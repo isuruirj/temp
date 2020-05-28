@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="bb1305d2-6a75-4ace-9a6d-310a25cf30e2" activeEnvironment="Default" name="WSTam_Test" resourceRoot="" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="4fac2a81-96d4-47c4-9eae-612e81c9ad8a" wsaVersion="NONE" name="WSTamSoap11Binding" type="wsdl" bindingName="{http://tempuri.org/}WSTamSoap11Binding" soapVersion="1_1" anonymous="optional" definition="https://gw-integrator.apps.test.bpichincha.com/services/WSTam?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>http://gw-integrator.apps.test.bpichincha.com/services/WSTam.WSTamHttpSoap11Endpoint</con:endpoint><con:endpoint>https://gw-integrator.apps.test.bpichincha.com/services/WSTam.WSTamHttpsSoap11Endpoint</con:endpoint></con:endpoints><con:operation id="fdcd85ab-735b-43d0-82da-c4665c9946bf" isOneWay="false" action="http://tempuri.org/CambioPasswordTam" name="CambioPasswordTam" bindingOperationName="CambioPasswordTam" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="8b4cf31b-4c1a-42c7-9912-066c913f5ef1" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://gw-integrator.apps.test.bpichincha.com/services/WSTam.WSTamHttpSoap11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <tem:CambioPasswordTam>\r
+         <!--Optional:-->\r
+         <tem:UserName>?</tem:UserName>\r
+         <!--Optional:-->\r
+         <tem:Password>?</tem:Password>\r
+      </tem:CambioPasswordTam>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/CambioPasswordTam"/></con:call></con:operation><con:operation id="f21126e9-c131-4eee-ae6c-20fe87ec6d8a" isOneWay="false" action="http://tempuri.org/ConsultarUsuarioTam" name="ConsultarUsuarioTam" bindingOperationName="ConsultarUsuarioTam" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b43fee95-064b-45db-bbf3-e37155e04c63" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://gw-integrator.apps.test.bpichincha.com/services/WSTam.WSTamHttpSoap11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <tem:ConsultarUsuarioTam>\r
+         <tem:UserName>Epanchi13</tem:UserName>\r
+      </tem:ConsultarUsuarioTam>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/ConsultarUsuarioTam"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="059a2db7-2d55-4bcc-ba1d-29af0d0afb59" isOneWay="false" action="http://tempuri.org/CrearUsuarioTam" name="CrearUsuarioTam" bindingOperationName="CrearUsuarioTam" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="20ecd072-bdca-4f7b-878f-c49f2f56f7ad" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://gw-integrator.apps.test.bpichincha.com/services/WSTam.WSTamHttpSoap11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:CrearUsuarioTam>
+         <tem:UserName>wso2user7</tem:UserName>
+         <tem:Nombres>PRUEBA EP20191016</tem:Nombres>
+         <tem:Apellidos>PRUEBA EP20191016</tem:Apellidos>
+         <tem:Cargo>CARGO_EXTERNO</tem:Cargo>
+         <tem:Empresa>0010</tem:Empresa>
+         <tem:Sucursal>0001</tem:Sucursal>
+         <tem:Identificacion>0123456789</tem:Identificacion>
+         <tem:FechaInicioVigencia>14-06-2019</tem:FechaInicioVigencia>
+         <tem:FechaFinVigencia>18-01-2073</tem:FechaFinVigencia>
+         <tem:Perfil_Usuario>OperacionesSoporte|</tem:Perfil_Usuario>
+         <tem:TellerNumber>545454541</tem:TellerNumber>
+         <tem:Termno>001</tem:Termno>
+         <tem:Mail>pruebarol@bpichinchatest.test</tem:Mail>
+         <tem:Observacion>PRUEBA PASS1</tem:Observacion>
+         <tem:Password>7+yIUKhNTPfHVveHzuHNYg==</tem:Password>
+         <tem:Given_Name>TALOS</tem:Given_Name>
+      </tem:CrearUsuarioTam>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/CrearUsuarioTam"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="d831ac3c-e57e-48d1-a21f-ec5b333e2557" isOneWay="false" action="http://tempuri.org/EliminarUsuarioTam" name="EliminarUsuarioTam" bindingOperationName="EliminarUsuarioTam" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1eb9ba3c-4fc4-4b2d-aac6-134b4c8f44cb" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://gw-integrator.apps.test.bpichincha.com/services/WSTam.WSTamHttpSoap11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <tem:EliminarUsuarioTam>\r
+         <tem:UserName>wso2user3</tem:UserName>\r
+      </tem:EliminarUsuarioTam>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/EliminarUsuarioTam"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="cc9afe2e-5456-43db-bbeb-a267159b6358" isOneWay="false" action="http://tempuri.org/ModificarUsuarioTam" name="ModificarUsuarioTam" bindingOperationName="ModificarUsuarioTam" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="77fc599c-fc3c-444f-8615-79d62b44240b" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://gw-integrator.apps.test.bpichincha.com/services/WSTam.WSTamHttpSoap11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:ModificarUsuarioTam>
+         <tem:UserName>wso2user6</tem:UserName>
+         <tem:Nombres>Anupam</tem:Nombres>
+         <tem:Apellidos>Gogoi</tem:Apellidos>
+         <tem:Cargo>Dev</tem:Cargo>
+         <tem:Empresa>WSO2 Inc</tem:Empresa>
+         <tem:Sucursal>0007</tem:Sucursal>
+         <tem:Identificacion>0123456789</tem:Identificacion>
+         <tem:FechaInicioVigencia>14-06-2019</tem:FechaInicioVigencia>
+         <tem:FechaFinVigencia>18-01-2073</tem:FechaFinVigencia>
+         <tem:Perfil_Usuario>OperacionesSoporte|undefined</tem:Perfil_Usuario>
+         <tem:TellerNumber>545454541</tem:TellerNumber>
+         <tem:Termno>002</tem:Termno>
+         <tem:Mail>anupam@wso2.com</tem:Mail>
+         <tem:Observacion>Modificar TDS and RHDS</tem:Observacion>
+      </tem:ModificarUsuarioTam>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/ModificarUsuarioTam"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="0f133af6-d7e8-416f-8e1a-17e6cd2b67e0" wsaVersion="NONE" name="WSTamSoap12Binding" type="wsdl" bindingName="{http://tempuri.org/}WSTamSoap12Binding" soapVersion="1_2" anonymous="optional" definition="https://gw-integrator.apps.test.bpichincha.com/services/WSTam?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://gw-integrator.apps.test.bpichincha.com/services/WSTam?wsdl"><con:part><con:url>https://gw-integrator.apps.test.bpichincha.com/services/WSTam?wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="CrearUsuarioTam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="UserName" type="s:string"/>
+            <s:element minOccurs="0" name="Nombres" type="s:string"/>
+            <s:element minOccurs="0" name="Apellidos" type="s:string"/>
+            <s:element minOccurs="0" name="Cargo" type="s:string"/>
+            <s:element minOccurs="0" name="Empresa" type="s:string"/>
+            <s:element minOccurs="0" name="Sucursal" type="s:string"/>
+            <s:element minOccurs="0" name="Identificacion" type="s:string"/>
+            <s:element minOccurs="0" name="FechaInicioVigencia" type="s:string"/>
+            <s:element minOccurs="0" name="FechaFinVigencia" type="s:string"/>
+            <s:element minOccurs="0" name="Perfil_Usuario" type="s:string"/>
+            <s:element minOccurs="0" name="TellerNumber" type="s:string"/>
+            <s:element minOccurs="0" name="Termno" type="s:string"/>
+            <s:element minOccurs="0" name="Mail" type="s:string"/>
+            <s:element minOccurs="0" name="Observacion" type="s:string"/>
+            <s:element minOccurs="0" name="Password" type="s:string"/>
+            <s:element minOccurs="0" name="Given_Name" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CrearUsuarioTamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="CrearUsuarioTamResult" type="tns:ESalida"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ESalida">
+        <s:sequence>
+          <s:element minOccurs="0" name="CodigoError1" type="s:string"/>
+          <s:element minOccurs="0" name="DesError1" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ModificarUsuarioTam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="UserName" type="s:string"/>
+            <s:element minOccurs="0" name="Nombres" type="s:string"/>
+            <s:element minOccurs="0" name="Apellidos" type="s:string"/>
+            <s:element minOccurs="0" name="Cargo" type="s:string"/>
+            <s:element minOccurs="0" name="Empresa" type="s:string"/>
+            <s:element minOccurs="0" name="Sucursal" type="s:string"/>
+            <s:element minOccurs="0" name="Identificacion" type="s:string"/>
+            <s:element minOccurs="0" name="FechaInicioVigencia" type="s:string"/>
+            <s:element minOccurs="0" name="FechaFinVigencia" type="s:string"/>
+            <s:element minOccurs="0" name="Perfil_Usuario" type="s:string"/>
+            <s:element minOccurs="0" name="TellerNumber" type="s:string"/>
+            <s:element minOccurs="0" name="Termno" type="s:string"/>
+            <s:element minOccurs="0" name="Mail" type="s:string"/>
+            <s:element minOccurs="0" name="Observacion" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarUsuarioTamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="ModificarUsuarioTamResult" type="tns:ESalida"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarUsuarioTam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="UserName" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarUsuarioTamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="EliminarUsuarioTamResult" type="tns:ESalida"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultarUsuarioTam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="UserName" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultarUsuarioTamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="ConsultarUsuarioTamResult" type="tns:UsuarioTAM"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UsuarioTAM">
+        <s:sequence>
+          <s:element minOccurs="0" name="CodError" type="s:string"/>
+          <s:element minOccurs="0" name="DesError1" type="s:string"/>
+          <s:element minOccurs="0" name="UserName1" type="s:string"/>
+          <s:element minOccurs="0" name="Nombres1" type="s:string"/>
+          <s:element minOccurs="0" name="Apellidos1" type="s:string"/>
+          <s:element minOccurs="0" name="Cargo1" type="s:string"/>
+          <s:element minOccurs="0" name="Empresa1" type="s:string"/>
+          <s:element minOccurs="0" name="Sucursal1" type="s:string"/>
+          <s:element minOccurs="0" name="Identificacion1" type="s:string"/>
+          <s:element minOccurs="0" name="FechaInicioVigencia1" type="s:string"/>
+          <s:element minOccurs="0" name="FechaFinVigencia1" type="s:string"/>
+          <s:element minOccurs="0" name="Perfil_Usuario1" type="s:string"/>
+          <s:element minOccurs="0" name="TellerNo1" type="s:string"/>
+          <s:element minOccurs="0" name="Termno1" type="s:string"/>
+          <s:element minOccurs="0" name="Mail1" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CambioPasswordTam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="UserName" type="s:string"/>
+            <s:element minOccurs="0" name="Password" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CambioPasswordTamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="CambioPasswordTamResult" type="tns:ESalida"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="EliminarUsuarioTamSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminarUsuarioTam"/>
+  </wsdl:message>
+  <wsdl:message name="EliminarUsuarioTamSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarUsuarioTamResponse"/>
+  </wsdl:message>
+  <wsdl:message name="CambioPasswordTamSoapIn">
+    <wsdl:part name="parameters" element="tns:CambioPasswordTam"/>
+  </wsdl:message>
+  <wsdl:message name="CambioPasswordTamSoapOut">
+    <wsdl:part name="parameters" element="tns:CambioPasswordTamResponse"/>
+  </wsdl:message>
+  <wsdl:message name="CrearUsuarioTamSoapIn">
+    <wsdl:part name="parameters" element="tns:CrearUsuarioTam"/>
+  </wsdl:message>
+  <wsdl:message name="CrearUsuarioTamSoapOut">
+    <wsdl:part name="parameters" element="tns:CrearUsuarioTamResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ConsultarUsuarioTamSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultarUsuarioTam"/>
+  </wsdl:message>
+  <wsdl:message name="ConsultarUsuarioTamSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultarUsuarioTamResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ModificarUsuarioTamSoapIn">
+    <wsdl:part name="parameters" element="tns:ModificarUsuarioTam"/>
+  </wsdl:message>
+  <wsdl:message name="ModificarUsuarioTamSoapOut">
+    <wsdl:part name="parameters" element="tns:ModificarUsuarioTamResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="WSTamPortType">
+    <wsdl:operation name="EliminarUsuarioTam">
+      <wsdl:input message="tns:EliminarUsuarioTamSoapIn" wsaw:Action="http://tempuri.org/EliminarUsuarioTam"/>
+      <wsdl:output message="tns:EliminarUsuarioTamSoapOut" wsaw:Action="http://tempuri.org/WebService1Soap/EliminarUsuarioTamResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="CambioPasswordTam">
+      <wsdl:input message="tns:CambioPasswordTamSoapIn" wsaw:Action="http://tempuri.org/CambioPasswordTam"/>
+      <wsdl:output message="tns:CambioPasswordTamSoapOut" wsaw:Action="http://tempuri.org/WebService1Soap/CambioPasswordTamResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="CrearUsuarioTam">
+      <wsdl:input message="tns:CrearUsuarioTamSoapIn" wsaw:Action="http://tempuri.org/CrearUsuarioTam"/>
+      <wsdl:output message="tns:CrearUsuarioTamSoapOut" wsaw:Action="http://tempuri.org/WebService1Soap/CrearUsuarioTamResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarUsuarioTam">
+      <wsdl:input message="tns:ConsultarUsuarioTamSoapIn" wsaw:Action="http://tempuri.org/ConsultarUsuarioTam"/>
+      <wsdl:output message="tns:ConsultarUsuarioTamSoapOut" wsaw:Action="http://tempuri.org/WebService1Soap/ConsultarUsuarioTamResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarUsuarioTam">
+      <wsdl:input message="tns:ModificarUsuarioTamSoapIn" wsaw:Action="http://tempuri.org/ModificarUsuarioTam"/>
+      <wsdl:output message="tns:ModificarUsuarioTamSoapOut" wsaw:Action="http://tempuri.org/WebService1Soap/ModificarUsuarioTamResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSTamSoap11Binding" type="tns:WSTamPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="EliminarUsuarioTam">
+      <soap:operation soapAction="http://tempuri.org/EliminarUsuarioTam" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CambioPasswordTam">
+      <soap:operation soapAction="http://tempuri.org/CambioPasswordTam" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearUsuarioTam">
+      <soap:operation soapAction="http://tempuri.org/CrearUsuarioTam" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarUsuarioTam">
+      <soap:operation soapAction="http://tempuri.org/ConsultarUsuarioTam" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarUsuarioTam">
+      <soap:operation soapAction="http://tempuri.org/ModificarUsuarioTam" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSTamSoap12Binding" type="tns:WSTamPortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="EliminarUsuarioTam">
+      <soap12:operation soapAction="http://tempuri.org/EliminarUsuarioTam" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CambioPasswordTam">
+      <soap12:operation soapAction="http://tempuri.org/CambioPasswordTam" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearUsuarioTam">
+      <soap12:operation soapAction="http://tempuri.org/CrearUsuarioTam" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarUsuarioTam">
+      <soap12:operation soapAction="http://tempuri.org/ConsultarUsuarioTam" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarUsuarioTam">
+      <soap12:operation soapAction="http://tempuri.org/ModificarUsuarioTam" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSTamHttpBinding" type="tns:WSTamPortType">
+    <http:binding verb="POST"/>
+    <wsdl:operation name="EliminarUsuarioTam">
+      <http:operation location="EliminarUsuarioTam"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CambioPasswordTam">
+      <http:operation location="CambioPasswordTam"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearUsuarioTam">
+      <http:operation location="CrearUsuarioTam"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarUsuarioTam">
+      <http:operation location="ConsultarUsuarioTam"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarUsuarioTam">
+      <http:operation location="ModificarUsuarioTam"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSTam">
+    <wsdl:port name="WSTamHttpSoap11Endpoint" binding="tns:WSTamSoap11Binding">
+      <soap:address location="http://gw-integrator.apps.test.bpichincha.com/services/WSTam.WSTamHttpSoap11Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="WSTamHttpsSoap11Endpoint" binding="tns:WSTamSoap11Binding">
+      <soap:address location="https://gw-integrator.apps.test.bpichincha.com/services/WSTam.WSTamHttpsSoap11Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="WSTamHttpsSoap12Endpoint" binding="tns:WSTamSoap12Binding">
+      <soap12:address location="https://gw-integrator.apps.test.bpichincha.com/services/WSTam.WSTamHttpsSoap12Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="WSTamHttpSoap12Endpoint" binding="tns:WSTamSoap12Binding">
+      <soap12:address location="http://gw-integrator.apps.test.bpichincha.com/services/WSTam.WSTamHttpSoap12Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="WSTamHttpEndpoint" binding="tns:WSTamHttpBinding">
+      <http:address location="http://gw-integrator.apps.test.bpichincha.com/services/WSTam.WSTamHttpEndpoint"/>
+    </wsdl:port>
+    <wsdl:port name="WSTamHttpsEndpoint" binding="tns:WSTamHttpBinding">
+      <http:address location="https://gw-integrator.apps.test.bpichincha.com/services/WSTam.WSTamHttpsEndpoint"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://gw-integrator.apps.test.bpichincha.com/services/WSTam.WSTamHttpSoap12Endpoint</con:endpoint><con:endpoint>https://gw-integrator.apps.test.bpichincha.com/services/WSTam.WSTamHttpsSoap12Endpoint</con:endpoint></con:endpoints><con:operation id="b4a412ab-1568-460c-bb4f-e4b94a9ef850" isOneWay="false" action="http://tempuri.org/CambioPasswordTam" name="CambioPasswordTam" bindingOperationName="CambioPasswordTam" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="dcd8250c-dddf-436d-972a-dfec1e3b0414" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://gw-integrator.apps.test.bpichincha.com/services/WSTam.WSTamHttpSoap12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:tem="http://tempuri.org/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <tem:CambioPasswordTam>\r
+         <!--Optional:-->\r
+         <tem:UserName>?</tem:UserName>\r
+         <!--Optional:-->\r
+         <tem:Password>?</tem:Password>\r
+      </tem:CambioPasswordTam>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="{http://schemas.xmlsoap.org/wsdl/http/}//tempuri.org/CambioPasswordTam"/></con:call></con:operation><con:operation id="9e6f2d09-5bd8-4477-9738-2ac328015cfd" isOneWay="false" action="http://tempuri.org/ConsultarUsuarioTam" name="ConsultarUsuarioTam" bindingOperationName="ConsultarUsuarioTam" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="288b346d-7bfa-4c95-abcb-c61de2c5ec3c" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://gw-integrator.apps.test.bpichincha.com/services/WSTam.WSTamHttpSoap12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:tem="http://tempuri.org/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <tem:ConsultarUsuarioTam>\r
+         <!--Optional:-->\r
+         <tem:UserName>?</tem:UserName>\r
+      </tem:ConsultarUsuarioTam>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="{http://schemas.xmlsoap.org/wsdl/http/}//tempuri.org/ConsultarUsuarioTam"/></con:call></con:operation><con:operation id="7d6b0fd2-3139-4e4a-8717-47fdc0e000aa" isOneWay="false" action="http://tempuri.org/CrearUsuarioTam" name="CrearUsuarioTam" bindingOperationName="CrearUsuarioTam" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="134f3e50-2180-4dd1-9491-d778628dfa68" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://gw-integrator.apps.test.bpichincha.com/services/WSTam.WSTamHttpSoap12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:tem="http://tempuri.org/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <tem:CrearUsuarioTam>\r
+         <!--Optional:-->\r
+         <tem:UserName>?</tem:UserName>\r
+         <!--Optional:-->\r
+         <tem:Nombres>?</tem:Nombres>\r
+         <!--Optional:-->\r
+         <tem:Apellidos>?</tem:Apellidos>\r
+         <!--Optional:-->\r
+         <tem:Cargo>?</tem:Cargo>\r
+         <!--Optional:-->\r
+         <tem:Empresa>?</tem:Empresa>\r
+         <!--Optional:-->\r
+         <tem:Sucursal>?</tem:Sucursal>\r
+         <!--Optional:-->\r
+         <tem:Identificacion>?</tem:Identificacion>\r
+         <!--Optional:-->\r
+         <tem:FechaInicioVigencia>?</tem:FechaInicioVigencia>\r
+         <!--Optional:-->\r
+         <tem:FechaFinVigencia>?</tem:FechaFinVigencia>\r
+         <!--Optional:-->\r
+         <tem:Perfil_Usuario>?</tem:Perfil_Usuario>\r
+         <!--Optional:-->\r
+         <tem:TellerNumber>?</tem:TellerNumber>\r
+         <!--Optional:-->\r
+         <tem:Termno>?</tem:Termno>\r
+         <!--Optional:-->\r
+         <tem:Mail>?</tem:Mail>\r
+         <!--Optional:-->\r
+         <tem:Observacion>?</tem:Observacion>\r
+         <!--Optional:-->\r
+         <tem:Password>?</tem:Password>\r
+         <!--Optional:-->\r
+         <tem:Given_Name>?</tem:Given_Name>\r
+      </tem:CrearUsuarioTam>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="{http://schemas.xmlsoap.org/wsdl/http/}//tempuri.org/CrearUsuarioTam"/></con:call></con:operation><con:operation id="e81d2237-6810-4ca4-9405-499ef8abfdb6" isOneWay="false" action="http://tempuri.org/EliminarUsuarioTam" name="EliminarUsuarioTam" bindingOperationName="EliminarUsuarioTam" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="957ac392-60eb-4dfc-9c03-3fc459f0638a" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://gw-integrator.apps.test.bpichincha.com/services/WSTam.WSTamHttpSoap12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:tem="http://tempuri.org/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <tem:EliminarUsuarioTam>\r
+         <!--Optional:-->\r
+         <tem:UserName>?</tem:UserName>\r
+      </tem:EliminarUsuarioTam>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="{http://schemas.xmlsoap.org/wsdl/http/}//tempuri.org/EliminarUsuarioTam"/></con:call></con:operation><con:operation id="cc1eee78-d942-48da-8d70-4dafaece4e84" isOneWay="false" action="http://tempuri.org/ModificarUsuarioTam" name="ModificarUsuarioTam" bindingOperationName="ModificarUsuarioTam" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="e1ac828b-e7d5-402c-b809-3825e3eef920" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://gw-integrator.apps.test.bpichincha.com/services/WSTam.WSTamHttpSoap12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:tem="http://tempuri.org/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <tem:ModificarUsuarioTam>\r
+         <!--Optional:-->\r
+         <tem:UserName>?</tem:UserName>\r
+         <!--Optional:-->\r
+         <tem:Nombres>?</tem:Nombres>\r
+         <!--Optional:-->\r
+         <tem:Apellidos>?</tem:Apellidos>\r
+         <!--Optional:-->\r
+         <tem:Cargo>?</tem:Cargo>\r
+         <!--Optional:-->\r
+         <tem:Empresa>?</tem:Empresa>\r
+         <!--Optional:-->\r
+         <tem:Sucursal>?</tem:Sucursal>\r
+         <!--Optional:-->\r
+         <tem:Identificacion>?</tem:Identificacion>\r
+         <!--Optional:-->\r
+         <tem:FechaInicioVigencia>?</tem:FechaInicioVigencia>\r
+         <!--Optional:-->\r
+         <tem:FechaFinVigencia>?</tem:FechaFinVigencia>\r
+         <!--Optional:-->\r
+         <tem:Perfil_Usuario>?</tem:Perfil_Usuario>\r
+         <!--Optional:-->\r
+         <tem:TellerNumber>?</tem:TellerNumber>\r
+         <!--Optional:-->\r
+         <tem:Termno>?</tem:Termno>\r
+         <!--Optional:-->\r
+         <tem:Mail>?</tem:Mail>\r
+         <!--Optional:-->\r
+         <tem:Observacion>?</tem:Observacion>\r
+      </tem:ModificarUsuarioTam>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="{http://schemas.xmlsoap.org/wsdl/http/}//tempuri.org/ModificarUsuarioTam"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

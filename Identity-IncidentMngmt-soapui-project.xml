@@ -1,0 +1,1128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="Identity_IncidentMngmt" resourceRoot="" soapui-version="5.5.0" id="2f7150f3-3da8-4cf4-91d6-d6f03cafb99d" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="Identity_IncidentMngmt" type="wsdl" bindingName="{http://schemas.hp.com/SM/7}Identity_IncidentMngmt" soapVersion="1_1" anonymous="optional" definition="http://10.60.24.52:13087/SM/7/Identity_IncidentMngmt.wsdl" id="20b4b917-a110-44eb-9103-8efc233f36f8" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://10.60.24.52:13087/SM/7/Identity_IncidentMngmt.wsdl"><con:part><con:url>http://10.60.24.52:13087/SM/7/Identity_IncidentMngmt.wsdl</con:url><con:content><![CDATA[<definitions targetNamespace="http://schemas.hp.com/SM/7" xsi:schemaLocation="http://schemas.xmlsoap.org/wsdl/  http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:cmn="http://schemas.hp.com/SM/7/Common" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:ns="http://schemas.hp.com/SM/7" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.hp.com/SM/7" version="2019-09-02 Rev 0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.hp.com/SM/7" xmlns:xmime="http://www.w3.org/2005/05/xmlmime">
+      <xs:import namespace="http://www.w3.org/2005/05/xmlmime" schemaLocation="http://www.w3.org/2005/05/xmlmime"/>
+      <xs:import namespace="http://schemas.hp.com/SM/7/Common" schemaLocation="http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/Common.xsd"/>
+      <xs:complexType name="IM_IncidentKeysType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IncidentID" nillable="true" type="cmn:StringType"/>
+        </xs:sequence>
+        <xs:attribute name="query" type="xs:string" use="optional"/>
+        <xs:attribute name="updatecounter" type="xs:long" use="optional"/>
+      </xs:complexType>
+      <xs:complexType name="IM_IncidentInstanceType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IncidentID" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Category" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="OpenTime" nillable="true" type="cmn:DateTimeType"/>
+          <xs:element minOccurs="0" name="OpenedBy" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Urgency" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="UpdatedTime" nillable="true" type="cmn:DateTimeType"/>
+          <xs:element minOccurs="0" name="AssignmentGroup" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="ClosedTime" nillable="true" type="cmn:DateTimeType"/>
+          <xs:element minOccurs="0" name="ClosedBy" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="ClosureCode" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="AffectedCI" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Description">
+            <xs:complexType>
+              <xs:complexContent>
+                <xs:extension base="cmn:ArrayType">
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="cmn:StringType"/>
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="Solution">
+            <xs:complexType>
+              <xs:complexContent>
+                <xs:extension base="cmn:ArrayType">
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="Solution" type="cmn:StringType"/>
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="Assignee" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Contact" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="JournalUpdates">
+            <xs:complexType>
+              <xs:complexContent>
+                <xs:extension base="cmn:ArrayType">
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="JournalUpdates" type="cmn:StringType"/>
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="AlertStatus" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="ContactLastName" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="ContactFirstName" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Company" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Title" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="TicketOwner" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="UpdatedBy" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Status" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Phase" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Area" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="SLAAgreementID" nillable="true" type="cmn:DecimalType"/>
+          <xs:element minOccurs="0" name="SiteCategory" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Subarea" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="ProblemType" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="ResolutionFixType" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Source" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="UserPriority" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Location" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="explanation">
+            <xs:complexType>
+              <xs:complexContent>
+                <xs:extension base="cmn:ArrayType">
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="explanation" type="cmn:StringType"/>
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="Impact" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="folder" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Service" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="IncidentManager" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="MajorIncident" nillable="true" type="cmn:BooleanType"/>
+          <xs:element minOccurs="0" name="Escalated" nillable="true" type="cmn:BooleanType"/>
+          <xs:element minOccurs="0" name="EscalationTeams">
+            <xs:complexType>
+              <xs:complexContent>
+                <xs:extension base="cmn:ArrayType">
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="EscalationTeams" type="cmn:StringType"/>
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="ReviewDetail">
+            <xs:complexType>
+              <xs:complexContent>
+                <xs:extension base="cmn:ArrayType">
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="ReviewDetail" type="cmn:StringType"/>
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="AplicacionAutomatica" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="attachments" nillable="true" type="cmn:AttachmentsType"/>
+        </xs:sequence>
+        <xs:attribute name="query" type="xs:string" use="optional"/>
+        <xs:attribute name="uniquequery" type="xs:string" use="optional"/>
+        <xs:attribute name="recordid" type="xs:string" use="optional"/>
+        <xs:attribute name="updatecounter" type="xs:long" use="optional"/>
+      </xs:complexType>
+      <xs:complexType name="IM_IncidentModelType">
+        <xs:sequence>
+          <xs:element name="keys" type="IM_IncidentKeysType"/>
+          <xs:element name="instance" type="IM_IncidentInstanceType"/>
+          <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+        </xs:sequence>
+        <xs:attribute name="query" type="xs:string" use="optional"/>
+      </xs:complexType>
+      <xs:element name="RetrieveIM_IncidentRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_IncidentModelType"/>
+          </xs:sequence>
+          <xs:attribute name="attachmentInfo" type="xs:boolean" use="optional"/>
+          <xs:attribute name="attachmentData" type="xs:boolean" use="optional"/>
+          <xs:attribute default="true" name="ignoreEmptyElements" type="xs:boolean" use="optional"/>
+          <xs:attribute name="updatecounter" type="xs:boolean" use="optional"/>
+          <xs:attribute name="handle" type="xs:string" use="optional"/>
+          <xs:attribute name="count" type="xs:long" use="optional"/>
+          <xs:attribute name="start" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RetrieveIM_IncidentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_IncidentModelType"/>
+            <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+          </xs:sequence>
+          <xs:attribute name="status" type="cmn:StatusType" use="required"/>
+          <xs:attribute name="message" type="xs:string" use="required"/>
+          <xs:attribute name="schemaRevisionDate" type="xs:date" use="required"/>
+          <xs:attribute name="schemaRevisionLevel" type="xs:int" use="required"/>
+          <xs:attribute name="returnCode" type="xs:decimal" use="optional"/>
+          <xs:attribute name="query" type="xs:string" use="optional"/>
+          <xs:attribute name="handle" type="xs:string" use="optional"/>
+          <xs:attribute name="count" type="xs:long" use="optional"/>
+          <xs:attribute name="more" type="xs:boolean" use="optional"/>
+          <xs:attribute name="start" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RetrieveIM_IncidentKeysListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_IncidentModelType"/>
+          </xs:sequence>
+          <xs:attribute name="attachmentInfo" type="xs:boolean" use="optional"/>
+          <xs:attribute name="attachmentData" type="xs:boolean" use="optional"/>
+          <xs:attribute default="true" name="ignoreEmptyElements" type="xs:boolean" use="optional"/>
+          <xs:attribute name="updatecounter" type="xs:boolean" use="optional"/>
+          <xs:attribute name="handle" type="xs:string" use="optional"/>
+          <xs:attribute name="count" type="xs:long" use="optional"/>
+          <xs:attribute name="start" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RetrieveIM_IncidentKeysListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="keys" type="IM_IncidentKeysType"/>
+            <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+          </xs:sequence>
+          <xs:attribute name="status" type="cmn:StatusType" use="required"/>
+          <xs:attribute name="message" type="xs:string" use="required"/>
+          <xs:attribute name="schemaRevisionDate" type="xs:date" use="required"/>
+          <xs:attribute name="schemaRevisionLevel" type="xs:int" use="required"/>
+          <xs:attribute name="returnCode" type="xs:decimal" use="optional"/>
+          <xs:attribute name="query" type="xs:string" use="optional"/>
+          <xs:attribute name="handle" type="xs:string" use="optional"/>
+          <xs:attribute name="count" type="xs:long" use="optional"/>
+          <xs:attribute name="more" type="xs:boolean" use="optional"/>
+          <xs:attribute name="start" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RetrieveIM_IncidentListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="keys" type="IM_IncidentKeysType"/>
+          </xs:sequence>
+          <xs:attribute name="attachmentInfo" type="xs:boolean" use="optional"/>
+          <xs:attribute name="attachmentData" type="xs:boolean" use="optional"/>
+          <xs:attribute default="true" name="ignoreEmptyElements" type="xs:boolean" use="optional"/>
+          <xs:attribute name="updatecounter" type="xs:boolean" use="optional"/>
+          <xs:attribute name="handle" type="xs:string" use="optional"/>
+          <xs:attribute name="count" type="xs:long" use="optional"/>
+          <xs:attribute name="start" type="xs:long" use="optional"/>
+          <xs:attribute name="attachmentType" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RetrieveIM_IncidentListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="instance" type="IM_IncidentInstanceType"/>
+            <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+          </xs:sequence>
+          <xs:attribute name="status" type="cmn:StatusType" use="required"/>
+          <xs:attribute name="message" type="xs:string" use="required"/>
+          <xs:attribute name="schemaRevisionDate" type="xs:date" use="required"/>
+          <xs:attribute name="schemaRevisionLevel" type="xs:int" use="required"/>
+          <xs:attribute name="returnCode" type="xs:decimal" use="optional"/>
+          <xs:attribute name="query" type="xs:string" use="optional"/>
+          <xs:attribute name="handle" type="xs:string" use="optional"/>
+          <xs:attribute name="count" type="xs:long" use="optional"/>
+          <xs:attribute name="more" type="xs:boolean" use="optional"/>
+          <xs:attribute name="start" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CreateIM_IncidentRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_IncidentModelType"/>
+          </xs:sequence>
+          <xs:attribute name="attachmentInfo" type="xs:boolean" use="optional"/>
+          <xs:attribute name="attachmentData" type="xs:boolean" use="optional"/>
+          <xs:attribute default="true" name="ignoreEmptyElements" type="xs:boolean" use="optional"/>
+          <xs:attribute default="-1" name="updateconstraint" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CreateIM_IncidentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_IncidentModelType"/>
+            <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+          </xs:sequence>
+          <xs:attribute name="status" type="cmn:StatusType" use="required"/>
+          <xs:attribute name="message" type="xs:string" use="required"/>
+          <xs:attribute name="schemaRevisionDate" type="xs:date" use="required"/>
+          <xs:attribute name="schemaRevisionLevel" type="xs:int" use="required"/>
+          <xs:attribute name="returnCode" type="xs:decimal" use="optional"/>
+          <xs:attribute name="query" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateIM_IncidentRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_IncidentModelType"/>
+          </xs:sequence>
+          <xs:attribute name="attachmentInfo" type="xs:boolean" use="optional"/>
+          <xs:attribute name="attachmentData" type="xs:boolean" use="optional"/>
+          <xs:attribute default="true" name="ignoreEmptyElements" type="xs:boolean" use="optional"/>
+          <xs:attribute default="-1" name="updateconstraint" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateIM_IncidentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_IncidentModelType"/>
+            <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+          </xs:sequence>
+          <xs:attribute name="status" type="cmn:StatusType" use="required"/>
+          <xs:attribute name="message" type="xs:string" use="required"/>
+          <xs:attribute name="schemaRevisionDate" type="xs:date" use="required"/>
+          <xs:attribute name="schemaRevisionLevel" type="xs:int" use="required"/>
+          <xs:attribute name="returnCode" type="xs:decimal" use="optional"/>
+          <xs:attribute name="query" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </types>
+  <message name="RetrieveIM_IncidentRequest">
+    <part element="ns:RetrieveIM_IncidentRequest" name="RetrieveIM_IncidentRequest"/>
+  </message>
+  <message name="RetrieveIM_IncidentResponse">
+    <part element="ns:RetrieveIM_IncidentResponse" name="RetrieveIM_IncidentResponse"/>
+  </message>
+  <message name="RetrieveIM_IncidentKeysListRequest">
+    <part element="ns:RetrieveIM_IncidentKeysListRequest" name="RetrieveIM_IncidentKeysListRequest"/>
+  </message>
+  <message name="RetrieveIM_IncidentKeysListResponse">
+    <part element="ns:RetrieveIM_IncidentKeysListResponse" name="RetrieveIM_IncidentKeysListResponse"/>
+  </message>
+  <message name="RetrieveIM_IncidentListRequest">
+    <part element="ns:RetrieveIM_IncidentListRequest" name="RetrieveIM_IncidentListRequest"/>
+  </message>
+  <message name="RetrieveIM_IncidentListResponse">
+    <part element="ns:RetrieveIM_IncidentListResponse" name="RetrieveIM_IncidentListResponse"/>
+  </message>
+  <message name="CreateIM_IncidentRequest">
+    <part element="ns:CreateIM_IncidentRequest" name="CreateIM_IncidentRequest"/>
+  </message>
+  <message name="CreateIM_IncidentResponse">
+    <part element="ns:CreateIM_IncidentResponse" name="CreateIM_IncidentResponse"/>
+  </message>
+  <message name="UpdateIM_IncidentRequest">
+    <part element="ns:UpdateIM_IncidentRequest" name="UpdateIM_IncidentRequest"/>
+  </message>
+  <message name="UpdateIM_IncidentResponse">
+    <part element="ns:UpdateIM_IncidentResponse" name="UpdateIM_IncidentResponse"/>
+  </message>
+  <portType name="Identity_IncidentMngmt">
+    <operation name="RetrieveIM_Incident">
+      <documentation/>
+      <input message="ns:RetrieveIM_IncidentRequest"/>
+      <output message="ns:RetrieveIM_IncidentResponse"/>
+    </operation>
+    <operation name="RetrieveIM_IncidentKeysList">
+      <documentation/>
+      <input message="ns:RetrieveIM_IncidentKeysListRequest"/>
+      <output message="ns:RetrieveIM_IncidentKeysListResponse"/>
+    </operation>
+    <operation name="RetrieveIM_IncidentList">
+      <documentation/>
+      <input message="ns:RetrieveIM_IncidentListRequest"/>
+      <output message="ns:RetrieveIM_IncidentListResponse"/>
+    </operation>
+    <operation name="CreateIM_Incident">
+      <documentation/>
+      <input message="ns:CreateIM_IncidentRequest"/>
+      <output message="ns:CreateIM_IncidentResponse"/>
+    </operation>
+    <operation name="UpdateIM_Incident">
+      <documentation/>
+      <input message="ns:UpdateIM_IncidentRequest"/>
+      <output message="ns:UpdateIM_IncidentResponse"/>
+    </operation>
+  </portType>
+  <binding name="Identity_IncidentMngmt" type="ns:Identity_IncidentMngmt">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="RetrieveIM_Incident">
+      <soap:operation soapAction="Retrieve" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="RetrieveIM_IncidentKeysList">
+      <soap:operation soapAction="RetrieveKeysList" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="RetrieveIM_IncidentList">
+      <soap:operation soapAction="RetrieveList" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="CreateIM_Incident">
+      <soap:operation soapAction="Create" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="UpdateIM_Incident">
+      <soap:operation soapAction="Update" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="Identity_IncidentMngmt">
+    <port binding="ns:Identity_IncidentMngmt" name="Identity_IncidentMngmt">
+      <soap:address location="http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://www.w3.org/2005/05/xmlmime</con:url><con:content><![CDATA[<!--W3C XML Schema defined in the Describing Media Content of Binary Data in XML
+   specification
+     http://www.w3.org/TR/xml-media-types
+
+   Copyright © 2005 World Wide Web Consortium,
+  
+   (Massachusetts Institute of Technology, European Research Consortium for
+   Informatics and Mathematics, Keio University). All Rights Reserved. This
+   work is distributed under the W3C® Software License [1] in the hope that
+   it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+   warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  
+   [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+
+   $Id: xmlmime.xsd,v 1.1 2005/04/25 17:08:35 hugo Exp $-->
+<xs:schema targetNamespace="http://www.w3.org/2005/05/xmlmime" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xmime="http://www.w3.org/2005/05/xmlmime">
+  <xs:attribute name="contentType">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="3"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
+  <xs:attribute name="expectedContentTypes" type="xs:string"/>
+  <xs:complexType name="base64Binary">
+    <xs:simpleContent>
+      <xs:extension base="xs:base64Binary">
+        <xs:attribute ref="xmime:contentType"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="hexBinary">
+    <xs:simpleContent>
+      <xs:extension base="xs:hexBinary">
+        <xs:attribute ref="xmime:contentType"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/Common.xsd</con:url><con:content><![CDATA[<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.hp.com/SM/7/Common" version="2019-09-02 Rev 0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.hp.com/SM/7/Common" xmlns:cmn="http://schemas.hp.com/SM/7/Common" xmlns:xmime="http://www.w3.org/2005/05/xmlmime">
+  <xs:import namespace="http://www.w3.org/2005/05/xmlmime" schemaLocation="http://www.w3.org/2005/05/xmlmime"/>
+  <xs:complexType name="StringType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute fixed="String" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DecimalType">
+    <xs:simpleContent>
+      <xs:extension base="xs:decimal">
+        <xs:attribute fixed="Decimal" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BooleanType">
+    <xs:simpleContent>
+      <xs:extension base="xs:boolean">
+        <xs:attribute fixed="Boolean" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DateTimeType">
+    <xs:simpleContent>
+      <xs:extension base="xs:dateTime">
+        <xs:attribute fixed="DateTime" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DateType">
+    <xs:simpleContent>
+      <xs:extension base="xs:date">
+        <xs:attribute fixed="Date" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="TimeType">
+    <xs:simpleContent>
+      <xs:extension base="xs:time">
+        <xs:attribute fixed="Time" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DurationType">
+    <xs:simpleContent>
+      <xs:extension base="xs:duration">
+        <xs:attribute fixed="Duration" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="IntType">
+    <xs:simpleContent>
+      <xs:extension base="xs:int">
+        <xs:attribute fixed="Int" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="ShortType">
+    <xs:simpleContent>
+      <xs:extension base="xs:short">
+        <xs:attribute fixed="Short" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="LongType">
+    <xs:simpleContent>
+      <xs:extension base="xs:long">
+        <xs:attribute fixed="Long" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="ByteType">
+    <xs:simpleContent>
+      <xs:extension base="xs:byte">
+        <xs:attribute fixed="Byte" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="FloatType">
+    <xs:simpleContent>
+      <xs:extension base="xs:float">
+        <xs:attribute fixed="Float" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DoubleType">
+    <xs:simpleContent>
+      <xs:extension base="xs:double">
+        <xs:attribute fixed="Double" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="Base64Type">
+    <xs:simpleContent>
+      <xs:extension base="xs:base64Binary">
+        <xs:attribute fixed="Base64" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayType">
+    <xs:attribute fixed="Array" name="type" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="StructureType">
+    <xs:attribute fixed="Structure" name="type" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="AttachmentType">
+    <xs:simpleContent>
+      <xs:extension base="xs:base64Binary">
+        <xs:attribute ref="xmime:contentType" use="required"/>
+        <xs:attribute name="href" type="xs:string" use="optional"/>
+        <xs:attribute name="contentId" type="xs:string" use="optional"/>
+        <xs:attribute name="action" type="xs:string" use="optional"/>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="type" type="xs:string" use="required"/>
+        <xs:attribute name="len" type="xs:int" use="optional"/>
+        <xs:attribute name="charset" type="xs:string" use="optional"/>
+        <xs:attribute name="upload.by" type="xs:string" use="optional"/>
+        <xs:attribute name="upload.date" type="xs:string" use="optional"/>
+        <xs:attribute name="attachmentType" type="xs:string" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="AttachmentsType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="attachment" type="AttachmentType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MessageType">
+    <xs:simpleContent>
+      <xs:extension base="StringType">
+        <xs:attribute name="severity" type="xs:int" use="optional"/>
+        <xs:attribute name="module" type="xs:string" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="MessagesType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="message" type="MessageType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="StatusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SUCCESS"/>
+      <xs:enumeration value="FAILURE"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://10.0.177.187:13087/SM/7/ws</con:endpoint><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint></con:endpoints><con:operation isOneWay="false" action="Create" name="CreateIM_Incident" bindingOperationName="CreateIM_Incident" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional" id="d0a5a200-5708-4c8c-9b8c-126039a46305"><con:settings/><con:call name="OK" id="01eca628-89ca-4520-a88c-1231f20f71c5"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://schemas.hp.com/SM/7" xmlns:com="http://schemas.hp.com/SM/7/Common" xmlns:xm="http://www.w3.org/2005/05/xmlmime">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:CreateIM_IncidentRequest ignoreEmptyElements="true" updateconstraint="-1">
+         <ns:model>
+            <ns:keys>
+               <ns:IncidentID type="String"/>
+            </ns:keys>
+            <ns:instance>
+               <ns:Category type="String">Incident</ns:Category>
+               <ns:Urgency type="String">3</ns:Urgency>
+               <ns:AssignmentGroup type="String">TEC_N2_ADMINISTRACION CLAVES</ns:AssignmentGroup>
+               <ns:Description type="Array">
+                  <ns:Description type="String">Test incident</ns:Description>
+               </ns:Description>
+               <ns:Contact type="String">fbalarez</ns:Contact>
+               <ns:Title type="String">Teste Title</ns:Title>
+               <ns:Status type="String">Categorize</ns:Status>
+               <ns:Phase type="String">Categorization</ns:Phase>
+               <ns:Area type="String">Infraestructura</ns:Area>
+               <ns:SLAAgreementID type="Decimal">177</ns:SLAAgreementID>
+               <ns:Subarea type="String">Incidente Equipo Facilidades</ns:Subarea>
+               <ns:Impact type="String">3</ns:Impact>
+               <ns:Service type="String">Servicios Operaciones IT</ns:Service>
+			<ns:Filial type="String">BANCO PICHINCHA</ns:Filial>
+			<ns:Ambiente type="String">PRODUCCIÓN</ns:Ambiente>
+            </ns:instance>
+         </ns:model>
+      </ns:CreateIM_IncidentRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>useridentity</con:username><con:password>Pichincha@123</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="Create"/><con:wsrmConfig version="1.2"/></con:call><con:call id="dfed5e41-433b-4148-84b4-0d3cacbe9de9" name="Container Request"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Body>\r
+      <ns:CreateIM_IncidentRequest ignoreEmptyElements="true" updateconstraint="-1" xmlns:ns="http://schemas.hp.com/SM/7">\r
+         <ns:model>\r
+            <ns:keys>\r
+               <ns:IncidentID type="String"/>\r
+            </ns:keys>\r
+            <ns:instance>\r
+               <ns:Category type="String">Incident</ns:Category>\r
+               <ns:Urgency type="String">3</ns:Urgency>\r
+               <ns:AssignmentGroup type="String">TEC_N2_ADMINISTRACION CLAVES</ns:AssignmentGroup>\r
+               <ns:Description type="Array">\r
+                  <ns:Description type="String">Accion: "http://tempuri.org/crearUsuario"
+                                                Usuario: "BANCS910"
+                                                Nombre Completo: ""
+                                                Identificaci??n: "0500682349"
+                                                Empresa: ""
+                                                Unidad: ""
+                                                Division: ""
+                                                Area:""
+                                                Cargo: "Analista"
+                                                APLICACION: "BANCS"
+                                                Centro de Costos: "0001"
+                                                Perfil:"Perfil"
+                                                Agencia: "Agencia"
+                                                Ambiente: "Ambiente"
+                                                Perfil: "Perfil"
+                                                Perfil:"Perfil"
+                                                Tipode cuenta: "Tipode cuenta"
+                                                Numero de cuenta: "N??mero de cuenta"
+                                                Perfiles Individuales:"Perfiles Individuales"</ns:Description>\r
+               </ns:Description>\r
+               <ns:Contact type="String">fbalarez</ns:Contact>\r
+               <ns:Title type="String">Teste Title</ns:Title>\r
+               <ns:Status type="String">Categorize</ns:Status>\r
+               <ns:Phase type="String">Categorization</ns:Phase>\r
+               <ns:Area type="String">Infraestructura</ns:Area>\r
+               <ns:SLAAgreementID type="Decimal">177</ns:SLAAgreementID>\r
+               <ns:Subarea type="String">Incidente Equipo Facilidades</ns:Subarea>\r
+               <ns:Impact type="String">3</ns:Impact>\r
+               <ns:Service type="String">Servicios Operaciones IT</ns:Service>\r
+               <ns:Filial type="String">BANCO PICHINCHA</ns:Filial>\r
+               <ns:Ambiente type="String">PRODUCCI??N</ns:Ambiente>\r
+            </ns:instance>\r
+         </ns:model>\r
+      </ns:CreateIM_IncidentRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>useridentity</con:username><con:password>Pichincha@123</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="Create"/><con:wsrmConfig version="1.2"/></con:call><con:call id="b5f9d57e-87c9-407a-a30a-2d4a2b80ea74" name="Request 3"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Body>\r
+      <ns:CreateIM_IncidentRequest ignoreEmptyElements="true" updateconstraint="-1" xmlns:ns="http://schemas.hp.com/SM/7">\r
+         <ns:model>\r
+            <ns:keys>\r
+               <ns:IncidentID type="String"/>\r
+            </ns:keys>\r
+            <ns:instance>\r
+               <ns:Category type="String">Incident</ns:Category>\r
+               <ns:Urgency type="String">3</ns:Urgency>\r
+               <ns:AssignmentGroup type="String">TEC_N2_ADMINISTRACION CLAVES</ns:AssignmentGroup>\r
+               <ns:Description type="Array">\r
+                  <ns:Description type="String">Accion: Creacion
+                                                Usuario: BANCS910
+                                                Nombre Completo:
+                                                Identificacion: 0500682349
+                                                Compania:
+                                                Division:
+                                                Area:
+                                                Departamento:
+                                                Cargo: Analista
+                                                Aplicacion: BANCS
+                                                Centro de Costos: 0001
+                                                Perfil:
+                                                Ambiente: Producion
+                                                ERROR: {"schemas":"urn:ietf:params:scim:api:messages:2.0:Error","detail":"Error in adding the user: bancs/BANCS910 to the user store. [OperationUUID: 23A2C461-4F4F-61E6-3A99-2269C0BF4E521114] - Error: El Usuario ya tiene asignado #Teller","status":"500"}</ns:Description>\r
+               </ns:Description>\r
+               <ns:Contact type="String">BANCS910</ns:Contact>\r
+               <ns:Title type="String">Notificacion de error en aprovisionamiento de Creacion ,en el aplicativo: BANCS</ns:Title>\r
+               <ns:Status type="String">Categorize</ns:Status>\r
+               <ns:Phase type="String">Categorization</ns:Phase>\r
+               <ns:Area type="String">Usuarios-perfiles</ns:Area>\r
+               <ns:SLAAgreementID type="Decimal">177</ns:SLAAgreementID>\r
+               <ns:Subarea type="String">Usuarios y Accesos</ns:Subarea>\r
+               <ns:Impact type="String">3</ns:Impact>\r
+               <ns:Service type="String">Servicios Operaciones IT</ns:Service>\r
+               <ns:Filial type="String">BANCO PICHINCHA</ns:Filial>\r
+               <ns:Ambiente type="String">PRODUCCION</ns:Ambiente>\r
+               <ns:Assignee type="String">usrssi</ns:Assignee>\r
+            </ns:instance>\r
+         </ns:model>\r
+      </ns:CreateIM_IncidentRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>useridentity</con:username><con:password>Pichincha@123</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="Create"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="Retrieve" name="RetrieveIM_Incident" bindingOperationName="RetrieveIM_Incident" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional" id="56249ddf-e3ba-4993-a17e-0be6a2c55ba8"><con:settings/><con:call name="Request 1" id="d6c6f9ee-f671-4e6d-9255-f892959374e8"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://schemas.hp.com/SM/7" xmlns:com="http://schemas.hp.com/SM/7/Common" xmlns:xm="http://www.w3.org/2005/05/xmlmime">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:RetrieveIM_IncidentRequest attachmentInfo="?" attachmentData="?" ignoreEmptyElements="true" updatecounter="?" handle="?" count="?" start="?">
+         <ns:model query="?">
+            <ns:keys query="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:IncidentID type="String" mandatory="?" readonly="?">?</ns:IncidentID>
+            </ns:keys>
+            <ns:instance query="?" uniquequery="?" recordid="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:IncidentID type="String" mandatory="?" readonly="?">?</ns:IncidentID>
+               <!--Optional:-->
+               <ns:Category type="String" mandatory="?" readonly="?">?</ns:Category>
+               <!--Optional:-->
+               <ns:OpenTime type="DateTime" mandatory="?" readonly="?">?</ns:OpenTime>
+               <!--Optional:-->
+               <ns:OpenedBy type="String" mandatory="?" readonly="?">?</ns:OpenedBy>
+               <!--Optional:-->
+               <ns:Urgency type="String" mandatory="?" readonly="?">?</ns:Urgency>
+               <!--Optional:-->
+               <ns:UpdatedTime type="DateTime" mandatory="?" readonly="?">?</ns:UpdatedTime>
+               <!--Optional:-->
+               <ns:AssignmentGroup type="String" mandatory="?" readonly="?">?</ns:AssignmentGroup>
+               <!--Optional:-->
+               <ns:ClosedTime type="DateTime" mandatory="?" readonly="?">?</ns:ClosedTime>
+               <!--Optional:-->
+               <ns:ClosedBy type="String" mandatory="?" readonly="?">?</ns:ClosedBy>
+               <!--Optional:-->
+               <ns:ClosureCode type="String" mandatory="?" readonly="?">?</ns:ClosureCode>
+               <!--Optional:-->
+               <ns:AffectedCI type="String" mandatory="?" readonly="?">?</ns:AffectedCI>
+               <!--Optional:-->
+               <ns:Description type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:Description type="String" mandatory="?" readonly="?">?</ns:Description>
+               </ns:Description>
+               <!--Optional:-->
+               <ns:Solution type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:Solution type="String" mandatory="?" readonly="?">?</ns:Solution>
+               </ns:Solution>
+               <!--Optional:-->
+               <ns:Assignee type="String" mandatory="?" readonly="?">?</ns:Assignee>
+               <!--Optional:-->
+               <ns:Contact type="String" mandatory="?" readonly="?">?</ns:Contact>
+               <!--Optional:-->
+               <ns:JournalUpdates type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:JournalUpdates type="String" mandatory="?" readonly="?">?</ns:JournalUpdates>
+               </ns:JournalUpdates>
+               <!--Optional:-->
+               <ns:AlertStatus type="String" mandatory="?" readonly="?">?</ns:AlertStatus>
+               <!--Optional:-->
+               <ns:ContactLastName type="String" mandatory="?" readonly="?">?</ns:ContactLastName>
+               <!--Optional:-->
+               <ns:ContactFirstName type="String" mandatory="?" readonly="?">?</ns:ContactFirstName>
+               <!--Optional:-->
+               <ns:Company type="String" mandatory="?" readonly="?">?</ns:Company>
+               <!--Optional:-->
+               <ns:Title type="String" mandatory="?" readonly="?">?</ns:Title>
+               <!--Optional:-->
+               <ns:TicketOwner type="String" mandatory="?" readonly="?">?</ns:TicketOwner>
+               <!--Optional:-->
+               <ns:UpdatedBy type="String" mandatory="?" readonly="?">?</ns:UpdatedBy>
+               <!--Optional:-->
+               <ns:Status type="String" mandatory="?" readonly="?">?</ns:Status>
+               <!--Optional:-->
+               <ns:Phase type="String" mandatory="?" readonly="?">?</ns:Phase>
+               <!--Optional:-->
+               <ns:Area type="String" mandatory="?" readonly="?">?</ns:Area>
+               <!--Optional:-->
+               <ns:SLAAgreementID type="Decimal" mandatory="?" readonly="?">?</ns:SLAAgreementID>
+               <!--Optional:-->
+               <ns:SiteCategory type="String" mandatory="?" readonly="?">?</ns:SiteCategory>
+               <!--Optional:-->
+               <ns:Subarea type="String" mandatory="?" readonly="?">?</ns:Subarea>
+               <!--Optional:-->
+               <ns:ProblemType type="String" mandatory="?" readonly="?">?</ns:ProblemType>
+               <!--Optional:-->
+               <ns:ResolutionFixType type="String" mandatory="?" readonly="?">?</ns:ResolutionFixType>
+               <!--Optional:-->
+               <ns:Source type="String" mandatory="?" readonly="?">?</ns:Source>
+               <!--Optional:-->
+               <ns:UserPriority type="String" mandatory="?" readonly="?">?</ns:UserPriority>
+               <!--Optional:-->
+               <ns:Location type="String" mandatory="?" readonly="?">?</ns:Location>
+               <!--Optional:-->
+               <ns:explanation type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:explanation type="String" mandatory="?" readonly="?">?</ns:explanation>
+               </ns:explanation>
+               <!--Optional:-->
+               <ns:Impact type="String" mandatory="?" readonly="?">?</ns:Impact>
+               <!--Optional:-->
+               <ns:folder type="String" mandatory="?" readonly="?">?</ns:folder>
+               <!--Optional:-->
+               <ns:Service type="String" mandatory="?" readonly="?">?</ns:Service>
+               <!--Optional:-->
+               <ns:IncidentManager type="String" mandatory="?" readonly="?">?</ns:IncidentManager>
+               <!--Optional:-->
+               <ns:MajorIncident type="Boolean" mandatory="?" readonly="?">?</ns:MajorIncident>
+               <!--Optional:-->
+               <ns:Escalated type="Boolean" mandatory="?" readonly="?">?</ns:Escalated>
+               <!--Optional:-->
+               <ns:EscalationTeams type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:EscalationTeams type="String" mandatory="?" readonly="?">?</ns:EscalationTeams>
+               </ns:EscalationTeams>
+               <!--Optional:-->
+               <ns:ReviewDetail type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ReviewDetail type="String" mandatory="?" readonly="?">?</ns:ReviewDetail>
+               </ns:ReviewDetail>
+               <!--Optional:-->
+               <ns:AplicacionAutomatica type="String" mandatory="?" readonly="?">?</ns:AplicacionAutomatica>
+               <!--Optional:-->
+               <ns:attachments>
+                  <!--Zero or more repetitions:-->
+                  <com:attachment xm:contentType="application/?" href="?" contentId="?" action="?" name="?" type="?" len="?" charset="?" upload.by="?" upload.date="?" attachmentType="?">cid:1376616648073</com:attachment>
+               </ns:attachments>
+            </ns:instance>
+            <!--Optional:-->
+            <ns:messages>
+               <!--Zero or more repetitions:-->
+               <com:message type="String" mandatory="?" readonly="?" severity="?" module="?">?</com:message>
+            </ns:messages>
+         </ns:model>
+      </ns:RetrieveIM_IncidentRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="Retrieve"/></con:call></con:operation><con:operation isOneWay="false" action="RetrieveKeysList" name="RetrieveIM_IncidentKeysList" bindingOperationName="RetrieveIM_IncidentKeysList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional" id="beb08b23-6726-4de2-b2db-891f9be6b26f"><con:settings/><con:call name="Request 1" id="f5f37018-d997-43fb-b973-0b79bd6f59f1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://schemas.hp.com/SM/7" xmlns:com="http://schemas.hp.com/SM/7/Common" xmlns:xm="http://www.w3.org/2005/05/xmlmime">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:RetrieveIM_IncidentKeysListRequest attachmentInfo="?" attachmentData="?" ignoreEmptyElements="true" updatecounter="?" handle="?" count="?" start="?">
+         <ns:model query="?">
+            <ns:keys query="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:IncidentID type="String" mandatory="?" readonly="?">?</ns:IncidentID>
+            </ns:keys>
+            <ns:instance query="?" uniquequery="?" recordid="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:IncidentID type="String" mandatory="?" readonly="?">?</ns:IncidentID>
+               <!--Optional:-->
+               <ns:Category type="String" mandatory="?" readonly="?">?</ns:Category>
+               <!--Optional:-->
+               <ns:OpenTime type="DateTime" mandatory="?" readonly="?">?</ns:OpenTime>
+               <!--Optional:-->
+               <ns:OpenedBy type="String" mandatory="?" readonly="?">?</ns:OpenedBy>
+               <!--Optional:-->
+               <ns:Urgency type="String" mandatory="?" readonly="?">?</ns:Urgency>
+               <!--Optional:-->
+               <ns:UpdatedTime type="DateTime" mandatory="?" readonly="?">?</ns:UpdatedTime>
+               <!--Optional:-->
+               <ns:AssignmentGroup type="String" mandatory="?" readonly="?">?</ns:AssignmentGroup>
+               <!--Optional:-->
+               <ns:ClosedTime type="DateTime" mandatory="?" readonly="?">?</ns:ClosedTime>
+               <!--Optional:-->
+               <ns:ClosedBy type="String" mandatory="?" readonly="?">?</ns:ClosedBy>
+               <!--Optional:-->
+               <ns:ClosureCode type="String" mandatory="?" readonly="?">?</ns:ClosureCode>
+               <!--Optional:-->
+               <ns:AffectedCI type="String" mandatory="?" readonly="?">?</ns:AffectedCI>
+               <!--Optional:-->
+               <ns:Description type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:Description type="String" mandatory="?" readonly="?">?</ns:Description>
+               </ns:Description>
+               <!--Optional:-->
+               <ns:Solution type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:Solution type="String" mandatory="?" readonly="?">?</ns:Solution>
+               </ns:Solution>
+               <!--Optional:-->
+               <ns:Assignee type="String" mandatory="?" readonly="?">?</ns:Assignee>
+               <!--Optional:-->
+               <ns:Contact type="String" mandatory="?" readonly="?">?</ns:Contact>
+               <!--Optional:-->
+               <ns:JournalUpdates type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:JournalUpdates type="String" mandatory="?" readonly="?">?</ns:JournalUpdates>
+               </ns:JournalUpdates>
+               <!--Optional:-->
+               <ns:AlertStatus type="String" mandatory="?" readonly="?">?</ns:AlertStatus>
+               <!--Optional:-->
+               <ns:ContactLastName type="String" mandatory="?" readonly="?">?</ns:ContactLastName>
+               <!--Optional:-->
+               <ns:ContactFirstName type="String" mandatory="?" readonly="?">?</ns:ContactFirstName>
+               <!--Optional:-->
+               <ns:Company type="String" mandatory="?" readonly="?">?</ns:Company>
+               <!--Optional:-->
+               <ns:Title type="String" mandatory="?" readonly="?">?</ns:Title>
+               <!--Optional:-->
+               <ns:TicketOwner type="String" mandatory="?" readonly="?">?</ns:TicketOwner>
+               <!--Optional:-->
+               <ns:UpdatedBy type="String" mandatory="?" readonly="?">?</ns:UpdatedBy>
+               <!--Optional:-->
+               <ns:Status type="String" mandatory="?" readonly="?">?</ns:Status>
+               <!--Optional:-->
+               <ns:Phase type="String" mandatory="?" readonly="?">?</ns:Phase>
+               <!--Optional:-->
+               <ns:Area type="String" mandatory="?" readonly="?">?</ns:Area>
+               <!--Optional:-->
+               <ns:SLAAgreementID type="Decimal" mandatory="?" readonly="?">?</ns:SLAAgreementID>
+               <!--Optional:-->
+               <ns:SiteCategory type="String" mandatory="?" readonly="?">?</ns:SiteCategory>
+               <!--Optional:-->
+               <ns:Subarea type="String" mandatory="?" readonly="?">?</ns:Subarea>
+               <!--Optional:-->
+               <ns:ProblemType type="String" mandatory="?" readonly="?">?</ns:ProblemType>
+               <!--Optional:-->
+               <ns:ResolutionFixType type="String" mandatory="?" readonly="?">?</ns:ResolutionFixType>
+               <!--Optional:-->
+               <ns:Source type="String" mandatory="?" readonly="?">?</ns:Source>
+               <!--Optional:-->
+               <ns:UserPriority type="String" mandatory="?" readonly="?">?</ns:UserPriority>
+               <!--Optional:-->
+               <ns:Location type="String" mandatory="?" readonly="?">?</ns:Location>
+               <!--Optional:-->
+               <ns:explanation type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:explanation type="String" mandatory="?" readonly="?">?</ns:explanation>
+               </ns:explanation>
+               <!--Optional:-->
+               <ns:Impact type="String" mandatory="?" readonly="?">?</ns:Impact>
+               <!--Optional:-->
+               <ns:folder type="String" mandatory="?" readonly="?">?</ns:folder>
+               <!--Optional:-->
+               <ns:Service type="String" mandatory="?" readonly="?">?</ns:Service>
+               <!--Optional:-->
+               <ns:IncidentManager type="String" mandatory="?" readonly="?">?</ns:IncidentManager>
+               <!--Optional:-->
+               <ns:MajorIncident type="Boolean" mandatory="?" readonly="?">?</ns:MajorIncident>
+               <!--Optional:-->
+               <ns:Escalated type="Boolean" mandatory="?" readonly="?">?</ns:Escalated>
+               <!--Optional:-->
+               <ns:EscalationTeams type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:EscalationTeams type="String" mandatory="?" readonly="?">?</ns:EscalationTeams>
+               </ns:EscalationTeams>
+               <!--Optional:-->
+               <ns:ReviewDetail type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ReviewDetail type="String" mandatory="?" readonly="?">?</ns:ReviewDetail>
+               </ns:ReviewDetail>
+               <!--Optional:-->
+               <ns:AplicacionAutomatica type="String" mandatory="?" readonly="?">?</ns:AplicacionAutomatica>
+               <!--Optional:-->
+               <ns:attachments>
+                  <!--Zero or more repetitions:-->
+                  <com:attachment xm:contentType="application/?" href="?" contentId="?" action="?" name="?" type="?" len="?" charset="?" upload.by="?" upload.date="?" attachmentType="?">cid:320218487418</com:attachment>
+               </ns:attachments>
+            </ns:instance>
+            <!--Optional:-->
+            <ns:messages>
+               <!--Zero or more repetitions:-->
+               <com:message type="String" mandatory="?" readonly="?" severity="?" module="?">?</com:message>
+            </ns:messages>
+         </ns:model>
+      </ns:RetrieveIM_IncidentKeysListRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="RetrieveKeysList"/></con:call></con:operation><con:operation isOneWay="false" action="RetrieveList" name="RetrieveIM_IncidentList" bindingOperationName="RetrieveIM_IncidentList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional" id="d7976a74-f0b4-45ef-9bf1-a4279a0f9481"><con:settings/><con:call name="Request 1" id="4af68480-584f-4c4d-8394-8b4fb54071f3"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://schemas.hp.com/SM/7">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:RetrieveIM_IncidentListRequest attachmentInfo="?" attachmentData="?" ignoreEmptyElements="true" updatecounter="?" handle="?" count="?" start="?" attachmentType="?">
+         <!--1 or more repetitions:-->
+         <ns:keys query="?" updatecounter="?">
+            <!--Optional:-->
+            <ns:IncidentID type="String" mandatory="?" readonly="?"> </ns:IncidentID>
+         </ns:keys>
+      </ns:RetrieveIM_IncidentListRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="RetrieveList"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="Update" name="UpdateIM_Incident" bindingOperationName="UpdateIM_Incident" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional" id="3cf5a7ad-a1e1-4213-a575-04662103b7f4"><con:settings/><con:call name="Request 1" id="02efc24f-a12d-4624-8254-34ea5e4dbb5a"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://schemas.hp.com/SM/7" xmlns:com="http://schemas.hp.com/SM/7/Common" xmlns:xm="http://www.w3.org/2005/05/xmlmime">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:UpdateIM_IncidentRequest attachmentInfo="?" attachmentData="?" ignoreEmptyElements="true" updateconstraint="-1">
+         <ns:model query="?">
+            <ns:keys query="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:IncidentID type="String" mandatory="?" readonly="?">?</ns:IncidentID>
+            </ns:keys>
+            <ns:instance query="?" uniquequery="?" recordid="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:IncidentID type="String" mandatory="?" readonly="?">?</ns:IncidentID>
+               <!--Optional:-->
+               <ns:Category type="String" mandatory="?" readonly="?">?</ns:Category>
+               <!--Optional:-->
+               <ns:OpenTime type="DateTime" mandatory="?" readonly="?">?</ns:OpenTime>
+               <!--Optional:-->
+               <ns:OpenedBy type="String" mandatory="?" readonly="?">?</ns:OpenedBy>
+               <!--Optional:-->
+               <ns:Urgency type="String" mandatory="?" readonly="?">?</ns:Urgency>
+               <!--Optional:-->
+               <ns:UpdatedTime type="DateTime" mandatory="?" readonly="?">?</ns:UpdatedTime>
+               <!--Optional:-->
+               <ns:AssignmentGroup type="String" mandatory="?" readonly="?">?</ns:AssignmentGroup>
+               <!--Optional:-->
+               <ns:ClosedTime type="DateTime" mandatory="?" readonly="?">?</ns:ClosedTime>
+               <!--Optional:-->
+               <ns:ClosedBy type="String" mandatory="?" readonly="?">?</ns:ClosedBy>
+               <!--Optional:-->
+               <ns:ClosureCode type="String" mandatory="?" readonly="?">?</ns:ClosureCode>
+               <!--Optional:-->
+               <ns:AffectedCI type="String" mandatory="?" readonly="?">?</ns:AffectedCI>
+               <!--Optional:-->
+               <ns:Description type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:Description type="String" mandatory="?" readonly="?">?</ns:Description>
+               </ns:Description>
+               <!--Optional:-->
+               <ns:Solution type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:Solution type="String" mandatory="?" readonly="?">?</ns:Solution>
+               </ns:Solution>
+               <!--Optional:-->
+               <ns:Assignee type="String" mandatory="?" readonly="?">?</ns:Assignee>
+               <!--Optional:-->
+               <ns:Contact type="String" mandatory="?" readonly="?">?</ns:Contact>
+               <!--Optional:-->
+               <ns:JournalUpdates type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:JournalUpdates type="String" mandatory="?" readonly="?">?</ns:JournalUpdates>
+               </ns:JournalUpdates>
+               <!--Optional:-->
+               <ns:AlertStatus type="String" mandatory="?" readonly="?">?</ns:AlertStatus>
+               <!--Optional:-->
+               <ns:ContactLastName type="String" mandatory="?" readonly="?">?</ns:ContactLastName>
+               <!--Optional:-->
+               <ns:ContactFirstName type="String" mandatory="?" readonly="?">?</ns:ContactFirstName>
+               <!--Optional:-->
+               <ns:Company type="String" mandatory="?" readonly="?">?</ns:Company>
+               <!--Optional:-->
+               <ns:Title type="String" mandatory="?" readonly="?">?</ns:Title>
+               <!--Optional:-->
+               <ns:TicketOwner type="String" mandatory="?" readonly="?">?</ns:TicketOwner>
+               <!--Optional:-->
+               <ns:UpdatedBy type="String" mandatory="?" readonly="?">?</ns:UpdatedBy>
+               <!--Optional:-->
+               <ns:Status type="String" mandatory="?" readonly="?">?</ns:Status>
+               <!--Optional:-->
+               <ns:Phase type="String" mandatory="?" readonly="?">?</ns:Phase>
+               <!--Optional:-->
+               <ns:Area type="String" mandatory="?" readonly="?">?</ns:Area>
+               <!--Optional:-->
+               <ns:SLAAgreementID type="Decimal" mandatory="?" readonly="?">?</ns:SLAAgreementID>
+               <!--Optional:-->
+               <ns:SiteCategory type="String" mandatory="?" readonly="?">?</ns:SiteCategory>
+               <!--Optional:-->
+               <ns:Subarea type="String" mandatory="?" readonly="?">?</ns:Subarea>
+               <!--Optional:-->
+               <ns:ProblemType type="String" mandatory="?" readonly="?">?</ns:ProblemType>
+               <!--Optional:-->
+               <ns:ResolutionFixType type="String" mandatory="?" readonly="?">?</ns:ResolutionFixType>
+               <!--Optional:-->
+               <ns:Source type="String" mandatory="?" readonly="?">?</ns:Source>
+               <!--Optional:-->
+               <ns:UserPriority type="String" mandatory="?" readonly="?">?</ns:UserPriority>
+               <!--Optional:-->
+               <ns:Location type="String" mandatory="?" readonly="?">?</ns:Location>
+               <!--Optional:-->
+               <ns:explanation type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:explanation type="String" mandatory="?" readonly="?">?</ns:explanation>
+               </ns:explanation>
+               <!--Optional:-->
+               <ns:Impact type="String" mandatory="?" readonly="?">?</ns:Impact>
+               <!--Optional:-->
+               <ns:folder type="String" mandatory="?" readonly="?">?</ns:folder>
+               <!--Optional:-->
+               <ns:Service type="String" mandatory="?" readonly="?">?</ns:Service>
+               <!--Optional:-->
+               <ns:IncidentManager type="String" mandatory="?" readonly="?">?</ns:IncidentManager>
+               <!--Optional:-->
+               <ns:MajorIncident type="Boolean" mandatory="?" readonly="?">?</ns:MajorIncident>
+               <!--Optional:-->
+               <ns:Escalated type="Boolean" mandatory="?" readonly="?">?</ns:Escalated>
+               <!--Optional:-->
+               <ns:EscalationTeams type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:EscalationTeams type="String" mandatory="?" readonly="?">?</ns:EscalationTeams>
+               </ns:EscalationTeams>
+               <!--Optional:-->
+               <ns:ReviewDetail type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ReviewDetail type="String" mandatory="?" readonly="?">?</ns:ReviewDetail>
+               </ns:ReviewDetail>
+               <!--Optional:-->
+               <ns:AplicacionAutomatica type="String" mandatory="?" readonly="?">?</ns:AplicacionAutomatica>
+               <!--Optional:-->
+               <ns:attachments>
+                  <!--Zero or more repetitions:-->
+                  <com:attachment xm:contentType="application/?" href="?" contentId="?" action="?" name="?" type="?" len="?" charset="?" upload.by="?" upload.date="?" attachmentType="?">cid:1287876803361</com:attachment>
+               </ns:attachments>
+            </ns:instance>
+            <!--Optional:-->
+            <ns:messages>
+               <!--Zero or more repetitions:-->
+               <com:message type="String" mandatory="?" readonly="?" severity="?" module="?">?</com:message>
+            </ns:messages>
+         </ns:model>
+      </ns:UpdateIM_IncidentRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="Update"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:RestService" id="f3792537-4446-4399-bc52-b125e25d28a3" wadlVersion="http://wadl.dev.java.net/2009/02" name="Identity_IncidentMngmt" type="rest" definitionUrl="service" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints/></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

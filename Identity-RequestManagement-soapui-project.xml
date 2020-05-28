@@ -1,0 +1,2986 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="427c25bf-3b4e-46ad-84cc-37b062f821f3" activeEnvironment="Default" name="Identity_RequestManagement" resourceRoot="" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="333debaa-2b19-4ad3-9dfc-fa0f8103720c" wsaVersion="NONE" name="Identity_RequestManagement" type="wsdl" bindingName="{http://schemas.hp.com/SM/7}Identity_RequestManagement" soapVersion="1_1" anonymous="optional" definition="file:/Users/anupamgogoi/Desktop/clients/PICHINCHA/gi/HP/requirements/Incident_Requirement.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/Users/anupamgogoi/Desktop/clients/PICHINCHA/gi/HP/requirements/Incident_Requirement.wsdl"><con:part><con:url>file:/Users/anupamgogoi/Desktop/clients/PICHINCHA/gi/HP/requirements/Incident_Requirement.wsdl</con:url><con:content><![CDATA[<definitions targetNamespace="http://schemas.hp.com/SM/7" xsi:schemaLocation="http://schemas.xmlsoap.org/wsdl/  http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:cmn="http://schemas.hp.com/SM/7/Common" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:ns="http://schemas.hp.com/SM/7" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.hp.com/SM/7" version="2019-09-02 Rev 0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.hp.com/SM/7" xmlns:xmime="http://www.w3.org/2005/05/xmlmime">
+      <xs:import namespace="http://www.w3.org/2005/05/xmlmime" schemaLocation="http://www.w3.org/2005/05/xmlmime"/>
+      <xs:import namespace="http://schemas.hp.com/SM/7/Common" schemaLocation="./Common.xsd"/>
+      <xs:complexType name="IM_RMKeysType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Number" nillable="true" type="cmn:StringType"/>
+        </xs:sequence>
+        <xs:attribute name="query" type="xs:string" use="optional"/>
+        <xs:attribute name="updatecounter" type="xs:long" use="optional"/>
+      </xs:complexType>
+      <xs:complexType name="IM_RMInstanceType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Number" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Open" nillable="true" type="cmn:BooleanType"/>
+          <xs:element minOccurs="0" name="Category" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Subcategory" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Model" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="CurrentPhase" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Impact" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Status" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Priority" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="ApprovalStatus" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Alert" nillable="true" type="cmn:BooleanType"/>
+          <xs:element minOccurs="0" name="AlertNames">
+            <xs:complexType>
+              <xs:complexContent>
+                <xs:extension base="cmn:ArrayType">
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="AlertNames" type="cmn:StringType"/>
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="PendingGroups">
+            <xs:complexType>
+              <xs:complexContent>
+                <xs:extension base="cmn:ArrayType">
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="PendingGroups" type="cmn:StringType"/>
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="Reason" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="SubmitDate" nillable="true" type="cmn:DateTimeType"/>
+          <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="cmn:DateTimeType"/>
+          <xs:element minOccurs="0" name="CloseDate" nillable="true" type="cmn:DateTimeType"/>
+          <xs:element minOccurs="0" name="CancelledDate" nillable="true" type="cmn:DateTimeType"/>
+          <xs:element minOccurs="0" name="RequestorName" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="CoordinatorName" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="CoordinatorDept" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="AssignedTo" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="ShiptoCode" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="BilltoCode" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="TotalCost" nillable="true" type="cmn:DecimalType"/>
+          <xs:element minOccurs="0" name="BilltoExt">
+            <xs:complexType>
+              <xs:complexContent>
+                <xs:extension base="cmn:ArrayType">
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="BilltoExt" type="cmn:StringType"/>
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="ShiptoExt">
+            <xs:complexType>
+              <xs:complexContent>
+                <xs:extension base="cmn:ArrayType">
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="ShiptoExt" type="cmn:StringType"/>
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="ProjectId" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="PlannedStart" nillable="true" type="cmn:DateTimeType"/>
+          <xs:element minOccurs="0" name="PlannedEnd" nillable="true" type="cmn:DateTimeType"/>
+          <xs:element minOccurs="0" name="RequestedFor" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="BriefDescription" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="CurrentPendingGroups">
+            <xs:complexType>
+              <xs:complexContent>
+                <xs:extension base="cmn:ArrayType">
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="CurrentPendingGroups" type="cmn:StringType"/>
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="FutureGroups">
+            <xs:complexType>
+              <xs:complexContent>
+                <xs:extension base="cmn:ArrayType">
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="FutureGroups" type="cmn:StringType"/>
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="ApprovedGroups">
+            <xs:complexType>
+              <xs:complexContent>
+                <xs:extension base="cmn:ArrayType">
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="ApprovedGroups" type="cmn:StringType"/>
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="BilltoDept" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Company" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="AlertStatus" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="SvcOptions" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Folder" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="SlaBreach" nillable="true" type="cmn:BooleanType"/>
+          <xs:element minOccurs="0" name="NextBreach" nillable="true" type="cmn:DateTimeType"/>
+          <xs:element minOccurs="0" name="SvcCartId" nillable="true" type="cmn:DecimalType"/>
+          <xs:element minOccurs="0" name="AgreementIds">
+            <xs:complexType>
+              <xs:complexContent>
+                <xs:extension base="cmn:ArrayType">
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="AgreementIds" type="cmn:DecimalType"/>
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="AssignedGroup" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="UpdateAction">
+            <xs:complexType>
+              <xs:complexContent>
+                <xs:extension base="cmn:ArrayType">
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="UpdateAction" type="cmn:StringType"/>
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="CustVisible" nillable="true" type="cmn:BooleanType"/>
+          <xs:element minOccurs="0" name="ClosureCode" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="ClosureComments" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="DeliveryDate" nillable="true" type="cmn:DateTimeType"/>
+          <xs:element minOccurs="0" name="CostCurrencyCode" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="ClosedBy" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Description">
+            <xs:complexType>
+              <xs:complexContent>
+                <xs:extension base="cmn:ArrayType">
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="cmn:StringType"/>
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="GlobalLeadTime" nillable="true" type="cmn:DateTimeType"/>
+          <xs:element minOccurs="0" name="RequestedDate" nillable="true" type="cmn:DateTimeType"/>
+          <xs:element minOccurs="0" name="ModelName" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="Urgency" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="AffectedService" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="AffectedCI" nillable="true" type="cmn:StringType"/>
+          <xs:element minOccurs="0" name="attachments" nillable="true" type="cmn:AttachmentsType"/>
+        </xs:sequence>
+        <xs:attribute name="query" type="xs:string" use="optional"/>
+        <xs:attribute name="uniquequery" type="xs:string" use="optional"/>
+        <xs:attribute name="recordid" type="xs:string" use="optional"/>
+        <xs:attribute name="updatecounter" type="xs:long" use="optional"/>
+      </xs:complexType>
+      <xs:complexType name="IM_RMModelType">
+        <xs:sequence>
+          <xs:element name="keys" type="IM_RMKeysType"/>
+          <xs:element name="instance" type="IM_RMInstanceType"/>
+          <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+        </xs:sequence>
+        <xs:attribute name="query" type="xs:string" use="optional"/>
+      </xs:complexType>
+      <xs:element name="RetrieveIM_RMRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_RMModelType"/>
+          </xs:sequence>
+          <xs:attribute name="attachmentInfo" type="xs:boolean" use="optional"/>
+          <xs:attribute name="attachmentData" type="xs:boolean" use="optional"/>
+          <xs:attribute default="true" name="ignoreEmptyElements" type="xs:boolean" use="optional"/>
+          <xs:attribute name="updatecounter" type="xs:boolean" use="optional"/>
+          <xs:attribute name="handle" type="xs:string" use="optional"/>
+          <xs:attribute name="count" type="xs:long" use="optional"/>
+          <xs:attribute name="start" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RetrieveIM_RMResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_RMModelType"/>
+            <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+          </xs:sequence>
+          <xs:attribute name="status" type="cmn:StatusType" use="required"/>
+          <xs:attribute name="message" type="xs:string" use="required"/>
+          <xs:attribute name="schemaRevisionDate" type="xs:date" use="required"/>
+          <xs:attribute name="schemaRevisionLevel" type="xs:int" use="required"/>
+          <xs:attribute name="returnCode" type="xs:decimal" use="optional"/>
+          <xs:attribute name="query" type="xs:string" use="optional"/>
+          <xs:attribute name="handle" type="xs:string" use="optional"/>
+          <xs:attribute name="count" type="xs:long" use="optional"/>
+          <xs:attribute name="more" type="xs:boolean" use="optional"/>
+          <xs:attribute name="start" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RetrieveIM_RMKeysListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_RMModelType"/>
+          </xs:sequence>
+          <xs:attribute name="attachmentInfo" type="xs:boolean" use="optional"/>
+          <xs:attribute name="attachmentData" type="xs:boolean" use="optional"/>
+          <xs:attribute default="true" name="ignoreEmptyElements" type="xs:boolean" use="optional"/>
+          <xs:attribute name="updatecounter" type="xs:boolean" use="optional"/>
+          <xs:attribute name="handle" type="xs:string" use="optional"/>
+          <xs:attribute name="count" type="xs:long" use="optional"/>
+          <xs:attribute name="start" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RetrieveIM_RMKeysListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="keys" type="IM_RMKeysType"/>
+            <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+          </xs:sequence>
+          <xs:attribute name="status" type="cmn:StatusType" use="required"/>
+          <xs:attribute name="message" type="xs:string" use="required"/>
+          <xs:attribute name="schemaRevisionDate" type="xs:date" use="required"/>
+          <xs:attribute name="schemaRevisionLevel" type="xs:int" use="required"/>
+          <xs:attribute name="returnCode" type="xs:decimal" use="optional"/>
+          <xs:attribute name="query" type="xs:string" use="optional"/>
+          <xs:attribute name="handle" type="xs:string" use="optional"/>
+          <xs:attribute name="count" type="xs:long" use="optional"/>
+          <xs:attribute name="more" type="xs:boolean" use="optional"/>
+          <xs:attribute name="start" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RetrieveIM_RMListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="keys" type="IM_RMKeysType"/>
+          </xs:sequence>
+          <xs:attribute name="attachmentInfo" type="xs:boolean" use="optional"/>
+          <xs:attribute name="attachmentData" type="xs:boolean" use="optional"/>
+          <xs:attribute default="true" name="ignoreEmptyElements" type="xs:boolean" use="optional"/>
+          <xs:attribute name="updatecounter" type="xs:boolean" use="optional"/>
+          <xs:attribute name="handle" type="xs:string" use="optional"/>
+          <xs:attribute name="count" type="xs:long" use="optional"/>
+          <xs:attribute name="start" type="xs:long" use="optional"/>
+          <xs:attribute name="attachmentType" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RetrieveIM_RMListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="instance" type="IM_RMInstanceType"/>
+            <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+          </xs:sequence>
+          <xs:attribute name="status" type="cmn:StatusType" use="required"/>
+          <xs:attribute name="message" type="xs:string" use="required"/>
+          <xs:attribute name="schemaRevisionDate" type="xs:date" use="required"/>
+          <xs:attribute name="schemaRevisionLevel" type="xs:int" use="required"/>
+          <xs:attribute name="returnCode" type="xs:decimal" use="optional"/>
+          <xs:attribute name="query" type="xs:string" use="optional"/>
+          <xs:attribute name="handle" type="xs:string" use="optional"/>
+          <xs:attribute name="count" type="xs:long" use="optional"/>
+          <xs:attribute name="more" type="xs:boolean" use="optional"/>
+          <xs:attribute name="start" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CreateIM_RMRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_RMModelType"/>
+          </xs:sequence>
+          <xs:attribute name="attachmentInfo" type="xs:boolean" use="optional"/>
+          <xs:attribute name="attachmentData" type="xs:boolean" use="optional"/>
+          <xs:attribute default="true" name="ignoreEmptyElements" type="xs:boolean" use="optional"/>
+          <xs:attribute default="-1" name="updateconstraint" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CreateIM_RMResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_RMModelType"/>
+            <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+          </xs:sequence>
+          <xs:attribute name="status" type="cmn:StatusType" use="required"/>
+          <xs:attribute name="message" type="xs:string" use="required"/>
+          <xs:attribute name="schemaRevisionDate" type="xs:date" use="required"/>
+          <xs:attribute name="schemaRevisionLevel" type="xs:int" use="required"/>
+          <xs:attribute name="returnCode" type="xs:decimal" use="optional"/>
+          <xs:attribute name="query" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CloseIM_RMRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_RMModelType"/>
+          </xs:sequence>
+          <xs:attribute name="attachmentInfo" type="xs:boolean" use="optional"/>
+          <xs:attribute name="attachmentData" type="xs:boolean" use="optional"/>
+          <xs:attribute default="true" name="ignoreEmptyElements" type="xs:boolean" use="optional"/>
+          <xs:attribute default="-1" name="updateconstraint" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CloseIM_RMResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_RMModelType"/>
+            <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+          </xs:sequence>
+          <xs:attribute name="status" type="cmn:StatusType" use="required"/>
+          <xs:attribute name="message" type="xs:string" use="required"/>
+          <xs:attribute name="schemaRevisionDate" type="xs:date" use="required"/>
+          <xs:attribute name="schemaRevisionLevel" type="xs:int" use="required"/>
+          <xs:attribute name="returnCode" type="xs:decimal" use="optional"/>
+          <xs:attribute name="query" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateIM_RMRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_RMModelType"/>
+          </xs:sequence>
+          <xs:attribute name="attachmentInfo" type="xs:boolean" use="optional"/>
+          <xs:attribute name="attachmentData" type="xs:boolean" use="optional"/>
+          <xs:attribute default="true" name="ignoreEmptyElements" type="xs:boolean" use="optional"/>
+          <xs:attribute default="-1" name="updateconstraint" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateIM_RMResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_RMModelType"/>
+            <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+          </xs:sequence>
+          <xs:attribute name="status" type="cmn:StatusType" use="required"/>
+          <xs:attribute name="message" type="xs:string" use="required"/>
+          <xs:attribute name="schemaRevisionDate" type="xs:date" use="required"/>
+          <xs:attribute name="schemaRevisionLevel" type="xs:int" use="required"/>
+          <xs:attribute name="returnCode" type="xs:decimal" use="optional"/>
+          <xs:attribute name="query" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RetractIM_RMRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_RMModelType"/>
+          </xs:sequence>
+          <xs:attribute name="attachmentInfo" type="xs:boolean" use="optional"/>
+          <xs:attribute name="attachmentData" type="xs:boolean" use="optional"/>
+          <xs:attribute default="true" name="ignoreEmptyElements" type="xs:boolean" use="optional"/>
+          <xs:attribute default="-1" name="updateconstraint" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RetractIM_RMResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_RMModelType"/>
+            <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+          </xs:sequence>
+          <xs:attribute name="status" type="cmn:StatusType" use="required"/>
+          <xs:attribute name="message" type="xs:string" use="required"/>
+          <xs:attribute name="schemaRevisionDate" type="xs:date" use="required"/>
+          <xs:attribute name="schemaRevisionLevel" type="xs:int" use="required"/>
+          <xs:attribute name="returnCode" type="xs:decimal" use="optional"/>
+          <xs:attribute name="query" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ApproveIM_RMRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_RMModelType"/>
+          </xs:sequence>
+          <xs:attribute name="attachmentInfo" type="xs:boolean" use="optional"/>
+          <xs:attribute name="attachmentData" type="xs:boolean" use="optional"/>
+          <xs:attribute default="true" name="ignoreEmptyElements" type="xs:boolean" use="optional"/>
+          <xs:attribute default="-1" name="updateconstraint" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ApproveIM_RMResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_RMModelType"/>
+            <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+          </xs:sequence>
+          <xs:attribute name="status" type="cmn:StatusType" use="required"/>
+          <xs:attribute name="message" type="xs:string" use="required"/>
+          <xs:attribute name="schemaRevisionDate" type="xs:date" use="required"/>
+          <xs:attribute name="schemaRevisionLevel" type="xs:int" use="required"/>
+          <xs:attribute name="returnCode" type="xs:decimal" use="optional"/>
+          <xs:attribute name="query" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DenyIM_RMRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_RMModelType"/>
+          </xs:sequence>
+          <xs:attribute name="attachmentInfo" type="xs:boolean" use="optional"/>
+          <xs:attribute name="attachmentData" type="xs:boolean" use="optional"/>
+          <xs:attribute default="true" name="ignoreEmptyElements" type="xs:boolean" use="optional"/>
+          <xs:attribute default="-1" name="updateconstraint" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DenyIM_RMResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_RMModelType"/>
+            <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+          </xs:sequence>
+          <xs:attribute name="status" type="cmn:StatusType" use="required"/>
+          <xs:attribute name="message" type="xs:string" use="required"/>
+          <xs:attribute name="schemaRevisionDate" type="xs:date" use="required"/>
+          <xs:attribute name="schemaRevisionLevel" type="xs:int" use="required"/>
+          <xs:attribute name="returnCode" type="xs:decimal" use="optional"/>
+          <xs:attribute name="query" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="MoveToNextPhaseIM_RMRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_RMModelType"/>
+          </xs:sequence>
+          <xs:attribute name="attachmentInfo" type="xs:boolean" use="optional"/>
+          <xs:attribute name="attachmentData" type="xs:boolean" use="optional"/>
+          <xs:attribute default="true" name="ignoreEmptyElements" type="xs:boolean" use="optional"/>
+          <xs:attribute default="-1" name="updateconstraint" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="MoveToNextPhaseIM_RMResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_RMModelType"/>
+            <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+          </xs:sequence>
+          <xs:attribute name="status" type="cmn:StatusType" use="required"/>
+          <xs:attribute name="message" type="xs:string" use="required"/>
+          <xs:attribute name="schemaRevisionDate" type="xs:date" use="required"/>
+          <xs:attribute name="schemaRevisionLevel" type="xs:int" use="required"/>
+          <xs:attribute name="returnCode" type="xs:decimal" use="optional"/>
+          <xs:attribute name="query" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ReopenIM_RMRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_RMModelType"/>
+          </xs:sequence>
+          <xs:attribute name="attachmentInfo" type="xs:boolean" use="optional"/>
+          <xs:attribute name="attachmentData" type="xs:boolean" use="optional"/>
+          <xs:attribute default="true" name="ignoreEmptyElements" type="xs:boolean" use="optional"/>
+          <xs:attribute default="-1" name="updateconstraint" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ReopenIM_RMResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_RMModelType"/>
+            <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+          </xs:sequence>
+          <xs:attribute name="status" type="cmn:StatusType" use="required"/>
+          <xs:attribute name="message" type="xs:string" use="required"/>
+          <xs:attribute name="schemaRevisionDate" type="xs:date" use="required"/>
+          <xs:attribute name="schemaRevisionLevel" type="xs:int" use="required"/>
+          <xs:attribute name="returnCode" type="xs:decimal" use="optional"/>
+          <xs:attribute name="query" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SubmitForApprovalIM_RMRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_RMModelType"/>
+          </xs:sequence>
+          <xs:attribute name="attachmentInfo" type="xs:boolean" use="optional"/>
+          <xs:attribute name="attachmentData" type="xs:boolean" use="optional"/>
+          <xs:attribute default="true" name="ignoreEmptyElements" type="xs:boolean" use="optional"/>
+          <xs:attribute default="-1" name="updateconstraint" type="xs:long" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SubmitForApprovalIM_RMResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="model" type="IM_RMModelType"/>
+            <xs:element minOccurs="0" name="messages" type="cmn:MessagesType"/>
+          </xs:sequence>
+          <xs:attribute name="status" type="cmn:StatusType" use="required"/>
+          <xs:attribute name="message" type="xs:string" use="required"/>
+          <xs:attribute name="schemaRevisionDate" type="xs:date" use="required"/>
+          <xs:attribute name="schemaRevisionLevel" type="xs:int" use="required"/>
+          <xs:attribute name="returnCode" type="xs:decimal" use="optional"/>
+          <xs:attribute name="query" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </types>
+  <message name="RetrieveIM_RMRequest">
+    <part element="ns:RetrieveIM_RMRequest" name="RetrieveIM_RMRequest"/>
+  </message>
+  <message name="RetrieveIM_RMResponse">
+    <part element="ns:RetrieveIM_RMResponse" name="RetrieveIM_RMResponse"/>
+  </message>
+  <message name="RetrieveIM_RMKeysListRequest">
+    <part element="ns:RetrieveIM_RMKeysListRequest" name="RetrieveIM_RMKeysListRequest"/>
+  </message>
+  <message name="RetrieveIM_RMKeysListResponse">
+    <part element="ns:RetrieveIM_RMKeysListResponse" name="RetrieveIM_RMKeysListResponse"/>
+  </message>
+  <message name="RetrieveIM_RMListRequest">
+    <part element="ns:RetrieveIM_RMListRequest" name="RetrieveIM_RMListRequest"/>
+  </message>
+  <message name="RetrieveIM_RMListResponse">
+    <part element="ns:RetrieveIM_RMListResponse" name="RetrieveIM_RMListResponse"/>
+  </message>
+  <message name="CreateIM_RMRequest">
+    <part element="ns:CreateIM_RMRequest" name="CreateIM_RMRequest"/>
+  </message>
+  <message name="CreateIM_RMResponse">
+    <part element="ns:CreateIM_RMResponse" name="CreateIM_RMResponse"/>
+  </message>
+  <message name="CloseIM_RMRequest">
+    <part element="ns:CloseIM_RMRequest" name="CloseIM_RMRequest"/>
+  </message>
+  <message name="CloseIM_RMResponse">
+    <part element="ns:CloseIM_RMResponse" name="CloseIM_RMResponse"/>
+  </message>
+  <message name="UpdateIM_RMRequest">
+    <part element="ns:UpdateIM_RMRequest" name="UpdateIM_RMRequest"/>
+  </message>
+  <message name="UpdateIM_RMResponse">
+    <part element="ns:UpdateIM_RMResponse" name="UpdateIM_RMResponse"/>
+  </message>
+  <message name="RetractIM_RMRequest">
+    <part element="ns:RetractIM_RMRequest" name="RetractIM_RMRequest"/>
+  </message>
+  <message name="RetractIM_RMResponse">
+    <part element="ns:RetractIM_RMResponse" name="RetractIM_RMResponse"/>
+  </message>
+  <message name="ApproveIM_RMRequest">
+    <part element="ns:ApproveIM_RMRequest" name="ApproveIM_RMRequest"/>
+  </message>
+  <message name="ApproveIM_RMResponse">
+    <part element="ns:ApproveIM_RMResponse" name="ApproveIM_RMResponse"/>
+  </message>
+  <message name="DenyIM_RMRequest">
+    <part element="ns:DenyIM_RMRequest" name="DenyIM_RMRequest"/>
+  </message>
+  <message name="DenyIM_RMResponse">
+    <part element="ns:DenyIM_RMResponse" name="DenyIM_RMResponse"/>
+  </message>
+  <message name="MoveToNextPhaseIM_RMRequest">
+    <part element="ns:MoveToNextPhaseIM_RMRequest" name="MoveToNextPhaseIM_RMRequest"/>
+  </message>
+  <message name="MoveToNextPhaseIM_RMResponse">
+    <part element="ns:MoveToNextPhaseIM_RMResponse" name="MoveToNextPhaseIM_RMResponse"/>
+  </message>
+  <message name="ReopenIM_RMRequest">
+    <part element="ns:ReopenIM_RMRequest" name="ReopenIM_RMRequest"/>
+  </message>
+  <message name="ReopenIM_RMResponse">
+    <part element="ns:ReopenIM_RMResponse" name="ReopenIM_RMResponse"/>
+  </message>
+  <message name="SubmitForApprovalIM_RMRequest">
+    <part element="ns:SubmitForApprovalIM_RMRequest" name="SubmitForApprovalIM_RMRequest"/>
+  </message>
+  <message name="SubmitForApprovalIM_RMResponse">
+    <part element="ns:SubmitForApprovalIM_RMResponse" name="SubmitForApprovalIM_RMResponse"/>
+  </message>
+  <portType name="Identity_RequestManagement">
+    <operation name="RetrieveIM_RM">
+      <documentation/>
+      <input message="ns:RetrieveIM_RMRequest"/>
+      <output message="ns:RetrieveIM_RMResponse"/>
+    </operation>
+    <operation name="RetrieveIM_RMKeysList">
+      <documentation/>
+      <input message="ns:RetrieveIM_RMKeysListRequest"/>
+      <output message="ns:RetrieveIM_RMKeysListResponse"/>
+    </operation>
+    <operation name="RetrieveIM_RMList">
+      <documentation/>
+      <input message="ns:RetrieveIM_RMListRequest"/>
+      <output message="ns:RetrieveIM_RMListResponse"/>
+    </operation>
+    <operation name="CreateIM_RM">
+      <documentation/>
+      <input message="ns:CreateIM_RMRequest"/>
+      <output message="ns:CreateIM_RMResponse"/>
+    </operation>
+    <operation name="CloseIM_RM">
+      <documentation/>
+      <input message="ns:CloseIM_RMRequest"/>
+      <output message="ns:CloseIM_RMResponse"/>
+    </operation>
+    <operation name="UpdateIM_RM">
+      <documentation/>
+      <input message="ns:UpdateIM_RMRequest"/>
+      <output message="ns:UpdateIM_RMResponse"/>
+    </operation>
+    <operation name="RetractIM_RM">
+      <documentation/>
+      <input message="ns:RetractIM_RMRequest"/>
+      <output message="ns:RetractIM_RMResponse"/>
+    </operation>
+    <operation name="ApproveIM_RM">
+      <documentation/>
+      <input message="ns:ApproveIM_RMRequest"/>
+      <output message="ns:ApproveIM_RMResponse"/>
+    </operation>
+    <operation name="DenyIM_RM">
+      <documentation/>
+      <input message="ns:DenyIM_RMRequest"/>
+      <output message="ns:DenyIM_RMResponse"/>
+    </operation>
+    <operation name="MoveToNextPhaseIM_RM">
+      <documentation/>
+      <input message="ns:MoveToNextPhaseIM_RMRequest"/>
+      <output message="ns:MoveToNextPhaseIM_RMResponse"/>
+    </operation>
+    <operation name="ReopenIM_RM">
+      <documentation/>
+      <input message="ns:ReopenIM_RMRequest"/>
+      <output message="ns:ReopenIM_RMResponse"/>
+    </operation>
+    <operation name="SubmitForApprovalIM_RM">
+      <documentation/>
+      <input message="ns:SubmitForApprovalIM_RMRequest"/>
+      <output message="ns:SubmitForApprovalIM_RMResponse"/>
+    </operation>
+  </portType>
+  <binding name="Identity_RequestManagement" type="ns:Identity_RequestManagement">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="RetrieveIM_RM">
+      <soap:operation soapAction="Retrieve" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="RetrieveIM_RMKeysList">
+      <soap:operation soapAction="RetrieveKeysList" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="RetrieveIM_RMList">
+      <soap:operation soapAction="RetrieveList" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="CreateIM_RM">
+      <soap:operation soapAction="Create" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="CloseIM_RM">
+      <soap:operation soapAction="Close" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="UpdateIM_RM">
+      <soap:operation soapAction="Update" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="RetractIM_RM">
+      <soap:operation soapAction="Retract" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="ApproveIM_RM">
+      <soap:operation soapAction="Approve" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="DenyIM_RM">
+      <soap:operation soapAction="Deny" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="MoveToNextPhaseIM_RM">
+      <soap:operation soapAction="MoveToNextPhase" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="ReopenIM_RM">
+      <soap:operation soapAction="Reopen" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="SubmitForApprovalIM_RM">
+      <soap:operation soapAction="SubmitForApproval" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="Identity_RequestManagement">
+    <port binding="ns:Identity_RequestManagement" name="Identity_RequestManagement">
+      <soap:address location="http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://www.w3.org/2005/05/xmlmime</con:url><con:content><![CDATA[<!--W3C XML Schema defined in the Describing Media Content of Binary Data in XML
+   specification
+     http://www.w3.org/TR/xml-media-types
+
+   Copyright © 2005 World Wide Web Consortium,
+  
+   (Massachusetts Institute of Technology, European Research Consortium for
+   Informatics and Mathematics, Keio University). All Rights Reserved. This
+   work is distributed under the W3C® Software License [1] in the hope that
+   it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+   warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  
+   [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+
+   $Id: xmlmime.xsd,v 1.1 2005/04/25 17:08:35 hugo Exp $-->
+<xs:schema targetNamespace="http://www.w3.org/2005/05/xmlmime" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xmime="http://www.w3.org/2005/05/xmlmime">
+  <xs:attribute name="contentType">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="3"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
+  <xs:attribute name="expectedContentTypes" type="xs:string"/>
+  <xs:complexType name="base64Binary">
+    <xs:simpleContent>
+      <xs:extension base="xs:base64Binary">
+        <xs:attribute ref="xmime:contentType"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="hexBinary">
+    <xs:simpleContent>
+      <xs:extension base="xs:hexBinary">
+        <xs:attribute ref="xmime:contentType"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:/Users/anupamgogoi/Desktop/clients/PICHINCHA/gi/HP/requirements/Common.xsd</con:url><con:content><![CDATA[<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.hp.com/SM/7/Common" version="2019-09-02 Rev 0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.hp.com/SM/7/Common" xmlns:cmn="http://schemas.hp.com/SM/7/Common" xmlns:xmime="http://www.w3.org/2005/05/xmlmime">
+  <xs:import namespace="http://www.w3.org/2005/05/xmlmime" schemaLocation="http://www.w3.org/2005/05/xmlmime"/>
+  <xs:complexType name="StringType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute fixed="String" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DecimalType">
+    <xs:simpleContent>
+      <xs:extension base="xs:decimal">
+        <xs:attribute fixed="Decimal" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BooleanType">
+    <xs:simpleContent>
+      <xs:extension base="xs:boolean">
+        <xs:attribute fixed="Boolean" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DateTimeType">
+    <xs:simpleContent>
+      <xs:extension base="xs:dateTime">
+        <xs:attribute fixed="DateTime" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DateType">
+    <xs:simpleContent>
+      <xs:extension base="xs:date">
+        <xs:attribute fixed="Date" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="TimeType">
+    <xs:simpleContent>
+      <xs:extension base="xs:time">
+        <xs:attribute fixed="Time" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DurationType">
+    <xs:simpleContent>
+      <xs:extension base="xs:duration">
+        <xs:attribute fixed="Duration" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="IntType">
+    <xs:simpleContent>
+      <xs:extension base="xs:int">
+        <xs:attribute fixed="Int" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="ShortType">
+    <xs:simpleContent>
+      <xs:extension base="xs:short">
+        <xs:attribute fixed="Short" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="LongType">
+    <xs:simpleContent>
+      <xs:extension base="xs:long">
+        <xs:attribute fixed="Long" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="ByteType">
+    <xs:simpleContent>
+      <xs:extension base="xs:byte">
+        <xs:attribute fixed="Byte" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="FloatType">
+    <xs:simpleContent>
+      <xs:extension base="xs:float">
+        <xs:attribute fixed="Float" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DoubleType">
+    <xs:simpleContent>
+      <xs:extension base="xs:double">
+        <xs:attribute fixed="Double" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="Base64Type">
+    <xs:simpleContent>
+      <xs:extension base="xs:base64Binary">
+        <xs:attribute fixed="Base64" name="type" type="xs:string" use="required"/>
+        <xs:attribute name="mandatory" type="xs:boolean" use="optional"/>
+        <xs:attribute name="readonly" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayType">
+    <xs:attribute fixed="Array" name="type" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="StructureType">
+    <xs:attribute fixed="Structure" name="type" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="AttachmentType">
+    <xs:simpleContent>
+      <xs:extension base="xs:base64Binary">
+        <xs:attribute ref="xmime:contentType" use="required"/>
+        <xs:attribute name="href" type="xs:string" use="optional"/>
+        <xs:attribute name="contentId" type="xs:string" use="optional"/>
+        <xs:attribute name="action" type="xs:string" use="optional"/>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="type" type="xs:string" use="required"/>
+        <xs:attribute name="len" type="xs:int" use="optional"/>
+        <xs:attribute name="charset" type="xs:string" use="optional"/>
+        <xs:attribute name="upload.by" type="xs:string" use="optional"/>
+        <xs:attribute name="upload.date" type="xs:string" use="optional"/>
+        <xs:attribute name="attachmentType" type="xs:string" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="AttachmentsType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="attachment" type="AttachmentType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MessageType">
+    <xs:simpleContent>
+      <xs:extension base="StringType">
+        <xs:attribute name="severity" type="xs:int" use="optional"/>
+        <xs:attribute name="module" type="xs:string" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="MessagesType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="message" type="MessageType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="StatusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SUCCESS"/>
+      <xs:enumeration value="FAILURE"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint></con:endpoints><con:operation id="7f530bca-7517-48be-a471-865a2992fc96" isOneWay="false" action="Approve" name="ApproveIM_RM" bindingOperationName="ApproveIM_RM" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5567287b-977a-4d6a-9d66-373c0f3463c2" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://schemas.hp.com/SM/7" xmlns:com="http://schemas.hp.com/SM/7/Common" xmlns:xm="http://www.w3.org/2005/05/xmlmime">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:ApproveIM_RMRequest attachmentInfo="?" attachmentData="?" ignoreEmptyElements="true" updateconstraint="-1">
+         <ns:model query="?">
+            <ns:keys query="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>
+            </ns:keys>
+            <ns:instance query="?" uniquequery="?" recordid="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>
+               <!--Optional:-->
+               <ns:Open type="Boolean" mandatory="?" readonly="?">?</ns:Open>
+               <!--Optional:-->
+               <ns:Category type="String" mandatory="?" readonly="?">?</ns:Category>
+               <!--Optional:-->
+               <ns:Subcategory type="String" mandatory="?" readonly="?">?</ns:Subcategory>
+               <!--Optional:-->
+               <ns:Model type="String" mandatory="?" readonly="?">?</ns:Model>
+               <!--Optional:-->
+               <ns:CurrentPhase type="String" mandatory="?" readonly="?">?</ns:CurrentPhase>
+               <!--Optional:-->
+               <ns:Impact type="String" mandatory="?" readonly="?">?</ns:Impact>
+               <!--Optional:-->
+               <ns:Status type="String" mandatory="?" readonly="?">?</ns:Status>
+               <!--Optional:-->
+               <ns:Priority type="String" mandatory="?" readonly="?">?</ns:Priority>
+               <!--Optional:-->
+               <ns:ApprovalStatus type="String" mandatory="?" readonly="?">?</ns:ApprovalStatus>
+               <!--Optional:-->
+               <ns:Alert type="Boolean" mandatory="?" readonly="?">?</ns:Alert>
+               <!--Optional:-->
+               <ns:AlertNames type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:AlertNames type="String" mandatory="?" readonly="?">?</ns:AlertNames>
+               </ns:AlertNames>
+               <!--Optional:-->
+               <ns:PendingGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:PendingGroups type="String" mandatory="?" readonly="?">?</ns:PendingGroups>
+               </ns:PendingGroups>
+               <!--Optional:-->
+               <ns:Reason type="String" mandatory="?" readonly="?">?</ns:Reason>
+               <!--Optional:-->
+               <ns:SubmitDate type="DateTime" mandatory="?" readonly="?">?</ns:SubmitDate>
+               <!--Optional:-->
+               <ns:UpdateDate type="DateTime" mandatory="?" readonly="?">?</ns:UpdateDate>
+               <!--Optional:-->
+               <ns:CloseDate type="DateTime" mandatory="?" readonly="?">?</ns:CloseDate>
+               <!--Optional:-->
+               <ns:CancelledDate type="DateTime" mandatory="?" readonly="?">?</ns:CancelledDate>
+               <!--Optional:-->
+               <ns:RequestorName type="String" mandatory="?" readonly="?">?</ns:RequestorName>
+               <!--Optional:-->
+               <ns:CoordinatorName type="String" mandatory="?" readonly="?">?</ns:CoordinatorName>
+               <!--Optional:-->
+               <ns:CoordinatorDept type="String" mandatory="?" readonly="?">?</ns:CoordinatorDept>
+               <!--Optional:-->
+               <ns:AssignedTo type="String" mandatory="?" readonly="?">?</ns:AssignedTo>
+               <!--Optional:-->
+               <ns:ShiptoCode type="String" mandatory="?" readonly="?">?</ns:ShiptoCode>
+               <!--Optional:-->
+               <ns:BilltoCode type="String" mandatory="?" readonly="?">?</ns:BilltoCode>
+               <!--Optional:-->
+               <ns:TotalCost type="Decimal" mandatory="?" readonly="?">?</ns:TotalCost>
+               <!--Optional:-->
+               <ns:BilltoExt type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:BilltoExt type="String" mandatory="?" readonly="?">?</ns:BilltoExt>
+               </ns:BilltoExt>
+               <!--Optional:-->
+               <ns:ShiptoExt type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ShiptoExt type="String" mandatory="?" readonly="?">?</ns:ShiptoExt>
+               </ns:ShiptoExt>
+               <!--Optional:-->
+               <ns:ProjectId type="String" mandatory="?" readonly="?">?</ns:ProjectId>
+               <!--Optional:-->
+               <ns:PlannedStart type="DateTime" mandatory="?" readonly="?">?</ns:PlannedStart>
+               <!--Optional:-->
+               <ns:PlannedEnd type="DateTime" mandatory="?" readonly="?">?</ns:PlannedEnd>
+               <!--Optional:-->
+               <ns:RequestedFor type="String" mandatory="?" readonly="?">?</ns:RequestedFor>
+               <!--Optional:-->
+               <ns:BriefDescription type="String" mandatory="?" readonly="?">?</ns:BriefDescription>
+               <!--Optional:-->
+               <ns:CurrentPendingGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:CurrentPendingGroups type="String" mandatory="?" readonly="?">?</ns:CurrentPendingGroups>
+               </ns:CurrentPendingGroups>
+               <!--Optional:-->
+               <ns:FutureGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:FutureGroups type="String" mandatory="?" readonly="?">?</ns:FutureGroups>
+               </ns:FutureGroups>
+               <!--Optional:-->
+               <ns:ApprovedGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ApprovedGroups type="String" mandatory="?" readonly="?">?</ns:ApprovedGroups>
+               </ns:ApprovedGroups>
+               <!--Optional:-->
+               <ns:BilltoDept type="String" mandatory="?" readonly="?">?</ns:BilltoDept>
+               <!--Optional:-->
+               <ns:Company type="String" mandatory="?" readonly="?">?</ns:Company>
+               <!--Optional:-->
+               <ns:AlertStatus type="String" mandatory="?" readonly="?">?</ns:AlertStatus>
+               <!--Optional:-->
+               <ns:SvcOptions type="String" mandatory="?" readonly="?">?</ns:SvcOptions>
+               <!--Optional:-->
+               <ns:Folder type="String" mandatory="?" readonly="?">?</ns:Folder>
+               <!--Optional:-->
+               <ns:SlaBreach type="Boolean" mandatory="?" readonly="?">?</ns:SlaBreach>
+               <!--Optional:-->
+               <ns:NextBreach type="DateTime" mandatory="?" readonly="?">?</ns:NextBreach>
+               <!--Optional:-->
+               <ns:SvcCartId type="Decimal" mandatory="?" readonly="?">?</ns:SvcCartId>
+               <!--Optional:-->
+               <ns:AgreementIds type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:AgreementIds type="Decimal" mandatory="?" readonly="?">?</ns:AgreementIds>
+               </ns:AgreementIds>
+               <!--Optional:-->
+               <ns:AssignedGroup type="String" mandatory="?" readonly="?">?</ns:AssignedGroup>
+               <!--Optional:-->
+               <ns:UpdateAction type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:UpdateAction type="String" mandatory="?" readonly="?">?</ns:UpdateAction>
+               </ns:UpdateAction>
+               <!--Optional:-->
+               <ns:CustVisible type="Boolean" mandatory="?" readonly="?">?</ns:CustVisible>
+               <!--Optional:-->
+               <ns:ClosureCode type="String" mandatory="?" readonly="?">?</ns:ClosureCode>
+               <!--Optional:-->
+               <ns:ClosureComments type="String" mandatory="?" readonly="?">?</ns:ClosureComments>
+               <!--Optional:-->
+               <ns:DeliveryDate type="DateTime" mandatory="?" readonly="?">?</ns:DeliveryDate>
+               <!--Optional:-->
+               <ns:CostCurrencyCode type="String" mandatory="?" readonly="?">?</ns:CostCurrencyCode>
+               <!--Optional:-->
+               <ns:ClosedBy type="String" mandatory="?" readonly="?">?</ns:ClosedBy>
+               <!--Optional:-->
+               <ns:Description type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:Description type="String" mandatory="?" readonly="?">?</ns:Description>
+               </ns:Description>
+               <!--Optional:-->
+               <ns:GlobalLeadTime type="DateTime" mandatory="?" readonly="?">?</ns:GlobalLeadTime>
+               <!--Optional:-->
+               <ns:RequestedDate type="DateTime" mandatory="?" readonly="?">?</ns:RequestedDate>
+               <!--Optional:-->
+               <ns:ModelName type="String" mandatory="?" readonly="?">?</ns:ModelName>
+               <!--Optional:-->
+               <ns:Urgency type="String" mandatory="?" readonly="?">?</ns:Urgency>
+               <!--Optional:-->
+               <ns:AffectedService type="String" mandatory="?" readonly="?">?</ns:AffectedService>
+               <!--Optional:-->
+               <ns:AffectedCI type="String" mandatory="?" readonly="?">?</ns:AffectedCI>
+               <!--Optional:-->
+               <ns:attachments>
+                  <!--Zero or more repetitions:-->
+                  <com:attachment xm:contentType="application/?" href="?" contentId="?" action="?" name="?" type="?" len="?" charset="?" upload.by="?" upload.date="?" attachmentType="?">cid:749436458232</com:attachment>
+               </ns:attachments>
+            </ns:instance>
+            <!--Optional:-->
+            <ns:messages>
+               <!--Zero or more repetitions:-->
+               <com:message type="String" mandatory="?" readonly="?" severity="?" module="?">?</com:message>
+            </ns:messages>
+         </ns:model>
+      </ns:ApproveIM_RMRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="Approve"/></con:call></con:operation><con:operation id="0704c352-c139-4d7b-bffb-05dd3aac3087" isOneWay="false" action="Close" name="CloseIM_RM" bindingOperationName="CloseIM_RM" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d52436e4-c5b5-4558-8b99-1c0578a540b2" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://schemas.hp.com/SM/7" xmlns:com="http://schemas.hp.com/SM/7/Common" xmlns:xm="http://www.w3.org/2005/05/xmlmime">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:CloseIM_RMRequest attachmentInfo="?" attachmentData="?" ignoreEmptyElements="true" updateconstraint="-1">
+         <ns:model query="?">
+            <ns:keys query="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>
+            </ns:keys>
+            <ns:instance query="?" uniquequery="?" recordid="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>
+               <!--Optional:-->
+               <ns:Open type="Boolean" mandatory="?" readonly="?">?</ns:Open>
+               <!--Optional:-->
+               <ns:Category type="String" mandatory="?" readonly="?">?</ns:Category>
+               <!--Optional:-->
+               <ns:Subcategory type="String" mandatory="?" readonly="?">?</ns:Subcategory>
+               <!--Optional:-->
+               <ns:Model type="String" mandatory="?" readonly="?">?</ns:Model>
+               <!--Optional:-->
+               <ns:CurrentPhase type="String" mandatory="?" readonly="?">?</ns:CurrentPhase>
+               <!--Optional:-->
+               <ns:Impact type="String" mandatory="?" readonly="?">?</ns:Impact>
+               <!--Optional:-->
+               <ns:Status type="String" mandatory="?" readonly="?">?</ns:Status>
+               <!--Optional:-->
+               <ns:Priority type="String" mandatory="?" readonly="?">?</ns:Priority>
+               <!--Optional:-->
+               <ns:ApprovalStatus type="String" mandatory="?" readonly="?">?</ns:ApprovalStatus>
+               <!--Optional:-->
+               <ns:Alert type="Boolean" mandatory="?" readonly="?">?</ns:Alert>
+               <!--Optional:-->
+               <ns:AlertNames type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:AlertNames type="String" mandatory="?" readonly="?">?</ns:AlertNames>
+               </ns:AlertNames>
+               <!--Optional:-->
+               <ns:PendingGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:PendingGroups type="String" mandatory="?" readonly="?">?</ns:PendingGroups>
+               </ns:PendingGroups>
+               <!--Optional:-->
+               <ns:Reason type="String" mandatory="?" readonly="?">?</ns:Reason>
+               <!--Optional:-->
+               <ns:SubmitDate type="DateTime" mandatory="?" readonly="?">?</ns:SubmitDate>
+               <!--Optional:-->
+               <ns:UpdateDate type="DateTime" mandatory="?" readonly="?">?</ns:UpdateDate>
+               <!--Optional:-->
+               <ns:CloseDate type="DateTime" mandatory="?" readonly="?">?</ns:CloseDate>
+               <!--Optional:-->
+               <ns:CancelledDate type="DateTime" mandatory="?" readonly="?">?</ns:CancelledDate>
+               <!--Optional:-->
+               <ns:RequestorName type="String" mandatory="?" readonly="?">?</ns:RequestorName>
+               <!--Optional:-->
+               <ns:CoordinatorName type="String" mandatory="?" readonly="?">?</ns:CoordinatorName>
+               <!--Optional:-->
+               <ns:CoordinatorDept type="String" mandatory="?" readonly="?">?</ns:CoordinatorDept>
+               <!--Optional:-->
+               <ns:AssignedTo type="String" mandatory="?" readonly="?">?</ns:AssignedTo>
+               <!--Optional:-->
+               <ns:ShiptoCode type="String" mandatory="?" readonly="?">?</ns:ShiptoCode>
+               <!--Optional:-->
+               <ns:BilltoCode type="String" mandatory="?" readonly="?">?</ns:BilltoCode>
+               <!--Optional:-->
+               <ns:TotalCost type="Decimal" mandatory="?" readonly="?">?</ns:TotalCost>
+               <!--Optional:-->
+               <ns:BilltoExt type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:BilltoExt type="String" mandatory="?" readonly="?">?</ns:BilltoExt>
+               </ns:BilltoExt>
+               <!--Optional:-->
+               <ns:ShiptoExt type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ShiptoExt type="String" mandatory="?" readonly="?">?</ns:ShiptoExt>
+               </ns:ShiptoExt>
+               <!--Optional:-->
+               <ns:ProjectId type="String" mandatory="?" readonly="?">?</ns:ProjectId>
+               <!--Optional:-->
+               <ns:PlannedStart type="DateTime" mandatory="?" readonly="?">?</ns:PlannedStart>
+               <!--Optional:-->
+               <ns:PlannedEnd type="DateTime" mandatory="?" readonly="?">?</ns:PlannedEnd>
+               <!--Optional:-->
+               <ns:RequestedFor type="String" mandatory="?" readonly="?">?</ns:RequestedFor>
+               <!--Optional:-->
+               <ns:BriefDescription type="String" mandatory="?" readonly="?">?</ns:BriefDescription>
+               <!--Optional:-->
+               <ns:CurrentPendingGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:CurrentPendingGroups type="String" mandatory="?" readonly="?">?</ns:CurrentPendingGroups>
+               </ns:CurrentPendingGroups>
+               <!--Optional:-->
+               <ns:FutureGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:FutureGroups type="String" mandatory="?" readonly="?">?</ns:FutureGroups>
+               </ns:FutureGroups>
+               <!--Optional:-->
+               <ns:ApprovedGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ApprovedGroups type="String" mandatory="?" readonly="?">?</ns:ApprovedGroups>
+               </ns:ApprovedGroups>
+               <!--Optional:-->
+               <ns:BilltoDept type="String" mandatory="?" readonly="?">?</ns:BilltoDept>
+               <!--Optional:-->
+               <ns:Company type="String" mandatory="?" readonly="?">?</ns:Company>
+               <!--Optional:-->
+               <ns:AlertStatus type="String" mandatory="?" readonly="?">?</ns:AlertStatus>
+               <!--Optional:-->
+               <ns:SvcOptions type="String" mandatory="?" readonly="?">?</ns:SvcOptions>
+               <!--Optional:-->
+               <ns:Folder type="String" mandatory="?" readonly="?">?</ns:Folder>
+               <!--Optional:-->
+               <ns:SlaBreach type="Boolean" mandatory="?" readonly="?">?</ns:SlaBreach>
+               <!--Optional:-->
+               <ns:NextBreach type="DateTime" mandatory="?" readonly="?">?</ns:NextBreach>
+               <!--Optional:-->
+               <ns:SvcCartId type="Decimal" mandatory="?" readonly="?">?</ns:SvcCartId>
+               <!--Optional:-->
+               <ns:AgreementIds type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:AgreementIds type="Decimal" mandatory="?" readonly="?">?</ns:AgreementIds>
+               </ns:AgreementIds>
+               <!--Optional:-->
+               <ns:AssignedGroup type="String" mandatory="?" readonly="?">?</ns:AssignedGroup>
+               <!--Optional:-->
+               <ns:UpdateAction type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:UpdateAction type="String" mandatory="?" readonly="?">?</ns:UpdateAction>
+               </ns:UpdateAction>
+               <!--Optional:-->
+               <ns:CustVisible type="Boolean" mandatory="?" readonly="?">?</ns:CustVisible>
+               <!--Optional:-->
+               <ns:ClosureCode type="String" mandatory="?" readonly="?">?</ns:ClosureCode>
+               <!--Optional:-->
+               <ns:ClosureComments type="String" mandatory="?" readonly="?">?</ns:ClosureComments>
+               <!--Optional:-->
+               <ns:DeliveryDate type="DateTime" mandatory="?" readonly="?">?</ns:DeliveryDate>
+               <!--Optional:-->
+               <ns:CostCurrencyCode type="String" mandatory="?" readonly="?">?</ns:CostCurrencyCode>
+               <!--Optional:-->
+               <ns:ClosedBy type="String" mandatory="?" readonly="?">?</ns:ClosedBy>
+               <!--Optional:-->
+               <ns:Description type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:Description type="String" mandatory="?" readonly="?">?</ns:Description>
+               </ns:Description>
+               <!--Optional:-->
+               <ns:GlobalLeadTime type="DateTime" mandatory="?" readonly="?">?</ns:GlobalLeadTime>
+               <!--Optional:-->
+               <ns:RequestedDate type="DateTime" mandatory="?" readonly="?">?</ns:RequestedDate>
+               <!--Optional:-->
+               <ns:ModelName type="String" mandatory="?" readonly="?">?</ns:ModelName>
+               <!--Optional:-->
+               <ns:Urgency type="String" mandatory="?" readonly="?">?</ns:Urgency>
+               <!--Optional:-->
+               <ns:AffectedService type="String" mandatory="?" readonly="?">?</ns:AffectedService>
+               <!--Optional:-->
+               <ns:AffectedCI type="String" mandatory="?" readonly="?">?</ns:AffectedCI>
+               <!--Optional:-->
+               <ns:attachments>
+                  <!--Zero or more repetitions:-->
+                  <com:attachment xm:contentType="application/?" href="?" contentId="?" action="?" name="?" type="?" len="?" charset="?" upload.by="?" upload.date="?" attachmentType="?">cid:217815268898</com:attachment>
+               </ns:attachments>
+            </ns:instance>
+            <!--Optional:-->
+            <ns:messages>
+               <!--Zero or more repetitions:-->
+               <com:message type="String" mandatory="?" readonly="?" severity="?" module="?">?</com:message>
+            </ns:messages>
+         </ns:model>
+      </ns:CloseIM_RMRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="Close"/></con:call></con:operation><con:operation id="e7a29a7b-2ed5-4e3d-8847-bc26a461d208" isOneWay="false" action="Create" name="CreateIM_RM" bindingOperationName="CreateIM_RM" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="acfefd29-7af7-42e1-ac4d-045b3edcd7dc" name="OK"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Body>\r
+      <ns:CreateIM_RMRequest ignoreEmptyElements="true" updateconstraint="-1" xmlns:ns="http://schemas.hp.com/SM/7">\r
+         <ns:model>\r
+            <ns:keys>\r
+               <ns:Number type="String"/>\r
+            </ns:keys>\r
+            <ns:instance>\r
+               <ns:RequestedFor type="String">fbalarez</ns:RequestedFor>\r
+               <ns:RequestorName type="String">useridentity</ns:RequestorName>\r
+               <ns:Category type="String">Comunicaciones</ns:Category>\r
+               <ns:Subcategory type="String">Soporte Especializado de F5</ns:Subcategory>\r
+               <ns:Model type="String">Especializaci??n F5</ns:Model>\r
+               <ns:AssignedGroup type="String">TEC_N2_TOOLS</ns:AssignedGroup>\r
+               <ns:BriefDescription type="String">Requerimentos Manuales</ns:BriefDescription>\r
+               <ns:Description type="Array">\r
+                  <ns:Description type="String">Acci??n: ""
+                                                Usuario: "tellerName"
+                                                Nombre Completo: "nombresEmpleadoapellidosEmpleado"
+                                                Identificaci??n: "identificacion"
+                                                Empresa: "nombreCompania"
+                                                Unidad: ""
+                                                Divisi??n: ""
+                                                ??rea:""
+                                                Cargo: "cargo"
+                                                APLICACI??N: "manual"
+                                                Centro de Costos: "codigoCentroCosto"
+                                                Perfil:"Perfil"
+                                                Agencia: "Agencia"
+                                                Ambiente: "Ambiente"
+                                                Perfil: "Perfil"
+                                                Perfil:"Perfil"
+                                                Tipode cuenta: "Tipode cuenta"
+                                                N??mero de cuenta: "N??mero de cuenta"
+                                                Perfiles Individuales:"Perfiles Individuales"</ns:Description>\r
+               </ns:Description>\r
+               <ns:Status type="String">Open</ns:Status>\r
+               <ns:ApprovalStatus type="String">approved</ns:ApprovalStatus>\r
+               <ns:CurrentPhase type="String">Logging</ns:CurrentPhase>\r
+               <ns:AgreementIds type="Array">\r
+                  <ns:AgreementIds type="Decimal">177</ns:AgreementIds>\r
+               </ns:AgreementIds>\r
+            </ns:instance>\r
+         </ns:model>\r
+      </ns:CreateIM_RMRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>useridentity</con:username><con:password>Pichincha@123</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="Create"/><con:wsrmConfig version="1.2"/></con:call><con:call id="4582a1c9-80ad-4e7f-8594-2780974bf5f7" name="Full"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://schemas.hp.com/SM/7" xmlns:com="http://schemas.hp.com/SM/7/Common" xmlns:xm="http://www.w3.org/2005/05/xmlmime">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ns:CreateIM_RMRequest attachmentInfo="?" attachmentData="?" ignoreEmptyElements="true" updateconstraint="-1">\r
+         <ns:model query="?">\r
+            <ns:keys query="?" updatecounter="?">\r
+               <!--Optional:-->\r
+               <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>\r
+            </ns:keys>\r
+            <ns:instance query="?" uniquequery="?" recordid="?" updatecounter="?">\r
+               <!--Optional:-->\r
+               <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>\r
+               <!--Optional:-->\r
+               <ns:Open type="Boolean" mandatory="?" readonly="?">?</ns:Open>\r
+               <!--Optional:-->\r
+               <ns:Category type="String" mandatory="?" readonly="?">?</ns:Category>\r
+               <!--Optional:-->\r
+               <ns:Subcategory type="String" mandatory="?" readonly="?">?</ns:Subcategory>\r
+               <!--Optional:-->\r
+               <ns:Model type="String" mandatory="?" readonly="?">?</ns:Model>\r
+               <!--Optional:-->\r
+               <ns:CurrentPhase type="String" mandatory="?" readonly="?">?</ns:CurrentPhase>\r
+               <!--Optional:-->\r
+               <ns:Impact type="String" mandatory="?" readonly="?">?</ns:Impact>\r
+               <!--Optional:-->\r
+               <ns:Status type="String" mandatory="?" readonly="?">?</ns:Status>\r
+               <!--Optional:-->\r
+               <ns:Priority type="String" mandatory="?" readonly="?">?</ns:Priority>\r
+               <!--Optional:-->\r
+               <ns:ApprovalStatus type="String" mandatory="?" readonly="?">?</ns:ApprovalStatus>\r
+               <!--Optional:-->\r
+               <ns:Alert type="Boolean" mandatory="?" readonly="?">?</ns:Alert>\r
+               <!--Optional:-->\r
+               <ns:AlertNames type="Array">\r
+                  <!--Zero or more repetitions:-->\r
+                  <ns:AlertNames type="String" mandatory="?" readonly="?">?</ns:AlertNames>\r
+               </ns:AlertNames>\r
+               <!--Optional:-->\r
+               <ns:PendingGroups type="Array">\r
+                  <!--Zero or more repetitions:-->\r
+                  <ns:PendingGroups type="String" mandatory="?" readonly="?">?</ns:PendingGroups>\r
+               </ns:PendingGroups>\r
+               <!--Optional:-->\r
+               <ns:Reason type="String" mandatory="?" readonly="?">?</ns:Reason>\r
+               <!--Optional:-->\r
+               <ns:SubmitDate type="DateTime" mandatory="?" readonly="?">?</ns:SubmitDate>\r
+               <!--Optional:-->\r
+               <ns:UpdateDate type="DateTime" mandatory="?" readonly="?">?</ns:UpdateDate>\r
+               <!--Optional:-->\r
+               <ns:CloseDate type="DateTime" mandatory="?" readonly="?">?</ns:CloseDate>\r
+               <!--Optional:-->\r
+               <ns:CancelledDate type="DateTime" mandatory="?" readonly="?">?</ns:CancelledDate>\r
+               <!--Optional:-->\r
+               <ns:RequestorName type="String" mandatory="?" readonly="?">?</ns:RequestorName>\r
+               <!--Optional:-->\r
+               <ns:CoordinatorName type="String" mandatory="?" readonly="?">?</ns:CoordinatorName>\r
+               <!--Optional:-->\r
+               <ns:CoordinatorDept type="String" mandatory="?" readonly="?">?</ns:CoordinatorDept>\r
+               <!--Optional:-->\r
+               <ns:AssignedTo type="String" mandatory="?" readonly="?">?</ns:AssignedTo>\r
+               <!--Optional:-->\r
+               <ns:ShiptoCode type="String" mandatory="?" readonly="?">?</ns:ShiptoCode>\r
+               <!--Optional:-->\r
+               <ns:BilltoCode type="String" mandatory="?" readonly="?">?</ns:BilltoCode>\r
+               <!--Optional:-->\r
+               <ns:TotalCost type="Decimal" mandatory="?" readonly="?">?</ns:TotalCost>\r
+               <!--Optional:-->\r
+               <ns:BilltoExt type="Array">\r
+                  <!--Zero or more repetitions:-->\r
+                  <ns:BilltoExt type="String" mandatory="?" readonly="?">?</ns:BilltoExt>\r
+               </ns:BilltoExt>\r
+               <!--Optional:-->\r
+               <ns:ShiptoExt type="Array">\r
+                  <!--Zero or more repetitions:-->\r
+                  <ns:ShiptoExt type="String" mandatory="?" readonly="?">?</ns:ShiptoExt>\r
+               </ns:ShiptoExt>\r
+               <!--Optional:-->\r
+               <ns:ProjectId type="String" mandatory="?" readonly="?">?</ns:ProjectId>\r
+               <!--Optional:-->\r
+               <ns:PlannedStart type="DateTime" mandatory="?" readonly="?">?</ns:PlannedStart>\r
+               <!--Optional:-->\r
+               <ns:PlannedEnd type="DateTime" mandatory="?" readonly="?">?</ns:PlannedEnd>\r
+               <!--Optional:-->\r
+               <ns:RequestedFor type="String" mandatory="?" readonly="?">?</ns:RequestedFor>\r
+               <!--Optional:-->\r
+               <ns:BriefDescription type="String" mandatory="?" readonly="?">?</ns:BriefDescription>\r
+               <!--Optional:-->\r
+               <ns:CurrentPendingGroups type="Array">\r
+                  <!--Zero or more repetitions:-->\r
+                  <ns:CurrentPendingGroups type="String" mandatory="?" readonly="?">?</ns:CurrentPendingGroups>\r
+               </ns:CurrentPendingGroups>\r
+               <!--Optional:-->\r
+               <ns:FutureGroups type="Array">\r
+                  <!--Zero or more repetitions:-->\r
+                  <ns:FutureGroups type="String" mandatory="?" readonly="?">?</ns:FutureGroups>\r
+               </ns:FutureGroups>\r
+               <!--Optional:-->\r
+               <ns:ApprovedGroups type="Array">\r
+                  <!--Zero or more repetitions:-->\r
+                  <ns:ApprovedGroups type="String" mandatory="?" readonly="?">?</ns:ApprovedGroups>\r
+               </ns:ApprovedGroups>\r
+               <!--Optional:-->\r
+               <ns:BilltoDept type="String" mandatory="?" readonly="?">?</ns:BilltoDept>\r
+               <!--Optional:-->\r
+               <ns:Company type="String" mandatory="?" readonly="?">?</ns:Company>\r
+               <!--Optional:-->\r
+               <ns:AlertStatus type="String" mandatory="?" readonly="?">?</ns:AlertStatus>\r
+               <!--Optional:-->\r
+               <ns:SvcOptions type="String" mandatory="?" readonly="?">?</ns:SvcOptions>\r
+               <!--Optional:-->\r
+               <ns:Folder type="String" mandatory="?" readonly="?">?</ns:Folder>\r
+               <!--Optional:-->\r
+               <ns:SlaBreach type="Boolean" mandatory="?" readonly="?">?</ns:SlaBreach>\r
+               <!--Optional:-->\r
+               <ns:NextBreach type="DateTime" mandatory="?" readonly="?">?</ns:NextBreach>\r
+               <!--Optional:-->\r
+               <ns:SvcCartId type="Decimal" mandatory="?" readonly="?">?</ns:SvcCartId>\r
+               <!--Optional:-->\r
+               <ns:AgreementIds type="Array">\r
+                  <!--Zero or more repetitions:-->\r
+                  <ns:AgreementIds type="Decimal" mandatory="?" readonly="?">?</ns:AgreementIds>\r
+               </ns:AgreementIds>\r
+               <!--Optional:-->\r
+               <ns:AssignedGroup type="String" mandatory="?" readonly="?">?</ns:AssignedGroup>\r
+               <!--Optional:-->\r
+               <ns:UpdateAction type="Array">\r
+                  <!--Zero or more repetitions:-->\r
+                  <ns:UpdateAction type="String" mandatory="?" readonly="?">?</ns:UpdateAction>\r
+               </ns:UpdateAction>\r
+               <!--Optional:-->\r
+               <ns:CustVisible type="Boolean" mandatory="?" readonly="?">?</ns:CustVisible>\r
+               <!--Optional:-->\r
+               <ns:ClosureCode type="String" mandatory="?" readonly="?">?</ns:ClosureCode>\r
+               <!--Optional:-->\r
+               <ns:ClosureComments type="String" mandatory="?" readonly="?">?</ns:ClosureComments>\r
+               <!--Optional:-->\r
+               <ns:DeliveryDate type="DateTime" mandatory="?" readonly="?">?</ns:DeliveryDate>\r
+               <!--Optional:-->\r
+               <ns:CostCurrencyCode type="String" mandatory="?" readonly="?">?</ns:CostCurrencyCode>\r
+               <!--Optional:-->\r
+               <ns:ClosedBy type="String" mandatory="?" readonly="?">?</ns:ClosedBy>\r
+               <!--Optional:-->\r
+               <ns:Description type="Array">\r
+                  <!--Zero or more repetitions:-->\r
+                  <ns:Description type="String" mandatory="?" readonly="?">?</ns:Description>\r
+               </ns:Description>\r
+               <!--Optional:-->\r
+               <ns:GlobalLeadTime type="DateTime" mandatory="?" readonly="?">?</ns:GlobalLeadTime>\r
+               <!--Optional:-->\r
+               <ns:RequestedDate type="DateTime" mandatory="?" readonly="?">?</ns:RequestedDate>\r
+               <!--Optional:-->\r
+               <ns:ModelName type="String" mandatory="?" readonly="?">?</ns:ModelName>\r
+               <!--Optional:-->\r
+               <ns:Urgency type="String" mandatory="?" readonly="?">?</ns:Urgency>\r
+               <!--Optional:-->\r
+               <ns:AffectedService type="String" mandatory="?" readonly="?">?</ns:AffectedService>\r
+               <!--Optional:-->\r
+               <ns:AffectedCI type="String" mandatory="?" readonly="?">?</ns:AffectedCI>\r
+               <!--Optional:-->\r
+               <ns:attachments>\r
+                  <!--Zero or more repetitions:-->\r
+                  <com:attachment xm:contentType="application/?" href="?" contentId="?" action="?" name="?" type="?" len="?" charset="?" upload.by="?" upload.date="?" attachmentType="?">cid:151318498934</com:attachment>\r
+               </ns:attachments>\r
+            </ns:instance>\r
+            <!--Optional:-->\r
+            <ns:messages>\r
+               <!--Zero or more repetitions:-->\r
+               <com:message type="String" mandatory="?" readonly="?" severity="?" module="?">?</com:message>\r
+            </ns:messages>\r
+         </ns:model>\r
+      </ns:CreateIM_RMRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="Create"/><con:wsrmConfig version="1.2"/></con:call><con:call id="413eab3a-0a83-40da-bf0a-a9511ca7a787" name="Request 3"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   <soapenv:Body>\r
+      <ns:CreateIM_IncidentRequest ignoreEmptyElements="true" updateconstraint="-1" xmlns:ns="http://schemas.hp.com/SM/7">\r
+         <ns:model>\r
+            <ns:keys>\r
+               <ns:IncidentID type="String"/>\r
+            </ns:keys>\r
+            <ns:instance>\r
+               <ns:Category type="String">Incident</ns:Category>\r
+               <ns:Urgency type="String">3</ns:Urgency>\r
+               <ns:AssignmentGroup type="String">TEC_N2_ADMINISTRACION CLAVES</ns:AssignmentGroup>\r
+               <ns:Description type="Array">\r
+                  <ns:Description type="String">\r
+                     <Description xmlns="http://ws.apache.org/ns/synapse">\r
+                        Accion: Creacion
+                                                Usuario: ymodlina
+                                                Nombre Completo: MODLINA AAA YYYY AAAAAA
+                                                Identificacion: 0501496855
+                                                Compania: BANCO PICHINCHA C.A.
+                                                Division: ADMINISTRATIVA
+                                                Area:ADMINISTRACION BIENES Y SERVICIOS
+                                                Departamento: INFRAESTRUCTURA
+                                                Cargo: ESPECIALISTA
+                                                Aplicacion: ADSSL
+                                                Centro de Costos: 0002
+                                                Perfil: AT_RED_EXC_001 : ACCESO A RED Y CORREO
+                                                Ambiente: Producion
+                                                ERROR:\r
+                        <soapenv:Fault>\r
+                           <faultcode>soapenv:Server</faultcode>\r
+                           <faultstring>The role: GF_Cajero_Universal does not exist.</faultstring>\r
+                           <detail/>\r
+                        </soapenv:Fault>\r
+                     </Description>\r
+                     <soapenv:Fault>\r
+                        <faultcode xmlns="http://ws.apache.org/ns/synapse">soapenv:Server</faultcode>\r
+                        <faultstring xmlns="http://ws.apache.org/ns/synapse">The role: GF_Cajero_Universal does not exist.</faultstring>\r
+                        <detail xmlns="http://ws.apache.org/ns/synapse"/>\r
+                     </soapenv:Fault>\r
+                     <faultcode xmlns="http://ws.apache.org/ns/synapse">soapenv:Server</faultcode>\r
+                     <faultstring xmlns="http://ws.apache.org/ns/synapse">The role: GF_Cajero_Universal does not exist.</faultstring>\r
+                     <detail xmlns="http://ws.apache.org/ns/synapse"/>\r
+                  </ns:Description>\r
+               </ns:Description>\r
+               <ns:Contact type="String">ymodlina</ns:Contact>\r
+               <ns:Title type="String">Notificacion de error en aprovisionamiento de Creacion ,en el aplicativo: ADSSL</ns:Title>\r
+               <ns:Status type="String">Categorize</ns:Status>\r
+               <ns:Phase type="String">Categorization</ns:Phase>\r
+               <ns:Area type="String">Usuarios-perfiles</ns:Area>\r
+               <ns:SLAAgreementID type="Decimal">177</ns:SLAAgreementID>\r
+               <ns:Subarea type="String">Usuarios y Accesos</ns:Subarea>\r
+               <ns:Impact type="String">3</ns:Impact>\r
+               <ns:Service type="String">Servicios Operaciones IT</ns:Service>\r
+               <ns:Filial type="String">BANCO PICHINCHA</ns:Filial>\r
+               <ns:Ambiente type="String">PRODUCCION</ns:Ambiente>\r
+               <ns:Assignee type="String">usrssi</ns:Assignee>\r
+            </ns:instance>\r
+         </ns:model>\r
+      </ns:CreateIM_IncidentRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>useridentity</con:username><con:password>Pichincha@123</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="Create"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="66adda12-9df8-486f-9cbe-f9687010f3e1" isOneWay="false" action="Deny" name="DenyIM_RM" bindingOperationName="DenyIM_RM" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="92bfac28-943f-434f-97f0-d65c8f282121" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://schemas.hp.com/SM/7" xmlns:com="http://schemas.hp.com/SM/7/Common" xmlns:xm="http://www.w3.org/2005/05/xmlmime">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:DenyIM_RMRequest attachmentInfo="?" attachmentData="?" ignoreEmptyElements="true" updateconstraint="-1">
+         <ns:model query="?">
+            <ns:keys query="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>
+            </ns:keys>
+            <ns:instance query="?" uniquequery="?" recordid="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>
+               <!--Optional:-->
+               <ns:Open type="Boolean" mandatory="?" readonly="?">?</ns:Open>
+               <!--Optional:-->
+               <ns:Category type="String" mandatory="?" readonly="?">?</ns:Category>
+               <!--Optional:-->
+               <ns:Subcategory type="String" mandatory="?" readonly="?">?</ns:Subcategory>
+               <!--Optional:-->
+               <ns:Model type="String" mandatory="?" readonly="?">?</ns:Model>
+               <!--Optional:-->
+               <ns:CurrentPhase type="String" mandatory="?" readonly="?">?</ns:CurrentPhase>
+               <!--Optional:-->
+               <ns:Impact type="String" mandatory="?" readonly="?">?</ns:Impact>
+               <!--Optional:-->
+               <ns:Status type="String" mandatory="?" readonly="?">?</ns:Status>
+               <!--Optional:-->
+               <ns:Priority type="String" mandatory="?" readonly="?">?</ns:Priority>
+               <!--Optional:-->
+               <ns:ApprovalStatus type="String" mandatory="?" readonly="?">?</ns:ApprovalStatus>
+               <!--Optional:-->
+               <ns:Alert type="Boolean" mandatory="?" readonly="?">?</ns:Alert>
+               <!--Optional:-->
+               <ns:AlertNames type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:AlertNames type="String" mandatory="?" readonly="?">?</ns:AlertNames>
+               </ns:AlertNames>
+               <!--Optional:-->
+               <ns:PendingGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:PendingGroups type="String" mandatory="?" readonly="?">?</ns:PendingGroups>
+               </ns:PendingGroups>
+               <!--Optional:-->
+               <ns:Reason type="String" mandatory="?" readonly="?">?</ns:Reason>
+               <!--Optional:-->
+               <ns:SubmitDate type="DateTime" mandatory="?" readonly="?">?</ns:SubmitDate>
+               <!--Optional:-->
+               <ns:UpdateDate type="DateTime" mandatory="?" readonly="?">?</ns:UpdateDate>
+               <!--Optional:-->
+               <ns:CloseDate type="DateTime" mandatory="?" readonly="?">?</ns:CloseDate>
+               <!--Optional:-->
+               <ns:CancelledDate type="DateTime" mandatory="?" readonly="?">?</ns:CancelledDate>
+               <!--Optional:-->
+               <ns:RequestorName type="String" mandatory="?" readonly="?">?</ns:RequestorName>
+               <!--Optional:-->
+               <ns:CoordinatorName type="String" mandatory="?" readonly="?">?</ns:CoordinatorName>
+               <!--Optional:-->
+               <ns:CoordinatorDept type="String" mandatory="?" readonly="?">?</ns:CoordinatorDept>
+               <!--Optional:-->
+               <ns:AssignedTo type="String" mandatory="?" readonly="?">?</ns:AssignedTo>
+               <!--Optional:-->
+               <ns:ShiptoCode type="String" mandatory="?" readonly="?">?</ns:ShiptoCode>
+               <!--Optional:-->
+               <ns:BilltoCode type="String" mandatory="?" readonly="?">?</ns:BilltoCode>
+               <!--Optional:-->
+               <ns:TotalCost type="Decimal" mandatory="?" readonly="?">?</ns:TotalCost>
+               <!--Optional:-->
+               <ns:BilltoExt type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:BilltoExt type="String" mandatory="?" readonly="?">?</ns:BilltoExt>
+               </ns:BilltoExt>
+               <!--Optional:-->
+               <ns:ShiptoExt type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ShiptoExt type="String" mandatory="?" readonly="?">?</ns:ShiptoExt>
+               </ns:ShiptoExt>
+               <!--Optional:-->
+               <ns:ProjectId type="String" mandatory="?" readonly="?">?</ns:ProjectId>
+               <!--Optional:-->
+               <ns:PlannedStart type="DateTime" mandatory="?" readonly="?">?</ns:PlannedStart>
+               <!--Optional:-->
+               <ns:PlannedEnd type="DateTime" mandatory="?" readonly="?">?</ns:PlannedEnd>
+               <!--Optional:-->
+               <ns:RequestedFor type="String" mandatory="?" readonly="?">?</ns:RequestedFor>
+               <!--Optional:-->
+               <ns:BriefDescription type="String" mandatory="?" readonly="?">?</ns:BriefDescription>
+               <!--Optional:-->
+               <ns:CurrentPendingGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:CurrentPendingGroups type="String" mandatory="?" readonly="?">?</ns:CurrentPendingGroups>
+               </ns:CurrentPendingGroups>
+               <!--Optional:-->
+               <ns:FutureGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:FutureGroups type="String" mandatory="?" readonly="?">?</ns:FutureGroups>
+               </ns:FutureGroups>
+               <!--Optional:-->
+               <ns:ApprovedGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ApprovedGroups type="String" mandatory="?" readonly="?">?</ns:ApprovedGroups>
+               </ns:ApprovedGroups>
+               <!--Optional:-->
+               <ns:BilltoDept type="String" mandatory="?" readonly="?">?</ns:BilltoDept>
+               <!--Optional:-->
+               <ns:Company type="String" mandatory="?" readonly="?">?</ns:Company>
+               <!--Optional:-->
+               <ns:AlertStatus type="String" mandatory="?" readonly="?">?</ns:AlertStatus>
+               <!--Optional:-->
+               <ns:SvcOptions type="String" mandatory="?" readonly="?">?</ns:SvcOptions>
+               <!--Optional:-->
+               <ns:Folder type="String" mandatory="?" readonly="?">?</ns:Folder>
+               <!--Optional:-->
+               <ns:SlaBreach type="Boolean" mandatory="?" readonly="?">?</ns:SlaBreach>
+               <!--Optional:-->
+               <ns:NextBreach type="DateTime" mandatory="?" readonly="?">?</ns:NextBreach>
+               <!--Optional:-->
+               <ns:SvcCartId type="Decimal" mandatory="?" readonly="?">?</ns:SvcCartId>
+               <!--Optional:-->
+               <ns:AgreementIds type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:AgreementIds type="Decimal" mandatory="?" readonly="?">?</ns:AgreementIds>
+               </ns:AgreementIds>
+               <!--Optional:-->
+               <ns:AssignedGroup type="String" mandatory="?" readonly="?">?</ns:AssignedGroup>
+               <!--Optional:-->
+               <ns:UpdateAction type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:UpdateAction type="String" mandatory="?" readonly="?">?</ns:UpdateAction>
+               </ns:UpdateAction>
+               <!--Optional:-->
+               <ns:CustVisible type="Boolean" mandatory="?" readonly="?">?</ns:CustVisible>
+               <!--Optional:-->
+               <ns:ClosureCode type="String" mandatory="?" readonly="?">?</ns:ClosureCode>
+               <!--Optional:-->
+               <ns:ClosureComments type="String" mandatory="?" readonly="?">?</ns:ClosureComments>
+               <!--Optional:-->
+               <ns:DeliveryDate type="DateTime" mandatory="?" readonly="?">?</ns:DeliveryDate>
+               <!--Optional:-->
+               <ns:CostCurrencyCode type="String" mandatory="?" readonly="?">?</ns:CostCurrencyCode>
+               <!--Optional:-->
+               <ns:ClosedBy type="String" mandatory="?" readonly="?">?</ns:ClosedBy>
+               <!--Optional:-->
+               <ns:Description type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:Description type="String" mandatory="?" readonly="?">?</ns:Description>
+               </ns:Description>
+               <!--Optional:-->
+               <ns:GlobalLeadTime type="DateTime" mandatory="?" readonly="?">?</ns:GlobalLeadTime>
+               <!--Optional:-->
+               <ns:RequestedDate type="DateTime" mandatory="?" readonly="?">?</ns:RequestedDate>
+               <!--Optional:-->
+               <ns:ModelName type="String" mandatory="?" readonly="?">?</ns:ModelName>
+               <!--Optional:-->
+               <ns:Urgency type="String" mandatory="?" readonly="?">?</ns:Urgency>
+               <!--Optional:-->
+               <ns:AffectedService type="String" mandatory="?" readonly="?">?</ns:AffectedService>
+               <!--Optional:-->
+               <ns:AffectedCI type="String" mandatory="?" readonly="?">?</ns:AffectedCI>
+               <!--Optional:-->
+               <ns:attachments>
+                  <!--Zero or more repetitions:-->
+                  <com:attachment xm:contentType="application/?" href="?" contentId="?" action="?" name="?" type="?" len="?" charset="?" upload.by="?" upload.date="?" attachmentType="?">cid:208689182984</com:attachment>
+               </ns:attachments>
+            </ns:instance>
+            <!--Optional:-->
+            <ns:messages>
+               <!--Zero or more repetitions:-->
+               <com:message type="String" mandatory="?" readonly="?" severity="?" module="?">?</com:message>
+            </ns:messages>
+         </ns:model>
+      </ns:DenyIM_RMRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="Deny"/></con:call></con:operation><con:operation id="c73c3585-e48d-4c49-ae8e-b898ce3ed682" isOneWay="false" action="MoveToNextPhase" name="MoveToNextPhaseIM_RM" bindingOperationName="MoveToNextPhaseIM_RM" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="41fadd3e-c59d-4149-b98c-76f3aabd5d18" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://schemas.hp.com/SM/7" xmlns:com="http://schemas.hp.com/SM/7/Common" xmlns:xm="http://www.w3.org/2005/05/xmlmime">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:MoveToNextPhaseIM_RMRequest attachmentInfo="?" attachmentData="?" ignoreEmptyElements="true" updateconstraint="-1">
+         <ns:model query="?">
+            <ns:keys query="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>
+            </ns:keys>
+            <ns:instance query="?" uniquequery="?" recordid="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>
+               <!--Optional:-->
+               <ns:Open type="Boolean" mandatory="?" readonly="?">?</ns:Open>
+               <!--Optional:-->
+               <ns:Category type="String" mandatory="?" readonly="?">?</ns:Category>
+               <!--Optional:-->
+               <ns:Subcategory type="String" mandatory="?" readonly="?">?</ns:Subcategory>
+               <!--Optional:-->
+               <ns:Model type="String" mandatory="?" readonly="?">?</ns:Model>
+               <!--Optional:-->
+               <ns:CurrentPhase type="String" mandatory="?" readonly="?">?</ns:CurrentPhase>
+               <!--Optional:-->
+               <ns:Impact type="String" mandatory="?" readonly="?">?</ns:Impact>
+               <!--Optional:-->
+               <ns:Status type="String" mandatory="?" readonly="?">?</ns:Status>
+               <!--Optional:-->
+               <ns:Priority type="String" mandatory="?" readonly="?">?</ns:Priority>
+               <!--Optional:-->
+               <ns:ApprovalStatus type="String" mandatory="?" readonly="?">?</ns:ApprovalStatus>
+               <!--Optional:-->
+               <ns:Alert type="Boolean" mandatory="?" readonly="?">?</ns:Alert>
+               <!--Optional:-->
+               <ns:AlertNames type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:AlertNames type="String" mandatory="?" readonly="?">?</ns:AlertNames>
+               </ns:AlertNames>
+               <!--Optional:-->
+               <ns:PendingGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:PendingGroups type="String" mandatory="?" readonly="?">?</ns:PendingGroups>
+               </ns:PendingGroups>
+               <!--Optional:-->
+               <ns:Reason type="String" mandatory="?" readonly="?">?</ns:Reason>
+               <!--Optional:-->
+               <ns:SubmitDate type="DateTime" mandatory="?" readonly="?">?</ns:SubmitDate>
+               <!--Optional:-->
+               <ns:UpdateDate type="DateTime" mandatory="?" readonly="?">?</ns:UpdateDate>
+               <!--Optional:-->
+               <ns:CloseDate type="DateTime" mandatory="?" readonly="?">?</ns:CloseDate>
+               <!--Optional:-->
+               <ns:CancelledDate type="DateTime" mandatory="?" readonly="?">?</ns:CancelledDate>
+               <!--Optional:-->
+               <ns:RequestorName type="String" mandatory="?" readonly="?">?</ns:RequestorName>
+               <!--Optional:-->
+               <ns:CoordinatorName type="String" mandatory="?" readonly="?">?</ns:CoordinatorName>
+               <!--Optional:-->
+               <ns:CoordinatorDept type="String" mandatory="?" readonly="?">?</ns:CoordinatorDept>
+               <!--Optional:-->
+               <ns:AssignedTo type="String" mandatory="?" readonly="?">?</ns:AssignedTo>
+               <!--Optional:-->
+               <ns:ShiptoCode type="String" mandatory="?" readonly="?">?</ns:ShiptoCode>
+               <!--Optional:-->
+               <ns:BilltoCode type="String" mandatory="?" readonly="?">?</ns:BilltoCode>
+               <!--Optional:-->
+               <ns:TotalCost type="Decimal" mandatory="?" readonly="?">?</ns:TotalCost>
+               <!--Optional:-->
+               <ns:BilltoExt type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:BilltoExt type="String" mandatory="?" readonly="?">?</ns:BilltoExt>
+               </ns:BilltoExt>
+               <!--Optional:-->
+               <ns:ShiptoExt type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ShiptoExt type="String" mandatory="?" readonly="?">?</ns:ShiptoExt>
+               </ns:ShiptoExt>
+               <!--Optional:-->
+               <ns:ProjectId type="String" mandatory="?" readonly="?">?</ns:ProjectId>
+               <!--Optional:-->
+               <ns:PlannedStart type="DateTime" mandatory="?" readonly="?">?</ns:PlannedStart>
+               <!--Optional:-->
+               <ns:PlannedEnd type="DateTime" mandatory="?" readonly="?">?</ns:PlannedEnd>
+               <!--Optional:-->
+               <ns:RequestedFor type="String" mandatory="?" readonly="?">?</ns:RequestedFor>
+               <!--Optional:-->
+               <ns:BriefDescription type="String" mandatory="?" readonly="?">?</ns:BriefDescription>
+               <!--Optional:-->
+               <ns:CurrentPendingGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:CurrentPendingGroups type="String" mandatory="?" readonly="?">?</ns:CurrentPendingGroups>
+               </ns:CurrentPendingGroups>
+               <!--Optional:-->
+               <ns:FutureGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:FutureGroups type="String" mandatory="?" readonly="?">?</ns:FutureGroups>
+               </ns:FutureGroups>
+               <!--Optional:-->
+               <ns:ApprovedGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ApprovedGroups type="String" mandatory="?" readonly="?">?</ns:ApprovedGroups>
+               </ns:ApprovedGroups>
+               <!--Optional:-->
+               <ns:BilltoDept type="String" mandatory="?" readonly="?">?</ns:BilltoDept>
+               <!--Optional:-->
+               <ns:Company type="String" mandatory="?" readonly="?">?</ns:Company>
+               <!--Optional:-->
+               <ns:AlertStatus type="String" mandatory="?" readonly="?">?</ns:AlertStatus>
+               <!--Optional:-->
+               <ns:SvcOptions type="String" mandatory="?" readonly="?">?</ns:SvcOptions>
+               <!--Optional:-->
+               <ns:Folder type="String" mandatory="?" readonly="?">?</ns:Folder>
+               <!--Optional:-->
+               <ns:SlaBreach type="Boolean" mandatory="?" readonly="?">?</ns:SlaBreach>
+               <!--Optional:-->
+               <ns:NextBreach type="DateTime" mandatory="?" readonly="?">?</ns:NextBreach>
+               <!--Optional:-->
+               <ns:SvcCartId type="Decimal" mandatory="?" readonly="?">?</ns:SvcCartId>
+               <!--Optional:-->
+               <ns:AgreementIds type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:AgreementIds type="Decimal" mandatory="?" readonly="?">?</ns:AgreementIds>
+               </ns:AgreementIds>
+               <!--Optional:-->
+               <ns:AssignedGroup type="String" mandatory="?" readonly="?">?</ns:AssignedGroup>
+               <!--Optional:-->
+               <ns:UpdateAction type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:UpdateAction type="String" mandatory="?" readonly="?">?</ns:UpdateAction>
+               </ns:UpdateAction>
+               <!--Optional:-->
+               <ns:CustVisible type="Boolean" mandatory="?" readonly="?">?</ns:CustVisible>
+               <!--Optional:-->
+               <ns:ClosureCode type="String" mandatory="?" readonly="?">?</ns:ClosureCode>
+               <!--Optional:-->
+               <ns:ClosureComments type="String" mandatory="?" readonly="?">?</ns:ClosureComments>
+               <!--Optional:-->
+               <ns:DeliveryDate type="DateTime" mandatory="?" readonly="?">?</ns:DeliveryDate>
+               <!--Optional:-->
+               <ns:CostCurrencyCode type="String" mandatory="?" readonly="?">?</ns:CostCurrencyCode>
+               <!--Optional:-->
+               <ns:ClosedBy type="String" mandatory="?" readonly="?">?</ns:ClosedBy>
+               <!--Optional:-->
+               <ns:Description type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:Description type="String" mandatory="?" readonly="?">?</ns:Description>
+               </ns:Description>
+               <!--Optional:-->
+               <ns:GlobalLeadTime type="DateTime" mandatory="?" readonly="?">?</ns:GlobalLeadTime>
+               <!--Optional:-->
+               <ns:RequestedDate type="DateTime" mandatory="?" readonly="?">?</ns:RequestedDate>
+               <!--Optional:-->
+               <ns:ModelName type="String" mandatory="?" readonly="?">?</ns:ModelName>
+               <!--Optional:-->
+               <ns:Urgency type="String" mandatory="?" readonly="?">?</ns:Urgency>
+               <!--Optional:-->
+               <ns:AffectedService type="String" mandatory="?" readonly="?">?</ns:AffectedService>
+               <!--Optional:-->
+               <ns:AffectedCI type="String" mandatory="?" readonly="?">?</ns:AffectedCI>
+               <!--Optional:-->
+               <ns:attachments>
+                  <!--Zero or more repetitions:-->
+                  <com:attachment xm:contentType="application/?" href="?" contentId="?" action="?" name="?" type="?" len="?" charset="?" upload.by="?" upload.date="?" attachmentType="?">cid:1044039043721</com:attachment>
+               </ns:attachments>
+            </ns:instance>
+            <!--Optional:-->
+            <ns:messages>
+               <!--Zero or more repetitions:-->
+               <com:message type="String" mandatory="?" readonly="?" severity="?" module="?">?</com:message>
+            </ns:messages>
+         </ns:model>
+      </ns:MoveToNextPhaseIM_RMRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="MoveToNextPhase"/></con:call></con:operation><con:operation id="117184bd-a47f-4477-921b-bed7109f4745" isOneWay="false" action="Reopen" name="ReopenIM_RM" bindingOperationName="ReopenIM_RM" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a2b2cde7-66b4-48b9-a39d-4527f648fff7" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://schemas.hp.com/SM/7" xmlns:com="http://schemas.hp.com/SM/7/Common" xmlns:xm="http://www.w3.org/2005/05/xmlmime">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:ReopenIM_RMRequest attachmentInfo="?" attachmentData="?" ignoreEmptyElements="true" updateconstraint="-1">
+         <ns:model query="?">
+            <ns:keys query="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>
+            </ns:keys>
+            <ns:instance query="?" uniquequery="?" recordid="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>
+               <!--Optional:-->
+               <ns:Open type="Boolean" mandatory="?" readonly="?">?</ns:Open>
+               <!--Optional:-->
+               <ns:Category type="String" mandatory="?" readonly="?">?</ns:Category>
+               <!--Optional:-->
+               <ns:Subcategory type="String" mandatory="?" readonly="?">?</ns:Subcategory>
+               <!--Optional:-->
+               <ns:Model type="String" mandatory="?" readonly="?">?</ns:Model>
+               <!--Optional:-->
+               <ns:CurrentPhase type="String" mandatory="?" readonly="?">?</ns:CurrentPhase>
+               <!--Optional:-->
+               <ns:Impact type="String" mandatory="?" readonly="?">?</ns:Impact>
+               <!--Optional:-->
+               <ns:Status type="String" mandatory="?" readonly="?">?</ns:Status>
+               <!--Optional:-->
+               <ns:Priority type="String" mandatory="?" readonly="?">?</ns:Priority>
+               <!--Optional:-->
+               <ns:ApprovalStatus type="String" mandatory="?" readonly="?">?</ns:ApprovalStatus>
+               <!--Optional:-->
+               <ns:Alert type="Boolean" mandatory="?" readonly="?">?</ns:Alert>
+               <!--Optional:-->
+               <ns:AlertNames type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:AlertNames type="String" mandatory="?" readonly="?">?</ns:AlertNames>
+               </ns:AlertNames>
+               <!--Optional:-->
+               <ns:PendingGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:PendingGroups type="String" mandatory="?" readonly="?">?</ns:PendingGroups>
+               </ns:PendingGroups>
+               <!--Optional:-->
+               <ns:Reason type="String" mandatory="?" readonly="?">?</ns:Reason>
+               <!--Optional:-->
+               <ns:SubmitDate type="DateTime" mandatory="?" readonly="?">?</ns:SubmitDate>
+               <!--Optional:-->
+               <ns:UpdateDate type="DateTime" mandatory="?" readonly="?">?</ns:UpdateDate>
+               <!--Optional:-->
+               <ns:CloseDate type="DateTime" mandatory="?" readonly="?">?</ns:CloseDate>
+               <!--Optional:-->
+               <ns:CancelledDate type="DateTime" mandatory="?" readonly="?">?</ns:CancelledDate>
+               <!--Optional:-->
+               <ns:RequestorName type="String" mandatory="?" readonly="?">?</ns:RequestorName>
+               <!--Optional:-->
+               <ns:CoordinatorName type="String" mandatory="?" readonly="?">?</ns:CoordinatorName>
+               <!--Optional:-->
+               <ns:CoordinatorDept type="String" mandatory="?" readonly="?">?</ns:CoordinatorDept>
+               <!--Optional:-->
+               <ns:AssignedTo type="String" mandatory="?" readonly="?">?</ns:AssignedTo>
+               <!--Optional:-->
+               <ns:ShiptoCode type="String" mandatory="?" readonly="?">?</ns:ShiptoCode>
+               <!--Optional:-->
+               <ns:BilltoCode type="String" mandatory="?" readonly="?">?</ns:BilltoCode>
+               <!--Optional:-->
+               <ns:TotalCost type="Decimal" mandatory="?" readonly="?">?</ns:TotalCost>
+               <!--Optional:-->
+               <ns:BilltoExt type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:BilltoExt type="String" mandatory="?" readonly="?">?</ns:BilltoExt>
+               </ns:BilltoExt>
+               <!--Optional:-->
+               <ns:ShiptoExt type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ShiptoExt type="String" mandatory="?" readonly="?">?</ns:ShiptoExt>
+               </ns:ShiptoExt>
+               <!--Optional:-->
+               <ns:ProjectId type="String" mandatory="?" readonly="?">?</ns:ProjectId>
+               <!--Optional:-->
+               <ns:PlannedStart type="DateTime" mandatory="?" readonly="?">?</ns:PlannedStart>
+               <!--Optional:-->
+               <ns:PlannedEnd type="DateTime" mandatory="?" readonly="?">?</ns:PlannedEnd>
+               <!--Optional:-->
+               <ns:RequestedFor type="String" mandatory="?" readonly="?">?</ns:RequestedFor>
+               <!--Optional:-->
+               <ns:BriefDescription type="String" mandatory="?" readonly="?">?</ns:BriefDescription>
+               <!--Optional:-->
+               <ns:CurrentPendingGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:CurrentPendingGroups type="String" mandatory="?" readonly="?">?</ns:CurrentPendingGroups>
+               </ns:CurrentPendingGroups>
+               <!--Optional:-->
+               <ns:FutureGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:FutureGroups type="String" mandatory="?" readonly="?">?</ns:FutureGroups>
+               </ns:FutureGroups>
+               <!--Optional:-->
+               <ns:ApprovedGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ApprovedGroups type="String" mandatory="?" readonly="?">?</ns:ApprovedGroups>
+               </ns:ApprovedGroups>
+               <!--Optional:-->
+               <ns:BilltoDept type="String" mandatory="?" readonly="?">?</ns:BilltoDept>
+               <!--Optional:-->
+               <ns:Company type="String" mandatory="?" readonly="?">?</ns:Company>
+               <!--Optional:-->
+               <ns:AlertStatus type="String" mandatory="?" readonly="?">?</ns:AlertStatus>
+               <!--Optional:-->
+               <ns:SvcOptions type="String" mandatory="?" readonly="?">?</ns:SvcOptions>
+               <!--Optional:-->
+               <ns:Folder type="String" mandatory="?" readonly="?">?</ns:Folder>
+               <!--Optional:-->
+               <ns:SlaBreach type="Boolean" mandatory="?" readonly="?">?</ns:SlaBreach>
+               <!--Optional:-->
+               <ns:NextBreach type="DateTime" mandatory="?" readonly="?">?</ns:NextBreach>
+               <!--Optional:-->
+               <ns:SvcCartId type="Decimal" mandatory="?" readonly="?">?</ns:SvcCartId>
+               <!--Optional:-->
+               <ns:AgreementIds type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:AgreementIds type="Decimal" mandatory="?" readonly="?">?</ns:AgreementIds>
+               </ns:AgreementIds>
+               <!--Optional:-->
+               <ns:AssignedGroup type="String" mandatory="?" readonly="?">?</ns:AssignedGroup>
+               <!--Optional:-->
+               <ns:UpdateAction type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:UpdateAction type="String" mandatory="?" readonly="?">?</ns:UpdateAction>
+               </ns:UpdateAction>
+               <!--Optional:-->
+               <ns:CustVisible type="Boolean" mandatory="?" readonly="?">?</ns:CustVisible>
+               <!--Optional:-->
+               <ns:ClosureCode type="String" mandatory="?" readonly="?">?</ns:ClosureCode>
+               <!--Optional:-->
+               <ns:ClosureComments type="String" mandatory="?" readonly="?">?</ns:ClosureComments>
+               <!--Optional:-->
+               <ns:DeliveryDate type="DateTime" mandatory="?" readonly="?">?</ns:DeliveryDate>
+               <!--Optional:-->
+               <ns:CostCurrencyCode type="String" mandatory="?" readonly="?">?</ns:CostCurrencyCode>
+               <!--Optional:-->
+               <ns:ClosedBy type="String" mandatory="?" readonly="?">?</ns:ClosedBy>
+               <!--Optional:-->
+               <ns:Description type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:Description type="String" mandatory="?" readonly="?">?</ns:Description>
+               </ns:Description>
+               <!--Optional:-->
+               <ns:GlobalLeadTime type="DateTime" mandatory="?" readonly="?">?</ns:GlobalLeadTime>
+               <!--Optional:-->
+               <ns:RequestedDate type="DateTime" mandatory="?" readonly="?">?</ns:RequestedDate>
+               <!--Optional:-->
+               <ns:ModelName type="String" mandatory="?" readonly="?">?</ns:ModelName>
+               <!--Optional:-->
+               <ns:Urgency type="String" mandatory="?" readonly="?">?</ns:Urgency>
+               <!--Optional:-->
+               <ns:AffectedService type="String" mandatory="?" readonly="?">?</ns:AffectedService>
+               <!--Optional:-->
+               <ns:AffectedCI type="String" mandatory="?" readonly="?">?</ns:AffectedCI>
+               <!--Optional:-->
+               <ns:attachments>
+                  <!--Zero or more repetitions:-->
+                  <com:attachment xm:contentType="application/?" href="?" contentId="?" action="?" name="?" type="?" len="?" charset="?" upload.by="?" upload.date="?" attachmentType="?">cid:1246601120866</com:attachment>
+               </ns:attachments>
+            </ns:instance>
+            <!--Optional:-->
+            <ns:messages>
+               <!--Zero or more repetitions:-->
+               <com:message type="String" mandatory="?" readonly="?" severity="?" module="?">?</com:message>
+            </ns:messages>
+         </ns:model>
+      </ns:ReopenIM_RMRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="Reopen"/></con:call></con:operation><con:operation id="1eb7d030-ca95-4b9c-9ba5-bc8ba4c9c604" isOneWay="false" action="Retract" name="RetractIM_RM" bindingOperationName="RetractIM_RM" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d5d4914e-5c02-4ba9-ab66-1337358e2ee7" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://schemas.hp.com/SM/7" xmlns:com="http://schemas.hp.com/SM/7/Common" xmlns:xm="http://www.w3.org/2005/05/xmlmime">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:RetractIM_RMRequest attachmentInfo="?" attachmentData="?" ignoreEmptyElements="true" updateconstraint="-1">
+         <ns:model query="?">
+            <ns:keys query="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>
+            </ns:keys>
+            <ns:instance query="?" uniquequery="?" recordid="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>
+               <!--Optional:-->
+               <ns:Open type="Boolean" mandatory="?" readonly="?">?</ns:Open>
+               <!--Optional:-->
+               <ns:Category type="String" mandatory="?" readonly="?">?</ns:Category>
+               <!--Optional:-->
+               <ns:Subcategory type="String" mandatory="?" readonly="?">?</ns:Subcategory>
+               <!--Optional:-->
+               <ns:Model type="String" mandatory="?" readonly="?">?</ns:Model>
+               <!--Optional:-->
+               <ns:CurrentPhase type="String" mandatory="?" readonly="?">?</ns:CurrentPhase>
+               <!--Optional:-->
+               <ns:Impact type="String" mandatory="?" readonly="?">?</ns:Impact>
+               <!--Optional:-->
+               <ns:Status type="String" mandatory="?" readonly="?">?</ns:Status>
+               <!--Optional:-->
+               <ns:Priority type="String" mandatory="?" readonly="?">?</ns:Priority>
+               <!--Optional:-->
+               <ns:ApprovalStatus type="String" mandatory="?" readonly="?">?</ns:ApprovalStatus>
+               <!--Optional:-->
+               <ns:Alert type="Boolean" mandatory="?" readonly="?">?</ns:Alert>
+               <!--Optional:-->
+               <ns:AlertNames type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:AlertNames type="String" mandatory="?" readonly="?">?</ns:AlertNames>
+               </ns:AlertNames>
+               <!--Optional:-->
+               <ns:PendingGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:PendingGroups type="String" mandatory="?" readonly="?">?</ns:PendingGroups>
+               </ns:PendingGroups>
+               <!--Optional:-->
+               <ns:Reason type="String" mandatory="?" readonly="?">?</ns:Reason>
+               <!--Optional:-->
+               <ns:SubmitDate type="DateTime" mandatory="?" readonly="?">?</ns:SubmitDate>
+               <!--Optional:-->
+               <ns:UpdateDate type="DateTime" mandatory="?" readonly="?">?</ns:UpdateDate>
+               <!--Optional:-->
+               <ns:CloseDate type="DateTime" mandatory="?" readonly="?">?</ns:CloseDate>
+               <!--Optional:-->
+               <ns:CancelledDate type="DateTime" mandatory="?" readonly="?">?</ns:CancelledDate>
+               <!--Optional:-->
+               <ns:RequestorName type="String" mandatory="?" readonly="?">?</ns:RequestorName>
+               <!--Optional:-->
+               <ns:CoordinatorName type="String" mandatory="?" readonly="?">?</ns:CoordinatorName>
+               <!--Optional:-->
+               <ns:CoordinatorDept type="String" mandatory="?" readonly="?">?</ns:CoordinatorDept>
+               <!--Optional:-->
+               <ns:AssignedTo type="String" mandatory="?" readonly="?">?</ns:AssignedTo>
+               <!--Optional:-->
+               <ns:ShiptoCode type="String" mandatory="?" readonly="?">?</ns:ShiptoCode>
+               <!--Optional:-->
+               <ns:BilltoCode type="String" mandatory="?" readonly="?">?</ns:BilltoCode>
+               <!--Optional:-->
+               <ns:TotalCost type="Decimal" mandatory="?" readonly="?">?</ns:TotalCost>
+               <!--Optional:-->
+               <ns:BilltoExt type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:BilltoExt type="String" mandatory="?" readonly="?">?</ns:BilltoExt>
+               </ns:BilltoExt>
+               <!--Optional:-->
+               <ns:ShiptoExt type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ShiptoExt type="String" mandatory="?" readonly="?">?</ns:ShiptoExt>
+               </ns:ShiptoExt>
+               <!--Optional:-->
+               <ns:ProjectId type="String" mandatory="?" readonly="?">?</ns:ProjectId>
+               <!--Optional:-->
+               <ns:PlannedStart type="DateTime" mandatory="?" readonly="?">?</ns:PlannedStart>
+               <!--Optional:-->
+               <ns:PlannedEnd type="DateTime" mandatory="?" readonly="?">?</ns:PlannedEnd>
+               <!--Optional:-->
+               <ns:RequestedFor type="String" mandatory="?" readonly="?">?</ns:RequestedFor>
+               <!--Optional:-->
+               <ns:BriefDescription type="String" mandatory="?" readonly="?">?</ns:BriefDescription>
+               <!--Optional:-->
+               <ns:CurrentPendingGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:CurrentPendingGroups type="String" mandatory="?" readonly="?">?</ns:CurrentPendingGroups>
+               </ns:CurrentPendingGroups>
+               <!--Optional:-->
+               <ns:FutureGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:FutureGroups type="String" mandatory="?" readonly="?">?</ns:FutureGroups>
+               </ns:FutureGroups>
+               <!--Optional:-->
+               <ns:ApprovedGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ApprovedGroups type="String" mandatory="?" readonly="?">?</ns:ApprovedGroups>
+               </ns:ApprovedGroups>
+               <!--Optional:-->
+               <ns:BilltoDept type="String" mandatory="?" readonly="?">?</ns:BilltoDept>
+               <!--Optional:-->
+               <ns:Company type="String" mandatory="?" readonly="?">?</ns:Company>
+               <!--Optional:-->
+               <ns:AlertStatus type="String" mandatory="?" readonly="?">?</ns:AlertStatus>
+               <!--Optional:-->
+               <ns:SvcOptions type="String" mandatory="?" readonly="?">?</ns:SvcOptions>
+               <!--Optional:-->
+               <ns:Folder type="String" mandatory="?" readonly="?">?</ns:Folder>
+               <!--Optional:-->
+               <ns:SlaBreach type="Boolean" mandatory="?" readonly="?">?</ns:SlaBreach>
+               <!--Optional:-->
+               <ns:NextBreach type="DateTime" mandatory="?" readonly="?">?</ns:NextBreach>
+               <!--Optional:-->
+               <ns:SvcCartId type="Decimal" mandatory="?" readonly="?">?</ns:SvcCartId>
+               <!--Optional:-->
+               <ns:AgreementIds type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:AgreementIds type="Decimal" mandatory="?" readonly="?">?</ns:AgreementIds>
+               </ns:AgreementIds>
+               <!--Optional:-->
+               <ns:AssignedGroup type="String" mandatory="?" readonly="?">?</ns:AssignedGroup>
+               <!--Optional:-->
+               <ns:UpdateAction type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:UpdateAction type="String" mandatory="?" readonly="?">?</ns:UpdateAction>
+               </ns:UpdateAction>
+               <!--Optional:-->
+               <ns:CustVisible type="Boolean" mandatory="?" readonly="?">?</ns:CustVisible>
+               <!--Optional:-->
+               <ns:ClosureCode type="String" mandatory="?" readonly="?">?</ns:ClosureCode>
+               <!--Optional:-->
+               <ns:ClosureComments type="String" mandatory="?" readonly="?">?</ns:ClosureComments>
+               <!--Optional:-->
+               <ns:DeliveryDate type="DateTime" mandatory="?" readonly="?">?</ns:DeliveryDate>
+               <!--Optional:-->
+               <ns:CostCurrencyCode type="String" mandatory="?" readonly="?">?</ns:CostCurrencyCode>
+               <!--Optional:-->
+               <ns:ClosedBy type="String" mandatory="?" readonly="?">?</ns:ClosedBy>
+               <!--Optional:-->
+               <ns:Description type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:Description type="String" mandatory="?" readonly="?">?</ns:Description>
+               </ns:Description>
+               <!--Optional:-->
+               <ns:GlobalLeadTime type="DateTime" mandatory="?" readonly="?">?</ns:GlobalLeadTime>
+               <!--Optional:-->
+               <ns:RequestedDate type="DateTime" mandatory="?" readonly="?">?</ns:RequestedDate>
+               <!--Optional:-->
+               <ns:ModelName type="String" mandatory="?" readonly="?">?</ns:ModelName>
+               <!--Optional:-->
+               <ns:Urgency type="String" mandatory="?" readonly="?">?</ns:Urgency>
+               <!--Optional:-->
+               <ns:AffectedService type="String" mandatory="?" readonly="?">?</ns:AffectedService>
+               <!--Optional:-->
+               <ns:AffectedCI type="String" mandatory="?" readonly="?">?</ns:AffectedCI>
+               <!--Optional:-->
+               <ns:attachments>
+                  <!--Zero or more repetitions:-->
+                  <com:attachment xm:contentType="application/?" href="?" contentId="?" action="?" name="?" type="?" len="?" charset="?" upload.by="?" upload.date="?" attachmentType="?">cid:373418805630</com:attachment>
+               </ns:attachments>
+            </ns:instance>
+            <!--Optional:-->
+            <ns:messages>
+               <!--Zero or more repetitions:-->
+               <com:message type="String" mandatory="?" readonly="?" severity="?" module="?">?</com:message>
+            </ns:messages>
+         </ns:model>
+      </ns:RetractIM_RMRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="Retract"/></con:call></con:operation><con:operation id="4d4f14d5-25ec-49ae-aef9-908d98fb1b35" isOneWay="false" action="Retrieve" name="RetrieveIM_RM" bindingOperationName="RetrieveIM_RM" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="563d8001-d485-4769-8565-fb3cb9e903e3" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://schemas.hp.com/SM/7" xmlns:com="http://schemas.hp.com/SM/7/Common" xmlns:xm="http://www.w3.org/2005/05/xmlmime">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:RetrieveIM_RMRequest attachmentInfo="?" attachmentData="?" ignoreEmptyElements="true" updatecounter="?" handle="?" count="?" start="?">
+         <ns:model query="?">
+            <ns:keys query="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>
+            </ns:keys>
+            <ns:instance query="?" uniquequery="?" recordid="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>
+               <!--Optional:-->
+               <ns:Open type="Boolean" mandatory="?" readonly="?">?</ns:Open>
+               <!--Optional:-->
+               <ns:Category type="String" mandatory="?" readonly="?">?</ns:Category>
+               <!--Optional:-->
+               <ns:Subcategory type="String" mandatory="?" readonly="?">?</ns:Subcategory>
+               <!--Optional:-->
+               <ns:Model type="String" mandatory="?" readonly="?">?</ns:Model>
+               <!--Optional:-->
+               <ns:CurrentPhase type="String" mandatory="?" readonly="?">?</ns:CurrentPhase>
+               <!--Optional:-->
+               <ns:Impact type="String" mandatory="?" readonly="?">?</ns:Impact>
+               <!--Optional:-->
+               <ns:Status type="String" mandatory="?" readonly="?">?</ns:Status>
+               <!--Optional:-->
+               <ns:Priority type="String" mandatory="?" readonly="?">?</ns:Priority>
+               <!--Optional:-->
+               <ns:ApprovalStatus type="String" mandatory="?" readonly="?">?</ns:ApprovalStatus>
+               <!--Optional:-->
+               <ns:Alert type="Boolean" mandatory="?" readonly="?">?</ns:Alert>
+               <!--Optional:-->
+               <ns:AlertNames type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:AlertNames type="String" mandatory="?" readonly="?">?</ns:AlertNames>
+               </ns:AlertNames>
+               <!--Optional:-->
+               <ns:PendingGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:PendingGroups type="String" mandatory="?" readonly="?">?</ns:PendingGroups>
+               </ns:PendingGroups>
+               <!--Optional:-->
+               <ns:Reason type="String" mandatory="?" readonly="?">?</ns:Reason>
+               <!--Optional:-->
+               <ns:SubmitDate type="DateTime" mandatory="?" readonly="?">?</ns:SubmitDate>
+               <!--Optional:-->
+               <ns:UpdateDate type="DateTime" mandatory="?" readonly="?">?</ns:UpdateDate>
+               <!--Optional:-->
+               <ns:CloseDate type="DateTime" mandatory="?" readonly="?">?</ns:CloseDate>
+               <!--Optional:-->
+               <ns:CancelledDate type="DateTime" mandatory="?" readonly="?">?</ns:CancelledDate>
+               <!--Optional:-->
+               <ns:RequestorName type="String" mandatory="?" readonly="?">?</ns:RequestorName>
+               <!--Optional:-->
+               <ns:CoordinatorName type="String" mandatory="?" readonly="?">?</ns:CoordinatorName>
+               <!--Optional:-->
+               <ns:CoordinatorDept type="String" mandatory="?" readonly="?">?</ns:CoordinatorDept>
+               <!--Optional:-->
+               <ns:AssignedTo type="String" mandatory="?" readonly="?">?</ns:AssignedTo>
+               <!--Optional:-->
+               <ns:ShiptoCode type="String" mandatory="?" readonly="?">?</ns:ShiptoCode>
+               <!--Optional:-->
+               <ns:BilltoCode type="String" mandatory="?" readonly="?">?</ns:BilltoCode>
+               <!--Optional:-->
+               <ns:TotalCost type="Decimal" mandatory="?" readonly="?">?</ns:TotalCost>
+               <!--Optional:-->
+               <ns:BilltoExt type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:BilltoExt type="String" mandatory="?" readonly="?">?</ns:BilltoExt>
+               </ns:BilltoExt>
+               <!--Optional:-->
+               <ns:ShiptoExt type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ShiptoExt type="String" mandatory="?" readonly="?">?</ns:ShiptoExt>
+               </ns:ShiptoExt>
+               <!--Optional:-->
+               <ns:ProjectId type="String" mandatory="?" readonly="?">?</ns:ProjectId>
+               <!--Optional:-->
+               <ns:PlannedStart type="DateTime" mandatory="?" readonly="?">?</ns:PlannedStart>
+               <!--Optional:-->
+               <ns:PlannedEnd type="DateTime" mandatory="?" readonly="?">?</ns:PlannedEnd>
+               <!--Optional:-->
+               <ns:RequestedFor type="String" mandatory="?" readonly="?">?</ns:RequestedFor>
+               <!--Optional:-->
+               <ns:BriefDescription type="String" mandatory="?" readonly="?">?</ns:BriefDescription>
+               <!--Optional:-->
+               <ns:CurrentPendingGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:CurrentPendingGroups type="String" mandatory="?" readonly="?">?</ns:CurrentPendingGroups>
+               </ns:CurrentPendingGroups>
+               <!--Optional:-->
+               <ns:FutureGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:FutureGroups type="String" mandatory="?" readonly="?">?</ns:FutureGroups>
+               </ns:FutureGroups>
+               <!--Optional:-->
+               <ns:ApprovedGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ApprovedGroups type="String" mandatory="?" readonly="?">?</ns:ApprovedGroups>
+               </ns:ApprovedGroups>
+               <!--Optional:-->
+               <ns:BilltoDept type="String" mandatory="?" readonly="?">?</ns:BilltoDept>
+               <!--Optional:-->
+               <ns:Company type="String" mandatory="?" readonly="?">?</ns:Company>
+               <!--Optional:-->
+               <ns:AlertStatus type="String" mandatory="?" readonly="?">?</ns:AlertStatus>
+               <!--Optional:-->
+               <ns:SvcOptions type="String" mandatory="?" readonly="?">?</ns:SvcOptions>
+               <!--Optional:-->
+               <ns:Folder type="String" mandatory="?" readonly="?">?</ns:Folder>
+               <!--Optional:-->
+               <ns:SlaBreach type="Boolean" mandatory="?" readonly="?">?</ns:SlaBreach>
+               <!--Optional:-->
+               <ns:NextBreach type="DateTime" mandatory="?" readonly="?">?</ns:NextBreach>
+               <!--Optional:-->
+               <ns:SvcCartId type="Decimal" mandatory="?" readonly="?">?</ns:SvcCartId>
+               <!--Optional:-->
+               <ns:AgreementIds type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:AgreementIds type="Decimal" mandatory="?" readonly="?">?</ns:AgreementIds>
+               </ns:AgreementIds>
+               <!--Optional:-->
+               <ns:AssignedGroup type="String" mandatory="?" readonly="?">?</ns:AssignedGroup>
+               <!--Optional:-->
+               <ns:UpdateAction type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:UpdateAction type="String" mandatory="?" readonly="?">?</ns:UpdateAction>
+               </ns:UpdateAction>
+               <!--Optional:-->
+               <ns:CustVisible type="Boolean" mandatory="?" readonly="?">?</ns:CustVisible>
+               <!--Optional:-->
+               <ns:ClosureCode type="String" mandatory="?" readonly="?">?</ns:ClosureCode>
+               <!--Optional:-->
+               <ns:ClosureComments type="String" mandatory="?" readonly="?">?</ns:ClosureComments>
+               <!--Optional:-->
+               <ns:DeliveryDate type="DateTime" mandatory="?" readonly="?">?</ns:DeliveryDate>
+               <!--Optional:-->
+               <ns:CostCurrencyCode type="String" mandatory="?" readonly="?">?</ns:CostCurrencyCode>
+               <!--Optional:-->
+               <ns:ClosedBy type="String" mandatory="?" readonly="?">?</ns:ClosedBy>
+               <!--Optional:-->
+               <ns:Description type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:Description type="String" mandatory="?" readonly="?">?</ns:Description>
+               </ns:Description>
+               <!--Optional:-->
+               <ns:GlobalLeadTime type="DateTime" mandatory="?" readonly="?">?</ns:GlobalLeadTime>
+               <!--Optional:-->
+               <ns:RequestedDate type="DateTime" mandatory="?" readonly="?">?</ns:RequestedDate>
+               <!--Optional:-->
+               <ns:ModelName type="String" mandatory="?" readonly="?">?</ns:ModelName>
+               <!--Optional:-->
+               <ns:Urgency type="String" mandatory="?" readonly="?">?</ns:Urgency>
+               <!--Optional:-->
+               <ns:AffectedService type="String" mandatory="?" readonly="?">?</ns:AffectedService>
+               <!--Optional:-->
+               <ns:AffectedCI type="String" mandatory="?" readonly="?">?</ns:AffectedCI>
+               <!--Optional:-->
+               <ns:attachments>
+                  <!--Zero or more repetitions:-->
+                  <com:attachment xm:contentType="application/?" href="?" contentId="?" action="?" name="?" type="?" len="?" charset="?" upload.by="?" upload.date="?" attachmentType="?">cid:1412549205609</com:attachment>
+               </ns:attachments>
+            </ns:instance>
+            <!--Optional:-->
+            <ns:messages>
+               <!--Zero or more repetitions:-->
+               <com:message type="String" mandatory="?" readonly="?" severity="?" module="?">?</com:message>
+            </ns:messages>
+         </ns:model>
+      </ns:RetrieveIM_RMRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="Retrieve"/></con:call></con:operation><con:operation id="08793f58-762e-480c-a739-759be14ce234" isOneWay="false" action="RetrieveKeysList" name="RetrieveIM_RMKeysList" bindingOperationName="RetrieveIM_RMKeysList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c9997951-12df-417b-9dc4-f6281d84a033" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://schemas.hp.com/SM/7" xmlns:com="http://schemas.hp.com/SM/7/Common" xmlns:xm="http://www.w3.org/2005/05/xmlmime">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:RetrieveIM_RMKeysListRequest attachmentInfo="?" attachmentData="?" ignoreEmptyElements="true" updatecounter="?" handle="?" count="?" start="?">
+         <ns:model query="?">
+            <ns:keys query="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>
+            </ns:keys>
+            <ns:instance query="?" uniquequery="?" recordid="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>
+               <!--Optional:-->
+               <ns:Open type="Boolean" mandatory="?" readonly="?">?</ns:Open>
+               <!--Optional:-->
+               <ns:Category type="String" mandatory="?" readonly="?">?</ns:Category>
+               <!--Optional:-->
+               <ns:Subcategory type="String" mandatory="?" readonly="?">?</ns:Subcategory>
+               <!--Optional:-->
+               <ns:Model type="String" mandatory="?" readonly="?">?</ns:Model>
+               <!--Optional:-->
+               <ns:CurrentPhase type="String" mandatory="?" readonly="?">?</ns:CurrentPhase>
+               <!--Optional:-->
+               <ns:Impact type="String" mandatory="?" readonly="?">?</ns:Impact>
+               <!--Optional:-->
+               <ns:Status type="String" mandatory="?" readonly="?">?</ns:Status>
+               <!--Optional:-->
+               <ns:Priority type="String" mandatory="?" readonly="?">?</ns:Priority>
+               <!--Optional:-->
+               <ns:ApprovalStatus type="String" mandatory="?" readonly="?">?</ns:ApprovalStatus>
+               <!--Optional:-->
+               <ns:Alert type="Boolean" mandatory="?" readonly="?">?</ns:Alert>
+               <!--Optional:-->
+               <ns:AlertNames type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:AlertNames type="String" mandatory="?" readonly="?">?</ns:AlertNames>
+               </ns:AlertNames>
+               <!--Optional:-->
+               <ns:PendingGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:PendingGroups type="String" mandatory="?" readonly="?">?</ns:PendingGroups>
+               </ns:PendingGroups>
+               <!--Optional:-->
+               <ns:Reason type="String" mandatory="?" readonly="?">?</ns:Reason>
+               <!--Optional:-->
+               <ns:SubmitDate type="DateTime" mandatory="?" readonly="?">?</ns:SubmitDate>
+               <!--Optional:-->
+               <ns:UpdateDate type="DateTime" mandatory="?" readonly="?">?</ns:UpdateDate>
+               <!--Optional:-->
+               <ns:CloseDate type="DateTime" mandatory="?" readonly="?">?</ns:CloseDate>
+               <!--Optional:-->
+               <ns:CancelledDate type="DateTime" mandatory="?" readonly="?">?</ns:CancelledDate>
+               <!--Optional:-->
+               <ns:RequestorName type="String" mandatory="?" readonly="?">?</ns:RequestorName>
+               <!--Optional:-->
+               <ns:CoordinatorName type="String" mandatory="?" readonly="?">?</ns:CoordinatorName>
+               <!--Optional:-->
+               <ns:CoordinatorDept type="String" mandatory="?" readonly="?">?</ns:CoordinatorDept>
+               <!--Optional:-->
+               <ns:AssignedTo type="String" mandatory="?" readonly="?">?</ns:AssignedTo>
+               <!--Optional:-->
+               <ns:ShiptoCode type="String" mandatory="?" readonly="?">?</ns:ShiptoCode>
+               <!--Optional:-->
+               <ns:BilltoCode type="String" mandatory="?" readonly="?">?</ns:BilltoCode>
+               <!--Optional:-->
+               <ns:TotalCost type="Decimal" mandatory="?" readonly="?">?</ns:TotalCost>
+               <!--Optional:-->
+               <ns:BilltoExt type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:BilltoExt type="String" mandatory="?" readonly="?">?</ns:BilltoExt>
+               </ns:BilltoExt>
+               <!--Optional:-->
+               <ns:ShiptoExt type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ShiptoExt type="String" mandatory="?" readonly="?">?</ns:ShiptoExt>
+               </ns:ShiptoExt>
+               <!--Optional:-->
+               <ns:ProjectId type="String" mandatory="?" readonly="?">?</ns:ProjectId>
+               <!--Optional:-->
+               <ns:PlannedStart type="DateTime" mandatory="?" readonly="?">?</ns:PlannedStart>
+               <!--Optional:-->
+               <ns:PlannedEnd type="DateTime" mandatory="?" readonly="?">?</ns:PlannedEnd>
+               <!--Optional:-->
+               <ns:RequestedFor type="String" mandatory="?" readonly="?">?</ns:RequestedFor>
+               <!--Optional:-->
+               <ns:BriefDescription type="String" mandatory="?" readonly="?">?</ns:BriefDescription>
+               <!--Optional:-->
+               <ns:CurrentPendingGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:CurrentPendingGroups type="String" mandatory="?" readonly="?">?</ns:CurrentPendingGroups>
+               </ns:CurrentPendingGroups>
+               <!--Optional:-->
+               <ns:FutureGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:FutureGroups type="String" mandatory="?" readonly="?">?</ns:FutureGroups>
+               </ns:FutureGroups>
+               <!--Optional:-->
+               <ns:ApprovedGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ApprovedGroups type="String" mandatory="?" readonly="?">?</ns:ApprovedGroups>
+               </ns:ApprovedGroups>
+               <!--Optional:-->
+               <ns:BilltoDept type="String" mandatory="?" readonly="?">?</ns:BilltoDept>
+               <!--Optional:-->
+               <ns:Company type="String" mandatory="?" readonly="?">?</ns:Company>
+               <!--Optional:-->
+               <ns:AlertStatus type="String" mandatory="?" readonly="?">?</ns:AlertStatus>
+               <!--Optional:-->
+               <ns:SvcOptions type="String" mandatory="?" readonly="?">?</ns:SvcOptions>
+               <!--Optional:-->
+               <ns:Folder type="String" mandatory="?" readonly="?">?</ns:Folder>
+               <!--Optional:-->
+               <ns:SlaBreach type="Boolean" mandatory="?" readonly="?">?</ns:SlaBreach>
+               <!--Optional:-->
+               <ns:NextBreach type="DateTime" mandatory="?" readonly="?">?</ns:NextBreach>
+               <!--Optional:-->
+               <ns:SvcCartId type="Decimal" mandatory="?" readonly="?">?</ns:SvcCartId>
+               <!--Optional:-->
+               <ns:AgreementIds type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:AgreementIds type="Decimal" mandatory="?" readonly="?">?</ns:AgreementIds>
+               </ns:AgreementIds>
+               <!--Optional:-->
+               <ns:AssignedGroup type="String" mandatory="?" readonly="?">?</ns:AssignedGroup>
+               <!--Optional:-->
+               <ns:UpdateAction type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:UpdateAction type="String" mandatory="?" readonly="?">?</ns:UpdateAction>
+               </ns:UpdateAction>
+               <!--Optional:-->
+               <ns:CustVisible type="Boolean" mandatory="?" readonly="?">?</ns:CustVisible>
+               <!--Optional:-->
+               <ns:ClosureCode type="String" mandatory="?" readonly="?">?</ns:ClosureCode>
+               <!--Optional:-->
+               <ns:ClosureComments type="String" mandatory="?" readonly="?">?</ns:ClosureComments>
+               <!--Optional:-->
+               <ns:DeliveryDate type="DateTime" mandatory="?" readonly="?">?</ns:DeliveryDate>
+               <!--Optional:-->
+               <ns:CostCurrencyCode type="String" mandatory="?" readonly="?">?</ns:CostCurrencyCode>
+               <!--Optional:-->
+               <ns:ClosedBy type="String" mandatory="?" readonly="?">?</ns:ClosedBy>
+               <!--Optional:-->
+               <ns:Description type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:Description type="String" mandatory="?" readonly="?">?</ns:Description>
+               </ns:Description>
+               <!--Optional:-->
+               <ns:GlobalLeadTime type="DateTime" mandatory="?" readonly="?">?</ns:GlobalLeadTime>
+               <!--Optional:-->
+               <ns:RequestedDate type="DateTime" mandatory="?" readonly="?">?</ns:RequestedDate>
+               <!--Optional:-->
+               <ns:ModelName type="String" mandatory="?" readonly="?">?</ns:ModelName>
+               <!--Optional:-->
+               <ns:Urgency type="String" mandatory="?" readonly="?">?</ns:Urgency>
+               <!--Optional:-->
+               <ns:AffectedService type="String" mandatory="?" readonly="?">?</ns:AffectedService>
+               <!--Optional:-->
+               <ns:AffectedCI type="String" mandatory="?" readonly="?">?</ns:AffectedCI>
+               <!--Optional:-->
+               <ns:attachments>
+                  <!--Zero or more repetitions:-->
+                  <com:attachment xm:contentType="application/?" href="?" contentId="?" action="?" name="?" type="?" len="?" charset="?" upload.by="?" upload.date="?" attachmentType="?">cid:346270287142</com:attachment>
+               </ns:attachments>
+            </ns:instance>
+            <!--Optional:-->
+            <ns:messages>
+               <!--Zero or more repetitions:-->
+               <com:message type="String" mandatory="?" readonly="?" severity="?" module="?">?</com:message>
+            </ns:messages>
+         </ns:model>
+      </ns:RetrieveIM_RMKeysListRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="RetrieveKeysList"/></con:call></con:operation><con:operation id="cc626e96-bdb2-45e9-b4f6-20ac2288b58e" isOneWay="false" action="RetrieveList" name="RetrieveIM_RMList" bindingOperationName="RetrieveIM_RMList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="e33e4162-4e64-4722-af02-4480e7f4efa5" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://schemas.hp.com/SM/7">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:RetrieveIM_RMListRequest attachmentInfo="?" attachmentData="?" ignoreEmptyElements="true" updatecounter="?" handle="?" count="?" start="?" attachmentType="?">
+         <!--1 or more repetitions:-->
+         <ns:keys query="?" updatecounter="?">
+            <!--Optional:-->
+            <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>
+         </ns:keys>
+      </ns:RetrieveIM_RMListRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="RetrieveList"/></con:call></con:operation><con:operation id="764daed0-1653-4d4f-a7a2-86ddbeb523cf" isOneWay="false" action="SubmitForApproval" name="SubmitForApprovalIM_RM" bindingOperationName="SubmitForApprovalIM_RM" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f53ec59a-4b0d-4d5d-97a4-4b5970fa7f24" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://schemas.hp.com/SM/7" xmlns:com="http://schemas.hp.com/SM/7/Common" xmlns:xm="http://www.w3.org/2005/05/xmlmime">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:SubmitForApprovalIM_RMRequest attachmentInfo="?" attachmentData="?" ignoreEmptyElements="true" updateconstraint="-1">
+         <ns:model query="?">
+            <ns:keys query="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>
+            </ns:keys>
+            <ns:instance query="?" uniquequery="?" recordid="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>
+               <!--Optional:-->
+               <ns:Open type="Boolean" mandatory="?" readonly="?">?</ns:Open>
+               <!--Optional:-->
+               <ns:Category type="String" mandatory="?" readonly="?">?</ns:Category>
+               <!--Optional:-->
+               <ns:Subcategory type="String" mandatory="?" readonly="?">?</ns:Subcategory>
+               <!--Optional:-->
+               <ns:Model type="String" mandatory="?" readonly="?">?</ns:Model>
+               <!--Optional:-->
+               <ns:CurrentPhase type="String" mandatory="?" readonly="?">?</ns:CurrentPhase>
+               <!--Optional:-->
+               <ns:Impact type="String" mandatory="?" readonly="?">?</ns:Impact>
+               <!--Optional:-->
+               <ns:Status type="String" mandatory="?" readonly="?">?</ns:Status>
+               <!--Optional:-->
+               <ns:Priority type="String" mandatory="?" readonly="?">?</ns:Priority>
+               <!--Optional:-->
+               <ns:ApprovalStatus type="String" mandatory="?" readonly="?">?</ns:ApprovalStatus>
+               <!--Optional:-->
+               <ns:Alert type="Boolean" mandatory="?" readonly="?">?</ns:Alert>
+               <!--Optional:-->
+               <ns:AlertNames type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:AlertNames type="String" mandatory="?" readonly="?">?</ns:AlertNames>
+               </ns:AlertNames>
+               <!--Optional:-->
+               <ns:PendingGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:PendingGroups type="String" mandatory="?" readonly="?">?</ns:PendingGroups>
+               </ns:PendingGroups>
+               <!--Optional:-->
+               <ns:Reason type="String" mandatory="?" readonly="?">?</ns:Reason>
+               <!--Optional:-->
+               <ns:SubmitDate type="DateTime" mandatory="?" readonly="?">?</ns:SubmitDate>
+               <!--Optional:-->
+               <ns:UpdateDate type="DateTime" mandatory="?" readonly="?">?</ns:UpdateDate>
+               <!--Optional:-->
+               <ns:CloseDate type="DateTime" mandatory="?" readonly="?">?</ns:CloseDate>
+               <!--Optional:-->
+               <ns:CancelledDate type="DateTime" mandatory="?" readonly="?">?</ns:CancelledDate>
+               <!--Optional:-->
+               <ns:RequestorName type="String" mandatory="?" readonly="?">?</ns:RequestorName>
+               <!--Optional:-->
+               <ns:CoordinatorName type="String" mandatory="?" readonly="?">?</ns:CoordinatorName>
+               <!--Optional:-->
+               <ns:CoordinatorDept type="String" mandatory="?" readonly="?">?</ns:CoordinatorDept>
+               <!--Optional:-->
+               <ns:AssignedTo type="String" mandatory="?" readonly="?">?</ns:AssignedTo>
+               <!--Optional:-->
+               <ns:ShiptoCode type="String" mandatory="?" readonly="?">?</ns:ShiptoCode>
+               <!--Optional:-->
+               <ns:BilltoCode type="String" mandatory="?" readonly="?">?</ns:BilltoCode>
+               <!--Optional:-->
+               <ns:TotalCost type="Decimal" mandatory="?" readonly="?">?</ns:TotalCost>
+               <!--Optional:-->
+               <ns:BilltoExt type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:BilltoExt type="String" mandatory="?" readonly="?">?</ns:BilltoExt>
+               </ns:BilltoExt>
+               <!--Optional:-->
+               <ns:ShiptoExt type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ShiptoExt type="String" mandatory="?" readonly="?">?</ns:ShiptoExt>
+               </ns:ShiptoExt>
+               <!--Optional:-->
+               <ns:ProjectId type="String" mandatory="?" readonly="?">?</ns:ProjectId>
+               <!--Optional:-->
+               <ns:PlannedStart type="DateTime" mandatory="?" readonly="?">?</ns:PlannedStart>
+               <!--Optional:-->
+               <ns:PlannedEnd type="DateTime" mandatory="?" readonly="?">?</ns:PlannedEnd>
+               <!--Optional:-->
+               <ns:RequestedFor type="String" mandatory="?" readonly="?">?</ns:RequestedFor>
+               <!--Optional:-->
+               <ns:BriefDescription type="String" mandatory="?" readonly="?">?</ns:BriefDescription>
+               <!--Optional:-->
+               <ns:CurrentPendingGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:CurrentPendingGroups type="String" mandatory="?" readonly="?">?</ns:CurrentPendingGroups>
+               </ns:CurrentPendingGroups>
+               <!--Optional:-->
+               <ns:FutureGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:FutureGroups type="String" mandatory="?" readonly="?">?</ns:FutureGroups>
+               </ns:FutureGroups>
+               <!--Optional:-->
+               <ns:ApprovedGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ApprovedGroups type="String" mandatory="?" readonly="?">?</ns:ApprovedGroups>
+               </ns:ApprovedGroups>
+               <!--Optional:-->
+               <ns:BilltoDept type="String" mandatory="?" readonly="?">?</ns:BilltoDept>
+               <!--Optional:-->
+               <ns:Company type="String" mandatory="?" readonly="?">?</ns:Company>
+               <!--Optional:-->
+               <ns:AlertStatus type="String" mandatory="?" readonly="?">?</ns:AlertStatus>
+               <!--Optional:-->
+               <ns:SvcOptions type="String" mandatory="?" readonly="?">?</ns:SvcOptions>
+               <!--Optional:-->
+               <ns:Folder type="String" mandatory="?" readonly="?">?</ns:Folder>
+               <!--Optional:-->
+               <ns:SlaBreach type="Boolean" mandatory="?" readonly="?">?</ns:SlaBreach>
+               <!--Optional:-->
+               <ns:NextBreach type="DateTime" mandatory="?" readonly="?">?</ns:NextBreach>
+               <!--Optional:-->
+               <ns:SvcCartId type="Decimal" mandatory="?" readonly="?">?</ns:SvcCartId>
+               <!--Optional:-->
+               <ns:AgreementIds type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:AgreementIds type="Decimal" mandatory="?" readonly="?">?</ns:AgreementIds>
+               </ns:AgreementIds>
+               <!--Optional:-->
+               <ns:AssignedGroup type="String" mandatory="?" readonly="?">?</ns:AssignedGroup>
+               <!--Optional:-->
+               <ns:UpdateAction type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:UpdateAction type="String" mandatory="?" readonly="?">?</ns:UpdateAction>
+               </ns:UpdateAction>
+               <!--Optional:-->
+               <ns:CustVisible type="Boolean" mandatory="?" readonly="?">?</ns:CustVisible>
+               <!--Optional:-->
+               <ns:ClosureCode type="String" mandatory="?" readonly="?">?</ns:ClosureCode>
+               <!--Optional:-->
+               <ns:ClosureComments type="String" mandatory="?" readonly="?">?</ns:ClosureComments>
+               <!--Optional:-->
+               <ns:DeliveryDate type="DateTime" mandatory="?" readonly="?">?</ns:DeliveryDate>
+               <!--Optional:-->
+               <ns:CostCurrencyCode type="String" mandatory="?" readonly="?">?</ns:CostCurrencyCode>
+               <!--Optional:-->
+               <ns:ClosedBy type="String" mandatory="?" readonly="?">?</ns:ClosedBy>
+               <!--Optional:-->
+               <ns:Description type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:Description type="String" mandatory="?" readonly="?">?</ns:Description>
+               </ns:Description>
+               <!--Optional:-->
+               <ns:GlobalLeadTime type="DateTime" mandatory="?" readonly="?">?</ns:GlobalLeadTime>
+               <!--Optional:-->
+               <ns:RequestedDate type="DateTime" mandatory="?" readonly="?">?</ns:RequestedDate>
+               <!--Optional:-->
+               <ns:ModelName type="String" mandatory="?" readonly="?">?</ns:ModelName>
+               <!--Optional:-->
+               <ns:Urgency type="String" mandatory="?" readonly="?">?</ns:Urgency>
+               <!--Optional:-->
+               <ns:AffectedService type="String" mandatory="?" readonly="?">?</ns:AffectedService>
+               <!--Optional:-->
+               <ns:AffectedCI type="String" mandatory="?" readonly="?">?</ns:AffectedCI>
+               <!--Optional:-->
+               <ns:attachments>
+                  <!--Zero or more repetitions:-->
+                  <com:attachment xm:contentType="application/?" href="?" contentId="?" action="?" name="?" type="?" len="?" charset="?" upload.by="?" upload.date="?" attachmentType="?">cid:1559691400731</com:attachment>
+               </ns:attachments>
+            </ns:instance>
+            <!--Optional:-->
+            <ns:messages>
+               <!--Zero or more repetitions:-->
+               <com:message type="String" mandatory="?" readonly="?" severity="?" module="?">?</com:message>
+            </ns:messages>
+         </ns:model>
+      </ns:SubmitForApprovalIM_RMRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="SubmitForApproval"/></con:call></con:operation><con:operation id="d0fddd2c-506b-4e8c-9e1c-825e16decd67" isOneWay="false" action="Update" name="UpdateIM_RM" bindingOperationName="UpdateIM_RM" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="76d6f4a1-2cda-41c2-81c1-a8782be23ccb" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://schemas.hp.com/SM/7" xmlns:com="http://schemas.hp.com/SM/7/Common" xmlns:xm="http://www.w3.org/2005/05/xmlmime">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:UpdateIM_RMRequest attachmentInfo="?" attachmentData="?" ignoreEmptyElements="true" updateconstraint="-1">
+         <ns:model query="?">
+            <ns:keys query="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>
+            </ns:keys>
+            <ns:instance query="?" uniquequery="?" recordid="?" updatecounter="?">
+               <!--Optional:-->
+               <ns:Number type="String" mandatory="?" readonly="?">?</ns:Number>
+               <!--Optional:-->
+               <ns:Open type="Boolean" mandatory="?" readonly="?">?</ns:Open>
+               <!--Optional:-->
+               <ns:Category type="String" mandatory="?" readonly="?">?</ns:Category>
+               <!--Optional:-->
+               <ns:Subcategory type="String" mandatory="?" readonly="?">?</ns:Subcategory>
+               <!--Optional:-->
+               <ns:Model type="String" mandatory="?" readonly="?">?</ns:Model>
+               <!--Optional:-->
+               <ns:CurrentPhase type="String" mandatory="?" readonly="?">?</ns:CurrentPhase>
+               <!--Optional:-->
+               <ns:Impact type="String" mandatory="?" readonly="?">?</ns:Impact>
+               <!--Optional:-->
+               <ns:Status type="String" mandatory="?" readonly="?">?</ns:Status>
+               <!--Optional:-->
+               <ns:Priority type="String" mandatory="?" readonly="?">?</ns:Priority>
+               <!--Optional:-->
+               <ns:ApprovalStatus type="String" mandatory="?" readonly="?">?</ns:ApprovalStatus>
+               <!--Optional:-->
+               <ns:Alert type="Boolean" mandatory="?" readonly="?">?</ns:Alert>
+               <!--Optional:-->
+               <ns:AlertNames type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:AlertNames type="String" mandatory="?" readonly="?">?</ns:AlertNames>
+               </ns:AlertNames>
+               <!--Optional:-->
+               <ns:PendingGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:PendingGroups type="String" mandatory="?" readonly="?">?</ns:PendingGroups>
+               </ns:PendingGroups>
+               <!--Optional:-->
+               <ns:Reason type="String" mandatory="?" readonly="?">?</ns:Reason>
+               <!--Optional:-->
+               <ns:SubmitDate type="DateTime" mandatory="?" readonly="?">?</ns:SubmitDate>
+               <!--Optional:-->
+               <ns:UpdateDate type="DateTime" mandatory="?" readonly="?">?</ns:UpdateDate>
+               <!--Optional:-->
+               <ns:CloseDate type="DateTime" mandatory="?" readonly="?">?</ns:CloseDate>
+               <!--Optional:-->
+               <ns:CancelledDate type="DateTime" mandatory="?" readonly="?">?</ns:CancelledDate>
+               <!--Optional:-->
+               <ns:RequestorName type="String" mandatory="?" readonly="?">?</ns:RequestorName>
+               <!--Optional:-->
+               <ns:CoordinatorName type="String" mandatory="?" readonly="?">?</ns:CoordinatorName>
+               <!--Optional:-->
+               <ns:CoordinatorDept type="String" mandatory="?" readonly="?">?</ns:CoordinatorDept>
+               <!--Optional:-->
+               <ns:AssignedTo type="String" mandatory="?" readonly="?">?</ns:AssignedTo>
+               <!--Optional:-->
+               <ns:ShiptoCode type="String" mandatory="?" readonly="?">?</ns:ShiptoCode>
+               <!--Optional:-->
+               <ns:BilltoCode type="String" mandatory="?" readonly="?">?</ns:BilltoCode>
+               <!--Optional:-->
+               <ns:TotalCost type="Decimal" mandatory="?" readonly="?">?</ns:TotalCost>
+               <!--Optional:-->
+               <ns:BilltoExt type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:BilltoExt type="String" mandatory="?" readonly="?">?</ns:BilltoExt>
+               </ns:BilltoExt>
+               <!--Optional:-->
+               <ns:ShiptoExt type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ShiptoExt type="String" mandatory="?" readonly="?">?</ns:ShiptoExt>
+               </ns:ShiptoExt>
+               <!--Optional:-->
+               <ns:ProjectId type="String" mandatory="?" readonly="?">?</ns:ProjectId>
+               <!--Optional:-->
+               <ns:PlannedStart type="DateTime" mandatory="?" readonly="?">?</ns:PlannedStart>
+               <!--Optional:-->
+               <ns:PlannedEnd type="DateTime" mandatory="?" readonly="?">?</ns:PlannedEnd>
+               <!--Optional:-->
+               <ns:RequestedFor type="String" mandatory="?" readonly="?">?</ns:RequestedFor>
+               <!--Optional:-->
+               <ns:BriefDescription type="String" mandatory="?" readonly="?">?</ns:BriefDescription>
+               <!--Optional:-->
+               <ns:CurrentPendingGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:CurrentPendingGroups type="String" mandatory="?" readonly="?">?</ns:CurrentPendingGroups>
+               </ns:CurrentPendingGroups>
+               <!--Optional:-->
+               <ns:FutureGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:FutureGroups type="String" mandatory="?" readonly="?">?</ns:FutureGroups>
+               </ns:FutureGroups>
+               <!--Optional:-->
+               <ns:ApprovedGroups type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:ApprovedGroups type="String" mandatory="?" readonly="?">?</ns:ApprovedGroups>
+               </ns:ApprovedGroups>
+               <!--Optional:-->
+               <ns:BilltoDept type="String" mandatory="?" readonly="?">?</ns:BilltoDept>
+               <!--Optional:-->
+               <ns:Company type="String" mandatory="?" readonly="?">?</ns:Company>
+               <!--Optional:-->
+               <ns:AlertStatus type="String" mandatory="?" readonly="?">?</ns:AlertStatus>
+               <!--Optional:-->
+               <ns:SvcOptions type="String" mandatory="?" readonly="?">?</ns:SvcOptions>
+               <!--Optional:-->
+               <ns:Folder type="String" mandatory="?" readonly="?">?</ns:Folder>
+               <!--Optional:-->
+               <ns:SlaBreach type="Boolean" mandatory="?" readonly="?">?</ns:SlaBreach>
+               <!--Optional:-->
+               <ns:NextBreach type="DateTime" mandatory="?" readonly="?">?</ns:NextBreach>
+               <!--Optional:-->
+               <ns:SvcCartId type="Decimal" mandatory="?" readonly="?">?</ns:SvcCartId>
+               <!--Optional:-->
+               <ns:AgreementIds type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:AgreementIds type="Decimal" mandatory="?" readonly="?">?</ns:AgreementIds>
+               </ns:AgreementIds>
+               <!--Optional:-->
+               <ns:AssignedGroup type="String" mandatory="?" readonly="?">?</ns:AssignedGroup>
+               <!--Optional:-->
+               <ns:UpdateAction type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:UpdateAction type="String" mandatory="?" readonly="?">?</ns:UpdateAction>
+               </ns:UpdateAction>
+               <!--Optional:-->
+               <ns:CustVisible type="Boolean" mandatory="?" readonly="?">?</ns:CustVisible>
+               <!--Optional:-->
+               <ns:ClosureCode type="String" mandatory="?" readonly="?">?</ns:ClosureCode>
+               <!--Optional:-->
+               <ns:ClosureComments type="String" mandatory="?" readonly="?">?</ns:ClosureComments>
+               <!--Optional:-->
+               <ns:DeliveryDate type="DateTime" mandatory="?" readonly="?">?</ns:DeliveryDate>
+               <!--Optional:-->
+               <ns:CostCurrencyCode type="String" mandatory="?" readonly="?">?</ns:CostCurrencyCode>
+               <!--Optional:-->
+               <ns:ClosedBy type="String" mandatory="?" readonly="?">?</ns:ClosedBy>
+               <!--Optional:-->
+               <ns:Description type="Array">
+                  <!--Zero or more repetitions:-->
+                  <ns:Description type="String" mandatory="?" readonly="?">?</ns:Description>
+               </ns:Description>
+               <!--Optional:-->
+               <ns:GlobalLeadTime type="DateTime" mandatory="?" readonly="?">?</ns:GlobalLeadTime>
+               <!--Optional:-->
+               <ns:RequestedDate type="DateTime" mandatory="?" readonly="?">?</ns:RequestedDate>
+               <!--Optional:-->
+               <ns:ModelName type="String" mandatory="?" readonly="?">?</ns:ModelName>
+               <!--Optional:-->
+               <ns:Urgency type="String" mandatory="?" readonly="?">?</ns:Urgency>
+               <!--Optional:-->
+               <ns:AffectedService type="String" mandatory="?" readonly="?">?</ns:AffectedService>
+               <!--Optional:-->
+               <ns:AffectedCI type="String" mandatory="?" readonly="?">?</ns:AffectedCI>
+               <!--Optional:-->
+               <ns:attachments>
+                  <!--Zero or more repetitions:-->
+                  <com:attachment xm:contentType="application/?" href="?" contentId="?" action="?" name="?" type="?" len="?" charset="?" upload.by="?" upload.date="?" attachmentType="?">cid:1259308993084</com:attachment>
+               </ns:attachments>
+            </ns:instance>
+            <!--Optional:-->
+            <ns:messages>
+               <!--Zero or more repetitions:-->
+               <com:message type="String" mandatory="?" readonly="?" severity="?" module="?">?</com:message>
+            </ns:messages>
+         </ns:model>
+      </ns:UpdateIM_RMRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="Update"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
