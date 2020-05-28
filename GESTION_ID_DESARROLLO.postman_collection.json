@@ -1,0 +1,945 @@
+{
+	"info": {
+		"_postman_id": "08959aa0-faf7-4994-bcf2-5c70522f6382",
+		"name": "GESTION_ID_DESARROLLO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Logic_Flow",
+			"item": [
+				{
+					"name": "AddUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"headerIn\": {\r\n\t\t\"dispositivo\": \"01010101010101010101010101010101\",\r\n\t\t\"empresa\": \"0010\",\r\n\t\t\"canal\": \"02\",\r\n\t\t\"medio\": \"020002\",\r\n\t\t\"aplicacion\": \"00647\",\r\n\t\t\"agencia\": \"0006\",\r\n\t\t\"tipoTransaccion\": \"202000632\",\r\n\t\t\"geolocalizacion\": \"00000\",\r\n\t\t\"usuario\": \"USINTERT\",\r\n\t\t\"unicidad\": \"UZhDOa2GXtkAK2/QovFagnnS+nQSGAF/SKyTIIv1axc=\",\r\n\t\t\"guid\": \"3F2504E04F8911D39A0C0305E82C3302\",\r\n\t\t\"fechaHora\": \"201902071628100774\",\r\n\t\t\"filler\": \"\",\r\n\t\t\"idioma\": \"es-EC\",\r\n\t\t\"sesion\": \"ASDASD77R01YH\",\r\n\t\t\"ip\": \"10.192.168.45\",\r\n\t\t\"idCliente\": \"0913023313\",\r\n\t\t\"tipoIdCliente\": \"0001\",\r\n\t\t\"bancs\": {\r\n\t\t\t\"teller\": \"70560\",\r\n\t\t\t\"terminal\": \"39\",\r\n\t\t\t\"institucion\": \"0010\",\r\n\t\t\t\"agencia\": \"0001\",\r\n\t\t\t\"estacion\": \"0010\",\r\n\t\t\t\"aplicacion\": \"BEP\",\r\n\t\t\t\"canal\": \"i\"\r\n\t\t}\r\n\t},\r\n\t\"bodyIn\": {\r\n\t\t\"usuario\": {\r\n\t\t\t\"tellerName\": \"USRDESA075\",\r\n\t\t\t\"tellerNumber\": null,\r\n\t\t\t\"nombreUsuario\": \"PRUEBA 052\",\r\n\t\t\t\"cargo\": \"APRGO\",\r\n\t\t\t\"empresa\": null,\r\n\t\t\t\"identificacion\": \"0923976633\",\r\n\t\t\t\"tipoIdentificacion\": \"C\",\r\n\t\t\t\"centroDeCostos\": null,\r\n\t\t\t\"claveAcceso\": null,\r\n\t\t\t\"terminal\": null,\r\n\t\t\t\"observacion\": null,\r\n\t\t\t\"mail\": \"info@dominio.com\",\r\n\t\t\t\"celular\": null,\r\n\t\t\t\"especificos\": {\r\n\t\t\t\t\"interno\": \"0\",\r\n\t\t\t\t\"enviarMail\": \"S\",\r\n\t\t\t\t\"cambioPwdInicial\": \"N\",\r\n\t\t\t\t\"codigoTipoUsuario\": \"003\",\r\n\t\t\t\t\"codigoRol\": \"1928\",\r\n\t\t\t\t\"codigoHorario\": \"HN\",\r\n\t\t\t\t\"loginSupervisor\": null,\r\n\t\t\t\t\"codigoAgenciaDefault\": \"877988720064\",\r\n\t\t\t\t\"validarAtributosPerfil\": \"S\",\r\n\t\t\t\t\"codigoAtributo\": null,\r\n\t\t\t\t\"codigoEstado\": null,\r\n\t\t\t\t\"perfilAplicacionDefault\": [ {\r\n                        \"codigoAplicacion\": \"LPT\",\r\n                        \"codigoPerfil\": \"CMC\"\r\n                    },\r\n                    {\r\n                        \"codigoAplicacion\": \"LFW\",\r\n                        \"codigoPerfil\": \"CMC\"\r\n                    }\r\n                    \r\n                ],\r\n\t\t\t\t\"perfilesAplicacionTemporal\": [{\r\n\t\t\t\t\t\t\"codigoAplicacion\": \"LFW\",\r\n\t\t\t\t\t\t\"codigoPerfilPermanente\": \"CMC\",\r\n\t\t\t\t\t\t\"codigoPerfilTemporal\": \"RECC1\",\r\n\t\t\t\t\t\t\"fechaFinVigencia\": \"11/12/2020\"\r\n\t\t\t\t\t},\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"codigoAplicacion\": \"LFW\",\r\n\t\t\t\t\t\t\"codigoPerfilPermanente\": \"CMC\",\r\n\t\t\t\t\t\t\"codigoPerfilTemporal\": \"RECC2\",\r\n\t\t\t\t\t\t\"fechaFinVigencia\": \"11/12/2020\"\r\n\t\t\t\t\t}\r\n\t\t\t\t],\r\n\t\t\t\t\"agenciasPermanentesUsuario\": [\r\n\t\t\t\t\t{\r\n                            \"codigoAgenciaPermanente\": \"\",\r\n                            \"codigoCentroCosto\": \"\"\r\n\t\t\t\t\t}\r\n\t\t\t\t],\r\n\t\t\t\t\"agenciasTemporalesUsuario\": [{\r\n\t\t\t\t\t\t\"codigoAgenciaTemporal\": \"\",\r\n\t\t\t\t\t\t\"codigoCentroCosto\": \"\",\r\n\t\t\t\t\t\t\"fechaFinVigencia\": \"\"\r\n\t\t\t\t\t}\r\n\t\t\t\t],\r\n\t\t\t\t\"atributoPerfilAplicacionDefault\": [{\r\n\t\t\t\t\t\t\"codigoAplicacion\": \"\",\r\n\t\t\t\t\t\t\"codigoAtributo\": \"\",\r\n\t\t\t\t\t\t\"codigoPerfil\": \"\",\r\n\t\t\t\t\t\t\"valorAtributo\": \"\"\r\n\t\t\t\t\t}\r\n\t\t\t\t],\r\n\t\t\t\t\"atributoPerfilesAplicacionTemporal\": [{\r\n\t\t\t\t\t\t\"codigoAplicacion\": \"\",\r\n\t\t\t\t\t\t\"codigoPerfil\": \"\",\r\n\t\t\t\t\t\t\"codigoAtributo\": \"\",\r\n\t\t\t\t\t\t\"valorAtributo\": \"\"\r\n\t\t\t\t\t}\r\n\t\t\t\t],\r\n\t\t\t\t\"atributoUsuario\": [{\r\n\t\t\t\t\t\t\"codigoAtributo\": 13,\r\n\t\t\t\t\t\t\"valorAtributo\": \"2\"\r\n\t\t\t\t\t}, {\r\n\t\t\t\t\t\t\"codigoAtributo\": 15,\r\n\t\t\t\t\t\t\"valorAtributo\": \"0999999999\"\r\n\t\t\t\t\t}, {\r\n\t\t\t\t\t\t\"codigoAtributo\": 16,\r\n\t\t\t\t\t\t\"valorAtributo\": \"framirez@logiciel-ec.com\"\r\n\t\t\t\t\t}, {\r\n\t\t\t\t\t\t\"codigoAtributo\": 17,\r\n\t\t\t\t\t\t\"valorAtributo\": \"023324185\"\r\n\t\t\t\t\t}\r\n\t\t\t\t]\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://10.0.93.226:8952/Omnicanalidad/Container/WSSeguridad0062/v1/Usuario/AddUser",
+							"protocol": "https",
+							"host": [
+								"10",
+								"0",
+								"93",
+								"226"
+							],
+							"port": "8952",
+							"path": [
+								"Omnicanalidad",
+								"Container",
+								"WSSeguridad0062",
+								"v1",
+								"Usuario",
+								"AddUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"headerIn\": {\r\n\t\t\"dispositivo\": \"01010101010101010101010101010101\",\r\n\t\t\"empresa\": \"0010\",\r\n\t\t\"canal\": \"02\",\r\n\t\t\"medio\": \"020002\",\r\n\t\t\"aplicacion\": \"00647\",\r\n\t\t\"agencia\": \"0006\",\r\n\t\t\"tipoTransaccion\": \"202000632\",\r\n\t\t\"geolocalizacion\": \"00000\",\r\n\t\t\"usuario\": \"USINTERT\",\r\n\t\t\"unicidad\": \"UZhDOa2GXtkAK2/QovFagnnS+nQSGAF/SKyTIIv1axc=\",\r\n\t\t\"guid\": \"3F2504E04F8911D39A0C0305E82C3302\",\r\n\t\t\"fechaHora\": \"201702081505651262\",\r\n\t\t\"filler\": \"\",\r\n\t\t\"idioma\": \"es-EC\",\r\n\t\t\"sesion\": \"ASDASD77R01YH\",\r\n\t\t\"ip\": \"10.192.168.45\",\r\n\t\t\"idCliente\": \"0913023313\",\r\n\t\t\"tipoIdCliente\": \"0001\"\r\n\t},\r\n\t\"bodyIn\": {\r\n\t\t\"usuario\": {\r\n\t\t\t\"tellerName\": \"USRDESA064\"\r\n\t\t}\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "https://10.0.93.226:8952/Omnicanalidad/Container/WSSeguridad0062/v1/Usuario/DeleteUser",
+							"protocol": "https",
+							"host": [
+								"10",
+								"0",
+								"93",
+								"226"
+							],
+							"port": "8952",
+							"path": [
+								"Omnicanalidad",
+								"Container",
+								"WSSeguridad0062",
+								"v1",
+								"Usuario",
+								"DeleteUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doListUsers",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"headerIn\": {\r\n\t\t\"dispositivo\": \"01010101010101010101010101010101\",\r\n\t\t\"empresa\": \"0010\",\r\n\t\t\"canal\": \"02\",\r\n\t\t\"medio\": \"020002\",\r\n\t\t\"aplicacion\": \"00647\",\r\n\t\t\"agencia\": \"0006\",\r\n\t\t\"tipoTransaccion\": \"202000632\",\r\n\t\t\"geolocalizacion\": \"00000\",\r\n\t\t\"usuario\": \"USINTERT\",\r\n\t\t\"unicidad\": \"UZhDOa2GXtkAK2/QovFagnnS+nQSGAF/SKyTIIv1axc=\",\r\n\t\t\"guid\": \"3F2504E04F8911D39A0C0305E82C3302\",\r\n\t\t\"fechaHora\": \"201902071628100774\",\r\n\t\t\"filler\": \"\",\r\n\t\t\"idioma\": \"es-EC\",\r\n\t\t\"sesion\": \"ASDASD77R01YH\",\r\n\t\t\"ip\": \"10.192.168.45\",\r\n\t\t\"idCliente\": \"0913023313\",\r\n\t\t\"tipoIdCliente\": \"0001\"\r\n\t},\r\n\t\"bodyIn\": {\r\n\t\t\"usuario\": {\r\n\t\t\t\"especificos\": {\r\n\t\t\t\t\"interno\": \"0\",\r\n\t\t\t\t\"estado\":\"EUS01\"\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "https://10.0.93.226:8952/Omnicanalidad/Container/WSSeguridad0062/v1/Usuario/doListUsers",
+							"protocol": "https",
+							"host": [
+								"10",
+								"0",
+								"93",
+								"226"
+							],
+							"port": "8952",
+							"path": [
+								"Omnicanalidad",
+								"Container",
+								"WSSeguridad0062",
+								"v1",
+								"Usuario",
+								"doListUsers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DoCheckExistingUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"headerIn\": {\r\n\t\t\"dispositivo\": \"01010101010101010101010101010101\",\r\n\t\t\"empresa\": \"0010\",\r\n\t\t\"canal\": \"02\",\r\n\t\t\"medio\": \"020002\",\r\n\t\t\"aplicacion\": \"00647\",\r\n\t\t\"agencia\": \"0006\",\r\n\t\t\"tipoTransaccion\": \"202000632\",\r\n\t\t\"geolocalizacion\": \"00000\",\r\n\t\t\"usuario\": \"USINTERT\",\r\n\t\t\"unicidad\": \"UZhDOa2GXtkAK2/QovFagnnS+nQSGAF/SKyTIIv1axc=\",\r\n\t\t\"guid\": \"3F2504E04F8911D39A0C0305E82C3302\",\r\n\t\t\"fechaHora\": \"201902071628100774\",\r\n\t\t\"filler\": \"\",\r\n\t\t\"idioma\": \"es-EC\",\r\n\t\t\"sesion\": \"ASDASD77R01YH\",\r\n\t\t\"ip\": \"10.192.168.45\",\r\n\t\t\"idCliente\": \"0913023313\",\r\n\t\t\"tipoIdCliente\": \"0001\"\r\n\t},\r\n\t\"bodyIn\": {\r\n\t\t\"usuario\": {\r\n\t\t\t\"tellerName\": \"USRDESA053\",\r\n\t\t\t\"especificos\": {\r\n\t\t\t\t\"interno\": \"0\",\r\n\t\t\t\t\"estado\":\"EUS01\"\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "https://10.0.93.226:8952/Omnicanalidad/Container/WSSeguridad0062/v1/Usuario/doCheckExistingUser",
+							"protocol": "https",
+							"host": [
+								"10",
+								"0",
+								"93",
+								"226"
+							],
+							"port": "8952",
+							"path": [
+								"Omnicanalidad",
+								"Container",
+								"WSSeguridad0062",
+								"v1",
+								"Usuario",
+								"doCheckExistingUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doSetUserClaimValue",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"headerIn\": {\n\t\t\"dispositivo\": \"01010101010101010101010101010101\",\n\t\t\"empresa\": \"0010\",\n\t\t\"canal\": \"02\",\n\t\t\"medio\": \"020002\",\n\t\t\"aplicacion\": \"00647\",\n\t\t\"agencia\": \"0006\",\n\t\t\"tipoTransaccion\": \"202000632\",\n\t\t\"geolocalizacion\": \"00000\",\n\t\t\"usuario\": \"USINTERT\",\n\t\t\"unicidad\": \"UZhDOa2GXtkAK2/QovFagnnS+nQSGAF/SKyTIIv1axc=\",\n\t\t\"guid\": \"3F2504E04F8911D39A0C0305E82C3302\",\n\t\t\"fechaHora\": \"201702081505651262\",\n\t\t\"filler\": \"\",\n\t\t\"idioma\": \"es-EC\",\n\t\t\"sesion\": \"ASDASD77R01YH\",\n\t\t\"ip\": \"10.192.168.45\",\n\t\t\"idCliente\": \"0913023313\",\n\t\t\"tipoIdCliente\": \"0001\"\n\t},\n\t\"bodyIn\": {\n\t\t\"usuario\": {\n\t\t\t\"tellerName\": \"USRDESA076\",\n\t\t\t\"tellerNumber\": null,\n\t\t\t\"nombreUsuario\": \"Usuario Desarrollo USRDESA076\",\n\t\t\t\"cargo\": \"APRGO\",\n\t\t\t\"empresa\": null,\n\t\t\t\"identificacion\": \"\",\n\t\t\t\"tipoIdentificacion\": \"C\",\n\t\t\t\"centroDeCostos\": null,\n\t\t\t\"claveAcceso\": null,\n\t\t\t\"terminal\": null,\n\t\t\t\"observacion\": null,\n\t\t\t\"mail\": \"info@dominio.com\",\n\t\t\t\"celular\": null,\n\t\t\t\"especificos\": {\t\t\t\t\n\t\t\t\t\"codigoTipoUsuario\": \"003\",\n\t\t\t\t\"codigoRol\": \"1928\",\n\t\t\t\t\"codigoHorario\": \"HN\",\n\t\t\t\t\"loginSupervisor\": null,\n\t\t\t\t\"codigoAgenciaDefault\": \"706070680064\",\n\t\t\t\t\"validarAtributosPerfil\": \"S\",\n\t\t\t\t\"codigoAtributo\": null,\n\t\t\t\t\"codigoEstado\": \"EUS01\",\n\t\t\t\t\"perfilAplicacionDefault\": [\n                    {\n                        \"codigoAplicacion\": \"LPT\",\n                        \"codigoPerfil\": \"CMC\"\n                    },\n                    {\n                        \"codigoAplicacion\": \"LFW\",\n                        \"codigoPerfil\": \"CMC\"\n                    }\n                    \n                ],\n\t\t\t\t\"perfilesAplicacionTemporal\": [{\n\t\t\t\t\t\t\"codigoAplicacion\": \"LFW\",\n\t\t\t\t\t\t\"codigoPerfilPermanente\": \"CMC\",\n\t\t\t\t\t\t\"codigoPerfilTemporal\": \"RECC1\",\n\t\t\t\t\t\t\"fechaFinVigencia\": \"31/01/2022\"\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"codigoAplicacion\": \"LFW\",\n\t\t\t\t\t\t\"codigoPerfilPermanente\": \"CMC\",\n\t\t\t\t\t\t\"codigoPerfilTemporal\": \"RECC2\",\n\t\t\t\t\t\t\"fechaFinVigencia\": \"31/01/2022\"\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t}\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "https://10.0.93.226:8952/Omnicanalidad/Container/WSSeguridad0062/v1/Usuario/doSetUserClaimValue",
+							"protocol": "https",
+							"host": [
+								"10",
+								"0",
+								"93",
+								"226"
+							],
+							"port": "8952",
+							"path": [
+								"Omnicanalidad",
+								"Container",
+								"WSSeguridad0062",
+								"v1",
+								"Usuario",
+								"doSetUserClaimValue"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doSetUserClaimValues",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"headerIn\": {\r\n\t\t\"dispositivo\": \"01010101010101010101010101010101\",\r\n\t\t\"empresa\": \"0010\",\r\n\t\t\"canal\": \"02\",\r\n\t\t\"medio\": \"020002\",\r\n\t\t\"aplicacion\": \"00647\",\r\n\t\t\"agencia\": \"0006\",\r\n\t\t\"tipoTransaccion\": \"202000632\",\r\n\t\t\"geolocalizacion\": \"00000\",\r\n\t\t\"usuario\": \"USINTERT\",\r\n\t\t\"unicidad\": \"UZhDOa2GXtkAK2/QovFagnnS+nQSGAF/SKyTIIv1axc=\",\r\n\t\t\"guid\": \"3F2504E04F8911D39A0C0305E82C3302\",\r\n\t\t\"fechaHora\": \"201702081505651262\",\r\n\t\t\"filler\": \"\",\r\n\t\t\"idioma\": \"es-EC\",\r\n\t\t\"sesion\": \"ASDASD77R01YH\",\r\n\t\t\"ip\": \"10.192.168.45\",\r\n\t\t\"idCliente\": \"0913023313\",\r\n\t\t\"tipoIdCliente\": \"0001\"\r\n\t},\r\n\t\"bodyIn\": {\r\n\t\t\"usuario\": {\r\n\t\t\t\"tellerName\": \"USRDESA053\",\r\n\t\t\t\"tellerNumber\": null,\r\n\t\t\t\"nombreUsuario\": \"Usuario Desarrollo 012\",\r\n\t\t\t\"cargo\": \"APRGO\",\r\n\t\t\t\"empresa\": null,\r\n\t\t\t\"centroDeCostos\": null,\r\n\t\t\t\"terminal\": null,\r\n\t\t\t\"observacion\": null,\r\n\t\t\t\"mail\": \"usr@dominio.com\",\r\n\t\t\t\"celular\": null,\r\n\t\t\t\"especificos\": {\t\t\t\t\r\n\t\t\t\t\"codigoTipoUsuario\": \"003\",\r\n\t\t\t\t\"codigoRol\": \"1928\",\r\n\t\t\t\t\"codigoHorario\": \"HN\",\r\n\t\t\t\t\"loginSupervisor\": null,\r\n\t\t\t\t\"codigoAgenciaDefault\": \"706070680064\",\r\n\t\t\t\t\"validarAtributosPerfil\": \"S\",\r\n\t\t\t\t\"codigoAtributo\": null,\r\n\t\t\t\t\"codigoEstado\": \"EUS01\",\r\n\t\t\t\t\"perfilAplicacionDefault\": [\r\n                    {\r\n                        \"codigoAplicacion\": \"LPT\",\r\n                        \"codigoPerfil\": \"CMC\"\r\n                    },\r\n                    {\r\n                        \"codigoAplicacion\": \"LFW\",\r\n                        \"codigoPerfil\": \"CMC\"\r\n                    }\r\n                    \r\n                ],\r\n\t\t\t\t\"perfilesAplicacionTemporal\": [{\r\n\t\t\t\t\t\t\"codigoAplicacion\": \"LFW\",\r\n\t\t\t\t\t\t\"codigoPerfilPermanente\": \"CMC\",\r\n\t\t\t\t\t\t\"codigoPerfilTemporal\": \"RECC1\",\r\n\t\t\t\t\t\t\"fechaFinVigencia\": \"31/01/2022\"\r\n\t\t\t\t\t},\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"codigoAplicacion\": \"LFW\",\r\n\t\t\t\t\t\t\"codigoPerfilPermanente\": \"CMC\",\r\n\t\t\t\t\t\t\"codigoPerfilTemporal\": \"RECC2\",\r\n\t\t\t\t\t\t\"fechaFinVigencia\": \"31/01/2022\"\r\n\t\t\t\t\t}\r\n\t\t\t\t]\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "https://10.0.93.226:8952/Omnicanalidad/Container/WSSeguridad0062/v1/Usuario/doSetUserClaimValues",
+							"protocol": "https",
+							"host": [
+								"10",
+								"0",
+								"93",
+								"226"
+							],
+							"port": "8952",
+							"path": [
+								"Omnicanalidad",
+								"Container",
+								"WSSeguridad0062",
+								"v1",
+								"Usuario",
+								"doSetUserClaimValues"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Bancs*",
+			"item": [
+				{
+					"name": "AddUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"headerIn\": {\r\n\t\t\"dispositivo\": \"01010101010101010101010101010101\",\r\n\t\t\"empresa\": \"0010\",\r\n\t\t\"canal\": \"02\",\r\n\t\t\"medio\": \"020002\",\r\n\t\t\"aplicacion\": \"00671\",\r\n\t\t\"agencia\": \"0006\",\r\n\t\t\"tipoTransaccion\": \"206006101\",\r\n\t\t\"geolocalizacion\": \"00000\",\r\n\t\t\"usuario\": \"USINTERT\",\r\n\t\t\"unicidad\": \"UZhDOa2GXtkAK2/QovFagnnS+nQSGAF/SKyTIIv1axc=\",\r\n\t\t\"guid\": \"3F2504E04F8911D39A0C0305E82C3302\",\r\n\t\t\"fechaHora\": \"201902071628100774\",\r\n\t\t\"filler\": \"\",\r\n\t\t\"idioma\": \"es-EC\",\r\n\t\t\"sesion\": \"ASDASD77R01YH\",\r\n\t\t\"ip\": \"10.192.168.45\",\r\n\t\t\"idCliente\": \"0909155665\",\r\n\t\t\"tipoIdCliente\": \"0001\"\r\n\t},\r\n\t\"bodyIn\": {\r\n\t\t\"usuario\": {\r\n\t\t\t\"tellerName\": \"DEGC0102\",\r\n\t\t\t\"tellerNumber\": \"\",\r\n\t\t\t\"nombreUsuario\": \"PRUEBA55 DEGC0102\",\r\n\t\t\t\"cargo\": \"ANALISTA IT\",\r\n\t\t\t\"empresa\": \"0042\",\r\n\t\t\t\"identificacion\": \"15191\",\r\n\t\t\t\"tipoIdentificacion\": \"0002\",\r\n\t\t\t\"centroDeCostos\": \"1\",\r\n\t\t\t\"claveAcceso\": null,\r\n\t\t\t\"mail\":\"dg@gmail.com\",\r\n\t\t\t\"celular\": \"0991919105\",\r\n\t\t\t\"terminal\": \"bt346475\",\r\n\t\t\t\"observacion\": \"CREACION DE USUARIO DEGC0102\",\r\n\t\t\t\"especificos\": {\r\n\t\t\t\t\"grupoTransaccion\": \"25\",\r\n\t\t\t\t\"nivelCapacidad\": \"10\",\r\n\t\t\t\t\"nivelCorreo\": \"9\",\r\n\t\t\t\t\"userType\": \"1\",\r\n\t\t\t\t\"chngBranchAlwd\": \"\",\r\n\t\t\t\t\"brchSup\": \"Y\",\r\n\t\t\t\t\"atmFlag\": \"N\",\r\n\t\t\t\t\"accsignMod\": \"\",\r\n\t\t\t\t\"casualApprovallim\": \"\",\r\n\t\t\t\t\"nivelSeguridad\": \"0\",\r\n\t\t\t\t\"estadoUsuario\": \"19\"\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://10.0.93.226:8952/Omnicanalidad/Container/WSSeguridad0061/v1/Usuario/AddUser",
+							"protocol": "https",
+							"host": [
+								"10",
+								"0",
+								"93",
+								"226"
+							],
+							"port": "8952",
+							"path": [
+								"Omnicanalidad",
+								"Container",
+								"WSSeguridad0061",
+								"v1",
+								"Usuario",
+								"AddUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"headerIn\": {\r\n\t\t\"dispositivo\": \"01010101010101010101010101010101\",\r\n\t\t\"empresa\": \"0010\",\r\n\t\t\"canal\": \"02\",\r\n\t\t\"medio\": \"020002\",\r\n\t\t\"aplicacion\": \"00573\",\r\n\t\t\"agencia\": \"0006\",\r\n\t\t\"usuario\": \"admin\",\r\n\t\t\"unicidad\": \"920F4D68-AC17-4993-92A7-8BD93FB2DE88\",\r\n\t\t\"guid\": \"920F4D68-AC17-4993-92A7-8BD93FB2DE88\",\r\n\t\t\"fechaHora\": \"202001300453080238\",\r\n\t\t\"filler\": \"WSO2 Identity Server\",\r\n\t\t\"idioma\": \"es-EC\",\r\n\t\t\"ip\": \"10.90.10.10\"\r\n\t},\r\n\t\"bodyIn\": {\r\n\t\t\"usuario\": {\r\n\t\t\t\"tellerNumber\": \"98998010\"\r\n\t\t}\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://10.0.93.226:8952/Omnicanalidad/Container/WSSeguridad0061/v1/Usuario/DeleteUser",
+							"protocol": "https",
+							"host": [
+								"10",
+								"0",
+								"93",
+								"226"
+							],
+							"port": "8952",
+							"path": [
+								"Omnicanalidad",
+								"Container",
+								"WSSeguridad0061",
+								"v1",
+								"Usuario",
+								"DeleteUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doListUsers",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"headerIn\": {\r\n\t\t\"dispositivo\": \"01010101010101010101010101010101\",\r\n\t\t\"empresa\": \"0010\",\r\n\t\t\"canal\": \"02\",\r\n\t\t\"medio\": \"020002\",\r\n\t\t\"aplicacion\": \"00647\",\r\n\t\t\"agencia\": \"0006\",\r\n\t\t\"tipoTransaccion\": \"202000632\",\r\n\t\t\"geolocalizacion\": \"00000\",\r\n\t\t\"usuario\": \"USINTERT\",\r\n\t\t\"unicidad\": \"UZhDOa2GXtkAK2/QovFagnnS+nQSGAF/SKyTIIv1axc=\",\r\n\t\t\"guid\": \"3F2504E04F8911D39A0C0305E82C3302\",\r\n\t\t\"fechaHora\": \"201902071628100774\",\r\n\t\t\"filler\": \"\",\r\n\t\t\"idioma\": \"es-EC\",\r\n\t\t\"sesion\": \"ASDASD77R01YH\",\r\n\t\t\"ip\": \"10.192.168.45\",\r\n\t\t\"idCliente\": \"0913023313\",\r\n\t\t\"tipoIdCliente\": \"0001\"\r\n\t},\r\n\t\"bodyIn\": {\r\n\t\t\"usuario\": {\r\n\t\t\t\"tellerNumber\": \"98998047\"\r\n\t\t}\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "https://10.0.93.226:8952/Omnicanalidad/Container/WSSeguridad0061/v1/Usuario/doListUsers",
+							"protocol": "https",
+							"host": [
+								"10",
+								"0",
+								"93",
+								"226"
+							],
+							"port": "8952",
+							"path": [
+								"Omnicanalidad",
+								"Container",
+								"WSSeguridad0061",
+								"v1",
+								"Usuario",
+								"doListUsers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doCheckExistingUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"headerIn\": {\r\n\t\t\"dispositivo\": \"01010101010101010101010101010101\",\r\n\t\t\"empresa\": \"0010\",\r\n\t\t\"canal\": \"02\",\r\n\t\t\"medio\": \"020002\",\r\n\t\t\"aplicacion\": \"00647\",\r\n\t\t\"agencia\": \"0006\",\r\n\t\t\"tipoTransaccion\": \"202000632\",\r\n\t\t\"geolocalizacion\": \"00000\",\r\n\t\t\"usuario\": \"USINTERT\",\r\n\t\t\"unicidad\": \"UZhDOa2GXtkAK2/QovFagnnS+nQSGAF/SKyTIIv1axc=\",\r\n\t\t\"guid\": \"3F2504E04F8911D39A0C0305E82C3302\",\r\n\t\t\"fechaHora\": \"201902071628100774\",\r\n\t\t\"filler\": \"\",\r\n\t\t\"idioma\": \"es-EC\",\r\n\t\t\"sesion\": \"ASDASD77R01YH\",\r\n\t\t\"ip\": \"10.192.168.45\",\r\n\t\t\"idCliente\": \"0913023313\",\r\n\t\t\"tipoIdCliente\": \"0001\"\r\n\t},\r\n\t\"bodyIn\": {\r\n\t\t\"usuario\": {\r\n\t\t\t\"tellerNumber\": \"98998010\"\r\n\t\t}\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "https://10.0.93.226:8952/Omnicanalidad/Container/WSSeguridad0061/v1/Usuario/doCheckExistingUser",
+							"protocol": "https",
+							"host": [
+								"10",
+								"0",
+								"93",
+								"226"
+							],
+							"port": "8952",
+							"path": [
+								"Omnicanalidad",
+								"Container",
+								"WSSeguridad0061",
+								"v1",
+								"Usuario",
+								"doCheckExistingUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doSetUserClaimValue",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"headerIn\": {\r\n\t\t\"dispositivo\": \"01010101010101010101010101010101\",\r\n\t\t\"empresa\": \"0010\",\r\n\t\t\"canal\": \"02\",\r\n\t\t\"medio\": \"020002\",\r\n\t\t\"aplicacion\": \"00647\",\r\n\t\t\"agencia\": \"0006\",\r\n\t\t\"tipoTransaccion\": \"202000632\",\r\n\t\t\"geolocalizacion\": \"00000\",\r\n\t\t\"usuario\": \"USINTERT\",\r\n\t\t\"unicidad\": \"UZhDOa2GXtkAK2/QovFagnnS+nQSGAF/SKyTIIv1axc=\",\r\n\t\t\"guid\": \"3F2504E04F8911D39A0C0305E82C3302\",\r\n\t\t\"fechaHora\": \"201902071628100774\",\r\n\t\t\"filler\": \"\",\r\n\t\t\"idioma\": \"es-EC\",\r\n\t\t\"sesion\": \"ASDASD77R01YH\",\r\n\t\t\"ip\": \"10.192.168.45\",\r\n\t\t\"idCliente\": \"0913023313\",\r\n\t\t\"tipoIdCliente\": \"0001\"\r\n\t},\r\n\t\"bodyIn\": {\r\n\t\t\"usuario\": {\r\n\t\t\t\"tellerName\": \"BP123TCS\",\r\n\t\t\t\"tellerNumber\": \"98998047\",\r\n\t\t\t\"nombreUsuario\": \"\",\r\n\t\t\t\"cargo\": \"ANALISTA IT\",\r\n\t\t\t\"empresa\": \"0010\",\r\n\t\t\t\"identificacion\": \"0801651753\",\r\n\t\t\t\"tipoIdentificacion\": \"0001\",\r\n\t\t\t\"centroDeCostos\": \"12\",\r\n\t\t\t\"claveAcceso\": null,\r\n\t\t\t\"mail\":\"qaaaaaaaaa@a.com\",\r\n\t\t\t\"celular\": \"123456\",\r\n\t\t\t\"terminal\": \"bt346475\",\r\n\t\t\t\"observacion\": \"CREACION DE USUARIO 98997873\",\r\n\t\t\t\"especificos\": {\r\n\t\t\t\t\"grupoTransaccion\": \"25\",\r\n\t\t\t\t\"nivelCapacidad\": \"10\",\r\n\t\t\t\t\"nivelCorreo\": \"9\",\r\n\t\t\t\t\"userType\": \"1\",\r\n\t\t\t\t\"chngBranchAlwd\": \"\",\r\n\t\t\t\t\"brchSup\": \"Y\",\r\n\t\t\t\t\"atmFlag\": \"N\",\r\n\t\t\t\t\"accsignMod\": \"\",\r\n\t\t\t\t\"casualApprovallim\": \"\",\r\n\t\t\t\t\"nivelSeguridad\": \"0\",\r\n\t\t\t\t\"estadoUsuario\": \"9\"\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "https://10.0.93.226:8952/Omnicanalidad/Container/WSSeguridad0061/v1/Usuario/doSetUserClaimValue",
+							"protocol": "https",
+							"host": [
+								"10",
+								"0",
+								"93",
+								"226"
+							],
+							"port": "8952",
+							"path": [
+								"Omnicanalidad",
+								"Container",
+								"WSSeguridad0061",
+								"v1",
+								"Usuario",
+								"doSetUserClaimValue"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doSetUserClaimValues",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"headerIn\": {\r\n\t\t\"dispositivo\": \"01010101010101010101010101010101\",\r\n\t\t\"empresa\": \"0010\",\r\n\t\t\"canal\": \"02\",\r\n\t\t\"medio\": \"020002\",\r\n\t\t\"aplicacion\": \"00647\",\r\n\t\t\"agencia\": \"0006\",\r\n\t\t\"tipoTransaccion\": \"202000632\",\r\n\t\t\"geolocalizacion\": \"00000\",\r\n\t\t\"usuario\": \"USINTERT\",\r\n\t\t\"unicidad\": \"UZhDOa2GXtkAK2/QovFagnnS+nQSGAF/SKyTIIv1axc=\",\r\n\t\t\"guid\": \"3F2504E04F8911D39A0C0305E82C3302\",\r\n\t\t\"fechaHora\": \"201902071628100774\",\r\n\t\t\"filler\": \"\",\r\n\t\t\"idioma\": \"es-EC\",\r\n\t\t\"sesion\": \"ASDASD77R01YH\",\r\n\t\t\"ip\": \"10.192.168.45\",\r\n\t\t\"idCliente\": \"0913023313\",\r\n\t\t\"tipoIdCliente\": \"0001\"\r\n\t},\r\n\t\"bodyIn\": {\r\n\t\t\"usuario\": {\r\n\t\t\t\"tellerName\": \"\",\r\n\t\t\t\"tellerNumber\": \"98998047\",\r\n\t\t\t\"nombreUsuario\": \"pruebas desarrollo GESTION\",\r\n\t\t\t\"cargo\": \"ANALISTA IT\",\r\n\t\t\t\"empresa\": \"0042\",\r\n\t\t\t\"identificacion\": \"0801651753\",\r\n\t\t\t\"tipoIdentificacion\": \"0001\",\r\n\t\t\t\"centroDeCostos\": \"12\",\r\n\t\t\t\"claveAcceso\": null,\r\n\t\t\t\"mail\":\"q@a.com\",\r\n\t\t\t\"celular\": \"123456\",\r\n\t\t\t\"terminal\": \"bt346475\",\r\n\t\t\t\"observacion\": \"CREACION DE USUARIO ODT12345\",\r\n\t\t\t\"especificos\": {\r\n\t\t\t\t\"grupoTransaccion\": \"25\",\r\n\t\t\t\t\"nivelCapacidad\": \"16\",\r\n\t\t\t\t\"nivelCorreo\": \"9\",\r\n\t\t\t\t\"userType\": \"1\",\r\n\t\t\t\t\"chngBranchAlwd\": \"\",\r\n\t\t\t\t\"brchSup\": \"Y\",\r\n\t\t\t\t\"atmFlag\": \"N\",\r\n\t\t\t\t\"accsignMod\": \"\",\r\n\t\t\t\t\"casualApprovallim\": \"\",\r\n\t\t\t\t\"nivelSeguridad\": \"0\",\r\n\t\t\t\t\"estadoUsuario\": \"9\"\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "https://10.0.93.226:8952/Omnicanalidad/Container/WSSeguridad0061/v1/Usuario/doSetUserClaimValues",
+							"protocol": "https",
+							"host": [
+								"10",
+								"0",
+								"93",
+								"226"
+							],
+							"port": "8952",
+							"path": [
+								"Omnicanalidad",
+								"Container",
+								"WSSeguridad0061",
+								"v1",
+								"Usuario",
+								"doSetUserClaimValues"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d469a797-b2fe-4e4b-a15e-2503d1be8773",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "2709f6f2-cabd-449b-8a40-296d0cf58bbe",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "PPRD-(Siglo21)",
+			"item": [
+				{
+					"name": "AddUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"headerIn\": {\r\n\t\t\"dispositivo\": \"01010101010101010101010101010101\",\r\n\t\t\"empresa\": \"0010\",\r\n\t\t\"canal\": \"02\",\r\n\t\t\"medio\": \"020002\",\r\n\t\t\"aplicacion\": \"00647\",\r\n\t\t\"agencia\": \"0006\",\r\n\t\t\"tipoTransaccion\": \"202000632\",\r\n\t\t\"geolocalizacion\": \"00000\",\r\n\t\t\"usuario\": \"USINTERT\",\r\n\t\t\"unicidad\": \"UZhDOa2GXtkAK2/QovFagnnS+nQSGAF/SKyTIIv1axc=\",\r\n\t\t\"guid\": \"3F2504E04F8911D39A0C0305E82C3302\",\r\n\t\t\"fechaHora\": \"201902071628100774\",\r\n\t\t\"filler\": \"\",\r\n\t\t\"idioma\": \"es-EC\",\r\n\t\t\"sesion\": \"ASDASD77R01YH\",\r\n\t\t\"ip\": \"10.192.168.45\",\r\n\t\t\"idCliente\": \"0913023313\",\r\n\t\t\"tipoIdCliente\": \"0001\"\r\n\t\t\r\n\t},\r\n\t\"bodyIn\": {\r\n\t\t\"usuario\": {\r\n\t\t\t\"tellerName\": \"DIGUERRO\",\r\n\t\t\t\"tellerNumber\": \"98998056\",\r\n\t\t\t\"nombreUsuario\": \"DIEGO GUERRON\",\r\n\t\t\t\"cargo\": \"ANALISTA IT\",\r\n\t\t\t\"empresa\": \"0010\",\r\n\t\t\t\"identificacion\": \"1734312002\",\r\n\t\t\t\"tipoIdentificacion\": \"0001\",\r\n\t\t\t\"centroDeCostos\": \"0001\",\r\n\t\t\t\"claveAcceso\": null,\r\n\t\t\t\"mail\":\"q@a.com\",\r\n\t\t\t\"celular\": \"123456\",\r\n\t\t\t\"terminal\": \"BT346474\",\r\n\t\t\t\"observacion\": \"CREACION DE USUARIO odt 123\",\r\n\t\t\t\"especificos\": {\r\n\t\t\t\t\"perfilUsuario\": \"CONSMOV2\",\r\n\t\t\t\t\"loginUsuario\": \"DLESW\",\r\n\t\t\t\t\"usuarioInterno\": null\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "https://10.0.93.226:8952/Omnicanalidad/Container/WSSeguridad0060/v1/Usuario/AddUser",
+							"protocol": "https",
+							"host": [
+								"10",
+								"0",
+								"93",
+								"226"
+							],
+							"port": "8952",
+							"path": [
+								"Omnicanalidad",
+								"Container",
+								"WSSeguridad0060",
+								"v1",
+								"Usuario",
+								"AddUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"headerIn\": {\r\n\t\t\"dispositivo\": \"01010101010101010101010101010101\",\r\n\t\t\"empresa\": \"0010\",\r\n\t\t\"canal\": \"02\",\r\n\t\t\"medio\": \"020002\",\r\n\t\t\"aplicacion\": \"00647\",\r\n\t\t\"agencia\": \"0006\",\r\n\t\t\"tipoTransaccion\": \"202000632\",\r\n\t\t\"geolocalizacion\": \"00000\",\r\n\t\t\"usuario\": \"USINTERT\",\r\n\t\t\"unicidad\": \"UZhDOa2GXtkAK2/QovFagnnS+nQSGAF/SKyTIIv1axc=\",\r\n\t\t\"guid\": \"3F2504E04F8911D39A0C0305E82C3302\",\r\n\t\t\"fechaHora\": \"201702081505651262\",\r\n\t\t\"filler\": \"\",\r\n\t\t\"idioma\": \"es-EC\",\r\n\t\t\"sesion\": \"ASDASD77R01YH\",\r\n\t\t\"ip\": \"10.192.168.45\",\r\n\t\t\"idCliente\": \"0913023313\",\r\n\t\t\"tipoIdCliente\": \"0001\"\r\n\t\t\r\n\t},\r\n\t\"bodyIn\": {\r\n\t\t\"usuario\": {\r\n\t\t\t\"tellerName\": \"0ZANIPAT\"\r\n\t\t}\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "https://10.0.93.226:8952/Omnicanalidad/Container/WSSeguridad0060/v1/Usuario/DeleteUser",
+							"protocol": "https",
+							"host": [
+								"10",
+								"0",
+								"93",
+								"226"
+							],
+							"port": "8952",
+							"path": [
+								"Omnicanalidad",
+								"Container",
+								"WSSeguridad0060",
+								"v1",
+								"Usuario",
+								"DeleteUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doListUsers",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"headerIn\": {\r\n\t\t\"dispositivo\": \"01010101010101010101010101010101\",\r\n\t\t\"empresa\": \"0010\",\r\n\t\t\"canal\": \"02\",\r\n\t\t\"medio\": \"020002\",\r\n\t\t\"aplicacion\": \"00647\",\r\n\t\t\"agencia\": \"0006\",\r\n\t\t\"tipoTransaccion\": \"202000632\",\r\n\t\t\"geolocalizacion\": \"00000\",\r\n\t\t\"usuario\": \"USINTERT\",\r\n\t\t\"unicidad\": \"UZhDOa2GXtkAK2/QovFagnnS+nQSGAF/SKyTIIv1axc=\",\r\n\t\t\"guid\": \"3F2504E04F8911D39A0C0305E82C3302\",\r\n\t\t\"fechaHora\": \"201902071628100774\",\r\n\t\t\"filler\": \"\",\r\n\t\t\"idioma\": \"es-EC\",\r\n\t\t\"sesion\": \"ASDASD77R01YH\",\r\n\t\t\"ip\": \"10.192.168.45\",\r\n\t\t\"idCliente\": \"0913023313\",\r\n\t\t\"tipoIdCliente\": \"0001\"\r\n\t},\r\n\t\"bodyIn\": {\r\n\t\t\"usuario\": {\r\n\t\t\t\r\n\t\t\t\"nombreUsuario\": \"AVI\", \r\n\t\t\t\"especificos\": {\r\n\t\t\t\t\"parametrosPaginacion\": {\r\n                    \"inicio\":0,\r\n                    \"final\": 10,\r\n                    \"opcion\": 0\r\n                }\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "https://10.0.93.226:8952/Omnicanalidad/Container/WSSeguridad0060/v1/Usuario/doListUsers",
+							"protocol": "https",
+							"host": [
+								"10",
+								"0",
+								"93",
+								"226"
+							],
+							"port": "8952",
+							"path": [
+								"Omnicanalidad",
+								"Container",
+								"WSSeguridad0060",
+								"v1",
+								"Usuario",
+								"doListUsers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doCheckExistingUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"headerIn\": {\r\n\t\t\"dispositivo\": \"01010101010101010101010101010101\",\r\n\t\t\"empresa\": \"0010\",\r\n\t\t\"canal\": \"02\",\r\n\t\t\"medio\": \"020002\",\r\n\t\t\"aplicacion\": \"00647\",\r\n\t\t\"agencia\": \"0006\",\r\n\t\t\"tipoTransaccion\": \"202000632\",\r\n\t\t\"geolocalizacion\": \"00000\",\r\n\t\t\"usuario\": \"USINTERT\",\r\n\t\t\"unicidad\": \"UZhDOa2GXtkAK2/QovFagnnS+nQSGAF/SKyTIIv1axc=\",\r\n\t\t\"guid\": \"3F2504E04F8911D39A0C0305E82C3302\",\r\n\t\t\"fechaHora\": \"201702081505651262\",\r\n\t\t\"filler\": \"\",\r\n\t\t\"idioma\": \"es-EC\",\r\n\t\t\"sesion\": \"ASDASD77R01YH\",\r\n\t\t\"ip\": \"10.192.168.45\",\r\n\t\t\"idCliente\": \"0913023313\",\r\n\t\t\"tipoIdCliente\": \"0001\"\r\n\t},\r\n\t\"bodyIn\": {\r\n\t\t\"usuario\": {\r\n\t\t\t\"tellerName\": \"DIGUERRO\"\r\n\t\t}\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "https://10.0.93.226:8952/Omnicanalidad/Container/WSSeguridad0060/v1/Usuario/doCheckExistingUser",
+							"protocol": "https",
+							"host": [
+								"10",
+								"0",
+								"93",
+								"226"
+							],
+							"port": "8952",
+							"path": [
+								"Omnicanalidad",
+								"Container",
+								"WSSeguridad0060",
+								"v1",
+								"Usuario",
+								"doCheckExistingUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doSetUserClaimValue",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"headerIn\": {\r\n\t\t\"dispositivo\": \"01010101010101010101010101010101\",\r\n\t\t\"empresa\": \"0010\",\r\n\t\t\"canal\": \"02\",\r\n\t\t\"medio\": \"020002\",\r\n\t\t\"aplicacion\": \"00647\",\r\n\t\t\"agencia\": \"0006\",\r\n\t\t\"tipoTransaccion\": \"202000632\",\r\n\t\t\"geolocalizacion\": \"00000\",\r\n\t\t\"usuario\": \"USINTERT\",\r\n\t\t\"unicidad\": \"UZhDOa2GXtkAK2/QovFagnnS+nQSGAF/SKyTIIv1axc=\",\r\n\t\t\"guid\": \"3F2504E04F8911D39A0C0305E82C3302\",\r\n\t\t\"fechaHora\": \"201702081505651262\",\r\n\t\t\"filler\": \"\",\r\n\t\t\"idioma\": \"es-EC\",\r\n\t\t\"sesion\": \"ASDASD77R01YH\",\r\n\t\t\"ip\": \"10.192.168.45\",\r\n\t\t\"idCliente\": \"0913023313\",\r\n\t\t\"tipoIdCliente\": \"0001\"\r\n\t},\r\n\t\"bodyIn\": {\r\n\t\t\"usuario\": {\r\n\t\t\t\"tellerName\": \"TCSBP005\",\r\n\t\t\t\"tellerNumber\": \"989982\",\r\n\t\t\t\"nombreUsuario\": \"PRUEBA DE TCSBP005\",\r\n\t\t\t\"cargo\": \"RECEPCIONISTA\",\r\n\t\t\t\"empresa\": \"0010\",\r\n\t\t\t\"identificacion\": \"1003412002\",\r\n\t\t\t\"tipoIdentificacion\": \"0001\",\r\n\t\t\t\"centroDeCostos\": \"0001\",\r\n\t\t\t\"claveAcceso\": null,\r\n\t\t\t\"mail\":\"q@a.com\",\r\n\t\t\t\"celular\": \"123456\",\r\n\t\t\t\"terminal\": \"BT346474\",\r\n\t\t\t\"observacion\": \"CREACION DE USUARIO TCSBP005\",\r\n\t\t\t\"especificos\": {\r\n\t\t\t\t\"perfilUsuario\": \"CONSMOV2\",\r\n\t\t\t\t\"loginUsuario\": \"DLESW\",\r\n\t\t\t\t\"usuarioInterno\": null\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "https://10.0.93.226:8952/Omnicanalidad/Container/WSSeguridad0060/v1/Usuario/doSetUserClaimValue",
+							"protocol": "https",
+							"host": [
+								"10",
+								"0",
+								"93",
+								"226"
+							],
+							"port": "8952",
+							"path": [
+								"Omnicanalidad",
+								"Container",
+								"WSSeguridad0060",
+								"v1",
+								"Usuario",
+								"doSetUserClaimValue"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doSetUserClaimValues",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"headerIn\": {\r\n\t\t\"dispositivo\": \"01010101010101010101010101010101\",\r\n\t\t\"empresa\": \"0010\",\r\n\t\t\"canal\": \"02\",\r\n\t\t\"medio\": \"020002\",\r\n\t\t\"aplicacion\": \"00647\",\r\n\t\t\"agencia\": \"0006\",\r\n\t\t\"tipoTransaccion\": \"202000632\",\r\n\t\t\"geolocalizacion\": \"00000\",\r\n\t\t\"usuario\": \"USINTERT\",\r\n\t\t\"unicidad\": \"UZhDOa2GXtkAK2/QovFagnnS+nQSGAF/SKyTIIv1axc=\",\r\n\t\t\"guid\": \"3F2504E04F8911D39A0C0305E82C3302\",\r\n\t\t\"fechaHora\": \"201702081505651262\",\r\n\t\t\"filler\": \"\",\r\n\t\t\"idioma\": \"es-EC\",\r\n\t\t\"sesion\": \"ASDASD77R01YH\",\r\n\t\t\"ip\": \"10.192.168.45\",\r\n\t\t\"idCliente\": \"0913023313\",\r\n\t\t\"tipoIdCliente\": \"0001\"\r\n\t},\r\n\t\"bodyIn\": {\r\n\t\t\"usuario\": {\r\n\t\t\t\"tellerName\": \"TCSBP005\",\r\n\t\t\t\"tellerNumber\": \"989982\",\r\n\t\t\t\"nombreUsuario\": \"TCSBP005\",\r\n\t\t\t\"cargo\": \"CAJERO\",\r\n\t\t\t\"empresa\": \"0010\",\r\n\t\t\t\"identificacion\": \"1003412002\",\r\n\t\t\t\"tipoIdentificacion\": \"0001\",\r\n\t\t\t\"centroDeCostos\": \"0001\",\r\n\t\t\t\"claveAcceso\": null,\r\n\t\t\t\"mail\":\"q@a.com\",\r\n\t\t\t\"celular\": \"123456\",\r\n\t\t\t\"terminal\": \"BT346474\",\r\n\t\t\t\"observacion\": \"CREACION DE USUARIO TCSBP005\",\r\n\t\t\t\"especificos\": {\r\n\t\t\t\t\"perfilUsuario\": \"CONSMOV2\",\r\n\t\t\t\t\"loginUsuario\": \"DLESW\",\r\n\t\t\t\t\"usuarioInterno\": null\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "https://10.0.93.226:8952/Omnicanalidad/Container/WSSeguridad0060/v1/Usuario/doSetUserClaimValues",
+							"protocol": "https",
+							"host": [
+								"10",
+								"0",
+								"93",
+								"226"
+							],
+							"port": "8952",
+							"path": [
+								"Omnicanalidad",
+								"Container",
+								"WSSeguridad0060",
+								"v1",
+								"Usuario",
+								"doSetUserClaimValues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doAddRole",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"headerIn\": {\r\n\t\t\"dispositivo\": \"01010101010101010101010101010101\",\r\n\t\t\"empresa\": \"0010\",\r\n\t\t\"canal\": \"02\",\r\n\t\t\"medio\": \"020002\",\r\n\t\t\"aplicacion\": \"00647\",\r\n\t\t\"agencia\": \"0006\",\r\n\t\t\"tipoTransaccion\": \"202000632\",\r\n\t\t\"geolocalizacion\": \"00000\",\r\n\t\t\"usuario\": \"USINTERT\",\r\n\t\t\"unicidad\": \"UZhDOa2GXtkAK2/QovFagnnS+nQSGAF/SKyTIIv1axc=\",\r\n\t\t\"guid\": \"3F2504E04F8911D39A0C0305E82C3302\",\r\n\t\t\"fechaHora\": \"201702081505651262\",\r\n\t\t\"filler\": \"\",\r\n\t\t\"idioma\": \"es-EC\",\r\n\t\t\"sesion\": \"ASDASD77R01YH\",\r\n\t\t\"ip\": \"10.192.168.45\",\r\n\t\t\"idCliente\": \"0913023313\",\r\n\t\t\"tipoIdCliente\": \"0001\"\r\n\t},\r\n\t\"bodyIn\": {\r\n\t\t\r\n        \"perfil\": {\r\n            \"codigoRecurso\": \"ACG29\",\r\n            \"codigoAcceso\": \"9999\",\r\n            \"grupo\": \"CONSMOV2\",\r\n            \"usuarioLogin\": \"dguerroc\",\r\n            \"terminal\": \"bt345464\",\r\n            \"observacion\": \"prueba de creacion de perfil GI\"\r\n            },\r\n        \"recurso\": {\r\n            \"descripcion\": null,\r\n            \"parametro\": null,\r\n            \"grupo\": null,\r\n            \"usuarioLogin\": null,\r\n            \"terminal\": null,\r\n            \"observacion\": null\r\n        }\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "https://10.0.93.226:8952/Omnicanalidad/Container/WSSeguridad0060/v1/Usuario/doAddRole",
+							"protocol": "https",
+							"host": [
+								"10",
+								"0",
+								"93",
+								"226"
+							],
+							"port": "8952",
+							"path": [
+								"Omnicanalidad",
+								"Container",
+								"WSSeguridad0060",
+								"v1",
+								"Usuario",
+								"doAddRole"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doDeleteRole",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"headerIn\": {\r\n\t\t\"dispositivo\": \"01010101010101010101010101010101\",\r\n\t\t\"empresa\": \"0010\",\r\n\t\t\"canal\": \"02\",\r\n\t\t\"medio\": \"020002\",\r\n\t\t\"aplicacion\": \"00647\",\r\n\t\t\"agencia\": \"0006\",\r\n\t\t\"tipoTransaccion\": \"202000632\",\r\n\t\t\"geolocalizacion\": \"00000\",\r\n\t\t\"usuario\": \"USINTERT\",\r\n\t\t\"unicidad\": \"UZhDOa2GXtkAK2/QovFagnnS+nQSGAF/SKyTIIv1axc=\",\r\n\t\t\"guid\": \"3F2504E04F8911D39A0C0305E82C3302\",\r\n\t\t\"fechaHora\": \"201702081505651262\",\r\n\t\t\"filler\": \"\",\r\n\t\t\"idioma\": \"es-EC\",\r\n\t\t\"sesion\": \"ASDASD77R01YH\",\r\n\t\t\"ip\": \"10.192.168.45\",\r\n\t\t\"idCliente\": \"0913023313\",\r\n\t\t\"tipoIdCliente\": \"0001\"\r\n\t},\r\n\t\"bodyIn\": {\r\n\t\t\r\n        \"perfil\": {\r\n            \"codigoRecurso\": \"ACG21\",\r\n            \"codigoAcceso\": \"9999\",\r\n            \"grupo\": \"CONSMOV2\",\r\n            \"usuarioLogin\": \"dguerroc\",\r\n            \"terminal\": \"bt345464\",\r\n            \"observacion\": \"prueba de creacion de perfil GI\"\r\n            },\r\n        \"recurso\": {\r\n            \"descripcion\": null,\r\n            \"parametro\": null,\r\n            \"grupo\": null,\r\n            \"usuarioLogin\": null,\r\n            \"terminal\": null,\r\n            \"observacion\": null\r\n        }\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "https://10.0.93.226:8952/Omnicanalidad/Container/WSSeguridad0060/v1/Usuario/doDeleteRole",
+							"protocol": "https",
+							"host": [
+								"10",
+								"0",
+								"93",
+								"226"
+							],
+							"port": "8952",
+							"path": [
+								"Omnicanalidad",
+								"Container",
+								"WSSeguridad0060",
+								"v1",
+								"Usuario",
+								"doDeleteRole"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doGetRoleNames",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"headerIn\": {\r\n\t\t\"dispositivo\": \"01010101010101010101010101010101\",\r\n\t\t\"empresa\": \"0010\",\r\n\t\t\"canal\": \"02\",\r\n\t\t\"medio\": \"020002\",\r\n\t\t\"aplicacion\": \"00647\",\r\n\t\t\"agencia\": \"0006\",\r\n\t\t\"tipoTransaccion\": \"202000632\",\r\n\t\t\"geolocalizacion\": \"00000\",\r\n\t\t\"usuario\": \"USINTERT\",\r\n\t\t\"unicidad\": \"UZhDOa2GXtkAK2/QovFagnnS+nQSGAF/SKyTIIv1axc=\",\r\n\t\t\"guid\": \"3F2504E04F8911D39A0C0305E82C3302\",\r\n\t\t\"fechaHora\": \"201702081505651262\",\r\n\t\t\"filler\": \"\",\r\n\t\t\"idioma\": \"es-EC\",\r\n\t\t\"sesion\": \"ASDASD77R01YH\",\r\n\t\t\"ip\": \"10.192.168.45\",\r\n\t\t\"idCliente\": \"0913023313\",\r\n\t\t\"tipoIdCliente\": \"0001\"\r\n\t},\r\n\t\"bodyIn\": {\r\n\t\t\"usuario\": {\r\n\t\t\t\"tellerName\": \"TCSBP005\",\r\n\t\t\t\"tellerNumber\": \"\",\r\n\t\t\t\"nombreUsuario\": \"\",\r\n\t\t\t\"cargo\": \"\",\r\n\t\t\t\"empresa\": \"\",\r\n\t\t\t\"identificacion\": \"\",\r\n\t\t\t\"tipoIdentificacion\": \"\",\r\n\t\t\t\"centroDeCostos\": \"0001\",\r\n\t\t\t\"claveAcceso\": null,\r\n\t\t\t\"mail\":\"q@a.com\",\r\n\t\t\t\"celular\": \"\",\r\n\t\t\t\"terminal\": \"\",\r\n\t\t\t\"observacion\": \"\",\r\n\t\t\t\"especificos\": {\r\n\t\t\t\t\"perfilUsuario\": \"\",\r\n\t\t\t\t\"loginUsuario\": \"\",\r\n\t\t\t\t\"usuarioInterno\": null\r\n\t\t\t}\r\n\t\t},\r\n        \"perfil\": {\r\n            \"codigoRecurso\": \"\",\r\n            \"codigoAcceso\":\"\" ,\r\n            \"grupo\": \"CONSMOV2\",\r\n            \"usuarioLogin\": \"dguerroc\",\r\n            \"terminal\": \"bt345464\",\r\n            \"observacion\": \"prueba de creacion de perfil GI\"\r\n            },\r\n        \"recurso\": {\r\n            \"descripcion\": null,\r\n            \"parametro\": null,\r\n            \"grupo\": null,\r\n            \"usuarioLogin\": null,\r\n            \"terminal\": null,\r\n            \"observacion\": null\r\n        }\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "https://10.0.93.226:8952/Omnicanalidad/Container/WSSeguridad0060/v1/Usuario/doGetRoleNames",
+							"protocol": "https",
+							"host": [
+								"10",
+								"0",
+								"93",
+								"226"
+							],
+							"port": "8952",
+							"path": [
+								"Omnicanalidad",
+								"Container",
+								"WSSeguridad0060",
+								"v1",
+								"Usuario",
+								"doGetRoleNames"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doUpdateRoleName",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"headerIn\": {\r\n\t\t\"dispositivo\": \"01010101010101010101010101010101\",\r\n\t\t\"empresa\": \"0010\",\r\n\t\t\"canal\": \"02\",\r\n\t\t\"medio\": \"020002\",\r\n\t\t\"aplicacion\": \"00647\",\r\n\t\t\"agencia\": \"0006\",\r\n\t\t\"tipoTransaccion\": \"202000632\",\r\n\t\t\"geolocalizacion\": \"00000\",\r\n\t\t\"usuario\": \"USINTERT\",\r\n\t\t\"unicidad\": \"UZhDOa2GXtkAK2/QovFagnnS+nQSGAF/SKyTIIv1axc=\",\r\n\t\t\"guid\": \"3F2504E04F8911D39A0C0305E82C3302\",\r\n\t\t\"fechaHora\": \"201702081505651262\",\r\n\t\t\"filler\": \"\",\r\n\t\t\"idioma\": \"es-EC\",\r\n\t\t\"sesion\": \"ASDASD77R01YH\",\r\n\t\t\"ip\": \"10.192.168.45\",\r\n\t\t\"idCliente\": \"0913023313\",\r\n\t\t\"tipoIdCliente\": \"0001\"\r\n\t},\r\n\t\"bodyIn\": {\r\n\t\t\"usuario\": {\r\n\t\t\t\"tellerName\": \"TCSBP005\",\r\n\t\t\t\"tellerNumber\": \"\",\r\n\t\t\t\"nombreUsuario\": \"\",\r\n\t\t\t\"cargo\": \"\",\r\n\t\t\t\"empresa\": \"\",\r\n\t\t\t\"identificacion\": \"\",\r\n\t\t\t\"tipoIdentificacion\": \"\",\r\n\t\t\t\"centroDeCostos\": \"0001\",\r\n\t\t\t\"claveAcceso\": null,\r\n\t\t\t\"mail\":\"q@a.com\",\r\n\t\t\t\"celular\": \"\",\r\n\t\t\t\"terminal\": \"\",\r\n\t\t\t\"observacion\": \"\",\r\n\t\t\t\"especificos\": {\r\n\t\t\t\t\"perfilUsuario\": \"\",\r\n\t\t\t\t\"loginUsuario\": \"\",\r\n\t\t\t\t\"usuarioInterno\": null\r\n\t\t\t}\r\n\t\t},\r\n        \"perfil\": {\r\n            \"codigoRecurso\": \"ACG22\",\r\n            \"codigoAcceso\": \"0\",\r\n            \"grupo\": \"CONSMOV3\",\r\n            \"usuarioLogin\": \"dguerroc\",\r\n            \"terminal\": \"bt345464\",\r\n            \"observacion\": \"prueba de creacion de perfil GI\"\r\n            },\r\n        \"recurso\": {\r\n            \"descripcion\": null,\r\n            \"parametro\": null,\r\n            \"grupo\": null,\r\n            \"usuarioLogin\": null,\r\n            \"terminal\": null,\r\n            \"observacion\": null\r\n        }\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "https://10.0.93.226:8952/Omnicanalidad/Container/WSSeguridad0060/v1/Usuario/doUpdateRoleName",
+							"protocol": "https",
+							"host": [
+								"10",
+								"0",
+								"93",
+								"226"
+							],
+							"port": "8952",
+							"path": [
+								"Omnicanalidad",
+								"Container",
+								"WSSeguridad0060",
+								"v1",
+								"Usuario",
+								"doUpdateRoleName"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ba4ae258-4509-4d62-abd8-c09e01cf7ad5",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "a0397891-b707-4a3f-acd3-24ecb2189e31",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "2eb9f943-32e5-4dd7-a1d7-7944e18bd5f9",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "fa4e1227-6933-46ae-83fb-ee30244a4218",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
