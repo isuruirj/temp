@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="211264a8-f01b-45da-bd96-4a0ac900d16f" activeEnvironment="Default" name="WSO2-GIRecovery_DSS" resourceRoot="" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="d9c3f6bf-f729-4106-83cd-9f73ea11d895" wsaVersion="NONE" name="GIRecovery_DSSSOAP11Binding" type="wsdl" bindingName="{http://ws.wso2.org/dataservice}GIRecovery_DSSSOAP11Binding" soapVersion="1_1" anonymous="optional" definition="https://ei.bp.com:8243/services/GIRecovery_DSS?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>https://ei.bp.com:8243/services/GIRecovery_DSS.SOAP11Endpoint</con:endpoint><con:endpoint>https://ei.bp.com:8243/services/GIRecovery_DSS.SecureSOAP11Endpoint</con:endpoint></con:endpoints><con:operation id="0c35706e-202b-4fd1-8273-19fccc9f1e0d" isOneWay="false" action="urn:Estado_Procedure" name="Estado_Procedure" bindingOperationName="Estado_Procedure" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="e92faa67-ce22-41b5-b0b4-5b775e372b8c" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIRecovery_DSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <dat:Estado_Procedure/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:Estado_Procedure"/></con:call></con:operation><con:operation id="d05ec0f1-e307-4153-91e0-9e24c3431efa" isOneWay="false" action="urn:Insert_GIdentidad" name="Insert_GIdentidad" bindingOperationName="Insert_GIdentidad" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="71011d60-7672-45ee-94a6-bf7dd6b368de" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIRecovery_DSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <dat:Insert_GIdentidad>
+         <dat:Guid>?</dat:Guid>
+         <dat:FechaIngreso>?</dat:FechaIngreso>
+         <dat:IdMensaje>?</dat:IdMensaje>
+         <dat:Estado>?</dat:Estado>
+         <dat:UserStore>?</dat:UserStore>
+         <dat:MensajePeticion>?</dat:MensajePeticion>
+         <dat:MensajeRespuesta>?</dat:MensajeRespuesta>
+         <dat:Prioridad>?</dat:Prioridad>
+         <dat:Reintento>?</dat:Reintento>
+         <dat:SoapAction>?</dat:SoapAction>
+         <dat:StatusCodResp>?</dat:StatusCodResp>
+         <dat:MensajePeticionValores>?</dat:MensajePeticionValores>
+         <dat:MensajeRespuestaValores>?</dat:MensajeRespuestaValores>
+      </dat:Insert_GIdentidad>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:Insert_GIdentidad"/></con:call></con:operation><con:operation id="b71c0312-f251-40fc-9996-8910f8d948cf" isOneWay="false" action="urn:Select_All" name="Select_All" bindingOperationName="Select_All" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d8d9a809-a923-4d3b-8f01-9cc4be3d751f" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIRecovery_DSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <dat:Select_All/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:Select_All"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="11d82324-7e0c-4d07-b0c4-0f5b57c9eed2" isOneWay="false" action="urn:Select_Estado" name="Select_Estado" bindingOperationName="Select_Estado" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="350742d6-1298-4806-bb09-de89374ec15a" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIRecovery_DSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <dat:Select_Estado>
+         <dat:Estado>?</dat:Estado>
+      </dat:Select_Estado>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:Select_Estado"/></con:call></con:operation><con:operation id="135073ab-6cef-40e0-8c31-832a1bde1b3d" isOneWay="false" action="urn:Update_Estado" name="Update_Estado" bindingOperationName="Update_Estado" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ef9982d4-87fd-48e9-97f6-8bd719f45715" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIRecovery_DSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <dat:Update_Estado>
+         <dat:Guid>?</dat:Guid>
+         <dat:Estado>?</dat:Estado>
+      </dat:Update_Estado>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:Update_Estado"/></con:call></con:operation><con:operation id="1a0a089a-6f6d-4599-bdae-d31d2aa2db77" isOneWay="false" action="urn:Update_GIdentidad" name="Update_GIdentidad" bindingOperationName="Update_GIdentidad" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="2416106d-2357-4a96-ba82-fa0d9d0dfdf2" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIRecovery_DSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <dat:Update_GIdentidad>
+         <dat:Guid>?</dat:Guid>
+         <dat:IdMensaje>?</dat:IdMensaje>
+         <dat:Estado>?</dat:Estado>
+         <dat:UserStore>?</dat:UserStore>
+         <dat:MensajePeticion>?</dat:MensajePeticion>
+         <dat:MensajeRespuesta>?</dat:MensajeRespuesta>
+         <dat:Reintento>?</dat:Reintento>
+         <dat:SoapAction>?</dat:SoapAction>
+         <dat:StatusCodResp>?</dat:StatusCodResp>
+         <dat:MensajePeticionValores>?</dat:MensajePeticionValores>
+         <dat:MensajeRespuestaValores>?</dat:MensajeRespuestaValores>
+      </dat:Update_GIdentidad>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:Update_GIdentidad"/></con:call></con:operation><con:operation id="42c5a90e-e4f3-4932-9b20-0dde6022edd3" isOneWay="false" action="urn:Update_HPTicket" name="Update_HPTicket" bindingOperationName="Update_HPTicket" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="7972f297-76f9-4892-81c8-cba634e87872" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIRecovery_DSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <dat:Update_HPTicket>
+         <dat:Guid>?</dat:Guid>
+         <dat:Estado>?</dat:Estado>
+         <dat:HPTicketNumero>?</dat:HPTicketNumero>
+         <dat:HPTicketContenido>?</dat:HPTicketContenido>
+         <dat:HPTicketFechaRespuesta>?</dat:HPTicketFechaRespuesta>
+         <dat:HPTicketEstado>?</dat:HPTicketEstado>
+         <dat:HPTicketLogs>?</dat:HPTicketLogs>
+      </dat:Update_HPTicket>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:Update_HPTicket"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="a790feea-956e-494c-b570-88523c044f4f" wsaVersion="NONE" name="GIRecovery_DSSSOAP12Binding" type="wsdl" bindingName="{http://ws.wso2.org/dataservice}GIRecovery_DSSSOAP12Binding" soapVersion="1_2" anonymous="optional" definition="https://ei.bp.com:8243/services/GIRecovery_DSS?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://ei.bp.com:8243/services/GIRecovery_DSS?wsdl"><con:part><con:url>https://ei.bp.com:8243/services/GIRecovery_DSS?wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://ws.wso2.org/dataservice" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns0="http://ws.wso2.org/dataservice" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:documentation/>
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://ws.wso2.org/dataservice">
+      <xs:element name="DataServiceFault">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="current_params" type="xs:string"/>
+            <xs:element name="current_request_name" type="xs:string"/>
+            <xs:element name="nested_exception" type="xs:string"/>
+            <xs:element name="source_data_service">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="location" type="xs:string"/>
+                  <xs:element name="default_namespace" type="xs:string"/>
+                  <xs:element name="description" type="xs:string"/>
+                  <xs:element name="data_service_name" type="xs:string"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ds_code" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="REQUEST_STATUS" type="xs:string"/>
+      <xs:element name="DATA_SERVICE_RESPONSE">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:any minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Insert_GIdentidad">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Guid" nillable="true" type="xs:string"/>
+            <xs:element name="FechaIngreso" nillable="true" type="xs:dateTime"/>
+            <xs:element name="IdMensaje" nillable="true" type="xs:string"/>
+            <xs:element name="Estado" nillable="true" type="xs:string"/>
+            <xs:element name="UserStore" nillable="true" type="xs:string"/>
+            <xs:element name="MensajePeticion" nillable="true" type="xs:string"/>
+            <xs:element name="MensajeRespuesta" nillable="true" type="xs:string"/>
+            <xs:element name="Prioridad" nillable="true" type="xs:byte"/>
+            <xs:element name="Reintento" nillable="true" type="xs:byte"/>
+            <xs:element name="SoapAction" nillable="true" type="xs:string"/>
+            <xs:element name="StatusCodResp" nillable="true" type="xs:string"/>
+            <xs:element name="MensajePeticionValores" nillable="true" type="xs:string"/>
+            <xs:element name="MensajeRespuestaValores" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Select_Estado">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Estado" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Mensajes" type="ns0:Mensajes"/>
+      <xs:complexType name="Mensajes">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="Mensaje" type="ns0:Mensaje"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Mensaje">
+        <xs:sequence>
+          <xs:element name="Guid" nillable="true" type="xs:string"/>
+          <xs:element name="FechaIngreso" nillable="true" type="xs:dateTime"/>
+          <xs:element name="IdMensaje" nillable="true" type="xs:string"/>
+          <xs:element name="Estado" nillable="true" type="xs:string"/>
+          <xs:element name="UserStore" nillable="true" type="xs:string"/>
+          <xs:element name="MensajePeticion" nillable="true" type="xs:string"/>
+          <xs:element name="MensajeRespuesta" nillable="true" type="xs:string"/>
+          <xs:element name="Prioridad" nillable="true" type="xs:integer"/>
+          <xs:element name="Reintento" nillable="true" type="xs:integer"/>
+          <xs:element name="SoapAction" nillable="true" type="xs:string"/>
+          <xs:element name="StatusCodResp" nillable="true" type="xs:string"/>
+          <xs:element name="UltimaFechaReintento" nillable="true" type="xs:dateTime"/>
+          <xs:element name="HPTicketNumero" nillable="true" type="xs:string"/>
+          <xs:element name="HPTicketContenido" nillable="true" type="xs:string"/>
+          <xs:element name="HPTicketFechaRespuesta" nillable="true" type="xs:dateTime"/>
+          <xs:element name="HPTicketEstado" nillable="true" type="xs:string"/>
+          <xs:element name="HPTicketLogs" nillable="true" type="xs:string"/>
+          <xs:element name="Uuid_GI" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Update_Estado">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Guid" nillable="true" type="xs:string"/>
+            <xs:element name="Estado" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Estado_Procedure">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Select_All">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Update_GIdentidad">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Guid" nillable="true" type="xs:string"/>
+            <xs:element name="IdMensaje" nillable="true" type="xs:string"/>
+            <xs:element name="Estado" nillable="true" type="xs:string"/>
+            <xs:element name="UserStore" nillable="true" type="xs:string"/>
+            <xs:element name="MensajePeticion" nillable="true" type="xs:string"/>
+            <xs:element name="MensajeRespuesta" nillable="true" type="xs:string"/>
+            <xs:element name="Reintento" nillable="true" type="xs:int"/>
+            <xs:element name="SoapAction" nillable="true" type="xs:string"/>
+            <xs:element name="StatusCodResp" nillable="true" type="xs:string"/>
+            <xs:element name="MensajePeticionValores" nillable="true" type="xs:string"/>
+            <xs:element name="MensajeRespuestaValores" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Update_HPTicket">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Guid" nillable="true" type="xs:string"/>
+            <xs:element name="Estado" nillable="true" type="xs:string"/>
+            <xs:element name="HPTicketNumero" nillable="true" type="xs:string"/>
+            <xs:element name="HPTicketContenido" nillable="true" type="xs:string"/>
+            <xs:element name="HPTicketFechaRespuesta" nillable="true" type="xs:string"/>
+            <xs:element name="HPTicketEstado" nillable="true" type="xs:string"/>
+            <xs:element name="HPTicketLogs" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="Insert_GIdentidadRequest">
+    <wsdl:part name="parameters" element="ns0:Insert_GIdentidad"/>
+  </wsdl:message>
+  <wsdl:message name="Insert_GIdentidadResponse">
+    <wsdl:part name="parameters" element="ns0:REQUEST_STATUS"/>
+  </wsdl:message>
+  <wsdl:message name="DataServiceFault">
+    <wsdl:part name="parameters" element="ns0:DataServiceFault"/>
+  </wsdl:message>
+  <wsdl:message name="Select_EstadoRequest">
+    <wsdl:part name="parameters" element="ns0:Select_Estado"/>
+  </wsdl:message>
+  <wsdl:message name="Select_EstadoResponse">
+    <wsdl:part name="parameters" element="ns0:Mensajes"/>
+  </wsdl:message>
+  <wsdl:message name="Update_EstadoRequest">
+    <wsdl:part name="parameters" element="ns0:Update_Estado"/>
+  </wsdl:message>
+  <wsdl:message name="Update_EstadoResponse">
+    <wsdl:part name="parameters" element="ns0:REQUEST_STATUS"/>
+  </wsdl:message>
+  <wsdl:message name="Estado_ProcedureRequest">
+    <wsdl:part name="parameters" element="ns0:Estado_Procedure"/>
+  </wsdl:message>
+  <wsdl:message name="Select_AllRequest">
+    <wsdl:part name="parameters" element="ns0:Select_All"/>
+  </wsdl:message>
+  <wsdl:message name="Select_AllResponse">
+    <wsdl:part name="parameters" element="ns0:Mensajes"/>
+  </wsdl:message>
+  <wsdl:message name="Update_GIdentidadRequest">
+    <wsdl:part name="parameters" element="ns0:Update_GIdentidad"/>
+  </wsdl:message>
+  <wsdl:message name="Update_GIdentidadResponse">
+    <wsdl:part name="parameters" element="ns0:REQUEST_STATUS"/>
+  </wsdl:message>
+  <wsdl:message name="Update_HPTicketRequest">
+    <wsdl:part name="parameters" element="ns0:Update_HPTicket"/>
+  </wsdl:message>
+  <wsdl:message name="Update_HPTicketResponse">
+    <wsdl:part name="parameters" element="ns0:REQUEST_STATUS"/>
+  </wsdl:message>
+  <wsdl:portType name="GIRecovery_DSSPortType">
+    <wsdl:operation name="Insert_GIdentidad">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:Insert_GIdentidadRequest" wsaw:Action="urn:Insert_GIdentidad"/>
+      <wsdl:output message="ns0:Insert_GIdentidadResponse" wsaw:Action="urn:Insert_GIdentidadResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:Insert_GIdentidadDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="Select_Estado">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:Select_EstadoRequest" wsaw:Action="urn:Select_Estado"/>
+      <wsdl:output message="ns0:Select_EstadoResponse" wsaw:Action="urn:Select_EstadoResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:Select_EstadoDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="Update_Estado">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:Update_EstadoRequest" wsaw:Action="urn:Update_Estado"/>
+      <wsdl:output message="ns0:Update_EstadoResponse" wsaw:Action="urn:Update_EstadoResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:Update_EstadoDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="Estado_Procedure">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:Estado_ProcedureRequest" wsaw:Action="urn:Estado_Procedure"/>
+    </wsdl:operation>
+    <wsdl:operation name="Select_All">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:Select_AllRequest" wsaw:Action="urn:Select_All"/>
+      <wsdl:output message="ns0:Select_AllResponse" wsaw:Action="urn:Select_AllResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:Select_AllDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="Update_GIdentidad">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:Update_GIdentidadRequest" wsaw:Action="urn:Update_GIdentidad"/>
+      <wsdl:output message="ns0:Update_GIdentidadResponse" wsaw:Action="urn:Update_GIdentidadResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:Update_GIdentidadDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="Update_HPTicket">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:Update_HPTicketRequest" wsaw:Action="urn:Update_HPTicket"/>
+      <wsdl:output message="ns0:Update_HPTicketResponse" wsaw:Action="urn:Update_HPTicketResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:Update_HPTicketDataServiceFault"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GIRecovery_DSSSOAP11Binding" type="ns0:GIRecovery_DSSPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="Insert_GIdentidad">
+      <soap:operation soapAction="urn:Insert_GIdentidad" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Select_Estado">
+      <soap:operation soapAction="urn:Select_Estado" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Update_Estado">
+      <soap:operation soapAction="urn:Update_Estado" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Estado_Procedure">
+      <soap:operation soapAction="urn:Estado_Procedure" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Select_All">
+      <soap:operation soapAction="urn:Select_All" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Update_GIdentidad">
+      <soap:operation soapAction="urn:Update_GIdentidad" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Update_HPTicket">
+      <soap:operation soapAction="urn:Update_HPTicket" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GIRecovery_DSSSOAP12Binding" type="ns0:GIRecovery_DSSPortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="Insert_GIdentidad">
+      <soap12:operation soapAction="urn:Insert_GIdentidad" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Select_Estado">
+      <soap12:operation soapAction="urn:Select_Estado" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Update_Estado">
+      <soap12:operation soapAction="urn:Update_Estado" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Estado_Procedure">
+      <soap12:operation soapAction="urn:Estado_Procedure" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Select_All">
+      <soap12:operation soapAction="urn:Select_All" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Update_GIdentidad">
+      <soap12:operation soapAction="urn:Update_GIdentidad" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Update_HPTicket">
+      <soap12:operation soapAction="urn:Update_HPTicket" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GIRecovery_DSSHttpBinding" type="ns0:GIRecovery_DSSPortType">
+    <http:binding verb="POST"/>
+    <wsdl:operation name="Insert_GIdentidad">
+      <http:operation location="Insert_GIdentidad"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Select_Estado">
+      <http:operation location="Select_Estado"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update_Estado">
+      <http:operation location="Update_Estado"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Estado_Procedure">
+      <http:operation location="Estado_Procedure"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Select_All">
+      <http:operation location="Select_All"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update_GIdentidad">
+      <http:operation location="Update_GIdentidad"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update_HPTicket">
+      <http:operation location="Update_HPTicket"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GIRecovery_DSS">
+    <wsdl:port name="SecureSOAP11Endpoint" binding="ns0:GIRecovery_DSSSOAP11Binding">
+      <soap:address location="https://ei.bp.com:8243/services/GIRecovery_DSS.SecureSOAP11Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="SOAP11Endpoint" binding="ns0:GIRecovery_DSSSOAP11Binding">
+      <soap:address location="https://ei.bp.com:8243/services/GIRecovery_DSS.SOAP11Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="SecureSOAP12Endpoint" binding="ns0:GIRecovery_DSSSOAP12Binding">
+      <soap12:address location="https://ei.bp.com:8243/services/GIRecovery_DSS.SecureSOAP12Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="SOAP12Endpoint" binding="ns0:GIRecovery_DSSSOAP12Binding">
+      <soap12:address location="https://ei.bp.com:8243/services/GIRecovery_DSS.SOAP12Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="SecureHTTPEndpoint" binding="ns0:GIRecovery_DSSHttpBinding">
+      <http:address location="https://ei.bp.com:8243/services/GIRecovery_DSS.SecureHTTPEndpoint"/>
+    </wsdl:port>
+    <wsdl:port name="HTTPEndpoint" binding="ns0:GIRecovery_DSSHttpBinding">
+      <http:address location="https://ei.bp.com:8243/services/GIRecovery_DSS.HTTPEndpoint"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://ei.bp.com:8243/services/GIRecovery_DSS.SOAP12Endpoint</con:endpoint><con:endpoint>https://ei.bp.com:8243/services/GIRecovery_DSS.SecureSOAP12Endpoint</con:endpoint></con:endpoints><con:operation id="26aed7cd-3c5f-4ba8-a0bb-50fe6483b7ac" isOneWay="false" action="urn:Estado_Procedure" name="Estado_Procedure" bindingOperationName="Estado_Procedure" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1c1a08fd-555f-44a9-9ce5-5b6c63f112eb" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIRecovery_DSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soap:Header/>
+   <soap:Body>
+      <dat:Estado_Procedure/>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:Estado_Procedure"/></con:call></con:operation><con:operation id="0cec22cb-3e15-43f9-942a-fc8328f6ce2c" isOneWay="false" action="urn:Insert_GIdentidad" name="Insert_GIdentidad" bindingOperationName="Insert_GIdentidad" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="50621849-e171-4400-8914-908ac793f6e7" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIRecovery_DSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soap:Header/>
+   <soap:Body>
+      <dat:Insert_GIdentidad>
+         <dat:Guid>?</dat:Guid>
+         <dat:FechaIngreso>?</dat:FechaIngreso>
+         <dat:IdMensaje>?</dat:IdMensaje>
+         <dat:Estado>?</dat:Estado>
+         <dat:UserStore>?</dat:UserStore>
+         <dat:MensajePeticion>?</dat:MensajePeticion>
+         <dat:MensajeRespuesta>?</dat:MensajeRespuesta>
+         <dat:Prioridad>?</dat:Prioridad>
+         <dat:Reintento>?</dat:Reintento>
+         <dat:SoapAction>?</dat:SoapAction>
+         <dat:StatusCodResp>?</dat:StatusCodResp>
+         <dat:MensajePeticionValores>?</dat:MensajePeticionValores>
+         <dat:MensajeRespuestaValores>?</dat:MensajeRespuestaValores>
+      </dat:Insert_GIdentidad>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:Insert_GIdentidad"/></con:call></con:operation><con:operation id="fc032645-bd0a-4fa8-b0b5-b49759ffa3c6" isOneWay="false" action="urn:Select_All" name="Select_All" bindingOperationName="Select_All" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="bee7b39f-bbd3-4c70-9d5d-cf5420ec1ae3" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIRecovery_DSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soap:Header/>
+   <soap:Body>
+      <dat:Select_All/>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:Select_All"/></con:call></con:operation><con:operation id="ed6a6ae6-4654-4388-a456-837a01f0c400" isOneWay="false" action="urn:Select_Estado" name="Select_Estado" bindingOperationName="Select_Estado" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="27cbfa40-dba0-431b-91c3-6fd7141a79a3" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIRecovery_DSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soap:Header/>
+   <soap:Body>
+      <dat:Select_Estado>
+         <dat:Estado>?</dat:Estado>
+      </dat:Select_Estado>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:Select_Estado"/></con:call></con:operation><con:operation id="5925675d-7ece-44bf-933a-19d9c4267088" isOneWay="false" action="urn:Update_Estado" name="Update_Estado" bindingOperationName="Update_Estado" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="43c97ea2-ae72-4cb3-a4dc-65f887d0355f" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIRecovery_DSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soap:Header/>
+   <soap:Body>
+      <dat:Update_Estado>
+         <dat:Guid>?</dat:Guid>
+         <dat:Estado>?</dat:Estado>
+      </dat:Update_Estado>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:Update_Estado"/></con:call></con:operation><con:operation id="7cf3cb32-e85d-407d-820f-07665d1ee854" isOneWay="false" action="urn:Update_GIdentidad" name="Update_GIdentidad" bindingOperationName="Update_GIdentidad" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="96ccdc79-70f1-4fa7-a2c2-a21137dcb0a9" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIRecovery_DSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soap:Header/>
+   <soap:Body>
+      <dat:Update_GIdentidad>
+         <dat:Guid>?</dat:Guid>
+         <dat:IdMensaje>?</dat:IdMensaje>
+         <dat:Estado>?</dat:Estado>
+         <dat:UserStore>?</dat:UserStore>
+         <dat:MensajePeticion>?</dat:MensajePeticion>
+         <dat:MensajeRespuesta>?</dat:MensajeRespuesta>
+         <dat:Reintento>?</dat:Reintento>
+         <dat:SoapAction>?</dat:SoapAction>
+         <dat:StatusCodResp>?</dat:StatusCodResp>
+         <dat:MensajePeticionValores>?</dat:MensajePeticionValores>
+         <dat:MensajeRespuestaValores>?</dat:MensajeRespuestaValores>
+      </dat:Update_GIdentidad>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:Update_GIdentidad"/></con:call></con:operation><con:operation id="d34cbf8e-3d1b-40db-a5c5-df1d7386129f" isOneWay="false" action="urn:Update_HPTicket" name="Update_HPTicket" bindingOperationName="Update_HPTicket" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ae6e153d-5059-455a-8eca-cd9abfd8c395" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIRecovery_DSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soap:Header/>
+   <soap:Body>
+      <dat:Update_HPTicket>
+         <dat:Guid>?</dat:Guid>
+         <dat:Estado>?</dat:Estado>
+         <dat:HPTicketNumero>?</dat:HPTicketNumero>
+         <dat:HPTicketContenido>?</dat:HPTicketContenido>
+         <dat:HPTicketFechaRespuesta>?</dat:HPTicketFechaRespuesta>
+         <dat:HPTicketEstado>?</dat:HPTicketEstado>
+         <dat:HPTicketLogs>?</dat:HPTicketLogs>
+      </dat:Update_HPTicket>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:Update_HPTicket"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

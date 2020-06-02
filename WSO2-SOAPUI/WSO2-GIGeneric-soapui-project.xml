@@ -1,0 +1,2108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="382fcbf0-fffd-42ec-afa7-ec74325628c6" activeEnvironment="Default" name="WSO2-GIGeneric" resourceRoot="" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="00f7418e-aa15-4d09-9478-918043a3e7b2" wsaVersion="NONE" name="GIGenericSoap11Binding" type="wsdl" bindingName="{http://tempuri.org/}GIGenericSoap11Binding" soapVersion="1_1" anonymous="optional" definition="https://ei.bp.com:8243/services/GIGeneric?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpSoap11Endpoint</con:endpoint><con:endpoint>https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpsSoap11Endpoint</con:endpoint></con:endpoints><con:operation id="2d8358a4-f9ba-46be-b1db-7650639acd9e" isOneWay="false" action="http://tempuri.org/consultarUsuario" name="consultarUsuario" bindingOperationName="consultarUsuario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="edd4827b-9016-4fe5-ade1-e1306521d58b" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpSoap11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:consultarUsuario>
+         <!--Optional:-->
+         <tem:guid>?</tem:guid>
+         <!--Optional:-->
+         <tem:uuid>?</tem:uuid>
+         <!--Optional:-->
+         <tem:tellerName>?</tem:tellerName>
+         <!--Optional:-->
+         <tem:aplicacion>?</tem:aplicacion>
+      </tem:consultarUsuario>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/consultarUsuario"/></con:call></con:operation><con:operation id="cfed98d8-3ee9-4241-9b8e-1692916bb410" isOneWay="false" action="http://tempuri.org/crearRequerimientos" name="crearRequerimientos" bindingOperationName="crearRequerimientos" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="47586e5a-6aed-42e9-8187-f7e3914bb992" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpSoap11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:crearRequerimientos>
+         <!--1 or more repetitions:-->
+         <tem:crearRequerimiento>
+            <tem:guid>?</tem:guid>
+            <tem:uuid>?</tem:uuid>
+            <tem:aplicacion>?</tem:aplicacion>
+            <tem:correoElectronico>?</tem:correoElectronico>
+            <tem:tellerName>?</tem:tellerName>
+            <!--Optional:-->
+            <tem:tellerNumber>?</tem:tellerNumber>
+            <tem:nombreUsuario>?</tem:nombreUsuario>
+            <tem:tipoIdentificacion>?</tem:tipoIdentificacion>
+            <tem:empresa>?</tem:empresa>
+            <tem:observacion>?</tem:observacion>
+            <tem:cargo>?</tem:cargo>
+            <tem:codigoCentroCosto>?</tem:codigoCentroCosto>
+            <tem:identificacion>?</tem:identificacion>
+            <tem:celular>?</tem:celular>
+            <tem:terminal>?</tem:terminal>
+            <tem:nombresEmpleado>?</tem:nombresEmpleado>
+            <!--Optional:-->
+            <tem:apellidosEmpleado>?</tem:apellidosEmpleado>
+            <!--Optional:-->
+            <tem:codigoCompania>?</tem:codigoCompania>
+            <!--Optional:-->
+            <tem:fechaSalidaEmpleado>?</tem:fechaSalidaEmpleado>
+            <!--Optional:-->
+            <tem:fechaIngresoEmpleado>?</tem:fechaIngresoEmpleado>
+            <!--Optional:-->
+            <tem:nombreCompania>?</tem:nombreCompania>
+            <!--Optional:-->
+            <tem:nombreDivision>?</tem:nombreDivision>
+            <!--Optional:-->
+            <tem:nombreArea>?</tem:nombreArea>
+            <!--Optional:-->
+            <tem:nombrePerfil>?</tem:nombrePerfil>
+            <!--Optional:-->
+            <tem:nombreDepartamento>?</tem:nombreDepartamento>
+            <!--Optional:-->
+            <tem:estadoEmpleado>?</tem:estadoEmpleado>
+            <!--Optional:-->
+            <tem:claveAcceso>?</tem:claveAcceso>
+            <!--Optional:-->
+            <tem:accion>?</tem:accion>
+            <!--Optional:-->
+            <tem:origen>?</tem:origen>
+            <!--Optional:-->
+            <tem:usuarioAplicacion>?</tem:usuarioAplicacion>
+            <!--Optional:-->
+            <tem:ambiente>?</tem:ambiente>
+            <!--Optional:-->
+            <tem:perfilGlobal>?</tem:perfilGlobal>
+            <tem:especificos>
+               <!--Optional:-->
+               <tem:grupoTransaccion>Only for BANCS</tem:grupoTransaccion>
+               <!--Optional:-->
+               <tem:nivelCapacidad>Only for BANCS</tem:nivelCapacidad>
+               <!--Optional:-->
+               <tem:nivelCorreo>Only for BANCS</tem:nivelCorreo>
+               <!--Optional:-->
+               <tem:userType>Only for BANCS</tem:userType>
+               <!--Optional:-->
+               <tem:chngBranchAlwd>Only for BANCS</tem:chngBranchAlwd>
+               <!--Optional:-->
+               <tem:brchSup>Only for BANCS</tem:brchSup>
+               <!--Optional:-->
+               <tem:atmFlag>Only for BANCS</tem:atmFlag>
+               <!--Optional:-->
+               <tem:accsignMod>Only for BANCS</tem:accsignMod>
+               <!--Optional:-->
+               <tem:casualApprovallim>Only for BANCS</tem:casualApprovallim>
+               <!--Optional:-->
+               <tem:nivelSeguridad>Only for BANCS</tem:nivelSeguridad>
+               <!--Optional:-->
+               <tem:estadoUsuario>Only for BANCS</tem:estadoUsuario>
+               <!--Optional:-->
+               <tem:perfilUsuario>Only for PPRD</tem:perfilUsuario>
+               <!--Optional:-->
+               <tem:loginUsuario>Only for PPRD</tem:loginUsuario>
+               <!--Optional:-->
+               <tem:usuarioInterno>Only for PPRD</tem:usuarioInterno>
+               <!--Optional:-->
+               <tem:interno>Only for LOGICIEL</tem:interno>
+               <!--Optional:-->
+               <tem:enviarMail>Only for LOGICIEL</tem:enviarMail>
+               <!--Optional:-->
+               <tem:cambioPwdInicial>Only for LOGICIEL</tem:cambioPwdInicial>
+               <!--Optional:-->
+               <tem:codigoTipoUsuario>Only for LOGICIEL</tem:codigoTipoUsuario>
+               <!--Optional:-->
+               <tem:codigoRol>Only for LOGICIEL</tem:codigoRol>
+               <!--Optional:-->
+               <tem:codigoHorario>Only for LOGICIEL</tem:codigoHorario>
+               <!--Optional:-->
+               <tem:loginSupervisor>Only for LOGICIEL</tem:loginSupervisor>
+               <!--Optional:-->
+               <tem:codigoAgenciaDefault>Only for LOGICIEL</tem:codigoAgenciaDefault>
+               <!--Optional:-->
+               <tem:validarAtributosPerfil>Only for LOGICIEL</tem:validarAtributosPerfil>
+               <!--Optional:-->
+               <tem:codigoAtributo>Only for LOGICIEL</tem:codigoAtributo>
+               <!--Optional:-->
+               <tem:codigoEstado>Only for LOGICIEL</tem:codigoEstado>
+               <!--Optional:-->
+               <tem:perfilAplicacionDefault>Only for LOGICIEL</tem:perfilAplicacionDefault>
+               <!--Optional:-->
+               <tem:perfilesAplicacionTemporal>Only for LOGICIEL</tem:perfilesAplicacionTemporal>
+               <!--Optional:-->
+               <tem:agenciasPermanentesUsuario>Only for LOGICIEL</tem:agenciasPermanentesUsuario>
+               <!--Optional:-->
+               <tem:agenciasTemporalesUsuario>Only for LOGICIEL</tem:agenciasTemporalesUsuario>
+               <!--Optional:-->
+               <tem:atributoPerfilAplicacionDefault>Only for LOGICIEL</tem:atributoPerfilAplicacionDefault>
+               <!--Optional:-->
+               <tem:atributoPerfilesAplicacionTemporal>Only for LOGICIEL</tem:atributoPerfilesAplicacionTemporal>
+               <!--Optional:-->
+               <tem:atributoUsuario>Only for LOGICIEL</tem:atributoUsuario>
+               <tem:role>Only for RHDS</tem:role>
+               <tem:rol>Only for RHDS</tem:rol>
+               <tem:branch>Only for RHDS</tem:branch>
+               <tem:termNo>Only for RHDS</tem:termNo>
+               <!--Optional:-->
+               <tem:RequestedFor>Only for Requerimientos Manuales</tem:RequestedFor>
+               <!--Optional:-->
+               <tem:RequestorName>Only for Requerimientos Manuales</tem:RequestorName>
+               <!--Optional:-->
+               <tem:Category>Only for Requerimientos Manuales</tem:Category>
+               <!--Optional:-->
+               <tem:Subcategory>Only for Requerimientos Manuales</tem:Subcategory>
+               <!--Optional:-->
+               <tem:Model>Only for Requerimientos Manuales</tem:Model>
+               <!--Optional:-->
+               <tem:AssignedGroup>Only for Requerimientos Manuales</tem:AssignedGroup>
+               <!--Optional:-->
+               <tem:BriefDescription>Only for Requerimientos Manuales</tem:BriefDescription>
+               <!--Optional:-->
+               <tem:Description>Only for Requerimientos Manuales</tem:Description>
+               <!--Optional:-->
+               <tem:Status>Only for Requerimientos Manuales</tem:Status>
+               <!--Optional:-->
+               <tem:ApprovalStatus>Only for Requerimientos Manuales</tem:ApprovalStatus>
+               <!--Optional:-->
+               <tem:CurrentPhase>Only for Requerimientos Manuales</tem:CurrentPhase>
+               <!--Optional:-->
+               <tem:AgreementIds>Only for Requerimientos Manuales</tem:AgreementIds>
+               <!--Optional:-->
+               <tem:mailbox>1</tem:mailbox>
+               <!--Optional:-->
+               <tem:tier>1</tem:tier>
+               <!--Optional:-->
+               <tem:Employeeid>1</tem:Employeeid>
+               <!--Optional:-->
+               <tem:title>Sr</tem:title>
+               <!--Optional:-->
+               <tem:pager>943-555-1234</tem:pager>
+               <!--Optional:-->
+               <tem:proxyAddresses>SMTP:newb@contoso.com</tem:proxyAddresses>
+               <!--Optional:-->
+               <tem:mailNickname>web</tem:mailNickname>
+               <!--Optional:-->
+               <tem:msDS-User-Account-Control-Computed>0x0010</tem:msDS-User-Account-Control-Computed>
+               <!--Optional:-->
+               <tem:userAccountControl>0x0200</tem:userAccountControl>
+               <!--Optional:-->
+               <tem:physicalDeliveryOfficeName>OFFICE</tem:physicalDeliveryOfficeName>
+               <!--Optional:-->
+               <tem:postOfficeBox>home</tem:postOfficeBox>
+               <!--Optional:-->
+               <tem:city>Quito</tem:city>
+               <!--Optional:-->
+               <tem:memberOf>CN=Managers,OU=Sales,DC=Domain,DC=Com</tem:memberOf>
+               <!--Optional:-->
+               <tem:msTSHomeDrive>C:\\</tem:msTSHomeDrive>
+               <!--Optional:-->
+               <tem:msTSHomeDirectory>C:\\</tem:msTSHomeDirectory>
+               <!--Optional:-->
+               <tem:msTSAllowLogon>TRUE</tem:msTSAllowLogon>
+               <!--Optional:-->
+               <tem:msTSConnectClientDrives>TRUE</tem:msTSConnectClientDrives>
+               <!--Optional:-->
+               <tem:msTSConnectPrinterDrives>TRUE</tem:msTSConnectPrinterDrives>
+               <!--Optional:-->
+               <tem:msTSDefaultToMainPrinter>TRUE</tem:msTSDefaultToMainPrinter>
+               <!--Optional:-->
+               <tem:ms-Exch-SIP-Access-Service>TRUE</tem:ms-Exch-SIP-Access-Service>
+               <!--Optional:-->
+               <tem:containerInfo>TRUE</tem:containerInfo>
+               <!--Optional:-->
+               <tem:pwdLastSet>132326600227017161</tem:pwdLastSet>
+               <!--Optional:-->
+               <tem:comment>Only for AD</tem:comment>
+               <!--Optional:-->
+               <tem:street>Only for AD</tem:street>
+               <!--Optional:-->
+               <tem:labeledURI>Only for AD</tem:labeledURI>
+               <!--Optional:-->
+               <tem:department>Only for AD</tem:department>
+               <!--Optional:-->
+               <tem:telephoneNumber>Only for AD</tem:telephoneNumber>
+               <!--Optional:-->
+               <tem:webPage>Only for AD</tem:webPage>
+               <!--Optional:-->
+               <tem:domain>Only for AD</tem:domain>
+               <!--Optional:-->
+               <tem:ERROR>Only for Incident Ticket</tem:ERROR>
+            </tem:especificos>
+         </tem:crearRequerimiento>
+      </tem:crearRequerimientos>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/crearRequerimientos"/></con:call></con:operation><con:operation id="607e1cf7-cab3-47d5-8743-c27e4905be59" isOneWay="false" action="http://tempuri.org/crearTicket" name="crearTicket" bindingOperationName="crearTicket" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="cb326c4f-4482-40d9-b16c-6b904fa56097" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpSoap11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:crearTicket>
+         <tem:guid>?</tem:guid>
+         <tem:uuid>?</tem:uuid>
+         <tem:aplicacion>?</tem:aplicacion>
+         <tem:correoElectronico>?</tem:correoElectronico>
+         <tem:tellerName>?</tem:tellerName>
+         <!--Optional:-->
+         <tem:tellerNumber>?</tem:tellerNumber>
+         <tem:nombreUsuario>?</tem:nombreUsuario>
+         <tem:tipoIdentificacion>?</tem:tipoIdentificacion>
+         <tem:empresa>?</tem:empresa>
+         <tem:observacion>?</tem:observacion>
+         <tem:cargo>?</tem:cargo>
+         <tem:cargoCompleto>?</tem:cargoCompleto>
+         <tem:codigoCentroCosto>?</tem:codigoCentroCosto>
+         <tem:identificacion>?</tem:identificacion>
+         <tem:celular>?</tem:celular>
+         <tem:terminal>?</tem:terminal>
+         <tem:nombresEmpleado>?</tem:nombresEmpleado>
+         <!--Optional:-->
+         <tem:apellidosEmpleado>?</tem:apellidosEmpleado>
+         <!--Optional:-->
+         <tem:codigoCompania>?</tem:codigoCompania>
+         <!--Optional:-->
+         <tem:fechaSalidaEmpleado>?</tem:fechaSalidaEmpleado>
+         <!--Optional:-->
+         <tem:fechaIngresoEmpleado>?</tem:fechaIngresoEmpleado>
+         <!--Optional:-->
+         <tem:nombreCompania>?</tem:nombreCompania>
+         <!--Optional:-->
+         <tem:estadoEmpleado>?</tem:estadoEmpleado>
+         <!--Optional:-->
+         <tem:claveAcceso>?</tem:claveAcceso>
+         <!--Optional:-->
+         <tem:ipclient>?</tem:ipclient>
+         <!--Optional:-->
+         <tem:usuarioAplicacion>?</tem:usuarioAplicacion>
+         <!--Optional:-->
+         <tem:nombreDivision>?</tem:nombreDivision>
+         <!--Optional:-->
+         <tem:nombreArea>?</tem:nombreArea>
+         <!--Optional:-->
+         <tem:nombrePerfil>?</tem:nombrePerfil>
+         <!--Optional:-->
+         <tem:nombreDepartamento>?</tem:nombreDepartamento>
+         <tem:especificos>
+            <!--Optional:-->
+            <tem:grupoTransaccion>Only for BANCS</tem:grupoTransaccion>
+            <!--Optional:-->
+            <tem:nivelCapacidad>Only for BANCS</tem:nivelCapacidad>
+            <!--Optional:-->
+            <tem:nivelCorreo>Only for BANCS</tem:nivelCorreo>
+            <!--Optional:-->
+            <tem:userType>Only for BANCS</tem:userType>
+            <!--Optional:-->
+            <tem:chngBranchAlwd>Only for BANCS</tem:chngBranchAlwd>
+            <!--Optional:-->
+            <tem:brchSup>Only for BANCS</tem:brchSup>
+            <!--Optional:-->
+            <tem:atmFlag>Only for BANCS</tem:atmFlag>
+            <!--Optional:-->
+            <tem:accsignMod>Only for BANCS</tem:accsignMod>
+            <!--Optional:-->
+            <tem:casualApprovallim>Only for BANCS</tem:casualApprovallim>
+            <!--Optional:-->
+            <tem:nivelSeguridad>Only for BANCS</tem:nivelSeguridad>
+            <!--Optional:-->
+            <tem:estadoUsuario>Only for BANCS</tem:estadoUsuario>
+            <!--Optional:-->
+            <tem:perfilUsuario>Only for PPRD</tem:perfilUsuario>
+            <!--Optional:-->
+            <tem:loginUsuario>Only for PPRD</tem:loginUsuario>
+            <!--Optional:-->
+            <tem:usuarioInterno>Only for PPRD</tem:usuarioInterno>
+            <!--Optional:-->
+            <tem:interno>Only for LOGICIEL</tem:interno>
+            <!--Optional:-->
+            <tem:enviarMail>Only for LOGICIEL</tem:enviarMail>
+            <!--Optional:-->
+            <tem:cambioPwdInicial>Only for LOGICIEL</tem:cambioPwdInicial>
+            <!--Optional:-->
+            <tem:codigoTipoUsuario>Only for LOGICIEL</tem:codigoTipoUsuario>
+            <!--Optional:-->
+            <tem:codigoRol>Only for LOGICIEL</tem:codigoRol>
+            <!--Optional:-->
+            <tem:codigoHorario>Only for LOGICIEL</tem:codigoHorario>
+            <!--Optional:-->
+            <tem:loginSupervisor>Only for LOGICIEL</tem:loginSupervisor>
+            <!--Optional:-->
+            <tem:codigoAgenciaDefault>Only for LOGICIEL</tem:codigoAgenciaDefault>
+            <!--Optional:-->
+            <tem:validarAtributosPerfil>Only for LOGICIEL</tem:validarAtributosPerfil>
+            <!--Optional:-->
+            <tem:codigoAtributo>Only for LOGICIEL</tem:codigoAtributo>
+            <!--Optional:-->
+            <tem:codigoEstado>Only for LOGICIEL</tem:codigoEstado>
+            <!--Optional:-->
+            <tem:perfilAplicacionDefault>Only for LOGICIEL</tem:perfilAplicacionDefault>
+            <!--Optional:-->
+            <tem:perfilesAplicacionTemporal>Only for LOGICIEL</tem:perfilesAplicacionTemporal>
+            <!--Optional:-->
+            <tem:agenciasPermanentesUsuario>Only for LOGICIEL</tem:agenciasPermanentesUsuario>
+            <!--Optional:-->
+            <tem:agenciasTemporalesUsuario>Only for LOGICIEL</tem:agenciasTemporalesUsuario>
+            <!--Optional:-->
+            <tem:atributoPerfilAplicacionDefault>Only for LOGICIEL</tem:atributoPerfilAplicacionDefault>
+            <!--Optional:-->
+            <tem:atributoPerfilesAplicacionTemporal>Only for LOGICIEL</tem:atributoPerfilesAplicacionTemporal>
+            <!--Optional:-->
+            <tem:atributoUsuario>Only for LOGICIEL</tem:atributoUsuario>
+            <tem:role>Only for RHDS</tem:role>
+            <tem:rol>Only for RHDS</tem:rol>
+            <tem:branch>Only for RHDS</tem:branch>
+            <tem:termNo>Only for RHDS</tem:termNo>
+            <!--Optional:-->
+            <tem:RequestedFor>Only for Requerimientos Manuales</tem:RequestedFor>
+            <!--Optional:-->
+            <tem:RequestorName>Only for Requerimientos Manuales</tem:RequestorName>
+            <!--Optional:-->
+            <tem:Category>Only for Requerimientos Manuales</tem:Category>
+            <!--Optional:-->
+            <tem:Subcategory>Only for Requerimientos Manuales</tem:Subcategory>
+            <!--Optional:-->
+            <tem:Model>Only for Requerimientos Manuales</tem:Model>
+            <!--Optional:-->
+            <tem:AssignedGroup>Only for Requerimientos Manuales</tem:AssignedGroup>
+            <!--Optional:-->
+            <tem:BriefDescription>Only for Requerimientos Manuales</tem:BriefDescription>
+            <!--Optional:-->
+            <tem:Description>Only for Requerimientos Manuales</tem:Description>
+            <!--Optional:-->
+            <tem:Status>Only for Requerimientos Manuales</tem:Status>
+            <!--Optional:-->
+            <tem:ApprovalStatus>Only for Requerimientos Manuales</tem:ApprovalStatus>
+            <!--Optional:-->
+            <tem:CurrentPhase>Only for Requerimientos Manuales</tem:CurrentPhase>
+            <!--Optional:-->
+            <tem:AgreementIds>Only for Requerimientos Manuales</tem:AgreementIds>
+            <!--Optional:-->
+            <tem:mailbox>1</tem:mailbox>
+            <!--Optional:-->
+            <tem:tier>1</tem:tier>
+            <!--Optional:-->
+            <tem:Employeeid>1</tem:Employeeid>
+            <!--Optional:-->
+            <tem:title>Sr</tem:title>
+            <!--Optional:-->
+            <tem:pager>943-555-1234</tem:pager>
+            <!--Optional:-->
+            <tem:proxyAddresses>SMTP:newb@contoso.com</tem:proxyAddresses>
+            <!--Optional:-->
+            <tem:mailNickname>web</tem:mailNickname>
+            <!--Optional:-->
+            <tem:msDS-User-Account-Control-Computed>0x0010</tem:msDS-User-Account-Control-Computed>
+            <!--Optional:-->
+            <tem:userAccountControl>0x0200</tem:userAccountControl>
+            <!--Optional:-->
+            <tem:physicalDeliveryOfficeName>OFFICE</tem:physicalDeliveryOfficeName>
+            <!--Optional:-->
+            <tem:postOfficeBox>home</tem:postOfficeBox>
+            <!--Optional:-->
+            <tem:city>Quito</tem:city>
+            <!--Optional:-->
+            <tem:memberOf>CN=Managers,OU=Sales,DC=Domain,DC=Com</tem:memberOf>
+            <!--Optional:-->
+            <tem:msTSHomeDrive>C:\\</tem:msTSHomeDrive>
+            <!--Optional:-->
+            <tem:msTSHomeDirectory>C:\\</tem:msTSHomeDirectory>
+            <!--Optional:-->
+            <tem:msTSAllowLogon>TRUE</tem:msTSAllowLogon>
+            <!--Optional:-->
+            <tem:msTSConnectClientDrives>TRUE</tem:msTSConnectClientDrives>
+            <!--Optional:-->
+            <tem:msTSConnectPrinterDrives>TRUE</tem:msTSConnectPrinterDrives>
+            <!--Optional:-->
+            <tem:msTSDefaultToMainPrinter>TRUE</tem:msTSDefaultToMainPrinter>
+            <!--Optional:-->
+            <tem:ms-Exch-SIP-Access-Service>TRUE</tem:ms-Exch-SIP-Access-Service>
+            <!--Optional:-->
+            <tem:containerInfo>TRUE</tem:containerInfo>
+            <!--Optional:-->
+            <tem:pwdLastSet>132326600227017161</tem:pwdLastSet>
+            <!--Optional:-->
+            <tem:comment>Only for AD</tem:comment>
+            <!--Optional:-->
+            <tem:street>Only for AD</tem:street>
+            <!--Optional:-->
+            <tem:labeledURI>Only for AD</tem:labeledURI>
+            <!--Optional:-->
+            <tem:department>Only for AD</tem:department>
+            <!--Optional:-->
+            <tem:telephoneNumber>Only for AD</tem:telephoneNumber>
+            <!--Optional:-->
+            <tem:webPage>Only for AD</tem:webPage>
+            <!--Optional:-->
+            <tem:domain>Only for AD</tem:domain>
+            <!--Optional:-->
+            <tem:ERROR>Only for Incident Ticket</tem:ERROR>
+         </tem:especificos>
+      </tem:crearTicket>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/crearTicket"/></con:call></con:operation><con:operation id="eaa7b82a-5326-4a20-b8d9-5c87310417f7" isOneWay="false" action="http://tempuri.org/crearUsuario" name="crearUsuario" bindingOperationName="crearUsuario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="fea57893-2197-437e-aea3-791e8f3d6c44" name="BANCS"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpSoap11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:crearUsuario>
+         <tem:uuid>guid-5</tem:uuid>
+         <tem:aplicacion>BANCS</tem:aplicacion>
+         <tem:correoElectronico>test@bp.com</tem:correoElectronico>
+         <tem:tellerName>BANCS100</tem:tellerName>
+         <tem:nombreUsuario>Test User</tem:nombreUsuario>
+         <tem:tipoIdentificacion>0001</tem:tipoIdentificacion>
+         <tem:empresa>0010</tem:empresa>
+         <tem:observacion>Test</tem:observacion>
+         <tem:cargo>Analista</tem:cargo>
+         <tem:codigoCentroCosto>0001</tem:codigoCentroCosto>
+         <tem:identificacion>0500682349</tem:identificacion>
+         <tem:celular>123456</tem:celular>
+         <tem:terminal>BT346474</tem:terminal>
+         <tem:ipclient>10.30.50.24</tem:ipclient>
+         <tem:usuarioAplicacion>usr</tem:usuarioAplicacion>
+         <tem:especificos>
+            <tem:grupoTransaccion>25</tem:grupoTransaccion>
+            <tem:nivelCapacidad>16</tem:nivelCapacidad>
+            <tem:nivelCorreo>9</tem:nivelCorreo>
+            <tem:userType>1</tem:userType>
+            <tem:chngBranchAlwd>c</tem:chngBranchAlwd>
+            <tem:brchSup>Y</tem:brchSup>
+            <tem:atmFlag>N</tem:atmFlag>
+            <tem:accsignMod>3</tem:accsignMod>
+            <tem:casualApprovallim/>
+            <tem:nivelSeguridad>0</tem:nivelSeguridad>
+            <tem:estadoUsuario>19</tem:estadoUsuario>
+         </tem:especificos>
+      </tem:crearUsuario>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/crearUsuario"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="d64f0bb2-a66b-4087-ae63-4b4f9ad89389" isOneWay="false" action="http://tempuri.org/eliminarUsuario" name="eliminarUsuario" bindingOperationName="eliminarUsuario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f6998c1a-ea85-4c83-9f45-ebbb8bab99d1" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpSoap11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:eliminarUsuario>
+         <!--Optional:-->
+         <tem:guid>?</tem:guid>
+         <!--Optional:-->
+         <tem:uuid>?</tem:uuid>
+         <!--Optional:-->
+         <tem:tellerName>?</tem:tellerName>
+         <!--Optional:-->
+         <tem:tellerNumber>?</tem:tellerNumber>
+         <!--Optional:-->
+         <tem:aplicacion>?</tem:aplicacion>
+      </tem:eliminarUsuario>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/eliminarUsuario"/></con:call></con:operation><con:operation id="dd487155-a852-4f79-b9d0-a32094ad6aa9" isOneWay="false" action="http://tempuri.org/modificarUsuario" name="modificarUsuario" bindingOperationName="modificarUsuario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="2d878b39-9838-435b-b060-711a57736211" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpSoap11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:modificarUsuario>
+         <tem:guid>?</tem:guid>
+         <tem:uuid>?</tem:uuid>
+         <tem:aplicacion>?</tem:aplicacion>
+         <tem:correoElectronico>?</tem:correoElectronico>
+         <tem:tellerName>?</tem:tellerName>
+         <!--Optional:-->
+         <tem:tellerNumber>?</tem:tellerNumber>
+         <tem:nombreUsuario>?</tem:nombreUsuario>
+         <tem:tipoIdentificacion>?</tem:tipoIdentificacion>
+         <tem:empresa>?</tem:empresa>
+         <tem:observacion>?</tem:observacion>
+         <tem:cargo>?</tem:cargo>
+         <tem:codigoCentroCosto>?</tem:codigoCentroCosto>
+         <tem:identificacion>?</tem:identificacion>
+         <tem:celular>?</tem:celular>
+         <tem:terminal>?</tem:terminal>
+         <tem:nombresEmpleado>?</tem:nombresEmpleado>
+         <!--Optional:-->
+         <tem:apellidosEmpleado>?</tem:apellidosEmpleado>
+         <!--Optional:-->
+         <tem:codigoCompania>?</tem:codigoCompania>
+         <!--Optional:-->
+         <tem:fechaSalidaEmpleado>?</tem:fechaSalidaEmpleado>
+         <!--Optional:-->
+         <tem:fechaIngresoEmpleado>?</tem:fechaIngresoEmpleado>
+         <!--Optional:-->
+         <tem:nombreCompania>?</tem:nombreCompania>
+         <!--Optional:-->
+         <tem:estadoEmpleado>?</tem:estadoEmpleado>
+         <!--Optional:-->
+         <tem:claveAcceso>?</tem:claveAcceso>
+         <!--Optional:-->
+         <tem:ipclient>?</tem:ipclient>
+         <!--Optional:-->
+         <tem:usuarioAplicacion>?</tem:usuarioAplicacion>
+         <!--Optional:-->
+         <tem:nombreDivision>?</tem:nombreDivision>
+         <!--Optional:-->
+         <tem:nombreArea>?</tem:nombreArea>
+         <!--Optional:-->
+         <tem:nombrePerfil>?</tem:nombrePerfil>
+         <!--Optional:-->
+         <tem:nombreDepartamento>?</tem:nombreDepartamento>
+         <tem:especificos>
+            <!--Optional:-->
+            <tem:grupoTransaccion>Only for BANCS</tem:grupoTransaccion>
+            <!--Optional:-->
+            <tem:nivelCapacidad>Only for BANCS</tem:nivelCapacidad>
+            <!--Optional:-->
+            <tem:nivelCorreo>Only for BANCS</tem:nivelCorreo>
+            <!--Optional:-->
+            <tem:userType>Only for BANCS</tem:userType>
+            <!--Optional:-->
+            <tem:chngBranchAlwd>Only for BANCS</tem:chngBranchAlwd>
+            <!--Optional:-->
+            <tem:brchSup>Only for BANCS</tem:brchSup>
+            <!--Optional:-->
+            <tem:atmFlag>Only for BANCS</tem:atmFlag>
+            <!--Optional:-->
+            <tem:accsignMod>Only for BANCS</tem:accsignMod>
+            <!--Optional:-->
+            <tem:casualApprovallim>Only for BANCS</tem:casualApprovallim>
+            <!--Optional:-->
+            <tem:nivelSeguridad>Only for BANCS</tem:nivelSeguridad>
+            <!--Optional:-->
+            <tem:estadoUsuario>Only for BANCS</tem:estadoUsuario>
+            <!--Optional:-->
+            <tem:perfilUsuario>Only for PPRD</tem:perfilUsuario>
+            <!--Optional:-->
+            <tem:loginUsuario>Only for PPRD</tem:loginUsuario>
+            <!--Optional:-->
+            <tem:usuarioInterno>Only for PPRD</tem:usuarioInterno>
+            <!--Optional:-->
+            <tem:interno>Only for LOGICIEL</tem:interno>
+            <!--Optional:-->
+            <tem:enviarMail>Only for LOGICIEL</tem:enviarMail>
+            <!--Optional:-->
+            <tem:cambioPwdInicial>Only for LOGICIEL</tem:cambioPwdInicial>
+            <!--Optional:-->
+            <tem:codigoTipoUsuario>Only for LOGICIEL</tem:codigoTipoUsuario>
+            <!--Optional:-->
+            <tem:codigoRol>Only for LOGICIEL</tem:codigoRol>
+            <!--Optional:-->
+            <tem:codigoHorario>Only for LOGICIEL</tem:codigoHorario>
+            <!--Optional:-->
+            <tem:loginSupervisor>Only for LOGICIEL</tem:loginSupervisor>
+            <!--Optional:-->
+            <tem:codigoAgenciaDefault>Only for LOGICIEL</tem:codigoAgenciaDefault>
+            <!--Optional:-->
+            <tem:validarAtributosPerfil>Only for LOGICIEL</tem:validarAtributosPerfil>
+            <!--Optional:-->
+            <tem:codigoAtributo>Only for LOGICIEL</tem:codigoAtributo>
+            <!--Optional:-->
+            <tem:codigoEstado>Only for LOGICIEL</tem:codigoEstado>
+            <!--Optional:-->
+            <tem:perfilAplicacionDefault>Only for LOGICIEL</tem:perfilAplicacionDefault>
+            <!--Optional:-->
+            <tem:perfilesAplicacionTemporal>Only for LOGICIEL</tem:perfilesAplicacionTemporal>
+            <!--Optional:-->
+            <tem:agenciasPermanentesUsuario>Only for LOGICIEL</tem:agenciasPermanentesUsuario>
+            <!--Optional:-->
+            <tem:agenciasTemporalesUsuario>Only for LOGICIEL</tem:agenciasTemporalesUsuario>
+            <!--Optional:-->
+            <tem:atributoPerfilAplicacionDefault>Only for LOGICIEL</tem:atributoPerfilAplicacionDefault>
+            <!--Optional:-->
+            <tem:atributoPerfilesAplicacionTemporal>Only for LOGICIEL</tem:atributoPerfilesAplicacionTemporal>
+            <!--Optional:-->
+            <tem:atributoUsuario>Only for LOGICIEL</tem:atributoUsuario>
+            <tem:role>Only for RHDS</tem:role>
+            <tem:rol>Only for RHDS</tem:rol>
+            <tem:branch>Only for RHDS</tem:branch>
+            <tem:termNo>Only for RHDS</tem:termNo>
+            <!--Optional:-->
+            <tem:RequestedFor>Only for Requerimientos Manuales</tem:RequestedFor>
+            <!--Optional:-->
+            <tem:RequestorName>Only for Requerimientos Manuales</tem:RequestorName>
+            <!--Optional:-->
+            <tem:Category>Only for Requerimientos Manuales</tem:Category>
+            <!--Optional:-->
+            <tem:Subcategory>Only for Requerimientos Manuales</tem:Subcategory>
+            <!--Optional:-->
+            <tem:Model>Only for Requerimientos Manuales</tem:Model>
+            <!--Optional:-->
+            <tem:AssignedGroup>Only for Requerimientos Manuales</tem:AssignedGroup>
+            <!--Optional:-->
+            <tem:BriefDescription>Only for Requerimientos Manuales</tem:BriefDescription>
+            <!--Optional:-->
+            <tem:Description>Only for Requerimientos Manuales</tem:Description>
+            <!--Optional:-->
+            <tem:Status>Only for Requerimientos Manuales</tem:Status>
+            <!--Optional:-->
+            <tem:ApprovalStatus>Only for Requerimientos Manuales</tem:ApprovalStatus>
+            <!--Optional:-->
+            <tem:CurrentPhase>Only for Requerimientos Manuales</tem:CurrentPhase>
+            <!--Optional:-->
+            <tem:AgreementIds>Only for Requerimientos Manuales</tem:AgreementIds>
+            <!--Optional:-->
+            <tem:mailbox>1</tem:mailbox>
+            <!--Optional:-->
+            <tem:tier>1</tem:tier>
+            <!--Optional:-->
+            <tem:Employeeid>1</tem:Employeeid>
+            <!--Optional:-->
+            <tem:title>Sr</tem:title>
+            <!--Optional:-->
+            <tem:pager>943-555-1234</tem:pager>
+            <!--Optional:-->
+            <tem:proxyAddresses>SMTP:newb@contoso.com</tem:proxyAddresses>
+            <!--Optional:-->
+            <tem:mailNickname>web</tem:mailNickname>
+            <!--Optional:-->
+            <tem:msDS-User-Account-Control-Computed>0x0010</tem:msDS-User-Account-Control-Computed>
+            <!--Optional:-->
+            <tem:userAccountControl>0x0200</tem:userAccountControl>
+            <!--Optional:-->
+            <tem:physicalDeliveryOfficeName>OFFICE</tem:physicalDeliveryOfficeName>
+            <!--Optional:-->
+            <tem:postOfficeBox>home</tem:postOfficeBox>
+            <!--Optional:-->
+            <tem:city>Quito</tem:city>
+            <!--Optional:-->
+            <tem:memberOf>CN=Managers,OU=Sales,DC=Domain,DC=Com</tem:memberOf>
+            <!--Optional:-->
+            <tem:msTSHomeDrive>C:\\</tem:msTSHomeDrive>
+            <!--Optional:-->
+            <tem:msTSHomeDirectory>C:\\</tem:msTSHomeDirectory>
+            <!--Optional:-->
+            <tem:msTSAllowLogon>TRUE</tem:msTSAllowLogon>
+            <!--Optional:-->
+            <tem:msTSConnectClientDrives>TRUE</tem:msTSConnectClientDrives>
+            <!--Optional:-->
+            <tem:msTSConnectPrinterDrives>TRUE</tem:msTSConnectPrinterDrives>
+            <!--Optional:-->
+            <tem:msTSDefaultToMainPrinter>TRUE</tem:msTSDefaultToMainPrinter>
+            <!--Optional:-->
+            <tem:ms-Exch-SIP-Access-Service>TRUE</tem:ms-Exch-SIP-Access-Service>
+            <!--Optional:-->
+            <tem:containerInfo>TRUE</tem:containerInfo>
+            <!--Optional:-->
+            <tem:pwdLastSet>132326600227017161</tem:pwdLastSet>
+            <!--Optional:-->
+            <tem:comment>Only for AD</tem:comment>
+            <!--Optional:-->
+            <tem:street>Only for AD</tem:street>
+            <!--Optional:-->
+            <tem:labeledURI>Only for AD</tem:labeledURI>
+            <!--Optional:-->
+            <tem:department>Only for AD</tem:department>
+            <!--Optional:-->
+            <tem:telephoneNumber>Only for AD</tem:telephoneNumber>
+            <!--Optional:-->
+            <tem:webPage>Only for AD</tem:webPage>
+            <!--Optional:-->
+            <tem:domain>Only for AD</tem:domain>
+            <!--Optional:-->
+            <tem:ERROR>Only for Incident Ticket</tem:ERROR>
+         </tem:especificos>
+      </tem:modificarUsuario>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/modificarUsuario"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="04d27c2b-a935-4fdc-8051-aed334ba3726" wsaVersion="NONE" name="GIGenericSoap12Binding" type="wsdl" bindingName="{http://tempuri.org/}GIGenericSoap12Binding" soapVersion="1_2" anonymous="optional" definition="https://ei.bp.com:8243/services/GIGeneric?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://ei.bp.com:8243/services/GIGeneric?wsdl"><con:part><con:url>https://ei.bp.com:8243/services/GIGeneric?wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="crearUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="guid" type="s:string"/>
+            <s:element name="uuid" type="s:string"/>
+            <s:element name="aplicacion" type="s:string"/>
+            <s:element name="correoElectronico" type="s:string"/>
+            <s:element name="tellerName" type="s:string"/>
+            <s:element minOccurs="0" name="tellerNumber" type="s:string"/>
+            <s:element name="nombreUsuario" type="s:string"/>
+            <s:element name="tipoIdentificacion" type="s:string"/>
+            <s:element name="empresa" type="s:string"/>
+            <s:element name="observacion" type="s:string"/>
+            <s:element name="cargo" type="s:string"/>
+            <s:element name="cargoCompleto" type="s:string"/>
+            <s:element name="codigoCentroCosto" type="s:string"/>
+            <s:element name="identificacion" type="s:string"/>
+            <s:element name="celular" type="s:string"/>
+            <s:element name="terminal" type="s:string"/>
+            <s:element name="nombresEmpleado" type="s:string"/>
+            <s:element minOccurs="0" name="apellidosEmpleado" type="s:string"/>
+            <s:element minOccurs="0" name="codigoCompania" type="s:string"/>
+            <s:element minOccurs="0" name="fechaSalidaEmpleado" type="s:string"/>
+            <s:element minOccurs="0" name="fechaIngresoEmpleado" type="s:string"/>
+            <s:element minOccurs="0" name="nombreCompania" type="s:string"/>
+            <s:element minOccurs="0" name="estadoEmpleado" type="s:string"/>
+            <s:element minOccurs="0" name="claveAcceso" type="s:string"/>
+            <s:element minOccurs="0" name="ipclient" type="s:string"/>
+            <s:element minOccurs="0" name="usuarioAplicacion" type="s:string"/>
+            <s:element minOccurs="0" name="nombreDivision" type="s:string"/>
+            <s:element minOccurs="0" name="nombreArea" type="s:string"/>
+            <s:element minOccurs="0" name="nombrePerfil" type="s:string"/>
+            <s:element minOccurs="0" name="nombreDepartamento" type="s:string"/>
+            <s:element name="especificos" type="tns:especificosType"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="crearUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="tellerNo" type="s:string"/>
+            <s:element minOccurs="0" name="crearUsuarioResult" type="tns:error"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="modificarUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="guid" type="s:string"/>
+            <s:element name="uuid" type="s:string"/>
+            <s:element name="aplicacion" type="s:string"/>
+            <s:element name="correoElectronico" type="s:string"/>
+            <s:element name="tellerName" type="s:string"/>
+            <s:element minOccurs="0" name="tellerNumber" type="s:string"/>
+            <s:element name="nombreUsuario" type="s:string"/>
+            <s:element name="tipoIdentificacion" type="s:string"/>
+            <s:element name="empresa" type="s:string"/>
+            <s:element name="observacion" type="s:string"/>
+            <s:element name="cargo" type="s:string"/>
+            <s:element name="codigoCentroCosto" type="s:string"/>
+            <s:element name="identificacion" type="s:string"/>
+            <s:element name="celular" type="s:string"/>
+            <s:element name="terminal" type="s:string"/>
+            <s:element name="nombresEmpleado" type="s:string"/>
+            <s:element minOccurs="0" name="apellidosEmpleado" type="s:string"/>
+            <s:element minOccurs="0" name="codigoCompania" type="s:string"/>
+            <s:element minOccurs="0" name="fechaSalidaEmpleado" type="s:string"/>
+            <s:element minOccurs="0" name="fechaIngresoEmpleado" type="s:string"/>
+            <s:element minOccurs="0" name="nombreCompania" type="s:string"/>
+            <s:element minOccurs="0" name="estadoEmpleado" type="s:string"/>
+            <s:element minOccurs="0" name="claveAcceso" type="s:string"/>
+            <s:element minOccurs="0" name="ipclient" type="s:string"/>
+            <s:element minOccurs="0" name="usuarioAplicacion" type="s:string"/>
+            <s:element minOccurs="0" name="nombreDivision" type="s:string"/>
+            <s:element minOccurs="0" name="nombreArea" type="s:string"/>
+            <s:element minOccurs="0" name="nombrePerfil" type="s:string"/>
+            <s:element minOccurs="0" name="nombreDepartamento" type="s:string"/>
+            <s:element name="especificos" type="tns:especificosType"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="modificarUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="tellerNo" type="s:string"/>
+            <s:element minOccurs="0" name="modificarUsuarioResult" type="tns:error"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="eliminarUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="guid" type="s:string"/>
+            <s:element minOccurs="0" name="uuid" type="s:string"/>
+            <s:element minOccurs="0" name="tellerName" type="s:string"/>
+            <s:element minOccurs="0" name="tellerNumber" type="s:string"/>
+            <s:element minOccurs="0" name="aplicacion" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="eliminarUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="EliminarUsuarioResult" type="tns:error"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="consultarUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="guid" type="s:string"/>
+            <s:element minOccurs="0" name="uuid" type="s:string"/>
+            <s:element minOccurs="0" name="tellerName" type="s:string"/>
+            <s:element minOccurs="0" name="aplicacion" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="consultarUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="consultarUsuarioResult" type="tns:usuarioType"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="crearRequerimientos">
+        <s:complexType>
+          <s:sequence>
+            <s:element maxOccurs="unbounded" name="crearRequerimiento" type="tns:manualesType"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="crearRequerimientosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="crearRequerimientosResult" type="tns:error"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="crearTicket">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="guid" type="s:string"/>
+            <s:element name="uuid" type="s:string"/>
+            <s:element name="aplicacion" type="s:string"/>
+            <s:element name="correoElectronico" type="s:string"/>
+            <s:element name="tellerName" type="s:string"/>
+            <s:element minOccurs="0" name="tellerNumber" type="s:string"/>
+            <s:element name="nombreUsuario" type="s:string"/>
+            <s:element name="tipoIdentificacion" type="s:string"/>
+            <s:element name="empresa" type="s:string"/>
+            <s:element name="observacion" type="s:string"/>
+            <s:element name="cargo" type="s:string"/>
+            <s:element name="cargoCompleto" type="s:string"/>
+            <s:element name="codigoCentroCosto" type="s:string"/>
+            <s:element name="identificacion" type="s:string"/>
+            <s:element name="celular" type="s:string"/>
+            <s:element name="terminal" type="s:string"/>
+            <s:element name="nombresEmpleado" type="s:string"/>
+            <s:element minOccurs="0" name="apellidosEmpleado" type="s:string"/>
+            <s:element minOccurs="0" name="codigoCompania" type="s:string"/>
+            <s:element minOccurs="0" name="fechaSalidaEmpleado" type="s:string"/>
+            <s:element minOccurs="0" name="fechaIngresoEmpleado" type="s:string"/>
+            <s:element minOccurs="0" name="nombreCompania" type="s:string"/>
+            <s:element minOccurs="0" name="estadoEmpleado" type="s:string"/>
+            <s:element minOccurs="0" name="claveAcceso" type="s:string"/>
+            <s:element minOccurs="0" name="ipclient" type="s:string"/>
+            <s:element minOccurs="0" name="usuarioAplicacion" type="s:string"/>
+            <s:element minOccurs="0" name="nombreDivision" type="s:string"/>
+            <s:element minOccurs="0" name="nombreArea" type="s:string"/>
+            <s:element minOccurs="0" name="nombrePerfil" type="s:string"/>
+            <s:element minOccurs="0" name="nombreDepartamento" type="s:string"/>
+            <s:element name="especificos" type="tns:especificosType"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="crearTicketResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="crearTicketResult" type="tns:error"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="error">
+        <s:sequence>
+          <s:element minOccurs="0" name="codigoError" type="s:string"/>
+          <s:element minOccurs="0" name="descripcionError" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="especificosType">
+        <s:sequence>
+          <s:element default="Only for BANCS" minOccurs="0" name="grupoTransaccion" type="s:string"/>
+          <s:element default="Only for BANCS" minOccurs="0" name="nivelCapacidad" type="s:string"/>
+          <s:element default="Only for BANCS" minOccurs="0" name="nivelCorreo" type="s:string"/>
+          <s:element default="Only for BANCS" minOccurs="0" name="userType" type="s:string"/>
+          <s:element default="Only for BANCS" minOccurs="0" name="chngBranchAlwd" type="s:string"/>
+          <s:element default="Only for BANCS" minOccurs="0" name="brchSup" type="s:string"/>
+          <s:element default="Only for BANCS" minOccurs="0" name="atmFlag" type="s:string"/>
+          <s:element default="Only for BANCS" minOccurs="0" name="accsignMod" type="s:string"/>
+          <s:element default="Only for BANCS" minOccurs="0" name="casualApprovallim" type="s:string"/>
+          <s:element default="Only for BANCS" minOccurs="0" name="nivelSeguridad" type="s:string"/>
+          <s:element default="Only for BANCS" minOccurs="0" name="estadoUsuario" type="s:string"/>
+          <s:element default="Only for PPRD" minOccurs="0" name="perfilUsuario" type="s:string"/>
+          <s:element default="Only for PPRD" minOccurs="0" name="loginUsuario" type="s:string"/>
+          <s:element default="Only for PPRD" minOccurs="0" name="usuarioInterno" type="s:string"/>
+          <s:element default="Only for LOGICIEL" minOccurs="0" name="interno" type="s:string"/>
+          <s:element default="Only for LOGICIEL" minOccurs="0" name="enviarMail" type="s:string"/>
+          <s:element default="Only for LOGICIEL" minOccurs="0" name="cambioPwdInicial" type="s:string"/>
+          <s:element default="Only for LOGICIEL" minOccurs="0" name="codigoTipoUsuario" type="s:string"/>
+          <s:element default="Only for LOGICIEL" minOccurs="0" name="codigoRol" type="s:string"/>
+          <s:element default="Only for LOGICIEL" minOccurs="0" name="codigoHorario" type="s:string"/>
+          <s:element default="Only for LOGICIEL" minOccurs="0" name="loginSupervisor" type="s:string"/>
+          <s:element default="Only for LOGICIEL" minOccurs="0" name="codigoAgenciaDefault" type="s:string"/>
+          <s:element default="Only for LOGICIEL" minOccurs="0" name="validarAtributosPerfil" type="s:string"/>
+          <s:element default="Only for LOGICIEL" minOccurs="0" name="codigoAtributo" type="s:string"/>
+          <s:element default="Only for LOGICIEL" minOccurs="0" name="codigoEstado" type="s:string"/>
+          <s:element default="Only for LOGICIEL" minOccurs="0" name="perfilAplicacionDefault" type="s:string"/>
+          <s:element default="Only for LOGICIEL" minOccurs="0" name="perfilesAplicacionTemporal" type="s:string"/>
+          <s:element default="Only for LOGICIEL" minOccurs="0" name="agenciasPermanentesUsuario" type="s:string"/>
+          <s:element default="Only for LOGICIEL" minOccurs="0" name="agenciasTemporalesUsuario" type="s:string"/>
+          <s:element default="Only for LOGICIEL" minOccurs="0" name="atributoPerfilAplicacionDefault" type="s:string"/>
+          <s:element default="Only for LOGICIEL" minOccurs="0" name="atributoPerfilesAplicacionTemporal" type="s:string"/>
+          <s:element default="Only for LOGICIEL" minOccurs="0" name="atributoUsuario" type="s:string"/>
+          <s:element default="Only for RHDS" name="role" type="s:string"/>
+          <s:element default="Only for RHDS" name="rol" type="s:string"/>
+          <s:element default="Only for RHDS" name="branch" type="s:string"/>
+          <s:element default="Only for RHDS" name="termNo" type="s:string"/>
+          <s:element default="Only for Requerimientos Manuales" minOccurs="0" name="RequestedFor" type="s:string"/>
+          <s:element default="Only for Requerimientos Manuales" minOccurs="0" name="RequestorName" type="s:string"/>
+          <s:element default="Only for Requerimientos Manuales" minOccurs="0" name="Category" type="s:string"/>
+          <s:element default="Only for Requerimientos Manuales" minOccurs="0" name="Subcategory" type="s:string"/>
+          <s:element default="Only for Requerimientos Manuales" minOccurs="0" name="Model" type="s:string"/>
+          <s:element default="Only for Requerimientos Manuales" minOccurs="0" name="AssignedGroup" type="s:string"/>
+          <s:element default="Only for Requerimientos Manuales" minOccurs="0" name="BriefDescription" type="s:string"/>
+          <s:element default="Only for Requerimientos Manuales" minOccurs="0" name="Description" type="s:string"/>
+          <s:element default="Only for Requerimientos Manuales" minOccurs="0" name="Status" type="s:string"/>
+          <s:element default="Only for Requerimientos Manuales" minOccurs="0" name="ApprovalStatus" type="s:string"/>
+          <s:element default="Only for Requerimientos Manuales" minOccurs="0" name="CurrentPhase" type="s:string"/>
+          <s:element default="Only for Requerimientos Manuales" minOccurs="0" name="AgreementIds" type="s:string"/>
+          <s:element default="1" minOccurs="0" name="mailbox" type="s:string"/>
+          <s:element default="1" minOccurs="0" name="tier" type="s:string"/>
+          <s:element default="1" minOccurs="0" name="Employeeid" type="s:string"/>
+          <s:element default="Sr" minOccurs="0" name="title" type="s:string"/>
+          <s:element default="943-555-1234" minOccurs="0" name="pager" type="s:string"/>
+          <s:element default="SMTP:newb@contoso.com" minOccurs="0" name="proxyAddresses" type="s:string"/>
+          <s:element default="web" minOccurs="0" name="mailNickname" type="s:string"/>
+          <s:element default="0x0010" minOccurs="0" name="msDS-User-Account-Control-Computed" type="s:string"/>
+          <s:element default="0x0200" minOccurs="0" name="userAccountControl" type="s:string"/>
+          <s:element default="OFFICE" minOccurs="0" name="physicalDeliveryOfficeName" type="s:string"/>
+          <s:element default="home" minOccurs="0" name="postOfficeBox" type="s:string"/>
+          <s:element default="Quito" minOccurs="0" name="city" type="s:string"/>
+          <s:element default="CN=Managers,OU=Sales,DC=Domain,DC=Com" minOccurs="0" name="memberOf" type="s:string"/>
+          <s:element default="C:\\" minOccurs="0" name="msTSHomeDrive" type="s:string"/>
+          <s:element default="C:\\" minOccurs="0" name="msTSHomeDirectory" type="s:string"/>
+          <s:element default="TRUE" minOccurs="0" name="msTSAllowLogon" type="s:string"/>
+          <s:element default="TRUE" minOccurs="0" name="msTSConnectClientDrives" type="s:string"/>
+          <s:element default="TRUE" minOccurs="0" name="msTSConnectPrinterDrives" type="s:string"/>
+          <s:element default="TRUE" minOccurs="0" name="msTSDefaultToMainPrinter" type="s:string"/>
+          <s:element default="TRUE" minOccurs="0" name="ms-Exch-SIP-Access-Service" type="s:string"/>
+          <s:element default="TRUE" minOccurs="0" name="containerInfo" type="s:string"/>
+          <s:element default="132326600227017161" minOccurs="0" name="pwdLastSet" type="s:string"/>
+          <s:element default="Only for AD" minOccurs="0" name="comment" type="s:string"/>
+          <s:element default="Only for AD" minOccurs="0" name="street" type="s:string"/>
+          <s:element default="Only for AD" minOccurs="0" name="labeledURI" type="s:string"/>
+          <s:element default="Only for AD" minOccurs="0" name="department" type="s:string"/>
+          <s:element default="Only for AD" minOccurs="0" name="telephoneNumber" type="s:string"/>
+          <s:element default="Only for AD" minOccurs="0" name="webPage" type="s:string"/>
+          <s:element default="Only for AD" minOccurs="0" name="domain" type="s:string"/>
+          <s:element default="Only for Incident Ticket" minOccurs="0" name="ERROR" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="usuarioType">
+        <s:sequence>
+          <s:any/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="manualesType">
+        <s:sequence>
+          <s:element name="guid" type="s:string"/>
+          <s:element name="uuid" type="s:string"/>
+          <s:element name="aplicacion" type="s:string"/>
+          <s:element name="correoElectronico" type="s:string"/>
+          <s:element name="tellerName" type="s:string"/>
+          <s:element minOccurs="0" name="tellerNumber" type="s:string"/>
+          <s:element name="nombreUsuario" type="s:string"/>
+          <s:element name="tipoIdentificacion" type="s:string"/>
+          <s:element name="empresa" type="s:string"/>
+          <s:element name="observacion" type="s:string"/>
+          <s:element name="cargo" type="s:string"/>
+          <s:element name="codigoCentroCosto" type="s:string"/>
+          <s:element name="identificacion" type="s:string"/>
+          <s:element name="celular" type="s:string"/>
+          <s:element name="terminal" type="s:string"/>
+          <s:element name="nombresEmpleado" type="s:string"/>
+          <s:element minOccurs="0" name="apellidosEmpleado" type="s:string"/>
+          <s:element minOccurs="0" name="codigoCompania" type="s:string"/>
+          <s:element minOccurs="0" name="fechaSalidaEmpleado" type="s:string"/>
+          <s:element minOccurs="0" name="fechaIngresoEmpleado" type="s:string"/>
+          <s:element minOccurs="0" name="nombreCompania" type="s:string"/>
+          <s:element minOccurs="0" name="nombreDivision" type="s:string"/>
+          <s:element minOccurs="0" name="nombreArea" type="s:string"/>
+          <s:element minOccurs="0" name="nombrePerfil" type="s:string"/>
+          <s:element minOccurs="0" name="nombreDepartamento" type="s:string"/>
+          <s:element minOccurs="0" name="estadoEmpleado" type="s:string"/>
+          <s:element minOccurs="0" name="claveAcceso" type="s:string"/>
+          <s:element minOccurs="0" name="accion" type="s:string"/>
+          <s:element minOccurs="0" name="origen" type="s:string"/>
+          <s:element minOccurs="0" name="usuarioAplicacion" type="s:string"/>
+          <s:element minOccurs="0" name="ambiente" type="s:string"/>
+          <s:element minOccurs="0" name="perfilGlobal" type="s:string"/>
+          <s:element name="especificos" type="tns:especificosType"/>
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="crearUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:crearUsuario"/>
+  </wsdl:message>
+  <wsdl:message name="crearUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:crearUsuarioResponse"/>
+  </wsdl:message>
+  <wsdl:message name="modificarUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:modificarUsuario"/>
+  </wsdl:message>
+  <wsdl:message name="modificarUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:modificarUsuarioResponse"/>
+  </wsdl:message>
+  <wsdl:message name="consultarUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:consultarUsuario"/>
+  </wsdl:message>
+  <wsdl:message name="consultarUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:consultarUsuarioResponse"/>
+  </wsdl:message>
+  <wsdl:message name="crearTicketSoapIn">
+    <wsdl:part name="parameters" element="tns:crearTicket"/>
+  </wsdl:message>
+  <wsdl:message name="crearTicketSoapOut">
+    <wsdl:part name="parameters" element="tns:crearTicketResponse"/>
+  </wsdl:message>
+  <wsdl:message name="crearRequerimientosSoapIn">
+    <wsdl:part name="parameters" element="tns:crearRequerimientos"/>
+  </wsdl:message>
+  <wsdl:message name="crearRequerimientosSoapOut">
+    <wsdl:part name="parameters" element="tns:crearRequerimientosResponse"/>
+  </wsdl:message>
+  <wsdl:message name="eliminarUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:eliminarUsuario"/>
+  </wsdl:message>
+  <wsdl:message name="eliminarUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:eliminarUsuarioResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="GIGenericPortType">
+    <wsdl:operation name="crearUsuario">
+      <wsdl:input message="tns:crearUsuarioSoapIn" wsaw:Action="http://tempuri.org/crearUsuario"/>
+      <wsdl:output message="tns:crearUsuarioSoapOut" wsaw:Action="http://tempuri.org/WebServiceGenericSoap/crearUsuarioResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="modificarUsuario">
+      <wsdl:input message="tns:modificarUsuarioSoapIn" wsaw:Action="http://tempuri.org/modificarUsuario"/>
+      <wsdl:output message="tns:modificarUsuarioSoapOut" wsaw:Action="http://tempuri.org/WebServiceGenericSoap/modificarUsuarioResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="consultarUsuario">
+      <wsdl:input message="tns:consultarUsuarioSoapIn" wsaw:Action="http://tempuri.org/consultarUsuario"/>
+      <wsdl:output message="tns:consultarUsuarioSoapOut" wsaw:Action="http://tempuri.org/WebServiceGenericSoap/consultarUsuarioResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="crearTicket">
+      <wsdl:input message="tns:crearTicketSoapIn" wsaw:Action="http://tempuri.org/crearTicket"/>
+      <wsdl:output message="tns:crearTicketSoapOut" wsaw:Action="http://tempuri.org/WebServiceGenericSoap/crearTicketResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="crearRequerimientos">
+      <wsdl:input message="tns:crearRequerimientosSoapIn" wsaw:Action="http://tempuri.org/crearRequerimientos"/>
+      <wsdl:output message="tns:crearRequerimientosSoapOut" wsaw:Action="http://tempuri.org/WebServiceGenericSoap/crearRequerimientosResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="eliminarUsuario">
+      <wsdl:input message="tns:eliminarUsuarioSoapIn" wsaw:Action="http://tempuri.org/eliminarUsuario"/>
+      <wsdl:output message="tns:eliminarUsuarioSoapOut" wsaw:Action="http://tempuri.org/WebServiceGenericSoap/eliminarUsuarioResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GIGenericSoap11Binding" type="tns:GIGenericPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="crearUsuario">
+      <soap:operation soapAction="http://tempuri.org/crearUsuario" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="modificarUsuario">
+      <soap:operation soapAction="http://tempuri.org/modificarUsuario" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarUsuario">
+      <soap:operation soapAction="http://tempuri.org/consultarUsuario" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="crearTicket">
+      <soap:operation soapAction="http://tempuri.org/crearTicket" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="crearRequerimientos">
+      <soap:operation soapAction="http://tempuri.org/crearRequerimientos" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="eliminarUsuario">
+      <soap:operation soapAction="http://tempuri.org/eliminarUsuario" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GIGenericSoap12Binding" type="tns:GIGenericPortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="crearUsuario">
+      <soap12:operation soapAction="http://tempuri.org/crearUsuario" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="modificarUsuario">
+      <soap12:operation soapAction="http://tempuri.org/modificarUsuario" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarUsuario">
+      <soap12:operation soapAction="http://tempuri.org/consultarUsuario" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="crearTicket">
+      <soap12:operation soapAction="http://tempuri.org/crearTicket" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="crearRequerimientos">
+      <soap12:operation soapAction="http://tempuri.org/crearRequerimientos" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="eliminarUsuario">
+      <soap12:operation soapAction="http://tempuri.org/eliminarUsuario" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GIGenericHttpBinding" type="tns:GIGenericPortType">
+    <http:binding verb="POST"/>
+    <wsdl:operation name="crearUsuario">
+      <http:operation location="crearUsuario"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="modificarUsuario">
+      <http:operation location="modificarUsuario"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarUsuario">
+      <http:operation location="consultarUsuario"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="crearTicket">
+      <http:operation location="crearTicket"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="crearRequerimientos">
+      <http:operation location="crearRequerimientos"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="eliminarUsuario">
+      <http:operation location="eliminarUsuario"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GIGeneric">
+    <wsdl:port name="GIGenericHttpsSoap11Endpoint" binding="tns:GIGenericSoap11Binding">
+      <soap:address location="https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpsSoap11Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="GIGenericHttpSoap11Endpoint" binding="tns:GIGenericSoap11Binding">
+      <soap:address location="https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpSoap11Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="GIGenericHttpSoap12Endpoint" binding="tns:GIGenericSoap12Binding">
+      <soap12:address location="https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpSoap12Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="GIGenericHttpsSoap12Endpoint" binding="tns:GIGenericSoap12Binding">
+      <soap12:address location="https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpsSoap12Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="GIGenericHttpEndpoint" binding="tns:GIGenericHttpBinding">
+      <http:address location="https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpEndpoint"/>
+    </wsdl:port>
+    <wsdl:port name="GIGenericHttpsEndpoint" binding="tns:GIGenericHttpBinding">
+      <http:address location="https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpsEndpoint"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpSoap12Endpoint</con:endpoint><con:endpoint>https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpsSoap12Endpoint</con:endpoint></con:endpoints><con:operation id="dbe49245-eb79-428f-9e6b-0f62383c336c" isOneWay="false" action="http://tempuri.org/consultarUsuario" name="consultarUsuario" bindingOperationName="consultarUsuario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="eba5e549-49be-4e92-96c1-ff8a6c3fe5eb" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpSoap12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:tem="http://tempuri.org/">
+   <soap:Header/>
+   <soap:Body>
+      <tem:consultarUsuario>
+         <!--Optional:-->
+         <tem:guid>?</tem:guid>
+         <!--Optional:-->
+         <tem:uuid>?</tem:uuid>
+         <!--Optional:-->
+         <tem:tellerName>?</tem:tellerName>
+         <!--Optional:-->
+         <tem:aplicacion>?</tem:aplicacion>
+      </tem:consultarUsuario>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="{http://schemas.xmlsoap.org/wsdl/http/}//tempuri.org/consultarUsuario"/></con:call></con:operation><con:operation id="ddddaf4b-570a-45e7-a80b-eaced65959fe" isOneWay="false" action="http://tempuri.org/crearRequerimientos" name="crearRequerimientos" bindingOperationName="crearRequerimientos" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1192fa04-e5ea-4cd8-aefa-259799bf1b14" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpSoap12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:tem="http://tempuri.org/">
+   <soap:Header/>
+   <soap:Body>
+      <tem:crearRequerimientos>
+         <!--1 or more repetitions:-->
+         <tem:crearRequerimiento>
+            <tem:guid>?</tem:guid>
+            <tem:uuid>?</tem:uuid>
+            <tem:aplicacion>?</tem:aplicacion>
+            <tem:correoElectronico>?</tem:correoElectronico>
+            <tem:tellerName>?</tem:tellerName>
+            <!--Optional:-->
+            <tem:tellerNumber>?</tem:tellerNumber>
+            <tem:nombreUsuario>?</tem:nombreUsuario>
+            <tem:tipoIdentificacion>?</tem:tipoIdentificacion>
+            <tem:empresa>?</tem:empresa>
+            <tem:observacion>?</tem:observacion>
+            <tem:cargo>?</tem:cargo>
+            <tem:codigoCentroCosto>?</tem:codigoCentroCosto>
+            <tem:identificacion>?</tem:identificacion>
+            <tem:celular>?</tem:celular>
+            <tem:terminal>?</tem:terminal>
+            <tem:nombresEmpleado>?</tem:nombresEmpleado>
+            <!--Optional:-->
+            <tem:apellidosEmpleado>?</tem:apellidosEmpleado>
+            <!--Optional:-->
+            <tem:codigoCompania>?</tem:codigoCompania>
+            <!--Optional:-->
+            <tem:fechaSalidaEmpleado>?</tem:fechaSalidaEmpleado>
+            <!--Optional:-->
+            <tem:fechaIngresoEmpleado>?</tem:fechaIngresoEmpleado>
+            <!--Optional:-->
+            <tem:nombreCompania>?</tem:nombreCompania>
+            <!--Optional:-->
+            <tem:nombreDivision>?</tem:nombreDivision>
+            <!--Optional:-->
+            <tem:nombreArea>?</tem:nombreArea>
+            <!--Optional:-->
+            <tem:nombrePerfil>?</tem:nombrePerfil>
+            <!--Optional:-->
+            <tem:nombreDepartamento>?</tem:nombreDepartamento>
+            <!--Optional:-->
+            <tem:estadoEmpleado>?</tem:estadoEmpleado>
+            <!--Optional:-->
+            <tem:claveAcceso>?</tem:claveAcceso>
+            <!--Optional:-->
+            <tem:accion>?</tem:accion>
+            <!--Optional:-->
+            <tem:origen>?</tem:origen>
+            <!--Optional:-->
+            <tem:usuarioAplicacion>?</tem:usuarioAplicacion>
+            <!--Optional:-->
+            <tem:ambiente>?</tem:ambiente>
+            <!--Optional:-->
+            <tem:perfilGlobal>?</tem:perfilGlobal>
+            <tem:especificos>
+               <!--Optional:-->
+               <tem:grupoTransaccion>Only for BANCS</tem:grupoTransaccion>
+               <!--Optional:-->
+               <tem:nivelCapacidad>Only for BANCS</tem:nivelCapacidad>
+               <!--Optional:-->
+               <tem:nivelCorreo>Only for BANCS</tem:nivelCorreo>
+               <!--Optional:-->
+               <tem:userType>Only for BANCS</tem:userType>
+               <!--Optional:-->
+               <tem:chngBranchAlwd>Only for BANCS</tem:chngBranchAlwd>
+               <!--Optional:-->
+               <tem:brchSup>Only for BANCS</tem:brchSup>
+               <!--Optional:-->
+               <tem:atmFlag>Only for BANCS</tem:atmFlag>
+               <!--Optional:-->
+               <tem:accsignMod>Only for BANCS</tem:accsignMod>
+               <!--Optional:-->
+               <tem:casualApprovallim>Only for BANCS</tem:casualApprovallim>
+               <!--Optional:-->
+               <tem:nivelSeguridad>Only for BANCS</tem:nivelSeguridad>
+               <!--Optional:-->
+               <tem:estadoUsuario>Only for BANCS</tem:estadoUsuario>
+               <!--Optional:-->
+               <tem:perfilUsuario>Only for PPRD</tem:perfilUsuario>
+               <!--Optional:-->
+               <tem:loginUsuario>Only for PPRD</tem:loginUsuario>
+               <!--Optional:-->
+               <tem:usuarioInterno>Only for PPRD</tem:usuarioInterno>
+               <!--Optional:-->
+               <tem:interno>Only for LOGICIEL</tem:interno>
+               <!--Optional:-->
+               <tem:enviarMail>Only for LOGICIEL</tem:enviarMail>
+               <!--Optional:-->
+               <tem:cambioPwdInicial>Only for LOGICIEL</tem:cambioPwdInicial>
+               <!--Optional:-->
+               <tem:codigoTipoUsuario>Only for LOGICIEL</tem:codigoTipoUsuario>
+               <!--Optional:-->
+               <tem:codigoRol>Only for LOGICIEL</tem:codigoRol>
+               <!--Optional:-->
+               <tem:codigoHorario>Only for LOGICIEL</tem:codigoHorario>
+               <!--Optional:-->
+               <tem:loginSupervisor>Only for LOGICIEL</tem:loginSupervisor>
+               <!--Optional:-->
+               <tem:codigoAgenciaDefault>Only for LOGICIEL</tem:codigoAgenciaDefault>
+               <!--Optional:-->
+               <tem:validarAtributosPerfil>Only for LOGICIEL</tem:validarAtributosPerfil>
+               <!--Optional:-->
+               <tem:codigoAtributo>Only for LOGICIEL</tem:codigoAtributo>
+               <!--Optional:-->
+               <tem:codigoEstado>Only for LOGICIEL</tem:codigoEstado>
+               <!--Optional:-->
+               <tem:perfilAplicacionDefault>Only for LOGICIEL</tem:perfilAplicacionDefault>
+               <!--Optional:-->
+               <tem:perfilesAplicacionTemporal>Only for LOGICIEL</tem:perfilesAplicacionTemporal>
+               <!--Optional:-->
+               <tem:agenciasPermanentesUsuario>Only for LOGICIEL</tem:agenciasPermanentesUsuario>
+               <!--Optional:-->
+               <tem:agenciasTemporalesUsuario>Only for LOGICIEL</tem:agenciasTemporalesUsuario>
+               <!--Optional:-->
+               <tem:atributoPerfilAplicacionDefault>Only for LOGICIEL</tem:atributoPerfilAplicacionDefault>
+               <!--Optional:-->
+               <tem:atributoPerfilesAplicacionTemporal>Only for LOGICIEL</tem:atributoPerfilesAplicacionTemporal>
+               <!--Optional:-->
+               <tem:atributoUsuario>Only for LOGICIEL</tem:atributoUsuario>
+               <tem:role>Only for RHDS</tem:role>
+               <tem:rol>Only for RHDS</tem:rol>
+               <tem:branch>Only for RHDS</tem:branch>
+               <tem:termNo>Only for RHDS</tem:termNo>
+               <!--Optional:-->
+               <tem:RequestedFor>Only for Requerimientos Manuales</tem:RequestedFor>
+               <!--Optional:-->
+               <tem:RequestorName>Only for Requerimientos Manuales</tem:RequestorName>
+               <!--Optional:-->
+               <tem:Category>Only for Requerimientos Manuales</tem:Category>
+               <!--Optional:-->
+               <tem:Subcategory>Only for Requerimientos Manuales</tem:Subcategory>
+               <!--Optional:-->
+               <tem:Model>Only for Requerimientos Manuales</tem:Model>
+               <!--Optional:-->
+               <tem:AssignedGroup>Only for Requerimientos Manuales</tem:AssignedGroup>
+               <!--Optional:-->
+               <tem:BriefDescription>Only for Requerimientos Manuales</tem:BriefDescription>
+               <!--Optional:-->
+               <tem:Description>Only for Requerimientos Manuales</tem:Description>
+               <!--Optional:-->
+               <tem:Status>Only for Requerimientos Manuales</tem:Status>
+               <!--Optional:-->
+               <tem:ApprovalStatus>Only for Requerimientos Manuales</tem:ApprovalStatus>
+               <!--Optional:-->
+               <tem:CurrentPhase>Only for Requerimientos Manuales</tem:CurrentPhase>
+               <!--Optional:-->
+               <tem:AgreementIds>Only for Requerimientos Manuales</tem:AgreementIds>
+               <!--Optional:-->
+               <tem:mailbox>1</tem:mailbox>
+               <!--Optional:-->
+               <tem:tier>1</tem:tier>
+               <!--Optional:-->
+               <tem:Employeeid>1</tem:Employeeid>
+               <!--Optional:-->
+               <tem:title>Sr</tem:title>
+               <!--Optional:-->
+               <tem:pager>943-555-1234</tem:pager>
+               <!--Optional:-->
+               <tem:proxyAddresses>SMTP:newb@contoso.com</tem:proxyAddresses>
+               <!--Optional:-->
+               <tem:mailNickname>web</tem:mailNickname>
+               <!--Optional:-->
+               <tem:msDS-User-Account-Control-Computed>0x0010</tem:msDS-User-Account-Control-Computed>
+               <!--Optional:-->
+               <tem:userAccountControl>0x0200</tem:userAccountControl>
+               <!--Optional:-->
+               <tem:physicalDeliveryOfficeName>OFFICE</tem:physicalDeliveryOfficeName>
+               <!--Optional:-->
+               <tem:postOfficeBox>home</tem:postOfficeBox>
+               <!--Optional:-->
+               <tem:city>Quito</tem:city>
+               <!--Optional:-->
+               <tem:memberOf>CN=Managers,OU=Sales,DC=Domain,DC=Com</tem:memberOf>
+               <!--Optional:-->
+               <tem:msTSHomeDrive>C:\\</tem:msTSHomeDrive>
+               <!--Optional:-->
+               <tem:msTSHomeDirectory>C:\\</tem:msTSHomeDirectory>
+               <!--Optional:-->
+               <tem:msTSAllowLogon>TRUE</tem:msTSAllowLogon>
+               <!--Optional:-->
+               <tem:msTSConnectClientDrives>TRUE</tem:msTSConnectClientDrives>
+               <!--Optional:-->
+               <tem:msTSConnectPrinterDrives>TRUE</tem:msTSConnectPrinterDrives>
+               <!--Optional:-->
+               <tem:msTSDefaultToMainPrinter>TRUE</tem:msTSDefaultToMainPrinter>
+               <!--Optional:-->
+               <tem:ms-Exch-SIP-Access-Service>TRUE</tem:ms-Exch-SIP-Access-Service>
+               <!--Optional:-->
+               <tem:containerInfo>TRUE</tem:containerInfo>
+               <!--Optional:-->
+               <tem:pwdLastSet>132326600227017161</tem:pwdLastSet>
+               <!--Optional:-->
+               <tem:comment>Only for AD</tem:comment>
+               <!--Optional:-->
+               <tem:street>Only for AD</tem:street>
+               <!--Optional:-->
+               <tem:labeledURI>Only for AD</tem:labeledURI>
+               <!--Optional:-->
+               <tem:department>Only for AD</tem:department>
+               <!--Optional:-->
+               <tem:telephoneNumber>Only for AD</tem:telephoneNumber>
+               <!--Optional:-->
+               <tem:webPage>Only for AD</tem:webPage>
+               <!--Optional:-->
+               <tem:domain>Only for AD</tem:domain>
+               <!--Optional:-->
+               <tem:ERROR>Only for Incident Ticket</tem:ERROR>
+            </tem:especificos>
+         </tem:crearRequerimiento>
+      </tem:crearRequerimientos>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="{http://schemas.xmlsoap.org/wsdl/http/}//tempuri.org/crearRequerimientos"/></con:call></con:operation><con:operation id="d0b67217-1474-4487-94fa-155df01f980e" isOneWay="false" action="http://tempuri.org/crearTicket" name="crearTicket" bindingOperationName="crearTicket" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="3cea1325-c0e0-46bc-b3fc-617382fff712" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpSoap12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:tem="http://tempuri.org/">
+   <soap:Header/>
+   <soap:Body>
+      <tem:crearTicket>
+         <tem:guid>?</tem:guid>
+         <tem:uuid>?</tem:uuid>
+         <tem:aplicacion>?</tem:aplicacion>
+         <tem:correoElectronico>?</tem:correoElectronico>
+         <tem:tellerName>?</tem:tellerName>
+         <!--Optional:-->
+         <tem:tellerNumber>?</tem:tellerNumber>
+         <tem:nombreUsuario>?</tem:nombreUsuario>
+         <tem:tipoIdentificacion>?</tem:tipoIdentificacion>
+         <tem:empresa>?</tem:empresa>
+         <tem:observacion>?</tem:observacion>
+         <tem:cargo>?</tem:cargo>
+         <tem:cargoCompleto>?</tem:cargoCompleto>
+         <tem:codigoCentroCosto>?</tem:codigoCentroCosto>
+         <tem:identificacion>?</tem:identificacion>
+         <tem:celular>?</tem:celular>
+         <tem:terminal>?</tem:terminal>
+         <tem:nombresEmpleado>?</tem:nombresEmpleado>
+         <!--Optional:-->
+         <tem:apellidosEmpleado>?</tem:apellidosEmpleado>
+         <!--Optional:-->
+         <tem:codigoCompania>?</tem:codigoCompania>
+         <!--Optional:-->
+         <tem:fechaSalidaEmpleado>?</tem:fechaSalidaEmpleado>
+         <!--Optional:-->
+         <tem:fechaIngresoEmpleado>?</tem:fechaIngresoEmpleado>
+         <!--Optional:-->
+         <tem:nombreCompania>?</tem:nombreCompania>
+         <!--Optional:-->
+         <tem:estadoEmpleado>?</tem:estadoEmpleado>
+         <!--Optional:-->
+         <tem:claveAcceso>?</tem:claveAcceso>
+         <!--Optional:-->
+         <tem:ipclient>?</tem:ipclient>
+         <!--Optional:-->
+         <tem:usuarioAplicacion>?</tem:usuarioAplicacion>
+         <!--Optional:-->
+         <tem:nombreDivision>?</tem:nombreDivision>
+         <!--Optional:-->
+         <tem:nombreArea>?</tem:nombreArea>
+         <!--Optional:-->
+         <tem:nombrePerfil>?</tem:nombrePerfil>
+         <!--Optional:-->
+         <tem:nombreDepartamento>?</tem:nombreDepartamento>
+         <tem:especificos>
+            <!--Optional:-->
+            <tem:grupoTransaccion>Only for BANCS</tem:grupoTransaccion>
+            <!--Optional:-->
+            <tem:nivelCapacidad>Only for BANCS</tem:nivelCapacidad>
+            <!--Optional:-->
+            <tem:nivelCorreo>Only for BANCS</tem:nivelCorreo>
+            <!--Optional:-->
+            <tem:userType>Only for BANCS</tem:userType>
+            <!--Optional:-->
+            <tem:chngBranchAlwd>Only for BANCS</tem:chngBranchAlwd>
+            <!--Optional:-->
+            <tem:brchSup>Only for BANCS</tem:brchSup>
+            <!--Optional:-->
+            <tem:atmFlag>Only for BANCS</tem:atmFlag>
+            <!--Optional:-->
+            <tem:accsignMod>Only for BANCS</tem:accsignMod>
+            <!--Optional:-->
+            <tem:casualApprovallim>Only for BANCS</tem:casualApprovallim>
+            <!--Optional:-->
+            <tem:nivelSeguridad>Only for BANCS</tem:nivelSeguridad>
+            <!--Optional:-->
+            <tem:estadoUsuario>Only for BANCS</tem:estadoUsuario>
+            <!--Optional:-->
+            <tem:perfilUsuario>Only for PPRD</tem:perfilUsuario>
+            <!--Optional:-->
+            <tem:loginUsuario>Only for PPRD</tem:loginUsuario>
+            <!--Optional:-->
+            <tem:usuarioInterno>Only for PPRD</tem:usuarioInterno>
+            <!--Optional:-->
+            <tem:interno>Only for LOGICIEL</tem:interno>
+            <!--Optional:-->
+            <tem:enviarMail>Only for LOGICIEL</tem:enviarMail>
+            <!--Optional:-->
+            <tem:cambioPwdInicial>Only for LOGICIEL</tem:cambioPwdInicial>
+            <!--Optional:-->
+            <tem:codigoTipoUsuario>Only for LOGICIEL</tem:codigoTipoUsuario>
+            <!--Optional:-->
+            <tem:codigoRol>Only for LOGICIEL</tem:codigoRol>
+            <!--Optional:-->
+            <tem:codigoHorario>Only for LOGICIEL</tem:codigoHorario>
+            <!--Optional:-->
+            <tem:loginSupervisor>Only for LOGICIEL</tem:loginSupervisor>
+            <!--Optional:-->
+            <tem:codigoAgenciaDefault>Only for LOGICIEL</tem:codigoAgenciaDefault>
+            <!--Optional:-->
+            <tem:validarAtributosPerfil>Only for LOGICIEL</tem:validarAtributosPerfil>
+            <!--Optional:-->
+            <tem:codigoAtributo>Only for LOGICIEL</tem:codigoAtributo>
+            <!--Optional:-->
+            <tem:codigoEstado>Only for LOGICIEL</tem:codigoEstado>
+            <!--Optional:-->
+            <tem:perfilAplicacionDefault>Only for LOGICIEL</tem:perfilAplicacionDefault>
+            <!--Optional:-->
+            <tem:perfilesAplicacionTemporal>Only for LOGICIEL</tem:perfilesAplicacionTemporal>
+            <!--Optional:-->
+            <tem:agenciasPermanentesUsuario>Only for LOGICIEL</tem:agenciasPermanentesUsuario>
+            <!--Optional:-->
+            <tem:agenciasTemporalesUsuario>Only for LOGICIEL</tem:agenciasTemporalesUsuario>
+            <!--Optional:-->
+            <tem:atributoPerfilAplicacionDefault>Only for LOGICIEL</tem:atributoPerfilAplicacionDefault>
+            <!--Optional:-->
+            <tem:atributoPerfilesAplicacionTemporal>Only for LOGICIEL</tem:atributoPerfilesAplicacionTemporal>
+            <!--Optional:-->
+            <tem:atributoUsuario>Only for LOGICIEL</tem:atributoUsuario>
+            <tem:role>Only for RHDS</tem:role>
+            <tem:rol>Only for RHDS</tem:rol>
+            <tem:branch>Only for RHDS</tem:branch>
+            <tem:termNo>Only for RHDS</tem:termNo>
+            <!--Optional:-->
+            <tem:RequestedFor>Only for Requerimientos Manuales</tem:RequestedFor>
+            <!--Optional:-->
+            <tem:RequestorName>Only for Requerimientos Manuales</tem:RequestorName>
+            <!--Optional:-->
+            <tem:Category>Only for Requerimientos Manuales</tem:Category>
+            <!--Optional:-->
+            <tem:Subcategory>Only for Requerimientos Manuales</tem:Subcategory>
+            <!--Optional:-->
+            <tem:Model>Only for Requerimientos Manuales</tem:Model>
+            <!--Optional:-->
+            <tem:AssignedGroup>Only for Requerimientos Manuales</tem:AssignedGroup>
+            <!--Optional:-->
+            <tem:BriefDescription>Only for Requerimientos Manuales</tem:BriefDescription>
+            <!--Optional:-->
+            <tem:Description>Only for Requerimientos Manuales</tem:Description>
+            <!--Optional:-->
+            <tem:Status>Only for Requerimientos Manuales</tem:Status>
+            <!--Optional:-->
+            <tem:ApprovalStatus>Only for Requerimientos Manuales</tem:ApprovalStatus>
+            <!--Optional:-->
+            <tem:CurrentPhase>Only for Requerimientos Manuales</tem:CurrentPhase>
+            <!--Optional:-->
+            <tem:AgreementIds>Only for Requerimientos Manuales</tem:AgreementIds>
+            <!--Optional:-->
+            <tem:mailbox>1</tem:mailbox>
+            <!--Optional:-->
+            <tem:tier>1</tem:tier>
+            <!--Optional:-->
+            <tem:Employeeid>1</tem:Employeeid>
+            <!--Optional:-->
+            <tem:title>Sr</tem:title>
+            <!--Optional:-->
+            <tem:pager>943-555-1234</tem:pager>
+            <!--Optional:-->
+            <tem:proxyAddresses>SMTP:newb@contoso.com</tem:proxyAddresses>
+            <!--Optional:-->
+            <tem:mailNickname>web</tem:mailNickname>
+            <!--Optional:-->
+            <tem:msDS-User-Account-Control-Computed>0x0010</tem:msDS-User-Account-Control-Computed>
+            <!--Optional:-->
+            <tem:userAccountControl>0x0200</tem:userAccountControl>
+            <!--Optional:-->
+            <tem:physicalDeliveryOfficeName>OFFICE</tem:physicalDeliveryOfficeName>
+            <!--Optional:-->
+            <tem:postOfficeBox>home</tem:postOfficeBox>
+            <!--Optional:-->
+            <tem:city>Quito</tem:city>
+            <!--Optional:-->
+            <tem:memberOf>CN=Managers,OU=Sales,DC=Domain,DC=Com</tem:memberOf>
+            <!--Optional:-->
+            <tem:msTSHomeDrive>C:\\</tem:msTSHomeDrive>
+            <!--Optional:-->
+            <tem:msTSHomeDirectory>C:\\</tem:msTSHomeDirectory>
+            <!--Optional:-->
+            <tem:msTSAllowLogon>TRUE</tem:msTSAllowLogon>
+            <!--Optional:-->
+            <tem:msTSConnectClientDrives>TRUE</tem:msTSConnectClientDrives>
+            <!--Optional:-->
+            <tem:msTSConnectPrinterDrives>TRUE</tem:msTSConnectPrinterDrives>
+            <!--Optional:-->
+            <tem:msTSDefaultToMainPrinter>TRUE</tem:msTSDefaultToMainPrinter>
+            <!--Optional:-->
+            <tem:ms-Exch-SIP-Access-Service>TRUE</tem:ms-Exch-SIP-Access-Service>
+            <!--Optional:-->
+            <tem:containerInfo>TRUE</tem:containerInfo>
+            <!--Optional:-->
+            <tem:pwdLastSet>132326600227017161</tem:pwdLastSet>
+            <!--Optional:-->
+            <tem:comment>Only for AD</tem:comment>
+            <!--Optional:-->
+            <tem:street>Only for AD</tem:street>
+            <!--Optional:-->
+            <tem:labeledURI>Only for AD</tem:labeledURI>
+            <!--Optional:-->
+            <tem:department>Only for AD</tem:department>
+            <!--Optional:-->
+            <tem:telephoneNumber>Only for AD</tem:telephoneNumber>
+            <!--Optional:-->
+            <tem:webPage>Only for AD</tem:webPage>
+            <!--Optional:-->
+            <tem:domain>Only for AD</tem:domain>
+            <!--Optional:-->
+            <tem:ERROR>Only for Incident Ticket</tem:ERROR>
+         </tem:especificos>
+      </tem:crearTicket>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="{http://schemas.xmlsoap.org/wsdl/http/}//tempuri.org/crearTicket"/></con:call></con:operation><con:operation id="c873265d-c8f9-45ee-a887-26a5cef689ac" isOneWay="false" action="http://tempuri.org/crearUsuario" name="crearUsuario" bindingOperationName="crearUsuario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="bb278aa8-e5b5-4168-8b66-0220b4cd2983" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpSoap12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:tem="http://tempuri.org/">
+   <soap:Header/>
+   <soap:Body>
+      <tem:crearUsuario>
+         <tem:guid>?</tem:guid>
+         <tem:uuid>?</tem:uuid>
+         <tem:aplicacion>?</tem:aplicacion>
+         <tem:correoElectronico>?</tem:correoElectronico>
+         <tem:tellerName>?</tem:tellerName>
+         <!--Optional:-->
+         <tem:tellerNumber>?</tem:tellerNumber>
+         <tem:nombreUsuario>?</tem:nombreUsuario>
+         <tem:tipoIdentificacion>?</tem:tipoIdentificacion>
+         <tem:empresa>?</tem:empresa>
+         <tem:observacion>?</tem:observacion>
+         <tem:cargo>?</tem:cargo>
+         <tem:cargoCompleto>?</tem:cargoCompleto>
+         <tem:codigoCentroCosto>?</tem:codigoCentroCosto>
+         <tem:identificacion>?</tem:identificacion>
+         <tem:celular>?</tem:celular>
+         <tem:terminal>?</tem:terminal>
+         <tem:nombresEmpleado>?</tem:nombresEmpleado>
+         <!--Optional:-->
+         <tem:apellidosEmpleado>?</tem:apellidosEmpleado>
+         <!--Optional:-->
+         <tem:codigoCompania>?</tem:codigoCompania>
+         <!--Optional:-->
+         <tem:fechaSalidaEmpleado>?</tem:fechaSalidaEmpleado>
+         <!--Optional:-->
+         <tem:fechaIngresoEmpleado>?</tem:fechaIngresoEmpleado>
+         <!--Optional:-->
+         <tem:nombreCompania>?</tem:nombreCompania>
+         <!--Optional:-->
+         <tem:estadoEmpleado>?</tem:estadoEmpleado>
+         <!--Optional:-->
+         <tem:claveAcceso>?</tem:claveAcceso>
+         <!--Optional:-->
+         <tem:ipclient>?</tem:ipclient>
+         <!--Optional:-->
+         <tem:usuarioAplicacion>?</tem:usuarioAplicacion>
+         <!--Optional:-->
+         <tem:nombreDivision>?</tem:nombreDivision>
+         <!--Optional:-->
+         <tem:nombreArea>?</tem:nombreArea>
+         <!--Optional:-->
+         <tem:nombrePerfil>?</tem:nombrePerfil>
+         <!--Optional:-->
+         <tem:nombreDepartamento>?</tem:nombreDepartamento>
+         <tem:especificos>
+            <!--Optional:-->
+            <tem:grupoTransaccion>Only for BANCS</tem:grupoTransaccion>
+            <!--Optional:-->
+            <tem:nivelCapacidad>Only for BANCS</tem:nivelCapacidad>
+            <!--Optional:-->
+            <tem:nivelCorreo>Only for BANCS</tem:nivelCorreo>
+            <!--Optional:-->
+            <tem:userType>Only for BANCS</tem:userType>
+            <!--Optional:-->
+            <tem:chngBranchAlwd>Only for BANCS</tem:chngBranchAlwd>
+            <!--Optional:-->
+            <tem:brchSup>Only for BANCS</tem:brchSup>
+            <!--Optional:-->
+            <tem:atmFlag>Only for BANCS</tem:atmFlag>
+            <!--Optional:-->
+            <tem:accsignMod>Only for BANCS</tem:accsignMod>
+            <!--Optional:-->
+            <tem:casualApprovallim>Only for BANCS</tem:casualApprovallim>
+            <!--Optional:-->
+            <tem:nivelSeguridad>Only for BANCS</tem:nivelSeguridad>
+            <!--Optional:-->
+            <tem:estadoUsuario>Only for BANCS</tem:estadoUsuario>
+            <!--Optional:-->
+            <tem:perfilUsuario>Only for PPRD</tem:perfilUsuario>
+            <!--Optional:-->
+            <tem:loginUsuario>Only for PPRD</tem:loginUsuario>
+            <!--Optional:-->
+            <tem:usuarioInterno>Only for PPRD</tem:usuarioInterno>
+            <!--Optional:-->
+            <tem:interno>Only for LOGICIEL</tem:interno>
+            <!--Optional:-->
+            <tem:enviarMail>Only for LOGICIEL</tem:enviarMail>
+            <!--Optional:-->
+            <tem:cambioPwdInicial>Only for LOGICIEL</tem:cambioPwdInicial>
+            <!--Optional:-->
+            <tem:codigoTipoUsuario>Only for LOGICIEL</tem:codigoTipoUsuario>
+            <!--Optional:-->
+            <tem:codigoRol>Only for LOGICIEL</tem:codigoRol>
+            <!--Optional:-->
+            <tem:codigoHorario>Only for LOGICIEL</tem:codigoHorario>
+            <!--Optional:-->
+            <tem:loginSupervisor>Only for LOGICIEL</tem:loginSupervisor>
+            <!--Optional:-->
+            <tem:codigoAgenciaDefault>Only for LOGICIEL</tem:codigoAgenciaDefault>
+            <!--Optional:-->
+            <tem:validarAtributosPerfil>Only for LOGICIEL</tem:validarAtributosPerfil>
+            <!--Optional:-->
+            <tem:codigoAtributo>Only for LOGICIEL</tem:codigoAtributo>
+            <!--Optional:-->
+            <tem:codigoEstado>Only for LOGICIEL</tem:codigoEstado>
+            <!--Optional:-->
+            <tem:perfilAplicacionDefault>Only for LOGICIEL</tem:perfilAplicacionDefault>
+            <!--Optional:-->
+            <tem:perfilesAplicacionTemporal>Only for LOGICIEL</tem:perfilesAplicacionTemporal>
+            <!--Optional:-->
+            <tem:agenciasPermanentesUsuario>Only for LOGICIEL</tem:agenciasPermanentesUsuario>
+            <!--Optional:-->
+            <tem:agenciasTemporalesUsuario>Only for LOGICIEL</tem:agenciasTemporalesUsuario>
+            <!--Optional:-->
+            <tem:atributoPerfilAplicacionDefault>Only for LOGICIEL</tem:atributoPerfilAplicacionDefault>
+            <!--Optional:-->
+            <tem:atributoPerfilesAplicacionTemporal>Only for LOGICIEL</tem:atributoPerfilesAplicacionTemporal>
+            <!--Optional:-->
+            <tem:atributoUsuario>Only for LOGICIEL</tem:atributoUsuario>
+            <tem:role>Only for RHDS</tem:role>
+            <tem:rol>Only for RHDS</tem:rol>
+            <tem:branch>Only for RHDS</tem:branch>
+            <tem:termNo>Only for RHDS</tem:termNo>
+            <!--Optional:-->
+            <tem:RequestedFor>Only for Requerimientos Manuales</tem:RequestedFor>
+            <!--Optional:-->
+            <tem:RequestorName>Only for Requerimientos Manuales</tem:RequestorName>
+            <!--Optional:-->
+            <tem:Category>Only for Requerimientos Manuales</tem:Category>
+            <!--Optional:-->
+            <tem:Subcategory>Only for Requerimientos Manuales</tem:Subcategory>
+            <!--Optional:-->
+            <tem:Model>Only for Requerimientos Manuales</tem:Model>
+            <!--Optional:-->
+            <tem:AssignedGroup>Only for Requerimientos Manuales</tem:AssignedGroup>
+            <!--Optional:-->
+            <tem:BriefDescription>Only for Requerimientos Manuales</tem:BriefDescription>
+            <!--Optional:-->
+            <tem:Description>Only for Requerimientos Manuales</tem:Description>
+            <!--Optional:-->
+            <tem:Status>Only for Requerimientos Manuales</tem:Status>
+            <!--Optional:-->
+            <tem:ApprovalStatus>Only for Requerimientos Manuales</tem:ApprovalStatus>
+            <!--Optional:-->
+            <tem:CurrentPhase>Only for Requerimientos Manuales</tem:CurrentPhase>
+            <!--Optional:-->
+            <tem:AgreementIds>Only for Requerimientos Manuales</tem:AgreementIds>
+            <!--Optional:-->
+            <tem:mailbox>1</tem:mailbox>
+            <!--Optional:-->
+            <tem:tier>1</tem:tier>
+            <!--Optional:-->
+            <tem:Employeeid>1</tem:Employeeid>
+            <!--Optional:-->
+            <tem:title>Sr</tem:title>
+            <!--Optional:-->
+            <tem:pager>943-555-1234</tem:pager>
+            <!--Optional:-->
+            <tem:proxyAddresses>SMTP:newb@contoso.com</tem:proxyAddresses>
+            <!--Optional:-->
+            <tem:mailNickname>web</tem:mailNickname>
+            <!--Optional:-->
+            <tem:msDS-User-Account-Control-Computed>0x0010</tem:msDS-User-Account-Control-Computed>
+            <!--Optional:-->
+            <tem:userAccountControl>0x0200</tem:userAccountControl>
+            <!--Optional:-->
+            <tem:physicalDeliveryOfficeName>OFFICE</tem:physicalDeliveryOfficeName>
+            <!--Optional:-->
+            <tem:postOfficeBox>home</tem:postOfficeBox>
+            <!--Optional:-->
+            <tem:city>Quito</tem:city>
+            <!--Optional:-->
+            <tem:memberOf>CN=Managers,OU=Sales,DC=Domain,DC=Com</tem:memberOf>
+            <!--Optional:-->
+            <tem:msTSHomeDrive>C:\\</tem:msTSHomeDrive>
+            <!--Optional:-->
+            <tem:msTSHomeDirectory>C:\\</tem:msTSHomeDirectory>
+            <!--Optional:-->
+            <tem:msTSAllowLogon>TRUE</tem:msTSAllowLogon>
+            <!--Optional:-->
+            <tem:msTSConnectClientDrives>TRUE</tem:msTSConnectClientDrives>
+            <!--Optional:-->
+            <tem:msTSConnectPrinterDrives>TRUE</tem:msTSConnectPrinterDrives>
+            <!--Optional:-->
+            <tem:msTSDefaultToMainPrinter>TRUE</tem:msTSDefaultToMainPrinter>
+            <!--Optional:-->
+            <tem:ms-Exch-SIP-Access-Service>TRUE</tem:ms-Exch-SIP-Access-Service>
+            <!--Optional:-->
+            <tem:containerInfo>TRUE</tem:containerInfo>
+            <!--Optional:-->
+            <tem:pwdLastSet>132326600227017161</tem:pwdLastSet>
+            <!--Optional:-->
+            <tem:comment>Only for AD</tem:comment>
+            <!--Optional:-->
+            <tem:street>Only for AD</tem:street>
+            <!--Optional:-->
+            <tem:labeledURI>Only for AD</tem:labeledURI>
+            <!--Optional:-->
+            <tem:department>Only for AD</tem:department>
+            <!--Optional:-->
+            <tem:telephoneNumber>Only for AD</tem:telephoneNumber>
+            <!--Optional:-->
+            <tem:webPage>Only for AD</tem:webPage>
+            <!--Optional:-->
+            <tem:domain>Only for AD</tem:domain>
+            <!--Optional:-->
+            <tem:ERROR>Only for Incident Ticket</tem:ERROR>
+         </tem:especificos>
+      </tem:crearUsuario>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="{http://schemas.xmlsoap.org/wsdl/http/}//tempuri.org/crearUsuario"/></con:call></con:operation><con:operation id="9445dc59-c0df-48e7-87dc-78c27064854c" isOneWay="false" action="http://tempuri.org/eliminarUsuario" name="eliminarUsuario" bindingOperationName="eliminarUsuario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b8e0303e-bedd-41a8-89e2-07ac6430190a" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpSoap12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:tem="http://tempuri.org/">
+   <soap:Header/>
+   <soap:Body>
+      <tem:eliminarUsuario>
+         <!--Optional:-->
+         <tem:guid>?</tem:guid>
+         <!--Optional:-->
+         <tem:uuid>?</tem:uuid>
+         <!--Optional:-->
+         <tem:tellerName>?</tem:tellerName>
+         <!--Optional:-->
+         <tem:tellerNumber>?</tem:tellerNumber>
+         <!--Optional:-->
+         <tem:aplicacion>?</tem:aplicacion>
+      </tem:eliminarUsuario>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="{http://schemas.xmlsoap.org/wsdl/http/}//tempuri.org/eliminarUsuario"/></con:call></con:operation><con:operation id="537428bd-cf9c-49ef-a721-20926c7f3ea9" isOneWay="false" action="http://tempuri.org/modificarUsuario" name="modificarUsuario" bindingOperationName="modificarUsuario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4c66e303-c38f-4c3a-be21-c45cdca16365" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpSoap12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:tem="http://tempuri.org/">
+   <soap:Header/>
+   <soap:Body>
+      <tem:modificarUsuario>
+         <tem:guid>?</tem:guid>
+         <tem:uuid>?</tem:uuid>
+         <tem:aplicacion>?</tem:aplicacion>
+         <tem:correoElectronico>?</tem:correoElectronico>
+         <tem:tellerName>?</tem:tellerName>
+         <!--Optional:-->
+         <tem:tellerNumber>?</tem:tellerNumber>
+         <tem:nombreUsuario>?</tem:nombreUsuario>
+         <tem:tipoIdentificacion>?</tem:tipoIdentificacion>
+         <tem:empresa>?</tem:empresa>
+         <tem:observacion>?</tem:observacion>
+         <tem:cargo>?</tem:cargo>
+         <tem:codigoCentroCosto>?</tem:codigoCentroCosto>
+         <tem:identificacion>?</tem:identificacion>
+         <tem:celular>?</tem:celular>
+         <tem:terminal>?</tem:terminal>
+         <tem:nombresEmpleado>?</tem:nombresEmpleado>
+         <!--Optional:-->
+         <tem:apellidosEmpleado>?</tem:apellidosEmpleado>
+         <!--Optional:-->
+         <tem:codigoCompania>?</tem:codigoCompania>
+         <!--Optional:-->
+         <tem:fechaSalidaEmpleado>?</tem:fechaSalidaEmpleado>
+         <!--Optional:-->
+         <tem:fechaIngresoEmpleado>?</tem:fechaIngresoEmpleado>
+         <!--Optional:-->
+         <tem:nombreCompania>?</tem:nombreCompania>
+         <!--Optional:-->
+         <tem:estadoEmpleado>?</tem:estadoEmpleado>
+         <!--Optional:-->
+         <tem:claveAcceso>?</tem:claveAcceso>
+         <!--Optional:-->
+         <tem:ipclient>?</tem:ipclient>
+         <!--Optional:-->
+         <tem:usuarioAplicacion>?</tem:usuarioAplicacion>
+         <!--Optional:-->
+         <tem:nombreDivision>?</tem:nombreDivision>
+         <!--Optional:-->
+         <tem:nombreArea>?</tem:nombreArea>
+         <!--Optional:-->
+         <tem:nombrePerfil>?</tem:nombrePerfil>
+         <!--Optional:-->
+         <tem:nombreDepartamento>?</tem:nombreDepartamento>
+         <tem:especificos>
+            <!--Optional:-->
+            <tem:grupoTransaccion>Only for BANCS</tem:grupoTransaccion>
+            <!--Optional:-->
+            <tem:nivelCapacidad>Only for BANCS</tem:nivelCapacidad>
+            <!--Optional:-->
+            <tem:nivelCorreo>Only for BANCS</tem:nivelCorreo>
+            <!--Optional:-->
+            <tem:userType>Only for BANCS</tem:userType>
+            <!--Optional:-->
+            <tem:chngBranchAlwd>Only for BANCS</tem:chngBranchAlwd>
+            <!--Optional:-->
+            <tem:brchSup>Only for BANCS</tem:brchSup>
+            <!--Optional:-->
+            <tem:atmFlag>Only for BANCS</tem:atmFlag>
+            <!--Optional:-->
+            <tem:accsignMod>Only for BANCS</tem:accsignMod>
+            <!--Optional:-->
+            <tem:casualApprovallim>Only for BANCS</tem:casualApprovallim>
+            <!--Optional:-->
+            <tem:nivelSeguridad>Only for BANCS</tem:nivelSeguridad>
+            <!--Optional:-->
+            <tem:estadoUsuario>Only for BANCS</tem:estadoUsuario>
+            <!--Optional:-->
+            <tem:perfilUsuario>Only for PPRD</tem:perfilUsuario>
+            <!--Optional:-->
+            <tem:loginUsuario>Only for PPRD</tem:loginUsuario>
+            <!--Optional:-->
+            <tem:usuarioInterno>Only for PPRD</tem:usuarioInterno>
+            <!--Optional:-->
+            <tem:interno>Only for LOGICIEL</tem:interno>
+            <!--Optional:-->
+            <tem:enviarMail>Only for LOGICIEL</tem:enviarMail>
+            <!--Optional:-->
+            <tem:cambioPwdInicial>Only for LOGICIEL</tem:cambioPwdInicial>
+            <!--Optional:-->
+            <tem:codigoTipoUsuario>Only for LOGICIEL</tem:codigoTipoUsuario>
+            <!--Optional:-->
+            <tem:codigoRol>Only for LOGICIEL</tem:codigoRol>
+            <!--Optional:-->
+            <tem:codigoHorario>Only for LOGICIEL</tem:codigoHorario>
+            <!--Optional:-->
+            <tem:loginSupervisor>Only for LOGICIEL</tem:loginSupervisor>
+            <!--Optional:-->
+            <tem:codigoAgenciaDefault>Only for LOGICIEL</tem:codigoAgenciaDefault>
+            <!--Optional:-->
+            <tem:validarAtributosPerfil>Only for LOGICIEL</tem:validarAtributosPerfil>
+            <!--Optional:-->
+            <tem:codigoAtributo>Only for LOGICIEL</tem:codigoAtributo>
+            <!--Optional:-->
+            <tem:codigoEstado>Only for LOGICIEL</tem:codigoEstado>
+            <!--Optional:-->
+            <tem:perfilAplicacionDefault>Only for LOGICIEL</tem:perfilAplicacionDefault>
+            <!--Optional:-->
+            <tem:perfilesAplicacionTemporal>Only for LOGICIEL</tem:perfilesAplicacionTemporal>
+            <!--Optional:-->
+            <tem:agenciasPermanentesUsuario>Only for LOGICIEL</tem:agenciasPermanentesUsuario>
+            <!--Optional:-->
+            <tem:agenciasTemporalesUsuario>Only for LOGICIEL</tem:agenciasTemporalesUsuario>
+            <!--Optional:-->
+            <tem:atributoPerfilAplicacionDefault>Only for LOGICIEL</tem:atributoPerfilAplicacionDefault>
+            <!--Optional:-->
+            <tem:atributoPerfilesAplicacionTemporal>Only for LOGICIEL</tem:atributoPerfilesAplicacionTemporal>
+            <!--Optional:-->
+            <tem:atributoUsuario>Only for LOGICIEL</tem:atributoUsuario>
+            <tem:role>Only for RHDS</tem:role>
+            <tem:rol>Only for RHDS</tem:rol>
+            <tem:branch>Only for RHDS</tem:branch>
+            <tem:termNo>Only for RHDS</tem:termNo>
+            <!--Optional:-->
+            <tem:RequestedFor>Only for Requerimientos Manuales</tem:RequestedFor>
+            <!--Optional:-->
+            <tem:RequestorName>Only for Requerimientos Manuales</tem:RequestorName>
+            <!--Optional:-->
+            <tem:Category>Only for Requerimientos Manuales</tem:Category>
+            <!--Optional:-->
+            <tem:Subcategory>Only for Requerimientos Manuales</tem:Subcategory>
+            <!--Optional:-->
+            <tem:Model>Only for Requerimientos Manuales</tem:Model>
+            <!--Optional:-->
+            <tem:AssignedGroup>Only for Requerimientos Manuales</tem:AssignedGroup>
+            <!--Optional:-->
+            <tem:BriefDescription>Only for Requerimientos Manuales</tem:BriefDescription>
+            <!--Optional:-->
+            <tem:Description>Only for Requerimientos Manuales</tem:Description>
+            <!--Optional:-->
+            <tem:Status>Only for Requerimientos Manuales</tem:Status>
+            <!--Optional:-->
+            <tem:ApprovalStatus>Only for Requerimientos Manuales</tem:ApprovalStatus>
+            <!--Optional:-->
+            <tem:CurrentPhase>Only for Requerimientos Manuales</tem:CurrentPhase>
+            <!--Optional:-->
+            <tem:AgreementIds>Only for Requerimientos Manuales</tem:AgreementIds>
+            <!--Optional:-->
+            <tem:mailbox>1</tem:mailbox>
+            <!--Optional:-->
+            <tem:tier>1</tem:tier>
+            <!--Optional:-->
+            <tem:Employeeid>1</tem:Employeeid>
+            <!--Optional:-->
+            <tem:title>Sr</tem:title>
+            <!--Optional:-->
+            <tem:pager>943-555-1234</tem:pager>
+            <!--Optional:-->
+            <tem:proxyAddresses>SMTP:newb@contoso.com</tem:proxyAddresses>
+            <!--Optional:-->
+            <tem:mailNickname>web</tem:mailNickname>
+            <!--Optional:-->
+            <tem:msDS-User-Account-Control-Computed>0x0010</tem:msDS-User-Account-Control-Computed>
+            <!--Optional:-->
+            <tem:userAccountControl>0x0200</tem:userAccountControl>
+            <!--Optional:-->
+            <tem:physicalDeliveryOfficeName>OFFICE</tem:physicalDeliveryOfficeName>
+            <!--Optional:-->
+            <tem:postOfficeBox>home</tem:postOfficeBox>
+            <!--Optional:-->
+            <tem:city>Quito</tem:city>
+            <!--Optional:-->
+            <tem:memberOf>CN=Managers,OU=Sales,DC=Domain,DC=Com</tem:memberOf>
+            <!--Optional:-->
+            <tem:msTSHomeDrive>C:\\</tem:msTSHomeDrive>
+            <!--Optional:-->
+            <tem:msTSHomeDirectory>C:\\</tem:msTSHomeDirectory>
+            <!--Optional:-->
+            <tem:msTSAllowLogon>TRUE</tem:msTSAllowLogon>
+            <!--Optional:-->
+            <tem:msTSConnectClientDrives>TRUE</tem:msTSConnectClientDrives>
+            <!--Optional:-->
+            <tem:msTSConnectPrinterDrives>TRUE</tem:msTSConnectPrinterDrives>
+            <!--Optional:-->
+            <tem:msTSDefaultToMainPrinter>TRUE</tem:msTSDefaultToMainPrinter>
+            <!--Optional:-->
+            <tem:ms-Exch-SIP-Access-Service>TRUE</tem:ms-Exch-SIP-Access-Service>
+            <!--Optional:-->
+            <tem:containerInfo>TRUE</tem:containerInfo>
+            <!--Optional:-->
+            <tem:pwdLastSet>132326600227017161</tem:pwdLastSet>
+            <!--Optional:-->
+            <tem:comment>Only for AD</tem:comment>
+            <!--Optional:-->
+            <tem:street>Only for AD</tem:street>
+            <!--Optional:-->
+            <tem:labeledURI>Only for AD</tem:labeledURI>
+            <!--Optional:-->
+            <tem:department>Only for AD</tem:department>
+            <!--Optional:-->
+            <tem:telephoneNumber>Only for AD</tem:telephoneNumber>
+            <!--Optional:-->
+            <tem:webPage>Only for AD</tem:webPage>
+            <!--Optional:-->
+            <tem:domain>Only for AD</tem:domain>
+            <!--Optional:-->
+            <tem:ERROR>Only for Incident Ticket</tem:ERROR>
+         </tem:especificos>
+      </tem:modificarUsuario>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="{http://schemas.xmlsoap.org/wsdl/http/}//tempuri.org/modificarUsuario"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

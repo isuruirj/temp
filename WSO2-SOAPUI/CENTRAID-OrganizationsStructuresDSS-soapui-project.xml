@@ -1,0 +1,1115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="d11a5d34-4a9e-4bff-81a1-4e94eba6dfe9" activeEnvironment="Default" name="CENTRAID_OrganizationsStructuresDSS" resourceRoot="" soapui-version="5.5.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="12e51a02-07cd-4705-91a2-73e5dae1155d" wsaVersion="NONE" name="OrganizationsStructuresDSSSOAP11Binding" type="wsdl" bindingName="{centra-id.com}OrganizationsStructuresDSSSOAP11Binding" soapVersion="1_1" anonymous="optional" definition="https://ei.bp.com:8243/services/OrganizationsStructuresDSS?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP11Endpoint</con:endpoint><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SecureSOAP11Endpoint</con:endpoint></con:endpoints><con:operation id="5cdaab6c-cb20-436c-bdb2-e843a747c1a0" isOneWay="false" action="urn:_deletedeleteorganizationsstructure" name="_deletedeleteorganizationsstructure" bindingOperationName="_deletedeleteorganizationsstructure" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="baf5f1cd-27ee-4acf-bee2-5be628573dc5" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:_deletedeleteorganizationsstructure>
+         <cen:id>?</cen:id>
+      </cen:_deletedeleteorganizationsstructure>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_deletedeleteorganizationsstructure"/></con:call></con:operation><con:operation id="c72d8125-b974-49d0-bb33-577ed4542d93" isOneWay="false" action="urn:_getgetallorganizationsstructures" name="_getgetallorganizationsstructures" bindingOperationName="_getgetallorganizationsstructures" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="10979165-8122-46a7-8040-8bbf58101d0a" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:_getgetallorganizationsstructures/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_getgetallorganizationsstructures"/></con:call></con:operation><con:operation id="a31d1e54-e97a-4249-82d2-5e8cc3250726" isOneWay="false" action="urn:_getgetbycompanyidandtypecatalogfisrtorganizationstructure" name="_getgetbycompanyidandtypecatalogfisrtorganizationstructure" bindingOperationName="_getgetbycompanyidandtypecatalogfisrtorganizationstructure" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="77e5eb1f-1433-42b3-a568-6b0275ccaf22" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:_getgetbycompanyidandtypecatalogfisrtorganizationstructure>
+         <cen:companyCode>BCPI</cen:companyCode>
+         <cen:typeCatalogCode>DIV</cen:typeCatalogCode>
+      </cen:_getgetbycompanyidandtypecatalogfisrtorganizationstructure>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_getgetbycompanyidandtypecatalogfisrtorganizationstructure"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="97c6baf5-f98e-48d1-9020-bcbd9d9fe0a1" isOneWay="false" action="urn:_getgetbycompanyidandtypecatalogorganizationstructure" name="_getgetbycompanyidandtypecatalogorganizationstructure" bindingOperationName="_getgetbycompanyidandtypecatalogorganizationstructure" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="372e4a4e-ab4a-4d7b-a47b-877f301c8e3c" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:_getgetbycompanyidandtypecatalogorganizationstructure>
+         <cen:companyCode>BCPI</cen:companyCode>
+         <cen:typeCatalogCode>DIV</cen:typeCatalogCode>
+         <cen:parentCode>?</cen:parentCode>
+      </cen:_getgetbycompanyidandtypecatalogorganizationstructure>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_getgetbycompanyidandtypecatalogorganizationstructure"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="687d6a60-1151-47f5-add1-ec25d2a53677" isOneWay="false" action="urn:_getgetbycompanyidorganizationstructure" name="_getgetbycompanyidorganizationstructure" bindingOperationName="_getgetbycompanyidorganizationstructure" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5afe1829-2de4-4245-8edd-8398bfa021d5" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:_getgetbycompanyidorganizationstructure>
+         <cen:companyId>?</cen:companyId>
+      </cen:_getgetbycompanyidorganizationstructure>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_getgetbycompanyidorganizationstructure"/></con:call></con:operation><con:operation id="0ab20ed8-bfc6-4fc6-80bd-312fec6d5736" isOneWay="false" action="urn:_getgetbyidorganizationstructure" name="_getgetbyidorganizationstructure" bindingOperationName="_getgetbyidorganizationstructure" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6801b881-645e-4467-99c3-a0eb0aeb2518" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:_getgetbyidorganizationstructure>
+         <cen:id>?</cen:id>
+      </cen:_getgetbyidorganizationstructure>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_getgetbyidorganizationstructure"/></con:call></con:operation><con:operation id="24cb4100-55ae-4b79-adf9-536964288e09" isOneWay="false" action="urn:_postcreateorganizationsstructure" name="_postcreateorganizationsstructure" bindingOperationName="_postcreateorganizationsstructure" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a3af746f-11be-4e03-b106-fad74fc0860d" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:_postcreateorganizationsstructure>
+         <cen:companyId>?</cen:companyId>
+         <cen:catalogOrganizationalStructureId>?</cen:catalogOrganizationalStructureId>
+         <cen:organizationStructureId>?</cen:organizationStructureId>
+         <cen:valid>?</cen:valid>
+      </cen:_postcreateorganizationsstructure>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_postcreateorganizationsstructure"/></con:call></con:operation><con:operation id="4806a893-62d7-457d-ad79-ff635bade2ad" isOneWay="false" action="urn:_putupdateorganizationsstructure" name="_putupdateorganizationsstructure" bindingOperationName="_putupdateorganizationsstructure" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="146c0a56-0edd-43b6-aec0-bd163f3ad834" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:_putupdateorganizationsstructure>
+         <cen:companyId>?</cen:companyId>
+         <cen:catalogOrganizationalStructureId>?</cen:catalogOrganizationalStructureId>
+         <cen:organizationStructureId>?</cen:organizationStructureId>
+         <cen:id>?</cen:id>
+      </cen:_putupdateorganizationsstructure>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_putupdateorganizationsstructure"/></con:call></con:operation><con:operation id="d58b17a0-3077-434e-8e54-9f53601f39d7" isOneWay="false" action="urn:delete_COMPANIES_STRUCTURES_operation" name="delete_COMPANIES_STRUCTURES_operation" bindingOperationName="delete_COMPANIES_STRUCTURES_operation" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="8f579ad4-497d-4ef8-80e5-c4fff9ed77f5" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:delete_COMPANIES_STRUCTURES_operation>
+         <cen:id>?</cen:id>
+      </cen:delete_COMPANIES_STRUCTURES_operation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:delete_COMPANIES_STRUCTURES_operation"/></con:call></con:operation><con:operation id="5821bb0c-8121-468a-82e6-eefa6048a416" isOneWay="false" action="urn:insert_COMPANIES_STRUCTURES_operation" name="insert_COMPANIES_STRUCTURES_operation" bindingOperationName="insert_COMPANIES_STRUCTURES_operation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="fb01be54-d755-40d6-853c-f05c2462132f" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:insert_COMPANIES_STRUCTURES_operation>
+         <cen:companyId>?</cen:companyId>
+         <cen:catalogOrganizationalStructureId>?</cen:catalogOrganizationalStructureId>
+         <cen:organizationStructureId>?</cen:organizationStructureId>
+         <cen:valid>?</cen:valid>
+      </cen:insert_COMPANIES_STRUCTURES_operation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:insert_COMPANIES_STRUCTURES_operation"/></con:call></con:operation><con:operation id="100b0fde-7208-40ac-a688-cb99d536cc4c" isOneWay="false" action="urn:select_all_COMPANIES_STRUCTURES_operation" name="select_all_COMPANIES_STRUCTURES_operation" bindingOperationName="select_all_COMPANIES_STRUCTURES_operation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="08a29311-0640-4579-a8d7-c234188ce406" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:select_all_COMPANIES_STRUCTURES_operation/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:select_all_COMPANIES_STRUCTURES_operation"/></con:call></con:operation><con:operation id="c14b5d2d-8580-48f6-8181-a3cbe8552d31" isOneWay="false" action="urn:select_with_catalog_company_type_id_hierarchies_operation" name="select_with_catalog_company_type_id_hierarchies_operation" bindingOperationName="select_with_catalog_company_type_id_hierarchies_operation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6a5da80c-2b71-4456-aed1-b9efb8a0e0e2" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:select_with_catalog_company_type_id_hierarchies_operation>
+         <cen:companyId>?</cen:companyId>
+      </cen:select_with_catalog_company_type_id_hierarchies_operation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:select_with_catalog_company_type_id_hierarchies_operation"/></con:call></con:operation><con:operation id="ff9da169-b88b-475c-aab6-0b3d0239af71" isOneWay="false" action="urn:select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operation" name="select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operation" bindingOperationName="select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="7c3432b2-2c7f-450a-991a-13f6c22997c5" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operation>
+         <cen:companyCode>?</cen:companyCode>
+         <cen:typeCatalogCode>?</cen:typeCatalogCode>
+         <cen:parentCode>?</cen:parentCode>
+      </cen:select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operation"/></con:call></con:operation><con:operation id="14ba7496-82c7-48a5-a380-a5a2ca38c0dc" isOneWay="false" action="urn:select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operation" name="select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operation" bindingOperationName="select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="e15296c1-baf3-44e5-8079-dadaf64445be" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operation>
+         <cen:companyCode>?</cen:companyCode>
+         <cen:typeCatalogCode>?</cen:typeCatalogCode>
+      </cen:select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operation"/></con:call></con:operation><con:operation id="6ce02103-ffd7-496d-bab9-c9a32773ba03" isOneWay="false" action="urn:select_with_key_COMPANIES_STRUCTURES_operation" name="select_with_key_COMPANIES_STRUCTURES_operation" bindingOperationName="select_with_key_COMPANIES_STRUCTURES_operation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="dfec858e-7b27-4318-be95-1aa406d05615" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:select_with_key_COMPANIES_STRUCTURES_operation>
+         <cen:id>?</cen:id>
+      </cen:select_with_key_COMPANIES_STRUCTURES_operation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:select_with_key_COMPANIES_STRUCTURES_operation"/></con:call></con:operation><con:operation id="0289991a-b062-470a-be14-a9032a2a04bd" isOneWay="false" action="urn:update_COMPANIES_STRUCTURES_operation" name="update_COMPANIES_STRUCTURES_operation" bindingOperationName="update_COMPANIES_STRUCTURES_operation" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="0fb0f279-cad1-4619-8b51-7cb4f03975f6" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:update_COMPANIES_STRUCTURES_operation>
+         <cen:companyId>?</cen:companyId>
+         <cen:catalogOrganizationalStructureId>?</cen:catalogOrganizationalStructureId>
+         <cen:organizationStructureId>?</cen:organizationStructureId>
+         <cen:id>?</cen:id>
+      </cen:update_COMPANIES_STRUCTURES_operation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:update_COMPANIES_STRUCTURES_operation"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="7ddf4d04-3358-477c-84a8-661ff3f54a19" wsaVersion="NONE" name="OrganizationsStructuresDSSSOAP12Binding" type="wsdl" bindingName="{centra-id.com}OrganizationsStructuresDSSSOAP12Binding" soapVersion="1_2" anonymous="optional" definition="https://ei.bp.com:8243/services/OrganizationsStructuresDSS?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://ei.bp.com:8243/services/OrganizationsStructuresDSS?wsdl"><con:part><con:url>https://ei.bp.com:8243/services/OrganizationsStructuresDSS?wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="centra-id.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns0="centra-id.com" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns1="http://ws.wso2.org/dataservice" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:documentation/>
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="centra-id.com">
+      <xs:element name="select_with_key_COMPANIES_STRUCTURES_operation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="id" nillable="true" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="OrganizationsStructures" type="ns0:OrganizationsStructures"/>
+      <xs:complexType name="OrganizationsStructures">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="OrganizationStructure" type="ns0:OrganizationStructure"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="OrganizationStructure">
+        <xs:sequence>
+          <xs:element name="id" nillable="true" type="xs:long"/>
+          <xs:element name="companyId" nillable="true" type="xs:long"/>
+          <xs:element name="catalogOrganizationalStructureId" nillable="true" type="xs:long"/>
+          <xs:element name="organizationStructureId" nillable="true" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="companyCode" nillable="true" type="xs:string"/>
+            <xs:element name="typeCatalogCode" nillable="true" type="xs:string"/>
+            <xs:element name="parentCode" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="delete_COMPANIES_STRUCTURES_operation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="id" nillable="true" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="insert_COMPANIES_STRUCTURES_operation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="companyId" nillable="true" type="xs:long"/>
+            <xs:element name="catalogOrganizationalStructureId" nillable="true" type="xs:long"/>
+            <xs:element name="organizationStructureId" nillable="true" type="xs:long"/>
+            <xs:element name="valid" nillable="true" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GeneratedKeys" type="ns0:GeneratedKeys"/>
+      <xs:complexType name="GeneratedKeys">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" type="ns0:Entry"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Entry">
+        <xs:sequence>
+          <xs:element name="id" nillable="true" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="update_COMPANIES_STRUCTURES_operation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="companyId" nillable="true" type="xs:long"/>
+            <xs:element name="catalogOrganizationalStructureId" nillable="true" type="xs:long"/>
+            <xs:element name="organizationStructureId" nillable="true" type="xs:long"/>
+            <xs:element name="id" nillable="true" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="select_all_COMPANIES_STRUCTURES_operation">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="select_with_catalog_company_type_id_hierarchies_operation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="companyId" nillable="true" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="companyCode" nillable="true" type="xs:string"/>
+            <xs:element name="typeCatalogCode" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="_getgetallorganizationsstructures">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="_getgetbyidorganizationstructure">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="id" nillable="true" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="_getgetbycompanyidorganizationstructure">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="companyId" nillable="true" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="_getgetbycompanyidandtypecatalogfisrtorganizationstructure">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="companyCode" nillable="true" type="xs:string"/>
+            <xs:element name="typeCatalogCode" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="_getgetbycompanyidandtypecatalogorganizationstructure">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="companyCode" nillable="true" type="xs:string"/>
+            <xs:element name="typeCatalogCode" nillable="true" type="xs:string"/>
+            <xs:element name="parentCode" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="_postcreateorganizationsstructure">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="companyId" nillable="true" type="xs:long"/>
+            <xs:element name="catalogOrganizationalStructureId" nillable="true" type="xs:long"/>
+            <xs:element name="organizationStructureId" nillable="true" type="xs:long"/>
+            <xs:element name="valid" nillable="true" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="_putupdateorganizationsstructure">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="companyId" nillable="true" type="xs:long"/>
+            <xs:element name="catalogOrganizationalStructureId" nillable="true" type="xs:long"/>
+            <xs:element name="organizationStructureId" nillable="true" type="xs:long"/>
+            <xs:element name="id" nillable="true" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="_deletedeleteorganizationsstructure">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="id" nillable="true" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://ws.wso2.org/dataservice">
+      <xs:element name="DataServiceFault">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="current_params" type="xs:string"/>
+            <xs:element name="current_request_name" type="xs:string"/>
+            <xs:element name="nested_exception" type="xs:string"/>
+            <xs:element name="source_data_service">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="location" type="xs:string"/>
+                  <xs:element name="default_namespace" type="xs:string"/>
+                  <xs:element name="description" type="xs:string"/>
+                  <xs:element name="data_service_name" type="xs:string"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ds_code" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="REQUEST_STATUS" type="xs:string"/>
+      <xs:element name="DATA_SERVICE_RESPONSE">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:any minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="select_with_key_COMPANIES_STRUCTURES_operationRequest">
+    <wsdl:part name="parameters" element="ns0:select_with_key_COMPANIES_STRUCTURES_operation"/>
+  </wsdl:message>
+  <wsdl:message name="select_with_key_COMPANIES_STRUCTURES_operationResponse">
+    <wsdl:part name="parameters" element="ns0:OrganizationsStructures"/>
+  </wsdl:message>
+  <wsdl:message name="DataServiceFault">
+    <wsdl:part name="parameters" element="ns1:DataServiceFault"/>
+  </wsdl:message>
+  <wsdl:message name="_postcreateorganizationsstructureRequest">
+    <wsdl:part name="parameters" element="ns0:_postcreateorganizationsstructure"/>
+  </wsdl:message>
+  <wsdl:message name="_postcreateorganizationsstructureResponse">
+    <wsdl:part name="parameters" element="ns0:GeneratedKeys"/>
+  </wsdl:message>
+  <wsdl:message name="update_COMPANIES_STRUCTURES_operationRequest">
+    <wsdl:part name="parameters" element="ns0:update_COMPANIES_STRUCTURES_operation"/>
+  </wsdl:message>
+  <wsdl:message name="_putupdateorganizationsstructureRequest">
+    <wsdl:part name="parameters" element="ns0:_putupdateorganizationsstructure"/>
+  </wsdl:message>
+  <wsdl:message name="_getgetbycompanyidorganizationstructureRequest">
+    <wsdl:part name="parameters" element="ns0:_getgetbycompanyidorganizationstructure"/>
+  </wsdl:message>
+  <wsdl:message name="_getgetbycompanyidorganizationstructureResponse">
+    <wsdl:part name="parameters" element="ns0:OrganizationsStructures"/>
+  </wsdl:message>
+  <wsdl:message name="select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operationRequest">
+    <wsdl:part name="parameters" element="ns0:select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operation"/>
+  </wsdl:message>
+  <wsdl:message name="select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operationResponse">
+    <wsdl:part name="parameters" element="ns0:OrganizationsStructures"/>
+  </wsdl:message>
+  <wsdl:message name="_getgetbycompanyidandtypecatalogorganizationstructureRequest">
+    <wsdl:part name="parameters" element="ns0:_getgetbycompanyidandtypecatalogorganizationstructure"/>
+  </wsdl:message>
+  <wsdl:message name="_getgetbycompanyidandtypecatalogorganizationstructureResponse">
+    <wsdl:part name="parameters" element="ns0:OrganizationsStructures"/>
+  </wsdl:message>
+  <wsdl:message name="_deletedeleteorganizationsstructureRequest">
+    <wsdl:part name="parameters" element="ns0:_deletedeleteorganizationsstructure"/>
+  </wsdl:message>
+  <wsdl:message name="delete_COMPANIES_STRUCTURES_operationRequest">
+    <wsdl:part name="parameters" element="ns0:delete_COMPANIES_STRUCTURES_operation"/>
+  </wsdl:message>
+  <wsdl:message name="insert_COMPANIES_STRUCTURES_operationRequest">
+    <wsdl:part name="parameters" element="ns0:insert_COMPANIES_STRUCTURES_operation"/>
+  </wsdl:message>
+  <wsdl:message name="insert_COMPANIES_STRUCTURES_operationResponse">
+    <wsdl:part name="parameters" element="ns0:GeneratedKeys"/>
+  </wsdl:message>
+  <wsdl:message name="_getgetbyidorganizationstructureRequest">
+    <wsdl:part name="parameters" element="ns0:_getgetbyidorganizationstructure"/>
+  </wsdl:message>
+  <wsdl:message name="_getgetbyidorganizationstructureResponse">
+    <wsdl:part name="parameters" element="ns0:OrganizationsStructures"/>
+  </wsdl:message>
+  <wsdl:message name="_getgetbycompanyidandtypecatalogfisrtorganizationstructureRequest">
+    <wsdl:part name="parameters" element="ns0:_getgetbycompanyidandtypecatalogfisrtorganizationstructure"/>
+  </wsdl:message>
+  <wsdl:message name="_getgetbycompanyidandtypecatalogfisrtorganizationstructureResponse">
+    <wsdl:part name="parameters" element="ns0:OrganizationsStructures"/>
+  </wsdl:message>
+  <wsdl:message name="_getgetallorganizationsstructuresRequest">
+    <wsdl:part name="parameters" element="ns0:_getgetallorganizationsstructures"/>
+  </wsdl:message>
+  <wsdl:message name="_getgetallorganizationsstructuresResponse">
+    <wsdl:part name="parameters" element="ns0:OrganizationsStructures"/>
+  </wsdl:message>
+  <wsdl:message name="select_all_COMPANIES_STRUCTURES_operationRequest">
+    <wsdl:part name="parameters" element="ns0:select_all_COMPANIES_STRUCTURES_operation"/>
+  </wsdl:message>
+  <wsdl:message name="select_all_COMPANIES_STRUCTURES_operationResponse">
+    <wsdl:part name="parameters" element="ns0:OrganizationsStructures"/>
+  </wsdl:message>
+  <wsdl:message name="select_with_catalog_company_type_id_hierarchies_operationRequest">
+    <wsdl:part name="parameters" element="ns0:select_with_catalog_company_type_id_hierarchies_operation"/>
+  </wsdl:message>
+  <wsdl:message name="select_with_catalog_company_type_id_hierarchies_operationResponse">
+    <wsdl:part name="parameters" element="ns0:OrganizationsStructures"/>
+  </wsdl:message>
+  <wsdl:message name="select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operationRequest">
+    <wsdl:part name="parameters" element="ns0:select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operation"/>
+  </wsdl:message>
+  <wsdl:message name="select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operationResponse">
+    <wsdl:part name="parameters" element="ns0:OrganizationsStructures"/>
+  </wsdl:message>
+  <wsdl:portType name="OrganizationsStructuresDSSPortType">
+    <wsdl:operation name="select_with_key_COMPANIES_STRUCTURES_operation">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:select_with_key_COMPANIES_STRUCTURES_operationRequest" wsaw:Action="urn:select_with_key_COMPANIES_STRUCTURES_operation"/>
+      <wsdl:output message="ns0:select_with_key_COMPANIES_STRUCTURES_operationResponse" wsaw:Action="urn:select_with_key_COMPANIES_STRUCTURES_operationResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:select_with_key_COMPANIES_STRUCTURES_operationDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="_postcreateorganizationsstructure">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:_postcreateorganizationsstructureRequest" wsaw:Action="urn:_postcreateorganizationsstructure"/>
+      <wsdl:output message="ns0:_postcreateorganizationsstructureResponse" wsaw:Action="urn:_postcreateorganizationsstructureResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:_postcreateorganizationsstructureDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="update_COMPANIES_STRUCTURES_operation">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:update_COMPANIES_STRUCTURES_operationRequest" wsaw:Action="urn:update_COMPANIES_STRUCTURES_operation"/>
+    </wsdl:operation>
+    <wsdl:operation name="_putupdateorganizationsstructure">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:_putupdateorganizationsstructureRequest" wsaw:Action="urn:_putupdateorganizationsstructure"/>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbycompanyidorganizationstructure">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:_getgetbycompanyidorganizationstructureRequest" wsaw:Action="urn:_getgetbycompanyidorganizationstructure"/>
+      <wsdl:output message="ns0:_getgetbycompanyidorganizationstructureResponse" wsaw:Action="urn:_getgetbycompanyidorganizationstructureResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:_getgetbycompanyidorganizationstructureDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operation">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operationRequest" wsaw:Action="urn:select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operation"/>
+      <wsdl:output message="ns0:select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operationResponse" wsaw:Action="urn:select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operationResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operationDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbycompanyidandtypecatalogorganizationstructure">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:_getgetbycompanyidandtypecatalogorganizationstructureRequest" wsaw:Action="urn:_getgetbycompanyidandtypecatalogorganizationstructure"/>
+      <wsdl:output message="ns0:_getgetbycompanyidandtypecatalogorganizationstructureResponse" wsaw:Action="urn:_getgetbycompanyidandtypecatalogorganizationstructureResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:_getgetbycompanyidandtypecatalogorganizationstructureDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="_deletedeleteorganizationsstructure">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:_deletedeleteorganizationsstructureRequest" wsaw:Action="urn:_deletedeleteorganizationsstructure"/>
+    </wsdl:operation>
+    <wsdl:operation name="delete_COMPANIES_STRUCTURES_operation">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:delete_COMPANIES_STRUCTURES_operationRequest" wsaw:Action="urn:delete_COMPANIES_STRUCTURES_operation"/>
+    </wsdl:operation>
+    <wsdl:operation name="insert_COMPANIES_STRUCTURES_operation">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:insert_COMPANIES_STRUCTURES_operationRequest" wsaw:Action="urn:insert_COMPANIES_STRUCTURES_operation"/>
+      <wsdl:output message="ns0:insert_COMPANIES_STRUCTURES_operationResponse" wsaw:Action="urn:insert_COMPANIES_STRUCTURES_operationResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:insert_COMPANIES_STRUCTURES_operationDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbyidorganizationstructure">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:_getgetbyidorganizationstructureRequest" wsaw:Action="urn:_getgetbyidorganizationstructure"/>
+      <wsdl:output message="ns0:_getgetbyidorganizationstructureResponse" wsaw:Action="urn:_getgetbyidorganizationstructureResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:_getgetbyidorganizationstructureDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbycompanyidandtypecatalogfisrtorganizationstructure">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:_getgetbycompanyidandtypecatalogfisrtorganizationstructureRequest" wsaw:Action="urn:_getgetbycompanyidandtypecatalogfisrtorganizationstructure"/>
+      <wsdl:output message="ns0:_getgetbycompanyidandtypecatalogfisrtorganizationstructureResponse" wsaw:Action="urn:_getgetbycompanyidandtypecatalogfisrtorganizationstructureResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:_getgetbycompanyidandtypecatalogfisrtorganizationstructureDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetallorganizationsstructures">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:_getgetallorganizationsstructuresRequest" wsaw:Action="urn:_getgetallorganizationsstructures"/>
+      <wsdl:output message="ns0:_getgetallorganizationsstructuresResponse" wsaw:Action="urn:_getgetallorganizationsstructuresResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:_getgetallorganizationsstructuresDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="select_all_COMPANIES_STRUCTURES_operation">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:select_all_COMPANIES_STRUCTURES_operationRequest" wsaw:Action="urn:select_all_COMPANIES_STRUCTURES_operation"/>
+      <wsdl:output message="ns0:select_all_COMPANIES_STRUCTURES_operationResponse" wsaw:Action="urn:select_all_COMPANIES_STRUCTURES_operationResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:select_all_COMPANIES_STRUCTURES_operationDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_catalog_company_type_id_hierarchies_operation">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:select_with_catalog_company_type_id_hierarchies_operationRequest" wsaw:Action="urn:select_with_catalog_company_type_id_hierarchies_operation"/>
+      <wsdl:output message="ns0:select_with_catalog_company_type_id_hierarchies_operationResponse" wsaw:Action="urn:select_with_catalog_company_type_id_hierarchies_operationResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:select_with_catalog_company_type_id_hierarchies_operationDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operation">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operationRequest" wsaw:Action="urn:select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operation"/>
+      <wsdl:output message="ns0:select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operationResponse" wsaw:Action="urn:select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operationResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operationDataServiceFault"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OrganizationsStructuresDSSSOAP11Binding" type="ns0:OrganizationsStructuresDSSPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="select_with_key_COMPANIES_STRUCTURES_operation">
+      <soap:operation soapAction="urn:select_with_key_COMPANIES_STRUCTURES_operation" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="_postcreateorganizationsstructure">
+      <soap:operation soapAction="urn:_postcreateorganizationsstructure" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="update_COMPANIES_STRUCTURES_operation">
+      <soap:operation soapAction="urn:update_COMPANIES_STRUCTURES_operation" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="_putupdateorganizationsstructure">
+      <soap:operation soapAction="urn:_putupdateorganizationsstructure" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbycompanyidorganizationstructure">
+      <soap:operation soapAction="urn:_getgetbycompanyidorganizationstructure" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operation">
+      <soap:operation soapAction="urn:select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operation" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbycompanyidandtypecatalogorganizationstructure">
+      <soap:operation soapAction="urn:_getgetbycompanyidandtypecatalogorganizationstructure" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="_deletedeleteorganizationsstructure">
+      <soap:operation soapAction="urn:_deletedeleteorganizationsstructure" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="delete_COMPANIES_STRUCTURES_operation">
+      <soap:operation soapAction="urn:delete_COMPANIES_STRUCTURES_operation" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="insert_COMPANIES_STRUCTURES_operation">
+      <soap:operation soapAction="urn:insert_COMPANIES_STRUCTURES_operation" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbyidorganizationstructure">
+      <soap:operation soapAction="urn:_getgetbyidorganizationstructure" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbycompanyidandtypecatalogfisrtorganizationstructure">
+      <soap:operation soapAction="urn:_getgetbycompanyidandtypecatalogfisrtorganizationstructure" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetallorganizationsstructures">
+      <soap:operation soapAction="urn:_getgetallorganizationsstructures" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="select_all_COMPANIES_STRUCTURES_operation">
+      <soap:operation soapAction="urn:select_all_COMPANIES_STRUCTURES_operation" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_catalog_company_type_id_hierarchies_operation">
+      <soap:operation soapAction="urn:select_with_catalog_company_type_id_hierarchies_operation" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operation">
+      <soap:operation soapAction="urn:select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operation" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="OrganizationsStructuresDSSSOAP12Binding" type="ns0:OrganizationsStructuresDSSPortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="select_with_key_COMPANIES_STRUCTURES_operation">
+      <soap12:operation soapAction="urn:select_with_key_COMPANIES_STRUCTURES_operation" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="_postcreateorganizationsstructure">
+      <soap12:operation soapAction="urn:_postcreateorganizationsstructure" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="update_COMPANIES_STRUCTURES_operation">
+      <soap12:operation soapAction="urn:update_COMPANIES_STRUCTURES_operation" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="_putupdateorganizationsstructure">
+      <soap12:operation soapAction="urn:_putupdateorganizationsstructure" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbycompanyidorganizationstructure">
+      <soap12:operation soapAction="urn:_getgetbycompanyidorganizationstructure" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operation">
+      <soap12:operation soapAction="urn:select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operation" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbycompanyidandtypecatalogorganizationstructure">
+      <soap12:operation soapAction="urn:_getgetbycompanyidandtypecatalogorganizationstructure" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="_deletedeleteorganizationsstructure">
+      <soap12:operation soapAction="urn:_deletedeleteorganizationsstructure" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="delete_COMPANIES_STRUCTURES_operation">
+      <soap12:operation soapAction="urn:delete_COMPANIES_STRUCTURES_operation" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="insert_COMPANIES_STRUCTURES_operation">
+      <soap12:operation soapAction="urn:insert_COMPANIES_STRUCTURES_operation" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbyidorganizationstructure">
+      <soap12:operation soapAction="urn:_getgetbyidorganizationstructure" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbycompanyidandtypecatalogfisrtorganizationstructure">
+      <soap12:operation soapAction="urn:_getgetbycompanyidandtypecatalogfisrtorganizationstructure" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetallorganizationsstructures">
+      <soap12:operation soapAction="urn:_getgetallorganizationsstructures" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="select_all_COMPANIES_STRUCTURES_operation">
+      <soap12:operation soapAction="urn:select_all_COMPANIES_STRUCTURES_operation" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_catalog_company_type_id_hierarchies_operation">
+      <soap12:operation soapAction="urn:select_with_catalog_company_type_id_hierarchies_operation" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operation">
+      <soap12:operation soapAction="urn:select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operation" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="OrganizationsStructuresDSSHttpBinding" type="ns0:OrganizationsStructuresDSSPortType">
+    <http:binding verb="POST"/>
+    <wsdl:operation name="select_with_key_COMPANIES_STRUCTURES_operation">
+      <http:operation location="select_with_key_COMPANIES_STRUCTURES_operation"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_postcreateorganizationsstructure">
+      <http:operation location="createOrganizationsStructure"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="update_COMPANIES_STRUCTURES_operation">
+      <http:operation location="update_COMPANIES_STRUCTURES_operation"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="_putupdateorganizationsstructure">
+      <http:operation location="updateOrganizationsStructure"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbycompanyidorganizationstructure">
+      <http:operation location="getByCompanyIdOrganizationStructure"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operation">
+      <http:operation location="select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operation"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbycompanyidandtypecatalogorganizationstructure">
+      <http:operation location="getByCompanyIdAndTypeCatalogOrganizationStructure"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_deletedeleteorganizationsstructure">
+      <http:operation location="deleteOrganizationsStructure"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="delete_COMPANIES_STRUCTURES_operation">
+      <http:operation location="delete_COMPANIES_STRUCTURES_operation"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="insert_COMPANIES_STRUCTURES_operation">
+      <http:operation location="insert_COMPANIES_STRUCTURES_operation"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbyidorganizationstructure">
+      <http:operation location="getByIdOrganizationStructure"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbycompanyidandtypecatalogfisrtorganizationstructure">
+      <http:operation location="getByCompanyIdAndTypeCatalogFisrtOrganizationStructure"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetallorganizationsstructures">
+      <http:operation location="getAllOrganizationsStructures"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="select_all_COMPANIES_STRUCTURES_operation">
+      <http:operation location="select_all_COMPANIES_STRUCTURES_operation"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_catalog_company_type_id_hierarchies_operation">
+      <http:operation location="select_with_catalog_company_type_id_hierarchies_operation"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operation">
+      <http:operation location="select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operation"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OrganizationsStructuresDSS">
+    <wsdl:port name="SecureSOAP11Endpoint" binding="ns0:OrganizationsStructuresDSSSOAP11Binding">
+      <soap:address location="https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SecureSOAP11Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="SOAP11Endpoint" binding="ns0:OrganizationsStructuresDSSSOAP11Binding">
+      <soap:address location="https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP11Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="SecureSOAP12Endpoint" binding="ns0:OrganizationsStructuresDSSSOAP12Binding">
+      <soap12:address location="https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SecureSOAP12Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="SOAP12Endpoint" binding="ns0:OrganizationsStructuresDSSSOAP12Binding">
+      <soap12:address location="https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP12Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="SecureHTTPEndpoint" binding="ns0:OrganizationsStructuresDSSHttpBinding">
+      <http:address location="https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SecureHTTPEndpoint"/>
+    </wsdl:port>
+    <wsdl:port name="HTTPEndpoint" binding="ns0:OrganizationsStructuresDSSHttpBinding">
+      <http:address location="https://ei.bp.com:8243/services/OrganizationsStructuresDSS.HTTPEndpoint"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP12Endpoint</con:endpoint><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SecureSOAP12Endpoint</con:endpoint></con:endpoints><con:operation id="5ba637f8-0b1f-40ad-8006-0784658a0714" isOneWay="false" action="urn:_deletedeleteorganizationsstructure" name="_deletedeleteorganizationsstructure" bindingOperationName="_deletedeleteorganizationsstructure" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f25a9806-559d-420e-98c2-98144b8c4902" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:_deletedeleteorganizationsstructure>
+         <cen:id>?</cen:id>
+      </cen:_deletedeleteorganizationsstructure>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_deletedeleteorganizationsstructure"/></con:call></con:operation><con:operation id="de916087-224f-43ce-941a-1f762ca405b2" isOneWay="false" action="urn:_getgetallorganizationsstructures" name="_getgetallorganizationsstructures" bindingOperationName="_getgetallorganizationsstructures" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4375b716-3ddc-45e8-8fe6-147149ddf00e" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:_getgetallorganizationsstructures/>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_getgetallorganizationsstructures"/></con:call></con:operation><con:operation id="ea6a2687-7163-4bf6-aa1c-333381b00d6c" isOneWay="false" action="urn:_getgetbycompanyidandtypecatalogfisrtorganizationstructure" name="_getgetbycompanyidandtypecatalogfisrtorganizationstructure" bindingOperationName="_getgetbycompanyidandtypecatalogfisrtorganizationstructure" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d9dad088-9c99-4c63-a6da-051050948db5" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:_getgetbycompanyidandtypecatalogfisrtorganizationstructure>
+         <cen:companyCode>?</cen:companyCode>
+         <cen:typeCatalogCode>?</cen:typeCatalogCode>
+      </cen:_getgetbycompanyidandtypecatalogfisrtorganizationstructure>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_getgetbycompanyidandtypecatalogfisrtorganizationstructure"/></con:call></con:operation><con:operation id="f2ae60c5-30fa-4b02-a4f5-e1d9298d76ce" isOneWay="false" action="urn:_getgetbycompanyidandtypecatalogorganizationstructure" name="_getgetbycompanyidandtypecatalogorganizationstructure" bindingOperationName="_getgetbycompanyidandtypecatalogorganizationstructure" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="352b54fa-27bb-4ca8-bc1a-9b9ac06c759e" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:_getgetbycompanyidandtypecatalogorganizationstructure>
+         <cen:companyCode>?</cen:companyCode>
+         <cen:typeCatalogCode>?</cen:typeCatalogCode>
+         <cen:parentCode>?</cen:parentCode>
+      </cen:_getgetbycompanyidandtypecatalogorganizationstructure>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_getgetbycompanyidandtypecatalogorganizationstructure"/></con:call></con:operation><con:operation id="d42c4b7b-a1ff-4402-ac8f-e91f46b41144" isOneWay="false" action="urn:_getgetbycompanyidorganizationstructure" name="_getgetbycompanyidorganizationstructure" bindingOperationName="_getgetbycompanyidorganizationstructure" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="61e8131c-f966-49ee-a6af-00bc064a1e3a" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:_getgetbycompanyidorganizationstructure>
+         <cen:companyId>?</cen:companyId>
+      </cen:_getgetbycompanyidorganizationstructure>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_getgetbycompanyidorganizationstructure"/></con:call></con:operation><con:operation id="d36c1744-1411-4ec6-ae2c-c97c8d4801b0" isOneWay="false" action="urn:_getgetbyidorganizationstructure" name="_getgetbyidorganizationstructure" bindingOperationName="_getgetbyidorganizationstructure" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="fbe9905e-17d7-4a08-9212-750452e3542f" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:_getgetbyidorganizationstructure>
+         <cen:id>?</cen:id>
+      </cen:_getgetbyidorganizationstructure>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_getgetbyidorganizationstructure"/></con:call></con:operation><con:operation id="4eac6176-1a58-499e-93ac-5d993eeb392f" isOneWay="false" action="urn:_postcreateorganizationsstructure" name="_postcreateorganizationsstructure" bindingOperationName="_postcreateorganizationsstructure" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f1991342-6b7b-4066-95e0-07d0de7035c6" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:_postcreateorganizationsstructure>
+         <cen:companyId>?</cen:companyId>
+         <cen:catalogOrganizationalStructureId>?</cen:catalogOrganizationalStructureId>
+         <cen:organizationStructureId>?</cen:organizationStructureId>
+         <cen:valid>?</cen:valid>
+      </cen:_postcreateorganizationsstructure>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_postcreateorganizationsstructure"/></con:call></con:operation><con:operation id="8380fdc6-6ec6-4e3f-803c-1e7d824929bd" isOneWay="false" action="urn:_putupdateorganizationsstructure" name="_putupdateorganizationsstructure" bindingOperationName="_putupdateorganizationsstructure" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="56380a02-9b9f-4d30-a445-117e3c13e10c" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:_putupdateorganizationsstructure>
+         <cen:companyId>?</cen:companyId>
+         <cen:catalogOrganizationalStructureId>?</cen:catalogOrganizationalStructureId>
+         <cen:organizationStructureId>?</cen:organizationStructureId>
+         <cen:id>?</cen:id>
+      </cen:_putupdateorganizationsstructure>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_putupdateorganizationsstructure"/></con:call></con:operation><con:operation id="354e71f1-3b39-4073-b1dc-172107996ba3" isOneWay="false" action="urn:delete_COMPANIES_STRUCTURES_operation" name="delete_COMPANIES_STRUCTURES_operation" bindingOperationName="delete_COMPANIES_STRUCTURES_operation" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="be4cd9f5-3364-4d6b-891d-f91d0dc1c2a1" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:delete_COMPANIES_STRUCTURES_operation>
+         <cen:id>?</cen:id>
+      </cen:delete_COMPANIES_STRUCTURES_operation>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:delete_COMPANIES_STRUCTURES_operation"/></con:call></con:operation><con:operation id="3ae83869-e738-4f59-bf02-e239df47a607" isOneWay="false" action="urn:insert_COMPANIES_STRUCTURES_operation" name="insert_COMPANIES_STRUCTURES_operation" bindingOperationName="insert_COMPANIES_STRUCTURES_operation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="174d9014-7cee-46f1-82b6-28e9d82a2e58" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:insert_COMPANIES_STRUCTURES_operation>
+         <cen:companyId>?</cen:companyId>
+         <cen:catalogOrganizationalStructureId>?</cen:catalogOrganizationalStructureId>
+         <cen:organizationStructureId>?</cen:organizationStructureId>
+         <cen:valid>?</cen:valid>
+      </cen:insert_COMPANIES_STRUCTURES_operation>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:insert_COMPANIES_STRUCTURES_operation"/></con:call></con:operation><con:operation id="c5470516-c4be-4cfe-9fe1-539830dcedcb" isOneWay="false" action="urn:select_all_COMPANIES_STRUCTURES_operation" name="select_all_COMPANIES_STRUCTURES_operation" bindingOperationName="select_all_COMPANIES_STRUCTURES_operation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="7af66f3b-f03a-47be-bd25-e7f257a04262" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:select_all_COMPANIES_STRUCTURES_operation/>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:select_all_COMPANIES_STRUCTURES_operation"/></con:call></con:operation><con:operation id="316fa05b-6712-42b3-9c3f-2724af9b5746" isOneWay="false" action="urn:select_with_catalog_company_type_id_hierarchies_operation" name="select_with_catalog_company_type_id_hierarchies_operation" bindingOperationName="select_with_catalog_company_type_id_hierarchies_operation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c5c5284f-aa09-4395-922b-07db1aa1b645" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:select_with_catalog_company_type_id_hierarchies_operation>
+         <cen:companyId>?</cen:companyId>
+      </cen:select_with_catalog_company_type_id_hierarchies_operation>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:select_with_catalog_company_type_id_hierarchies_operation"/></con:call></con:operation><con:operation id="11a1462f-3449-40a4-8b10-efa7c17c3233" isOneWay="false" action="urn:select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operation" name="select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operation" bindingOperationName="select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="fe3f5f9d-c5e0-469a-90b4-aa39a548853e" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operation>
+         <cen:companyCode>?</cen:companyCode>
+         <cen:typeCatalogCode>?</cen:typeCatalogCode>
+         <cen:parentCode>?</cen:parentCode>
+      </cen:select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operation>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:select_with_company_id_and_type_catalog_COMPANIES_STRUCTURES_operation"/></con:call></con:operation><con:operation id="a4c90cc7-99a9-497c-9e58-f46814464e3d" isOneWay="false" action="urn:select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operation" name="select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operation" bindingOperationName="select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="beb1ba15-8840-4281-8bc7-c98557bbb0e2" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operation>
+         <cen:companyCode>?</cen:companyCode>
+         <cen:typeCatalogCode>?</cen:typeCatalogCode>
+      </cen:select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operation>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:select_with_company_id_and_type_catalog_first_COMPANIES_STRUCTURES_operation"/></con:call></con:operation><con:operation id="d12faa8e-032a-4c13-9023-9ea71ce603c8" isOneWay="false" action="urn:select_with_key_COMPANIES_STRUCTURES_operation" name="select_with_key_COMPANIES_STRUCTURES_operation" bindingOperationName="select_with_key_COMPANIES_STRUCTURES_operation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="be4c82ef-96be-49bd-a2bf-0c20a9f4b367" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:select_with_key_COMPANIES_STRUCTURES_operation>
+         <cen:id>?</cen:id>
+      </cen:select_with_key_COMPANIES_STRUCTURES_operation>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:select_with_key_COMPANIES_STRUCTURES_operation"/></con:call></con:operation><con:operation id="ee9a909a-759c-4268-bf6a-5b56eabc6465" isOneWay="false" action="urn:update_COMPANIES_STRUCTURES_operation" name="update_COMPANIES_STRUCTURES_operation" bindingOperationName="update_COMPANIES_STRUCTURES_operation" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="830f3765-4671-4e35-ba29-9eca82f9f5d1" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/OrganizationsStructuresDSS.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:update_COMPANIES_STRUCTURES_operation>
+         <cen:companyId>?</cen:companyId>
+         <cen:catalogOrganizationalStructureId>?</cen:catalogOrganizationalStructureId>
+         <cen:organizationStructureId>?</cen:organizationStructureId>
+         <cen:id>?</cen:id>
+      </cen:update_COMPANIES_STRUCTURES_operation>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:update_COMPANIES_STRUCTURES_operation"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
