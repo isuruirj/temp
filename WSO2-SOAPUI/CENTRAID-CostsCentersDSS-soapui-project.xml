@@ -1,0 +1,1678 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="743a106c-9bdf-490b-943a-3f76bee0367f" activeEnvironment="Default" name="CENTRAID_CostsCentersDSS" resourceRoot="" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="312e4ea1-a1a8-4693-a479-93275b9c7736" wsaVersion="NONE" name="CostsCentersDSSSOAP11Binding" type="wsdl" bindingName="{centra-id.com}CostsCentersDSSSOAP11Binding" soapVersion="1_1" anonymous="optional" definition="https://ei.bp.com:8243/services/CostsCentersDSS?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint</con:endpoint></con:endpoints><con:operation id="70697305-8699-4bd3-a624-e26c6aa3d862" isOneWay="false" action="urn:_deletedeletecostcenter" name="_deletedeletecostcenter" bindingOperationName="_deletedeletecostcenter" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4e06d614-a293-4df7-94c3-2d408d558056" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:_deletedeletecostcenter>
+         <cen:id>?</cen:id>
+      </cen:_deletedeletecostcenter>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_deletedeletecostcenter"/></con:call></con:operation><con:operation id="09da699b-53c6-401b-8ac0-57baf505e247" isOneWay="false" action="urn:_deletedeletecostcenter_batch_req" name="_deletedeletecostcenter_batch_req" bindingOperationName="_deletedeletecostcenter_batch_req" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ca9ea292-5de5-4472-a7c0-5e1fb0a10441" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:_deletedeletecostcenter_batch_req>
+         <!--1 or more repetitions:-->
+         <cen:_deletedeletecostcenter>
+            <cen:id>?</cen:id>
+         </cen:_deletedeletecostcenter>
+      </cen:_deletedeletecostcenter_batch_req>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_deletedeletecostcenter_batch_req"/></con:call></con:operation><con:operation id="ac12bde8-376c-4a90-9d41-7b0beb928cf5" isOneWay="false" action="urn:_getgetallcostscenters" name="_getgetallcostscenters" bindingOperationName="_getgetallcostscenters" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="51dbe7d4-708f-4f5c-a004-13b411ec0a86" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:_getgetallcostscenters/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_getgetallcostscenters"/></con:call></con:operation><con:operation id="bb7fc051-6973-4974-a488-da906383dcb5" isOneWay="false" action="urn:_getgetbycompanycodeandcodecostcenter" name="_getgetbycompanycodeandcodecostcenter" bindingOperationName="_getgetbycompanycodeandcodecostcenter" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1bb5cafc-038e-4602-91fc-7f0978f5e84e" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:_getgetbycompanycodeandcodecostcenter>
+         <cen:companyCode>?</cen:companyCode>
+         <cen:centerCostCode>?</cen:centerCostCode>
+      </cen:_getgetbycompanycodeandcodecostcenter>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_getgetbycompanycodeandcodecostcenter"/></con:call></con:operation><con:operation id="7a11a616-c09c-4cf9-ac98-06ca38039a0a" isOneWay="false" action="urn:_getgetbycompanycodecostcenter" name="_getgetbycompanycodecostcenter" bindingOperationName="_getgetbycompanycodecostcenter" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="abd0bcd8-b2ea-48dd-8bce-586e6a36cfb6" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:_getgetbycompanycodecostcenter>
+         <cen:code>BCPI</cen:code>
+      </cen:_getgetbycompanycodecostcenter>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_getgetbycompanycodecostcenter"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="ea4b8604-d154-412a-8bdc-8779f030f8d2" isOneWay="false" action="urn:_getgetbyidcostcenter" name="_getgetbyidcostcenter" bindingOperationName="_getgetbyidcostcenter" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="cacafa72-638c-40a0-a832-5a009c4c58e3" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:_getgetbyidcostcenter>
+         <cen:id>?</cen:id>
+      </cen:_getgetbyidcostcenter>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_getgetbyidcostcenter"/></con:call></con:operation><con:operation id="29f4250a-6be7-4aaf-8723-c1ee7ffdcdcf" isOneWay="false" action="urn:_postcreatecostcenter" name="_postcreatecostcenter" bindingOperationName="_postcreatecostcenter" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="3382f5d7-1a4c-4729-a9ec-f85f332003f8" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:_postcreatecostcenter>
+         <cen:code>?</cen:code>
+         <cen:name>?</cen:name>
+         <cen:companyId>?</cen:companyId>
+         <cen:costCenterId>?</cen:costCenterId>
+         <cen:valid>?</cen:valid>
+      </cen:_postcreatecostcenter>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_postcreatecostcenter"/></con:call></con:operation><con:operation id="2524b45e-88e1-4563-ae93-deab9984311e" isOneWay="false" action="urn:_postcreatecostcenter_batch_req" name="_postcreatecostcenter_batch_req" bindingOperationName="_postcreatecostcenter_batch_req" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="8fe58b4c-122e-4888-89f0-8a12dbe38b37" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:_postcreatecostcenter_batch_req>
+         <!--1 or more repetitions:-->
+         <cen:_postcreatecostcenter>
+            <cen:code>?</cen:code>
+            <cen:name>?</cen:name>
+            <cen:companyId>?</cen:companyId>
+            <cen:costCenterId>?</cen:costCenterId>
+            <cen:valid>?</cen:valid>
+         </cen:_postcreatecostcenter>
+      </cen:_postcreatecostcenter_batch_req>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_postcreatecostcenter_batch_req"/></con:call></con:operation><con:operation id="175f2c95-09e5-4aff-91dd-6913d1061934" isOneWay="false" action="urn:_putupdatecostcenter" name="_putupdatecostcenter" bindingOperationName="_putupdatecostcenter" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5f9deaa1-a071-409d-a423-b44e7c883462" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:_putupdatecostcenter>
+         <cen:code>?</cen:code>
+         <cen:name>?</cen:name>
+         <cen:companyId>?</cen:companyId>
+         <cen:costCenterId>?</cen:costCenterId>
+         <cen:id>?</cen:id>
+      </cen:_putupdatecostcenter>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_putupdatecostcenter"/></con:call></con:operation><con:operation id="8b2d19ba-9b32-443a-ac5b-e8f0b10539b8" isOneWay="false" action="urn:_putupdatecostcenter_batch_req" name="_putupdatecostcenter_batch_req" bindingOperationName="_putupdatecostcenter_batch_req" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="cd696adc-19ba-4a9f-923b-ddd092c493dd" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:_putupdatecostcenter_batch_req>
+         <!--1 or more repetitions:-->
+         <cen:_putupdatecostcenter>
+            <cen:code>?</cen:code>
+            <cen:name>?</cen:name>
+            <cen:companyId>?</cen:companyId>
+            <cen:costCenterId>?</cen:costCenterId>
+            <cen:id>?</cen:id>
+         </cen:_putupdatecostcenter>
+      </cen:_putupdatecostcenter_batch_req>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_putupdatecostcenter_batch_req"/></con:call></con:operation><con:operation id="7f7bacc7-6d12-4b8b-b1ae-7d4cee8b0170" isOneWay="false" action="urn:delete_costs_centers_operation" name="delete_costs_centers_operation" bindingOperationName="delete_costs_centers_operation" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b23e37cc-3e6c-4a5f-a805-36bca851b9c7" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:delete_costs_centers_operation>
+         <cen:id>?</cen:id>
+      </cen:delete_costs_centers_operation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:delete_costs_centers_operation"/></con:call></con:operation><con:operation id="c4fd282d-5ea2-41e5-8ef7-63e7639306b3" isOneWay="false" action="urn:delete_costs_centers_operation_batch_req" name="delete_costs_centers_operation_batch_req" bindingOperationName="delete_costs_centers_operation_batch_req" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ad64fe72-9a04-4cad-86bc-3f6b85615b13" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:delete_costs_centers_operation_batch_req>
+         <!--1 or more repetitions:-->
+         <cen:delete_costs_centers_operation>
+            <cen:id>?</cen:id>
+         </cen:delete_costs_centers_operation>
+      </cen:delete_costs_centers_operation_batch_req>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:delete_costs_centers_operation_batch_req"/></con:call></con:operation><con:operation id="584091b0-c453-4488-abf6-6a4dfeb1228a" isOneWay="false" action="urn:insert_costs_centers_operation" name="insert_costs_centers_operation" bindingOperationName="insert_costs_centers_operation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d2430c8c-f610-4002-8f06-47b413bbe3b7" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:insert_costs_centers_operation>
+         <cen:code>?</cen:code>
+         <cen:name>?</cen:name>
+         <cen:companyId>?</cen:companyId>
+         <cen:costCenterId>?</cen:costCenterId>
+         <cen:valid>?</cen:valid>
+      </cen:insert_costs_centers_operation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:insert_costs_centers_operation"/></con:call></con:operation><con:operation id="6d7a9712-e51f-4d01-ac81-09e14cb7a8ec" isOneWay="false" action="urn:insert_costs_centers_operation_batch_req" name="insert_costs_centers_operation_batch_req" bindingOperationName="insert_costs_centers_operation_batch_req" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d00c1e42-e9e8-4e4d-84a5-d71decd22651" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:insert_costs_centers_operation_batch_req>
+         <!--1 or more repetitions:-->
+         <cen:insert_costs_centers_operation>
+            <cen:code>?</cen:code>
+            <cen:name>?</cen:name>
+            <cen:companyId>?</cen:companyId>
+            <cen:costCenterId>?</cen:costCenterId>
+            <cen:valid>?</cen:valid>
+         </cen:insert_costs_centers_operation>
+      </cen:insert_costs_centers_operation_batch_req>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:insert_costs_centers_operation_batch_req"/></con:call></con:operation><con:operation id="79c7ecf4-d7f3-4617-a3ca-ccc23709ca80" isOneWay="false" action="urn:request_box" name="request_box" bindingOperationName="request_box" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ba9394ac-6b0c-4986-999b-c2152520b0eb" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:request_box>
+         <!--You may enter the following 20 items in any order-->
+         <cen:delete_costs_centers_operation>
+            <cen:id>?</cen:id>
+         </cen:delete_costs_centers_operation>
+         <cen:update_costs_centers_operation>
+            <cen:code>?</cen:code>
+            <cen:name>?</cen:name>
+            <cen:companyId>?</cen:companyId>
+            <cen:costCenterId>?</cen:costCenterId>
+            <cen:id>?</cen:id>
+         </cen:update_costs_centers_operation>
+         <cen:insert_costs_centers_operation>
+            <cen:code>?</cen:code>
+            <cen:name>?</cen:name>
+            <cen:companyId>?</cen:companyId>
+            <cen:costCenterId>?</cen:costCenterId>
+            <cen:valid>?</cen:valid>
+         </cen:insert_costs_centers_operation>
+         <cen:select_all_costs_centers_operation/>
+         <cen:select_with_key_costs_centers_operation>
+            <cen:id>?</cen:id>
+         </cen:select_with_key_costs_centers_operation>
+         <cen:select_with_company_code_costs_centers_operation>
+            <cen:code>?</cen:code>
+         </cen:select_with_company_code_costs_centers_operation>
+         <cen:select_with_company_code_and_code_costs_centers_operation>
+            <cen:companyCode>?</cen:companyCode>
+            <cen:centerCostCode>?</cen:centerCostCode>
+         </cen:select_with_company_code_and_code_costs_centers_operation>
+         <cen:update_costs_centers_operation_batch_req>
+            <!--1 or more repetitions:-->
+            <cen:update_costs_centers_operation>
+               <cen:code>?</cen:code>
+               <cen:name>?</cen:name>
+               <cen:companyId>?</cen:companyId>
+               <cen:costCenterId>?</cen:costCenterId>
+               <cen:id>?</cen:id>
+            </cen:update_costs_centers_operation>
+         </cen:update_costs_centers_operation_batch_req>
+         <cen:insert_costs_centers_operation_batch_req>
+            <!--1 or more repetitions:-->
+            <cen:insert_costs_centers_operation>
+               <cen:code>?</cen:code>
+               <cen:name>?</cen:name>
+               <cen:companyId>?</cen:companyId>
+               <cen:costCenterId>?</cen:costCenterId>
+               <cen:valid>?</cen:valid>
+            </cen:insert_costs_centers_operation>
+         </cen:insert_costs_centers_operation_batch_req>
+         <cen:delete_costs_centers_operation_batch_req>
+            <!--1 or more repetitions:-->
+            <cen:delete_costs_centers_operation>
+               <cen:id>?</cen:id>
+            </cen:delete_costs_centers_operation>
+         </cen:delete_costs_centers_operation_batch_req>
+         <cen:_getgetallcostscenters/>
+         <cen:_getgetbyidcostcenter>
+            <cen:id>?</cen:id>
+         </cen:_getgetbyidcostcenter>
+         <cen:_getgetbycompanycodecostcenter>
+            <cen:code>?</cen:code>
+         </cen:_getgetbycompanycodecostcenter>
+         <cen:_getgetbycompanycodeandcodecostcenter>
+            <cen:companyCode>?</cen:companyCode>
+            <cen:centerCostCode>?</cen:centerCostCode>
+         </cen:_getgetbycompanycodeandcodecostcenter>
+         <cen:_postcreatecostcenter>
+            <cen:code>?</cen:code>
+            <cen:name>?</cen:name>
+            <cen:companyId>?</cen:companyId>
+            <cen:costCenterId>?</cen:costCenterId>
+            <cen:valid>?</cen:valid>
+         </cen:_postcreatecostcenter>
+         <cen:_putupdatecostcenter>
+            <cen:code>?</cen:code>
+            <cen:name>?</cen:name>
+            <cen:companyId>?</cen:companyId>
+            <cen:costCenterId>?</cen:costCenterId>
+            <cen:id>?</cen:id>
+         </cen:_putupdatecostcenter>
+         <cen:_deletedeletecostcenter>
+            <cen:id>?</cen:id>
+         </cen:_deletedeletecostcenter>
+         <cen:_postcreatecostcenter_batch_req>
+            <!--1 or more repetitions:-->
+            <cen:_postcreatecostcenter>
+               <cen:code>?</cen:code>
+               <cen:name>?</cen:name>
+               <cen:companyId>?</cen:companyId>
+               <cen:costCenterId>?</cen:costCenterId>
+               <cen:valid>?</cen:valid>
+            </cen:_postcreatecostcenter>
+         </cen:_postcreatecostcenter_batch_req>
+         <cen:_putupdatecostcenter_batch_req>
+            <!--1 or more repetitions:-->
+            <cen:_putupdatecostcenter>
+               <cen:code>?</cen:code>
+               <cen:name>?</cen:name>
+               <cen:companyId>?</cen:companyId>
+               <cen:costCenterId>?</cen:costCenterId>
+               <cen:id>?</cen:id>
+            </cen:_putupdatecostcenter>
+         </cen:_putupdatecostcenter_batch_req>
+         <cen:_deletedeletecostcenter_batch_req>
+            <!--1 or more repetitions:-->
+            <cen:_deletedeletecostcenter>
+               <cen:id>?</cen:id>
+            </cen:_deletedeletecostcenter>
+         </cen:_deletedeletecostcenter_batch_req>
+      </cen:request_box>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:request_box"/></con:call></con:operation><con:operation id="1a4ba49a-9c85-4581-8990-2ed77d96be8b" isOneWay="false" action="urn:select_all_costs_centers_operation" name="select_all_costs_centers_operation" bindingOperationName="select_all_costs_centers_operation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c00794e1-ee91-4644-9060-f27dd775ca7a" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:select_all_costs_centers_operation/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:select_all_costs_centers_operation"/></con:call></con:operation><con:operation id="7df6f3eb-9665-4db8-a7cc-1213254c8197" isOneWay="false" action="urn:select_with_company_code_and_code_costs_centers_operation" name="select_with_company_code_and_code_costs_centers_operation" bindingOperationName="select_with_company_code_and_code_costs_centers_operation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="63eddd7d-5ec3-4be1-a5ba-aaa271c1ec90" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:select_with_company_code_and_code_costs_centers_operation>
+         <cen:companyCode>?</cen:companyCode>
+         <cen:centerCostCode>?</cen:centerCostCode>
+      </cen:select_with_company_code_and_code_costs_centers_operation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:select_with_company_code_and_code_costs_centers_operation"/></con:call></con:operation><con:operation id="a26a9abe-2651-4fb3-bf7a-e3b41b91aee9" isOneWay="false" action="urn:select_with_company_code_costs_centers_operation" name="select_with_company_code_costs_centers_operation" bindingOperationName="select_with_company_code_costs_centers_operation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="721b2994-6a91-461d-abd0-bbd4fba61006" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:select_with_company_code_costs_centers_operation>
+         <cen:code>?</cen:code>
+      </cen:select_with_company_code_costs_centers_operation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:select_with_company_code_costs_centers_operation"/></con:call></con:operation><con:operation id="a1dc3733-42e1-47fb-8ac6-fa57479e38da" isOneWay="false" action="urn:select_with_key_costs_centers_operation" name="select_with_key_costs_centers_operation" bindingOperationName="select_with_key_costs_centers_operation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="413b427e-2360-4385-91f9-34cfbe87fdcd" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:select_with_key_costs_centers_operation>
+         <cen:id>?</cen:id>
+      </cen:select_with_key_costs_centers_operation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:select_with_key_costs_centers_operation"/></con:call></con:operation><con:operation id="6d477881-c5de-47f1-8fa7-48b8a0050f86" isOneWay="false" action="urn:update_costs_centers_operation" name="update_costs_centers_operation" bindingOperationName="update_costs_centers_operation" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="3976f1e2-c677-48c5-9f55-45b54d86e9cd" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:update_costs_centers_operation>
+         <cen:code>?</cen:code>
+         <cen:name>?</cen:name>
+         <cen:companyId>?</cen:companyId>
+         <cen:costCenterId>?</cen:costCenterId>
+         <cen:id>?</cen:id>
+      </cen:update_costs_centers_operation>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:update_costs_centers_operation"/></con:call></con:operation><con:operation id="dca025e9-9880-4ebf-9df1-9221821873b7" isOneWay="false" action="urn:update_costs_centers_operation_batch_req" name="update_costs_centers_operation_batch_req" bindingOperationName="update_costs_centers_operation_batch_req" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="fb3cfd4e-bdfa-4aa8-b5fb-3f7eaf162090" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cen="centra-id.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cen:update_costs_centers_operation_batch_req>
+         <!--1 or more repetitions:-->
+         <cen:update_costs_centers_operation>
+            <cen:code>?</cen:code>
+            <cen:name>?</cen:name>
+            <cen:companyId>?</cen:companyId>
+            <cen:costCenterId>?</cen:costCenterId>
+            <cen:id>?</cen:id>
+         </cen:update_costs_centers_operation>
+      </cen:update_costs_centers_operation_batch_req>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:update_costs_centers_operation_batch_req"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="7749d7ac-529e-4230-98c1-9bd254462126" wsaVersion="NONE" name="CostsCentersDSSSOAP12Binding" type="wsdl" bindingName="{centra-id.com}CostsCentersDSSSOAP12Binding" soapVersion="1_2" anonymous="optional" definition="https://ei.bp.com:8243/services/CostsCentersDSS?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://ei.bp.com:8243/services/CostsCentersDSS?wsdl"><con:part><con:url>https://ei.bp.com:8243/services/CostsCentersDSS?wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="centra-id.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns0="centra-id.com" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns1="http://ws.wso2.org/dataservice" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:documentation/>
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="centra-id.com">
+      <xs:element name="delete_costs_centers_operation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="id" nillable="true" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="update_costs_centers_operation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="code" nillable="true" type="xs:string"/>
+            <xs:element name="name" nillable="true" type="xs:string"/>
+            <xs:element name="companyId" nillable="true" type="xs:long"/>
+            <xs:element name="costCenterId" nillable="true" type="xs:long"/>
+            <xs:element name="id" nillable="true" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="insert_costs_centers_operation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="code" nillable="true" type="xs:string"/>
+            <xs:element name="name" nillable="true" type="xs:string"/>
+            <xs:element name="companyId" nillable="true" type="xs:long"/>
+            <xs:element name="costCenterId" nillable="true" type="xs:long"/>
+            <xs:element name="valid" nillable="true" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GeneratedKeys" type="ns0:GeneratedKeys"/>
+      <xs:complexType name="GeneratedKeys">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" type="ns0:Entry"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Entry">
+        <xs:sequence>
+          <xs:element name="id" nillable="true" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="select_all_costs_centers_operation">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CostsCenters" type="ns0:CostsCenters"/>
+      <xs:complexType name="CostsCenters">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="CostCenter" type="ns0:CostCenter"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CostCenter">
+        <xs:sequence>
+          <xs:element name="id" nillable="true" type="xs:long"/>
+          <xs:element name="code" nillable="true" type="xs:string"/>
+          <xs:element name="name" nillable="true" type="xs:string"/>
+          <xs:element name="companyId" nillable="true" type="xs:long"/>
+          <xs:element name="costCenterId" nillable="true" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="select_with_key_costs_centers_operation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="id" nillable="true" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="select_with_company_code_costs_centers_operation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="code" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="select_with_company_code_and_code_costs_centers_operation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="companyCode" nillable="true" type="xs:string"/>
+            <xs:element name="centerCostCode" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="update_costs_centers_operation_batch_req">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" ref="ns0:update_costs_centers_operation"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="insert_costs_centers_operation_batch_req">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" ref="ns0:insert_costs_centers_operation"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="delete_costs_centers_operation_batch_req">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" ref="ns0:delete_costs_centers_operation"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="_getgetallcostscenters">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="_getgetbyidcostcenter">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="id" nillable="true" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="_getgetbycompanycodecostcenter">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="code" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="_getgetbycompanycodeandcodecostcenter">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="companyCode" nillable="true" type="xs:string"/>
+            <xs:element name="centerCostCode" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="_postcreatecostcenter">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="code" nillable="true" type="xs:string"/>
+            <xs:element name="name" nillable="true" type="xs:string"/>
+            <xs:element name="companyId" nillable="true" type="xs:long"/>
+            <xs:element name="costCenterId" nillable="true" type="xs:long"/>
+            <xs:element name="valid" nillable="true" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="_putupdatecostcenter">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="code" nillable="true" type="xs:string"/>
+            <xs:element name="name" nillable="true" type="xs:string"/>
+            <xs:element name="companyId" nillable="true" type="xs:long"/>
+            <xs:element name="costCenterId" nillable="true" type="xs:long"/>
+            <xs:element name="id" nillable="true" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="_deletedeletecostcenter">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="id" nillable="true" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="_postcreatecostcenter_batch_req">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" ref="ns0:_postcreatecostcenter"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="_putupdatecostcenter_batch_req">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" ref="ns0:_putupdatecostcenter"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="_deletedeletecostcenter_batch_req">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" ref="ns0:_deletedeletecostcenter"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="request_box">
+        <xs:complexType>
+          <xs:all minOccurs="0">
+            <xs:element ref="ns0:delete_costs_centers_operation"/>
+            <xs:element ref="ns0:update_costs_centers_operation"/>
+            <xs:element ref="ns0:insert_costs_centers_operation"/>
+            <xs:element ref="ns0:select_all_costs_centers_operation"/>
+            <xs:element ref="ns0:select_with_key_costs_centers_operation"/>
+            <xs:element ref="ns0:select_with_company_code_costs_centers_operation"/>
+            <xs:element ref="ns0:select_with_company_code_and_code_costs_centers_operation"/>
+            <xs:element ref="ns0:update_costs_centers_operation_batch_req"/>
+            <xs:element ref="ns0:insert_costs_centers_operation_batch_req"/>
+            <xs:element ref="ns0:delete_costs_centers_operation_batch_req"/>
+            <xs:element ref="ns0:_getgetallcostscenters"/>
+            <xs:element ref="ns0:_getgetbyidcostcenter"/>
+            <xs:element ref="ns0:_getgetbycompanycodecostcenter"/>
+            <xs:element ref="ns0:_getgetbycompanycodeandcodecostcenter"/>
+            <xs:element ref="ns0:_postcreatecostcenter"/>
+            <xs:element ref="ns0:_putupdatecostcenter"/>
+            <xs:element ref="ns0:_deletedeletecostcenter"/>
+            <xs:element ref="ns0:_postcreatecostcenter_batch_req"/>
+            <xs:element ref="ns0:_putupdatecostcenter_batch_req"/>
+            <xs:element ref="ns0:_deletedeletecostcenter_batch_req"/>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://ws.wso2.org/dataservice">
+      <xs:element name="DataServiceFault">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="current_params" type="xs:string"/>
+            <xs:element name="current_request_name" type="xs:string"/>
+            <xs:element name="nested_exception" type="xs:string"/>
+            <xs:element name="source_data_service">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="location" type="xs:string"/>
+                  <xs:element name="default_namespace" type="xs:string"/>
+                  <xs:element name="description" type="xs:string"/>
+                  <xs:element name="data_service_name" type="xs:string"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ds_code" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="REQUEST_STATUS" type="xs:string"/>
+      <xs:element name="DATA_SERVICE_RESPONSE">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:any minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DATA_SERVICE_REQUEST_BOX_RESPONSE">
+        <xs:complexType>
+          <xs:all minOccurs="0">
+            <xs:element ref="ns0:GeneratedKeys"/>
+            <xs:element ref="ns0:CostsCenters"/>
+            <xs:element ref="ns0:CostsCenters"/>
+            <xs:element ref="ns0:CostsCenters"/>
+            <xs:element ref="ns0:CostsCenters"/>
+            <xs:element ref="ns0:GeneratedKeys"/>
+            <xs:element ref="ns0:CostsCenters"/>
+            <xs:element ref="ns0:CostsCenters"/>
+            <xs:element ref="ns0:CostsCenters"/>
+            <xs:element ref="ns0:CostsCenters"/>
+            <xs:element ref="ns0:GeneratedKeys"/>
+            <xs:element ref="ns0:GeneratedKeys"/>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="_getgetbycompanycodecostcenterRequest">
+    <wsdl:part name="parameters" element="ns0:_getgetbycompanycodecostcenter"/>
+  </wsdl:message>
+  <wsdl:message name="_getgetbycompanycodecostcenterResponse">
+    <wsdl:part name="parameters" element="ns0:CostsCenters"/>
+  </wsdl:message>
+  <wsdl:message name="DataServiceFault">
+    <wsdl:part name="parameters" element="ns1:DataServiceFault"/>
+  </wsdl:message>
+  <wsdl:message name="_getgetbycompanycodeandcodecostcenterRequest">
+    <wsdl:part name="parameters" element="ns0:_getgetbycompanycodeandcodecostcenter"/>
+  </wsdl:message>
+  <wsdl:message name="_getgetbycompanycodeandcodecostcenterResponse">
+    <wsdl:part name="parameters" element="ns0:CostsCenters"/>
+  </wsdl:message>
+  <wsdl:message name="insert_costs_centers_operation_batch_reqRequest">
+    <wsdl:part name="parameters" element="ns0:insert_costs_centers_operation_batch_req"/>
+  </wsdl:message>
+  <wsdl:message name="insert_costs_centers_operation_batch_reqResponse">
+    <wsdl:part name="parameters" element="ns0:GeneratedKeys"/>
+  </wsdl:message>
+  <wsdl:message name="_postcreatecostcenter_batch_reqRequest">
+    <wsdl:part name="parameters" element="ns0:_postcreatecostcenter_batch_req"/>
+  </wsdl:message>
+  <wsdl:message name="_postcreatecostcenter_batch_reqResponse">
+    <wsdl:part name="parameters" element="ns0:GeneratedKeys"/>
+  </wsdl:message>
+  <wsdl:message name="_putupdatecostcenter_batch_reqRequest">
+    <wsdl:part name="parameters" element="ns0:_putupdatecostcenter_batch_req"/>
+  </wsdl:message>
+  <wsdl:message name="select_all_costs_centers_operationRequest">
+    <wsdl:part name="parameters" element="ns0:select_all_costs_centers_operation"/>
+  </wsdl:message>
+  <wsdl:message name="select_all_costs_centers_operationResponse">
+    <wsdl:part name="parameters" element="ns0:CostsCenters"/>
+  </wsdl:message>
+  <wsdl:message name="request_boxRequest">
+    <wsdl:part name="parameters" element="ns0:request_box"/>
+  </wsdl:message>
+  <wsdl:message name="request_boxResponse">
+    <wsdl:part name="parameters" element="ns1:DATA_SERVICE_REQUEST_BOX_RESPONSE"/>
+  </wsdl:message>
+  <wsdl:message name="select_with_company_code_and_code_costs_centers_operationRequest">
+    <wsdl:part name="parameters" element="ns0:select_with_company_code_and_code_costs_centers_operation"/>
+  </wsdl:message>
+  <wsdl:message name="select_with_company_code_and_code_costs_centers_operationResponse">
+    <wsdl:part name="parameters" element="ns0:CostsCenters"/>
+  </wsdl:message>
+  <wsdl:message name="update_costs_centers_operation_batch_reqRequest">
+    <wsdl:part name="parameters" element="ns0:update_costs_centers_operation_batch_req"/>
+  </wsdl:message>
+  <wsdl:message name="_postcreatecostcenterRequest">
+    <wsdl:part name="parameters" element="ns0:_postcreatecostcenter"/>
+  </wsdl:message>
+  <wsdl:message name="_postcreatecostcenterResponse">
+    <wsdl:part name="parameters" element="ns0:GeneratedKeys"/>
+  </wsdl:message>
+  <wsdl:message name="delete_costs_centers_operationRequest">
+    <wsdl:part name="parameters" element="ns0:delete_costs_centers_operation"/>
+  </wsdl:message>
+  <wsdl:message name="_putupdatecostcenterRequest">
+    <wsdl:part name="parameters" element="ns0:_putupdatecostcenter"/>
+  </wsdl:message>
+  <wsdl:message name="update_costs_centers_operationRequest">
+    <wsdl:part name="parameters" element="ns0:update_costs_centers_operation"/>
+  </wsdl:message>
+  <wsdl:message name="_deletedeletecostcenterRequest">
+    <wsdl:part name="parameters" element="ns0:_deletedeletecostcenter"/>
+  </wsdl:message>
+  <wsdl:message name="insert_costs_centers_operationRequest">
+    <wsdl:part name="parameters" element="ns0:insert_costs_centers_operation"/>
+  </wsdl:message>
+  <wsdl:message name="insert_costs_centers_operationResponse">
+    <wsdl:part name="parameters" element="ns0:GeneratedKeys"/>
+  </wsdl:message>
+  <wsdl:message name="_getgetallcostscentersRequest">
+    <wsdl:part name="parameters" element="ns0:_getgetallcostscenters"/>
+  </wsdl:message>
+  <wsdl:message name="_getgetallcostscentersResponse">
+    <wsdl:part name="parameters" element="ns0:CostsCenters"/>
+  </wsdl:message>
+  <wsdl:message name="_deletedeletecostcenter_batch_reqRequest">
+    <wsdl:part name="parameters" element="ns0:_deletedeletecostcenter_batch_req"/>
+  </wsdl:message>
+  <wsdl:message name="_getgetbyidcostcenterRequest">
+    <wsdl:part name="parameters" element="ns0:_getgetbyidcostcenter"/>
+  </wsdl:message>
+  <wsdl:message name="_getgetbyidcostcenterResponse">
+    <wsdl:part name="parameters" element="ns0:CostsCenters"/>
+  </wsdl:message>
+  <wsdl:message name="select_with_key_costs_centers_operationRequest">
+    <wsdl:part name="parameters" element="ns0:select_with_key_costs_centers_operation"/>
+  </wsdl:message>
+  <wsdl:message name="select_with_key_costs_centers_operationResponse">
+    <wsdl:part name="parameters" element="ns0:CostsCenters"/>
+  </wsdl:message>
+  <wsdl:message name="select_with_company_code_costs_centers_operationRequest">
+    <wsdl:part name="parameters" element="ns0:select_with_company_code_costs_centers_operation"/>
+  </wsdl:message>
+  <wsdl:message name="select_with_company_code_costs_centers_operationResponse">
+    <wsdl:part name="parameters" element="ns0:CostsCenters"/>
+  </wsdl:message>
+  <wsdl:message name="delete_costs_centers_operation_batch_reqRequest">
+    <wsdl:part name="parameters" element="ns0:delete_costs_centers_operation_batch_req"/>
+  </wsdl:message>
+  <wsdl:portType name="CostsCentersDSSPortType">
+    <wsdl:operation name="_getgetbycompanycodecostcenter">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:_getgetbycompanycodecostcenterRequest" wsaw:Action="urn:_getgetbycompanycodecostcenter"/>
+      <wsdl:output message="ns0:_getgetbycompanycodecostcenterResponse" wsaw:Action="urn:_getgetbycompanycodecostcenterResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:_getgetbycompanycodecostcenterDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbycompanycodeandcodecostcenter">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:_getgetbycompanycodeandcodecostcenterRequest" wsaw:Action="urn:_getgetbycompanycodeandcodecostcenter"/>
+      <wsdl:output message="ns0:_getgetbycompanycodeandcodecostcenterResponse" wsaw:Action="urn:_getgetbycompanycodeandcodecostcenterResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:_getgetbycompanycodeandcodecostcenterDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="insert_costs_centers_operation_batch_req">
+      <wsdl:documentation>batch operation for 'insert_costs_centers_operation'</wsdl:documentation>
+      <wsdl:input message="ns0:insert_costs_centers_operation_batch_reqRequest" wsaw:Action="urn:insert_costs_centers_operation_batch_req"/>
+      <wsdl:output message="ns0:insert_costs_centers_operation_batch_reqResponse" wsaw:Action="urn:insert_costs_centers_operation_batch_reqResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:insert_costs_centers_operation_batch_reqDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="_postcreatecostcenter_batch_req">
+      <wsdl:documentation>batch resource for [POST:createCostCenter]</wsdl:documentation>
+      <wsdl:input message="ns0:_postcreatecostcenter_batch_reqRequest" wsaw:Action="urn:_postcreatecostcenter_batch_req"/>
+      <wsdl:output message="ns0:_postcreatecostcenter_batch_reqResponse" wsaw:Action="urn:_postcreatecostcenter_batch_reqResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:_postcreatecostcenter_batch_reqDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="_putupdatecostcenter_batch_req">
+      <wsdl:documentation>batch resource for [PUT:updateCostCenter]</wsdl:documentation>
+      <wsdl:input message="ns0:_putupdatecostcenter_batch_reqRequest" wsaw:Action="urn:_putupdatecostcenter_batch_req"/>
+    </wsdl:operation>
+    <wsdl:operation name="select_all_costs_centers_operation">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:select_all_costs_centers_operationRequest" wsaw:Action="urn:select_all_costs_centers_operation"/>
+      <wsdl:output message="ns0:select_all_costs_centers_operationResponse" wsaw:Action="urn:select_all_costs_centers_operationResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:select_all_costs_centers_operationDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="request_box">
+      <wsdl:documentation>Control operation for sending multiple requests at once</wsdl:documentation>
+      <wsdl:input message="ns0:request_boxRequest" wsaw:Action="urn:request_box"/>
+      <wsdl:output message="ns0:request_boxResponse" wsaw:Action="urn:request_boxResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:request_boxDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_company_code_and_code_costs_centers_operation">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:select_with_company_code_and_code_costs_centers_operationRequest" wsaw:Action="urn:select_with_company_code_and_code_costs_centers_operation"/>
+      <wsdl:output message="ns0:select_with_company_code_and_code_costs_centers_operationResponse" wsaw:Action="urn:select_with_company_code_and_code_costs_centers_operationResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:select_with_company_code_and_code_costs_centers_operationDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="update_costs_centers_operation_batch_req">
+      <wsdl:documentation>batch operation for 'update_costs_centers_operation'</wsdl:documentation>
+      <wsdl:input message="ns0:update_costs_centers_operation_batch_reqRequest" wsaw:Action="urn:update_costs_centers_operation_batch_req"/>
+    </wsdl:operation>
+    <wsdl:operation name="_postcreatecostcenter">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:_postcreatecostcenterRequest" wsaw:Action="urn:_postcreatecostcenter"/>
+      <wsdl:output message="ns0:_postcreatecostcenterResponse" wsaw:Action="urn:_postcreatecostcenterResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:_postcreatecostcenterDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="delete_costs_centers_operation">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:delete_costs_centers_operationRequest" wsaw:Action="urn:delete_costs_centers_operation"/>
+    </wsdl:operation>
+    <wsdl:operation name="_putupdatecostcenter">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:_putupdatecostcenterRequest" wsaw:Action="urn:_putupdatecostcenter"/>
+    </wsdl:operation>
+    <wsdl:operation name="update_costs_centers_operation">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:update_costs_centers_operationRequest" wsaw:Action="urn:update_costs_centers_operation"/>
+    </wsdl:operation>
+    <wsdl:operation name="_deletedeletecostcenter">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:_deletedeletecostcenterRequest" wsaw:Action="urn:_deletedeletecostcenter"/>
+    </wsdl:operation>
+    <wsdl:operation name="insert_costs_centers_operation">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:insert_costs_centers_operationRequest" wsaw:Action="urn:insert_costs_centers_operation"/>
+      <wsdl:output message="ns0:insert_costs_centers_operationResponse" wsaw:Action="urn:insert_costs_centers_operationResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:insert_costs_centers_operationDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetallcostscenters">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:_getgetallcostscentersRequest" wsaw:Action="urn:_getgetallcostscenters"/>
+      <wsdl:output message="ns0:_getgetallcostscentersResponse" wsaw:Action="urn:_getgetallcostscentersResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:_getgetallcostscentersDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="_deletedeletecostcenter_batch_req">
+      <wsdl:documentation>batch resource for [DELETE:deleteCostCenter]</wsdl:documentation>
+      <wsdl:input message="ns0:_deletedeletecostcenter_batch_reqRequest" wsaw:Action="urn:_deletedeletecostcenter_batch_req"/>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbyidcostcenter">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:_getgetbyidcostcenterRequest" wsaw:Action="urn:_getgetbyidcostcenter"/>
+      <wsdl:output message="ns0:_getgetbyidcostcenterResponse" wsaw:Action="urn:_getgetbyidcostcenterResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:_getgetbyidcostcenterDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_key_costs_centers_operation">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:select_with_key_costs_centers_operationRequest" wsaw:Action="urn:select_with_key_costs_centers_operation"/>
+      <wsdl:output message="ns0:select_with_key_costs_centers_operationResponse" wsaw:Action="urn:select_with_key_costs_centers_operationResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:select_with_key_costs_centers_operationDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_company_code_costs_centers_operation">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:select_with_company_code_costs_centers_operationRequest" wsaw:Action="urn:select_with_company_code_costs_centers_operation"/>
+      <wsdl:output message="ns0:select_with_company_code_costs_centers_operationResponse" wsaw:Action="urn:select_with_company_code_costs_centers_operationResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:select_with_company_code_costs_centers_operationDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="delete_costs_centers_operation_batch_req">
+      <wsdl:documentation>batch operation for 'delete_costs_centers_operation'</wsdl:documentation>
+      <wsdl:input message="ns0:delete_costs_centers_operation_batch_reqRequest" wsaw:Action="urn:delete_costs_centers_operation_batch_req"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CostsCentersDSSSOAP11Binding" type="ns0:CostsCentersDSSPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="_getgetbycompanycodecostcenter">
+      <soap:operation soapAction="urn:_getgetbycompanycodecostcenter" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbycompanycodeandcodecostcenter">
+      <soap:operation soapAction="urn:_getgetbycompanycodeandcodecostcenter" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="insert_costs_centers_operation_batch_req">
+      <soap:operation soapAction="urn:insert_costs_centers_operation_batch_req" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="_postcreatecostcenter_batch_req">
+      <soap:operation soapAction="urn:_postcreatecostcenter_batch_req" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="_putupdatecostcenter_batch_req">
+      <soap:operation soapAction="urn:_putupdatecostcenter_batch_req" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="select_all_costs_centers_operation">
+      <soap:operation soapAction="urn:select_all_costs_centers_operation" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="request_box">
+      <soap:operation soapAction="urn:request_box" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_company_code_and_code_costs_centers_operation">
+      <soap:operation soapAction="urn:select_with_company_code_and_code_costs_centers_operation" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="update_costs_centers_operation_batch_req">
+      <soap:operation soapAction="urn:update_costs_centers_operation_batch_req" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="_postcreatecostcenter">
+      <soap:operation soapAction="urn:_postcreatecostcenter" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="delete_costs_centers_operation">
+      <soap:operation soapAction="urn:delete_costs_centers_operation" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="_putupdatecostcenter">
+      <soap:operation soapAction="urn:_putupdatecostcenter" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="update_costs_centers_operation">
+      <soap:operation soapAction="urn:update_costs_centers_operation" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="_deletedeletecostcenter">
+      <soap:operation soapAction="urn:_deletedeletecostcenter" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="insert_costs_centers_operation">
+      <soap:operation soapAction="urn:insert_costs_centers_operation" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetallcostscenters">
+      <soap:operation soapAction="urn:_getgetallcostscenters" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="_deletedeletecostcenter_batch_req">
+      <soap:operation soapAction="urn:_deletedeletecostcenter_batch_req" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbyidcostcenter">
+      <soap:operation soapAction="urn:_getgetbyidcostcenter" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_key_costs_centers_operation">
+      <soap:operation soapAction="urn:select_with_key_costs_centers_operation" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_company_code_costs_centers_operation">
+      <soap:operation soapAction="urn:select_with_company_code_costs_centers_operation" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="delete_costs_centers_operation_batch_req">
+      <soap:operation soapAction="urn:delete_costs_centers_operation_batch_req" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CostsCentersDSSSOAP12Binding" type="ns0:CostsCentersDSSPortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="_getgetbycompanycodecostcenter">
+      <soap12:operation soapAction="urn:_getgetbycompanycodecostcenter" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbycompanycodeandcodecostcenter">
+      <soap12:operation soapAction="urn:_getgetbycompanycodeandcodecostcenter" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="insert_costs_centers_operation_batch_req">
+      <soap12:operation soapAction="urn:insert_costs_centers_operation_batch_req" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="_postcreatecostcenter_batch_req">
+      <soap12:operation soapAction="urn:_postcreatecostcenter_batch_req" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="_putupdatecostcenter_batch_req">
+      <soap12:operation soapAction="urn:_putupdatecostcenter_batch_req" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="select_all_costs_centers_operation">
+      <soap12:operation soapAction="urn:select_all_costs_centers_operation" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="request_box">
+      <soap12:operation soapAction="urn:request_box" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_company_code_and_code_costs_centers_operation">
+      <soap12:operation soapAction="urn:select_with_company_code_and_code_costs_centers_operation" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="update_costs_centers_operation_batch_req">
+      <soap12:operation soapAction="urn:update_costs_centers_operation_batch_req" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="_postcreatecostcenter">
+      <soap12:operation soapAction="urn:_postcreatecostcenter" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="delete_costs_centers_operation">
+      <soap12:operation soapAction="urn:delete_costs_centers_operation" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="_putupdatecostcenter">
+      <soap12:operation soapAction="urn:_putupdatecostcenter" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="update_costs_centers_operation">
+      <soap12:operation soapAction="urn:update_costs_centers_operation" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="_deletedeletecostcenter">
+      <soap12:operation soapAction="urn:_deletedeletecostcenter" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="insert_costs_centers_operation">
+      <soap12:operation soapAction="urn:insert_costs_centers_operation" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetallcostscenters">
+      <soap12:operation soapAction="urn:_getgetallcostscenters" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="_deletedeletecostcenter_batch_req">
+      <soap12:operation soapAction="urn:_deletedeletecostcenter_batch_req" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbyidcostcenter">
+      <soap12:operation soapAction="urn:_getgetbyidcostcenter" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_key_costs_centers_operation">
+      <soap12:operation soapAction="urn:select_with_key_costs_centers_operation" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_company_code_costs_centers_operation">
+      <soap12:operation soapAction="urn:select_with_company_code_costs_centers_operation" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="delete_costs_centers_operation_batch_req">
+      <soap12:operation soapAction="urn:delete_costs_centers_operation_batch_req" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CostsCentersDSSHttpBinding" type="ns0:CostsCentersDSSPortType">
+    <http:binding verb="POST"/>
+    <wsdl:operation name="_getgetbycompanycodecostcenter">
+      <http:operation location="getByCompanyCodeCostCenter"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbycompanycodeandcodecostcenter">
+      <http:operation location="getByCompanyCodeAndCodeCostCenter"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insert_costs_centers_operation_batch_req">
+      <http:operation location="insert_costs_centers_operation_batch_req"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_postcreatecostcenter_batch_req">
+      <http:operation location="createCostCenter_batch_req"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_putupdatecostcenter_batch_req">
+      <http:operation location="updateCostCenter_batch_req"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="select_all_costs_centers_operation">
+      <http:operation location="select_all_costs_centers_operation"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="request_box">
+      <http:operation location="request_box"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_company_code_and_code_costs_centers_operation">
+      <http:operation location="select_with_company_code_and_code_costs_centers_operation"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="update_costs_centers_operation_batch_req">
+      <http:operation location="update_costs_centers_operation_batch_req"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="_postcreatecostcenter">
+      <http:operation location="createCostCenter"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delete_costs_centers_operation">
+      <http:operation location="delete_costs_centers_operation"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="_putupdatecostcenter">
+      <http:operation location="updateCostCenter"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="update_costs_centers_operation">
+      <http:operation location="update_costs_centers_operation"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="_deletedeletecostcenter">
+      <http:operation location="deleteCostCenter"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="insert_costs_centers_operation">
+      <http:operation location="insert_costs_centers_operation"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetallcostscenters">
+      <http:operation location="getAllCostsCenters"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="_deletedeletecostcenter_batch_req">
+      <http:operation location="deleteCostCenter_batch_req"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="_getgetbyidcostcenter">
+      <http:operation location="getByIdCostCenter"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_key_costs_centers_operation">
+      <http:operation location="select_with_key_costs_centers_operation"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="select_with_company_code_costs_centers_operation">
+      <http:operation location="select_with_company_code_costs_centers_operation"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delete_costs_centers_operation_batch_req">
+      <http:operation location="delete_costs_centers_operation_batch_req"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CostsCentersDSS">
+    <wsdl:port name="SecureSOAP11Endpoint" binding="ns0:CostsCentersDSSSOAP11Binding">
+      <soap:address location="https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP11Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="SecureSOAP12Endpoint" binding="ns0:CostsCentersDSSSOAP12Binding">
+      <soap12:address location="https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="SecureHTTPEndpoint" binding="ns0:CostsCentersDSSHttpBinding">
+      <http:address location="https://ei.bp.com:8243/services/CostsCentersDSS.SecureHTTPEndpoint"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint</con:endpoint></con:endpoints><con:operation id="5306db0a-981a-46d9-8f9b-702032005a5a" isOneWay="false" action="urn:_deletedeletecostcenter" name="_deletedeletecostcenter" bindingOperationName="_deletedeletecostcenter" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="067a5eed-9908-4bb1-9393-31446bdb6f7b" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:_deletedeletecostcenter>
+         <cen:id>?</cen:id>
+      </cen:_deletedeletecostcenter>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_deletedeletecostcenter"/></con:call></con:operation><con:operation id="8da5dcea-3c75-437e-9fd4-70c5398d1e56" isOneWay="false" action="urn:_deletedeletecostcenter_batch_req" name="_deletedeletecostcenter_batch_req" bindingOperationName="_deletedeletecostcenter_batch_req" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="75538da9-8f96-499f-920d-e7092302b316" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:_deletedeletecostcenter_batch_req>
+         <!--1 or more repetitions:-->
+         <cen:_deletedeletecostcenter>
+            <cen:id>?</cen:id>
+         </cen:_deletedeletecostcenter>
+      </cen:_deletedeletecostcenter_batch_req>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_deletedeletecostcenter_batch_req"/></con:call></con:operation><con:operation id="e3ebf298-625e-474c-9929-4055d7ce58e1" isOneWay="false" action="urn:_getgetallcostscenters" name="_getgetallcostscenters" bindingOperationName="_getgetallcostscenters" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f4db4d60-ccda-4054-9ce9-0df443391841" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:_getgetallcostscenters/>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_getgetallcostscenters"/></con:call></con:operation><con:operation id="dbd7648c-5948-4445-845a-3c5f2af7e668" isOneWay="false" action="urn:_getgetbycompanycodeandcodecostcenter" name="_getgetbycompanycodeandcodecostcenter" bindingOperationName="_getgetbycompanycodeandcodecostcenter" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="7d413c84-edc3-4c7a-9fae-b4f96dd6b6e9" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:_getgetbycompanycodeandcodecostcenter>
+         <cen:companyCode>?</cen:companyCode>
+         <cen:centerCostCode>?</cen:centerCostCode>
+      </cen:_getgetbycompanycodeandcodecostcenter>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_getgetbycompanycodeandcodecostcenter"/></con:call></con:operation><con:operation id="1a6ebbbd-37e2-4b22-995d-4171212f5570" isOneWay="false" action="urn:_getgetbycompanycodecostcenter" name="_getgetbycompanycodecostcenter" bindingOperationName="_getgetbycompanycodecostcenter" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6d802019-a3e0-4b8b-9770-ada2ad871452" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:_getgetbycompanycodecostcenter>
+         <cen:code>?</cen:code>
+      </cen:_getgetbycompanycodecostcenter>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_getgetbycompanycodecostcenter"/></con:call></con:operation><con:operation id="4f8d97b7-4209-4584-a919-866cf0decc00" isOneWay="false" action="urn:_getgetbyidcostcenter" name="_getgetbyidcostcenter" bindingOperationName="_getgetbyidcostcenter" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ce8c4a57-3ac4-4a35-8e7c-595ebd17c0ce" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:_getgetbyidcostcenter>
+         <cen:id>?</cen:id>
+      </cen:_getgetbyidcostcenter>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_getgetbyidcostcenter"/></con:call></con:operation><con:operation id="e9cf9563-82a1-47d1-af35-324fa515360e" isOneWay="false" action="urn:_postcreatecostcenter" name="_postcreatecostcenter" bindingOperationName="_postcreatecostcenter" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="63fe01d6-daab-45bd-94b7-7a329c13d600" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:_postcreatecostcenter>
+         <cen:code>?</cen:code>
+         <cen:name>?</cen:name>
+         <cen:companyId>?</cen:companyId>
+         <cen:costCenterId>?</cen:costCenterId>
+         <cen:valid>?</cen:valid>
+      </cen:_postcreatecostcenter>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_postcreatecostcenter"/></con:call></con:operation><con:operation id="a8a6aab6-7e9f-49ba-bb0c-63a9273ae469" isOneWay="false" action="urn:_postcreatecostcenter_batch_req" name="_postcreatecostcenter_batch_req" bindingOperationName="_postcreatecostcenter_batch_req" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="8c6cd641-3aa7-4652-8fb7-070d9ffbd57e" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:_postcreatecostcenter_batch_req>
+         <!--1 or more repetitions:-->
+         <cen:_postcreatecostcenter>
+            <cen:code>?</cen:code>
+            <cen:name>?</cen:name>
+            <cen:companyId>?</cen:companyId>
+            <cen:costCenterId>?</cen:costCenterId>
+            <cen:valid>?</cen:valid>
+         </cen:_postcreatecostcenter>
+      </cen:_postcreatecostcenter_batch_req>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_postcreatecostcenter_batch_req"/></con:call></con:operation><con:operation id="2e7edf1b-61a6-41cb-871b-9056f7d8dd0a" isOneWay="false" action="urn:_putupdatecostcenter" name="_putupdatecostcenter" bindingOperationName="_putupdatecostcenter" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c58b3d0a-2e07-47cc-8249-4a68a465b1de" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:_putupdatecostcenter>
+         <cen:code>?</cen:code>
+         <cen:name>?</cen:name>
+         <cen:companyId>?</cen:companyId>
+         <cen:costCenterId>?</cen:costCenterId>
+         <cen:id>?</cen:id>
+      </cen:_putupdatecostcenter>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_putupdatecostcenter"/></con:call></con:operation><con:operation id="bdf5e558-4ede-4912-a306-d71d36e892bb" isOneWay="false" action="urn:_putupdatecostcenter_batch_req" name="_putupdatecostcenter_batch_req" bindingOperationName="_putupdatecostcenter_batch_req" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="7a15d809-1028-464e-aece-9363801da5b1" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:_putupdatecostcenter_batch_req>
+         <!--1 or more repetitions:-->
+         <cen:_putupdatecostcenter>
+            <cen:code>?</cen:code>
+            <cen:name>?</cen:name>
+            <cen:companyId>?</cen:companyId>
+            <cen:costCenterId>?</cen:costCenterId>
+            <cen:id>?</cen:id>
+         </cen:_putupdatecostcenter>
+      </cen:_putupdatecostcenter_batch_req>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:_putupdatecostcenter_batch_req"/></con:call></con:operation><con:operation id="f7e019e3-fbbb-4e1d-a9fe-e1b8e6558f75" isOneWay="false" action="urn:delete_costs_centers_operation" name="delete_costs_centers_operation" bindingOperationName="delete_costs_centers_operation" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ae99e583-5247-46d7-a258-6714cbdee727" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:delete_costs_centers_operation>
+         <cen:id>?</cen:id>
+      </cen:delete_costs_centers_operation>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:delete_costs_centers_operation"/></con:call></con:operation><con:operation id="eb8912d1-a05c-4c52-8f22-37d4c7194b9b" isOneWay="false" action="urn:delete_costs_centers_operation_batch_req" name="delete_costs_centers_operation_batch_req" bindingOperationName="delete_costs_centers_operation_batch_req" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f03915ff-d5ee-43e1-a1ef-3c789826f767" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:delete_costs_centers_operation_batch_req>
+         <!--1 or more repetitions:-->
+         <cen:delete_costs_centers_operation>
+            <cen:id>?</cen:id>
+         </cen:delete_costs_centers_operation>
+      </cen:delete_costs_centers_operation_batch_req>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:delete_costs_centers_operation_batch_req"/></con:call></con:operation><con:operation id="05b5bfa2-d0cd-42a3-8d24-86fe71959649" isOneWay="false" action="urn:insert_costs_centers_operation" name="insert_costs_centers_operation" bindingOperationName="insert_costs_centers_operation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="8c601dc4-eefa-4ae3-b6c1-f0ecefe573e9" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:insert_costs_centers_operation>
+         <cen:code>?</cen:code>
+         <cen:name>?</cen:name>
+         <cen:companyId>?</cen:companyId>
+         <cen:costCenterId>?</cen:costCenterId>
+         <cen:valid>?</cen:valid>
+      </cen:insert_costs_centers_operation>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:insert_costs_centers_operation"/></con:call></con:operation><con:operation id="0f9d012e-e55f-4b4c-9d18-e47c89dff6d6" isOneWay="false" action="urn:insert_costs_centers_operation_batch_req" name="insert_costs_centers_operation_batch_req" bindingOperationName="insert_costs_centers_operation_batch_req" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="adb5b3ac-480c-4cf9-b044-dc14ae817c6e" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:insert_costs_centers_operation_batch_req>
+         <!--1 or more repetitions:-->
+         <cen:insert_costs_centers_operation>
+            <cen:code>?</cen:code>
+            <cen:name>?</cen:name>
+            <cen:companyId>?</cen:companyId>
+            <cen:costCenterId>?</cen:costCenterId>
+            <cen:valid>?</cen:valid>
+         </cen:insert_costs_centers_operation>
+      </cen:insert_costs_centers_operation_batch_req>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:insert_costs_centers_operation_batch_req"/></con:call></con:operation><con:operation id="8008fb16-6b9e-4e20-96fa-fbdb6150b69e" isOneWay="false" action="urn:request_box" name="request_box" bindingOperationName="request_box" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ab628ea0-2ea6-4a96-b7b5-1eea1a967b56" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:request_box>
+         <!--You may enter the following 20 items in any order-->
+         <cen:delete_costs_centers_operation>
+            <cen:id>?</cen:id>
+         </cen:delete_costs_centers_operation>
+         <cen:update_costs_centers_operation>
+            <cen:code>?</cen:code>
+            <cen:name>?</cen:name>
+            <cen:companyId>?</cen:companyId>
+            <cen:costCenterId>?</cen:costCenterId>
+            <cen:id>?</cen:id>
+         </cen:update_costs_centers_operation>
+         <cen:insert_costs_centers_operation>
+            <cen:code>?</cen:code>
+            <cen:name>?</cen:name>
+            <cen:companyId>?</cen:companyId>
+            <cen:costCenterId>?</cen:costCenterId>
+            <cen:valid>?</cen:valid>
+         </cen:insert_costs_centers_operation>
+         <cen:select_all_costs_centers_operation/>
+         <cen:select_with_key_costs_centers_operation>
+            <cen:id>?</cen:id>
+         </cen:select_with_key_costs_centers_operation>
+         <cen:select_with_company_code_costs_centers_operation>
+            <cen:code>?</cen:code>
+         </cen:select_with_company_code_costs_centers_operation>
+         <cen:select_with_company_code_and_code_costs_centers_operation>
+            <cen:companyCode>?</cen:companyCode>
+            <cen:centerCostCode>?</cen:centerCostCode>
+         </cen:select_with_company_code_and_code_costs_centers_operation>
+         <cen:update_costs_centers_operation_batch_req>
+            <!--1 or more repetitions:-->
+            <cen:update_costs_centers_operation>
+               <cen:code>?</cen:code>
+               <cen:name>?</cen:name>
+               <cen:companyId>?</cen:companyId>
+               <cen:costCenterId>?</cen:costCenterId>
+               <cen:id>?</cen:id>
+            </cen:update_costs_centers_operation>
+         </cen:update_costs_centers_operation_batch_req>
+         <cen:insert_costs_centers_operation_batch_req>
+            <!--1 or more repetitions:-->
+            <cen:insert_costs_centers_operation>
+               <cen:code>?</cen:code>
+               <cen:name>?</cen:name>
+               <cen:companyId>?</cen:companyId>
+               <cen:costCenterId>?</cen:costCenterId>
+               <cen:valid>?</cen:valid>
+            </cen:insert_costs_centers_operation>
+         </cen:insert_costs_centers_operation_batch_req>
+         <cen:delete_costs_centers_operation_batch_req>
+            <!--1 or more repetitions:-->
+            <cen:delete_costs_centers_operation>
+               <cen:id>?</cen:id>
+            </cen:delete_costs_centers_operation>
+         </cen:delete_costs_centers_operation_batch_req>
+         <cen:_getgetallcostscenters/>
+         <cen:_getgetbyidcostcenter>
+            <cen:id>?</cen:id>
+         </cen:_getgetbyidcostcenter>
+         <cen:_getgetbycompanycodecostcenter>
+            <cen:code>?</cen:code>
+         </cen:_getgetbycompanycodecostcenter>
+         <cen:_getgetbycompanycodeandcodecostcenter>
+            <cen:companyCode>?</cen:companyCode>
+            <cen:centerCostCode>?</cen:centerCostCode>
+         </cen:_getgetbycompanycodeandcodecostcenter>
+         <cen:_postcreatecostcenter>
+            <cen:code>?</cen:code>
+            <cen:name>?</cen:name>
+            <cen:companyId>?</cen:companyId>
+            <cen:costCenterId>?</cen:costCenterId>
+            <cen:valid>?</cen:valid>
+         </cen:_postcreatecostcenter>
+         <cen:_putupdatecostcenter>
+            <cen:code>?</cen:code>
+            <cen:name>?</cen:name>
+            <cen:companyId>?</cen:companyId>
+            <cen:costCenterId>?</cen:costCenterId>
+            <cen:id>?</cen:id>
+         </cen:_putupdatecostcenter>
+         <cen:_deletedeletecostcenter>
+            <cen:id>?</cen:id>
+         </cen:_deletedeletecostcenter>
+         <cen:_postcreatecostcenter_batch_req>
+            <!--1 or more repetitions:-->
+            <cen:_postcreatecostcenter>
+               <cen:code>?</cen:code>
+               <cen:name>?</cen:name>
+               <cen:companyId>?</cen:companyId>
+               <cen:costCenterId>?</cen:costCenterId>
+               <cen:valid>?</cen:valid>
+            </cen:_postcreatecostcenter>
+         </cen:_postcreatecostcenter_batch_req>
+         <cen:_putupdatecostcenter_batch_req>
+            <!--1 or more repetitions:-->
+            <cen:_putupdatecostcenter>
+               <cen:code>?</cen:code>
+               <cen:name>?</cen:name>
+               <cen:companyId>?</cen:companyId>
+               <cen:costCenterId>?</cen:costCenterId>
+               <cen:id>?</cen:id>
+            </cen:_putupdatecostcenter>
+         </cen:_putupdatecostcenter_batch_req>
+         <cen:_deletedeletecostcenter_batch_req>
+            <!--1 or more repetitions:-->
+            <cen:_deletedeletecostcenter>
+               <cen:id>?</cen:id>
+            </cen:_deletedeletecostcenter>
+         </cen:_deletedeletecostcenter_batch_req>
+      </cen:request_box>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:request_box"/></con:call></con:operation><con:operation id="6c1450b3-a2bc-4794-9f44-ccac1990df2b" isOneWay="false" action="urn:select_all_costs_centers_operation" name="select_all_costs_centers_operation" bindingOperationName="select_all_costs_centers_operation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1438905a-5c51-41b3-8fa1-2694b95a405a" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:select_all_costs_centers_operation/>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:select_all_costs_centers_operation"/></con:call></con:operation><con:operation id="1b65d970-5763-42dc-b3fb-12b09747fc44" isOneWay="false" action="urn:select_with_company_code_and_code_costs_centers_operation" name="select_with_company_code_and_code_costs_centers_operation" bindingOperationName="select_with_company_code_and_code_costs_centers_operation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f8f5f555-a4bd-4467-b7b3-07bf748204a7" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:select_with_company_code_and_code_costs_centers_operation>
+         <cen:companyCode>?</cen:companyCode>
+         <cen:centerCostCode>?</cen:centerCostCode>
+      </cen:select_with_company_code_and_code_costs_centers_operation>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:select_with_company_code_and_code_costs_centers_operation"/></con:call></con:operation><con:operation id="2e14325b-f29f-4bfa-8818-7e79e91291bf" isOneWay="false" action="urn:select_with_company_code_costs_centers_operation" name="select_with_company_code_costs_centers_operation" bindingOperationName="select_with_company_code_costs_centers_operation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="3ba9d6f7-d093-4882-9777-ac4cd7d92a54" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:select_with_company_code_costs_centers_operation>
+         <cen:code>?</cen:code>
+      </cen:select_with_company_code_costs_centers_operation>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:select_with_company_code_costs_centers_operation"/></con:call></con:operation><con:operation id="ba32f7c7-f535-4bfe-80ee-84f0d93478e2" isOneWay="false" action="urn:select_with_key_costs_centers_operation" name="select_with_key_costs_centers_operation" bindingOperationName="select_with_key_costs_centers_operation" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d463f83b-eb51-4027-89b1-960c7be825ce" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:select_with_key_costs_centers_operation>
+         <cen:id>?</cen:id>
+      </cen:select_with_key_costs_centers_operation>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:select_with_key_costs_centers_operation"/></con:call></con:operation><con:operation id="32574dd2-826f-4750-b028-f6df00ec28b1" isOneWay="false" action="urn:update_costs_centers_operation" name="update_costs_centers_operation" bindingOperationName="update_costs_centers_operation" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="afa51ab3-51cb-4240-90f0-7de56f482bd8" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:update_costs_centers_operation>
+         <cen:code>?</cen:code>
+         <cen:name>?</cen:name>
+         <cen:companyId>?</cen:companyId>
+         <cen:costCenterId>?</cen:costCenterId>
+         <cen:id>?</cen:id>
+      </cen:update_costs_centers_operation>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:update_costs_centers_operation"/></con:call></con:operation><con:operation id="edf64eea-69c5-4171-b56a-edde75738804" isOneWay="false" action="urn:update_costs_centers_operation_batch_req" name="update_costs_centers_operation_batch_req" bindingOperationName="update_costs_centers_operation_batch_req" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c2c1bb45-25e2-4f1d-86f1-e83ac54ca4dd" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/CostsCentersDSS.SecureSOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:cen="centra-id.com">
+   <soap:Header/>
+   <soap:Body>
+      <cen:update_costs_centers_operation_batch_req>
+         <!--1 or more repetitions:-->
+         <cen:update_costs_centers_operation>
+            <cen:code>?</cen:code>
+            <cen:name>?</cen:name>
+            <cen:companyId>?</cen:companyId>
+            <cen:costCenterId>?</cen:costCenterId>
+            <cen:id>?</cen:id>
+         </cen:update_costs_centers_operation>
+      </cen:update_costs_centers_operation_batch_req>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:update_costs_centers_operation_batch_req"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

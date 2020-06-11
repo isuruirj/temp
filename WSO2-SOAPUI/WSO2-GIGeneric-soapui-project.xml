@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project id="382fcbf0-fffd-42ec-afa7-ec74325628c6" activeEnvironment="Default" name="WSO2-GIGeneric" resourceRoot="" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="00f7418e-aa15-4d09-9478-918043a3e7b2" wsaVersion="NONE" name="GIGenericSoap11Binding" type="wsdl" bindingName="{http://tempuri.org/}GIGenericSoap11Binding" soapVersion="1_1" anonymous="optional" definition="https://ei.bp.com:8243/services/GIGeneric?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpSoap11Endpoint</con:endpoint><con:endpoint>https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpsSoap11Endpoint</con:endpoint></con:endpoints><con:operation id="2d8358a4-f9ba-46be-b1db-7650639acd9e" isOneWay="false" action="http://tempuri.org/consultarUsuario" name="consultarUsuario" bindingOperationName="consultarUsuario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="edd4827b-9016-4fe5-ade1-e1306521d58b" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpSoap11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+<con:soapui-project id="382fcbf0-fffd-42ec-afa7-ec74325628c6" activeEnvironment="Default" name="WSO2-GIGeneric" resourceRoot="" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="00f7418e-aa15-4d09-9478-918043a3e7b2" wsaVersion="NONE" name="GIGenericSoap11Binding" type="wsdl" bindingName="{http://tempuri.org/}GIGenericSoap11Binding" soapVersion="1_1" anonymous="optional" definition="https://ei.bp.com:8243/services/GIGeneric?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints><con:endpoint>https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpSoap11Endpoint</con:endpoint><con:endpoint>https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpsSoap11Endpoint</con:endpoint></con:endpoints><con:operation id="2d8358a4-f9ba-46be-b1db-7650639acd9e" isOneWay="false" action="http://tempuri.org/consultarUsuario" name="consultarUsuario" bindingOperationName="consultarUsuario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="edd4827b-9016-4fe5-ade1-e1306521d58b" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/GIGeneric.GIGenericHttpSoap11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
    <soapenv:Header/>
    <soapenv:Body>
       <tem:consultarUsuario>
@@ -460,6 +460,59 @@
             <tem:casualApprovallim/>
             <tem:nivelSeguridad>0</tem:nivelSeguridad>
             <tem:estadoUsuario>19</tem:estadoUsuario>
+         </tem:especificos>
+      </tem:crearUsuario>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/crearUsuario"/><con:wsrmConfig version="1.2"/></con:call><con:call id="153bc026-dc28-4110-89a7-24f45acc9cbb" name="AD"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.wso2.com:8243/services/GIGeneric.GIGenericHttpSoap11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:crearUsuario>
+         <tem:guid>23A2C461-4F4F-61E6-3A99-2111</tem:guid>
+         <tem:uuid>23A2C461-4F4F-61E6-3A99-212125551</tem:uuid>
+         <tem:aplicacion>ADSSL</tem:aplicacion>
+         <tem:correoElectronico>test@bp.com</tem:correoElectronico>
+         <tem:tellerName>ad_user_6</tem:tellerName>
+         <tem:nombreUsuario>Test User</tem:nombreUsuario>
+         <tem:tipoIdentificacion>0001</tem:tipoIdentificacion>
+         <tem:empresa>0010</tem:empresa>
+         <tem:observacion>Test</tem:observacion>
+         <tem:cargo>Analista</tem:cargo>
+         <tem:codigoCentroCosto>0001</tem:codigoCentroCosto>
+         <tem:identificacion>0500682349</tem:identificacion>
+         <tem:celular>123456</tem:celular>
+         <tem:terminal>BT346474</tem:terminal>
+         <tem:ipclient>10.30.50.24</tem:ipclient>
+         <tem:usuarioAplicacion>usr</tem:usuarioAplicacion>
+         <tem:claveAcceso>FhMJvhn2JnzhVU12ja+1Fw==</tem:claveAcceso>
+         <tem:nombresEmpleado>nombresEmpleado</tem:nombresEmpleado>
+         <tem:apellidosEmpleado>apellidosEmpleado</tem:apellidosEmpleado>
+         <tem:especificos>
+            <tem:mailbox>1</tem:mailbox>
+            <tem:tier>Tier1</tem:tier>
+            <tem:Employeeid>1</tem:Employeeid>
+            <tem:title>Developer</tem:title>
+            <tem:pager>943-555-1234</tem:pager>
+            <tem:proxyAddresses>SMTP:newb@contoso.com</tem:proxyAddresses>
+            <tem:mailNickname>web</tem:mailNickname>
+            <tem:msDS-User-Account-Control-Computed>0x0010</tem:msDS-User-Account-Control-Computed>
+            <tem:userAccountControl>0x0200</tem:userAccountControl>
+            <tem:physicalDeliveryOfficeName>OFFICE</tem:physicalDeliveryOfficeName>
+            <tem:postOfficeBox>home</tem:postOfficeBox>
+            <tem:city>Quito</tem:city>
+            <tem:memberOf>GA_AURO_CierreAutomatico,GA_AURO_TEST_BACKOFFICE_APROBADOR</tem:memberOf>
+            <tem:msTSHomeDrive>C:\\</tem:msTSHomeDrive>
+            <tem:msTSHomeDirectory>C:\\</tem:msTSHomeDirectory>
+            <tem:msTSAllowLogon>TRUE</tem:msTSAllowLogon>
+            <tem:msTSConnectClientDrives>TRUE</tem:msTSConnectClientDrives>
+            <tem:msTSConnectPrinterDrives>TRUE</tem:msTSConnectPrinterDrives>
+            <tem:msTSDefaultToMainPrinter>TRUE</tem:msTSDefaultToMainPrinter>
+            <tem:street>stre</tem:street>
+            <tem:department>department</tem:department>
+            <tem:telephoneNumber>telephoneNumber</tem:telephoneNumber>
+            <tem:wWWHomePage>wWWHomePage</tem:wWWHomePage>
+            <tem:domain>pichincha.com</tem:domain>
+            <tem:containerInfo>OU=Banco</tem:containerInfo>
+            <tem:pwdLastSet>0</tem:pwdLastSet>
          </tem:especificos>
       </tem:crearUsuario>
    </soapenv:Body>
