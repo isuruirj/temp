@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="c54ec90e-0bc4-46a2-b152-5ea3c213375d" activeEnvironment="Default" name="WSO2-Mock" resourceRoot="" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="2d87b010-4f81-483b-b4a5-a9b515232f92" wsaVersion="NONE" name="MOCKSOAP11Binding" type="wsdl" bindingName="{http://ws.wso2.org/dataservice}MOCKSOAP11Binding" soapVersion="1_1" anonymous="optional" definition="https://ei.bp.wso2.com:8243/services/MOCK?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>https://ei.bp.com:8243/services/MOCK.SOAP11Endpoint</con:endpoint><con:endpoint>https://ei.bp.com:8243/services/MOCK.SecureSOAP11Endpoint</con:endpoint></con:endpoints><con:operation id="174c94b9-621a-4304-a7c8-040b49343647" isOneWay="false" action="urn:bancs_AddUser" name="bancs_AddUser" bindingOperationName="bancs_AddUser" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="efad3193-8d89-4c1a-99ed-aa90d310908d" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.wso2.com:8243/services/MOCK.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <dat:bancs_AddUser>
+         <dat:DATA>Test Data</dat:DATA>
+         <dat:TELLER_NAME>test</dat:TELLER_NAME>
+      </dat:bancs_AddUser>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:bancs_AddUser"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="51b3d34e-39df-4735-afdb-28a53871e836" isOneWay="false" action="urn:bancs_doCheckExistingUser" name="bancs_doCheckExistingUser" bindingOperationName="bancs_doCheckExistingUser" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6721047a-4c9d-4a55-a683-c22651718400" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/MOCK.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <dat:bancs_doCheckExistingUser>
+         <dat:TELLER_NUMBER>?</dat:TELLER_NUMBER>
+      </dat:bancs_doCheckExistingUser>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:bancs_doCheckExistingUser"/></con:call></con:operation><con:operation id="f4253c8a-cc82-4b3a-bee3-cdb3e86e94ce" isOneWay="false" action="urn:bancs_doListUsers" name="bancs_doListUsers" bindingOperationName="bancs_doListUsers" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ea53e5d5-ef09-45b2-a741-95f8fa8abd08" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.wso2.com:8243/services/MOCK.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <dat:bancs_doListUsers/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:bancs_doListUsers"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="1b54a884-0e5f-4e66-b629-cb7f3a441a3e" isOneWay="false" action="urn:logiciel_AddUser" name="logiciel_AddUser" bindingOperationName="logiciel_AddUser" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f52b8095-c6ee-433f-99fa-6157042e631c" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/MOCK.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <dat:logiciel_AddUser>
+         <dat:TELLER_NAME>?</dat:TELLER_NAME>
+         <dat:DATA>?</dat:DATA>
+      </dat:logiciel_AddUser>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:logiciel_AddUser"/></con:call></con:operation><con:operation id="25d5038e-9d4c-4d77-aced-e7e4303fe62d" isOneWay="false" action="urn:logiciel_doCheckExistingUser" name="logiciel_doCheckExistingUser" bindingOperationName="logiciel_doCheckExistingUser" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="0e3c5fe7-b830-43fe-bd43-b7626ee30ed8" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/MOCK.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <dat:logiciel_doCheckExistingUser>
+         <dat:TELLER_NAME>?</dat:TELLER_NAME>
+      </dat:logiciel_doCheckExistingUser>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:logiciel_doCheckExistingUser"/></con:call></con:operation><con:operation id="34c03f80-7a4b-4a1d-b6af-18efd5f9b077" isOneWay="false" action="urn:logiciel_doListUsers" name="logiciel_doListUsers" bindingOperationName="logiciel_doListUsers" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="9393fee2-1259-4f1a-a0e3-386d71ba6c45" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.wso2.com:8243/services/MOCK.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <dat:logiciel_doListUsers/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:logiciel_doListUsers"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="4dc89821-df03-4ae5-91ab-46eaad7abc60" isOneWay="false" action="urn:pprd_AddUser" name="pprd_AddUser" bindingOperationName="pprd_AddUser" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1c668cb4-cb81-4427-809d-92949202f2ac" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/MOCK.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <dat:pprd_AddUser>
+         <dat:TELLER_NAME>?</dat:TELLER_NAME>
+         <dat:DATA>?</dat:DATA>
+      </dat:pprd_AddUser>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:pprd_AddUser"/></con:call></con:operation><con:operation id="bda2e7fa-eaf9-4f52-9c91-3eaffc5b8655" isOneWay="false" action="urn:pprd_doCheckExistingUser" name="pprd_doCheckExistingUser" bindingOperationName="pprd_doCheckExistingUser" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6e775f9c-f530-4ca0-a198-84e7b57a2b8d" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/MOCK.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <dat:pprd_doCheckExistingUser>
+         <dat:TELLER_NAME>?</dat:TELLER_NAME>
+      </dat:pprd_doCheckExistingUser>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:pprd_doCheckExistingUser"/></con:call></con:operation><con:operation id="d7d86597-611f-4fc3-91bb-03c3a658f092" isOneWay="false" action="urn:pprd_doListUsers" name="pprd_doListUsers" bindingOperationName="pprd_doListUsers" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="9a125557-c2c2-43e5-9da9-2e899e967f83" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.wso2.com:8243/services/MOCK.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <dat:pprd_doListUsers/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:pprd_doListUsers"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="095e5526-8006-4d74-a816-61ccd020885c" isOneWay="false" action="urn:removeAll" name="removeAll" bindingOperationName="removeAll" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="3663a6c6-279f-48db-a523-c91d9bc2dc71" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.wso2.com:8243/services/MOCK.SOAP11Endpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <dat:removeAll/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:removeAll"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="7d007ae6-8277-4efc-aeb6-c7cd796dc12c" wsaVersion="NONE" name="MOCKSOAP12Binding" type="wsdl" bindingName="{http://ws.wso2.org/dataservice}MOCKSOAP12Binding" soapVersion="1_2" anonymous="optional" definition="https://ei.bp.wso2.com:8243/services/MOCK?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://ei.bp.wso2.com:8243/services/MOCK?wsdl"><con:part><con:url>https://ei.bp.wso2.com:8243/services/MOCK?wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://ws.wso2.org/dataservice" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns0="http://ws.wso2.org/dataservice" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:documentation/>
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://ws.wso2.org/dataservice">
+      <xs:element name="DataServiceFault">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="current_params" type="xs:string"/>
+            <xs:element name="current_request_name" type="xs:string"/>
+            <xs:element name="nested_exception" type="xs:string"/>
+            <xs:element name="source_data_service">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="location" type="xs:string"/>
+                  <xs:element name="default_namespace" type="xs:string"/>
+                  <xs:element name="description" type="xs:string"/>
+                  <xs:element name="data_service_name" type="xs:string"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ds_code" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="REQUEST_STATUS" type="xs:string"/>
+      <xs:element name="DATA_SERVICE_RESPONSE">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:any minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="bancs_doCheckExistingUser">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="TELLER_NUMBER" nillable="true" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Entries" type="ns0:Entries"/>
+      <xs:complexType name="Entries">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" type="ns0:Entry"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Entry">
+        <xs:sequence>
+          <xs:element name="TELLER_NAME" nillable="true" type="xs:string"/>
+          <xs:element name="TELLER_NUMBER" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="bancs_doListUsers">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="removeAll">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="logiciel_doCheckExistingUser">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="TELLER_NAME" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="pprd_AddUser">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="TELLER_NAME" nillable="true" type="xs:string"/>
+            <xs:element name="DATA" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="bancs_AddUser">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="DATA" nillable="true" type="xs:string"/>
+            <xs:element name="TELLER_NAME" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GeneratedKeys" type="ns0:GeneratedKeys"/>
+      <xs:complexType name="GeneratedKeys">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" type="ns0:Entry2"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Entry2">
+        <xs:sequence>
+          <xs:element name="TELLER_NUMBER" nillable="true" type="xs:integer"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="pprd_doListUsers">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="pprd_doCheckExistingUser">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="TELLER_NAME" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="logiciel_AddUser">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="TELLER_NAME" nillable="true" type="xs:string"/>
+            <xs:element name="DATA" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="logiciel_doListUsers">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="bancs_doCheckExistingUserRequest">
+    <wsdl:part name="parameters" element="ns0:bancs_doCheckExistingUser"/>
+  </wsdl:message>
+  <wsdl:message name="bancs_doCheckExistingUserResponse">
+    <wsdl:part name="parameters" element="ns0:Entries"/>
+  </wsdl:message>
+  <wsdl:message name="DataServiceFault">
+    <wsdl:part name="parameters" element="ns0:DataServiceFault"/>
+  </wsdl:message>
+  <wsdl:message name="bancs_doListUsersRequest">
+    <wsdl:part name="parameters" element="ns0:bancs_doListUsers"/>
+  </wsdl:message>
+  <wsdl:message name="bancs_doListUsersResponse">
+    <wsdl:part name="parameters" element="ns0:Entries"/>
+  </wsdl:message>
+  <wsdl:message name="removeAllRequest">
+    <wsdl:part name="parameters" element="ns0:removeAll"/>
+  </wsdl:message>
+  <wsdl:message name="logiciel_doCheckExistingUserRequest">
+    <wsdl:part name="parameters" element="ns0:logiciel_doCheckExistingUser"/>
+  </wsdl:message>
+  <wsdl:message name="logiciel_doCheckExistingUserResponse">
+    <wsdl:part name="parameters" element="ns0:Entries"/>
+  </wsdl:message>
+  <wsdl:message name="pprd_AddUserRequest">
+    <wsdl:part name="parameters" element="ns0:pprd_AddUser"/>
+  </wsdl:message>
+  <wsdl:message name="bancs_AddUserRequest">
+    <wsdl:part name="parameters" element="ns0:bancs_AddUser"/>
+  </wsdl:message>
+  <wsdl:message name="bancs_AddUserResponse">
+    <wsdl:part name="parameters" element="ns0:GeneratedKeys"/>
+  </wsdl:message>
+  <wsdl:message name="pprd_doListUsersRequest">
+    <wsdl:part name="parameters" element="ns0:pprd_doListUsers"/>
+  </wsdl:message>
+  <wsdl:message name="pprd_doListUsersResponse">
+    <wsdl:part name="parameters" element="ns0:Entries"/>
+  </wsdl:message>
+  <wsdl:message name="pprd_doCheckExistingUserRequest">
+    <wsdl:part name="parameters" element="ns0:pprd_doCheckExistingUser"/>
+  </wsdl:message>
+  <wsdl:message name="pprd_doCheckExistingUserResponse">
+    <wsdl:part name="parameters" element="ns0:Entries"/>
+  </wsdl:message>
+  <wsdl:message name="logiciel_AddUserRequest">
+    <wsdl:part name="parameters" element="ns0:logiciel_AddUser"/>
+  </wsdl:message>
+  <wsdl:message name="logiciel_doListUsersRequest">
+    <wsdl:part name="parameters" element="ns0:logiciel_doListUsers"/>
+  </wsdl:message>
+  <wsdl:message name="logiciel_doListUsersResponse">
+    <wsdl:part name="parameters" element="ns0:Entries"/>
+  </wsdl:message>
+  <wsdl:portType name="MOCKPortType">
+    <wsdl:operation name="bancs_doCheckExistingUser">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:bancs_doCheckExistingUserRequest" wsaw:Action="urn:bancs_doCheckExistingUser"/>
+      <wsdl:output message="ns0:bancs_doCheckExistingUserResponse" wsaw:Action="urn:bancs_doCheckExistingUserResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:bancs_doCheckExistingUserDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="bancs_doListUsers">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:bancs_doListUsersRequest" wsaw:Action="urn:bancs_doListUsers"/>
+      <wsdl:output message="ns0:bancs_doListUsersResponse" wsaw:Action="urn:bancs_doListUsersResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:bancs_doListUsersDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="removeAll">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:removeAllRequest" wsaw:Action="urn:removeAll"/>
+    </wsdl:operation>
+    <wsdl:operation name="logiciel_doCheckExistingUser">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:logiciel_doCheckExistingUserRequest" wsaw:Action="urn:logiciel_doCheckExistingUser"/>
+      <wsdl:output message="ns0:logiciel_doCheckExistingUserResponse" wsaw:Action="urn:logiciel_doCheckExistingUserResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:logiciel_doCheckExistingUserDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="pprd_AddUser">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:pprd_AddUserRequest" wsaw:Action="urn:pprd_AddUser"/>
+    </wsdl:operation>
+    <wsdl:operation name="bancs_AddUser">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:bancs_AddUserRequest" wsaw:Action="urn:bancs_AddUser"/>
+      <wsdl:output message="ns0:bancs_AddUserResponse" wsaw:Action="urn:bancs_AddUserResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:bancs_AddUserDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="pprd_doListUsers">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:pprd_doListUsersRequest" wsaw:Action="urn:pprd_doListUsers"/>
+      <wsdl:output message="ns0:pprd_doListUsersResponse" wsaw:Action="urn:pprd_doListUsersResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:pprd_doListUsersDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="pprd_doCheckExistingUser">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:pprd_doCheckExistingUserRequest" wsaw:Action="urn:pprd_doCheckExistingUser"/>
+      <wsdl:output message="ns0:pprd_doCheckExistingUserResponse" wsaw:Action="urn:pprd_doCheckExistingUserResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:pprd_doCheckExistingUserDataServiceFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="logiciel_AddUser">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:logiciel_AddUserRequest" wsaw:Action="urn:logiciel_AddUser"/>
+    </wsdl:operation>
+    <wsdl:operation name="logiciel_doListUsers">
+      <wsdl:documentation/>
+      <wsdl:input message="ns0:logiciel_doListUsersRequest" wsaw:Action="urn:logiciel_doListUsers"/>
+      <wsdl:output message="ns0:logiciel_doListUsersResponse" wsaw:Action="urn:logiciel_doListUsersResponse"/>
+      <wsdl:fault message="ns0:DataServiceFault" name="DataServiceFault" wsaw:Action="urn:logiciel_doListUsersDataServiceFault"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MOCKSOAP11Binding" type="ns0:MOCKPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="bancs_doCheckExistingUser">
+      <soap:operation soapAction="urn:bancs_doCheckExistingUser" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="bancs_doListUsers">
+      <soap:operation soapAction="urn:bancs_doListUsers" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="removeAll">
+      <soap:operation soapAction="urn:removeAll" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="logiciel_doCheckExistingUser">
+      <soap:operation soapAction="urn:logiciel_doCheckExistingUser" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="pprd_AddUser">
+      <soap:operation soapAction="urn:pprd_AddUser" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="bancs_AddUser">
+      <soap:operation soapAction="urn:bancs_AddUser" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="pprd_doListUsers">
+      <soap:operation soapAction="urn:pprd_doListUsers" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="pprd_doCheckExistingUser">
+      <soap:operation soapAction="urn:pprd_doCheckExistingUser" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="logiciel_AddUser">
+      <soap:operation soapAction="urn:logiciel_AddUser" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="logiciel_doListUsers">
+      <soap:operation soapAction="urn:logiciel_doListUsers" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MOCKSOAP12Binding" type="ns0:MOCKPortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="bancs_doCheckExistingUser">
+      <soap12:operation soapAction="urn:bancs_doCheckExistingUser" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="bancs_doListUsers">
+      <soap12:operation soapAction="urn:bancs_doListUsers" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="removeAll">
+      <soap12:operation soapAction="urn:removeAll" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="logiciel_doCheckExistingUser">
+      <soap12:operation soapAction="urn:logiciel_doCheckExistingUser" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="pprd_AddUser">
+      <soap12:operation soapAction="urn:pprd_AddUser" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="bancs_AddUser">
+      <soap12:operation soapAction="urn:bancs_AddUser" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="pprd_doListUsers">
+      <soap12:operation soapAction="urn:pprd_doListUsers" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="pprd_doCheckExistingUser">
+      <soap12:operation soapAction="urn:pprd_doCheckExistingUser" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="logiciel_AddUser">
+      <soap12:operation soapAction="urn:logiciel_AddUser" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="logiciel_doListUsers">
+      <soap12:operation soapAction="urn:logiciel_doListUsers" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataServiceFault">
+        <soap12:fault use="literal" name="DataServiceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MOCKHttpBinding" type="ns0:MOCKPortType">
+    <http:binding verb="POST"/>
+    <wsdl:operation name="bancs_doCheckExistingUser">
+      <http:operation location="bancs_doCheckExistingUser"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="bancs_doListUsers">
+      <http:operation location="bancs_doListUsers"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removeAll">
+      <http:operation location="removeAll"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="logiciel_doCheckExistingUser">
+      <http:operation location="logiciel_doCheckExistingUser"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pprd_AddUser">
+      <http:operation location="pprd_AddUser"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="bancs_AddUser">
+      <http:operation location="bancs_AddUser"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pprd_doListUsers">
+      <http:operation location="pprd_doListUsers"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pprd_doCheckExistingUser">
+      <http:operation location="pprd_doCheckExistingUser"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logiciel_AddUser">
+      <http:operation location="logiciel_AddUser"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="logiciel_doListUsers">
+      <http:operation location="logiciel_doListUsers"/>
+      <wsdl:input>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MOCK">
+    <wsdl:port name="SecureSOAP11Endpoint" binding="ns0:MOCKSOAP11Binding">
+      <soap:address location="https://ei.bp.com:8243/services/MOCK.SecureSOAP11Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="SOAP11Endpoint" binding="ns0:MOCKSOAP11Binding">
+      <soap:address location="https://ei.bp.com:8243/services/MOCK.SOAP11Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="SecureSOAP12Endpoint" binding="ns0:MOCKSOAP12Binding">
+      <soap12:address location="https://ei.bp.com:8243/services/MOCK.SecureSOAP12Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="SOAP12Endpoint" binding="ns0:MOCKSOAP12Binding">
+      <soap12:address location="https://ei.bp.com:8243/services/MOCK.SOAP12Endpoint"/>
+    </wsdl:port>
+    <wsdl:port name="SecureHTTPEndpoint" binding="ns0:MOCKHttpBinding">
+      <http:address location="https://ei.bp.com:8243/services/MOCK.SecureHTTPEndpoint"/>
+    </wsdl:port>
+    <wsdl:port name="HTTPEndpoint" binding="ns0:MOCKHttpBinding">
+      <http:address location="https://ei.bp.com:8243/services/MOCK.HTTPEndpoint"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://ei.bp.com:8243/services/MOCK.SOAP12Endpoint</con:endpoint><con:endpoint>https://ei.bp.com:8243/services/MOCK.SecureSOAP12Endpoint</con:endpoint></con:endpoints><con:operation id="c92417cc-ffeb-405e-b667-eead8c430d48" isOneWay="false" action="urn:bancs_AddUser" name="bancs_AddUser" bindingOperationName="bancs_AddUser" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="31420466-98a0-4074-bc22-a3a2576c3b02" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/MOCK.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soap:Header/>
+   <soap:Body>
+      <dat:bancs_AddUser>
+         <dat:DATA>?</dat:DATA>
+         <dat:TELLER_NAME>?</dat:TELLER_NAME>
+      </dat:bancs_AddUser>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:bancs_AddUser"/></con:call></con:operation><con:operation id="3722e8aa-97de-4d4f-9a3e-fc2231aa53c6" isOneWay="false" action="urn:bancs_doCheckExistingUser" name="bancs_doCheckExistingUser" bindingOperationName="bancs_doCheckExistingUser" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ea20aacc-be68-4ae2-b69c-7fc7e25a6727" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/MOCK.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soap:Header/>
+   <soap:Body>
+      <dat:bancs_doCheckExistingUser>
+         <dat:TELLER_NUMBER>?</dat:TELLER_NUMBER>
+      </dat:bancs_doCheckExistingUser>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:bancs_doCheckExistingUser"/></con:call></con:operation><con:operation id="99d81c82-9eb2-4bfc-a2c3-bc0b175d2bc8" isOneWay="false" action="urn:bancs_doListUsers" name="bancs_doListUsers" bindingOperationName="bancs_doListUsers" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="400b7830-e228-40fb-8818-a6bd74369cbd" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/MOCK.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soap:Header/>
+   <soap:Body>
+      <dat:bancs_doListUsers/>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:bancs_doListUsers"/></con:call></con:operation><con:operation id="26debc20-5f0e-4de5-b071-bc0430549ce1" isOneWay="false" action="urn:logiciel_AddUser" name="logiciel_AddUser" bindingOperationName="logiciel_AddUser" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="cef7aad1-3f3e-436e-b44f-4c14b0984708" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/MOCK.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soap:Header/>
+   <soap:Body>
+      <dat:logiciel_AddUser>
+         <dat:TELLER_NAME>?</dat:TELLER_NAME>
+         <dat:DATA>?</dat:DATA>
+      </dat:logiciel_AddUser>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:logiciel_AddUser"/></con:call></con:operation><con:operation id="c5b386e8-2750-4bff-ac6a-2a756e109d01" isOneWay="false" action="urn:logiciel_doCheckExistingUser" name="logiciel_doCheckExistingUser" bindingOperationName="logiciel_doCheckExistingUser" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="69661419-4267-40ee-9a4c-c92918672d3a" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/MOCK.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soap:Header/>
+   <soap:Body>
+      <dat:logiciel_doCheckExistingUser>
+         <dat:TELLER_NAME>?</dat:TELLER_NAME>
+      </dat:logiciel_doCheckExistingUser>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:logiciel_doCheckExistingUser"/></con:call></con:operation><con:operation id="2339c211-f991-488f-8e27-21b5baab87cf" isOneWay="false" action="urn:logiciel_doListUsers" name="logiciel_doListUsers" bindingOperationName="logiciel_doListUsers" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="08362789-a916-4675-98b7-7fe1eba75321" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/MOCK.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soap:Header/>
+   <soap:Body>
+      <dat:logiciel_doListUsers/>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:logiciel_doListUsers"/></con:call></con:operation><con:operation id="bf47fd2d-8f23-48a1-9356-1b403261a1b7" isOneWay="false" action="urn:pprd_AddUser" name="pprd_AddUser" bindingOperationName="pprd_AddUser" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="fb786705-2787-48b1-9789-c6c571291f1c" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/MOCK.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soap:Header/>
+   <soap:Body>
+      <dat:pprd_AddUser>
+         <dat:TELLER_NAME>?</dat:TELLER_NAME>
+         <dat:DATA>?</dat:DATA>
+      </dat:pprd_AddUser>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:pprd_AddUser"/></con:call></con:operation><con:operation id="83723b2b-a2f9-437b-aac6-d270aa98b4a2" isOneWay="false" action="urn:pprd_doCheckExistingUser" name="pprd_doCheckExistingUser" bindingOperationName="pprd_doCheckExistingUser" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="266cb8a0-611d-4756-9ab8-c4e6a19d4f76" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/MOCK.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soap:Header/>
+   <soap:Body>
+      <dat:pprd_doCheckExistingUser>
+         <dat:TELLER_NAME>?</dat:TELLER_NAME>
+      </dat:pprd_doCheckExistingUser>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:pprd_doCheckExistingUser"/></con:call></con:operation><con:operation id="b1e7d6f8-ab64-464b-92f3-5bfdc3f69d4a" isOneWay="false" action="urn:pprd_doListUsers" name="pprd_doListUsers" bindingOperationName="pprd_doListUsers" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f1d625e9-983c-4ed9-b265-3de93242d7f6" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.com:8243/services/MOCK.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soap:Header/>
+   <soap:Body>
+      <dat:pprd_doListUsers/>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:pprd_doListUsers"/></con:call></con:operation><con:operation id="34974139-b317-4d6e-b92e-d3dae42775ed" isOneWay="false" action="urn:removeAll" name="removeAll" bindingOperationName="removeAll" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="87c2e29d-fad2-4eda-83ca-f948f50a8876" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://ei.bp.wso2.com:8243/services/MOCK.SOAP12Endpoint</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:dat="http://ws.wso2.org/dataservice">
+   <soap:Header/>
+   <soap:Body>
+      <dat:removeAll/>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:removeAll"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
