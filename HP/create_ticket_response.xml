@@ -1,0 +1,41 @@
+AP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Body>
+      <CreateIM_IncidentResponse message="Correcto" returnCode="0" schemaRevisionDate="2020-05-29" schemaRevisionLevel="38" status="SUCCESS" xsi:schemaLocation="http://schemas.hp.com/SM/7 http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/IM_Incident.xsd" xmlns="http://schemas.hp.com/SM/7" xmlns:cmn="http://schemas.hp.com/SM/7/Common" xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         <model>
+            <keys>
+               <IncidentID type="String">IM00012376</IncidentID>
+            </keys>
+            <instance recordid="IM00012376 - Teste Title" uniquequery="number=&quot;IM00012376&quot;">
+               <IncidentID type="String">IM00012376</IncidentID>
+               <Category type="String">Incident</Category>
+               <OpenTime type="DateTime">2020-06-18T12:46:25+00:00</OpenTime>
+               <OpenedBy type="String">useridentity</OpenedBy>
+               <Urgency type="String">3</Urgency>
+               <UpdatedTime type="DateTime">2020-06-18T12:46:25+00:00</UpdatedTime>
+               <AssignmentGroup type="String">TEC_N2_ADMINISTRACION CLAVES</AssignmentGroup>
+               <Description type="Array">
+                  <Description type="String">Test incident</Description>
+               </Description>
+               <Contact type="String">fbalarez</Contact>
+               <Title type="String">Teste Title</Title>
+               <UpdatedBy type="String">useridentity</UpdatedBy>
+               <Status type="String">Categorize</Status>
+               <Phase type="String">Categorization</Phase>
+               <Area type="String">Infraestructura</Area>
+               <SLAAgreementID type="Decimal">177</SLAAgreementID>
+               <Subarea type="String">Incidente Equipo Facilidades</Subarea>
+               <Impact type="String">3</Impact>
+               <Service display="" type="String">Servicios Operaciones IT</Service>
+               <Ambiente type="String">PRODUCCIÓN</Ambiente>
+               <Filial type="String">BANCO PICHINCHA</Filial>
+            </instance>
+         </model>
+         <messages>
+            <cmn:message type="String">America/Guayaquil 18/06/2020 07:46:27: El incidente IM00012376 ha sido abierto por useridentity</cmn:message>
+            <cmn:message type="String">Elemento Incidente "IM00012376" añadido.</cmn:message>
+            <cmn:message type="String">Se ha enviado correo electrónico a fbalarez@pichincha.com.</cmn:message>
+         </messages>
+      </CreateIM_IncidentResponse>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+

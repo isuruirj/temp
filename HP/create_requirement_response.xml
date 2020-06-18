@@ -1,0 +1,58 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Body>
+      <CreateIM_RMResponse message="Correcto" returnCode="0" schemaRevisionDate="2020-05-29" schemaRevisionLevel="38" status="SUCCESS" xsi:schemaLocation="http://schemas.hp.com/SM/7 http://ECBPLXTIT10.uio.bpichincha.com:13087/SM/7/IM_RM.xsd" xmlns="http://schemas.hp.com/SM/7" xmlns:cmn="http://schemas.hp.com/SM/7/Common" xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         <model>
+            <keys>
+               <Number type="String">RF00008288</Number>
+            </keys>
+            <instance recordid="RF00008288" uniquequery="number=&quot;RF00008288&quot;">
+               <Number type="String">RF00008288</Number>
+               <Open type="Boolean">true</Open>
+               <Category type="String">Comunicaciones</Category>
+               <Subcategory type="String">Soporte Especializado de F5</Subcategory>
+               <Model type="String">Especializaci??n F5</Model>
+               <CurrentPhase type="String">Logging</CurrentPhase>
+               <Status type="String">Open</Status>
+               <ApprovalStatus type="String">approved</ApprovalStatus>
+               <SubmitDate type="DateTime">2020-06-18T12:30:59+00:00</SubmitDate>
+               <UpdateDate type="DateTime">2020-06-18T12:30:59+00:00</UpdateDate>
+               <RequestorName type="String">useridentity</RequestorName>
+               <RequestedFor type="String">fbalarez</RequestedFor>
+               <BriefDescription type="String">Requerimentos Manuales</BriefDescription>
+               <SlaBreach type="Boolean">false</SlaBreach>
+               <AgreementIds type="Array">
+                  <AgreementIds type="Decimal">177</AgreementIds>
+               </AgreementIds>
+               <AssignedGroup type="String">TEC_N2_TOOLS</AssignedGroup>
+               <Description type="Array">
+                  <Description type="String">Acci??n: ""
+                                                Usuario: "tellerName"
+                                                Nombre Completo: "nombresEmpleadoapellidosEmpleado"
+                                                Identificaci??n: "identificacion"
+                                                Empresa: "nombreCompania"
+                                                Unidad: ""
+                                                Divisi??n: ""
+                                                ??rea:""
+                                                Cargo: "cargo"
+                                                APLICACI??N: "manual"
+                                                Centro de Costos: "codigoCentroCosto"
+                                                Perfil:"Perfil"
+                                                Agencia: "Agencia"
+                                                Ambiente: "Ambiente"
+                                                Perfil: "Perfil"
+                                                Perfil:"Perfil"
+                                                Tipode cuenta: "Tipode cuenta"
+                                                N??mero de cuenta: "N??mero de cuenta"
+                                                Perfiles Individuales:"Perfiles Individuales"</Description>
+               </Description>
+            </instance>
+         </model>
+         <messages>
+            <cmn:message module="evmsg" severity="1" type="String">Se ha enviado correo electrónico a fbalarez@pichincha.com.</cmn:message>
+            <cmn:message module="evmsg" severity="1" type="String">Se ha enviado correo electrónico a fbalarez@pichincha.com.</cmn:message>
+            <cmn:message module="evmsg" severity="1" type="String">Registro de Petición añadido.</cmn:message>
+            <cmn:message module="evmsg" severity="2" type="String">El valor del campo Model Id no es válido.</cmn:message>
+         </messages>
+      </CreateIM_RMResponse>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
