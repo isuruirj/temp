@@ -1,0 +1,122 @@
+A
+https://openshift.desa.bpichincha.com/
+yratnayake
+Lp7qSfH2w
+
+###### OC Test
+https://openshift.test.bpichincha.com/
+yratnayake
+x33HAPrzjiCo
+
+
+
+
+###### Copy artifacts
+1. .86 to .52
+scp custom-userstore-rest-1.0.25.jar usrdwso2@10.50.24.52:/home/usrdwso2/anupam
+
+2. .52 to .43
+scp custom-userstore-rest-1.0.25.jar usrdwso2@10.50.24.43:/app/wso2/banco-pichincha/resources/dropins
+
+######## OC Copy
+oc cp wso2apim-is-as-km-deployment-28-2p5l4:/home/wso2carbon/wso2is-km-5.7.0/repository .
+oc cp wso2apim-is-as-km-deployment-38-8r48q:/home/wso2carbon/wso2is-km-5.7.0/repository/conf .
+oc cp wso2ei-integrator-deployment-14-n8vwd:/home/wso2carbon/wso2ei-6.4.0/lib/CustomMediators-1.0.0.jar .
+oc cp /home/wso2carbon/wso2is-km-5.7.0/repository/deployment/server/userstores/
+###### BDD
+jdbc:sqlserver://10.50.24.47:10447;databaseName=BDD_TALOS
+usrdtalo
+Pichincha4
+
+######## TAM
+http://10.0.92.28:8080/WSGestionIdentidad/WebServices/Tam/WebServiceTamRT.asmx
+
+
+
+
+######## ALIAS
+alias p="oc get pods"
+alias d="oc delete pods "
+alias l="oc logs -f "
+alias r="oc rsh "
+alias desc="oc describe pods "
+alias dc="oc get dc"
+alias svc="oc get svc"
+alias routes="oc get routes"
+
+
+
+
+
+
+######## GIT
+git init
+git remote add origin https://anupamgogoi-wso2@bitbucket.org/anupamgogoi-wso2/banco-pichincha.git
+git push origin master
+
+######## BDD
+jdbc:sqlserver://10.50.24.47:10447;databaseName=CENTRA_ID
+usrdtalo
+Pichincha4
+
+######### AD
+ldaps://ecbptsd02.uiotest.bpichinchatest.test:636
+CN=Usuario Generico PRY_4945_TALOS,OU=Genericos,OU=TCS,OU=Filiales,OU=Usuarios,DC=Uiotest,DC=Bpichinchatest,DC=test
+OU=Genericos,OU=TCS,OU=Filiales,OU=Usuarios,DC=Uiotest,DC=Bpichinchatest,DC=test
+
+######## AD Test
+ldaps://ecbptsd02.uiotest.bpichinchatest.test:636
+CN=Usuario Generico PRY_4945_TALOS,OU=Genericos,OU=TCS,OU=Filiales,OU=Usuarios,DC=Uiotest,DC=Bpichinchatest,DC=test
+OU=Genericos,OU=TCS,OU=Filiales,OU=Usuarios,DC=Uiotest,DC=Bpichinchatest,DC=test
+
+
+######## ADALL
+CN=Usuario Generico PRY_4945_TALOS,OU=Genericos,OU=TCS,OU=Filiales,OU=Usuarios,DC=Uiotest,DC=Bpichinchatest,DC=test
+
+######## AD
+CN=Usuario Generico PRY_4945_TALOS,OU=Genericos,OU=TCS,OU=Filiales,OU=Usuarios,DC=Uiotest,DC=Bpichinchatest,DC=test
+
+regexp=(https://centraid-operation-web-banco-pichincha-dev.apps.desa.bpichincha.com/auth/callback|https://centraid-operation-web-banco-pichincha-dev.apps.desa.bpichincha.com/assets/silent-renew.html|https://centraid-operation-web-banco-pichincha-dev.apps.desa.bpichincha.com/auth/login|https://centraid-admin-web-banco-pichincha-dev.apps.desa.bpichincha.com/auth/callback|https://centraid-admin-web-banco-pichincha-dev.apps.desa.bpichincha.com/assets/silent-renew.html|https://centraid-admin-web-banco-pichincha-dev.apps.desa.bpichincha.com/auth/login)
+regexp=(http://centraid-operation-web-banco-pichincha-dev.apps.desa.bpichincha.com/auth/callback|http://centraid-operation-web-banco-pichincha-dev.apps.desa.bpichincha.com/assets/silent-renew.html|http://centraid-operation-web-banco-pichincha-dev.apps.desa.bpichincha.com/auth/login)
+regexp=(http://centraid-admin-web-banco-pichincha-dev.apps.desa.bpichincha.com/auth/callback|http://centraid-admin-web-banco-pichincha-dev.apps.desa.bpichincha.com/assets/silent-renew.html|http://centraid-admin-web-banco-pichincha-dev.apps.desa.bpichincha.com/auth/login)
+
+http://centraid-admin-web-banco-pichincha-dev.apps.desa.bpichincha.com/auth/login
+
+#######Keystore Test
+sznc3bf57gxs8t32
+certificado_ad_failover.cer
+certificado_ad_principal.cer
+
+
+regexp=(https://centraid-admin-web-banco-pichincha-dev.apps.desa.bpichincha.com/auth/callback|https://centraid-admin-web-banco-pichincha-dev.apps.desa.bpichincha.com/assets/silent-renew.html|https://centraid-admin-web-banco-pichincha-dev.apps.desa.bpichincha.com/auth/login)
+
+usrdwso2
+w50d05hM4Y
+
+
+
+jdbc:sqlserver://10.50.24.47:10447;databaseName=WSO2_UM_DB;SendStringParametersAsUnicode=false
+
+
+cent
+https://wso2ei-integrator-service:8243/api.centraid/businesslogic
+
+
+
+
+
+
+1552996257036
+
+jdbc:sqlserver://10.50.24.47:10447;databaseName=WSO2_UM_DB;SendStringParametersAsUnicode=false
+
+
+
+
+
+
+
+
+wso2ei-integrator-deployment-16-rxkvb:/home/wso2carbon/wso2ei-6.4.0/repository/deployment/server/carbonapps
+
+
