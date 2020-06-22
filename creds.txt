@@ -123,4 +123,10 @@ wso2ei-integrator-deployment-16-rxkvb:/home/wso2carbon/wso2ei-6.4.0/repository/d
 
 
 ############ BP Bitbucket
-https://controlversiones.uio.bpichincha.com/scm/an10/centra-id-queue.git
+git clone https://controlversiones.uio.bpichincha.com/scm/an10/centra-id-queue.git
+git checkout feature/PRY_GESTION_IDENTIDAD
+git pull origin feature/PRY_GESTION_IDENTIDAD
+
+usrwso2
+usrwso2!*
+
