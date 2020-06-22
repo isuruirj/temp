@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localEntry xmlns="http://ws.apache.org/ns/synapse" key="AD_CONFIGURE">
+   <tem:adConfigure xmlns:tem="http://tempuri.org/">
+      <tem:ldapUri>ldap://ecbptsd02.uiotest.bpichinchatest.test:389</tem:ldapUri>
+      <tem:searchBaseGroup>OU=Grupos,DC=Uiotest,DC=Bpichinchatest,DC=test</tem:searchBaseGroup>
+      <tem:searchBaseContainer>OU=Usuarios,DC=Uiotest,DC=Bpichinchatest,DC=test</tem:searchBaseContainer>
+      <tem:securityPrincipal>CN=Usuario Generico PRY_4945_TALOS,OU=Genericos,OU=TCS,OU=Filiales,OU=Usuarios,DC=Uiotest,DC=Bpichinchatest,DC=test</tem:securityPrincipal>
+      <tem:securityCredential>kronNGejTNNlNdpX8MSywg==</tem:securityCredential>
+   </tem:adConfigure>
+   <description>Configuracion AD</description>
+</localEntry>

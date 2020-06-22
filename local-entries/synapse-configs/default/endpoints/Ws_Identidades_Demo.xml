@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoint xmlns="http://ws.apache.org/ns/synapse" name="Ws_Identidades_Demo">
+   <address uri="http://10.0.64.140/WSGestionIdentidad/WebServices/Bancs/WebServiceBancs.asmx"/>
+</endpoint>
