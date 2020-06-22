@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/api.centraid/common/UserMigrationError" name="CentraIDcommonUserMigrationErrorApi" version="1.0.0" version-type="context" xmlns="http://ws.apache.org/ns/synapse">
+    <resource faultSequence="FaultSeq" methods="GET">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="UserMigrationErrorListSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/count">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="UserMigrationErrorCountSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/max/{field}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="UserMigrationErrorMaxSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/sum/{field}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="UserMigrationErrorSumSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="POST" uri-template="/">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="UserMigrationErrorCreateSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="PUT" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="UserMigrationErrorUpdateSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="DELETE" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="UserMigrationErrorDeleteSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/{from}/{to}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="UserMigrationErrorFromToSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="UserMigrationErrorRetrieveSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+</api>

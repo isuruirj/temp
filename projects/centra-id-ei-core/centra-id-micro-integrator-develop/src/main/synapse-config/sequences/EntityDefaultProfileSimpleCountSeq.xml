@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="DefaultProfileSimpleCountSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="DefaultProfileSimpleCountSeq" value="Inicio.." />
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+    <property name="Accept" scope="transport" type="STRING" value="application/json" />
+    <property action="remove" name="Content-Type" scope="transport" />
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.codeCompany" name="codeCompany" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.codeDivision" name="codeDivision" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.codeArea" name="codeArea" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.codeDepartment" name="codeDepartment" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.codePosition" name="codePosition" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfileId" name="globalProfileId" scope="default" type="STRING" />
+    <script language="nashornJs"><![CDATA[
+        @add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE defaultProfileSimple.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","defaultProfileSimple","id");
+        where += addWhere("codeCompany","String","defaultProfileSimple","code_company");
+        where += addWhere("codeDivision","String","defaultProfileSimple","code_division");
+        where += addWhere("codeArea","String","defaultProfileSimple","code_area");
+        where += addWhere("codeDepartment","String","defaultProfileSimple","code_department");
+        where += addWhere("codePosition","String","defaultProfileSimple","code_position");
+        where += addWhere("valid","Integer","defaultProfileSimple","valid");
+        where += addWhere("globalProfileId","Integer","defaultProfileSimple","global_profile_id");
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+        log.debug(where);]]></script>
+
+    <property value="sch_centra_id.DEFAULT_PROFILES defaultProfileSimple" name="uri.var.table" scope="default" type="STRING"/>
+    <property value="COUNT" name="uri.var.function" scope="default" type="STRING"/>
+    <property value="*" name="uri.var.field" scope="default" type="STRING"/>
+
+    <call>
+        <endpoint name="DefaultProfileSimpleDSS_Endpoint" template="HTTPEndpointGetTemplate"
+              uri="{uri.var.dataServiceHost}/application.default-profile-simple.ds.HTTPEndpoint/GetFunctionResultDefaultProfileSimple?function={uri.var.function}&amp;whereclause={uri.var.whereclause}&amp;field={uri.var.field}&amp;table={uri.var.table}&amp;innerjoinclause={uri.var.innerjoinclause}" />
+
+    </call>
+
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING"/>
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq"/>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                        "count": $1
+                    }
+                </format>
+                <args>
+                    <arg evaluator="json" expression="$.result.value"/>
+                </args>
+            </payloadFactory>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200"/>
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="DefaultProfileSimpleCountSeq" value="Fin.." />
+    </log>
+    <respond />
+</sequence>

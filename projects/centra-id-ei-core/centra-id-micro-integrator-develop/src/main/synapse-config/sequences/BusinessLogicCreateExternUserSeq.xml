@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="BusinessLogicCreateExternUserSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="BusinessLogicCreateExternUserSeq" value="Inicio..." />
+    </log>
+    <property name="messageType" value="application/json" scope="axis2" />
+    <property expression="$body/*[1]" name="payload" scope="default" type="STRING" />
+    <script language="js">
+        <![CDATA[var payload = mc.getProperty("payload");mc.setPayloadJSON(payload);]]>
+    </script>
+    <!-- tranformar JSON to XML -->
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml" />
+    <property name="Accept" scope="transport" type="STRING" value="application/xml" />
+    <!-- Salvar datos -->
+    <property name="X-Forwarded-For" expression="//xForwardedForAction/text()" />
+    <property name="UserName" expression="//usernameAction/text()" />
+    <property name="uri.var.company" expression="//company/text()" />
+    <property name="uri.var.division" expression="//division/text()" />
+    <property name="uri.var.identityType" expression="//identityType/text()" />
+    <property name="uri.var.position" expression="//position/text()" />
+    <property name="uri.var.costCenter" expression="//costCenter/text()" />
+    <property name="uri.var.userTypeCode" expression="//userTypeCode/text()" />
+    <property name="uri.var.userSubtypeCode" expression="//userSubtypeCode/text()" />
+    <property name="firstSurname" expression="//firstSurname/text()" />
+    <property name="middleName" expression="//middleName/text()" />
+    <property name="firstName" expression="//firstName/text()" />
+    <property name="secondSurname" expression="//secondSurname/text()" />
+    <property name="names" expression="//names/text()" />
+    <property name="identity" expression="//identity/text()" />
+    <property name="endDate" expression="//endDate/text()" />
+    <property name="personalEmail" expression="//personalEmail/text()" />
+    <property name="guid" expression="fn:substring-after(get-property('MessageID'), 'urn:uuid:')" />
+    <property name="cellphoneNumber" expression="//cellphoneNumber/text()" />
+    <property name="uri.var.bankCounterpart" expression="//bankCounterpart/text()" />
+    <property name="uri.var.profile" expression="//profile/text()" />
+    <log level="custom" category="DEBUG">
+        <property name="X-Forwarded-For" expression="$ctx:X-Forwarded-For" />
+        <property name="UserName" expression="$ctx:UserName" />
+        <property name="uri.var.company" expression="get-property('uri.var.company')" />
+        <property name="uri.var.division" expression="get-property('uri.var.division')" />
+        <property name="uri.var.identityType" expression="get-property('uri.var.identityType')" />
+        <property name="uri.var.position" expression="get-property('uri.var.position')" />
+        <property name="uri.var.costCenter" expression="get-property('uri.var.costCenter')" />
+        <property name="uri.var.userTypeCode" expression="get-property('uri.var.userTypeCode')" />
+        <property name="uri.var.userSubtypeCode" expression="get-property('uri.var.userSubtypeCode')" />
+        <property name="firstSurname" expression="get-property('firstSurname')" />
+        <property name="middleName" expression="get-property('middleName')" />
+        <property name="firstName" expression="get-property('firstName')" />
+        <property name="secondSurname" expression="get-property('secondSurname')" />
+        <property name="names" expression="get-property('names')" />
+        <property name="identity" expression="get-property('identity')" />
+        <property name="endDate" expression="get-property('endDate')" />
+        <property name="personalEmail" expression="get-property('personalEmail')" />
+        <property name="guid" expression="get-property('guid')" />
+        <property name="cellphoneNumber" expression="get-property('cellphoneNumber')" />
+        <property name="uri.var.bankCounterpart" expression="get-property('bankCounterpart')" />
+        <property name="uri.var.profile" expression="get-property('uri.var.profile')" />
+    </log>
+    <!-- Recuperar compania -->
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/company/Company?code={uri.var.company}" />
+    </call>
+    <property name="companyId" expression="//companyList/company/id" />
+    <!-- Recuperar division -->
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/common/Catalog?code={uri.var.division}&amp;catalogType.code=DIV" />
+    </call>
+    <property name="divisionId" expression="//catalogList/catalog/id" />
+    <!-- Recuperar cargo -->
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/common/Catalog?code={uri.var.position}&amp;catalogType.code=CAR" />
+    </call>
+    <property name="positionId" expression="//catalogList/catalog/id" />
+    <!-- Recuperar tipo de identificacion -->
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/common/Catalog?code={uri.var.identityType}&amp;catalogType.code=TIPIDE" />
+    </call>
+    <property name="catalogIdentificationTypeId" expression="//catalogList/catalog/id" />
+    <!-- Recuperar centro costo-->
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/company/CostCenter?code={uri.var.costCenter}&amp;company.code=BCPI" />
+    </call>
+    <property name="costCenterId" expression="//costCenterList/costCenter/id" />
+    <!-- Recuperar tipo de usuario-->
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/TypeUser?code={uri.var.userTypeCode}&amp;type=T" />
+    </call>
+    <property name="userTypeId" expression="//typeUserList/typeUser/id" />
+    <!-- Recuperar subtipo de usuario-->
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/TypeUser?code={uri.var.userSubtypeCode}&amp;type=S" />
+    </call>
+    <property name="userSubtypeId" expression="//typeUserList/typeUser/id" />
+    <!-- Recuperar perfil global -->
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/GlobalProfile?code={uri.var.profile}" />
+    </call>
+    <property name="globalProfileId" expression="//globalProfileList/globalProfile/id" />
+    <!-- -->
+    <!-- Recupera contrapartebancp -->
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/UserDataSimple/0/1?employeeCode={uri.var.bankCounterpart}" />
+    </call>
+    <property name="bankCounterpartId" expression="//id" />
+    <log level="custom" category="DEBUG">
+        <property name="BusinessLogicCreateExternUserSeq" value="Inicio.2.." />
+    </log>
+    <!-- Obtener fecha actual -->
+    <call-template target="GetCurrentDateTemplate" />
+    <log level="custom" category="DEBUG">
+        <property name="BusinessLogicCreateExternUserSeq" value="Inicio.3.." />
+        <property name="firstSurname" expression="get-property('firstSurname')" />
+        <property name="middleName" expression="get-property('middleName')" />
+        <property name="firstName" expression="get-property('firstName')" />
+        <property name="secondSurname" expression="get-property('secondSurname')" />
+        <property name="names" expression="get-property('names')" />
+        <property name="identity" expression="get-property('identity')" />
+        <property name="currentDate" expression="get-property('currentDate')" />
+        <property name="personalEmail" expression="get-property('personalEmail')" />
+        <property name="currentDate" expression="get-property('currentDate')" />
+        <property name="guid" expression="get-property('guid')" />
+        <property name="currentDate" expression="get-property('currentDate')" />
+        <property name="guid" expression="get-property('guid')" />
+        <property name="cellphoneNumber" expression="get-property('cellphoneNumber')" />
+        <property name="companyId" expression="get-property('companyId')" />
+        <property name="divisionId" expression="get-property('divisionId')" />
+        <property name="positionId" expression="get-property('positionId')" />
+        <property name="costCenterId" expression="get-property('costCenterId')" />
+        <property name="userTypeId" expression="get-property('userTypeId')" />
+        <property name="userSubtypeId" expression="get-property('userSubtypeId')" />
+        <property name="catalogIdentificationTypeId" expression="get-property('catalogIdentificationTypeId')" />
+        <property name="globalProfileId" expression="get-property('globalProfileId')" />
+        <property name="bankCounterpartId" expression="get-property('bankCounterpartId')" />
+    </log>
+    <!-- Crear Usuario-->
+    <payloadFactory media-type="json">
+        <format>
+            {
+                "userData": {
+                    "username": "",
+                    "workerCode": "",
+                    "employeeFirstSurname": "$1",
+                    "employeeSecondSurname": "$2",
+                    "employeeFirstName": "$3",
+                    "employeeSecondName": "$4",
+                    "employeeCompleteName": "$5",
+                    "identification": "$6",
+                    "groupingCode": "",
+                    "subsidiaryCode": "",
+                    "subsidiaryName": "",
+                    "locationName": "",
+                    "hierarchicalLevel": "100",
+                    "depositAccountNumber": "",
+                    "employeeIncomeDate": "$7",
+                    "employeeDepartureDate": null,
+                    "employeeStatus": "ACTIVO",
+                    "employeeCode": "0000000000",
+                    "usernameView" : "$8",
+                    "mail" : "X",
+                    "registrationDate": "$9",
+                    "guid": "$10",
+                    "typeEvent": "C",
+                    "dataDate": "$11",
+                    "uuid": "$12",
+                    "provisionDate": null,
+                    "mobile": "$13",
+                    "suspensionStartDate": null,
+                    "suspensionEndDate": null,
+                    "suspensionReason": null,
+                    "suspensionType": null,
+                    "validationStartDate": null,
+                    "validationEndDate": null,
+                    "endingWorkDate": null,
+                    "company": {
+                        "id": $14
+                    },
+                    "catalogDivision": {
+                        "id": $15
+                    },
+                    "catalogArea": null,
+                    "catalogDepartment": null,
+                    "catalogPosition": {
+                        "id": $16
+                    },
+                    "costCenter": {
+                        "id": $17
+                    },
+                    "typeUser": {
+                        "id": $18
+                    },
+                    "subtypeUser": {
+                        "id": $19
+                    },
+                    "catalogIdentificationType": {
+                        "id": $20
+                    },
+                    "globalProfile": {
+                        "id": $21
+                    },
+                    "userdataBankCounterpart": {
+                        "id": $22
+                    },
+                    "userdataResponsibleUser": null,
+                    "userdataSupervisor": null,
+                    "counterGenericRotary" : 0,
+                    "counterGenericMail" : 0,
+                    "typeRotary" : "",
+                    "filter" : "X",
+                    "origin" : "Creación / Eliminación Usuario Externo"
+                }
+            }
+        </format>
+        <args>
+            <arg evaluator="xml" expression="get-property('firstSurname')" />
+            <arg evaluator="xml" expression="get-property('secondSurname')" />
+            <arg evaluator="xml" expression="get-property('firstName')" />
+            <arg evaluator="xml" expression="get-property('middleName')" />
+            <arg evaluator="xml" expression="get-property('names')" />
+            <arg evaluator="xml" expression="get-property('identity')" />
+            <arg evaluator="xml" expression="get-property('currentDate')" />
+            <arg evaluator="xml" expression="get-property('personalEmail')" />
+            <arg evaluator="xml" expression="get-property('currentDate')" />
+            <arg evaluator="xml" expression="get-property('guid')" />
+            <arg evaluator="xml" expression="get-property('currentDate')" />
+            <arg evaluator="xml" expression="get-property('guid')" />
+            <arg evaluator="xml" expression="get-property('cellphoneNumber')" />
+            <arg evaluator="xml" expression="get-property('companyId')" />
+            <arg evaluator="xml" expression="get-property('divisionId')" />
+            <arg evaluator="xml" expression="get-property('positionId')" />
+            <arg evaluator="xml" expression="get-property('costCenterId')" />
+            <arg evaluator="xml" expression="get-property('userTypeId')" />
+            <arg evaluator="xml" expression="get-property('userSubtypeId')" />
+            <arg evaluator="xml" expression="get-property('catalogIdentificationTypeId')" />
+            <arg evaluator="xml" expression="get-property('globalProfileId')" />
+            <arg evaluator="xml" expression="get-property('bankCounterpartId')" />
+        </args>
+    </payloadFactory>
+    <property name="X-Forwarded-For" scope="transport" expression="$ctx:X-Forwarded-For" />
+    <property name="UserName" scope="transport" expression="$ctx:UserName" />
+    <call>
+        <endpoint template="HTTPEndpointPostTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/UserData" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <property name="ContentType" value="application/json" scope="axis2" />
+            <property name="messageType" value="application/json" scope="axis2" />
+        </then>
+        <else>
+            <property name="fault" value="Error create extern user" />
+            <sequence key="FaultSeq" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="BusinessLogicCreateExternUserSeq" value="Fin..." />
+    </log>
+</sequence>

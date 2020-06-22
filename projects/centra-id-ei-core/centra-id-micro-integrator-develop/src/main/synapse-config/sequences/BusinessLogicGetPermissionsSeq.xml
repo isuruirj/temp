@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="BusinessLogicGetPermissionsSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse" xmlns:ns="http://service.ws.um.carbon.wso2.org" xmlns:ax2777="http://core.user.carbon.wso2.org/xsd" xmlns:ax2778="http://api.user.carbon.wso2.org/xsd">
+    <log level="custom" category="DEBUG">
+        <property name="BusinessLogicGetPermissionsSeq" value="Inicio..." />
+        <property name="username" expression="//username" />
+        <property name="app" expression="//app" />
+    </log>
+    <!--<property name="uri.var.username" expression="//username" />-->
+    <property name="uri.var.username" expression="$ctx:UserName"/>
+    <property name="uri.var.app" expression="//app" />
+    <log level="custom" category="DEBUG">
+        <property name="BusinessLogicGetPermissionsSeq" value="Inicio.0.." />
+        <property name="username" expression="get-property('uri.var.username')" />
+    </log>
+    <payloadFactory media-type="xml">
+        <format>
+            <ser:getAllowedUIResourcesForUser xmlns:ser="http://service.ws.um.carbon.wso2.org">
+                <ser:userName>$1</ser:userName>
+                <ser:permissionRootPath>/</ser:permissionRootPath>
+            </ser:getAllowedUIResourcesForUser>
+        </format>
+        <args>
+            <arg evaluator="xml" expression="fn:concat(get-property('DOMAIN'),'/',get-property('uri.var.username'))" />
+        </args>
+    </payloadFactory>
+    <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="IS_SERVER_USER_DATO" expression="synapse:get-property('IS_SERVER_USER')" scope="default" />
+    <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="IS_SERVER_PASSWORD_DATO" expression="synapse:get-property('IS_SERVER_PASSWORD')" scope="default" />
+    <property xmlns:ns="http://org.apache.synapse/xsd" name="Authorization" expression="fn:concat('Basic ', base64Encode(fn:concat($ctx:IS_SERVER_USER_DATO,':',$ctx:IS_SERVER_PASSWORD_DATO)))" scope="transport" />
+    <property name="service_ep" expression="fn:concat( get-property('uri.var.identityServerHost'),'/services' ,'/RemoteAuthorizationManagerService')" />
+    <header name="To" expression="get-property('service_ep')" />
+    <property name="Accept" scope="transport" value="application/xml" />
+    <log level="custom" category="DEBUG">
+        <property name="BusinessLogicGetPermissionsSeq" value="Inicio.1.." />
+    </log>
+    <call>
+        <endpoint>
+            <default />
+        </endpoint>
+    </call>
+    <property expression="$body//*" name="permissions" scope="default" type="OM" />
+    <log level="custom" category="DEBUG">
+        <property name="permissions" expression="get-property('permissions')" />
+    </log>
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/common/Menu?app={uri.var.app}" />
+    </call>
+    <log level="custom" category="DEBUG">
+        <property name="BusinessLogicGetPermissionsSeq" value="Inicio.3.." />
+    </log>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <log level="custom" category="DEBUG">
+                <property name="BusinessLogicGetPermissionsSeq" value="Inicio.4.." />
+            </log>
+            <foreach expression="//menu">
+                <sequence>
+                    <property name="permission" expression="//menu/permission" />
+                    <property name="condition" expression="fn:concat('$ctx:permissions//is:return[contains(text(),','&quot;',$ctx:permission,'&quot;',')]/text()')" />
+                    <log level="custom" category="DEBUG">
+                        <property name="permission" expression="get-property('condition')" />
+                    </log>
+                    <!--property name="condition" value="get-property('permissions')//ns:return[contains(text(),'Op_InternalUserCreation')]/text()" /-->
+                    <property name="exist" expression="evaluate(get-property('condition'))" xmlns:is="http://service.ws.um.carbon.wso2.org"/>
+                    <log level="custom" category="DEBUG">
+                        <property name="permission" expression="get-property('permission')" />
+                        <property name="exist" expression="get-property('exist')" />
+                    </log>
+                    <filter regex="true" source="boolean($ctx:exist)">
+                        <then>
+                            <payloadFactory media-type="xml">
+                                <format>
+                                    <menu>
+                                        <id>$1</id>
+                                        <title>$2</title>
+                                        <translate>$3</translate>
+                                        <type>$4</type>
+                                        <icon>$5</icon>
+                                        <url>$6</url>
+                                        <permission>$7</permission>
+                                        <view>true</view>
+                                    </menu>
+                                </format>
+                                <args>
+                                    <arg evaluator="xml" expression="//menu/id" />
+                                    <arg evaluator="xml" expression="//menu/title" />
+                                    <arg evaluator="xml" expression="//menu/translate" />
+                                    <arg evaluator="xml" expression="//menu/type" />
+                                    <arg evaluator="xml" expression="//menu/icon" />
+                                    <arg evaluator="xml" expression="//menu/url" />
+                                    <arg evaluator="xml" expression="//menu/permission" />
+                                </args>
+                            </payloadFactory>
+                        </then>
+                        <else>
+                            <payloadFactory media-type="xml">
+                                <format>
+                                    <menu>
+                                        <id>$1</id>
+                                        <title />
+                                        <translate />
+                                        <type />
+                                        <icon />
+                                        <url />
+                                        <permission />
+                                        <view>false</view>
+                                    </menu>
+                                </format>
+                                <args>
+                                    <arg evaluator="xml" expression="//menu/id" />
+                                </args>
+                            </payloadFactory>
+                        </else>
+                    </filter>
+                </sequence>
+            </foreach>
+        </then>
+        <else>
+            <property name="fault" value="Error when consulting 'menu' by 'app' " />
+            <sequence key="FaultSeq" />
+        </else>
+    </filter>
+    <property name="messageType" scope="axis2" value="application/json" />
+    <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+    <log level="custom" category="DEBUG">
+        <property name="BusinessLogicGetPermissionsSeq" value="Fin..." />
+    </log>
+</sequence>

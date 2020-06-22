@@ -1,0 +1,333 @@
+<data name="company.company.ds"
+    serviceNamespace="centra-id.com"
+    enableBatchRequests="false"
+    enableBoxcarring="false"
+    transports="https"
+    disableLegacyBoxcarringMode="true">
+
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <!-- DYNAMIC QUERY COMPANY -->
+    <query id="dynamicQuery_company" useConfig="default">
+        <sql>
+           SELECT
+               company.id,
+               company.code,
+               company.identifier,
+               company.business_name,
+               company.catalog_company_type_id,
+               company.domain_name,
+               company.status,
+               company.logon,
+               company.valid
+           FROM sch_centra_id.COMPANIES company :innerjoinclause :whereclause ORDER BY :orderby :fromto
+        </sql>
+        <result element="companyList" rowName="company">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="identifier" name="identifier" xsdType="xs:string"/>
+            <element column="business_name" name="businessName" xsdType="xs:string"/>
+            <call-query href="queryReferenceById__company_catalogCompanyType">
+                <with-param column="catalog_company_type_id" name="id"/>
+            </call-query>
+            <element column="domain_name" name="domainName" xsdType="xs:string"/>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <element column="logon" name="logon" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="fromto" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DISTINCT QUERY COMPANY Catalog-->
+    <query id="dynamicDistinctQuery_company_catalog" useConfig="default">
+        <sql>
+           SELECT DISTINCT
+               catalogCompanyType.id,
+               catalogCompanyType.code,
+               catalogCompanyType.name,
+               catalogCompanyType.predetermined,
+               catalogCompanyType.ordinal,
+               catalogCompanyType.value_text,
+               catalogCompanyType.value_number,
+               catalogCompanyType.value_date,
+               catalogCompanyType.value_boolean,
+               catalogCompanyType.catalog_type_id,
+               catalogCompanyType.valid
+           FROM sch_centra_id.COMPANIES company :innerjoinclause :whereclause ORDER BY :orderby
+        </sql>
+        <result element="catalogList" rowName="catalog">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="predetermined" name="predetermined" xsdType="xs:integer"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="value_text" name="valueText" xsdType="xs:string"/>
+            <element column="value_number" name="valueNumber" xsdType="xs:decimal"/>
+            <element column="value_date" name="valueDate" xsdType="xs:date"/>
+            <element column="value_boolean" name="valueBoolean" xsdType="xs:integer"/>
+            <call-query href="queryReferenceById__catalogCompanyType_catalog_catalogType">
+                <with-param column="catalog_type_id" name="id"/>
+            </call-query>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- INSERT Company -->
+    <query id="insertQuery_company" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>
+           INSERT INTO sch_centra_id.COMPANIES(
+               code,
+               identifier,
+               business_name,
+               catalog_company_type_id,
+               domain_name,
+               status,
+               logon,
+               valid
+        ) VALUES(?,?,?,?,?,?,?,?)
+        </sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="code" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="identifier" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="businessName" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="catalogCompanyTypeId" ordinal="4" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="domainName" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="status" ordinal="6" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="A"/>
+        <param name="logon" ordinal="7" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="valid" ordinal="8" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="1"/>
+    </query>
+    <!-- UPDATE Company -->
+    <query id="updateQuery_company" useConfig="default">
+        <sql>
+           UPDATE sch_centra_id.COMPANIES SET
+               code=?,
+               identifier=?,
+               business_name=?,
+               catalog_company_type_id=?,
+               domain_name=?,
+               status=?,
+               logon=?
+            WHERE id=?
+        </sql>
+        <param name="code" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="identifier" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="businessName" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="catalogCompanyTypeId" ordinal="4" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="domainName" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="status" ordinal="6" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="A"/>
+        <param name="logon" ordinal="7" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="id" ordinal="8" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <!-- QUERY REFERENCE Company Catalog 0-->
+    <query id="queryReferenceById__company_catalogCompanyType" useConfig="default">
+        <sql>
+           SELECT 
+               catalogCompanyType.id,
+               catalogCompanyType.code,
+               catalogCompanyType.name,
+               catalogCompanyType.predetermined,
+               catalogCompanyType.ordinal,
+               catalogCompanyType.value_text,
+               catalogCompanyType.value_number,
+               catalogCompanyType.value_date,
+               catalogCompanyType.value_boolean,
+               catalogCompanyType.catalog_type_id,
+               catalogCompanyType.valid
+           FROM sch_centra_id.CATALOGS catalogCompanyType WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogCompanyType">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="predetermined" name="predetermined" xsdType="xs:integer"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="value_text" name="valueText" xsdType="xs:string"/>
+            <element column="value_number" name="valueNumber" xsdType="xs:decimal"/>
+            <element column="value_date" name="valueDate" xsdType="xs:date"/>
+            <element column="value_boolean" name="valueBoolean" xsdType="xs:integer"/>
+            <call-query href="queryReferenceById__catalogCompanyType_catalog_catalogType">
+                <with-param column="catalog_type_id" name="id"/>
+            </call-query>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE Company CatalogType 1-->
+    <query id="queryReferenceById__catalogCompanyType_catalog_catalogType" useConfig="default">
+        <sql>
+           SELECT 
+               catalogType.id,
+               catalogType.code,
+               catalogType.name,
+               catalogType.sort_type,
+               catalogType.editable,
+               catalogType.valid,
+               catalogType.description
+           FROM sch_centra_id.CATALOGS_TYPES catalogType WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogType">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="sort_type" name="sortType" xsdType="xs:string"/>
+            <element column="editable" name="editable" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="description" name="description" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- DYNAMIC FUNCTION  -->
+    <query id="dynamicQueryFunction_company" useConfig="default">
+        <sql>
+           SELECT :function(:field) as value FROM :table :innerjoinclause :whereclause
+         </sql>
+        <result element="result">
+            <element column="value" name="value" xsdType="xs:long"/>
+        </result>
+        <param name="function" sqlType="QUERY_STRING"/>
+        <param name="field" sqlType="QUERY_STRING"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DELETE  -->
+    <query id="dynamicDeleteQuery_company" useConfig="default">
+        <sql>UPDATE :table SET :set WHERE id=:id</sql>
+        <param name="id" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="set" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- OPERATIONS -->
+    <operation name="listAllOperation_company">
+        <call-query href="dynamicQuery_company">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="fromToOperation_company">
+        <call-query href="dynamicQuery_company">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="functionOperation_company">
+        <call-query href="dynamicQueryFunction_company">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="deleteOperation_company">
+        <call-query href="dynamicDeleteQuery_company">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </operation>
+    <operation name="create_company">
+        <call-query href="insertQuery_company">
+            <with-param name="code" query-param="code"/>
+            <with-param name="identifier" query-param="identifier"/>
+            <with-param name="businessName" query-param="businessName"/>
+            <with-param name="catalogCompanyTypeId" query-param="catalogCompanyTypeId"/>
+            <with-param name="domainName" query-param="domainName"/>
+            <with-param name="status" query-param="status"/>
+            <with-param name="logon" query-param="logon"/>
+            <with-param name="valid" query-param="valid"/>
+        </call-query>
+    </operation>
+    <operation name="update_company">
+        <call-query href="updateQuery_company">
+            <with-param name="code" query-param="code"/>
+            <with-param name="identifier" query-param="identifier"/>
+            <with-param name="businessName" query-param="businessName"/>
+            <with-param name="catalogCompanyTypeId" query-param="catalogCompanyTypeId"/>
+            <with-param name="domainName" query-param="domainName"/>
+            <with-param name="status" query-param="status"/>
+            <with-param name="logon" query-param="logon"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <operation name="distinctOperation_company_catalogCompanyType">
+        <call-query href="dynamicDistinctQuery_company_catalog">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <!-- RESOURCES -->
+    <resource method="GET" path="GetAllCompany">
+        <call-query href="dynamicQuery_company">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFromToCompany">
+        <call-query href="dynamicQuery_company">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFunctionResultCompany">
+        <call-query href="dynamicQueryFunction_company">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="DeleteCompany">
+        <call-query href="dynamicDeleteQuery_company">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="CreateCompany">
+        <call-query href="insertQuery_company">
+            <with-param name="code" query-param="code"/>
+            <with-param name="identifier" query-param="identifier"/>
+            <with-param name="businessName" query-param="businessName"/>
+            <with-param name="catalogCompanyTypeId" query-param="catalogCompanyTypeId"/>
+            <with-param name="domainName" query-param="domainName"/>
+            <with-param name="status" query-param="status"/>
+            <with-param name="logon" query-param="logon"/>
+            <with-param name="valid" query-param="valid"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="UpdateCompany">
+        <call-query href="updateQuery_company">
+            <with-param name="code" query-param="code"/>
+            <with-param name="identifier" query-param="identifier"/>
+            <with-param name="businessName" query-param="businessName"/>
+            <with-param name="catalogCompanyTypeId" query-param="catalogCompanyTypeId"/>
+            <with-param name="domainName" query-param="domainName"/>
+            <with-param name="status" query-param="status"/>
+            <with-param name="logon" query-param="logon"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetDistinctCompanyCatalogCompanyType">
+        <call-query href="dynamicDistinctQuery_company_catalog">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+</data>

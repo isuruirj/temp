@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="BussinesProcessStartInstanceSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="BussinesProcessStartInstanceSeq" value="Inicio..." />
+        <property expression="$ctx:X-Forwarded-For" name="X-Forwarded-For" xmlns:cen="centra-id.com" />
+        <property expression="$ctx:UserName" name="UserName" xmlns:cen="centra-id.com" />
+    </log>
+    <!-- Salvar mensaje original -->
+    <property expression="json-eval($)" name="json" scope="default" type="STRING" />
+    <!-- Salvar GUID Y ProcessKey -->
+    <property expression="json-eval($.guid)" name="guid" scope="default" type="STRING" />
+    <property expression="json-eval($.processkey)" name="uri.var.processKey" scope="default" type="STRING" />
+    <!-- Recuperar la definicion del proceso desde parametros globales-->
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/common/GlobalParameter?code={uri.var.processKey}" />
+    </call>
+    <property expression="//globalParameter/valueText" name="processDefinitionId" scope="default" type="STRING" xmlns:cen="centra-id.com" />
+    <filter regex="true" source="boolean(get-property('processDefinitionId'))" xmlns:cen="centra-id.com">
+        <then>
+            <payloadFactory media-type="json">
+                <format>
+                    $1
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="get-property('json')" />
+                </args>
+            </payloadFactory>
+            <!-- tranformar JSON to XML -->
+            <xslt key="gov:/centra-id/xslt/bpsFilter.xsl">
+                <property expression="get-property('processDefinitionId')" name="processDefinitionId" />
+            </xslt>
+            <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+            <property expression="json-eval($)" name="payload" scope="default" type="STRING" />
+            <payloadFactory media-type="json">
+                <format>$1</format>
+                <args>
+                    <arg evaluator="xml" expression="$ctx:payload" />
+                </args>
+            </payloadFactory>
+            <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+            <property name="ContentType" scope="axis2" type="STRING" value="application/json" />
+            <property name="Accept" scope="axis2" type="STRING" value="application/json" />
+            <property action="remove" name="Content-Encoding" scope="transport" />
+            <property action="remove" name="Accept-Encoding" scope="transport" />
+            <property expression="synapse:get-property('BPS_SERVER_USER')" name="BPS_SERVER_USER_DATO" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns2="http://org.apache.synapse/xsd" />
+            <property expression="synapse:get-property('BPS_SERVER_PASSWORD')" name="BPS_SERVER_PASSWORD_DATO" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns2="http://org.apache.synapse/xsd" />
+            <property expression="fn:concat('Basic ', base64Encode(fn:concat($ctx:BPS_SERVER_USER_DATO,':',$ctx:BPS_SERVER_PASSWORD_DATO)))" name="Authorization" scope="transport" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" />
+            <call>
+                <endpoint template="HTTPEndpointPostTemplate" uri="{uri.var.bussinesProcessServiceHost}/bpmn/runtime/process-instances" />
+            </call>
+            <filter regex="201" source="get-property('axis2', 'HTTP_SC')">
+                <then>
+                    <property expression="//id" name="uri.var.processInstanceId" scope="default" type="STRING" />
+                    <property action="remove" name="Content-Type" scope="transport" />
+                    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+                    <property expression="fn:concat('Basic ', base64Encode(fn:concat($ctx:BPS_SERVER_USER_DATO,':',$ctx:BPS_SERVER_PASSWORD_DATO)))" name="Authorization" scope="transport" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" />
+                    <call>
+                        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.bussinesProcessServiceHost}/bpmn/runtime/tasks?processInstanceId={uri.var.processInstanceId}" />
+                    </call>
+                    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                        <then>
+                            <property expression="//data/id" name="uri.var.taskId" scope="default" type="STRING" />
+                            <payloadFactory media-type="json">
+                                <format>
+                                    $1
+                               </format>
+                                <args>
+                                    <arg evaluator="xml" expression="get-property('json')" />
+                                </args>
+                            </payloadFactory>
+                            <sequence key="GetReferenceDataSeq" />
+                            <!-- Completar la tarea -->
+                            <payloadFactory media-type="json">
+                                <format>
+                                    {
+                                        "action": "complete",
+                                        "variables": [
+                                            {
+                                                "name": "identityTypeName",
+                                                "value" : "$1"
+                                            },
+                                            {
+                                                "name": "companyName",
+                                                "value" : "$2"
+                                            },
+                                            {
+                                                "name": "divisionName",
+                                                "value":"$3"
+                                            },
+                                            {
+                                                "name": "areaName",
+                                                "value":"$4"
+                                            },
+                                            {
+                                                "name": "departmentName",
+                                                "value":"$5"
+                                            },
+                                            {
+                                                "name": "positionName",
+                                                "value":"$6"
+                                            },
+                                            {
+                                                "name": "costCenterName",
+                                                "value":"$7"
+                                            },
+                                            {
+                                                "name": "userTypeName",
+                                                "value":"$8"
+                                            },
+                                            {
+                                                "name": "userSubtypeName",
+                                                "value":"$9"
+                                            },
+                                            {
+                                                "name": "names",
+                                                "value":"$10"
+                                            },
+                                            {
+                                                "name": "type",
+                                                "value":"$11"
+                                            },
+                                            {
+                                                "name": "profileName",
+                                                "value":"$12"
+                                            },
+                                            {
+                                                "name": "supervisionLine",
+                                                "value":"$13"
+                                            },
+                                            {
+                                                "name": "supervisionLineName",
+                                                "value":"$14"
+                                            },
+                                            {
+                                                "name": "supervisionLineUsername",
+                                                "value":"$15"
+                                            },
+{
+                                                "name": "supervisionLineIdentification",
+                                                "value":"$16"
+                                            },
+                                            {
+                                                "name": "supervisionLineId",
+                                                "value":"$17"
+                                            },
+                                            {
+                                                "name": "bankCounterpart",
+                                                "value":"$18"
+                                            },
+                                            {
+                                                "name": "bankCounterpartName",
+                                                "value":"$19"
+                                            },
+                                            {
+                                                "name": "bankCounterpartUsername",
+                                                "value":"$20"
+                                            },
+                                            {
+                                                "name": "bankCounterpartIdentificacion",
+                                                "value":"$21"
+                                            },
+                                            {
+                                                "name": "bankCounterpartId",
+                                                "value":"$22"
+                                            },
+                                            {
+                                                "name": "responsibleUser",
+                                                "value":"$23"
+                                            },
+                                            {
+                                                "name": "responsibleUserName",
+                                                "value":"$24"
+                                            },
+                                            {
+                                                "name": "responsibleUserUsername",
+                                                "value":"$25"
+                                            },
+                                            {
+                                                "name": "responsibleUserIdentification",
+                                                "value":"$26"
+                                            },                                            
+                                            {
+                                                "name": "responsibleUserId",
+                                                "value":"$27"
+                                            },                                            
+                                            {
+                                                "name": "justification",
+                                                "value":"$28"
+                                            },
+                                            {
+                                                "name": "usernameAction",
+                                                "value":"$29"
+                                            },
+                                            {
+                                                "name": "xForwardedForAction",
+                                                "value":"$30"
+                                            }
+
+                                        ]
+                                    }
+                                </format>
+                                <args>
+                                    <arg evaluator="xml" expression="get-property('identityTypeName')" />
+                                    <arg evaluator="xml" expression="get-property('companyName')" />
+                                    <arg evaluator="xml" expression="get-property('divisionName')" />
+                                    <arg evaluator="xml" expression="get-property('areaName')" />
+                                    <arg evaluator="xml" expression="get-property('departmentName')" />
+                                    <arg evaluator="xml" expression="get-property('positionName')" />
+                                    <arg evaluator="xml" expression="get-property('costCenterName')" />
+                                    <arg evaluator="xml" expression="get-property('userTypeName')" />
+                                    <arg evaluator="xml" expression="get-property('userSubtypeName')" />
+                                    <arg evaluator="xml" expression="get-property('names')" />
+                                    <arg evaluator="xml" expression="get-property('type')" />
+                                    <arg evaluator="xml" expression="get-property('globalProfileName')" />
+                                    <arg evaluator="xml" expression="get-property('supervisionLine')" />
+                                    <arg evaluator="xml" expression="get-property('userDatasupervisionLineName')" />
+                                    <arg evaluator="xml" expression="get-property('userDatasupervisionLineUsername')" />
+                                    <arg evaluator="xml" expression="get-property('userDatasupervisionLineIdentification')" />
+                                    <arg evaluator="xml" expression="get-property('userDatasupervisionLineId')" />
+                                    <arg evaluator="xml" expression="get-property('bankCounterpart')" />
+                                    <arg evaluator="xml" expression="get-property('userDataBankCountertPartName')" />
+                                    <arg evaluator="xml" expression="get-property('userDataBankCountertPartUsername')" />
+                                    <arg evaluator="xml" expression="get-property('userDataBankCountertPartIdentification')" />
+                                    <arg evaluator="xml" expression="get-property('userDataBankCountertPartId')" />
+                                    <arg evaluator="xml" expression="get-property('responsibleUser')" />
+                                    <arg evaluator="xml" expression="get-property('userDataResponsibleUserName')" />
+                                    <arg evaluator="xml" expression="get-property('userDataResponsibleUserUsername')" />
+                                    <arg evaluator="xml" expression="get-property('userDataResponsibleUserIdentification')" />
+                                    <arg evaluator="xml" expression="get-property('userDataResponsibleUserId')" />
+                                    <arg evaluator="xml" expression="get-property('justification')" />
+                                    <arg evaluator="xml" expression="$ctx:UserName" />
+                                    <arg evaluator="xml" expression="$ctx:X-Forwarded-For" />
+                                </args>
+                            </payloadFactory>
+                            <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+                            <property expression="fn:concat('Basic ', base64Encode(fn:concat($ctx:BPS_SERVER_USER_DATO,':',$ctx:BPS_SERVER_PASSWORD_DATO)))" name="Authorization" scope="transport" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" />
+                            <call>
+                                <endpoint template="HTTPEndpointPostTemplate" uri="{uri.var.bussinesProcessServiceHost}/bpmn/runtime/tasks/{uri.var.taskId}" />
+                            </call>
+                            <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                                <then>
+                                    <payloadFactory media-type="json">
+                                        <format>
+                                            {
+                                                "processInstanceId": $1,
+                                                "processDefinitionId": "$2"
+                                            }
+                        		        </format>
+                                        <args>
+                                            <arg evaluator="xml" expression="get-property('uri.var.processInstanceId')" />
+                                            <arg evaluator="xml" expression="get-property('processDefinitionId')" />
+                                        </args>
+                                    </payloadFactory>
+                                </then>
+                                <else>
+                                    <property name="fault" scope="default" type="STRING" value="error when attending the task " />
+                                    <sequence key="FaultSeq" />
+                                </else>
+                            </filter>
+                        </then>
+                        <else>
+                            <property name="fault" scope="default" type="STRING" value="task retrieval failed " />
+                            <sequence key="FaultSeq" />
+                        </else>
+                    </filter>
+                </then>
+                <else>
+                    <sequence key="FaultSeq" />
+                </else>
+            </filter>
+        </then>
+        <else>
+            <property expression="fn:concat('ProcessDefinitionId not exist: ',get-property('processDefinitionId'))" name="fault" scope="default" type="STRING" />
+            <sequence key="FaultSeq" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="BussinesProcessStartInstanceSeq" value="Fin..." />
+        <property expression="get-property('transport','X-Forwarded-For')" name="X-Forwarded-For" xmlns:cen="centra-id.com" />
+        <property expression="get-property('transport','UserName')" name="UserName" xmlns:cen="centra-id.com" />
+    </log>
+</sequence>

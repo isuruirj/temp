@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="OperationProvisioningMaxSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="OperationProvisioningMaxSeq" value="Inicio.." />
+        <property name="uri.var.field" expression="get-property('uri.var.field')"/>
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+    <property name="Accept" scope="transport" type="STRING" value="application/json" />
+    <property action="remove" name="Content-Type" scope="transport" />
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.id" name="transactionalIdentity.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.uuid" name="transactionalIdentity.uuid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.guid" name="transactionalIdentity.guid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.username" name="transactionalIdentity.username" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.password" name="transactionalIdentity.password" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.workerCode" name="transactionalIdentity.workerCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.employeeLastname" name="transactionalIdentity.employeeLastname" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.employeeFirstname" name="transactionalIdentity.employeeFirstname" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.identification" name="transactionalIdentity.identification" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.identificationSupervisor" name="transactionalIdentity.identificationSupervisor" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.namesSupervisor" name="transactionalIdentity.namesSupervisor" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.companyCode" name="transactionalIdentity.companyCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.companyName" name="transactionalIdentity.companyName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.groupCode" name="transactionalIdentity.groupCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.groupName" name="transactionalIdentity.groupName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.divisionCode" name="transactionalIdentity.divisionCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.divisionName" name="transactionalIdentity.divisionName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.departmentCode" name="transactionalIdentity.departmentCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.departmentName" name="transactionalIdentity.departmentName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.areaCode" name="transactionalIdentity.areaCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.areaName" name="transactionalIdentity.areaName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.subsidiaryCode" name="transactionalIdentity.subsidiaryCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.subsidiaryName" name="transactionalIdentity.subsidiaryName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.costCenterCode" name="transactionalIdentity.costCenterCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.costCenterName" name="transactionalIdentity.costCenterName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.locationCode" name="transactionalIdentity.locationCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.locationName" name="transactionalIdentity.locationName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.hierarchicalLevelCode" name="transactionalIdentity.hierarchicalLevelCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.positionName" name="transactionalIdentity.positionName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.hierarchicalLevelName" name="transactionalIdentity.hierarchicalLevelName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.depositAccountNumber" name="transactionalIdentity.depositAccountNumber" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.employeeStartDate" name="transactionalIdentity.employeeStartDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.employeeEndDate" name="transactionalIdentity.employeeEndDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.employeeStatus" name="transactionalIdentity.employeeStatus" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.employeeCode" name="transactionalIdentity.employeeCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.userType" name="transactionalIdentity.userType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.userSubtype" name="transactionalIdentity.userSubtype" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.mobile" name="transactionalIdentity.mobile" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.origen" name="transactionalIdentity.origen" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.status" name="transactionalIdentity.status" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.createdDate" name="transactionalIdentity.createdDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.plannedExecutionDate" name="transactionalIdentity.plannedExecutionDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.modifyData" name="transactionalIdentity.modifyData" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.profileRecalculation" name="transactionalIdentity.profileRecalculation" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.typeAction" name="transactionalIdentity.typeAction" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.mail" name="transactionalIdentity.mail" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.globalProfileId" name="transactionalIdentity.globalProfileId" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.userDataId" name="transactionalIdentity.userDataId" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalIdentity.valid" name="transactionalIdentity.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.id" name="globalProfile.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.code" name="globalProfile.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.name" name="globalProfile.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.isBirth" name="globalProfile.isBirth" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.employeeCodeOwner" name="globalProfile.employeeCodeOwner" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.catalogPositionOwner.id" name="globalProfile.catalogPositionOwner.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.catalogPositionOwner.code" name="globalProfile.catalogPositionOwner.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.catalogPositionOwner.name" name="globalProfile.catalogPositionOwner.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.catalogPositionOwner.predetermined" name="globalProfile.catalogPositionOwner.predetermined" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.catalogPositionOwner.ordinal" name="globalProfile.catalogPositionOwner.ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.catalogPositionOwner.valueText" name="globalProfile.catalogPositionOwner.valueText" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.catalogPositionOwner.valueNumber" name="globalProfile.catalogPositionOwner.valueNumber" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.catalogPositionOwner.valueDate" name="globalProfile.catalogPositionOwner.valueDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.catalogPositionOwner.valueBoolean" name="globalProfile.catalogPositionOwner.valueBoolean" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.catalogPositionOwner.catalogType.id" name="globalProfile.catalogPositionOwner.catalogType.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.catalogPositionOwner.catalogType.code" name="globalProfile.catalogPositionOwner.catalogType.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.catalogPositionOwner.catalogType.name" name="globalProfile.catalogPositionOwner.catalogType.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.catalogPositionOwner.catalogType.sortType" name="globalProfile.catalogPositionOwner.catalogType.sortType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.catalogPositionOwner.catalogType.editable" name="globalProfile.catalogPositionOwner.catalogType.editable" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.catalogPositionOwner.catalogType.valid" name="globalProfile.catalogPositionOwner.catalogType.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.catalogPositionOwner.catalogType.description" name="globalProfile.catalogPositionOwner.catalogType.description" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.catalogPositionOwner.valid" name="globalProfile.catalogPositionOwner.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.valid" name="globalProfile.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.associatedTicketNumber" name="globalProfile.associatedTicketNumber" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.status" name="globalProfile.status" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.createdDate" name="globalProfile.createdDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.approvalDate" name="globalProfile.approvalDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.employeeCodeApproval" name="globalProfile.employeeCodeApproval" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.observation" name="globalProfile.observation" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.scopeRulesWho" name="globalProfile.scopeRulesWho" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfile.scopeRulesThat" name="globalProfile.scopeRulesThat" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.id" name="userData.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.username" name="userData.username" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.employeeFirstSurname" name="userData.employeeFirstSurname" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.employeeSecondSurname" name="userData.employeeSecondSurname" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.employeeFirstName" name="userData.employeeFirstName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.employeeSecondName" name="userData.employeeSecondName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.employeeCompleteName" name="userData.employeeCompleteName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.identification" name="userData.identification" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.companyId" name="userData.companyId" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.catalogDivisionId" name="userData.catalogDivisionId" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.catalogAreaId" name="userData.catalogAreaId" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.catalogDepartmentId" name="userData.catalogDepartmentId" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.catalogPositionId" name="userData.catalogPositionId" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.groupingCode" name="userData.groupingCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.subsidiaryCode" name="userData.subsidiaryCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.subsidiaryName" name="userData.subsidiaryName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.costCenterId" name="userData.costCenterId" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.locationName" name="userData.locationName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.hierarchicalLevel" name="userData.hierarchicalLevel" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.depositAccountNumber" name="userData.depositAccountNumber" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.employeeIncomeDate" name="userData.employeeIncomeDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.employeeDepartureDate" name="userData.employeeDepartureDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.employeeStatus" name="userData.employeeStatus" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.employeeCode" name="userData.employeeCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.registrationDate" name="userData.registrationDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.guid" name="userData.guid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.typeEvent" name="userData.typeEvent" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.dataDate" name="userData.dataDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.uuid" name="userData.uuid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.provisionDate" name="userData.provisionDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.mobile" name="userData.mobile" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.suspensionStartDate" name="userData.suspensionStartDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.suspensionEndDate" name="userData.suspensionEndDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.suspensionReason" name="userData.suspensionReason" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.suspensionType" name="userData.suspensionType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.validationStartDate" name="userData.validationStartDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.validationEndDate" name="userData.validationEndDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.endingWorkDate" name="userData.endingWorkDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.mail" name="userData.mail" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.effectiveDate" name="userData.effectiveDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.usernameView" name="userData.usernameView" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.userdataSupervisorId" name="userData.userdataSupervisorId" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.userdataResponsibleUserId" name="userData.userdataResponsibleUserId" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.valid" name="userData.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userData.workerCode" name="userData.workerCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.createdDate" name="createdDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.profileStartDate" name="profileStartDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.profileEndDate" name="profileEndDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.startDate" name="startDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.endDate" name="endDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.modifyData" name="modifyData" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.profileRecalculation" name="profileRecalculation" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.status" name="status" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING" />
+    <script language="nashornJs"><![CDATA[
+        @add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE operationProvisioning.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","operationProvisioning","id");
+        where += addWhere("transactionalIdentity.id","Integer","transactionalIdentity","id");
+        where += addWhere("transactionalIdentity.uuid","String","transactionalIdentity","uuid");
+        where += addWhere("transactionalIdentity.guid","String","transactionalIdentity","guid");
+        where += addWhere("transactionalIdentity.username","String","transactionalIdentity","username");
+        where += addWhere("transactionalIdentity.password","String","transactionalIdentity","password");
+        where += addWhere("transactionalIdentity.workerCode","String","transactionalIdentity","worker_code");
+        where += addWhere("transactionalIdentity.employeeLastname","String","transactionalIdentity","employee_lastname");
+        where += addWhere("transactionalIdentity.employeeFirstname","String","transactionalIdentity","employee_firstname");
+        where += addWhere("transactionalIdentity.identification","String","transactionalIdentity","identification");
+        where += addWhere("transactionalIdentity.identificationSupervisor","String","transactionalIdentity","identification_supervisor");
+        where += addWhere("transactionalIdentity.namesSupervisor","String","transactionalIdentity","names_supervisor");
+        where += addWhere("transactionalIdentity.companyCode","String","transactionalIdentity","company_code");
+        where += addWhere("transactionalIdentity.companyName","String","transactionalIdentity","company_name");
+        where += addWhere("transactionalIdentity.groupCode","String","transactionalIdentity","group_code");
+        where += addWhere("transactionalIdentity.groupName","String","transactionalIdentity","group_name");
+        where += addWhere("transactionalIdentity.divisionCode","String","transactionalIdentity","division_code");
+        where += addWhere("transactionalIdentity.divisionName","String","transactionalIdentity","division_name");
+        where += addWhere("transactionalIdentity.departmentCode","String","transactionalIdentity","department_code");
+        where += addWhere("transactionalIdentity.departmentName","String","transactionalIdentity","department_name");
+        where += addWhere("transactionalIdentity.areaCode","String","transactionalIdentity","area_code");
+        where += addWhere("transactionalIdentity.areaName","String","transactionalIdentity","area_name");
+        where += addWhere("transactionalIdentity.subsidiaryCode","String","transactionalIdentity","subsidiary_code");
+        where += addWhere("transactionalIdentity.subsidiaryName","String","transactionalIdentity","subsidiary_name");
+        where += addWhere("transactionalIdentity.costCenterCode","String","transactionalIdentity","cost_center_code");
+        where += addWhere("transactionalIdentity.costCenterName","String","transactionalIdentity","cost_center_name");
+        where += addWhere("transactionalIdentity.locationCode","String","transactionalIdentity","location_code");
+        where += addWhere("transactionalIdentity.locationName","String","transactionalIdentity","location_name");
+        where += addWhere("transactionalIdentity.hierarchicalLevelCode","String","transactionalIdentity","hierarchical_level_code");
+        where += addWhere("transactionalIdentity.positionName","String","transactionalIdentity","position_name");
+        where += addWhere("transactionalIdentity.hierarchicalLevelName","String","transactionalIdentity","hierarchical_level_name");
+        where += addWhere("transactionalIdentity.depositAccountNumber","String","transactionalIdentity","deposit_account_number");
+        where += addWhere("transactionalIdentity.employeeStartDate","String","transactionalIdentity","employee_start_date");
+        where += addWhere("transactionalIdentity.employeeEndDate","String","transactionalIdentity","employee_end_date");
+        where += addWhere("transactionalIdentity.employeeStatus","String","transactionalIdentity","employee_status");
+        where += addWhere("transactionalIdentity.employeeCode","String","transactionalIdentity","employee_code");
+        where += addWhere("transactionalIdentity.userType","String","transactionalIdentity","user_type");
+        where += addWhere("transactionalIdentity.userSubtype","String","transactionalIdentity","user_subtype");
+        where += addWhere("transactionalIdentity.mobile","String","transactionalIdentity","mobile");
+        where += addWhere("transactionalIdentity.origen","String","transactionalIdentity","origen");
+        where += addWhere("transactionalIdentity.status","String","transactionalIdentity","status");
+        where += addWhere("transactionalIdentity.createdDate","Date","transactionalIdentity","created_date");
+        where += addWhere("transactionalIdentity.plannedExecutionDate","DateTime","transactionalIdentity","planned_execution_date");
+        where += addWhere("transactionalIdentity.modifyData","Integer","transactionalIdentity","modify_data");
+        where += addWhere("transactionalIdentity.profileRecalculation","Integer","transactionalIdentity","profile_recalculation");
+        where += addWhere("transactionalIdentity.typeAction","String","transactionalIdentity","type_action");
+        where += addWhere("transactionalIdentity.mail","String","transactionalIdentity","mail");
+        where += addWhere("transactionalIdentity.globalProfileId","Integer","transactionalIdentity","global_profile_id");
+        where += addWhere("transactionalIdentity.userDataId","Integer","transactionalIdentity","user_data_id");
+        where += addWhere("transactionalIdentity.valid","Integer","transactionalIdentity","valid");
+        where += addWhere("globalProfile.id","Integer","globalProfile","id");
+        where += addWhere("globalProfile.code","String","globalProfile","code");
+        where += addWhere("globalProfile.name","String","globalProfile","name");
+        where += addWhere("globalProfile.isBirth","Integer","globalProfile","is_birth");
+        where += addWhere("globalProfile.employeeCodeOwner","String","globalProfile","employee_code_owner");
+        where += addWhere("globalProfile.catalogPositionOwner.id","Integer","globalProfile_catalogPositionOwner","id");
+        where += addWhere("globalProfile.catalogPositionOwner.code","String","globalProfile_catalogPositionOwner","code");
+        where += addWhere("globalProfile.catalogPositionOwner.name","String","globalProfile_catalogPositionOwner","name");
+        where += addWhere("globalProfile.catalogPositionOwner.predetermined","Integer","globalProfile_catalogPositionOwner","predetermined");
+        where += addWhere("globalProfile.catalogPositionOwner.ordinal","Integer","globalProfile_catalogPositionOwner","ordinal");
+        where += addWhere("globalProfile.catalogPositionOwner.valueText","String","globalProfile_catalogPositionOwner","value_text");
+        where += addWhere("globalProfile.catalogPositionOwner.valueNumber","Numeric","globalProfile_catalogPositionOwner","value_number");
+        where += addWhere("globalProfile.catalogPositionOwner.valueDate","Date","globalProfile_catalogPositionOwner","value_date");
+        where += addWhere("globalProfile.catalogPositionOwner.valueBoolean","Integer","globalProfile_catalogPositionOwner","value_boolean");
+        where += addWhere("globalProfile.catalogPositionOwner.catalogType.id","Integer","globalProfile_catalogPositionOwner_catalogType","id");
+        where += addWhere("globalProfile.catalogPositionOwner.catalogType.code","String","globalProfile_catalogPositionOwner_catalogType","code");
+        where += addWhere("globalProfile.catalogPositionOwner.catalogType.name","String","globalProfile_catalogPositionOwner_catalogType","name");
+        where += addWhere("globalProfile.catalogPositionOwner.catalogType.sortType","String","globalProfile_catalogPositionOwner_catalogType","sort_type");
+        where += addWhere("globalProfile.catalogPositionOwner.catalogType.editable","Integer","globalProfile_catalogPositionOwner_catalogType","editable");
+        where += addWhere("globalProfile.catalogPositionOwner.catalogType.valid","Integer","globalProfile_catalogPositionOwner_catalogType","valid");
+        where += addWhere("globalProfile.catalogPositionOwner.catalogType.description","String","globalProfile_catalogPositionOwner_catalogType","description");
+        where += addWhere("globalProfile.catalogPositionOwner.valid","Integer","globalProfile_catalogPositionOwner","valid");
+        where += addWhere("globalProfile.valid","Integer","globalProfile","valid");
+        where += addWhere("globalProfile.associatedTicketNumber","String","globalProfile","associated_ticket_number");
+        where += addWhere("globalProfile.status","String","globalProfile","status");
+        where += addWhere("globalProfile.createdDate","DateTime","globalProfile","created_date");
+        where += addWhere("globalProfile.approvalDate","DateTime","globalProfile","approval_date");
+        where += addWhere("globalProfile.employeeCodeApproval","String","globalProfile","employee_code_approval");
+        where += addWhere("globalProfile.observation","String","globalProfile","observation");
+        where += addWhere("globalProfile.scopeRulesWho","String","globalProfile","scope_rules_who");
+        where += addWhere("globalProfile.scopeRulesThat","String","globalProfile","scope_rules_that");
+        where += addWhere("userData.id","Integer","userData","id");
+        where += addWhere("userData.username","String","userData","username");
+        where += addWhere("userData.employeeFirstSurname","String","userData","employee_first_surname");
+        where += addWhere("userData.employeeSecondSurname","String","userData","employee_second_surname");
+        where += addWhere("userData.employeeFirstName","String","userData","employee_first_name");
+        where += addWhere("userData.employeeSecondName","String","userData","employee_second_name");
+        where += addWhere("userData.employeeCompleteName","String","userData","employee_complete_name");
+        where += addWhere("userData.identification","String","userData","identification");
+        where += addWhere("userData.companyId","Integer","userData","company_id");
+        where += addWhere("userData.catalogDivisionId","Integer","userData","catalog_division_id");
+        where += addWhere("userData.catalogAreaId","Integer","userData","catalog_area_id");
+        where += addWhere("userData.catalogDepartmentId","Integer","userData","catalog_department_id");
+        where += addWhere("userData.catalogPositionId","Integer","userData","catalog_position_id");
+        where += addWhere("userData.groupingCode","String","userData","grouping_code");
+        where += addWhere("userData.subsidiaryCode","String","userData","subsidiary_code");
+        where += addWhere("userData.subsidiaryName","String","userData","subsidiary_name");
+        where += addWhere("userData.costCenterId","Integer","userData","cost_center_id");
+        where += addWhere("userData.locationName","String","userData","location_name");
+        where += addWhere("userData.hierarchicalLevel","String","userData","hierarchical_level");
+        where += addWhere("userData.depositAccountNumber","String","userData","deposit_account_number");
+        where += addWhere("userData.employeeIncomeDate","Date","userData","employee_income_date");
+        where += addWhere("userData.employeeDepartureDate","Date","userData","employee_departure_date");
+        where += addWhere("userData.employeeStatus","String","userData","employee_status");
+        where += addWhere("userData.employeeCode","String","userData","employee_code");
+        where += addWhere("userData.registrationDate","Date","userData","registration_date");
+        where += addWhere("userData.guid","String","userData","guid");
+        where += addWhere("userData.typeEvent","String","userData","type_event");
+        where += addWhere("userData.dataDate","Date","userData","data_date");
+        where += addWhere("userData.uuid","String","userData","uuid");
+        where += addWhere("userData.provisionDate","Date","userData","provision_date");
+        where += addWhere("userData.mobile","String","userData","mobile");
+        where += addWhere("userData.suspensionStartDate","Date","userData","suspension_start_date");
+        where += addWhere("userData.suspensionEndDate","Date","userData","suspension_end_date");
+        where += addWhere("userData.suspensionReason","String","userData","suspension_reason");
+        where += addWhere("userData.suspensionType","String","userData","suspension_type");
+        where += addWhere("userData.validationStartDate","Date","userData","validation_start_date");
+        where += addWhere("userData.validationEndDate","Date","userData","validation_end_date");
+        where += addWhere("userData.endingWorkDate","Date","userData","ending_work_date");
+        where += addWhere("userData.mail","String","userData","mail");
+        where += addWhere("userData.effectiveDate","Date","userData","effective_date");
+        where += addWhere("userData.usernameView","String","userData","username_view");
+        where += addWhere("userData.userdataSupervisorId","Integer","userData","userdata_supervisor_id");
+        where += addWhere("userData.userdataResponsibleUserId","Integer","userData","userdata_responsible_user_id");
+        where += addWhere("userData.valid","Integer","userData","valid");
+        where += addWhere("userData.workerCode","String","userData","worker_code");
+        where += addWhere("createdDate","Date","operationProvisioning","created_date");
+        where += addWhere("profileStartDate","Date","operationProvisioning","profile_start_date");
+        where += addWhere("profileEndDate","Date","operationProvisioning","profile_end_date");
+        where += addWhere("startDate","Date","operationProvisioning","start_date");
+        where += addWhere("endDate","Date","operationProvisioning","end_date");
+        where += addWhere("modifyData","Integer","operationProvisioning","modify_data");
+        where += addWhere("profileRecalculation","Integer","operationProvisioning","profile_recalculation");
+        where += addWhere("status","String","operationProvisioning","status");
+        where += addWhere("valid","Integer","operationProvisioning","valid");
+        innerJoin += " LEFT JOIN sch_centra_id.TRANSACTIONAL_IDENTITY transactionalIdentity ON OperationProvisioning.transactional_identity_id = transactionalIdentity.id";
+        innerJoin += " LEFT JOIN sch_centra_id.GLOBAL_PROFILES globalProfile ON OperationProvisioning.global_profile_id = globalProfile.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS globalProfile_catalogPositionOwner ON globalProfile.catalog_position_owner_id = globalProfile_catalogPositionOwner.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS_TYPES globalProfile_catalogPositionOwner_catalogType ON globalProfile_catalogPositionOwner.catalog_type_id = globalProfile_catalogPositionOwner_catalogType.id";
+        innerJoin += " LEFT JOIN sch_centra_id.USERDATA userData ON OperationProvisioning.user_data_id = userData.id";
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+
+        // FIELD
+        var field = "operationProvisioning."+mc.getProperty("uri.var.field");
+        mc.setProperty("uri.var.field",field);
+
+        log.debug(where);]]></script>
+
+    <property value="sch_centra_id.OPERATIONS_PROVISIONING operationProvisioning" name="uri.var.table" scope="default" type="STRING"/>
+    <property value="MAX" name="uri.var.function" scope="default" type="STRING"/>
+
+    <call>
+        <endpoint name="OperationProvisioningDSS_Endpoint" template="HTTPEndpointGetTemplate"
+              uri="{uri.var.dataServiceHost}/provisioning.operation-provisioning.ds.HTTPEndpoint/GetFunctionResultOperationProvisioning?function={uri.var.function}&amp;whereclause={uri.var.whereclause}&amp;field={uri.var.field}&amp;table={uri.var.table}&amp;innerjoinclause={uri.var.innerjoinclause}" />
+
+    </call>
+
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING"/>
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq"/>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                        "max": $1
+                    }
+                </format>
+                <args>
+                    <arg evaluator="json" expression="$.result.value"/>
+                </args>
+            </payloadFactory>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200"/>
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="OperationProvisioningMaxSeq" value="Fin.." />
+    </log>
+    <respond />
+</sequence>

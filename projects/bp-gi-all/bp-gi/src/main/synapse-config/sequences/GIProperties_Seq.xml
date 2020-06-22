@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GIProperties_Seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <filter xpath="$trp:Estado">
+        <then>
+            <property description="ESTADO" expression="get-property('transport','Estado')" name="ESTADO" scope="default" type="STRING"/>
+        </then>
+        <else>
+            <property description="ESTADO" name="ESTADO" scope="default" type="STRING" value="O"/>
+        </else>
+    </filter>
+    <property description="REINTENTO" expression="get-property('transport','REINTENTO')" name="REINTENTO" scope="default" type="STRING"/>
+    <property description="SOAP_ACTION_REQUEST" expression="get-property('Action')" name="SOAP_ACTION_REQUEST" scope="default" type="STRING"/>
+    <property description="MENSAJE_PETICION" expression="//*[local-name()='Envelope'][last()]" name="MENSAJE_PETICION" scope="default" type="STRING"/>
+    <property description="MENSAJE_PETICION_VALORES" expression="//*[local-name()='Envelope'][last()]" name="MENSAJE_PETICION_VALORES" scope="default" type="OM"/>
+    <property description="GUID" expression="$body//*/tem:uuid" name="GUID" scope="default" type="STRING" xmlns:tem="http://tempuri.org/"/>
+    <property description="REQUEST_ORIGIN" expression="$body//*/tem:aplicacion" name="REQUEST_ORIGIN" scope="default" type="STRING" xmlns:tem="http://tempuri.org/"/>
+    <property description="uuid" expression="$body//*/tem:uuid" name="uuid" scope="default" type="STRING" xmlns:tem="http://tempuri.org/"/>
+    <property description="aplicacion" expression="lower-case($body//*/tem:aplicacion)" name="aplicacion" scope="default" type="STRING" xmlns:tem="http://tempuri.org/"/>
+    <property description="username" expression="$body//*/tem:tellerName/text()" name="username" scope="default" type="STRING" xmlns:tem="http://tempuri.org/"/>
+    <property description="fullUserName" expression="fn:concat(get-property('aplicacion'),'/',get-property('username'))" name="fullUserName" scope="default" type="STRING"/>
+    <property description="ipclient" expression="$body//*/tem:ipclient" name="ipclient" scope="default" type="STRING" xmlns:tem="http://tempuri.org/"/>
+    <property description="usuarioAplicacion" expression="$body//*/tem:usuarioAplicacion" name="usuarioAplicacion" scope="default" type="STRING" xmlns:tem="http://tempuri.org/"/>
+    <property description="isTicketGenerated" name="isTicketGenerated" scope="default" type="BOOLEAN" value="false"/>
+    <switch source="get-property('aplicacion')">
+        <case regex=".*ad.*">
+            <property description="role" expression="$body/*/tem:especificos/tem:memberOf/text()" name="role" scope="default" type="STRING" xmlns:tem="http://tempuri.org/"/>
+        </case>
+        <case regex=".*rhds.*">
+            <property description="role" expression="$body/*/tem:especificos/tem:role/text()" name="role" scope="default" type="STRING" xmlns:tem="http://tempuri.org/"/>
+        </case>
+        <default/>
+    </switch>
+    <log description="Log All" level="custom">
+        <property name="seq" value="-------------------- GIProperties_Seq --------------------"/>
+        <property expression="get-property('GUID')" name="GUID"/>
+        <property expression="get-property('ESTADO')" name="ESTADO"/>
+        <property expression="get-property('REINTENTO')" name="REINTENTO"/>
+        <property expression="get-property('SOAP_ACTION_REQUEST')" name="SOAP_ACTION_REQUEST"/>
+        <property expression="get-property('uuid')" name="uuid"/>
+        <property expression="get-property('aplicacion')" name="aplicacion"/>
+        <property expression="get-property('fullUserName')" name="fullUserName"/>
+        <property expression="get-property('MENSAJE_PETICION')" name="MENSAJE_PETICION"/>
+        <property expression="get-property('MENSAJE_PETICION_VALORES')" name="MENSAJE_PETICION_VALORES"/>
+    </log>
+</sequence>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ProfilesSynchronizationSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="ProfilesSynchronizationSeq" value="Inicio.." />
+        <property name="globalTransactionalProfileId" expression="$ctx:globalTransactionalProfileId" />
+        <property name="uri.var.globalProfileId" expression="$ctx:uri.var.globalProfileId" />
+        <property name="uri.var.transactionalProfileId" expression="$ctx:uri.var.transactionalProfileId" />
+        <property name="type" expression="$ctx:type" />
+    </log>
+    <call-template target="GetCurrentDateTemplate" />
+    <filter regex="true" source="boolean($ctx:uri.var.globalProfileId)">
+        <then>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                        "profilesSynchronization": {
+                            "userCreated":  "$1",
+                            "dateCreated": "$2",
+                            "dateSynchronization": null,
+                            "type": "$3",
+                            "status": "REG",
+                            "transactionalProfileId": $4,
+                            "globalProfileId" : $5,
+                            "profileSynchronizationExecutionId" : null
+                        }
+                    }            
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="$ctx:UserName" />
+                    <arg evaluator="xml" expression="$ctx:currentDate" />
+                    <arg evaluator="xml" expression="$ctx:type" />
+                    <arg evaluator="xml" expression="$ctx:uri.var.transactionalProfileId" />
+                    <arg evaluator="xml" expression="$ctx:uri.var.globalProfileId" />
+                </args>
+            </payloadFactory>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                        "profilesSynchronization": {
+                            "userCreated":  "$1",
+                            "dateCreated": "$2",
+                            "dateSynchronization": null,
+                            "type": "$3",
+                            "status": "REG",
+                            "transactionalProfileId": $4,
+                            "globalProfileId" : null,
+                            "profileSynchronizationExecutionId" : null
+                        }
+                    }            
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="$ctx:UserName" />
+                    <arg evaluator="xml" expression="$ctx:currentDate" />
+                    <arg evaluator="xml" expression="$ctx:type" />
+                    <arg evaluator="xml" expression="$ctx:uri.var.transactionalProfileId" />
+                </args>
+            </payloadFactory>
+        </else>
+    </filter>
+    <call>
+        <endpoint template="HTTPEndpointPostTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/ProfilesSynchronization" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <log level="custom" category="DEBUG">
+                <property name="ProfilesSynchronizationSeq" value="Inicio.OK." />
+            </log>
+            <!--sequence key="ProfilesSynchronizationCalculateSeq" /-->
+        </then>
+        <else>
+            <script language="js">
+                <![CDATA[java.lang.Thread.sleep(60000);]]>
+            </script>
+            <store messageStore="ProfilesSynchronizationStore" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="ProfilesSynchronizationSeq" value="Fin.." />
+    </log>
+</sequence>

@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="MigrationEntityUserDataIdentityCreateSeq" onError="FaultMigrationSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="MigrationEntityUserDataIdentityCreateSeq" value="Inicio.." />
+        <property name="userdataId" expression="get-property('uri.var.userdataId')" />
+    </log>
+    <filter regex="true" source="boolean(get-property('uri.var.userdataId'))">
+        <then>
+            <!-- recuperar los datos del userdata -->
+            <call>
+                <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/UserData/{uri.var.userdataId}" />
+            </call>
+            <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                <then>
+                    <property name="mail" expression="fn:concat(get-property('username'),'@',//userData/company/domainName)" />
+                    <property name="personalMail" expression="//mail" />
+                    <property name="movil" expression="//userData/mobile" />
+                    <property name="identification" expression="//userData/identification" />
+                    <property name="name" expression="fn:concat(//userData/employeeFirstSurname,' ',//userData/employeeSecondSurname,' ',//userData/employeeFirstName,' ',//userData/employeeSecondName)" />
+                    <property name="uuid" expression="//userData/uuid" />
+                    <property name="guid" expression="//userData/guid" />
+                    <property name="password" value="12345678" />
+                    <property name="username" expression="//userData/username" />
+                    <!-- Crear Usuario -->
+                    <payloadFactory media-type="xml">
+                        <format>
+                            <xsd:addUser xmlns:xsd="http://org.apache.axis2/xsd" xmlns:xsd1="http://common.mgt.user.carbon.wso2.org/xsd">
+                                <xsd:userName>$39</xsd:userName>
+                                <xsd:password>$40</xsd:password>
+                                <xsd:roles>Internal/employee_user</xsd:roles>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/codigoTrabajador</xsd1:claimURI>
+                                    <xsd1:value>$1</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/apellidosEmpleado</xsd1:claimURI>
+                                    <xsd1:value>$2</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/nombresEmpleado</xsd1:claimURI>
+                                    <xsd1:value>$3</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/identificacion</xsd1:claimURI>
+                                    <xsd1:value>$4</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/identificacionSupervisor</xsd1:claimURI>
+                                    <xsd1:value>$5</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/nombreSupervisor</xsd1:claimURI>
+                                    <xsd1:value>$6</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/codigoCompania</xsd1:claimURI>
+                                    <xsd1:value>$7</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/nombreCompania</xsd1:claimURI>
+                                    <xsd1:value>$8</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/codigoAgrupacion</xsd1:claimURI>
+                                    <xsd1:value>$9</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/nombreAgrupacion</xsd1:claimURI>
+                                    <xsd1:value>$10</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/codigoDivision</xsd1:claimURI>
+                                    <xsd1:value>$11</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/nombreDivision</xsd1:claimURI>
+                                    <xsd1:value>$12</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/codigoDepartamento</xsd1:claimURI>
+                                    <xsd1:value>$13</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/nombreDepartamento</xsd1:claimURI>
+                                    <xsd1:value>$14</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/codigoArea</xsd1:claimURI>
+                                    <xsd1:value>$15</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/nombreArea</xsd1:claimURI>
+                                    <xsd1:value>$16</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/codigoCentroCosto</xsd1:claimURI>
+                                    <xsd1:value>$17</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/nombreCentroCosto</xsd1:claimURI>
+                                    <xsd1:value>$18</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/nombreLocalidad</xsd1:claimURI>
+                                    <xsd1:value>$19</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/nombreCargo</xsd1:claimURI>
+                                    <xsd1:value>$20</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/codigoNivelJerarquico</xsd1:claimURI>
+                                    <xsd1:value>$21</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/nombreNivelJerarquico</xsd1:claimURI>
+                                    <xsd1:value>$22</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/numeroCuentaDeposito</xsd1:claimURI>
+                                    <xsd1:value>$23</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/fechaEntrada</xsd1:claimURI>
+                                    <xsd1:value>$24</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/fechaSalida</xsd1:claimURI>
+                                    <xsd1:value>$25</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/estadoEmpleado</xsd1:claimURI>
+                                    <xsd1:value>$26</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/celular</xsd1:claimURI>
+                                    <xsd1:value>$27</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/codigoEmpleado</xsd1:claimURI>
+                                    <xsd1:value>$28</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/tipoUsuario</xsd1:claimURI>
+                                    <xsd1:value>$29</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/subTipo</xsd1:claimURI>
+                                    <xsd1:value>$30</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/correoElectronico</xsd1:claimURI>
+                                    <xsd1:value>$31</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/userDataId</xsd1:claimURI>
+                                    <xsd1:value>$32</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/globalProfileCode</xsd1:claimURI>
+                                    <xsd1:value>$33</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/globalProfileId</xsd1:claimURI>
+                                    <xsd1:value>$34</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/globalProfileName</xsd1:claimURI>
+                                    <xsd1:value>$35</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/tipoIdentificacion</xsd1:claimURI>
+                                    <xsd1:value>$36</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/username</xsd1:claimURI>
+                                    <xsd1:value>$37</xsd1:value>
+                                </xsd:claims>
+                                <xsd:claims>
+                                    <xsd1:claimURI>http://wso2.org/claims/nombres</xsd1:claimURI>
+                                    <xsd1:value>$38</xsd1:value>
+                                </xsd:claims>
+                                <xsd:profileName>default</xsd:profileName>
+                            </xsd:addUser>
+                        </format>
+                        <args>
+                            <arg evaluator="xml" expression="//userData/workerCode" />
+                            <arg evaluator="xml" expression="fn:concat(//userData/employeeFirstSurname,' ',//userData/employeeSecondSurname)" />
+                            <arg evaluator="xml" expression="fn:concat(//userData/employeeFirstName,' ',//userData/employeeSecondName)" />
+                            <arg evaluator="xml" expression="//userData/identification" />
+                            <arg evaluator="xml" expression="//userData/supervisorIdentification" />
+                            <arg evaluator="xml" expression="//userData/supervisorName" />
+                            <arg evaluator="xml" expression="//userData/company/code" />
+                            <arg evaluator="xml" expression="//userData/company/businessName" />
+                            <arg evaluator="xml" expression="//userData/groupingCode" />
+                            <arg evaluator="xml" expression="//userData/groupingCode" />
+                            <arg evaluator="xml" expression="//userData/catalogDivision/code" />
+                            <arg evaluator="xml" expression="//userData/catalogDivision/name" />
+                            <arg evaluator="xml" expression="//userData/catalogDepartment/code" />
+                            <arg evaluator="xml" expression="//userData/catalogDepartment/name" />
+                            <arg evaluator="xml" expression="//userData/catalogArea/code" />
+                            <arg evaluator="xml" expression="//userData/catalogArea/name" />
+                            <arg evaluator="xml" expression="//userData/costCenter/code" />
+                            <arg evaluator="xml" expression="//userData/costCenter/name" />
+                            <arg evaluator="xml" expression="//userData/locationName" />
+                            <arg evaluator="xml" expression="//userData/catalogPosition/name" />
+                            <arg evaluator="xml" expression="//userData/hierarchicalLevel" />
+                            <arg evaluator="xml" expression="//userData/hierarchicalLevel" />
+                            <arg evaluator="xml" expression="//userData/depositAccountNumber" />
+                            <arg evaluator="xml" expression="//userData/employeeIncomeDate" />
+                            <arg evaluator="xml" expression="//userData/employeeDepartureDate" />
+                            <arg evaluator="xml" value="ACTIVO" />
+                            <arg evaluator="xml" expression="//userData/mobile" />
+                            <arg evaluator="xml" expression="//userData/employeeCode" />
+                            <arg evaluator="xml" expression="//userData/typeUser/code" />
+                            <arg evaluator="xml" expression="//userData/subtypeUser/code" />
+                            <arg evaluator="xml" expression="fn:concat(get-property('username'),'@',//userData/company/domainName)" />
+                            <arg evaluator="xml" expression="//userData/id" />
+                            <arg evaluator="xml" expression="//userData/globalProfile/code" />
+                            <arg evaluator="xml" expression="//userData/globalProfile/id" />
+                            <arg evaluator="xml" expression="//userData/globalProfile/name" />
+                            <arg evaluator="xml" expression="//userData/catalogIdentificationType/code" />
+                            <arg evaluator="xml" expression="get-property('username')" />
+                            <arg evaluator="xml" expression="fn:concat(//userData/employeeFirstSurname,' ',//userData/employeeSecondSurname,' ',//userData/employeeFirstName,' ',//userData/employeeSecondName)" />
+                            <arg evaluator="xml" expression="get-property('username')" />
+                            <arg evaluator="xml" expression="get-property('password')" />
+                        </args>
+                    </payloadFactory>
+                    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+                    <property name="IS_SERVER_USER_DATO" expression="synapse:get-property('IS_SERVER_USER')" scope="default" />
+                    <property name="IS_SERVER_PASSWORD_DATO" expression="synapse:get-property('IS_SERVER_PASSWORD')" scope="default" />
+                    <property name="Authorization" expression="fn:concat('Basic ', base64Encode(fn:concat($ctx:IS_SERVER_USER_DATO,':',$ctx:IS_SERVER_PASSWORD_DATO)))" scope="transport" />
+                    <property name="service_ep" expression="fn:concat(get-property('uri.var.identityServerHost'),'/services' ,'/UserAdmin')" />
+                    <header name="To" expression="get-property('service_ep')" />
+                    <property name="Accept" scope="transport" value="application/xml" />
+                    <call>
+                        <endpoint>
+                            <default />
+                        </endpoint>
+                    </call>
+                    <property name="fault" expression="//*:UserAdminUserAdminException" />
+                    <property name="fault2" expression="//faultstring" />
+                    <filter regex="true" source="boolean(get-property('fault')) or boolean(get-property('fault2'))">
+                        <then>
+                            <property expression="json-eval($)" name="payload" scope="default" type="STRING" />
+                            <property name="errorMigration" expression="fn:concat('Error al crear usuario en IS: ',$ctx:payload)" />
+                            <sequence key="FaultMigrationSeq" />
+                            <call>
+                                <endpoint template="HTTPEndpointDeleteTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/UserDataSimple/{uri.var.userdataId}" />
+                            </call>
+                        </then>
+                        <else>
+                            <!-- Generar QR 
+                            <payloadFactory media-type="xml">
+                                <format>
+                                    <ser:retrieveSecretKey xmlns:ser="http://services.totp.authenticator.application.identity.carbon.wso2.org">
+                                        <ser:username>$1</ser:username>
+                                    </ser:retrieveSecretKey>
+                                </format>
+                                <args>
+                                    <arg evaluator="xml" expression="get-property('username')" />
+                                </args>
+                            </payloadFactory>
+                            <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+                            <property name="IS_SERVER_USER_DATO" expression="synapse:get-property('IS_SERVER_USER')" scope="default" />
+                            <property name="IS_SERVER_PASSWORD_DATO" expression="synapse:get-property('IS_SERVER_PASSWORD')" scope="default" />
+                            <property name="Authorization" expression="fn:concat('Basic ', base64Encode(fn:concat($ctx:IS_SERVER_USER_DATO,':',$ctx:IS_SERVER_PASSWORD_DATO)))" scope="transport" />
+                            <property name="service_ep_totp" expression="fn:concat(get-property('uri.var.identityServerHost'),'/services' ,'/TOTPAdminService')" />
+                            <header name="To" expression="get-property('service_ep_totp')" />
+                            <call>
+                                <endpoint>
+                                    <default />
+                                </endpoint>
+                            </call>
+                            <property name="QR_CODE_SECRET" expression="//*:return" />
+                            <property name="QR_CODE_ACCOUNT" expression="get-property('username')" />
+                            <sequence key="GenerateQRCodeSeq" />
+                            <script language="js">
+                                <![CDATA[
+                                var file = mc.getProperty('QR_CODE_RESULT');
+                                mc.setProperty("qrBase64",file.substring(22));
+                                ;]]>
+                            </script>
+                            <call-template target="GetCurrentDateFormatTemplate" />
+                            <payloadFactory media-type="json">
+                                <format>
+                                    [
+                                        {
+                                            "campo": "Generado",
+                                            "valor": "$1"
+                                        },
+                                        {
+                                            "campo": "tipoIdentificacion",
+                                            "valor": "$2"
+                                        },
+
+                                        {
+                                            "campo": "nombreCompleto",
+                                            "valor": "$3"
+                                        },
+                                        {
+                                            "campo": "usuario",
+                                            "valor": "$4"
+                                        },
+                                        {
+                                            "campo": "clave",
+                                            "valor": "$5"
+                                        },
+                                        {
+                                            "campo": "imagenQr",
+                                            "valor": "$6"
+                                        },
+                                        {
+                                            "campo": "secretKey",
+                                            "valor": "$7 "
+                                        }
+                                    ]                                    
+                                </format>
+                                <args>
+                                    <arg evaluator="xml" expression="get-property('currentDate')" />
+                                    <arg evaluator="xml" value="CÉDULA" />
+                                    <arg evaluator="xml" expression="get-property('name')" />
+                                    <arg evaluator="xml" expression="get-property('username')" />
+                                    <arg evaluator="xml" value="******" />
+                                    <arg evaluator="xml" expression="get-property('qrBase64')" />
+                                    <arg evaluator="xml" expression="get-property('QR_CODE_SECRET')" />
+                                </args>
+                            </payloadFactory>
+                            <property name="message" expression="json-eval($)" />
+                            <property name="personalMail" value="henry.molina@atikasoft.com" />
+                            <call-template target="SendMailSeqTemplate">
+                                <with-param name="templateType" value="Plantilla_Email_GeneracionClaveInicial" />
+                                <with-param name="toAddress" value="{get-property('personalMail')}" />
+                                <with-param name="identification" value="{get-property('identification')}" />
+                                <with-param name="message" value="{get-property('message')}" />
+                                <with-param name="attachedName" value="X" />
+                                <with-param name="attachedBase64" value="X" />
+                                <with-param name="uuid" value="{get-property('uuid')}" />
+                                <with-param name="guid" value="{get-property('guid')}" />
+                            </call-template> -->
+                        </else>
+                    </filter>
+                </then>
+                <else>
+                    <property name="errorMigration" value="Error a consultando datos de USERDATA" />
+                    <sequence key="FaultMigrationSeq" />
+                </else>
+            </filter>
+        </then>
+        <else>
+            <property name="errorMigration" value="userdataId no fue encontrado en USERDATA" />
+            <sequence key="FaultMigrationSeq" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="MigrationEntityUserDataIdentityCreateSeq" value="Fin..." />
+    </log>
+</sequence>

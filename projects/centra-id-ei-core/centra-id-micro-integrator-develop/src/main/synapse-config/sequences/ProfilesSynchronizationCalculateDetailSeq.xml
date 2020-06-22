@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ProfilesSynchronizationCalculateDetailSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property name="profilesSynchronization" expression="$body//*" scope="default" type="OM" />
+    <property name="profilesSynchronizationId" expression="$ctx:profilesSynchronization//id" />
+    <log level="custom" category="DEBUG">
+        <property name="ProfilesSynchronizationCalculateDetailSeq" value="Inicio.." />
+        <property name="profilesSynchronization" expression="$ctx:profilesSynchronization" />
+        <property name="profilesSynchronizationExecutionId" expression="$ctx:profilesSynchronizationExecutionId" />
+        <property name="profilesSynchronizationId" expression="$ctx:profilesSynchronizationId" />
+    </log>
+    <property expression="$ctx:profilesSynchronization//globalProfileId" name="uri.var.globalProfileId" scope="default" type="STRING" />
+    <!-- contar total de usuarios -->
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/UserDataSearch/count?idPerfilGlobal={uri.var.globalProfileId}" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <property name="total" expression="//count" type="STRING" />
+            <property name="zero" value="0.0" type="STRING" />
+            <filter regex="true" source="$ctx:total &gt; $ctx:zero">
+                <then>
+                    <xslt key="gov:/centra-id/xslt/pagination.xsl">
+                        <property name="total" expression="$ctx:total" />
+                        <property name="size" value="400" />
+                    </xslt>
+                    <iterate expression="//page" id="pageId">
+                        <target>
+                            <sequence>
+                                <property expression="//from" name="uri.var.from" scope="default" type="STRING" />
+                                <property expression="//to" name="uri.var.to" scope="default" type="STRING" />
+                                <call>
+                                    <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/UserDataSearch/{uri.var.from}/{uri.var.to}?idPerfilGlobal={uri.var.globalProfileId}" />
+                                </call>
+                                <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                                    <then>
+                                        <property name="profilesSynchronizationId" expression="$ctx:profilesSynchronizationId" />
+                                        <property name="profilesSynchronizationExecutionId" expression="$ctx:profilesSynchronizationExecutionId" />
+                                        <store messageStore="ProfilesSynchronizationCalculateUserDataStore" />
+                                    </then>
+                                    <else>
+                                        <property name="fault" scope="default" type="STRING" value="Error get Userdata" />
+                                        <sequence key="FaultSeq" />
+                                    </else>
+                                </filter>
+                            </sequence>
+                        </target>
+                    </iterate>
+                    <aggregate id="pageId">
+                        <completeCondition>
+                            <messageCount max="-1" min="-1" />
+                        </completeCondition>
+                        <onComplete expression="$body/*[1]">
+                            <log level="custom" category="DEBUG">
+                                <property name="agregado" value="ok" />
+                            </log>
+                        </onComplete>
+                    </aggregate>
+                </then>
+            </filter>
+            <call-template target="GetCurrentDateTemplate" />
+            <filter regex="true" source="boolean($ctx:profilesSynchronization//globalProfileId/text())">
+                <then>
+                    <payloadFactory media-type="json">
+                        <format>
+                            {
+                                "profilesSynchronization": {
+                                    "id" : $1,
+                                    "userCreated":  "$2",
+                                    "dateCreated": "$3",
+                                    "dateSynchronization": "$4",
+                                    "type": "$5",
+                                    "status": "SYN",
+                                    "transactionalProfileId": $6,
+                                    "globalProfileId": $7,
+                                    "profilesSynchronizationExecutionId": $8
+                                }
+                            }                            
+                        </format>
+                        <args>
+                            <arg evaluator="xml" expression="$ctx:profilesSynchronizationId" />
+                            <arg evaluator="xml" expression="$ctx:profilesSynchronization//userCreated" />
+                            <arg evaluator="xml" expression="$ctx:profilesSynchronization//dateCreated" />
+                            <arg evaluator="xml" expression="$ctx:currentDate" />
+                            <arg evaluator="xml" expression="$ctx:profilesSynchronization//type" />
+                            <arg evaluator="xml" expression="$ctx:profilesSynchronization//transactionalProfileId" />
+                            <arg evaluator="xml" expression="$ctx:profilesSynchronization//globalProfileId" />
+                            <arg evaluator="xml" expression="$ctx:profilesSynchronizationExecutionId" />
+                        </args>
+                    </payloadFactory>
+                </then>
+                <else>
+                    <payloadFactory media-type="json">
+                        <format>
+                           {
+                            "profilesSynchronization": {
+                                "id" : $1,
+                                "userCreated":  "$2",
+                                "dateCreated": "$3",
+                                "dateSynchronization": "$4",
+                                "type": "$5",
+                                "status": "SYN",
+                                "transactionalProfileId": $6,
+                                "globalProfileId": null,
+                                "profilesSynchronizationExecutionId": $7
+                                }
+                            }                            
+                        </format>
+                        <args>
+                            <arg evaluator="xml" expression="$ctx:profilesSynchronizationId" />
+                            <arg evaluator="xml" expression="$ctx:profilesSynchronization//userCreated" />
+                            <arg evaluator="xml" expression="$ctx:profilesSynchronization//dateCreated" />
+                            <arg evaluator="xml" expression="$ctx:currentDate" />
+                            <arg evaluator="xml" expression="$ctx:profilesSynchronization//type" />
+                            <arg evaluator="xml" expression="$ctx:profilesSynchronization//transactionalProfileId" />
+                            <arg evaluator="xml" expression="$ctx:profilesSynchronizationExecutionId" />
+                        </args>
+                    </payloadFactory>
+                </else>
+            </filter>
+            <property name="uri.var.profilesSynchronizationId" expression="$ctx:profilesSynchronizationId" />
+            <call>
+                <endpoint template="HTTPEndpointPutTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/ProfilesSynchronization/{uri.var.profilesSynchronizationId}" />
+            </call>
+            <filter regex="202" source="get-property('axis2', 'HTTP_SC')">
+                <then></then>
+                <else>
+                    <property name="fault" value="Error update ProfilesSynchronization" />
+                    <sequence key="FaultSeq" />
+                </else>
+            </filter>
+        </then>
+        <else>
+            <property name="fault" scope="default" type="STRING" value="Error count Userdata" />
+            <sequence key="FaultSeq" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="ProfilesSynchronizationCalculateDetailSeq" value="Fin.." />
+    </log>
+</sequence>

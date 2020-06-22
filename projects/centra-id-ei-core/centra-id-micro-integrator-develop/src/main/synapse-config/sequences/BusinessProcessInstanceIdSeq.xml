@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="BusinessProcessInstanceIdSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="BusinessProcessInstanceIdSeq" value="Inicio..." />
+    </log>
+    <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="BPS_SERVER_USER_DATO" expression="synapse:get-property('BPS_SERVER_USER')" scope="default" />
+    <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="BPS_SERVER_PASSWORD_DATO" expression="synapse:get-property('BPS_SERVER_PASSWORD')" scope="default" />
+    <property xmlns:ns="http://org.apache.synapse/xsd" name="Authorization" expression="fn:concat('Basic ', base64Encode(fn:concat($ctx:BPS_SERVER_USER_DATO,':',$ctx:BPS_SERVER_PASSWORD_DATO)))" scope="transport" />
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <log level="custom" separator="**1**" />
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.bussinesProcessServiceHost}/bpmn/runtime/process-instances/{uri.var.id}" />
+    </call>
+    <property name="messageType" value="application/xml" scope="axis2" />
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <log level="custom" separator="**2**" />
+            <xslt key="gov:/centra-id/xslt/bpsInstanceFilter.xsl" />
+            <log level="custom" separator="**3**" />
+        </then>
+        <else>
+            <property name="fault" value="error when consulting process instance by id " />
+            <sequence key="FaultSeq" />
+        </else>
+    </filter>
+    <property name="messageType" value="application/json" scope="axis2" type="STRING" />
+    <log level="custom" category="DEBUG">
+        <property name="BusinessProcessInstanceIdSeq" value="Fin..." />
+    </log>
+</sequence>

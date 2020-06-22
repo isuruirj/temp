@@ -1,0 +1,34 @@
+<data name="LogPerformanceDSS" serviceNamespace="centra-id.com" transports="https">
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <query id="insert_LOG_PERFORMANCE_query" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>INSERT INTO SCH_CENTRA_ID_AUDIT.LOG_PERFORMANCE(GUID,REQUEST_DATE,RESPONSE_DATE,APP_CALLED,ACTION_CALLED) VALUES(?,?,?,?,?)</sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>        
+        <param name="GUID" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="REQUEST_DATE" ordinal="2" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+        <param defaultValue="#{NULL}" name="RESPONSE_DATE" ordinal="3" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+        <param name="APP_CALLED" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="ACTION_CALLED" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN"/>
+    </query>
+    <operation name="insert_LOG_PERFORMANCE_operation">
+        <call-query href="insert_LOG_PERFORMANCE_query">
+            <with-param name="ACTION_CALLED" query-param="actionCalled"/>
+            <with-param name="REQUEST_DATE" query-param="requestDate"/>
+            <with-param name="RESPONSE_DATE" query-param="responseDate"/>
+            <with-param name="GUID" query-param="guid"/>
+            <with-param name="APP_CALLED" query-param="appCalled"/>
+        </call-query>
+    </operation>
+    <resource method="POST" path="createLogPerformance">
+        <call-query href="insert_LOG_PERFORMANCE_query">
+            <with-param name="ACTION_CALLED" query-param="actionCalled"/>
+            <with-param name="REQUEST_DATE" query-param="requestDate"/>
+            <with-param name="RESPONSE_DATE" query-param="responseDate"/>
+            <with-param name="GUID" query-param="guid"/>
+            <with-param name="APP_CALLED" query-param="appCalled"/>
+        </call-query>
+    </resource>
+</data>

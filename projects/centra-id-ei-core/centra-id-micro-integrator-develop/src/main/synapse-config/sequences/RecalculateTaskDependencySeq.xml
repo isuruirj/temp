@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="RecalculateTaskDependencySeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="RecalculateTaskDependencySeq" value="Inicio.." />
+    </log>
+    <!-- Consultar task de la operacion -->
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/provisioning/TaskProvisioningSimple?operationProvisioningId={uri.var.operationProvisioningId}&amp;action=C" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <property name="taskProvisioningList" expression="$body//*" scope="default" type="OM" />
+            <property name="taskProvisioningDependenciesList" expression="$body//*" scope="default" type="OM" />
+        </then>
+        <else>
+            <property name="fault" value="RecalculateTaskSeq: Error get TaskProvisioning" />
+            <sequence key="FaultUserDataSeq" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="RecalculateTaskDependencySeq" value="Inicio.1." />
+    </log>
+    <property name="findData" expression="$ctx:taskProvisioningList//taskProvisioningSimpleList/taskProvisioningSimple[type[text()='1']]" />
+    <filter regex="true" source="boolean($ctx:findData)">
+        <then>
+            <iterate expression="$ctx:taskProvisioningList//taskProvisioningSimpleList/taskProvisioningSimple[type[text()='1']]" id="taskProvisioningMainListId">
+                <target>
+                    <sequence>
+                        <property name="taskProvisioning" expression="$body//*" scope="default" type="OM" />
+                        <property name="uri.var.taskProvisioningId" expression="//id" />
+                        <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+                        <property action="remove" name="Content-Type" scope="transport" />
+                        <log level="custom" category="DEBUG">
+                            <property name="RecalculateTaskDependencySeq.." value="Inicio.1.1." />
+                            <property name="uri.var.taskProvisioningId" expression="$ctx:uri.var.taskProvisioningId" />
+                        </log>
+                        <call>
+                            <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.dataServiceHost}/UsersDSS.HTTPEndpoint/getTasksWithOperation?operationProvisioningId={uri.var.operationProvisioningId}&amp;operationProvisioning2Id={uri.var.operationProvisioningId}&amp;taskProvisioningId={uri.var.taskProvisioningId}" />
+                        </call>
+                        <property name="uuidParent" expression="//*:uuidParent"></property>
+                        <log level="custom" category="DEBUG">
+                            <property name="RecalculateTaskDependencySeq" value="Inicio.2." />
+                            <property name="uri.var.operationProvisioningId" expression="$ctx:uri.var.operationProvisioningId" />
+                            <property name="uri.var.taskProvisioningId" expression="$ctx:uri.var.taskProvisioningId" />
+                            <property name="uuidParent" expression="$ctx:uuidParent" />
+                        </log>
+                        <filter regex="true" source="boolean($ctx:uuidParent)">
+                            <then>
+                                <payloadFactory media-type="json">
+                                    <format>
+                                        {
+                                            "taskProvisioning": {
+                                            "id" :$1,
+                                            "transactionalProfileId": $2,
+                                            "applicationId" : $3,
+                                            "operationProvisioningId" : $4,
+                                            "provisioningDate" : null,
+                                            "provisioningStatus" : "PENDIENTE",
+                                            "provisioningComments": "",
+                                            "creationDate": "$5",
+                                            "uuid":"$6",
+                                            "uuidParent": "$7", 
+                                            "ticketNumber": "",
+                                            "ticketDate": null,
+                                            "ticketContent": null,
+                                            "ticketError": null,        
+                                            "action": "$8",
+                                            "type" : "$9",
+                                            "status": "REGISTRADO"
+                                            }
+                                        }
+                                    </format>
+                                    <args>
+                                        <arg evaluator="xml" expression="$ctx:taskProvisioning//id/text()" />
+                                        <arg evaluator="xml" expression="$ctx:taskProvisioning//transactionalProfileId/text()" />
+                                        <arg evaluator="xml" expression="$ctx:taskProvisioning//applicationId/text()" />
+                                        <arg evaluator="xml" expression="$ctx:taskProvisioning//operationProvisioningId/text()" />
+                                        <arg evaluator="xml" expression="$ctx:taskProvisioning//creationDate/text()" />
+                                        <arg evaluator="xml" expression="$ctx:taskProvisioning//uuid/text()" />
+                                        <arg evaluator="xml" expression="$ctx:uuidParent" />
+                                        <arg evaluator="xml" expression="$ctx:taskProvisioning//action/text()" />
+                                        <arg evaluator="xml" expression="$ctx:taskProvisioning//type/text()" />
+                                    </args>
+                                </payloadFactory>
+                                <header name="Content-Type" scope="transport" value="application/json" />
+                                <call>
+                                    <endpoint template="HTTPEndpointPutTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/provisioning/TaskProvisioningSimple/{uri.var.taskProvisioningId}" />
+                                </call>
+                            </then>
+                        </filter>
+                    </sequence>
+                </target>
+            </iterate>
+            <aggregate id="taskProvisioningMainListId">
+                <completeCondition>
+                    <messageCount min="-1" max="-1" />
+                </completeCondition>
+                <onComplete expression="$body/*[1]">
+                    <log level="custom" category="DEBUG">
+                        <property name="agregado" value="Fin taskProvisioningMainListId" />
+                    </log>
+                </onComplete>
+            </aggregate>
+        </then>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="RecalculateTaskDependencySeq" value="Fin.." />
+    </log>
+</sequence>

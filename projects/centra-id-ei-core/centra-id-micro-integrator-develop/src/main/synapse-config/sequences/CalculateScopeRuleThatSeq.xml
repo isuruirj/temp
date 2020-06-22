@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="CalculateScopeRuleThatSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="CalculateScopeRuleThatSeq" value="Inicio..." />
+        <property name="userDataId" expression="$ctx:uri.var.userDataId" />
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property action="remove" name="Content-Type" scope="transport" />
+    <switch source="$ctx:type">
+        <case regex="EXTERN">
+            <script language="js">
+                <![CDATA[
+                    var log = mc.getServiceLog();       
+                    var where = " AND  (";
+                    var company = eval(mc.getProperty("company"));
+                    var division = eval(mc.getProperty("division"));
+                    var position = eval(mc.getProperty("position"));
+                    where += " SCOPE_RULES_THAT LIKE '%Compania="+company+"%' AND ";
+                    where += " SCOPE_RULES_THAT LIKE '%Division="+division+"%' AND ";
+                    where += " SCOPE_RULES_THAT LIKE '%Cargo="+position+"%' ";
+                    where += ") AND STATUS='ACTIVO' ";
+                    mc.setProperty('whereRule',eval(where).toString());
+                    log.debug('where:'+mc.getProperty('whereRule'));
+                ]]>
+            </script>
+        </case>
+        <case regex="GENERIC">
+            <script language="js">
+                <![CDATA[
+                    var log = mc.getServiceLog();       
+                    var where = " AND  (";
+                    where += " SCOPE_RULES_THAT LIKE '%TipoUsuario=GEN%' AND ";
+                    where += " SCOPE_RULES_THAT LIKE '%SubTipoUsuario=MAIL%' ";
+                    where += ")  AND STATUS='ACTIVO'";
+                    mc.setProperty('whereRule',eval(where).toString());
+                    log.debug('where:'+mc.getProperty('whereRule'));
+                ]]>
+            </script>
+        </case>
+        <case regex="GENERIC_ROTARY">
+            <script language="js">
+                <![CDATA[
+                    var log = mc.getServiceLog();       
+                    var where = " AND  (";
+                    where += " SCOPE_RULES_THAT LIKE '%TipoUsuario=GEN%' AND ";
+                    where += " SCOPE_RULES_THAT LIKE '%SubTipoUsuario=ROT%' ";
+                    where += ")  AND STATUS='ACTIVO'";
+                    mc.setProperty('whereRule',eval(where).toString());
+                    log.debug('where:'+mc.getProperty('whereRule'));
+                ]]>
+            </script>
+        </case>
+        <case regex="CHANGE_GLOBAL_PROFILE">
+            <filter regex="true" source="boolean($ctx:uri.var.userDataId)">
+                <then>
+                    <call>
+                        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/UserDataSimple/{uri.var.userDataId}" />
+                    </call>
+                    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                        <then>
+                            <property name="userdata" expression="$body//*" scope="default" type="OM" />
+                            <property name="uri.var.globalProfileId" expression="$ctx:userdata//globalProfileId/text()" />
+                            <filter regex="true" source="boolean($ctx:uri.var.globalProfileId)">
+                                <then>
+                                    <call>
+                                        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/GlobalProfile/{uri.var.globalProfileId}" />
+                                    </call>
+                                    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                                        <then>
+                                            <property name="globalProfile" expression="$body//*" scope="default" type="OM" />
+                                        </then>
+                                        <else>
+                                            <property name="whereRule" value=" AND a.CODE_COMPANY='XXXX'" />
+                                        </else>
+                                    </filter>
+                                </then>
+                            </filter>
+                        </then>
+                        <else>
+                            <property name="whereRule" value=" AND a.CODE_COMPANY='XXXX'" />
+                        </else>
+                    </filter>
+                    <filter regex="true" source="boolean($ctx:userdata//id/text()) and boolean($ctx:globalProfile//id/text())">
+                        <then>
+                            <!-- Buscar la regla que -->
+                            <property name="rule" expression="$ctx:globalProfile//scopeRulesThat/text()" />
+                            <filter regex="true" source="boolean($ctx:rule)">
+                                <then>
+                                    <script language="js">
+                                        <![CDATA[
+                                        var log = mc.getServiceLog();       
+                                        var where = " AND  (";
+                                        var rule = eval(mc.getProperty("rule"));
+                                        var jsonObject = JSON.parse(rule);
+                                        var exist=false;
+                                        for (i = 0; i < jsonObject.length; ++i) {
+                                            var obj = jsonObject[i];
+                                            log.debug('obj:'+obj.type);
+                                            if(obj.type=='Operador'){
+                                                where += " " + obj.data + " ";
+                                            } else if(obj.type=='Compania'){
+                                                where += " (SCOPE_RULES_THAT LIKE '%Compania="+obj.code+"%' ) ";
+                                                //where += " (a.CODE_COMPANY='"+obj.code+"' OR a.CODE_COMPANY='ANY')";
+                                            } else if(obj.type=='Division'){
+                                                where += " (SCOPE_RULES_THAT LIKE '%Division="+obj.code+"%' ) ";
+                                                //where += " (a.CODE_DIVISION='"+obj.code+"' OR a.CODE_DIVISION='ANY')";
+                                            } else if(obj.type=='Area'){
+                                                where += " (SCOPE_RULES_THAT LIKE '%Area="+obj.code+"%' ) ";
+                                                //where += " (a.CODE_AREA='"+obj.code+"' OR a.CODE_AREA='ANY')";
+                                            } else if(obj.type=='Departamento'){
+                                                where += " (SCOPE_RULES_THAT LIKE '%Departamento="+obj.code+"%' ) ";
+                                                //where += " (a.CODE_DEPARTMENT='"+obj.code+"' OR a.CODE_DEPARTMENT='ANY')";
+                                            } else if(obj.type=='Cargo'){
+                                                where += " (SCOPE_RULES_THAT LIKE '%Cargo="+obj.code+"%' ) ";
+                                                //where += " (a.CODE_POSITION='"+obj.code+"' OR CODE_POSITION='ANY')";
+                                            } 
+                                        }
+                                        where += ")  AND STATUS='ACTIVO' ";
+                                        mc.setProperty('whereRule',eval(where).toString());
+                                        log.debug('where:'+mc.getProperty('whereRule'));
+                                    ]]>
+                                    </script>
+                                </then>
+                                <else>
+                                    <!-- incluir condicion para que no retorne ningun usuario ya que no existe regla -->
+                                    <property name="whereRule" value=" AND a.CODE_COMPANY='XXXX'" />
+                                </else>
+                            </filter>
+                        </then>
+                        <else>
+                            <property name="whereRule" value=" AND a.CODE_COMPANY='XXXX'" />
+                        </else>
+                    </filter>
+                </then>
+                <else>
+                    <property name="whereRule" value=" AND a.CODE_COMPANY='XXXX'" />
+                </else>
+            </filter>
+        </case>
+    </switch>
+    <log level="custom" category="DEBUG">
+        <property name="CalculateScopeRuleThatSeq" value="Fin..." />
+        <property name="whereRule" expression="$ctx:whereRule" />
+    </log>
+</sequence>

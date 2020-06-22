@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<artifacts>
+    <artifact name="ProvisioningEP" groupId="com.centra-id.micro-integrator.endpoint" version="1.0.0"  type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/ProvisioningEP.xml</file>
+    </artifact>
+    <artifact name="AD_CONFIGURE" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/AD_CONFIGURE.xml</file>
+    </artifact>
+    <artifact name="AES_IV" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/AES_IV.xml</file>
+    </artifact>
+    <artifact name="BPS_SERVER_PASSWORD" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/BPS_SERVER_PASSWORD.xml</file>
+    </artifact>
+    <artifact name="BPS_SERVER_USER" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/BPS_SERVER_USER.xml</file>
+    </artifact>
+    <artifact name="BUSSINES_PROCESS_SERVICE_HOST" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/BUSSINES_PROCESS_SERVICE_HOST.xml</file>
+    </artifact>
+    <artifact name="CENTRAID_AES_IV" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/CENTRAID_AES_IV.xml</file>
+    </artifact>
+    <artifact name="CENTRAID_AES_KEY" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/CENTRAID_AES_KEY.xml</file>
+    </artifact>
+    <artifact name="DATA_SERVICE_HOST" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/DATA_SERVICE_HOST.xml</file>
+    </artifact>
+    <artifact name="ENDPOINT_CHALLENGE_QUESTION_TCS" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/ENDPOINT_CHALLENGE_QUESTION_TCS.xml</file>
+    </artifact>
+    <artifact name="ENDPOINT_NOTIFICACION_TCS" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/ENDPOINT_NOTIFICACION_TCS.xml</file>
+    </artifact>
+    <artifact name="ENTERPRISE_INTEGRATOR_HOST" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/ENTERPRISE_INTEGRATOR_HOST.xml</file>
+    </artifact>
+    <artifact name="ENVIRONMENT" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/ENVIRONMENT.xml</file>
+    </artifact>
+    <artifact name="FILE_NAME_BULK_UPLOAD_TRANSACTIONAL_PROFILES" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/FILE_NAME_BULK_UPLOAD_TRANSACTIONAL_PROFILES.xml</file>
+    </artifact>
+    <artifact name="FIRST_NAME_GENERIC_USER" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/FIRST_NAME_GENERIC_USER.xml</file>
+    </artifact>
+    <artifact name="FIRST_NAME_ROTARY_USER" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/FIRST_NAME_ROTARY_USER.xml</file>
+    </artifact>
+    <artifact name="HIERARCHY_CHIEFS" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/HIERARCHY_CHIEFS.xml</file>
+    </artifact>
+    <artifact name="IDENTIFICATION_GENERIC_USER" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/IDENTIFICATION_GENERIC_USER.xml</file>
+    </artifact>
+    <artifact name="IDENTIFICATION_ROTARY_USER" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/IDENTIFICATION_ROTARY_USER.xml</file>
+    </artifact>
+    <artifact name="IDENTITY_SERVER_HOST" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/IDENTITY_SERVER_HOST.xml</file>
+    </artifact>
+    <artifact name="IS_SCIM_USER" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/IS_SCIM_USER.xml</file>
+    </artifact>
+    <artifact name="IS_SCIM_USER_PASSWORD" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/IS_SCIM_USER_PASSWORD.xml</file>
+    </artifact>
+    <artifact name="IS_SERVER_PASSWORD" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/IS_SERVER_PASSWORD.xml</file>
+    </artifact>
+    <artifact name="IS_SERVER_USER" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/IS_SERVER_USER.xml</file>
+    </artifact>
+    <artifact name="LOGICIEL_EXPIRATION_DATE" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/LOGICIEL_EXPIRATION_DATE.xml</file>
+    </artifact>
+    <artifact name="QR_CODE_ISSUER" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/QR_CODE_ISSUER.xml</file>
+    </artifact>
+    <artifact name="RHDS_TERM_NO" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/RHDS_TERM_NO.xml</file>
+    </artifact>
+    <artifact name="SECOND_SURNAME_GENERIC_USER" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/SECOND_SURNAME_GENERIC_USER.xml</file>
+    </artifact>
+    <artifact name="SECOND_SURNAME_ROTARY_USER" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/SECOND_SURNAME_ROTARY_USER.xml</file>
+    </artifact>
+    <artifact name="APIM_GW_HOST" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/APIM_GW_HOST.xml</file>
+    </artifact>
+    <artifact name="HP_PASSWORD" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/HP_PASSWORD.xml</file>
+    </artifact>
+    <artifact name="HP_USER" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/HP_USER.xml</file>
+    </artifact>
+    <artifact name="MAILBOX_TOKEN" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/MAILBOX_TOKEN.xml</file>
+    </artifact>
+    <artifact name="WS_USER" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/WS_USER.xml</file>
+    </artifact>
+    <artifact name="DOMAIN" groupId="com.centra-id.micro-integrator.local-entry" version="1.0.0"  type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/DOMAIN.xml</file>
+    </artifact>
+
+
+    <artifact name="GICorreo_EP" groupId="com.centra-id.micro-integrator.endpoint" version="1.0.0"  type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/GICorreo_EP.xml</file>
+    </artifact>
+    <artifact name="GIDss_GIdentidades_EP" groupId="com.centra-id.micro-integrator.endpoint" version="1.0.0"  type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/GIDss_GIdentidades_EP.xml</file>
+    </artifact>
+    <artifact name="GIGeneric_EP" groupId="com.centra-id.micro-integrator.endpoint" version="1.0.0"  type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/GIGeneric_EP.xml</file>
+    </artifact>
+    <artifact name="GIIncidentes_EP" groupId="com.centra-id.micro-integrator.endpoint" version="1.0.0"  type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/GIIncidentes_EP.xml</file>
+    </artifact>
+    <artifact name="GIMailbox_EP" groupId="com.centra-id.micro-integrator.endpoint" version="1.0.0"  type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/GIMailbox_EP.xml</file>
+    </artifact>
+    <artifact name="GIMedio_EP" groupId="com.centra-id.micro-integrator.endpoint" version="1.0.0"  type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/GIMedio_EP.xml</file>
+    </artifact>
+    <artifact name="GIRHDS_IS_EP" groupId="com.centra-id.micro-integrator.endpoint" version="1.0.0"  type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/GIRHDS_IS_EP.xml</file>
+    </artifact>
+    <artifact name="GIRequerimientos_EP" groupId="com.centra-id.micro-integrator.endpoint" version="1.0.0"  type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/GIRequerimientos_EP.xml</file>
+    </artifact>
+    <artifact name="GISCIM_EP" groupId="com.centra-id.micro-integrator.endpoint" version="1.0.0"  type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/GISCIM_EP.xml</file>
+    </artifact>
+    <artifact name="GITareas_EP" groupId="com.centra-id.micro-integrator.endpoint" version="1.0.0"  type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/GITareas_EP.xml</file>
+    </artifact>
+
+</artifacts>

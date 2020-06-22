@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="BulkTransactionalProfilesSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="BulkTransactionalProfilesSeq" value="Inicio..." />
+        <property name="recordFileId" expression="$ctx:recordFileId" />
+        <property name="UserName" expression="$ctx:UserName" />
+    </log>
+    <filter regex="false" source="boolean($ctx:UserName)">
+        <then>
+            <property name="UserName" expression="get-property('transport','UserName')" />
+        </then>
+    </filter>
+    <property name="uri.var.recordFileId" expression="$ctx:recordFileId" />
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/common/RecordFiles/0/1/{uri.var.recordFileId}" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <property name="recordFile" expression="$body//*" scope="default" type="OM" />
+            <property name="content" expression="base64Decode($ctx:recordFile//content)" />
+            <payloadFactory media-type="json">
+                <format>$1</format>
+                <args>
+                    <arg evaluator="xml" expression="$ctx:content" />
+                </args>
+            </payloadFactory>
+            <iterate expression="//rows" id="recordFileId">
+                <target>
+                    <sequence>
+                        <property name="record" expression="$body//*" scope="default" type="OM" />
+                        <!-- consulta global profile -->
+                        <property name="uri.var.globalProfileCode" expression="$ctx:record//col0" />
+                        <call>
+                            <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/GlobalProfile/0/1?code={uri.var.globalProfileCode}" />
+                        </call>
+                        <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                            <then>
+                                <property name="globalProfile" expression="$body//*" scope="default" type="OM" />
+                            </then>
+                            <else>
+                                <property name="fault" value="BulkTransactionalProfilesSeq: Error create globalProfile" />
+                                <sequence key="FaultSeq" />
+                            </else>
+                        </filter>
+                        <!-- consulta transactional profile -->
+                        <property name="uri.var.transactionalProfileCode" expression="$ctx:record//col1" />
+                        <call>
+                            <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/TransactionalProfileSimple/0/1?transactionalProfileCode={uri.var.transactionalProfileCode}" />
+                        </call>
+                        <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                            <then>
+                                <property name="transactionalProfile" expression="$body//*" scope="default" type="OM" />
+                            </then>
+                            <else>
+                                <property name="fault" value="BulkTransactionalProfilesSeq: Error create transactionalProfile" />
+                                <sequence key="FaultSeq" />
+                            </else>
+                        </filter>
+                        <switch source="$ctx:record//col2">
+                            <case regex="C">
+                                <payloadFactory media-type="json">
+                                    <format>
+                                        {
+                                            "AddTransactionalProfile": {
+                                                "globalProfileId": $1,
+                                                "transactionalProfileId": $2
+                                            }
+                                        }                                        
+                                    </format>
+                                    <args>
+                                        <arg evaluator="xml" expression="$ctx:globalProfile//globalProfileList/globalProfile/id" />
+                                        <arg evaluator="xml" expression="$ctx:transactionalProfile//transactionalProfileSimpleList/transactionalProfileSimple/id" />
+                                    </args>
+                                </payloadFactory>
+                                <property name="UserName" expression="$ctx:UserName" scope="transport" />
+                                <call>
+                                    <endpoint template="HTTPEndpointPostTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/businesslogic/AddTransactionalProfile" />
+                                </call>
+                                <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                                    <then></then>
+                                    <else>
+                                        <property name="fault" value="BulkTransactionalProfilesSeq: Error create AddTransactionalProfile" />
+                                        <sequence key="FaultSeq" />
+                                    </else>
+                                </filter>
+                            </case>
+                            <case regex="E">
+                                <payloadFactory media-type="json">
+                                    <format>
+                                        {
+                                            "RemoveTransactionalProfile": {
+                                                "globalProfileId": $1,
+                                                "transactionalProfileId": $2
+                                            }
+                                        }                                        
+                                    </format>
+                                    <args>
+                                        <arg evaluator="xml" expression="$ctx:globalProfile//globalProfileList/globalProfile/id" />
+                                        <arg evaluator="xml" expression="$ctx:transactionalProfile//transactionalProfileSimpleList/transactionalProfileSimple/id" />
+                                    </args>
+                                </payloadFactory>
+                                <property name="UserName" expression="$ctx:UserName" scope="transport" />
+                                <call>
+                                    <endpoint template="HTTPEndpointPostTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/businesslogic/RemoveTransactionalProfile" />
+                                </call>
+                                <filter regex="202" source="get-property('axis2', 'HTTP_SC')">
+                                    <then></then>
+                                    <else>
+                                        <property name="fault" value="BulkTransactionalProfilesSeq: Error create RemoveTransactionalProfile" />
+                                        <sequence key="FaultSeq" />
+                                    </else>
+                                </filter>
+                            </case>
+                            <default></default>
+                        </switch>
+                        <!-- crear una ejecucion -->
+                        <call-template target="GetCurrentDateTemplate" />
+                        <payloadFactory media-type="json">
+                            <format>
+                                {
+                                    "profilesSynchronizationExecution": {
+                                        "userCreated":  "$1",
+                                        "dateCreated": "$2",
+                                        "datePlanned": "$3",
+                                        "dateSynchronizationInit" : null,
+                                        "dateSynchronizationEnd" : null,
+                                        "type": "GP",
+                                        "status": "REG",
+                                        "transactionalProfileId": $4,
+                                        "globalProfileId" : $5
+                                    }
+                                }
+                            </format>
+                            <args>
+                                <arg evaluator="xml" expression="$ctx:UserName" />
+                                <arg evaluator="xml" expression="$ctx:currentDate" />
+                                <arg evaluator="xml" expression="$ctx:datePlanned" />
+                                <arg evaluator="xml" expression="$ctx:transactionalProfile//id" />
+                                <arg evaluator="xml" expression="$ctx:globalProfile//id" />
+                            </args>
+                        </payloadFactory>
+                        <call>
+                            <endpoint template="HTTPEndpointPostTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/ProfilesSynchronizationExecution" />
+                        </call>
+                    </sequence>
+                </target>
+            </iterate>
+            <aggregate id="recordFileId">
+                <completeCondition>
+                    <messageCount min="-1" max="-1" />
+                </completeCondition>
+                <onComplete expression="$body/*">
+                    <log level="custom" category="DEBUG">
+                        <property name="BulkTransactionalProfilesSeq" value="ok" />
+                    </log>
+                </onComplete>
+            </aggregate>
+        </then>
+        <else>
+            <property name="fault" value="Error RecordFile get" />
+            <sequence key="FaultSeq" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="BulkTransactionalProfilesSeq" value="Fin....." />
+    </log>
+</sequence>

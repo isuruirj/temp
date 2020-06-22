@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/api.centraid/company/CompanyStructure" name="CentraIDcompanyCompanyStructureApi" version="1.0.0" version-type="context" xmlns="http://ws.apache.org/ns/synapse">
+    <resource faultSequence="FaultSeq" methods="GET">
+         <inSequence>
+             <sequence key="InBoundSeq" />
+             <sequence key="CompanyStructureListSeq" />
+             <sequence key="OutboundSeq" />
+             <respond />
+         </inSequence>
+         <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/count">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="CompanyStructureCountSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/distinct/company">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="CompanyStructureDistinctCompanySeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/distinct/company/count">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="CompanyStructureDistinctCompanyCountSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/distinct/catalogOrganizationalStructure">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="CompanyStructureDistinctCatalogOrganizationalStructureSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/distinct/catalogOrganizationalStructure/count">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="CompanyStructureDistinctCatalogOrganizationalStructureCountSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/distinct/parent">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="CompanyStructureDistinctParentSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/distinct/parent/count">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="CompanyStructureDistinctParentCountSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/max/{field}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="CompanyStructureMaxSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/sum/{field}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="CompanyStructureSumSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="POST" uri-template="/">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+             <sequence key="CompanyStructureCreateSeq" />
+             <sequence key="OutboundSeq" />
+             <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="PUT" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="CompanyStructureUpdateSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="DELETE" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="CompanyStructureDeleteSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/{from}/{to}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="CompanyStructureFromToSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="CompanyStructureRetrieveSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+       </inSequence>
+       <outSequence/>
+    </resource>
+</api>

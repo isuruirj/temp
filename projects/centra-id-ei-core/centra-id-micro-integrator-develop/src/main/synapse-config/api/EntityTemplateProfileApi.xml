@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/api.centraid/application/TemplateProfile" name="CentraIDapplicationTemplateProfileApi" version="1.0.0" version-type="context" xmlns="http://ws.apache.org/ns/synapse">
+    <resource faultSequence="FaultSeq" methods="GET">
+         <inSequence>
+             <sequence key="InBoundSeq" />
+             <sequence key="TemplateProfileListSeq" />
+             <sequence key="OutboundSeq" />
+             <respond />
+         </inSequence>
+         <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/count">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="TemplateProfileCountSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/distinct/field">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="TemplateProfileDistinctFieldSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/distinct/field/count">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="TemplateProfileDistinctFieldCountSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/max/{field}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="TemplateProfileMaxSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/sum/{field}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="TemplateProfileSumSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="POST" uri-template="/">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+             <sequence key="TemplateProfileCreateSeq" />
+             <sequence key="OutboundSeq" />
+             <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="PUT" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="TemplateProfileUpdateSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="DELETE" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="TemplateProfileDeleteSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/{from}/{to}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="TemplateProfileFromToSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="TemplateProfileRetrieveSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+       </inSequence>
+       <outSequence/>
+    </resource>
+</api>

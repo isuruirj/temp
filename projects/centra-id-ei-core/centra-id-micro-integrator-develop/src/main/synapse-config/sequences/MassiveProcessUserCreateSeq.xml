@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="MassiveProcessUserCreateSeq" onError="FaultMassiveProcessUsersSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="MassiveProcessUserCreateSeq" value="Inicio..."/>
+    </log>
+    <!-- identificador unico de la carga masiva individual -->
+    <property expression="get-property('massiveProcessId')" name="uri.var.id" scope="default" type="STRING"/>
+    <!-- Preparando la consulta de la carga masiva -->
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2"/>
+    <property expression="get-property('apiAuthorizationToken')" name="Authorization" scope="transport" type="STRING"/>
+    <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+    <property name="Accept" scope="transport" type="STRING" value="application/json"/>
+    <property action="remove" name="Content-Type" scope="transport"/>
+    <call>
+        <endpoint name="GuidsDSS_Endpoint" template="HTTPEndpointGetTemplate" uri="{uri.var.apiManagerHost}/centra-id/dss/services/1.0/MassiveProcessDSS.HTTPEndpoint/getByIdMassiveProcess?id={uri.var.id}"/>
+    </call>
+    <property expression="json-eval($)" name="jsonEmpleadoMasivo" scope="default" type="STRING"/>
+    <!-- Calcular username y password -->
+    <sequence key="MassiveProcessUserCalculateUsernameSeq"/>
+    <!-- Crear Usuario -->
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2"/>
+    <property expression="get-property('apiAuthorizationToken')" name="Authorization" scope="transport" type="STRING"/>
+    <payloadFactory media-type="json">
+        <format>
+			{
+			"schemas": [],
+			"data": {
+			"codigoTrabajador": "$1",
+			"apellidosEmpleado": "$2",
+			"nombresEmpleado": "$3",
+			"identificacion": "$4",
+			"identificacionSupervisor": "$5",
+			"nombreSupervisor": "$6",
+			"codigoCompania": "$7",
+			"nombreCompania": "$8",
+			"codigoAgrupacion": "$9",
+			"nombreAgrupacion": "$10",
+			"codigoDivision": "$11",
+			"nombreDivision": "$12",
+			"codigoDepartamento": "$13",
+			"nombreDepartamento": "$14",
+			"codigoArea": "$15",
+			"nombreArea": "$16",
+			"codigoCentroCosto": "$17",
+			"nombreCentroCosto": "$18",
+			"nombreLocalidad": "$19",
+			"nombreCargo": "$20",
+			"codigoNivelJerarquico": "$21",
+			"nombreNivelJerarquico": "$22",
+			"numeroCuentaDeposito": "$23",
+			"fechaIngresoEmpleado": "$24",
+			"fechaSalidaEmpleado": "$25",
+			"estadoEmpleado": "$26",
+			"celular": "$27",
+			"codigoEmpleado": "$28",
+			"tipoUsuario": "$29",
+			"subTipo": "$30"
+			},
+			"userName": "$31",
+			"password": "$32",
+
+			}
+		</format>
+        <args>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.codigoTrabajador"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.apellidosEmpleado"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.nombresEmpleado"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.identificacion"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.identificacionSupervisor"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.nombreSupervisor"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.codigoCompania"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.nombreCompania"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.codigoAgrupacion"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.nombreAgrupacion"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.codigoDivision"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.nombreDivision"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.codigoDepartamento"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.nombreDepartamento"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.codigoArea"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.nombreArea"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.codigoCentroCosto"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.nombreCentroCosto"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.nombreLocalidad"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.nombreCargo"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.codigoNivelJerarquico"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.nombreNivelJerarquico"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.numeroCuentaDeposito"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.fechaIngresoEmpleado"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.estadoEmpleado"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.celular"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.codigoEmpleado"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.tipoUsuario"/>
+            <arg evaluator="json" expression="$.MassiveProcesses.MassiveProcess.subTipo"/>
+            <arg evaluator="xml" expression="get-property('username')"/>
+            <arg evaluator="xml" expression="get-property('password')"/>
+        </args>
+    </payloadFactory>
+    <call>
+        <endpoint name="Users_Endpoint" template="HTTPEndpointPostTemplate" uri="{uri.var.identityServerHost}/wso2/scim/Users"/>
+    </call>
+    <log level="custom" category="DEBUG">
+        <property name="MassiveProcessUserCreateSeq" value="Fin..."/>
+    </log>
+</sequence>

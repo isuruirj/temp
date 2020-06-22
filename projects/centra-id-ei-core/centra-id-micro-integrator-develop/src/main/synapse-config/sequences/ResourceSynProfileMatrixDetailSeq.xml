@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ResourceSynProfileMatrixDetailSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="ResourceSynProfileMatrixDetailSeq" value="Inicio..." />
+        <property name="uri.var.templateProfileMatrixId" expression="get-property('uri.var.templateProfileMatrixId')" />
+    </log>
+    <payloadFactory media-type="json">
+        <format>
+            {
+                "templateProfileMatrixGroup": {
+                "templateProfileMatrix": {
+                        "id": $1
+                    }
+               }
+            }
+        </format>
+        <args>
+            <arg evaluator="xml" expression="get-property('uri.var.templateProfileMatrixId')" />
+        </args>
+    </payloadFactory>
+    <call>
+        <endpoint template="HTTPEndpointPostTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/TemplateProfileMatrixGroup" />
+    </call>
+    <property name="uri.var.templateProfileMatrixGroupId" expression="//id" />
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/MatrixDetail?matrix.id={uri.var.matrixId}&amp;orderby=ordinal" />
+    </call>
+    <filter regex="true" source="boolean(//matrixDetailList/matrixDetail)">
+        <then>
+            <iterate expression="//matrixDetail" id="matrixDetailId" sequential="true">
+                <target>
+                    <sequence>
+                        <property name="uri.var.matrixDetailId" expression="//matrixDetail/id" scope="default" type="STRING" />
+                        <property name="ordinal" expression="//matrixDetail/ordinal" scope="default" type="STRING" />
+                        <payloadFactory media-type="json">
+                            <format>
+                                {
+                                    "templateProfileMatrixDetail": {
+                                        "templateProfileMatrixGroup": {
+                                            "id": $1
+                                        },
+                                        "matrixDetail" : {
+                                            "id" : $2
+                                        },
+                                        "value" : null,
+                                        "ordinal" : $3
+                                    }
+                                }
+                          </format>
+                            <args>
+                                <arg evaluator="xml" expression="get-property('uri.var.templateProfileMatrixGroupId')" />
+                                <arg evaluator="xml" expression="get-property('uri.var.matrixDetailId')" />
+                                <arg evaluator="xml" expression="get-property('ordinal')" />
+                            </args>
+                        </payloadFactory>
+                        <call>
+                            <endpoint template="HTTPEndpointPostTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/TemplateProfileMatrixDetail" />
+                        </call>
+                    </sequence>
+                </target>
+            </iterate>
+            <aggregate id="matrixDetailId">
+                <completeCondition>
+                    <messageCount min="-1" max="-1" />
+                </completeCondition>
+                <onComplete expression="$body/*[1]">
+                    <log level="custom">
+                        <property name="agregado" value="ok" />
+                    </log>
+                </onComplete>
+            </aggregate>
+        </then>
+    </filter>
+</sequence>

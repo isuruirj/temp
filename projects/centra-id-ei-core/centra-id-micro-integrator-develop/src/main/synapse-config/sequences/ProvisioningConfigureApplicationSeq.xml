@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ProvisioningConfigureApplicationSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningConfigureApplicationSeq" value="Inicio.." />
+        <property name="uri.var.applicationId" expression="$ctx:uri.var.applicationId" />
+        <property name="taskProvisioningCreate" expression="$ctx:taskProvisioningCreate" />
+    </log>
+    <property name="uri.var.applicationId" expression="$ctx:taskProvisioningCreate//applicationId" />
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/Application/{uri.var.applicationId}" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <property name="application" expression="$body//*" scope="default" type="OM" />
+            <log level="custom" category="DEBUG">
+                <property name="ProvisioningConfigureApplicationSeq.2" value="Inicio.0." />
+                <property name="application" expression="$ctx:application//applicationList/application/applicationGroup/code/text()" />
+                <property name="X-Forwarded-For" expression="$ctx:X-Forwarded-For" />
+                <property name="UserName" expression="$ctx:UserName" />
+            </log>
+        </then>
+        <else>
+            <property name="fault" value="ProvisioningCreateUserSeq: Error get Application" />
+            <sequence key="FaultSeq" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningConfigureApplicationSeq.1" value="Fin.." />
+    </log>
+</sequence>

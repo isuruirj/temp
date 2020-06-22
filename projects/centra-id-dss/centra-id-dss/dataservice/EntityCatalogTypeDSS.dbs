@@ -1,0 +1,203 @@
+<data name="common.catalog-type.ds"
+    serviceNamespace="centra-id.com"
+    enableBatchRequests="false"
+    enableBoxcarring="false"
+    transports="https"
+    disableLegacyBoxcarringMode="true">
+
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <!-- DYNAMIC QUERY CATALOGTYPE -->
+    <query id="dynamicQuery_catalogType" useConfig="default">
+        <sql>
+           SELECT
+               catalogType.id,
+               catalogType.code,
+               catalogType.name,
+               catalogType.sort_type,
+               catalogType.editable,
+               catalogType.valid,
+               catalogType.description
+           FROM sch_centra_id.CATALOGS_TYPES catalogType :innerjoinclause :whereclause ORDER BY :orderby :fromto
+        </sql>
+        <result element="catalogTypeList" rowName="catalogType">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="sort_type" name="sortType" xsdType="xs:string"/>
+            <element column="editable" name="editable" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="description" name="description" xsdType="xs:string"/>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="fromto" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- INSERT CatalogType -->
+    <query id="insertQuery_catalogType" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>
+           INSERT INTO sch_centra_id.CATALOGS_TYPES(
+               code,
+               name,
+               sort_type,
+               editable,
+               valid,
+               description
+        ) VALUES(?,?,?,?,?,?)
+        </sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="code" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="name" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="sortType" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="editable" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+        <param name="valid" ordinal="5" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="1"/>
+        <param name="description" ordinal="6" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+    </query>
+    <!-- UPDATE CatalogType -->
+    <query id="updateQuery_catalogType" useConfig="default">
+        <sql>
+           UPDATE sch_centra_id.CATALOGS_TYPES SET
+               code=?,
+               name=?,
+               sort_type=?,
+               editable=?,
+               description=?
+            WHERE id=?
+        </sql>
+        <param name="code" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="name" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="sortType" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="editable" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+        <param name="description" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="id" ordinal="6" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <!-- DYNAMIC FUNCTION  -->
+    <query id="dynamicQueryFunction_catalogType" useConfig="default">
+        <sql>
+           SELECT :function(:field) as value FROM :table :innerjoinclause :whereclause
+         </sql>
+        <result element="result">
+            <element column="value" name="value" xsdType="xs:long"/>
+        </result>
+        <param name="function" sqlType="QUERY_STRING"/>
+        <param name="field" sqlType="QUERY_STRING"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DELETE  -->
+    <query id="dynamicDeleteQuery_catalogType" useConfig="default">
+        <sql>UPDATE :table SET :set WHERE id=:id</sql>
+        <param name="id" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="set" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- OPERATIONS -->
+    <operation name="listAllOperation_catalogType">
+        <call-query href="dynamicQuery_catalogType">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="fromToOperation_catalogType">
+        <call-query href="dynamicQuery_catalogType">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="functionOperation_catalogType">
+        <call-query href="dynamicQueryFunction_catalogType">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="deleteOperation_catalogType">
+        <call-query href="dynamicDeleteQuery_catalogType">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </operation>
+    <operation name="create_catalogType">
+        <call-query href="insertQuery_catalogType">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="sortType" query-param="sortType"/>
+            <with-param name="editable" query-param="editable"/>
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="description" query-param="description"/>
+        </call-query>
+    </operation>
+    <operation name="update_catalogType">
+        <call-query href="updateQuery_catalogType">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="sortType" query-param="sortType"/>
+            <with-param name="editable" query-param="editable"/>
+            <with-param name="description" query-param="description"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <!-- RESOURCES -->
+    <resource method="GET" path="GetAllCatalogType">
+        <call-query href="dynamicQuery_catalogType">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFromToCatalogType">
+        <call-query href="dynamicQuery_catalogType">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFunctionResultCatalogType">
+        <call-query href="dynamicQueryFunction_catalogType">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="DeleteCatalogType">
+        <call-query href="dynamicDeleteQuery_catalogType">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="CreateCatalogType">
+        <call-query href="insertQuery_catalogType">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="sortType" query-param="sortType"/>
+            <with-param name="editable" query-param="editable"/>
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="description" query-param="description"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="UpdateCatalogType">
+        <call-query href="updateQuery_catalogType">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="sortType" query-param="sortType"/>
+            <with-param name="editable" query-param="editable"/>
+            <with-param name="description" query-param="description"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+</data>

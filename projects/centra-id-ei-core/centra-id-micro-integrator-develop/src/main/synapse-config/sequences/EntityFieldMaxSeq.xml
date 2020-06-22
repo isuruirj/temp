@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="FieldMaxSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="FieldMaxSeq" value="Inicio.." />
+        <property name="uri.var.field" expression="get-property('uri.var.field')"/>
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+    <property name="Accept" scope="transport" type="STRING" value="application/json" />
+    <property action="remove" name="Content-Type" scope="transport" />
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.code" name="code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.name" name="name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.predetermined" name="predetermined" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.type" name="type" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.length" name="length" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.required" name="required" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.ordinal" name="ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.applicationGroup.id" name="applicationGroup.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.applicationGroup.code" name="applicationGroup.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.applicationGroup.name" name="applicationGroup.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.applicationGroup.endpointType" name="applicationGroup.endpointType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.applicationGroup.ordinal" name="applicationGroup.ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.applicationGroup.valid" name="applicationGroup.valid" scope="default" type="STRING" />
+    <script language="nashornJs"><![CDATA[
+        @add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE field.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","field","id");
+        where += addWhere("code","String","field","code");
+        where += addWhere("name","String","field","name");
+        where += addWhere("predetermined","String","field","predetermined");
+        where += addWhere("type","String","field","type");
+        where += addWhere("length","Integer","field","length");
+        where += addWhere("required","Integer","field","required");
+        where += addWhere("ordinal","Integer","field","ordinal");
+        where += addWhere("valid","Integer","field","valid");
+        where += addWhere("applicationGroup.id","Integer","applicationGroup","id");
+        where += addWhere("applicationGroup.code","String","applicationGroup","code");
+        where += addWhere("applicationGroup.name","String","applicationGroup","name");
+        where += addWhere("applicationGroup.endpointType","String","applicationGroup","endpoint_type");
+        where += addWhere("applicationGroup.ordinal","Integer","applicationGroup","ordinal");
+        where += addWhere("applicationGroup.valid","Integer","applicationGroup","valid");
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS_GROUP applicationGroup ON Field.application_group_id = applicationGroup.id";
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+
+        // FIELD
+        var field = "field."+mc.getProperty("uri.var.field");
+        mc.setProperty("uri.var.field",field);
+
+        log.debug(where);]]></script>
+
+    <property value="sch_centra_id.FIELDS field" name="uri.var.table" scope="default" type="STRING"/>
+    <property value="MAX" name="uri.var.function" scope="default" type="STRING"/>
+
+    <call>
+        <endpoint name="FieldDSS_Endpoint" template="HTTPEndpointGetTemplate"
+              uri="{uri.var.dataServiceHost}/application.field.ds.HTTPEndpoint/GetFunctionResultField?function={uri.var.function}&amp;whereclause={uri.var.whereclause}&amp;field={uri.var.field}&amp;table={uri.var.table}&amp;innerjoinclause={uri.var.innerjoinclause}" />
+
+    </call>
+
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING"/>
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq"/>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                        "max": $1
+                    }
+                </format>
+                <args>
+                    <arg evaluator="json" expression="$.result.value"/>
+                </args>
+            </payloadFactory>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200"/>
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="FieldMaxSeq" value="Fin.." />
+    </log>
+    <respond />
+</sequence>

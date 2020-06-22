@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GICorreo_Seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log description="seq" level="custom">
+        <property name="status" value="--------------------  WSCorreo_Seq --------------------"/>
+    </log>
+    <property description="messageType" name="messageType" scope="axis2" type="STRING" value="text/html"/>
+    <property description="ContentType" name="ContentType" scope="axis2" type="STRING" value="text/html"/>
+    <property description="Subject" name="Subject" scope="transport" type="STRING" value="Error en aprovisionamiento"/>
+    <property description="OUT_ONLY" name="OUT_ONLY" scope="default" type="STRING" value="true"/>
+    <call>
+        <endpoint key="GICorreo_EP"/>
+    </call>
+</sequence>

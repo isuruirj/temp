@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="IdentityChallengeQuestions" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="IdentityChallengeQuestions" value="Inicio..." />
+        <property name="identificationType" expression="//identificationType" />
+    </log>
+    <filter regex="true" source="//identificationType = 'C'">
+        <then>
+            <property name="identificationTypeService" value="0001" />
+        </then>
+        <else>
+            <property name="identificationTypeService" value="0003" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="identificationTypeService" expression="get-property('identificationTypeService')"/>
+    </log>
+    <!--
+    <payloadFactory media-type="xml">
+        <format>
+            <ser:consultarPreguntasLinaje01 xmlns:ser="http://bpichincha.com/servicios">
+                <headerIn>
+                    <dispositivo>rrwbI5YRiMbxC3U8CIJS5+amrbUkC6/R5GznCDScH/0=</dispositivo>
+                    <empresa>0010</empresa>
+                    <canal>02</canal>
+                    <medio>020002</medio>
+                    <aplicacion>00647</aplicacion>
+                    <agencia />
+                    <tipoTransaccion>201002601</tipoTransaccion>
+                    <geolocalizacion />
+                    <usuario>USINTERT</usuario>
+                    <unicidad />
+                    <guid>983b66e0-ee4a-4e65-81c8-8ed680ad9e64</guid>
+                    <fechaHora>201904161755570813</fechaHora>
+                    <filler />
+                    <idioma>es-EC</idioma>
+                    <sesion>f40cd0cd-c0e5-4912-a0fd-41ffc3eada4a</sesion>
+                    <ip>10.0.176.53</ip>
+                    <idCliente />
+                    <tipoIdCliente />
+                </headerIn>
+                <bodyIn>
+                    <ordenante>
+                        <identificacion>1003412002</identificacion>
+                        <tipoIdentificacion>0001</tipoIdentificacion>
+                    </ordenante>
+                    <criteriosConsultaPregunta>
+                        <proceso>6</proceso>
+                        <subProceso>CALLC</subProceso>
+                    </criteriosConsultaPregunta>
+                </bodyIn>
+            </ser:consultarPreguntasLinaje01>
+        </format>
+        <args>
+            <arg evaluator="xml" expression="//identificacion" />
+            <arg evaluator="xml" expression="get-property('identificationTypeService')" />
+        </args>
+    </payloadFactory>
+    <header name="Action" scope="default" value="urn:consultarPreguntasLinaje01" />
+    <property name="service_ep" expression="get-property('uri.var.endpointChallengeQuestionTcs')" />
+    <header name="To" expression="get-property('service_ep')" />
+    <call>
+        <endpoint>
+            <default />
+        </endpoint>
+    </call>
+    -->
+    <payloadFactory media-type="json">
+        <format>
+            {
+                "questions" : [
+                   {
+                        "section" : 1,
+                        "code" : "P12",
+                        "nivel" : 1,
+                        "question" : "Ingrese su color favorito",
+                        "options": [
+                                "AZUL",
+                                "BLANCO",
+                                "CAFE",
+                                "NEGRO"
+                            ]
+                   },
+                   {
+                        "section" : 2,
+                        "code" : "P13",
+                        "nivel" : 2,
+                        "question" : "Ingrese su apellido materno",
+                        "options": [
+                                "ARIZMENDI",
+                                "SUAREZ",
+                                "GOMEZ",
+                                "SUNTAXI"
+                            ]
+                   },
+                   {
+                        "section" : 3,
+                        "code" : "P14",
+                        "nivel" : 3,
+                        "question" : "Ingrese su fecha de nacimiento aaaammdd",
+                        "options": [
+                                "19900101",
+                                "19900201",
+                                "19900312",
+                                "20001231"
+                            ]
+                   }
+                ]
+            }
+        </format>
+        <args></args>
+    </payloadFactory>
+    <log level="custom" category="DEBUG">
+        <property name="IdentityChallengeQuestions" value="Inicio..." />
+    </log>
+</sequence>

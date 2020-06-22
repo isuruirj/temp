@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="TypeUserCountSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="TypeUserCountSeq" value="Inicio.." />
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+    <property name="Accept" scope="transport" type="STRING" value="application/json" />
+    <property action="remove" name="Content-Type" scope="transport" />
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.id" name="parent.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.id" name="parent.parent.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.id" name="parent.parent.parent.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.parent.id" name="parent.parent.parent.parent.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.parent.code" name="parent.parent.parent.parent.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.parent.name" name="parent.parent.parent.parent.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.parent.type" name="parent.parent.parent.parent.type" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.parent.valid" name="parent.parent.parent.parent.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.code" name="parent.parent.parent.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.name" name="parent.parent.parent.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.type" name="parent.parent.parent.type" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.valid" name="parent.parent.parent.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.code" name="parent.parent.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.name" name="parent.parent.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.type" name="parent.parent.type" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.valid" name="parent.parent.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.code" name="parent.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.name" name="parent.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.type" name="parent.type" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.valid" name="parent.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.code" name="code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.name" name="name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.type" name="type" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING" />
+    <script language="nashornJs"><![CDATA[
+        @add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE typeUser.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","typeUser","id");
+        where += addWhere("parent.id","Integer","parent","id");
+        where += addWhere("parent.parent.id","Integer","parent_parent","id");
+        where += addWhere("parent.parent.parent.id","Integer","parent_parent_parent","id");
+        where += addWhere("parent.parent.parent.parent.id","Integer","parent_parent_parent_parent","id");
+        where += addWhere("parent.parent.parent.parent.code","String","parent_parent_parent_parent","code");
+        where += addWhere("parent.parent.parent.parent.name","String","parent_parent_parent_parent","name");
+        where += addWhere("parent.parent.parent.parent.type","String","parent_parent_parent_parent","type");
+        where += addWhere("parent.parent.parent.parent.valid","Integer","parent_parent_parent_parent","valid");
+        where += addWhere("parent.parent.parent.code","String","parent_parent_parent","code");
+        where += addWhere("parent.parent.parent.name","String","parent_parent_parent","name");
+        where += addWhere("parent.parent.parent.type","String","parent_parent_parent","type");
+        where += addWhere("parent.parent.parent.valid","Integer","parent_parent_parent","valid");
+        where += addWhere("parent.parent.code","String","parent_parent","code");
+        where += addWhere("parent.parent.name","String","parent_parent","name");
+        where += addWhere("parent.parent.type","String","parent_parent","type");
+        where += addWhere("parent.parent.valid","Integer","parent_parent","valid");
+        where += addWhere("parent.code","String","parent","code");
+        where += addWhere("parent.name","String","parent","name");
+        where += addWhere("parent.type","String","parent","type");
+        where += addWhere("parent.valid","Integer","parent","valid");
+        where += addWhere("code","String","typeUser","code");
+        where += addWhere("name","String","typeUser","name");
+        where += addWhere("type","String","typeUser","type");
+        where += addWhere("valid","Integer","typeUser","valid");
+        innerJoin += " LEFT JOIN sch_centra_id.TYPE_USERS parent ON TypeUser.parent_id = parent.id";
+        innerJoin += " LEFT JOIN sch_centra_id.TYPE_USERS parent_parent ON parent.parent_id = parent_parent.id";
+        innerJoin += " LEFT JOIN sch_centra_id.TYPE_USERS parent_parent_parent ON parent_parent.parent_id = parent_parent_parent.id";
+        innerJoin += " LEFT JOIN sch_centra_id.TYPE_USERS parent_parent_parent_parent ON parent_parent_parent.parent_id = parent_parent_parent_parent.id";
+        innerJoin += " LEFT JOIN sch_centra_id.TYPE_USERS parent_parent_parent_parent_parent ON parent_parent_parent_parent.parent_id = parent_parent_parent_parent_parent.id";
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+        log.debug(where);]]></script>
+
+    <property value="sch_centra_id.TYPE_USERS typeUser" name="uri.var.table" scope="default" type="STRING"/>
+    <property value="COUNT" name="uri.var.function" scope="default" type="STRING"/>
+    <property value="*" name="uri.var.field" scope="default" type="STRING"/>
+
+    <call>
+        <endpoint name="TypeUserDSS_Endpoint" template="HTTPEndpointGetTemplate"
+              uri="{uri.var.dataServiceHost}/identity.type-user.ds.HTTPEndpoint/GetFunctionResultTypeUser?function={uri.var.function}&amp;whereclause={uri.var.whereclause}&amp;field={uri.var.field}&amp;table={uri.var.table}&amp;innerjoinclause={uri.var.innerjoinclause}" />
+
+    </call>
+
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING"/>
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq"/>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                        "count": $1
+                    }
+                </format>
+                <args>
+                    <arg evaluator="json" expression="$.result.value"/>
+                </args>
+            </payloadFactory>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200"/>
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="TypeUserCountSeq" value="Fin.." />
+    </log>
+    <respond />
+</sequence>

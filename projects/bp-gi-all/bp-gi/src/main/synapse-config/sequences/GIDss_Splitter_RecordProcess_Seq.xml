@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GIDss_Splitter_RecordProcess_Seq" onError="GIDss_Splitter_Error_Seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property description="Mensaje_Peticion" expression="base64Decode(//*[local-name()='MensajePeticion'])" name="Mensaje_Peticion" scope="default" type="OM"/>
+    <property action="remove" description="TRANSPORT_HEADERS" name="TRANSPORT_HEADERS" scope="axis2"/>
+    <header action="remove" name="To" scope="default"/>
+    <header expression="//*[local-name()='SoapAction']" name="Action" scope="default"/>
+    <header expression="//*[local-name()='SoapAction']" name="SOAPAction" scope="transport"/>
+    <property description="REINTENTO" expression="//*[local-name()='Reintento']" name="REINTENTO" scope="transport" type="STRING"/>
+    <property description="Estado" expression="//*[local-name()='Estado']" name="Estado" scope="transport" type="STRING"/>
+    <enrich>
+        <source clone="true" xpath="$ctx:Mensaje_Peticion//*[local-name()='Body']/*"/>
+        <target type="body"/>
+    </enrich>
+    <log description="Log All" level="custom">
+        <property expression="$trp:REINTENTO" name="REINTENTO"/>
+        <property expression="$trp:Estado" name="ESTADO"/>
+        <property expression="$ctx:Mensaje_Peticion" name="Mensaje_Peticion"/>
+        <property expression="$body" name="Body Reintento"/>
+    </log>
+    <call>
+        <endpoint key="GIGeneric_EP"/>
+    </call>
+    <!-- Handle errors -->
+    <filter regex=".*20.*" source="$axis2:HTTP_SC">
+        <then/>
+        <else>
+            <sequence key="GIDss_Splitter_Error_Seq"/>
+        </else>
+    </filter>
+</sequence>

@@ -1,0 +1,364 @@
+<data name="application.matrix-detail.ds" serviceNamespace="centra-id.com" enableBatchRequests="false" enableBoxcarring="false" transports="https" disableLegacyBoxcarringMode="true">
+
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <!-- DYNAMIC QUERY MATRIXDETAIL -->
+    <query id="dynamicQuery_matrixDetail" useConfig="default">
+        <sql>
+           SELECT
+               matrixDetail.id,
+               matrixDetail.code,
+               matrixDetail.name,
+               matrixDetail.valid,
+               matrixDetail.matrix_id,
+               matrixDetail.ordinal
+           FROM sch_centra_id.MATRICES_DETAIL matrixDetail :innerjoinclause :whereclause ORDER BY :orderby :fromto
+        </sql>
+        <result element="matrixDetailList" rowName="matrixDetail">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <call-query href="queryReferenceById__matrixDetail_matrix">
+                <with-param column="matrix_id" name="id"/>
+            </call-query>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="fromto" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DISTINCT QUERY MATRIXDETAIL Matrix-->
+    <query id="dynamicDistinctQuery_matrixDetail_matrix" useConfig="default">
+        <sql>
+           SELECT DISTINCT
+               matrix.id,
+               matrix.code,
+               matrix.name,
+               matrix.quantity,
+               matrix.valid,
+               matrix.application_group_id
+           FROM sch_centra_id.MATRICES_DETAIL matrixDetail :innerjoinclause :whereclause ORDER BY :orderby
+        </sql>
+        <result element="matrixList" rowName="matrix">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="quantity" name="quantity" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <call-query href="queryManyToOneById__matrix_matrix_applicationGroup">
+                <with-param column="application_group_id" name="id"/>
+            </call-query>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- INSERT MatrixDetail -->
+    <query id="insertQuery_matrixDetail" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>
+           INSERT INTO sch_centra_id.MATRICES_DETAIL(
+               code,
+               name,
+               valid,
+               ordinal,
+               matrix_id
+        ) VALUES(?,?,?,?,?)
+        </sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="code" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="name" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="valid" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="1"/>
+        <param name="ordinal" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="1"/>
+        <param name="matrixId" ordinal="5" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <!-- UPDATE MatrixDetail -->
+    <query id="updateQuery_matrixDetail" useConfig="default">
+        <sql>
+           UPDATE sch_centra_id.MATRICES_DETAIL SET code=?, name=?, ordinal=?, matrix_id=?
+            WHERE id=?
+        </sql>
+        <param name="code" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="name" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="ordinal" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+        <param name="matrixId" ordinal="4" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="id" ordinal="4" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <!-- QUERY REFERENCE MatrixDetail Matrix 0-->
+    <query id="queryReferenceById__matrixDetail_matrix" useConfig="default">
+        <sql>
+           SELECT 
+               matrix.id,
+               matrix.code,
+               matrix.name,
+               matrix.quantity,
+               matrix.valid,
+               matrix.application_group_id
+           FROM sch_centra_id.MATRICES matrix WHERE id=? AND valid=1
+        </sql>
+        <result element="matrix">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="quantity" name="quantity" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <call-query href="queryManyToOneById__matrix_matrix_applicationGroup">
+                <with-param column="application_group_id" name="id"/>
+            </call-query>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE MatrixDetail ApplicationGroup 1-->
+    <query id="queryManyToOneById__matrix_matrix_applicationGroup" useConfig="default">
+        <sql>
+           SELECT 
+               applicationGroup.id,
+               applicationGroup.code,
+               applicationGroup.name,
+               applicationGroup.endpoint_type,
+               applicationGroup.ordinal,
+               applicationGroup.valid
+           FROM sch_centra_id.APPLICATIONS_GROUP applicationGroup WHERE id=? AND valid=1
+        </sql>
+        <result element="applicationGroup">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="endpoint_type" name="endpointType" xsdType="xs:string"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY ONE TO MANY MatrixDetail Matrix 2-->
+    <query id="queryOneToManyByMasterId__matrix_applicationGroup_applicationGroup_matrix" useConfig="default">
+        <sql>
+           SELECT 
+               matrixList.id,
+               matrixList.code,
+               matrixList.name,
+               matrixList.quantity,
+               matrixList.valid,
+               matrixList.application_group_id
+           FROM sch_centra_id.MATRICES matrixList WHERE application_group_id=? AND valid=1
+        </sql>
+        <result element="matrixList" rowName="matrix">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="quantity" name="quantity" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="masterId" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE MatrixDetail ApplicationGroup 3-->
+    <query id="queryManyToOneById__matrix_applicationGroup_matrixList_matrix_applicationGroup" useConfig="default">
+        <sql>
+           SELECT 
+               applicationGroup.id,
+               applicationGroup.code,
+               applicationGroup.name,
+               applicationGroup.endpoint_type,
+               applicationGroup.ordinal,
+               applicationGroup.valid
+           FROM sch_centra_id.APPLICATIONS_GROUP applicationGroup WHERE id=? AND valid=1
+        </sql>
+        <result element="applicationGroup">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="endpoint_type" name="endpointType" xsdType="xs:string"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY ONE TO MANY MatrixDetail Field 2-->
+    <query id="queryOneToManyByMasterId__matrix_applicationGroup_applicationGroup_field" useConfig="default">
+        <sql>
+           SELECT 
+               fieldList.id,
+               fieldList.code,
+               fieldList.name,
+               fieldList.predetermined,
+               fieldList.type,
+               fieldList.length,
+               fieldList.required,
+               fieldList.valid,
+               fieldList.application_group_id
+           FROM sch_centra_id.FIELDS fieldList WHERE application_group_id=? AND valid=1
+        </sql>
+        <result element="fieldList" rowName="field">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="predetermined" name="predetermined" xsdType="xs:string"/>
+            <element column="type" name="type" xsdType="xs:string"/>
+            <element column="length" name="length" xsdType="xs:integer"/>
+            <element column="required" name="required" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="masterId" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE MatrixDetail ApplicationGroup 3-->
+    <query id="queryManyToOneById__matrix_applicationGroup_fieldList_field_applicationGroup" useConfig="default">
+        <sql>
+           SELECT 
+               applicationGroup.id,
+               applicationGroup.code,
+               applicationGroup.name,
+               applicationGroup.endpoint_type,
+               applicationGroup.ordinal,
+               applicationGroup.valid
+           FROM sch_centra_id.APPLICATIONS_GROUP applicationGroup WHERE id=? AND valid=1
+        </sql>
+        <result element="applicationGroup">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="endpoint_type" name="endpointType" xsdType="xs:string"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- DYNAMIC FUNCTION  -->
+    <query id="dynamicQueryFunction_matrixDetail" useConfig="default">
+        <sql>
+           SELECT :function(:field) as value FROM :table :innerjoinclause :whereclause
+        </sql>
+        <result element="result">
+            <element column="value" name="value" xsdType="xs:long"/>
+        </result>
+        <param name="function" sqlType="QUERY_STRING"/>
+        <param name="field" sqlType="QUERY_STRING"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DELETE  -->
+    <query id="dynamicDeleteQuery_matrixDetail" useConfig="default">
+        <sql>UPDATE :table SET :set WHERE id=:id</sql>
+        <param name="id" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="set" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- OPERATIONS -->
+    <operation name="listAllOperation_matrixDetail">
+        <call-query href="dynamicQuery_matrixDetail">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="fromToOperation_matrixDetail">
+        <call-query href="dynamicQuery_matrixDetail">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="functionOperation_matrixDetail">
+        <call-query href="dynamicQueryFunction_matrixDetail">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="deleteOperation_matrixDetail">
+        <call-query href="dynamicDeleteQuery_matrixDetail">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </operation>
+    <operation name="create_matrixDetail">
+        <call-query href="insertQuery_matrixDetail">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="ordinal" query-param="ordinal"/>
+            <with-param name="matrixId" query-param="matrixId"/>
+        </call-query>
+    </operation>
+    <operation name="update_matrixDetail">
+        <call-query href="updateQuery_matrixDetail">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="ordinal" query-param="ordinal"/>
+            <with-param name="matrixId" query-param="matrixId"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <operation name="distinctOperation_matrixDetail_matrix">
+        <call-query href="dynamicDistinctQuery_matrixDetail_matrix">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <!-- RESOURCES -->
+    <resource method="GET" path="GetAllMatrixDetail">
+        <call-query href="dynamicQuery_matrixDetail">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFromToMatrixDetail">
+        <call-query href="dynamicQuery_matrixDetail">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFunctionResultMatrixDetail">
+        <call-query href="dynamicQueryFunction_matrixDetail">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="DeleteMatrixDetail">
+        <call-query href="dynamicDeleteQuery_matrixDetail">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="CreateMatrixDetail">
+        <call-query href="insertQuery_matrixDetail">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="ordinal" query-param="ordinal"/>
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="matrixId" query-param="matrixId"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="UpdateMatrixDetail">
+        <call-query href="updateQuery_matrixDetail">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="ordinal" query-param="ordinal"/>
+            <with-param name="matrixId" query-param="matrixId"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetDistinctMatrixDetailMatrix">
+        <call-query href="dynamicDistinctQuery_matrixDetail_matrix">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+</data>

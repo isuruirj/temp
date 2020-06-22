@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="UserDataDeleteSeq" onError="FaultUserDataDeleteSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse" xmlns:ci="centra-id.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:axis2ns65="http://ws.wso2.org/dataservice">
+    <log level="custom" category="DEBUG">
+        <property name="UserDataDeleteSeq" value="Inicio.." />
+    </log>
+    <property name="guid" expression="//guid" />
+    <filter regex="false" source="boolean(get-property('guid'))">
+        <then>
+            <property action="set" name="guid" expression="fn:substring-after(get-property('MessageID'), 'urn:uuid:')" />
+        </then>
+    </filter>
+    <property name="uuid" expression="//uuid" />
+    <filter regex="false" source="boolean(get-property('uuid'))">
+        <then>
+            <property action="set" name="uuid" expression="fn:substring-after(get-property('MessageID'), 'urn:uuid:')" />
+        </then>
+    </filter>
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/UserDataSearch/{uri.var.id}" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <property name="uri.var.username" expression="//username" />
+            <property name="employeeCode" expression="//codigoEmpleado" />
+            <property name="typeUser" expression="//tipousuario" />
+            <property name="subTypeUser" expression="//subtipo" />
+            <log level="custom" category="DEBUG">
+                <property name="uri.var.username" expression="get-property('uri.var.username')" />
+                <property name="employeeCode" expression="get-property('employeeCode')" />
+            </log>
+            <filter regex="true" source="boolean(get-property('uri.var.username'))">
+                <then>
+                    <!-- determinar origen -->
+                    <switch source="$ctx:subTypeUser">
+                        <case regex="EMP">
+                            <property name="origin" value="Eliminación" />
+                        </case>
+                        <case regex="EXT">
+                            <property name="origin" value="Creación / Eliminación Usuario Externo" />
+                        </case>
+                        <case regex="ROT">
+                            <property name="origin" value="Creación / Eliminación Usuario Genérico" />
+                        </case>
+                        <case regex="MAIL">
+                            <property name="origin" value="Creación / Eliminación Usuario Genérico" />
+                        </case>
+                        <default>
+                            <property name="origin" value="Eliminación" />
+                        </default>
+                    </switch>
+                    <!-- Eliminar usuario en IS -->
+                    <property name="uri.var.type" value="D" />
+                    <store messageStore="IdentityStore" />
+                    <!-- Crear en transactional identity -->
+                    <call-template target="CreateTransactionaIdentityTemplate">
+                        <with-param name="userDataId" value="{get-property('uri.var.id')}" />
+                        <with-param name="origin" value="{get-property('origin')}" />
+                        <with-param name="guid" value="{get-property('guid')}" />
+                        <with-param name="uuid" value="{get-property('uuid')}" />
+                        <with-param name="action" value="D" />
+                        <with-param name="modifyData" value="0" />
+                        <with-param name="profileRecalculation" value="0" />
+                        <with-param name="password" value="X" />
+                    </call-template>
+                    <!-- Delete UserData -->
+                    <property name="uri.var.table" scope="default" type="STRING" value="sch_centra_id.USERDATA" />
+                    <property name="uri.var.set" scope="default" type="STRING" value="valid=0" />
+                    <property name="Content-Type" scope="transport" value="application/x-www-form-urlencoded" />
+                    <property name="messageType" scope="axis2" type="STRING" value="application/x-www-form-urlencoded" />
+                    <log level="custom" category="DEBUG">
+                        <property name="UserDataDeleteSeq" value="Inicio.2." />
+                    </log>
+                    <call>
+                        <endpoint template="HTTPEndpointDeleteTemplate" uri="{uri.var.dataServiceHost}/identity.user-data.ds.HTTPEndpoint/DeleteUserData?id={uri.var.id}&amp;set={uri.var.set}&amp;table={uri.var.table}" />
+                    </call>
+                    <property expression="//ci:Fault/ci:faultcode" name="faultCode" scope="default" type="STRING" />
+                    <filter regex="true" source="boolean(get-property('faultCode'))">
+                        <then>
+                            <property name="fault" expression="get-property('faultCode')" />
+                            <sequence key="FaultSeq" />
+                        </then>
+                        <else>
+                            <!-- cambia de estado al usuario eliminado -->
+                            <property name="messageType" scope="axis2" type="STRING" value="application/xml" />
+                            <property name="Accept" scope="transport" type="STRING" value="application/xml" />
+                            <payloadFactory media-type="xml">
+                                <format>
+                                    <ci:update_all_query_operation xmlns:ci="centra-id.com">
+                                        <ci:table>SCH_CENTRA_ID.USERDATA</ci:table>
+                                        <ci:set>EMPLOYEE_STATUS='ELIMINADO'</ci:set>
+                                        <ci:where>ID=$1</ci:where>
+                                    </ci:update_all_query_operation>
+                                </format>
+                                <args>
+                                    <arg evaluator="xml" expression="$ctx:uri.var.id" />
+                                </args>
+                            </payloadFactory>
+                            <call>
+                                <endpoint template="HTTPEndpointPutTemplate" uri="{uri.var.dataServiceHost}/UsersDSS.HTTPEndpoint/updateAll" />
+                            </call>
+                            <payloadFactory media-type="json">
+                                <format>{ "userData": { "id": $1 } }</format>
+                                <args>
+                                    <arg evaluator="xml" expression="get-property('uri.var.id')" />
+                                </args>
+                            </payloadFactory>
+                            <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+                        </else>
+                    </filter>
+                </then>
+                <else>
+                    <property name="fault" value="Not found username. " />
+                    <sequence key="FaultSeq" />
+                </else>
+            </filter>
+        </then>
+        <else>
+            <sequence key="FaultSeq" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="UserDataDeleteSeq" value="Fin.." />
+    </log>
+</sequence>

@@ -1,0 +1,697 @@
+<data name="company.cost-center.ds"
+    serviceNamespace="centra-id.com"
+    enableBatchRequests="false"
+    enableBoxcarring="false"
+    transports="https"
+    disableLegacyBoxcarringMode="true">
+
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <!-- DYNAMIC QUERY COSTCENTER -->
+    <query id="dynamicQuery_costCenter" useConfig="default">
+        <sql>
+           SELECT
+               costCenter.id,
+               costCenter.code,
+               costCenter.name,
+               costCenter.company_id,
+               costCenter.parent_id,
+               costCenter.status,
+               costCenter.valid,
+               costCenter.filter,
+               costCenter.city
+           FROM sch_centra_id.COSTS_CENTERS costCenter :innerjoinclause :whereclause ORDER BY :orderby :fromto
+        </sql>
+        <result element="costCenterList" rowName="costCenter">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <call-query href="queryReferenceById__costCenter_company">
+                <with-param column="company_id" name="id"/>
+            </call-query>
+            <call-query href="queryReferenceById__costCenter_parent">
+                <with-param column="parent_id" name="id"/>
+            </call-query>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="filter" name="filter" xsdType="xs:string"/>
+            <element column="city" name="city" xsdType="xs:string"/>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="fromto" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DISTINCT QUERY COSTCENTER Company-->
+    <query id="dynamicDistinctQuery_costCenter_company" useConfig="default">
+        <sql>
+           SELECT DISTINCT
+               company.id,
+               company.code,
+               company.identifier,
+               company.business_name,
+               company.catalog_company_type_id,
+               company.domain_name,
+               company.status,
+               company.logon,
+               company.valid
+           FROM sch_centra_id.COSTS_CENTERS costCenter :innerjoinclause :whereclause ORDER BY :orderby
+        </sql>
+        <result element="companyList" rowName="company">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="identifier" name="identifier" xsdType="xs:string"/>
+            <element column="business_name" name="businessName" xsdType="xs:string"/>
+            <call-query href="queryReferenceById__company_company_catalogCompanyType">
+                <with-param column="catalog_company_type_id" name="id"/>
+            </call-query>
+            <element column="domain_name" name="domainName" xsdType="xs:string"/>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <element column="logon" name="logon" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DISTINCT QUERY COSTCENTER CostCenter-->
+    <query id="dynamicDistinctQuery_costCenter_costCenter" useConfig="default">
+        <sql>
+           SELECT DISTINCT
+               parent.id,
+               parent.code,
+               parent.name,
+               parent.company_id,
+               parent.parent_id,
+               parent.status,
+               parent.valid,
+               parent.filter
+           FROM sch_centra_id.COSTS_CENTERS costCenter :innerjoinclause :whereclause ORDER BY :orderby
+        </sql>
+        <result element="costCenterList" rowName="costCenter">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <call-query href="queryReferenceById__parent_costCenter_company">
+                <with-param column="company_id" name="id"/>
+            </call-query>
+            <call-query href="queryReferenceById__parent_costCenter_parent">
+                <with-param column="parent_id" name="id"/>
+            </call-query>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="filter" name="filter" xsdType="xs:string"/>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- INSERT CostCenter -->
+    <query id="insertQuery_costCenter" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>
+           INSERT INTO sch_centra_id.COSTS_CENTERS(
+               code,
+               name,
+               company_id,
+               parent_id,
+               status,
+               valid,
+               filter,
+               city
+        ) VALUES(?,?,?,?,?,?,?,?)
+        </sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="code" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="name" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="companyId" ordinal="3" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="parentId" ordinal="4" paramType="SCALAR" sqlType="BIGINT" type="IN" defaultValue="#{NULL}"/>
+        <param name="status" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="A"/>
+        <param name="valid" ordinal="6" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="1"/>
+        <param name="filter" ordinal="7" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="city" ordinal="8" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+    </query>
+    <!-- UPDATE CostCenter -->
+    <query id="updateQuery_costCenter" useConfig="default">
+        <sql>
+           UPDATE sch_centra_id.COSTS_CENTERS SET
+               code=?,
+               name=?,
+               company_id=?,
+               parent_id=?,
+               status=?,
+               filter=?,
+               city=?
+            WHERE id=?
+        </sql>
+        <param name="code" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="name" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="companyId" ordinal="3" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="parentId" ordinal="4" paramType="SCALAR" sqlType="BIGINT" type="IN" defaultValue="#{NULL}"/>
+        <param name="status" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="A"/>
+        <param name="filter" ordinal="6" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="city" ordinal="7" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="id" ordinal="8" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <!-- QUERY REFERENCE CostCenter Company 0-->
+    <query id="queryReferenceById__costCenter_company" useConfig="default">
+        <sql>
+           SELECT 
+               company.id,
+               company.code,
+               company.identifier,
+               company.business_name,
+               company.catalog_company_type_id,
+               company.domain_name,
+               company.status,
+               company.logon,
+               company.valid
+           FROM sch_centra_id.COMPANIES company WHERE id=? AND valid=1
+        </sql>
+        <result element="company">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="identifier" name="identifier" xsdType="xs:string"/>
+            <element column="business_name" name="businessName" xsdType="xs:string"/>
+            <call-query href="queryReferenceById__company_company_catalogCompanyType">
+                <with-param column="catalog_company_type_id" name="id"/>
+            </call-query>
+            <element column="domain_name" name="domainName" xsdType="xs:string"/>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <element column="logon" name="logon" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CostCenter Catalog 1-->
+    <query id="queryReferenceById__company_company_catalogCompanyType" useConfig="default">
+        <sql>
+           SELECT 
+               catalogCompanyType.id,
+               catalogCompanyType.code,
+               catalogCompanyType.name,
+               catalogCompanyType.predetermined,
+               catalogCompanyType.ordinal,
+               catalogCompanyType.value_text,
+               catalogCompanyType.value_number,
+               catalogCompanyType.value_date,
+               catalogCompanyType.value_boolean,
+               catalogCompanyType.catalog_type_id,
+               catalogCompanyType.valid
+           FROM sch_centra_id.CATALOGS catalogCompanyType WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogCompanyType">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="predetermined" name="predetermined" xsdType="xs:integer"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="value_text" name="valueText" xsdType="xs:string"/>
+            <element column="value_number" name="valueNumber" xsdType="xs:decimal"/>
+            <element column="value_date" name="valueDate" xsdType="xs:date"/>
+            <element column="value_boolean" name="valueBoolean" xsdType="xs:integer"/>
+            <call-query href="queryReferenceById__company_catalogCompanyType_catalog_catalogType">
+                <with-param column="catalog_type_id" name="id"/>
+            </call-query>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CostCenter CatalogType 2-->
+    <query id="queryReferenceById__company_catalogCompanyType_catalog_catalogType" useConfig="default">
+        <sql>
+           SELECT 
+               catalogType.id,
+               catalogType.code,
+               catalogType.name,
+               catalogType.sort_type,
+               catalogType.editable,
+               catalogType.valid,
+               catalogType.description
+           FROM sch_centra_id.CATALOGS_TYPES catalogType WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogType">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="sort_type" name="sortType" xsdType="xs:string"/>
+            <element column="editable" name="editable" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="description" name="description" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CostCenter CostCenter 0-->
+    <query id="queryReferenceById__costCenter_parent" useConfig="default">
+        <sql>
+           SELECT 
+               parent.id,
+               parent.code,
+               parent.name,
+               parent.company_id,
+               parent.parent_id,
+               parent.status,
+               parent.valid,
+               parent.filter
+           FROM sch_centra_id.COSTS_CENTERS parent WHERE id=? AND valid=1
+        </sql>
+        <result element="parent">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <call-query href="queryReferenceById__parent_costCenter_company">
+                <with-param column="company_id" name="id"/>
+            </call-query>
+            <call-query href="queryReferenceById__parent_costCenter_parent">
+                <with-param column="parent_id" name="id"/>
+            </call-query>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="filter" name="filter" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CostCenter Company 1-->
+    <query id="queryReferenceById__parent_costCenter_company" useConfig="default">
+        <sql>
+           SELECT 
+               company.id,
+               company.code,
+               company.identifier,
+               company.business_name,
+               company.catalog_company_type_id,
+               company.domain_name,
+               company.status,
+               company.logon,
+               company.valid
+           FROM sch_centra_id.COMPANIES company WHERE id=? AND valid=1
+        </sql>
+        <result element="company">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="identifier" name="identifier" xsdType="xs:string"/>
+            <element column="business_name" name="businessName" xsdType="xs:string"/>
+            <call-query href="queryReferenceById__parent_company_company_catalogCompanyType">
+                <with-param column="catalog_company_type_id" name="id"/>
+            </call-query>
+            <element column="domain_name" name="domainName" xsdType="xs:string"/>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <element column="logon" name="logon" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CostCenter Catalog 2-->
+    <query id="queryReferenceById__parent_company_company_catalogCompanyType" useConfig="default">
+        <sql>
+           SELECT 
+               catalogCompanyType.id,
+               catalogCompanyType.code,
+               catalogCompanyType.name,
+               catalogCompanyType.predetermined,
+               catalogCompanyType.ordinal,
+               catalogCompanyType.value_text,
+               catalogCompanyType.value_number,
+               catalogCompanyType.value_date,
+               catalogCompanyType.value_boolean,
+               catalogCompanyType.catalog_type_id,
+               catalogCompanyType.valid
+           FROM sch_centra_id.CATALOGS catalogCompanyType WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogCompanyType">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="predetermined" name="predetermined" xsdType="xs:integer"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="value_text" name="valueText" xsdType="xs:string"/>
+            <element column="value_number" name="valueNumber" xsdType="xs:decimal"/>
+            <element column="value_date" name="valueDate" xsdType="xs:date"/>
+            <element column="value_boolean" name="valueBoolean" xsdType="xs:integer"/>
+              <element name="catalogType">
+                <element column="catalog_type_id" name="id" xsdType="xs:integer"/>
+              </element>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CostCenter CatalogType 3-->
+    <query id="queryReferenceById__parent_company_catalogCompanyType_catalog_catalogType" useConfig="default">
+        <sql>
+           SELECT 
+               catalogType.id,
+               catalogType.code,
+               catalogType.name,
+               catalogType.sort_type,
+               catalogType.editable,
+               catalogType.valid,
+               catalogType.description
+           FROM sch_centra_id.CATALOGS_TYPES catalogType WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogType">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="sort_type" name="sortType" xsdType="xs:string"/>
+            <element column="editable" name="editable" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="description" name="description" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CostCenter CostCenter 1-->
+    <query id="queryReferenceById__parent_costCenter_parent" useConfig="default">
+        <sql>
+           SELECT 
+               parent.id,
+               parent.code,
+               parent.name,
+               parent.company_id,
+               parent.parent_id,
+               parent.status,
+               parent.valid,
+               parent.filter
+           FROM sch_centra_id.COSTS_CENTERS parent WHERE id=? AND valid=1
+        </sql>
+        <result element="parent">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <call-query href="queryReferenceById__parent_parent_costCenter_company">
+                <with-param column="company_id" name="id"/>
+            </call-query>
+            <call-query href="queryReferenceById__parent_parent_costCenter_parent">
+                <with-param column="parent_id" name="id"/>
+            </call-query>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="filter" name="filter" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CostCenter Company 2-->
+    <query id="queryReferenceById__parent_parent_costCenter_company" useConfig="default">
+        <sql>
+           SELECT 
+               company.id,
+               company.code,
+               company.identifier,
+               company.business_name,
+               company.catalog_company_type_id,
+               company.domain_name,
+               company.status,
+               company.logon,
+               company.valid
+           FROM sch_centra_id.COMPANIES company WHERE id=? AND valid=1
+        </sql>
+        <result element="company">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="identifier" name="identifier" xsdType="xs:string"/>
+            <element column="business_name" name="businessName" xsdType="xs:string"/>
+              <element name="catalogCompanyType">
+                <element column="catalog_company_type_id" name="id" xsdType="xs:integer"/>
+              </element>
+            <element column="domain_name" name="domainName" xsdType="xs:string"/>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <element column="logon" name="logon" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CostCenter Catalog 3-->
+    <query id="queryReferenceById__parent_parent_company_company_catalogCompanyType" useConfig="default">
+        <sql>
+           SELECT 
+               catalogCompanyType.id,
+               catalogCompanyType.code,
+               catalogCompanyType.name,
+               catalogCompanyType.predetermined,
+               catalogCompanyType.ordinal,
+               catalogCompanyType.value_text,
+               catalogCompanyType.value_number,
+               catalogCompanyType.value_date,
+               catalogCompanyType.value_boolean,
+               catalogCompanyType.catalog_type_id,
+               catalogCompanyType.valid
+           FROM sch_centra_id.CATALOGS catalogCompanyType WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogCompanyType">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="predetermined" name="predetermined" xsdType="xs:integer"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="value_text" name="valueText" xsdType="xs:string"/>
+            <element column="value_number" name="valueNumber" xsdType="xs:decimal"/>
+            <element column="value_date" name="valueDate" xsdType="xs:date"/>
+            <element column="value_boolean" name="valueBoolean" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CostCenter CostCenter 2-->
+    <query id="queryReferenceById__parent_parent_costCenter_parent" useConfig="default">
+        <sql>
+           SELECT 
+               parent.id,
+               parent.code,
+               parent.name,
+               parent.company_id,
+               parent.parent_id,
+               parent.status,
+               parent.valid,
+               parent.filter
+           FROM sch_centra_id.COSTS_CENTERS parent WHERE id=? AND valid=1
+        </sql>
+        <result element="parent">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+              <element name="company">
+                <element column="company_id" name="id" xsdType="xs:integer"/>
+              </element>
+              <element name="parent">
+                <element column="parent_id" name="id" xsdType="xs:integer"/>
+              </element>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="filter" name="filter" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CostCenter Company 3-->
+    <query id="queryReferenceById__parent_parent_parent_costCenter_company" useConfig="default">
+        <sql>
+           SELECT 
+               company.id,
+               company.code,
+               company.identifier,
+               company.business_name,
+               company.catalog_company_type_id,
+               company.domain_name,
+               company.status,
+               company.logon,
+               company.valid
+           FROM sch_centra_id.COMPANIES company WHERE id=? AND valid=1
+        </sql>
+        <result element="company">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="identifier" name="identifier" xsdType="xs:string"/>
+            <element column="business_name" name="businessName" xsdType="xs:string"/>
+            <element column="domain_name" name="domainName" xsdType="xs:string"/>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <element column="logon" name="logon" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CostCenter CostCenter 3-->
+    <query id="queryReferenceById__parent_parent_parent_costCenter_parent" useConfig="default">
+        <sql>
+           SELECT 
+               parent.id,
+               parent.code,
+               parent.name,
+               parent.company_id,
+               parent.parent_id,
+               parent.status,
+               parent.valid,
+               parent.filter
+           FROM sch_centra_id.COSTS_CENTERS parent WHERE id=? AND valid=1
+        </sql>
+        <result element="parent">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="filter" name="filter" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- DYNAMIC FUNCTION  -->
+    <query id="dynamicQueryFunction_costCenter" useConfig="default">
+        <sql>
+           SELECT :function(:field) as value FROM :table :innerjoinclause :whereclause
+         </sql>
+        <result element="result">
+            <element column="value" name="value" xsdType="xs:long"/>
+        </result>
+        <param name="function" sqlType="QUERY_STRING"/>
+        <param name="field" sqlType="QUERY_STRING"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DELETE  -->
+    <query id="dynamicDeleteQuery_costCenter" useConfig="default">
+        <sql>UPDATE :table SET :set WHERE id=:id</sql>
+        <param name="id" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="set" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- OPERATIONS -->
+    <operation name="listAllOperation_costCenter">
+        <call-query href="dynamicQuery_costCenter">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="fromToOperation_costCenter">
+        <call-query href="dynamicQuery_costCenter">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="functionOperation_costCenter">
+        <call-query href="dynamicQueryFunction_costCenter">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="deleteOperation_costCenter">
+        <call-query href="dynamicDeleteQuery_costCenter">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </operation>
+    <operation name="create_costCenter">
+        <call-query href="insertQuery_costCenter">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="companyId" query-param="companyId"/>
+            <with-param name="parentId" query-param="parentId"/>
+            <with-param name="status" query-param="status"/>
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="filter" query-param="filter"/>
+            <with-param name="city" query-param="city"/>
+        </call-query>
+    </operation>
+    <operation name="update_costCenter">
+        <call-query href="updateQuery_costCenter">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="companyId" query-param="companyId"/>
+            <with-param name="parentId" query-param="parentId"/>
+            <with-param name="status" query-param="status"/>
+            <with-param name="filter" query-param="filter"/>
+            <with-param name="city" query-param="city"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <operation name="distinctOperation_costCenter_company">
+        <call-query href="dynamicDistinctQuery_costCenter_company">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="distinctOperation_costCenter_parent">
+        <call-query href="dynamicDistinctQuery_costCenter_costCenter">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <!-- RESOURCES -->
+    <resource method="GET" path="GetAllCostCenter">
+        <call-query href="dynamicQuery_costCenter">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFromToCostCenter">
+        <call-query href="dynamicQuery_costCenter">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFunctionResultCostCenter">
+        <call-query href="dynamicQueryFunction_costCenter">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="DeleteCostCenter">
+        <call-query href="dynamicDeleteQuery_costCenter">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="CreateCostCenter">
+        <call-query href="insertQuery_costCenter">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="companyId" query-param="companyId"/>
+            <with-param name="parentId" query-param="parentId"/>
+            <with-param name="status" query-param="status"/>
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="filter" query-param="filter"/>
+            <with-param name="city" query-param="city"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="UpdateCostCenter">
+        <call-query href="updateQuery_costCenter">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="companyId" query-param="companyId"/>
+            <with-param name="parentId" query-param="parentId"/>
+            <with-param name="status" query-param="status"/>
+            <with-param name="filter" query-param="filter"/>
+            <with-param name="city" query-param="city"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetDistinctCostCenterCompany">
+        <call-query href="dynamicDistinctQuery_costCenter_company">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetDistinctCostCenterParent">
+        <call-query href="dynamicDistinctQuery_costCenter_costCenter">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+</data>

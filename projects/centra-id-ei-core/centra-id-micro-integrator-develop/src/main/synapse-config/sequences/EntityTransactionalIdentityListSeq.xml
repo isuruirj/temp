@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="TransactionalIdentityListSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="TransactionalIdentityListSeq" value="Inicio.." />
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml" />
+    <property name="Accept" scope="transport" type="STRING" value="application/xml" />
+    <property action="remove" name="Content-Type" scope="transport" />
+    <property expression="$ctx:query.param.orderby" name="uri.var.orderby" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.uuid" name="uuid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.guid" name="guid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.username" name="username" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.password" name="password" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.workerCode" name="workerCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.employeeLastname" name="employeeLastname" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.employeeFirstname" name="employeeFirstname" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.identification" name="identification" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.identificationType" name="identificationType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.identificationSupervisor" name="identificationSupervisor" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.namesSupervisor" name="namesSupervisor" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.companyCode" name="companyCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.companyName" name="companyName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.groupCode" name="groupCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.groupName" name="groupName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.divisionCode" name="divisionCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.divisionName" name="divisionName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.departmentCode" name="departmentCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.departmentName" name="departmentName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.areaCode" name="areaCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.areaName" name="areaName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.subsidiaryCode" name="subsidiaryCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.subsidiaryName" name="subsidiaryName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.costCenterCode" name="costCenterCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.costCenterName" name="costCenterName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.locationCode" name="locationCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.locationName" name="locationName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.hierarchicalLevelCode" name="hierarchicalLevelCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.positionName" name="positionName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.hierarchicalLevelName" name="hierarchicalLevelName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.depositAccountNumber" name="depositAccountNumber" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.employeeStartDate" name="employeeStartDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.employeeEndDate" name="employeeEndDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.employeeStatus" name="employeeStatus" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.employeeCode" name="employeeCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userType" name="userType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userSubtype" name="userSubtype" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.mobile" name="mobile" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.origen" name="origen" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.status" name="status" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.createdDate" name="createdDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.plannedExecutionDate" name="plannedExecutionDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.modifyData" name="modifyData" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.profileRecalculation" name="profileRecalculation" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.typeAction" name="typeAction" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.mail" name="mail" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfileId" name="globalProfileId" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfilePreviusId" name="globalProfilePreviusId" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userDataId" name="userDataId" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING" />
+    <script language="nashornJs"><![CDATA[
+        @add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE transactionalIdentity.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","transactionalIdentity","id");
+        where += addWhere("uuid","String","transactionalIdentity","uuid");
+        where += addWhere("guid","String","transactionalIdentity","guid");
+        where += addWhere("username","String","transactionalIdentity","username");
+        where += addWhere("password","String","transactionalIdentity","password");
+        where += addWhere("workerCode","String","transactionalIdentity","worker_code");
+        where += addWhere("employeeLastname","String","transactionalIdentity","employee_lastname");
+        where += addWhere("employeeFirstname","String","transactionalIdentity","employee_firstname");
+        where += addWhere("identification","String","transactionalIdentity","identification");
+        where += addWhere("identificationType","String","transactionalIdentity","identification_type");
+        where += addWhere("identificationSupervisor","String","transactionalIdentity","identification_supervisor");
+        where += addWhere("namesSupervisor","String","transactionalIdentity","names_supervisor");
+        where += addWhere("companyCode","String","transactionalIdentity","company_code");
+        where += addWhere("companyName","String","transactionalIdentity","company_name");
+        where += addWhere("groupCode","String","transactionalIdentity","group_code");
+        where += addWhere("groupName","String","transactionalIdentity","group_name");
+        where += addWhere("divisionCode","String","transactionalIdentity","division_code");
+        where += addWhere("divisionName","String","transactionalIdentity","division_name");
+        where += addWhere("departmentCode","String","transactionalIdentity","department_code");
+        where += addWhere("departmentName","String","transactionalIdentity","department_name");
+        where += addWhere("areaCode","String","transactionalIdentity","area_code");
+        where += addWhere("areaName","String","transactionalIdentity","area_name");
+        where += addWhere("subsidiaryCode","String","transactionalIdentity","subsidiary_code");
+        where += addWhere("subsidiaryName","String","transactionalIdentity","subsidiary_name");
+        where += addWhere("costCenterCode","String","transactionalIdentity","cost_center_code");
+        where += addWhere("costCenterName","String","transactionalIdentity","cost_center_name");
+        where += addWhere("locationCode","String","transactionalIdentity","location_code");
+        where += addWhere("locationName","String","transactionalIdentity","location_name");
+        where += addWhere("hierarchicalLevelCode","String","transactionalIdentity","hierarchical_level_code");
+        where += addWhere("positionName","String","transactionalIdentity","position_name");
+        where += addWhere("hierarchicalLevelName","String","transactionalIdentity","hierarchical_level_name");
+        where += addWhere("depositAccountNumber","String","transactionalIdentity","deposit_account_number");
+        where += addWhere("employeeStartDate","String","transactionalIdentity","employee_start_date");
+        where += addWhere("employeeEndDate","String","transactionalIdentity","employee_end_date");
+        where += addWhere("employeeStatus","String","transactionalIdentity","employee_status");
+        where += addWhere("employeeCode","String","transactionalIdentity","employee_code");
+        where += addWhere("userType","String","transactionalIdentity","user_type");
+        where += addWhere("userSubtype","String","transactionalIdentity","user_subtype");
+        where += addWhere("mobile","String","transactionalIdentity","mobile");
+        where += addWhere("origen","String","transactionalIdentity","origen");
+        where += addWhere("status","String","transactionalIdentity","status");
+        where += addWhere("createdDate","Date","transactionalIdentity","created_date");
+        where += addWhere("plannedExecutionDate","DateTime","transactionalIdentity","planned_execution_date");
+        where += addWhere("modifyData","Integer","transactionalIdentity","modify_data");
+        where += addWhere("profileRecalculation","Integer","transactionalIdentity","profile_recalculation");
+        where += addWhere("typeAction","String","transactionalIdentity","type_action");
+        where += addWhere("mail","String","transactionalIdentity","mail");
+        where += addWhere("globalProfileId","Integer","transactionalIdentity","global_profile_id");
+        where += addWhere("globalProfilePreviusId","Integer","transactionalIdentity","global_profile_previus_id");
+        where += addWhere("userDataId","Integer","transactionalIdentity","user_data_id");
+        where += addWhere("valid","Integer","transactionalIdentity","valid");
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+        if(!mc.getProperty("uri.var.orderby")){
+            mc.setProperty("uri.var.orderby","transactionalIdentity.id");
+        } else {
+            mc.setProperty("uri.var.orderby","transactionalIdentity."+mc.getProperty("uri.var.orderby"));
+        }
+        log.debug(where);]]></script>
+    <call>
+        <endpoint name="TransactionalIdentityDSS_Endpoint" template="HTTPEndpointGetTemplate"
+              uri="{uri.var.dataServiceHost}/provisioning.transactional-identity.ds.HTTPEndpoint/GetAllTransactionalIdentity?whereclause={uri.var.whereclause}&amp;orderby={uri.var.orderby}&amp;innerjoinclause={uri.var.innerjoinclause}" />
+
+    </call>
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING" />
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq" />
+        </then>
+        <else>
+            <xslt key="gov:/centra-id/xslt/dssFilter.xsl" />
+            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="TransactionalIdentitySeq" value="Fin.." />
+    </log>
+    <property name="messageType" value="application/json" scope="axis2" type="STRING"/>
+    <property name="Access-Control-Allow-Methods" value="GET,PUT,POST,DELETE,PATCH,OPTIONS" scope="transport" type="STRING"/>
+    <property name="Access-Control-Allow-Headers" value="Authorization,Access-Control-Allow-Origin,Content-Type" scope="transport" type="STRING"/>
+</sequence>

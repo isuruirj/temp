@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/api.centraid/application/ApplicationGroup" name="CentraIDapplicationApplicationGroupApi" version="1.0.0" version-type="context" xmlns="http://ws.apache.org/ns/synapse">
+    <resource faultSequence="FaultSeq" methods="GET">
+         <inSequence>
+             <sequence key="InBoundSeq" />
+             <sequence key="ApplicationGroupListSeq" />
+             <sequence key="OutboundSeq" />
+             <respond />
+         </inSequence>
+         <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/count">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="ApplicationGroupCountSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/max/{field}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="ApplicationGroupMaxSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/sum/{field}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="ApplicationGroupSumSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="POST" uri-template="/">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+             <sequence key="ApplicationGroupCreateSeq" />
+             <sequence key="OutboundSeq" />
+             <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="PUT" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="ApplicationGroupUpdateSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="DELETE" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="ApplicationGroupDeleteSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/{from}/{to}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="ApplicationGroupFromToSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="ApplicationGroupRetrieveSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+       </inSequence>
+       <outSequence/>
+    </resource>
+</api>

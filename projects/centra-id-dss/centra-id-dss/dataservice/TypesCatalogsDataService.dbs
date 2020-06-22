@@ -1,0 +1,111 @@
+<data enableBatchRequests="true" enableBoxcarring="true" name="TypesCatalogsDSS" serviceNamespace="centra-id.com" transports="https" disableLegacyBoxcarringMode="true">
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <query id="select_with_key_types_catalogs_query" useConfig="default">
+        <sql>SELECT id, code, name, sort_type, editable FROM sch_centra_id.CATALOGS_TYPES WHERE id=? AND valid=1</sql>
+        <result element="TypesCatalogs" rowName="TypesCatalog">
+            <element column="id" name="id" xsdType="xs:long"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="sort_type" name="sortType" xsdType="xs:string"/>
+            <element column="editable" name="editable" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <query id="update_types_catalogs_query" useConfig="default">
+        <sql>UPDATE sch_centra_id.CATALOGS_TYPES SET code=?,name=?,sort_type=?,editable=? WHERE id=? AND valid=1</sql>
+        <param name="code" ordinal="1" sqlType="STRING"/>
+        <param name="name" ordinal="2" sqlType="STRING"/>
+        <param name="sortType" ordinal="3" sqlType="STRING"/>
+        <param name="editable" ordinal="4" sqlType="INTEGER"/>
+        <param name="id" ordinal="5" sqlType="BIGINT"/>
+    </query>
+    <query id="insert_types_catalogs_query" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>INSERT INTO sch_centra_id.CATALOGS_TYPES(code,name,sort_type,editable,valid) VALUES (?,?,?,?,?)</sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="code" ordinal="1" sqlType="STRING"/>
+        <param name="name" ordinal="2" sqlType="STRING"/>
+        <param name="sortType" ordinal="3" sqlType="STRING"/>
+        <param name="editable" ordinal="4" sqlType="INTEGER"/>
+        <param defaultValue="1" name="valid" ordinal="5" sqlType="INTEGER"/>
+    </query>
+    <query id="delete_types_catalogs_query" useConfig="default">
+        <sql>UPDATE sch_centra_id.CATALOGS_TYPES SET valid=0 WHERE id=?</sql>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <query id="select_all_types_catalogs_query" useConfig="default">
+        <sql>SELECT id, code, name, sort_type, editable FROM sch_centra_id.CATALOGS_TYPES WHERE valid=1</sql>
+        <result element="TypesCatalogs" rowName="TypeCatalog">
+            <element column="id" name="id" xsdType="xs:long"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="sort_type" name="sortType" xsdType="xs:string"/>
+            <element column="editable" name="editable" xsdType="xs:integer"/>
+        </result>
+    </query>
+    <operation name="insert_types_catalogs_operation">
+        <call-query href="insert_types_catalogs_query">
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="sortType" query-param="sortType"/>
+            <with-param name="code" query-param="code"/>
+            <with-param name="editable" query-param="editable"/>
+            <with-param name="name" query-param="name"/>
+        </call-query>
+    </operation>
+    <operation name="delete_types_catalogs_operation">
+        <call-query href="delete_types_catalogs_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <operation name="select_with_key_types_catalogs_operation">
+        <call-query href="select_with_key_types_catalogs_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <operation name="select_all_types_catalogs_operation">
+        <call-query href="select_all_types_catalogs_query"/>
+    </operation>
+    <operation name="update_types_catalogs_operation">
+        <call-query href="update_types_catalogs_query">
+            <with-param name="sortType" query-param="sortType"/>
+            <with-param name="code" query-param="code"/>
+            <with-param name="editable" query-param="editable"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <resource method="GET" path="getAllTypeCatalogs">
+        <call-query href="select_all_types_catalogs_query"/>
+    </resource>
+    <resource method="GET" path="getByIdTypeCatalog">
+        <call-query href="select_with_key_types_catalogs_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="createTypeCatalog">
+        <call-query href="insert_types_catalogs_query">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="sortType" query-param="sortType"/>
+            <with-param name="editable" query-param="editable"/>
+            <with-param name="valid" query-param="valid"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="updateTypeCatalog">
+        <call-query href="update_types_catalogs_query">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="sortType" query-param="sortType"/>
+            <with-param name="editable" query-param="editable"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="deleteTypeCatalog">
+        <call-query href="delete_types_catalogs_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+</data>

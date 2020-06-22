@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ProvisioningCreateUserSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningCreateUserSeq.*" value="Inicio.." />
+        <property name="X-Forwarded-For" expression="$ctx:X-Forwarded-For" />
+        <property name="UserName" expression="$ctx:UserName" />
+        <property name="dependency" expression="$ctx:dependency" />
+        <property name="uuid" expression="//uuid" />
+    </log>
+    <property name="taskProvisioningCreate" expression="$body//*" scope="default" type="OM" />
+    <!-- Consultar Application -->
+    <sequence key="ProvisioningConfigureApplicationSeq" />
+    <filter regex="true" source="not(boolean($ctx:taskProvisioningCreate//uuidParent/text())) or $ctx:dependency">
+        <then>
+            <property name="dependency" value="false" type="BOOLEAN" />
+            <!-- consultar centro de costo -->
+            <sequence key="ProvisioningConfigureCostCenterSeq" />
+            <!-- Consulta perfil transaccional -->
+            <sequence key="ProvisioningConfigureTemplateProfileSeq" />
+            <!-- Consultar Teller No -->
+            <sequence key="ProvisioningConfigureTellerNumberSeq" />
+            <!-- Consultar Template Profiles -->
+            <sequence key="ProvisioningConfigureTemplateProfileSeq" />
+            <!-- Consultar Template Profiles AD -->
+            <sequence key="ProvisioningConfigureTemplateProfileAdSeq" />
+            <!-- Consultar Template Profiles Matrix -->
+            <sequence key="ProvisioningConfigureTemplateProfileMatrixSeq" />
+            <!-- Calcula tipo de identificacion-->
+            <sequence key="ProvisioningConfigureIdentificationTypeSeq" />
+            <!-- determina el nombre del cargo -->
+            <sequence key="ProvisioningConfigurePositionSeq" />
+            <!-- determina tipo de avaya-->
+            <sequence key="ProvisioningConfigureAvayaTypeSeq" />
+            <!-- configura propiedades de logiciel-->
+            <sequence key="ProvisioningConfigureLogicielSeq" />
+            <!-- -->
+            <payloadFactory media-type="xml">
+                <format>
+                    <tem:crearUsuario xmlns:tem="http://tempuri.org/">
+                        <!--Common-->
+                        <tem:guid>$1</tem:guid>
+                        <tem:uuid>$2</tem:uuid>
+                        <tem:aplicacion>$3</tem:aplicacion>
+                        <tem:correoElectronico>$4</tem:correoElectronico>
+                        <tem:tellerName>$5</tem:tellerName>
+                        <tem:tellerNumber>$6</tem:tellerNumber>
+                        <tem:nombreUsuario>$7</tem:nombreUsuario>
+                        <tem:tipoIdentificacion>$8</tem:tipoIdentificacion>
+                        <tem:empresa>$9</tem:empresa>
+                        <tem:observacion>$10</tem:observacion>
+                        <tem:cargo>$11</tem:cargo>
+                        <tem:cargoCompleto>$89</tem:cargoCompleto>
+                        <tem:codigoCentroCosto>$12</tem:codigoCentroCosto>
+                        <tem:identificacion>$13</tem:identificacion>
+                        <tem:celular>$14</tem:celular>
+                        <tem:terminal>$15</tem:terminal>
+                        <tem:nombresEmpleado>$16</tem:nombresEmpleado>
+                        <tem:apellidosEmpleado>$17</tem:apellidosEmpleado>
+                        <tem:codigoCompania>$18</tem:codigoCompania>
+                        <tem:fechaSalidaEmpleado>$19</tem:fechaSalidaEmpleado>
+                        <tem:fechaIngresoEmpleado>$20</tem:fechaIngresoEmpleado>
+                        <tem:nombreCompania>$21</tem:nombreCompania>
+                        <tem:nombreDivision>$22</tem:nombreDivision>
+                        <tem:nombreArea>$23</tem:nombreArea>
+                        <tem:nombreDepartamento>$24</tem:nombreDepartamento>
+                        <tem:nombrePerfil>$25</tem:nombrePerfil>
+                        <tem:nombreCentroCosto>$26</tem:nombreCentroCosto>
+                        <tem:estadoEmpleado>$27</tem:estadoEmpleado>
+                        <tem:claveAcceso>$28</tem:claveAcceso>
+                        <tem:ipcliente>$29</tem:ipcliente>
+                        <tem:usuarioAplicacion>$30</tem:usuarioAplicacion>
+                        <tem:especificos>
+                            <!--Only for AD-->
+                            <tem:domain>$31</tem:domain>
+                            <tem:mailbox>$32</tem:mailbox>
+                            <tem:tier>$33</tem:tier>
+                            <tem:Employeeid>$34</tem:Employeeid>
+                            <tem:title>$35</tem:title>
+                            <tem:pager>$36</tem:pager>
+                            <tem:proxyAddresses>$37</tem:proxyAddresses>
+                            <tem:mailNickname>$38</tem:mailNickname>
+                            <tem:msDS-User-Account-Control-Computed>$39</tem:msDS-User-Account-Control-Computed>
+                            <tem:userAccountControl>$40</tem:userAccountControl>
+                            <tem:physicalDeliveryOfficeName>$41</tem:physicalDeliveryOfficeName>
+                            <tem:postOfficeBox>$42</tem:postOfficeBox>
+                            <tem:city>$43</tem:city>
+                            <tem:containerInfo>$44</tem:containerInfo>
+                            <tem:memberOf>$45</tem:memberOf>
+                            <tem:msTSHomeDrive>$46</tem:msTSHomeDrive>
+                            <tem:msTSHomeDirectory>$47</tem:msTSHomeDirectory>
+                            <tem:msTSAllowLogon>$48</tem:msTSAllowLogon>
+                            <tem:pwdLastSet>$49</tem:pwdLastSet>
+                            <tem:nTSecurityDescriptor>$50</tem:nTSecurityDescriptor>
+                            <tem:ms-Exch-SIP-Access-Service>$51</tem:ms-Exch-SIP-Access-Service>
+                            <tem:msTSConnectClientDrives>$52</tem:msTSConnectClientDrives>
+                            <tem:msTSConnectPrinterDrives>$53</tem:msTSConnectPrinterDrives>
+                            <tem:msTSDefaultToMainPrinter>$54</tem:msTSDefaultToMainPrinter>
+                            <tem:description>$81</tem:description>
+                            <tem:department>$82</tem:department>
+                            <tem:company>$83</tem:company>
+                            <tem:userSystemAssignedUid>$84</tem:userSystemAssignedUid>
+                            <tem:alias>$85</tem:alias>
+                            <tem:telephoneNumber>$86</tem:telephoneNumber>
+                            <tem:webPage>$87</tem:webPage>
+                            <tem:userLogon>$88</tem:userLogon>
+                            <!--Only for BANCS-->
+                            <tem:grupoTransaccion>$55</tem:grupoTransaccion>
+                            <tem:nivelCapacidad>$56</tem:nivelCapacidad>
+                            <tem:nivelCorreo>$57</tem:nivelCorreo>
+                            <tem:userType>$58</tem:userType>
+                            <tem:chngBranchAlwd>$59</tem:chngBranchAlwd>
+                            <tem:brchSup>$60</tem:brchSup>
+                            <tem:atmFlag>$61</tem:atmFlag>
+                            <tem:accsignMod>$62</tem:accsignMod>
+                            <tem:casualApprovallim>$63</tem:casualApprovallim>
+                            <tem:nivelSeguridad>$64</tem:nivelSeguridad>
+                            <tem:estadoUsuario>$65</tem:estadoUsuario>
+                            <!--Only for PPRD-->
+                            <tem:perfilUsuario>$66</tem:perfilUsuario>
+                            <tem:loginUsuario>$67</tem:loginUsuario>
+                            <tem:usuarioInterno>$68</tem:usuarioInterno>
+                            <!--Only for LOGICIEL-->
+                            <tem:interno>$69</tem:interno>
+                            <tem:enviarMail>$70</tem:enviarMail>
+                            <tem:cambioPwdInicial>$71</tem:cambioPwdInicial>
+                            <tem:codigoTipoUsuario>$72</tem:codigoTipoUsuario>
+                            <tem:codigoRol>$73</tem:codigoRol>
+                            <tem:codigoHorario>$74</tem:codigoHorario>
+                            <tem:codigoAgenciaDefault>$75</tem:codigoAgenciaDefault>
+                            <tem:validarAtributosPerfil>$76</tem:validarAtributosPerfil>
+                            <tem:codigoAtributo>$92</tem:codigoAtributo>
+                            <tem:loginSupervisor>$93</tem:loginSupervisor>
+                            <tem:perfilAplicacionDefault>$77</tem:perfilAplicacionDefault>
+                            <tem:perfilAplicacionTemporal>$91</tem:perfilAplicacionTemporal>
+                            <!--Only for RHDS-->
+                            <tem:role>$78</tem:role>
+                            <tem:rol>$79</tem:rol>
+                            <tem:branch>$80</tem:branch>
+                            <tem:termNo>$90</tem:termNo>
+                        </tem:especificos>
+                    </tem:crearUsuario>
+                </format>
+                <args>
+                    <!-- C O M M O N S -->
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/guid/text()" />
+                    <arg evaluator="xml" expression="$ctx:taskProvisioningCreate//uuid/text()" />
+                    <arg evaluator="xml" expression="$ctx:application//applicationList/application/applicationGroup/code/text()" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/mail/text()" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/username/text()" />
+                    <arg evaluator="xml" expression="$ctx:restUserStoreScim//tellerNumber/text()" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/username/text()" />
+                    <arg evaluator="xml" expression="$ctx:idetificationType" />
+                    <arg evaluator="xml" value="0010" />
+                    <arg evaluator="xml" value="AUTO - PROVISIONADO DESDE GI" />
+                    <arg evaluator="xml" expression="fn:substring($ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/positionName/text(),1,13)" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/costCenterCode/text()" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/identification/text()" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/mobile/text()" />
+                    <arg evaluator="xml" expression="get-property('SERVER_IP')" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/employeeFirstname/text()" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/employeeLastname/text()" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/companyCode/text()" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/employeeEndDate/text()" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/employeeStartDate/text()" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/companyName/text()" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/divisionName/text()" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/areaName/text()" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/departmentName/text()" />
+                    <arg evaluator="xml" expression="fn:concat($ctx:transactionalProfile//code/text(),' : ',$ctx:transactionalProfile//name/text())" />
+                    <arg evaluator="xml" expression="fn:concat($ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/costCenterCode/text(),' ',$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/costCenterName/text())" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/employeeStatus/text()" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/password/text()" />
+                    <arg evaluator="xml" expression="$ctx:X-Forwarded-For" />
+                    <arg evaluator="xml" expression="$ctx:UserName" />
+                    <arg evaluator="xml" expression="$ctx:costCenter//company/domainName" />
+                    <!-- 31 -->
+                    <!-- A D -->
+                    <arg evaluator="xml" expression="$ctx:templateProfileAd//activateMail" />
+                    <arg evaluator="xml" expression="$ctx:templateProfileAd//mailboxType" />
+                    <arg evaluator="xml" value="1" />
+                    <arg evaluator="xml" expression="$ctx:postionName" />
+                    <arg evaluator="xml" expression="$ctx:avaya" />
+                    <arg evaluator="xml" value="SMTP:newb@contoso.com" />
+                    <arg evaluator="xml" value="web" />
+                    <arg evaluator="xml" value="0x0010" />
+                    <arg evaluator="xml" expression="$ctx:passwordNotExpire" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/divisionName/text()" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/areaName/text()" />
+                    <arg evaluator="xml" expression="$ctx:costCenter//city" />
+                    <arg evaluator="xml" expression="$ctx:templateProfileAd//accountContainer" />
+                    <arg evaluator="xml" expression="$ctx:groupAd" />
+                    <arg evaluator="xml" expression="$ctx:templateProfileAd//connectFollowingDrive" />
+                    <arg evaluator="xml" expression="fn:concat($ctx:templateProfileAd//terminalServicesHomeDirectory,$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/username/text())" />
+                    <arg evaluator="xml" expression="$ctx:allowLogonToTerminalServer" />
+                    <arg evaluator="xml" expression="$ctx:shouldChangePasswordFirstTime" />
+                    <arg evaluator="xml" expression="$ctx:shouldNotChangePassword" />
+                    <arg evaluator="xml" expression="$ctx:sip" />
+                    <arg evaluator="xml" value="TRUE" />
+                    <arg evaluator="xml" value="TRUE" />
+                    <arg evaluator="xml" value="TRUE" />
+                    <!-- 55 -->
+                    <!-- B A N C S -->
+                    <arg evaluator="xml" expression="$ctx:templateProfileSimple//templateProfileSimple[applicationCode='BANCS' and fieldCode='grupoTransaccion']/fieldValue/text()" />
+                    <arg evaluator="xml" expression="$ctx:templateProfileSimple//templateProfileSimple[applicationCode='BANCS' and fieldCode='nivelCapacidad']/fieldValue/text()" />
+                    <arg evaluator="xml" expression="$ctx:templateProfileSimple//templateProfileSimple[applicationCode='BANCS' and fieldCode='nivelCorreo']/fieldValue/text()" />
+                    <arg evaluator="xml" expression="$ctx:templateProfileSimple//templateProfileSimple[applicationCode='BANCS' and fieldCode='userType']/fieldValue/text()" />
+                    <arg evaluator="xml" expression="$ctx:templateProfileSimple//templateProfileSimple[applicationCode='BANCS' and fieldCode='chngBranchallow']/fieldValue/text()" />
+                    <arg evaluator="xml" expression="$ctx:templateProfileSimple//templateProfileSimple[applicationCode='BANCS' and fieldCode='brchSup']/fieldValue/text()" />
+                    <arg evaluator="xml" expression="$ctx:templateProfileSimple//templateProfileSimple[applicationCode='BANCS' and fieldCode='atmflag']/fieldValue/text()" />
+                    <arg evaluator="xml" expression="$ctx:templateProfileSimple//templateProfileSimple[applicationCode='BANCS' and fieldCode='accignmod']/fieldValue/text()" />
+                    <arg evaluator="xml" expression="$ctx:templateProfileSimple//templateProfileSimple[applicationCode='BANCS' and fieldCode='casualApprovallim']/fieldValue/text()" />
+                    <arg evaluator="xml" expression="$ctx:templateProfileSimple//templateProfileSimple[applicationCode='BANCS' and fieldCode='nivelSeguridad']/fieldValue/text()" />
+                    <arg evaluator="xml" expression="$ctx:templateProfileSimple//templateProfileSimple[applicationCode='BANCS' and fieldCode='estadoUsuario']/fieldValue/text()" />
+                    <!-- PPRD-->
+                    <arg evaluator="xml" expression="$ctx:templateProfileSimple//templateProfileSimple[applicationCode='PPRD' and fieldCode='perfilUsuario']/fieldValue/text()" />
+                    <arg evaluator="xml" value="SGI" />
+                    <arg evaluator="xml" value="" />
+                    <!-- LOGICIEL-->
+                    <arg evaluator="xml" expression="$ctx:logicielInterno" />
+                    <arg evaluator="xml" expression="$ctx:templateProfileSimple//templateProfileSimple[applicationCode='LOGICIEL' and fieldCode='enviarMail']/fieldValue/text()" />
+                    <arg evaluator="xml" expression="$ctx:templateProfileSimple//templateProfileSimple[applicationCode='LOGICIEL' and fieldCode='cambioPwdInicial']/fieldValue/text()" />
+                    <arg evaluator="xml" expression="$ctx:logicielCodigoTipoUsuario" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/positionName/text()" />
+                    <arg evaluator="xml" expression="$ctx:templateProfileSimple//templateProfileSimple[applicationCode='LOGICIEL' and fieldCode='codigoHorario']/fieldValue/text()" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/costCenterCode/text()" />
+                    <arg evaluator="xml" expression="$ctx:templateProfileSimple//templateProfileSimple[applicationCode='LOGICIEL' and fieldCode='validarAtributosPerfil']/fieldValue/text()" />
+                    <arg evaluator="xml" expression="$ctx:perfilAplicacionDefault" />
+                    <!-- RHDS-->
+                    <arg evaluator="xml" expression="$ctx:templateProfileSimple//templateProfileSimple[applicationCode='RHDS' and fieldCode='perfil_usuario']/fieldValue/text()" />
+                    <arg evaluator="xml" expression="$ctx:templateProfileSimple//templateProfileSimple[applicationCode='RHDS' and fieldCode='roles']/fieldValue/text()" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/costCenterCode/text()" />
+                    <!-- AD -->
+                    <arg evaluator="xml" expression="$ctx:description" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/costCenterCode/text()" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/companyCode/text()" />
+                    <arg evaluator="xml" value="TRUE" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/username/text()" />
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/mobile/text()" />
+                    <arg evaluator="xml" value="http://" />
+                    <arg evaluator="xml" expression="$ctx:costCenter//company/logon" />
+                    <!-- COMMON -->
+                    <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/positionName/text()" />
+                    <arg evaluator="xml" expression="get-property('RHDS_TERM_NO')" />
+                    <!-- L O G I C I E L -->
+                    <arg evaluator="xml" expression="$ctx:perfilAplicacionTemporal" />
+                    <arg evaluator="xml" expression="$ctx:templateProfileSimple//templateProfileSimple[applicationCode='LOGICIEL' and fieldCode='codigoAtributo']/fieldValue/text()" />
+                    <arg evaluator="xml" expression="$ctx:logicielLoginSupervisor" />
+                </args>
+            </payloadFactory>
+            <property name="target.endpoint" value="ProvisioningEP" />
+            <header name="Action" value="http://tempuri.org/crearUsuario" />
+            <property name="SOAPAction" scope="transport" value="http://tempuri.org/crearUsuario" />
+            <store messageStore="ProvisioningStore" />
+            <!-- actualizar xml -->
+            <property name="input" expression="$body/*[1]" scope="default" />
+            <property name="uuid" expression="$ctx:taskProvisioningCreate//uuid/text()" />
+            <call-template target="UpdateDataInputTemplate">
+                <with-param name="type" value="Q" />
+                <with-param name="input" value="{get-property('input')}" />
+                <with-param name="uuid" value="{get-property('uuid')}" />
+            </call-template>
+        </then>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningCreateUserSeq" value="Fin.." />
+        <property name="X-Forwarded-For" expression="$ctx:X-Forwarded-For" />
+        <property name="UserName" expression="$ctx:UserName" />
+    </log>
+</sequence>

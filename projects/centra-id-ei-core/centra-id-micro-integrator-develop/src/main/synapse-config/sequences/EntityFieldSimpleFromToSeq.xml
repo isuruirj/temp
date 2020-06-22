@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="FieldSimpleFromToSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log category="DEBUG" level="custom">
+        <property name="FieldSimpleFromToSeq" value="Inicio.."/>
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2"/>
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml"/>
+    <property name="Accept" scope="transport" type="STRING" value="application/xml"/>
+    <property action="remove" name="Content-Type" scope="transport"/>
+    <property expression="$ctx:query.param.orderby" name="uri.var.orderby" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.code" name="code" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.name" name="name" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.predetermined" name="predetermined" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.type" name="type" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.length" name="length" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.required" name="required" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.applicationGroupId" name="applicationGroupId" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING"/>
+    <script language="nashornJs"><![CDATA[@add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE fieldSimple.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","fieldSimple","id");
+        where += addWhere("code","String","fieldSimple","code");
+        where += addWhere("name","String","fieldSimple","name");
+        where += addWhere("predetermined","String","fieldSimple","predetermined");
+        where += addWhere("type","String","fieldSimple","type");
+        where += addWhere("length","Integer","fieldSimple","length");
+        where += addWhere("required","Integer","fieldSimple","required");
+        where += addWhere("applicationGroupId","Integer","fieldSimple","application_group_id");
+        where += addWhere("valid","Integer","fieldSimple","valid");
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+
+        if(!mc.getProperty("uri.var.orderby")){
+            mc.setProperty("uri.var.orderby","fieldSimple.id");
+        } else {
+            mc.setProperty("uri.var.orderby","fieldSimple."+mc.getProperty("uri.var.orderby"));
+        }
+
+        // FROM TO
+        var fromto = "OFFSET "+mc.getProperty("uri.var.from")+" ROWS FETCH NEXT "+mc.getProperty("uri.var.to")+" ROWS ONLY";
+        mc.setProperty("uri.var.fromto",fromto);
+        log.debug(where);]]></script>
+    <call>
+        <endpoint name="FieldSimpleDSS_Endpoint" template="HTTPEndpointGetTemplate" uri="{uri.var.dataServiceHost}/application.field-simple.ds.HTTPEndpoint/GetFromToFieldSimple?whereclause={uri.var.whereclause}&amp;orderby={uri.var.orderby}&amp;fromto={uri.var.fromto}&amp;innerjoinclause={uri.var.innerjoinclause}"/>
+    </call>
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING"/>
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq"/>
+        </then>
+        <else>
+            <xslt key="gov:/centra-id/xslt/dssFilter.xsl"/>
+            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200"/>
+        </else>
+    </filter>
+    <log category="DEBUG" level="custom">
+        <property name="FieldSimpleFromToSeq" value="Fin.."/>
+    </log>
+</sequence>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="CrearClaimIndividualSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="*****CrearClaimIndividualSeq" value="Inicio..." />
+    </log>
+    <property expression="//claims/claim" name="claimRequest" scope="default" type="STRING" />
+    <property expression="//claims/order" name="claimOrder" scope="default" type="STRING" />
+    <property expression="//claims/display" name="claimDisplay" scope="default" type="STRING" />
+    <property expression="//claims/display" name="claimDisplay" scope="default" type="STRING" />
+    <property expression="//claims/AD" name="AD" scope="default" type="STRING" />
+    <property expression="//claims/PPRD" name="PPRD" scope="default" type="STRING" />
+    <property expression="//claims/BANCS" name="BANCS" scope="default" type="STRING" />
+    <property expression="//claims/LOGICIEL" name="LOGICIEL" scope="default" type="STRING" />
+    <!--
+
+
+    <header name="Action" scope="default" value="urn:getLocalClaims" />
+    <payloadFactory media-type="xml">
+        <format>
+            <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd">
+                <soapenv:Header />
+                <soapenv:Body>
+                    <xsd:getLocalClaims />
+                </soapenv:Body>
+            </soapenv:Envelope>
+        </format>
+        <args />
+    </payloadFactory>
+    <property name="service_ep" expression="fn:concat(get-property('uri.var.identityServerHost'),'/services' ,'/ClaimMetadataManagementService')" />
+    <header name="To" expression="get-property('service_ep')" />
+    <property name="Accept" scope="transport" value="application/xml" />
+    <call>
+        <endpoint>
+            <default />
+        </endpoint>
+    </call>
+    <property expression="fn:concat('//ax2342:attributeName[text()=','&quot;',get-property('claimRequest'),'&quot;',']')" name="claimPath" scope="default" type="STRING" />
+    <property expression="evaluate($ctx:claimPath)" name="claimName" scope="default" type="STRING" xmlns:ax2342="http://dto.mgt.metadata.claim.identity.carbon.wso2.org/xsd" />
+    <filter regex="true" source="boolean(get-property('claimName'))">
+        <then>
+            <payloadFactory media-type="xml" xmlns:xsd="http://org.apache.axis2/xsd">
+                <format>
+                    <xsd:removeExternalClaim>
+                        <xsd:externalClaimDialectURI>urn:scim:schemas:extension:bp:1.0</xsd:externalClaimDialectURI>
+                        <xsd:externalClaimURI>$1</xsd:externalClaimURI>
+                    </xsd:removeExternalClaim>
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="fn:concat('urn:scim:schemas:extension:bp:1.0:',get-property('claimRequest'))" />
+                </args>
+            </payloadFactory>
+            <property expression="synapse:get-property('IS_SERVER_USER')" name="IS_SERVER_USER_DATO" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns2="http://org.apache.synapse/xsd" xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope" />
+            <property expression="synapse:get-property('IS_SERVER_PASSWORD')" name="IS_SERVER_PASSWORD_DATO" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns2="http://org.apache.synapse/xsd" xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope" />
+            <property expression="fn:concat('Basic ', base64Encode(fn:concat($ctx:IS_SERVER_USER_DATO,':',$ctx:IS_SERVER_PASSWORD_DATO)))" name="Authorization" scope="transport" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" />
+            <property name="service_ep" expression="fn:concat(get-property('uri.var.identityServerHost'),'/services' ,'/ClaimMetadataManagementService')" />
+            <header name="To" expression="get-property('service_ep')" />
+            <property name="Accept" scope="transport" value="application/xml" />
+            <call>
+                <endpoint>
+                    <default />
+                </endpoint>
+            </call>
+            <payloadFactory media-type="xml" xmlns:xsd="http://org.apache.axis2/xsd">
+                <format>
+                    <xsd:removeLocalClaim>
+                        <xsd:localClaimURI>$1</xsd:localClaimURI>
+                    </xsd:removeLocalClaim>
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="fn:concat('http://wso2.org/claims/',get-property('claimRequest'))" />
+                </args>
+            </payloadFactory>
+            <property expression="synapse:get-property('IS_SERVER_USER')" name="IS_SERVER_USER_DATO" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns2="http://org.apache.synapse/xsd" xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope" />
+            <property expression="synapse:get-property('IS_SERVER_PASSWORD')" name="IS_SERVER_PASSWORD_DATO" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns2="http://org.apache.synapse/xsd" xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope" />
+            <property expression="fn:concat('Basic ', base64Encode(fn:concat($ctx:IS_SERVER_USER_DATO,':',$ctx:IS_SERVER_PASSWORD_DATO)))" name="Authorization" scope="transport" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" />
+            <property name="service_ep" expression="fn:concat(get-property('uri.var.identityServerHost'),'/services' ,'/ClaimMetadataManagementService')" />
+            <header name="To" expression="get-property('service_ep')" />
+            <property name="Accept" scope="transport" value="application/xml" />
+            <call>
+                <endpoint>
+                    <default />
+                </endpoint>
+            </call>
+        </then>
+        <else>
+        </else>
+    </filter>
+
+    -->
+
+
+
+    <header name="Action" scope="default" value="urn:addLocalClaim" />
+    <xslt key="gov:/centra-id/xslt/addLocalClaim.xsl">
+        <property name="attributeNamePRIMARY" expression="get-property('claimRequest')" />
+        <property name="attributeNameAD" expression="get-property('AD')" />
+        <property name="attributeNameBANCS" expression="get-property('BANCS')" />
+        <property name="attributeNamePPRD" expression="get-property('PPRD')" />
+        <property name="attributeNameLOGICIEL" expression="get-property('LOGICIEL')" />
+        <property name="claimDisplay" expression="get-property('claimDisplay')" />
+        <property name="claimOrder" expression="get-property('claimOrder')" />
+        <property name="localClaimURI" expression="fn:concat('http://wso2.org/claims/',get-property('claimRequest'))" />
+    </xslt>
+    <property expression="synapse:get-property('IS_SERVER_USER')" name="IS_SERVER_USER_DATO" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns2="http://org.apache.synapse/xsd" xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope" />
+    <property expression="synapse:get-property('IS_SERVER_PASSWORD')" name="IS_SERVER_PASSWORD_DATO" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns2="http://org.apache.synapse/xsd" xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope" />
+    <property expression="fn:concat('Basic ', base64Encode(fn:concat($ctx:IS_SERVER_USER_DATO,':',$ctx:IS_SERVER_PASSWORD_DATO)))" name="Authorization" scope="transport" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" />
+    <property name="service_ep" expression="fn:concat(get-property('uri.var.identityServerHost'),'/services' ,'/ClaimMetadataManagementService')" />
+    <header name="To" expression="get-property('service_ep')" />
+    <property name="Accept" scope="transport" value="application/xml" />
+    <call>
+        <endpoint>
+            <default />
+        </endpoint>
+    </call>
+    <header name="Action" scope="default" value="urn:addExternalClaim" />
+    <payloadFactory media-type="xml">
+        <format>
+            <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd" xmlns:xsd1="http://dto.mgt.metadata.claim.identity.carbon.wso2.org/xsd">
+                <soapenv:Header />
+                <soapenv:Body>
+                    <xsd:addExternalClaim>
+                        <xsd:externalClaim>
+                            <xsd1:externalClaimDialectURI>urn:scim:schemas:extension:bp:1.0</xsd1:externalClaimDialectURI>
+                            <xsd1:externalClaimURI>$1</xsd1:externalClaimURI>
+                            <xsd1:mappedLocalClaimURI>$2</xsd1:mappedLocalClaimURI>
+                        </xsd:externalClaim>
+                    </xsd:addExternalClaim>
+                </soapenv:Body>
+            </soapenv:Envelope>
+        </format>
+        <args>
+            <arg evaluator="xml" expression="fn:concat('urn:scim:schemas:extension:bp:1.0:',get-property('claimRequest'))" />
+            <arg evaluator="xml" expression="fn:concat('http://wso2.org/claims/',get-property('claimRequest'))" />
+        </args>
+    </payloadFactory>
+    <property expression="synapse:get-property('IS_SERVER_USER')" name="IS_SERVER_USER_DATO" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns2="http://org.apache.synapse/xsd" xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope" />
+    <property expression="synapse:get-property('IS_SERVER_PASSWORD')" name="IS_SERVER_PASSWORD_DATO" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns2="http://org.apache.synapse/xsd" xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope" />
+    <property expression="fn:concat('Basic ', base64Encode(fn:concat($ctx:IS_SERVER_USER_DATO,':',$ctx:IS_SERVER_PASSWORD_DATO)))" name="Authorization" scope="transport" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" />
+    <property name="service_ep" expression="fn:concat(get-property('uri.var.identityServerHost'),'/services' ,'/ClaimMetadataManagementService')" />
+    <header name="To" expression="get-property('service_ep')" />
+    <property name="Accept" scope="transport" value="application/xml" />
+    <call>
+        <endpoint>
+            <default />
+        </endpoint>
+    </call>
+    <log level="custom" category="DEBUG">
+        <property name="*****CrearClaimIndividualSeq" value="Fin..." />
+    </log>
+</sequence>

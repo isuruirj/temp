@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ProfilesSynchronizationExecutionCreateSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="ProfilesSynchronizationExecutionCreateSeq" value="Inicio.."/>
+    </log>
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml"/>
+    <property name="Accept" scope="transport" type="STRING" value="application/xml"/>
+    <xslt key="gov:/centra-id/xslt/jsonFilter.xsl">
+        <property name="operationName" value="insert"/>
+        <property name="entityName" value="profilesSynchronizationExecution"/>
+        <property name="entityNamePlural" value="profilesSynchronizationsExecutions"/>
+    </xslt>
+    <call>
+        <endpoint name="ProfilesSynchronizationExecutionDSS_Endpoint" template="HTTPEndpointPostTemplate" uri="{uri.var.dataServiceHost}/application.profiles-synchronization-execution.ds.HTTPEndpoint/CreateProfilesSynchronizationExecution"/>
+    </call>
+    <property expression="//ci:Entry/ci:id" name="result" scope="default" type="STRING" xmlns:axis2ns65="http://ws.wso2.org/dataservice" xmlns:ci="centra-id.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <filter regex="true" source="boolean(get-property('result'))" xmlns:axis2ns65="http://ws.wso2.org/dataservice" xmlns:ci="centra-id.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <then>
+            <payloadFactory media-type="json">
+                <format>{ "profilesSynchronizationExecution": { "id": $1 } }</format>
+                <args>
+                    <arg evaluator="xml" expression="//ci:Entry/ci:id"/>
+                </args>
+            </payloadFactory>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200"/>
+        </then>
+        <else>
+            <sequence key="FaultSeq"/>
+        </else>
+    </filter>
+    <log category="DEBUG" level="custom">
+        <property name="ProfilesSynchronizationExecutionCreateSeq" value="Fin.."/>
+    </log>
+</sequence>

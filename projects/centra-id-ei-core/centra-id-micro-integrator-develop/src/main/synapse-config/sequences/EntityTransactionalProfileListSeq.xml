@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="TransactionalProfileListSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="TransactionalProfileListSeq" value="Inicio.." />
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml" />
+    <property name="Accept" scope="transport" type="STRING" value="application/xml" />
+    <property action="remove" name="Content-Type" scope="transport" />
+    <property expression="$ctx:query.param.orderby" name="uri.var.orderby" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.code" name="code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.name" name="name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.comments" name="comments" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.dateCreated" name="dateCreated" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.dateDeleted" name="dateDeleted" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userCreated" name="userCreated" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userDeleted" name="userDeleted" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.configured" name="configured" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.filter" name="filter" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogRiskLevel.id" name="catalogRiskLevel.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogRiskLevel.code" name="catalogRiskLevel.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogRiskLevel.name" name="catalogRiskLevel.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogRiskLevel.predetermined" name="catalogRiskLevel.predetermined" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogRiskLevel.ordinal" name="catalogRiskLevel.ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogRiskLevel.valueText" name="catalogRiskLevel.valueText" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogRiskLevel.valueNumber" name="catalogRiskLevel.valueNumber" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogRiskLevel.valueDate" name="catalogRiskLevel.valueDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogRiskLevel.valueBoolean" name="catalogRiskLevel.valueBoolean" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogRiskLevel.catalogType.id" name="catalogRiskLevel.catalogType.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogRiskLevel.catalogType.code" name="catalogRiskLevel.catalogType.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogRiskLevel.catalogType.name" name="catalogRiskLevel.catalogType.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogRiskLevel.catalogType.sortType" name="catalogRiskLevel.catalogType.sortType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogRiskLevel.catalogType.editable" name="catalogRiskLevel.catalogType.editable" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogRiskLevel.catalogType.valid" name="catalogRiskLevel.catalogType.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogRiskLevel.catalogType.description" name="catalogRiskLevel.catalogType.description" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogRiskLevel.filter" name="catalogRiskLevel.filter" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogRiskLevel.valid" name="catalogRiskLevel.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.id" name="application.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.code" name="application.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.name" name="application.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.automaticProvision" name="application.automaticProvision" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.status" name="application.status" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.valid" name="application.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.applicationGroup.id" name="application.applicationGroup.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.applicationGroup.code" name="application.applicationGroup.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.applicationGroup.name" name="application.applicationGroup.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.applicationGroup.endpointType" name="application.applicationGroup.endpointType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.applicationGroup.ordinal" name="application.applicationGroup.ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.applicationGroup.valid" name="application.applicationGroup.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.applicationGroup.numberRetries" name="application.applicationGroup.numberRetries" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.applicationGroup.timeBetweenRetries" name="application.applicationGroup.timeBetweenRetries" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.applicationGroup.errorsNotRequireTicket" name="application.applicationGroup.errorsNotRequireTicket" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.id" name="application.parent.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.code" name="application.parent.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.name" name="application.parent.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.automaticProvision" name="application.parent.automaticProvision" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.status" name="application.parent.status" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.valid" name="application.parent.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.applicationGroup.id" name="application.parent.applicationGroup.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.applicationGroup.code" name="application.parent.applicationGroup.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.applicationGroup.name" name="application.parent.applicationGroup.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.applicationGroup.endpointType" name="application.parent.applicationGroup.endpointType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.applicationGroup.ordinal" name="application.parent.applicationGroup.ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.applicationGroup.valid" name="application.parent.applicationGroup.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.applicationGroup.numberRetries" name="application.parent.applicationGroup.numberRetries" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.applicationGroup.timeBetweenRetries" name="application.parent.applicationGroup.timeBetweenRetries" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.applicationGroup.errorsNotRequireTicket" name="application.parent.applicationGroup.errorsNotRequireTicket" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.parent.id" name="application.parent.parent.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.parent.code" name="application.parent.parent.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.parent.name" name="application.parent.parent.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.parent.automaticProvision" name="application.parent.parent.automaticProvision" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.parent.status" name="application.parent.parent.status" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.parent.valid" name="application.parent.parent.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.parent.applicationGroup.id" name="application.parent.parent.applicationGroup.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.parent.applicationGroup.code" name="application.parent.parent.applicationGroup.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.parent.applicationGroup.name" name="application.parent.parent.applicationGroup.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.parent.applicationGroup.endpointType" name="application.parent.parent.applicationGroup.endpointType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.parent.applicationGroup.ordinal" name="application.parent.parent.applicationGroup.ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.parent.applicationGroup.valid" name="application.parent.parent.applicationGroup.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.parent.applicationGroup.numberRetries" name="application.parent.parent.applicationGroup.numberRetries" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.parent.applicationGroup.timeBetweenRetries" name="application.parent.parent.applicationGroup.timeBetweenRetries" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.parent.applicationGroup.errorsNotRequireTicket" name="application.parent.parent.applicationGroup.errorsNotRequireTicket" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.parent.parent.id" name="application.parent.parent.parent.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.parent.parent.code" name="application.parent.parent.parent.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.parent.parent.name" name="application.parent.parent.parent.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.parent.parent.automaticProvision" name="application.parent.parent.parent.automaticProvision" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.parent.parent.status" name="application.parent.parent.parent.status" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.application.parent.parent.parent.valid" name="application.parent.parent.parent.valid" scope="default" type="STRING" />
+    <script language="nashornJs"><![CDATA[
+        @add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE transactionalProfile.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","transactionalProfile","id");
+        where += addWhere("code","String","transactionalProfile","code");
+        where += addWhere("name","String","transactionalProfile","name");
+        where += addWhere("comments","String","transactionalProfile","comments");
+        where += addWhere("dateCreated","DateTime","transactionalProfile","date_created");
+        where += addWhere("dateDeleted","DateTime","transactionalProfile","date_deleted");
+        where += addWhere("userCreated","String","transactionalProfile","user_created");
+        where += addWhere("userDeleted","String","transactionalProfile","user_deleted");
+        where += addWhere("valid","Integer","transactionalProfile","valid");
+        where += addWhere("configured","Integer","transactionalProfile","configured");
+        where += addWhere("filter","String","transactionalProfile","filter");
+        where += addWhere("catalogRiskLevel.id","Integer","catalogRiskLevel","id");
+        where += addWhere("catalogRiskLevel.code","String","catalogRiskLevel","code");
+        where += addWhere("catalogRiskLevel.name","String","catalogRiskLevel","name");
+        where += addWhere("catalogRiskLevel.predetermined","Integer","catalogRiskLevel","predetermined");
+        where += addWhere("catalogRiskLevel.ordinal","Integer","catalogRiskLevel","ordinal");
+        where += addWhere("catalogRiskLevel.valueText","String","catalogRiskLevel","value_text");
+        where += addWhere("catalogRiskLevel.valueNumber","Numeric","catalogRiskLevel","value_number");
+        where += addWhere("catalogRiskLevel.valueDate","Date","catalogRiskLevel","value_date");
+        where += addWhere("catalogRiskLevel.valueBoolean","Integer","catalogRiskLevel","value_boolean");
+        where += addWhere("catalogRiskLevel.catalogType.id","Integer","catalogRiskLevel_catalogType","id");
+        where += addWhere("catalogRiskLevel.catalogType.code","String","catalogRiskLevel_catalogType","code");
+        where += addWhere("catalogRiskLevel.catalogType.name","String","catalogRiskLevel_catalogType","name");
+        where += addWhere("catalogRiskLevel.catalogType.sortType","String","catalogRiskLevel_catalogType","sort_type");
+        where += addWhere("catalogRiskLevel.catalogType.editable","Integer","catalogRiskLevel_catalogType","editable");
+        where += addWhere("catalogRiskLevel.catalogType.valid","Integer","catalogRiskLevel_catalogType","valid");
+        where += addWhere("catalogRiskLevel.catalogType.description","String","catalogRiskLevel_catalogType","description");
+        where += addWhere("catalogRiskLevel.filter","String","catalogRiskLevel","filter");
+        where += addWhere("catalogRiskLevel.valid","Integer","catalogRiskLevel","valid");
+        where += addWhere("application.id","Integer","application","id");
+        where += addWhere("application.code","String","application","code");
+        where += addWhere("application.name","String","application","name");
+        where += addWhere("application.automaticProvision","Integer","application","automatic_provision");
+        where += addWhere("application.status","String","application","status");
+        where += addWhere("application.valid","Integer","application","valid");
+        where += addWhere("application.applicationGroup.id","Integer","application_applicationGroup","id");
+        where += addWhere("application.applicationGroup.code","String","application_applicationGroup","code");
+        where += addWhere("application.applicationGroup.name","String","application_applicationGroup","name");
+        where += addWhere("application.applicationGroup.endpointType","String","application_applicationGroup","endpoint_type");
+        where += addWhere("application.applicationGroup.ordinal","Integer","application_applicationGroup","ordinal");
+        where += addWhere("application.applicationGroup.valid","Integer","application_applicationGroup","valid");
+        where += addWhere("application.applicationGroup.numberRetries","Integer","application_applicationGroup","number_retries");
+        where += addWhere("application.applicationGroup.timeBetweenRetries","Integer","application_applicationGroup","time_between_retries");
+        where += addWhere("application.applicationGroup.errorsNotRequireTicket","String","application_applicationGroup","errors_not_require_ticket");
+        where += addWhere("application.parent.id","Integer","application_parent","id");
+        where += addWhere("application.parent.code","String","application_parent","code");
+        where += addWhere("application.parent.name","String","application_parent","name");
+        where += addWhere("application.parent.automaticProvision","Integer","application_parent","automatic_provision");
+        where += addWhere("application.parent.status","String","application_parent","status");
+        where += addWhere("application.parent.valid","Integer","application_parent","valid");
+        where += addWhere("application.parent.applicationGroup.id","Integer","application_parent_applicationGroup","id");
+        where += addWhere("application.parent.applicationGroup.code","String","application_parent_applicationGroup","code");
+        where += addWhere("application.parent.applicationGroup.name","String","application_parent_applicationGroup","name");
+        where += addWhere("application.parent.applicationGroup.endpointType","String","application_parent_applicationGroup","endpoint_type");
+        where += addWhere("application.parent.applicationGroup.ordinal","Integer","application_parent_applicationGroup","ordinal");
+        where += addWhere("application.parent.applicationGroup.valid","Integer","application_parent_applicationGroup","valid");
+        where += addWhere("application.parent.applicationGroup.numberRetries","Integer","application_parent_applicationGroup","number_retries");
+        where += addWhere("application.parent.applicationGroup.timeBetweenRetries","Integer","application_parent_applicationGroup","time_between_retries");
+        where += addWhere("application.parent.applicationGroup.errorsNotRequireTicket","String","application_parent_applicationGroup","errors_not_require_ticket");
+        where += addWhere("application.parent.parent.id","Integer","application_parent_parent","id");
+        where += addWhere("application.parent.parent.code","String","application_parent_parent","code");
+        where += addWhere("application.parent.parent.name","String","application_parent_parent","name");
+        where += addWhere("application.parent.parent.automaticProvision","Integer","application_parent_parent","automatic_provision");
+        where += addWhere("application.parent.parent.status","String","application_parent_parent","status");
+        where += addWhere("application.parent.parent.valid","Integer","application_parent_parent","valid");
+        where += addWhere("application.parent.parent.applicationGroup.id","Integer","application_parent_parent_applicationGroup","id");
+        where += addWhere("application.parent.parent.applicationGroup.code","String","application_parent_parent_applicationGroup","code");
+        where += addWhere("application.parent.parent.applicationGroup.name","String","application_parent_parent_applicationGroup","name");
+        where += addWhere("application.parent.parent.applicationGroup.endpointType","String","application_parent_parent_applicationGroup","endpoint_type");
+        where += addWhere("application.parent.parent.applicationGroup.ordinal","Integer","application_parent_parent_applicationGroup","ordinal");
+        where += addWhere("application.parent.parent.applicationGroup.valid","Integer","application_parent_parent_applicationGroup","valid");
+        where += addWhere("application.parent.parent.applicationGroup.numberRetries","Integer","application_parent_parent_applicationGroup","number_retries");
+        where += addWhere("application.parent.parent.applicationGroup.timeBetweenRetries","Integer","application_parent_parent_applicationGroup","time_between_retries");
+        where += addWhere("application.parent.parent.applicationGroup.errorsNotRequireTicket","String","application_parent_parent_applicationGroup","errors_not_require_ticket");
+        where += addWhere("application.parent.parent.parent.id","Integer","application_parent_parent_parent","id");
+        where += addWhere("application.parent.parent.parent.code","String","application_parent_parent_parent","code");
+        where += addWhere("application.parent.parent.parent.name","String","application_parent_parent_parent","name");
+        where += addWhere("application.parent.parent.parent.automaticProvision","Integer","application_parent_parent_parent","automatic_provision");
+        where += addWhere("application.parent.parent.parent.status","String","application_parent_parent_parent","status");
+        where += addWhere("application.parent.parent.parent.valid","Integer","application_parent_parent_parent","valid");
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS catalogRiskLevel ON TransactionalProfile.catalog_risk_level_id = catalogRiskLevel.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS_TYPES catalogRiskLevel_catalogType ON catalogRiskLevel.catalog_type_id = catalogRiskLevel_catalogType.id";
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS application ON TransactionalProfile.application_id = application.id";
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS_GROUP application_applicationGroup ON application.application_group_id = application_applicationGroup.id";
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS application_parent ON application.parent_id = application_parent.id";
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS_GROUP application_parent_applicationGroup ON application_parent.application_group_id = application_parent_applicationGroup.id";
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS application_parent_parent ON application_parent.parent_id = application_parent_parent.id";
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS_GROUP application_parent_parent_applicationGroup ON application_parent_parent.application_group_id = application_parent_parent_applicationGroup.id";
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS application_parent_parent_parent ON application_parent_parent.parent_id = application_parent_parent_parent.id";
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS_GROUP application_parent_parent_parent_applicationGroup ON application_parent_parent_parent.application_group_id = application_parent_parent_parent_applicationGroup.id";
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS application_parent_parent_parent_parent ON application_parent_parent_parent.parent_id = application_parent_parent_parent_parent.id";
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+        if(!mc.getProperty("uri.var.orderby")){
+            mc.setProperty("uri.var.orderby","transactionalProfile.id");
+        } else {
+            mc.setProperty("uri.var.orderby","transactionalProfile."+mc.getProperty("uri.var.orderby"));
+        }
+        log.debug(where);]]></script>
+    <call>
+        <endpoint name="TransactionalProfileDSS_Endpoint" template="HTTPEndpointGetTemplate"
+              uri="{uri.var.dataServiceHost}/application.transactional-profile.ds.HTTPEndpoint/GetAllTransactionalProfile?whereclause={uri.var.whereclause}&amp;orderby={uri.var.orderby}&amp;innerjoinclause={uri.var.innerjoinclause}" />
+
+    </call>
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING" />
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq" />
+        </then>
+        <else>
+            <xslt key="gov:/centra-id/xslt/dssFilter.xsl" />
+            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="TransactionalProfileSeq" value="Fin.." />
+    </log>
+    <property name="messageType" value="application/json" scope="axis2" type="STRING"/>
+    <property name="Access-Control-Allow-Methods" value="GET,PUT,POST,DELETE,PATCH,OPTIONS" scope="transport" type="STRING"/>
+    <property name="Access-Control-Allow-Headers" value="Authorization,Access-Control-Allow-Origin,Content-Type" scope="transport" type="STRING"/>
+</sequence>

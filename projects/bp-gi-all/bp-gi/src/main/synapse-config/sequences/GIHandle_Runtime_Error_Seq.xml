@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GIHandle_Runtime_Error_Seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log description="seq" level="custom">
+        <property name="seq" value="-------------------- GIHandle_Runtime_Error_Seq --------------------"/>
+        <property expression="get-property('seqName')" name="seqName"/>
+        <property expression="get-property('cgi-error-codigo')" name="cgi-error-codigo"/>
+        <property expression="get-property('cgi-error-mensaje')" name="cgi-error-mensaje"/>
+        <property expression="get-property('scimResponse')" name="scimResponse"/>
+        <property expression="get-property('ERROR_CODE')" name="ERROR_CODE"/>
+        <property expression="get-property('ERROR_MESSAGE')" name="ERROR_MESSAGE"/>
+    </log>
+    <filter regex="true" source="boolean(get-property('ERROR_CODE'))">
+        <then>
+            <switch source="get-property('seqName')">
+                <case regex=".*GIRequerimientos_Seq.*">
+                    <property description="uri.var.resourcepath" name="uri.var.resourcepath" scope="default" type="STRING" value="TaskProvisioningManual"/>
+                    <payloadFactory description="Requerimientos Manuales ERROR" media-type="json">
+                        <format>{
+					"TaskProvisioningManual": {
+					"uuid": "$1",
+					"ticketDate": "$2",
+					"ticketNumber": "$3",
+					"ticketContent": "$4",
+					"ticketError": "$5"
+					}
+					}</format>
+                        <args>
+                            <arg evaluator="xml" expression="get-property('uuid')"/>
+                            <arg evaluator="xml" expression="get-property(&quot;SYSTEM_DATE&quot;, &quot;yyyy-MM-dd'T'HH:mm:ss.SSSXXX&quot;)"/>
+                            <arg value="-1"/>
+                            <arg evaluator="xml" expression="get-property('ERROR_MESSAGE')"/>
+                            <arg evaluator="xml" expression="get-property('ERROR_MESSAGE')"/>
+                        </args>
+                    </payloadFactory>
+                    <log description="Tareas Payload" level="custom">
+                        <property expression="json-eval($.)" name="tareas_payload"/>
+                    </log>
+                    <sequence key="GITareas_Seq"/>
+                </case>
+                <case regex=".*GIHelpDesk_CreateTicket_Seq.*">
+                    <property description="uri.var.resourcepath" name="uri.var.resourcepath" scope="default" type="STRING" value="TaskProvisioningError"/>
+                    <payloadFactory description="Requerimientos Manuales ERROR" media-type="json">
+                        <format>{
+    "TaskProvisioningError": {
+        "uuid": "$1",
+        "ticketDate": "$2",
+        "ticketNumber": "$3",
+        "ticketContent": "$4",
+        "ticketError": "$5"
+        
+    }
+}</format>
+                        <args>
+                            <arg evaluator="xml" expression="get-property('uuid')"/>
+                            <arg evaluator="xml" expression="get-property(&quot;SYSTEM_DATE&quot;, &quot;yyyy-MM-dd'T'HH:mm:ss.SSSXXX&quot;)"/>
+                            <arg value="-1"/>
+                            <arg evaluator="xml" expression="base64Encode(get-property('scimResponse'))"/>
+                            <arg value="ERROR TICKET NO GENERADO"/>
+                        </args>
+                    </payloadFactory>
+                    <log description="Tareas Payload" level="custom">
+                        <property expression="json-eval($.)" name="tareas_payload"/>
+                    </log>
+                    <sequence key="GITareas_Seq"/>
+                </case>
+                <default/>
+            </switch>
+            <log description="Log Response" level="full"/>
+            <payloadFactory description=" ERROR" media-type="xml">
+                <format>
+                    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+                        <soapenv:Body>
+                            <FinalRespose xmlns="http://tempuri.org/">
+                                <Response>
+                                    <Cod>$1</Cod>
+                                    <DesError1>$2</DesError1>
+                                </Response>
+                            </FinalRespose>
+                        </soapenv:Body>
+                    </soapenv:Envelope>
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="get-property('ERROR_CODE')"/>
+                    <arg evaluator="xml" expression="get-property('ERROR_MESSAGE')"/>
+                </args>
+            </payloadFactory>
+            <respond/>
+        </then>
+        <else>
+            <log description="No Error" level="custom">
+                <property name="msg" value="No Runtime Error"/>
+            </log>
+        </else>
+    </filter>
+</sequence>

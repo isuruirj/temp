@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GlobalProfileListSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="GlobalProfileListSeq" value="Inicio.." />
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml" />
+    <property name="Accept" scope="transport" type="STRING" value="application/xml" />
+    <property action="remove" name="Content-Type" scope="transport" />
+    <property expression="$ctx:query.param.orderby" name="uri.var.orderby" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.code" name="code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.name" name="name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.isBirth" name="isBirth" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.employeeCodeOwner" name="employeeCodeOwner" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogPositionOwner.id" name="catalogPositionOwner.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogPositionOwner.code" name="catalogPositionOwner.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogPositionOwner.name" name="catalogPositionOwner.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogPositionOwner.predetermined" name="catalogPositionOwner.predetermined" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogPositionOwner.ordinal" name="catalogPositionOwner.ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogPositionOwner.valueText" name="catalogPositionOwner.valueText" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogPositionOwner.valueNumber" name="catalogPositionOwner.valueNumber" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogPositionOwner.valueDate" name="catalogPositionOwner.valueDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogPositionOwner.valueBoolean" name="catalogPositionOwner.valueBoolean" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogPositionOwner.catalogType.id" name="catalogPositionOwner.catalogType.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogPositionOwner.catalogType.code" name="catalogPositionOwner.catalogType.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogPositionOwner.catalogType.name" name="catalogPositionOwner.catalogType.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogPositionOwner.catalogType.sortType" name="catalogPositionOwner.catalogType.sortType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogPositionOwner.catalogType.editable" name="catalogPositionOwner.catalogType.editable" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogPositionOwner.catalogType.valid" name="catalogPositionOwner.catalogType.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogPositionOwner.catalogType.description" name="catalogPositionOwner.catalogType.description" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogPositionOwner.valid" name="catalogPositionOwner.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.associatedTicketNumber" name="associatedTicketNumber" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.status" name="status" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.createdDate" name="createdDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.approvalDate" name="approvalDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.employeeCodeApproval" name="employeeCodeApproval" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.observation" name="observation" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.scopeRulesWho" name="scopeRulesWho" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.scopeRulesThat" name="scopeRulesThat" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.filter" name="filter" scope="default" type="STRING" />
+    <script language="nashornJs"><![CDATA[
+        @add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE globalProfile.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","globalProfile","id");
+        where += addWhere("code","String","globalProfile","code");
+        where += addWhere("name","String","globalProfile","name");
+        where += addWhere("isBirth","Integer","globalProfile","is_birth");
+        where += addWhere("employeeCodeOwner","String","globalProfile","employee_code_owner");
+        where += addWhere("catalogPositionOwner.id","Integer","catalogPositionOwner","id");
+        where += addWhere("catalogPositionOwner.code","String","catalogPositionOwner","code");
+        where += addWhere("catalogPositionOwner.name","String","catalogPositionOwner","name");
+        where += addWhere("catalogPositionOwner.predetermined","Integer","catalogPositionOwner","predetermined");
+        where += addWhere("catalogPositionOwner.ordinal","Integer","catalogPositionOwner","ordinal");
+        where += addWhere("catalogPositionOwner.valueText","String","catalogPositionOwner","value_text");
+        where += addWhere("catalogPositionOwner.valueNumber","Numeric","catalogPositionOwner","value_number");
+        where += addWhere("catalogPositionOwner.valueDate","Date","catalogPositionOwner","value_date");
+        where += addWhere("catalogPositionOwner.valueBoolean","Integer","catalogPositionOwner","value_boolean");
+        where += addWhere("catalogPositionOwner.catalogType.id","Integer","catalogPositionOwner_catalogType","id");
+        where += addWhere("catalogPositionOwner.catalogType.code","String","catalogPositionOwner_catalogType","code");
+        where += addWhere("catalogPositionOwner.catalogType.name","String","catalogPositionOwner_catalogType","name");
+        where += addWhere("catalogPositionOwner.catalogType.sortType","String","catalogPositionOwner_catalogType","sort_type");
+        where += addWhere("catalogPositionOwner.catalogType.editable","Integer","catalogPositionOwner_catalogType","editable");
+        where += addWhere("catalogPositionOwner.catalogType.valid","Integer","catalogPositionOwner_catalogType","valid");
+        where += addWhere("catalogPositionOwner.catalogType.description","String","catalogPositionOwner_catalogType","description");
+        where += addWhere("catalogPositionOwner.valid","Integer","catalogPositionOwner","valid");
+        where += addWhere("valid","Integer","globalProfile","valid");
+        where += addWhere("associatedTicketNumber","String","globalProfile","associated_ticket_number");
+        where += addWhere("status","String","globalProfile","status");
+        where += addWhere("createdDate","DateTime","globalProfile","created_date");
+        where += addWhere("approvalDate","DateTime","globalProfile","approval_date");
+        where += addWhere("employeeCodeApproval","String","globalProfile","employee_code_approval");
+        where += addWhere("observation","String","globalProfile","observation");
+        where += addWhere("scopeRulesWho","String","globalProfile","scope_rules_who");
+        where += addWhere("scopeRulesThat","String","globalProfile","scope_rules_that");
+        where += addWhere("filter","String","globalProfile","filter");
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS catalogPositionOwner ON GlobalProfile.catalog_position_owner_id = catalogPositionOwner.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS_TYPES catalogPositionOwner_catalogType ON catalogPositionOwner.catalog_type_id = catalogPositionOwner_catalogType.id";
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+        if(!mc.getProperty("uri.var.orderby")){
+            mc.setProperty("uri.var.orderby","globalProfile.id");
+        } else {
+            mc.setProperty("uri.var.orderby","globalProfile."+mc.getProperty("uri.var.orderby"));
+        }
+        log.debug(where);]]></script>
+    <call>
+        <endpoint name="GlobalProfileDSS_Endpoint" template="HTTPEndpointGetTemplate"
+              uri="{uri.var.dataServiceHost}/application.global-profile.ds.HTTPEndpoint/GetAllGlobalProfile?whereclause={uri.var.whereclause}&amp;orderby={uri.var.orderby}&amp;innerjoinclause={uri.var.innerjoinclause}" />
+
+    </call>
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING" />
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq" />
+        </then>
+        <else>
+            <xslt key="gov:/centra-id/xslt/dssFilter.xsl" />
+            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="GlobalProfileSeq" value="Fin.." />
+    </log>
+    <property name="messageType" value="application/json" scope="axis2" type="STRING"/>
+    <property name="Access-Control-Allow-Methods" value="GET,PUT,POST,DELETE,PATCH,OPTIONS" scope="transport" type="STRING"/>
+    <property name="Access-Control-Allow-Headers" value="Authorization,Access-Control-Allow-Origin,Content-Type" scope="transport" type="STRING"/>
+</sequence>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="RecalculateSynchronizationSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom">
+        <property name="RecalculateSynchronizationSeq" value="Inicio.." />
+        <property name="profilesSynchronizationId" expression="$ctx:profilesSynchronizationId" />
+    </log>
+    <property name="uri.var.profilesSynchronizationId" expression="$ctx:profilesSynchronizationId" />
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/ProfilesSynchronization/{uri.var.profilesSynchronizationId}" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <property name="uri.var.transactionalProfileId" expression="//transactionalProfileId" />
+            <property name="type" expression="//type" />
+            <call>
+                <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/TransactionalProfileSimple/0/1?id={uri.var.transactionalProfileId}" />
+            </call>
+            <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                <then>
+                    <switch source="$ctx:type">
+                        <case regex="\+">
+                            <property name="typeAction" value="C" />
+                        </case>
+                        <case regex="\-">
+                            <property name="typeAction" value="D" />
+                        </case>
+                        <case regex="\=">
+                            <property name="typeAction" value="U" />
+                        </case>
+                    </switch>
+                    <sequence key="RecalculateTaskSeq" />
+                    <sequence key="RecalculateTaskDependencySeq" />
+                    <sequence key="ProvisioningSeq" />
+                </then>
+                <else>
+                    <property name="fault" value="RecalculateSeq: error when get TransactionalProfileSimple" />
+                    <sequence key="FaulSeq" />
+                </else>
+            </filter>
+        </then>
+        <else>
+            <property name="fault" value="RecalculateSeq: error when get ProfilesSynchronization" />
+            <sequence key="FaulSeq" />
+        </else>
+    </filter>
+    <log level="custom">
+        <property name="RecalculateSynchronizationSeq" value="Fin.." />
+    </log>
+</sequence>

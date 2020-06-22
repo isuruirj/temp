@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="MassiveProcessUsersSeq" onError="FaultMassiveProcessUsersSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="MassiveProcessUsersSeq" value="Inicio..." />
+    </log>
+    <filter regex="OPTIONS" source="get-property('axis2', 'HTTP_METHOD')" xmlns:cen="centra-id.com">
+        <then>
+            <property name="Access-Control-Request-Headers" scope="transport" type="STRING" value="authorization,content-type" />
+            <property name="Access-Control-Allow-Headers" scope="transport" type="STRING" value="authorization,Access-Control-Allow-Origin,Content-Type,X-Requested-With,Accept" />
+            <property name="Access-Control-Allow-Methods" scope="transport" type="STRING" value="GET,POST,PUT,DELETE,OPTIONS" />
+            <property name="RESPONSE" scope="default" type="STRING" value="true" />
+        </then>
+        <else>
+            <property name="json" expression="json-eval($)" scope="default" type="STRING" />
+            <property name="messageType" scope="axis2" type="STRING" value="application/xml" />
+            <property name="Accept" scope="transport" type="STRING" value="application/xml" />
+            <!-- Registrar GUID -->
+            <property name="guid" expression="//ProcesarEmpleadoRequest/headerIn/guid" scope="default" type="STRING" />
+            <property name="event" scope="default" type="STRING" value="REGISTRAR EMPLEADOS X CARGA MASIVA" />
+            <sequence key="MassiveProcessUsersGuiSeq" />
+            <property name="resultGUID" expression="//cen:Entry/cen:id" scope="default" type="STRING" />
+            <filter regex="true" source="boolean(get-property('resultGUID'))">
+                <then>
+                    <log level="custom" category="DEBUG">
+                        <property name="RESULTADO" value="GUID Creado OK." />
+                    </log>
+                    <!-- Cargamos json original en payload -->
+                    <payloadFactory media-type="json">
+                        <format>
+							$1
+                        </format>
+                        <args>
+                            <arg evaluator="xml" expression="get-property('json')" />
+                        </args>
+                    </payloadFactory>
+                    <log level="custom" category="DEBUG">
+                        <property name="MassiveProcessUsersSeq" value="Valida estructura..." />
+                    </log>
+                    <!-- Validar estructura usando json schema -->
+                    <sequence key="MassiveProcessUsersSchemaSeq" />
+                    <!-- Iterar datos de cada emleado -->
+                    <log level="custom" category="DEBUG">
+                        <property name="MassiveProcessUsersSeq" value="Valida datos y clasifica..." />
+                    </log>
+                    <iterate expression="//bodyIn/empleados" id="clasificaEmpleadosId">
+                        <target>
+                            <sequence>
+                                <sequence key="MassiveProcessUserSeq" />
+                            </sequence>
+                        </target>
+                    </iterate>
+                    <aggregate id="clasificaEmpleadosId">
+                        <completeCondition>
+                            <messageCount min="-1" max="-1" />
+                        </completeCondition>
+                        <onComplete expression="$body/*[1]">
+                            <log level="custom" category="DEBUG">
+                                <property name="agregado" value="ok" />
+                            </log>
+                        </onComplete>
+                    </aggregate>
+                    <!-- Registra el perfil por default -->
+                    <log level="custom" category="DEBUG">
+                        <property name="MassiveProcessUsersSeq" value="Determina perfil por defecto..." />
+                    </log>
+                    <!--sequence key="MassiveProcessDefectProfileSeq" /-->
+                    <!-- Registra los datos en el Identity Server -->
+                    <log level="custom" category="DEBUG">
+                        <property name="MassiveProcessUsersSeq" value="Registra IS..." />
+                    </log>
+                    <!--sequence key="MassiveProcessUsersIdentitySeq" /-->
+                    <!-- Registra datos para el recalculo -->
+                    <!--log level="custom">
+                        <property name="MassiveProcessUsersSeq" value="Registra transaccional identity..." />
+                    </log>
+                    <sequence key="MassiveProcessUsersTransactionalSeq" /-->
+                </then>
+                <else>
+                    <property name="observations" scope="default" type="STRING" value="GUID already exists" />
+                    <sequence key="FaultMassiveProcessUsersSeq" />
+                </else>
+            </filter>
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="MassiveProcessUsersSeq" value="Fin...." />
+    </log>
+</sequence>

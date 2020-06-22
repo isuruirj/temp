@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="MassiveProcessUserValidateCompanySeq" onError="FaultMassiveProcessUsersSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse" xmlns:cen="centra-id.com">
+    <log level="custom" separator="***">
+        <property name="MassiveProcessUserValidateCompanySeq" value="Inicio..." />
+        <property expression="get-property('codigoCompania')" name="uri.var.code" />
+    </log>
+    <header action="remove" name="Content-Type" scope="transport" />
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <call>
+        <endpoint name="CompaniesDSS_Endpoint" template="HTTPEndpointGetTemplate" uri="{uri.var.dataServiceHost}/CompaniesDSS.HTTPEndpoint/getByCodeCompany?code={uri.var.code}" />
+    </call>
+    <log level="custom" separator="**1**">
+        <property name="MassiveProcessUserValidateCompanySeq" value="Inicio1..." />
+    </log>
+    <property expression="//cen:Company/cen:code" name="code" scope="default" type="STRING" />
+    <log level="custom" category="DEBUG">
+        <property name="MassiveProcessUserValidateCompanySeq:code" expression="get-property('code')" />
+    </log>
+    <filter regex="false" source="boolean(get-property('code'))">
+        <then>
+            <property name="validateData" scope="default" type="BOOLEAN" value="false" />
+            <property expression="fn:concat(get-property('validateDataMessage'),'El codigo del compania (',get-property('uri.var.code'),') no existe. ')" name="validateDataMessage" scope="default" type="STRING" />
+        </then>
+        <else />
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="MassiveProcessUserValidateCompanySeq" value="Fin.." />
+    </log>
+</sequence>

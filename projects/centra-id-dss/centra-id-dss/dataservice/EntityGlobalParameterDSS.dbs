@@ -1,0 +1,243 @@
+<data name="common.global-parameter.ds"
+    serviceNamespace="centra-id.com"
+    enableBatchRequests="false"
+    enableBoxcarring="false"
+    transports="https"
+    disableLegacyBoxcarringMode="true">
+
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <!-- DYNAMIC QUERY GLOBALPARAMETER -->
+    <query id="dynamicQuery_globalParameter" useConfig="default">
+        <sql>
+           SELECT
+               globalParameter.id,
+               globalParameter.code,
+               globalParameter.name,
+               globalParameter.description,
+               globalParameter.type,
+               globalParameter.value_text,
+               globalParameter.value_number,
+               globalParameter.value_date,
+               globalParameter.value_boolean,
+               globalParameter.filter,
+               globalParameter.valid
+           FROM sch_centra_id.GLOBAL_PARAMETERS globalParameter :innerjoinclause :whereclause ORDER BY :orderby :fromto
+        </sql>
+        <result element="globalParameterList" rowName="globalParameter">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="description" name="description" xsdType="xs:string"/>
+            <element column="type" name="type" xsdType="xs:string"/>
+            <element column="value_text" name="valueText" xsdType="xs:string"/>
+            <element column="value_number" name="valueNumber" xsdType="xs:decimal"/>
+            <element column="value_date" name="valueDate" xsdType="xs:date"/>
+            <element column="value_boolean" name="valueBoolean" xsdType="xs:boolean"/>
+            <element column="filter" name="filter" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="fromto" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- INSERT GlobalParameter -->
+    <query id="insertQuery_globalParameter" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>
+           INSERT INTO sch_centra_id.GLOBAL_PARAMETERS(
+               code,
+               name,
+               description,
+               type,
+               value_text,
+               value_number,
+               value_date,
+               value_boolean,
+               filter,
+               valid
+        ) VALUES(?,?,?,?,?,?,?,?,?,?)
+        </sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="code" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="name" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="description" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="type" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="valueText" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="valueNumber" ordinal="6" paramType="SCALAR" sqlType="NUMERIC" type="IN"/>
+        <param name="valueDate" ordinal="7" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+        <param name="valueBoolean" ordinal="8" paramType="SCALAR" sqlType="BOOLEAN" type="IN"/>
+        <param name="filter" ordinal="9" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="valid" ordinal="10" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="1"/>
+    </query>
+    <!-- UPDATE GlobalParameter -->
+    <query id="updateQuery_globalParameter" useConfig="default">
+        <sql>
+           UPDATE sch_centra_id.GLOBAL_PARAMETERS SET
+               code=?,
+               name=?,
+               description=?,
+               type=?,
+               value_text=?,
+               value_number=?,
+               value_date=?,
+               value_boolean=?,
+               filter=?
+            WHERE id=?
+        </sql>
+        <param name="code" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="name" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="description" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="type" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="valueText" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="valueNumber" ordinal="6" paramType="SCALAR" sqlType="NUMERIC" type="IN"/>
+        <param name="valueDate" ordinal="7" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+        <param name="valueBoolean" ordinal="8" paramType="SCALAR" sqlType="BOOLEAN" type="IN"/>
+        <param name="filter" ordinal="9" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="id" ordinal="10" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <!-- DYNAMIC FUNCTION  -->
+    <query id="dynamicQueryFunction_globalParameter" useConfig="default">
+        <sql>
+           SELECT :function(:field) as value FROM :table :innerjoinclause :whereclause
+         </sql>
+        <result element="result">
+            <element column="value" name="value" xsdType="xs:long"/>
+        </result>
+        <param name="function" sqlType="QUERY_STRING"/>
+        <param name="field" sqlType="QUERY_STRING"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DELETE  -->
+    <query id="dynamicDeleteQuery_globalParameter" useConfig="default">
+        <sql>UPDATE :table SET :set WHERE id=:id</sql>
+        <param name="id" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="set" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- OPERATIONS -->
+    <operation name="listAllOperation_globalParameter">
+        <call-query href="dynamicQuery_globalParameter">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="fromToOperation_globalParameter">
+        <call-query href="dynamicQuery_globalParameter">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="functionOperation_globalParameter">
+        <call-query href="dynamicQueryFunction_globalParameter">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="deleteOperation_globalParameter">
+        <call-query href="dynamicDeleteQuery_globalParameter">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </operation>
+    <operation name="create_globalParameter">
+        <call-query href="insertQuery_globalParameter">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="description" query-param="description"/>
+            <with-param name="type" query-param="type"/>
+            <with-param name="valueText" query-param="valueText"/>
+            <with-param name="valueNumber" query-param="valueNumber"/>
+            <with-param name="valueDate" query-param="valueDate"/>
+            <with-param name="valueBoolean" query-param="valueBoolean"/>
+            <with-param name="filter" query-param="filter"/>
+            <with-param name="valid" query-param="valid"/>
+        </call-query>
+    </operation>
+    <operation name="update_globalParameter">
+        <call-query href="updateQuery_globalParameter">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="description" query-param="description"/>
+            <with-param name="type" query-param="type"/>
+            <with-param name="valueText" query-param="valueText"/>
+            <with-param name="valueNumber" query-param="valueNumber"/>
+            <with-param name="valueDate" query-param="valueDate"/>
+            <with-param name="valueBoolean" query-param="valueBoolean"/>
+            <with-param name="filter" query-param="filter"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <!-- RESOURCES -->
+    <resource method="GET" path="GetAllGlobalParameter">
+        <call-query href="dynamicQuery_globalParameter">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFromToGlobalParameter">
+        <call-query href="dynamicQuery_globalParameter">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFunctionResultGlobalParameter">
+        <call-query href="dynamicQueryFunction_globalParameter">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="DeleteGlobalParameter">
+        <call-query href="dynamicDeleteQuery_globalParameter">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="CreateGlobalParameter">
+        <call-query href="insertQuery_globalParameter">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="description" query-param="description"/>
+            <with-param name="type" query-param="type"/>
+            <with-param name="valueText" query-param="valueText"/>
+            <with-param name="valueNumber" query-param="valueNumber"/>
+            <with-param name="valueDate" query-param="valueDate"/>
+            <with-param name="valueBoolean" query-param="valueBoolean"/>
+            <with-param name="filter" query-param="filter"/>
+            <with-param name="valid" query-param="valid"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="UpdateGlobalParameter">
+        <call-query href="updateQuery_globalParameter">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="description" query-param="description"/>
+            <with-param name="type" query-param="type"/>
+            <with-param name="valueText" query-param="valueText"/>
+            <with-param name="valueNumber" query-param="valueNumber"/>
+            <with-param name="valueDate" query-param="valueDate"/>
+            <with-param name="valueBoolean" query-param="valueBoolean"/>
+            <with-param name="filter" query-param="filter"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+</data>

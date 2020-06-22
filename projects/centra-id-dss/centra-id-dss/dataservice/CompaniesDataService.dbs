@@ -1,0 +1,131 @@
+<data enableBatchRequests="true" enableBoxcarring="true" name="CompaniesDSS" serviceNamespace="centra-id.com" transports="https" disableLegacyBoxcarringMode="true">
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <query id="update_companies_query" useConfig="default">
+        <sql>UPDATE sch_centra_id.companies SET identifier=?,business_name=?,catalog_company_type_id=?,code=? WHERE id=?</sql>
+        <param name="identifier" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="businessName" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="catalogCompanyTypeId" ordinal="3" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="code" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="id" ordinal="5" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <query id="insert_companies_query" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>INSERT INTO sch_centra_id.companies(identifier,business_name,catalog_company_type_id,valid,code) VALUES(?,?,?,?,?)</sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="identifier" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="businessName" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="catalogCompanyTypeId" ordinal="3" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param defaultValue="1" name="valid" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+        <param name="code" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN"/>
+    </query>
+    <query id="delete_companies_query" useConfig="default">
+        <sql>UPDATE sch_centra_id.companies SET valid=0 WHERE id=?</sql>
+        <param name="id" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <query id="select_all_companies_query" useConfig="default">
+        <sql>SELECT id, identifier, business_name,catalog_company_type_id,code FROM sch_centra_id.companies WHERE valid=1</sql>
+        <result element="Companies" rowName="Company">
+            <element column="id" name="id" xsdType="xs:long"/>
+            <element column="identifier" name="identifier" xsdType="xs:string"/>
+            <element column="business_name" name="businessName" xsdType="xs:string"/>
+            <element column="catalog_company_type_id" name="catalogCompanyTypeId" xsdType="xs:long"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+        </result>
+    </query>
+    <query id="select_with_key_companies_query" useConfig="default">
+        <sql>SELECT id, identifier, business_name,catalog_company_type_id,code FROM sch_centra_id.companies WHERE id=? AND valid=1</sql>
+        <param name="id" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <result element="Companies" rowName="Company">
+            <element column="id" name="id" xsdType="xs:long"/>
+            <element column="identifier" name="identifier" xsdType="xs:string"/>
+            <element column="business_name" name="businessName" xsdType="xs:string"/>
+            <element column="catalog_company_type_id" name="catalogCompanyTypeId" xsdType="xs:long"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+        </result>
+    </query>
+    <query id="select_with_code_companies_query" useConfig="default">
+        <sql>SELECT id, identifier, business_name,catalog_company_type_id,code FROM sch_centra_id.companies WHERE code=? AND valid=1</sql>
+        <param name="code" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <result element="Companies" rowName="Company">
+            <element column="id" name="id" xsdType="xs:long"/>
+            <element column="identifier" name="identifier" xsdType="xs:string"/>
+            <element column="business_name" name="businessName" xsdType="xs:string"/>
+            <element column="catalog_company_type_id" name="catalogCompanyTypeId" xsdType="xs:long"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+        </result>
+    </query>
+    <operation name="insert_companies_operation">
+        <call-query href="insert_companies_query">
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="identifier" query-param="identifier"/>
+            <with-param name="businessName" query-param="businessName"/>
+            <with-param name="catalogCompanyTypeId" query-param="catalogCompanyTypeId"/>
+        </call-query>
+    </operation>
+    <operation name="select_all_companies_operation">
+        <call-query href="select_all_companies_query"/>
+    </operation>
+    <operation name="update_companies_operation">
+        <call-query href="update_companies_query">
+            <with-param name="identifier" query-param="identifier"/>
+            <with-param name="businessName" query-param="businessName"/>
+            <with-param name="id" query-param="id"/>
+            <with-param name="catalogCompanyTypeId" query-param="catalogCompanyTypeId"/>
+            <with-param name="code" query-param="code"/>
+        </call-query>
+    </operation>
+    <operation name="select_with_key_companies_operation">
+        <call-query href="select_with_key_companies_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <operation name="select_with_code_companies_operation">
+        <call-query href="select_with_code_companies_query">
+            <with-param name="code" query-param="code"/>
+        </call-query>
+    </operation>
+    <operation name="delete_companies_operation">
+        <call-query href="delete_companies_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <resource method="GET" path="getAllCompanies">
+        <call-query href="select_all_companies_query"/>
+    </resource>
+    <resource method="GET" path="getByIdCompany">
+        <call-query href="select_with_key_companies_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="getByCodeCompany">
+        <call-query href="select_with_code_companies_query">
+            <with-param name="code" query-param="code"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="createCompany">
+        <call-query href="insert_companies_query">
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="identifier" query-param="identifier"/>
+            <with-param name="businessName" query-param="businessName"/>
+            <with-param name="catalogCompanyTypeId" query-param="catalogCompanyTypeId"/>
+            <with-param name="code" query-param="code"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="updateCompany">
+        <call-query href="update_companies_query">
+            <with-param name="identifier" query-param="identifier"/>
+            <with-param name="businessName" query-param="businessName"/>
+            <with-param name="catalogCompanyTypeId" query-param="catalogCompanyTypeId"/>
+            <with-param name="code" query-param="code"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="deleteCompany">
+        <call-query href="delete_companies_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+</data>

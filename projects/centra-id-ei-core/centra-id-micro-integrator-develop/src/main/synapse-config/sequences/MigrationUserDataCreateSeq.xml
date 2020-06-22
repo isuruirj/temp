@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="MigrationUserDataCreateSeq" onError="FaultMigrationSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property expression="json-eval($)" name="userData" scope="default" type="STRING" />
+    <payloadFactory media-type="json">
+        <format>$1</format>
+        <args>
+            <arg evaluator="xml" expression="$ctx:userData" />
+        </args>
+    </payloadFactory>
+    <log level="custom" category="DEBUG">
+        <property name="MigrationUserDataCreateSeq" value="Inicio.." />
+    </log>
+    <!-- Respaldar datos originales -->
+    <property name="employeeCode" expression="//employeeCode" />
+    <property name="mail" expression="//mail" />
+    <property name="uri.var.companyId" expression="//company/id" />
+    <property name="uri.var.typeUserId" expression="//typeUser/id" />
+    <property name="uri.var.subtypeUserId" expression="//subtypeUser/id" />
+    <property name="uri.var.costCenterId" expression="//costCenter/id" />
+    <property name="employeeStatus" expression="//employeeStatus" />
+    <property name="origin" value="MANUAL" />
+    <!--log level="custom" category="DEBUG">
+        <property name="employeeCode" expression="get-property('employeeCode')" />
+        <property name="uri.var.companyId" expression="get-property('uri.var.companyId')" />
+        <property name="origin" expression="get-property('origin')" />
+    </log-->
+    <!-- transformar-->
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml" />
+    <property name="Accept" scope="transport" type="STRING" value="application/xml`" />
+    <xslt key="gov:/centra-id/xslt/jsonFilter.xsl">
+        <property value="insert" name="operationName" />
+        <property value="userData" name="entityName" />
+        <property value="users" name="entityNamePlural" />
+    </xslt>
+    <call>
+        <endpoint template="HTTPEndpointPostTemplate" uri="{uri.var.dataServiceHost}/identity.user-data.ds.HTTPEndpoint/CreateUserData" />
+    </call>
+    <property expression="//*:Entry/*:id" name="uri.var.userdataId" scope="default" type="STRING" />
+    <filter regex="true" source="boolean(get-property('uri.var.userdataId'))">
+        <then>
+            <filter regex="true" source="$ctx:employeeStatus='ACTIVO'">
+                <then>
+                    <!-- Crear usuario en IS -->
+                    <sequence key="MigrationEntityUserDataIdentityCreateSeq" />
+                </then>
+                <else>
+                    <call>
+                        <endpoint template="HTTPEndpointDeleteTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/UserDataSimple/{uri.var.userdataId}" />
+                    </call>
+                </else>
+            </filter>
+        </then>
+        <else>
+            <property expression="json-eval($)" name="payload" scope="default" type="STRING" />
+            <property name="errorMigration" expression="fn:concat('Error al crear USERDATA: ',$ctx:payload)" />
+            <sequence key="FaultMigrationSeq" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="MigrationUserDataCreateSeq" value="Fin.." />
+    </log>
+</sequence>

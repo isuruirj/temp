@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ProvisioningConfigureTemplateProfileAdSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningConfigureTemplateProfileAdSeq" value="Inicio.." />
+    </log>
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/TemplateProfileAd?transactionalProfileId={uri.var.transactionalProfileId}" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <property name="templateProfileAd" expression="$body//*" scope="default" type="OM" />
+            <filter regex="true" source="$ctx:templateProfileAd//shouldChangePasswordFirstTime='1'">
+                <then>
+                    <property name="shouldChangePasswordFirstTime" value="0" />
+                </then>
+                <else>
+                    <property name="shouldChangePasswordFirstTime" value="-1" />
+                </else>
+            </filter>
+            <filter regex="true" source="$ctx:templateProfileAd//allowLogonToTerminalServer='1'">
+                <then>
+                    <property name="allowLogonToTerminalServer" value="TRUE" />
+                </then>
+                <else>
+                    <property name="allowLogonToTerminalServer" value="FALSE" />
+                </else>
+            </filter>
+            <filter regex="true" source="$ctx:templateProfileAd//passwordNotExpire='1'">
+                <then>
+                    <property name="passwordNotExpire" value="512" />
+                </then>
+                <else>
+                    <property name="passwordNotExpire" value="-1" />
+                </else>
+            </filter>
+            <filter regex="true" source="$ctx:templateProfileAd//shouldNotChangePassword='1'">
+                <then>
+                    <property name="shouldNotChangePassword" value="TRUE" />
+                </then>
+                <else>
+                    <property name="shouldNotChangePassword" value="FALSE" />
+                </else>
+            </filter>
+            <filter regex="true" source="$ctx:templateProfileAd//sip='1'">
+                <then>
+                    <property name="sip" value="TRUE" />
+                </then>
+                <else>
+                    <property name="sip" value="FALSE" />
+                </else>
+            </filter>
+            <payloadFactory media-type="json">
+                <format>$1</format>
+                <args>
+                    <arg evaluator="xml" expression="$ctx:templateProfileAd//groupAd" />
+                </args>
+            </payloadFactory>
+            <property name="groupAd" expression="string-join(//name, ',')" />
+        </then>
+        <else>
+            <property name="fault" value="ProvisioningCreateUserSeq: Error get TemplateProfileAd" />
+            <sequence key="FaultSeq" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningConfigureTemplateProfileAdSeq" value="Fin.." />
+    </log>
+</sequence>

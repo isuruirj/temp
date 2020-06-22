@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ApplicationGroupFromToSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="ApplicationGroupFromToSeq" value="Inicio.." />
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml" />
+    <property name="Accept" scope="transport" type="STRING" value="application/xml" />
+    <property action="remove" name="Content-Type" scope="transport" />
+    <property expression="$ctx:query.param.orderby" name="uri.var.orderby" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.code" name="code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.name" name="name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.endpointType" name="endpointType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.ordinal" name="ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.numberRetries" name="numberRetries" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.timeBetweenRetries" name="timeBetweenRetries" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.errorsNotRequireTicket" name="errorsNotRequireTicket" scope="default" type="STRING" />
+    <script language="nashornJs"><![CDATA[
+        @add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE applicationGroup.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","applicationGroup","id");
+        where += addWhere("code","String","applicationGroup","code");
+        where += addWhere("name","String","applicationGroup","name");
+        where += addWhere("endpointType","String","applicationGroup","endpoint_type");
+        where += addWhere("ordinal","Integer","applicationGroup","ordinal");
+        where += addWhere("valid","Integer","applicationGroup","valid");
+        where += addWhere("numberRetries","Integer","applicationGroup","number_retries");
+        where += addWhere("timeBetweenRetries","Integer","applicationGroup","time_between_retries");
+        where += addWhere("errorsNotRequireTicket","String","applicationGroup","errors_not_require_ticket");
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+
+        if(!mc.getProperty("uri.var.orderby")){
+            mc.setProperty("uri.var.orderby","applicationGroup.id");
+        } else {
+            mc.setProperty("uri.var.orderby","applicationGroup."+mc.getProperty("uri.var.orderby"));
+        }
+
+        // FROM TO
+        var fromto = "OFFSET "+mc.getProperty("uri.var.from")+" ROWS FETCH NEXT "+mc.getProperty("uri.var.to")+" ROWS ONLY";
+        mc.setProperty("uri.var.fromto",fromto);
+        log.debug(where);]]></script>
+    <call>
+        <endpoint name="ApplicationGroupDSS_Endpoint" template="HTTPEndpointGetTemplate"
+              uri="{uri.var.dataServiceHost}/application.application-group.ds.HTTPEndpoint/GetFromToApplicationGroup?whereclause={uri.var.whereclause}&amp;orderby={uri.var.orderby}&amp;fromto={uri.var.fromto}&amp;innerjoinclause={uri.var.innerjoinclause}" />
+
+    </call>
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING" />
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq" />
+        </then>
+        <else>
+            <xslt key="gov:/centra-id/xslt/dssFilter.xsl" />
+            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="ApplicationGroupFromToSeq" value="Fin.." />
+    </log>
+</sequence>

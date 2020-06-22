@@ -1,0 +1,167 @@
+<data enableBatchRequests="true" enableBoxcarring="true" name="HierarchiesDSS" serviceNamespace="centra-id.com" transports="https" disableLegacyBoxcarringMode="true">
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <query id="update_hierarchies_query" useConfig="default">
+        <sql>UPDATE sch_centra_id.hierarchies SET catalog_type_id=?,catalog_company_type_id=?,hierarchies_id=? WHERE id=? AND valid=1</sql>
+        <param name="typeCatalogId" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="catalogCompanyTypeId" ordinal="2" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="hierarchiesId" ordinal="3" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="id" ordinal="4" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <query id="select_with_key_hierarchies_query" useConfig="default">
+        <sql>SELECT id, catalog_type_id, catalog_company_type_id, hierarchies_id FROM sch_centra_id.hierarchies WHERE id=? AND valid=1</sql>
+        <param name="id" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <result element="Hierarchies" rowName="Hierarchy">
+            <element column="id" name="id" xsdType="xs:long"/>
+            <element column="catalog_type_id" name="typeCatalogId" xsdType="xs:long"/>
+            <element column="catalog_company_type_id" name="catalogCompanyTypeId" xsdType="xs:long"/>
+            <element column="hierarchies_id" name="hierarchiesId" xsdType="xs:long"/>
+        </result>
+    </query>
+    <query id="delete_hierarchies_query" useConfig="default">
+        <sql>UPDATE sch_centra_id.hierarchies SET valid=0 WHERE id=?</sql>
+        <param name="id" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <query id="insert_hierarchies_query" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>INSERT INTO sch_centra_id.hierarchies(catalog_type_id,catalog_company_type_id,hierarchies_id,valid) VALUES(?,?,?,?)</sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="typeCatalogId" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="catalogCompanyTypeId" ordinal="2" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param defaultValue="#{NULL}" name="hierarchiesId" ordinal="3" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param defaultValue="1" name="valid" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+    </query>
+    <query id="select_all_hierarchies_query" useConfig="default">
+        <sql>SELECT id, catalog_type_id, catalog_company_type_id, hierarchies_id FROM sch_centra_id.hierarchies WHERE valid=1</sql>
+        <result element="Hierarchies" rowName="Hierarchy">
+            <element column="id" name="id" xsdType="xs:long"/>
+            <element column="catalog_type_id" name="typeCatalogId" xsdType="xs:long"/>
+            <element column="catalog_company_type_id" name="catalogCompanyTypeId" xsdType="xs:long"/>
+            <element column="hierarchies_id" name="hierarchiesId" xsdType="xs:long"/>
+        </result>
+    </query>
+    <query id="select_with_catalog_company_type_id_hierarchies_query" useConfig="default">
+        <param name="catalogCompanyTypeId" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <sql>SELECT h.id,h.catalog_company_type_id, c.name as catalog_company_type_name,h.catalog_type_id, tc.name as types_catalogs_name, tcj.id as  parent_catalog_type_id,tcj.name as parent_types_catalogs_name FROM sch_centra_id.hierarchies h JOIN sch_centra_id.CATALOGS_TYPES tc on h.catalog_type_id=tc.id JOIN sch_centra_id.catalogs c ON h.catalog_company_type_id=c.id LEFT JOIN sch_centra_id.hierarchies hj ON h.hierarchies_id=hj.id LEFT JOIN sch_centra_id.CATALOGS_TYPES tcj ON hj.catalog_type_id=tcj.id WHERE h.valid=1 AND h.catalog_company_type_id=?</sql>
+        <result element="Hierarchies" rowName="Hierarchy">
+            <element column="id" name="id" xsdType="xs:long"/>
+            <element column="catalog_company_type_id" name="catalogCompanyTypeId" xsdType="xs:long"/>
+            <element column="catalog_company_type_name" name="catalogCompanyTypeName" xsdType="xs:string"/>
+            <element column="catalog_type_id" name="typeCatalogId" xsdType="xs:long"/>
+            <element column="types_catalogs_name" name="typesCatalogName" xsdType="xs:string"/>
+            <element column="parent_catalog_type_id" name="parentTypeCatalogId" xsdType="xs:long"/>
+            <element column="parent_types_catalogs_name" name="parentTypeCatalogName" xsdType="xs:string"/>
+        </result>
+    </query>
+    <query id="select_hierarchies_dynamic_query" useConfig="default">
+        <param name="select" sqlType="QUERY_STRING">
+            <validatePattern pattern="^((?!(;|--)).)+" />
+        </param>
+        <param name="joinclause" sqlType="QUERY_STRING">
+            <validatePattern pattern="^((?!(;|--)).)+" />
+        </param>
+        <param name="whereclause" sqlType="QUERY_STRING">
+            <validatePattern pattern="^((?!(;|--)).)+" />
+        </param>
+        <param name="orderby" sqlType="QUERY_STRING">
+            <validatePattern pattern="^((?!(;|--)).)+" />
+        </param>
+        <sql>
+            SELECT :select 
+               FROM SCH_CENTRA_ID.COMPANIES_STRUCTURES cs
+                :joinclause    
+               WHERE :whereclause
+               ORDER BY :orderby
+        </sql>
+        <result element="Hierarchies" rowName="Hierarchy">
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+        </result>
+    </query>
+    <operation name="select_hierarchies_dynamic_operation">
+        <call-query href="select_hierarchies_dynamic_query">
+            <with-param name="select" query-param="select"/>
+            <with-param name="joinclause" query-param="joinclause"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+        </call-query>
+    </operation>
+    <operation name="select_with_key_hierarchies_operation">
+        <call-query href="select_with_key_hierarchies_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <operation name="select_with_catalog_company_type_id_hierarchies_operation">
+        <call-query href="select_with_catalog_company_type_id_hierarchies_query">
+            <with-param name="catalogCompanyTypeId" query-param="catalogCompanyTypeId"/>
+        </call-query>
+    </operation>
+    <operation name="insert_hierarchies_operation">
+        <call-query href="insert_hierarchies_query">
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="hierarchiesId" query-param="hierarchiesId"/>
+            <with-param name="catalogCompanyTypeId" query-param="catalogCompanyTypeId"/>
+            <with-param name="typeCatalogId" query-param="typeCatalogId"/>
+        </call-query>
+    </operation>
+    <operation name="update_hierarchies_operation">
+        <call-query href="update_hierarchies_query">
+            <with-param name="hierarchiesId" query-param="hierarchiesId"/>
+            <with-param name="catalogCompanyTypeId" query-param="catalogCompanyTypeId"/>
+            <with-param name="id" query-param="id"/>
+            <with-param name="typeCatalogId" query-param="typeCatalogId"/>
+        </call-query>
+    </operation>
+    <operation name="select_all_hierarchies_operation">
+        <call-query href="select_all_hierarchies_query"/>
+    </operation>
+    <operation name="delete_hierarchies_operation">
+        <call-query href="delete_hierarchies_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <resource method="GET" path="getHierarchyDynamic">
+        <call-query href="select_hierarchies_dynamic_query">
+            <with-param name="select" query-param="select"/>
+            <with-param name="joinclause" query-param="joinclause"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="getAllHierarchies">
+        <call-query href="select_all_hierarchies_query"/>
+    </resource>
+    <resource method="GET" path="getByIdHierarchy">
+        <call-query href="select_with_key_hierarchies_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="getByCatalogCompanyTypeIdHierarchy">
+        <call-query href="select_with_catalog_company_type_id_hierarchies_query">
+            <with-param name="catalogCompanyTypeId" query-param="catalogCompanyTypeId"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="createHierarchy">
+        <call-query href="insert_hierarchies_query">
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="hierarchiesId" query-param="hierarchiesId"/>
+            <with-param name="catalogCompanyTypeId" query-param="catalogCompanyTypeId"/>
+            <with-param name="typeCatalogId" query-param="typeCatalogId"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="updateHierarchy">
+        <call-query href="update_hierarchies_query">
+            <with-param name="hierarchiesId" query-param="hierarchiesId"/>
+            <with-param name="catalogCompanyTypeId" query-param="catalogCompanyTypeId"/>
+            <with-param name="id" query-param="id"/>
+            <with-param name="typeCatalogId" query-param="typeCatalogId"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="deleteHierarchy">
+        <call-query href="delete_hierarchies_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+</data>

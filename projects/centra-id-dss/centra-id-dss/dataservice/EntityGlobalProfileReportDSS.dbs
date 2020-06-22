@@ -1,0 +1,275 @@
+<data name="report.global-profile-report.ds"
+    serviceNamespace="centra-id.com"
+    enableBatchRequests="false"
+    enableBoxcarring="false"
+    transports="https"
+    disableLegacyBoxcarringMode="true">
+
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <!-- DYNAMIC QUERY GLOBALPROFILEREPORT -->
+    <query id="dynamicQuery_globalProfileReport" useConfig="default">
+        <sql>
+           SELECT
+               globalProfileReport.id,
+               globalProfileReport.global_profile_code,
+               globalProfileReport.global_profile_name,
+               globalProfileReport.global_profile_is_birth,
+               globalProfileReport.global_profile_status,
+               globalProfileReport.global_profile_ticket_number,
+               globalProfileReport.global_profile_user_creation,
+               globalProfileReport.global_profile_date_creation,
+               globalProfileReport.global_profile_user_approval,
+               globalProfileReport.global_profile_date_approval,
+               globalProfileReport.global_profile_observation,
+               globalProfileReport.global_profile_scope_rules_who,
+               globalProfileReport.global_profile_scope_rules_that,
+               globalProfileReport.global_profile_position_name_owner,
+               globalProfileReport.valid
+           FROM sch_centra_id.GLOBAL_PROFILES_REPORT_VW globalProfileReport :innerjoinclause :whereclause ORDER BY :orderby :fromto
+        </sql>
+        <result element="globalProfileReportList" rowName="globalProfileReport">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="global_profile_code" name="globalProfileCode" xsdType="xs:string"/>
+            <element column="global_profile_name" name="globalProfileName" xsdType="xs:string"/>
+            <element column="global_profile_is_birth" name="globalProfileIsBirth" xsdType="xs:integer"/>
+            <element column="global_profile_status" name="globalProfileStatus" xsdType="xs:string"/>
+            <element column="global_profile_ticket_number" name="globalProfileTicketNumber" xsdType="xs:string"/>
+            <element column="global_profile_user_creation" name="globalProfileUserCreation" xsdType="xs:string"/>
+            <element column="global_profile_date_creation" name="globalProfileDateCreation" xsdType="xs:date"/>
+            <element column="global_profile_user_approval" name="globalProfileUserApproval" xsdType="xs:string"/>
+            <element column="global_profile_date_approval" name="globalProfileDateApproval" xsdType="xs:date"/>
+            <element column="global_profile_observation" name="globalProfileObservation" xsdType="xs:string"/>
+            <element column="global_profile_scope_rules_who" name="globalProfileScopeRulesWho" xsdType="xs:string"/>
+            <element column="global_profile_scope_rules_that" name="globalProfileScopeRulesThat" xsdType="xs:string"/>
+            <element column="global_profile_position_name_owner" name="globalProfilePositionNameOwner" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="fromto" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- INSERT GlobalProfileReport -->
+    <query id="insertQuery_globalProfileReport" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>
+           INSERT INTO sch_centra_id.GLOBAL_PROFILES_REPORT_VW(
+               global_profile_code,
+               global_profile_name,
+               global_profile_is_birth,
+               global_profile_status,
+               global_profile_ticket_number,
+               global_profile_user_creation,
+               global_profile_date_creation,
+               global_profile_user_approval,
+               global_profile_date_approval,
+               global_profile_observation,
+               global_profile_scope_rules_who,
+               global_profile_scope_rules_that,
+               valid
+        ) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)
+        </sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="globalProfileCode" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="globalProfileName" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="globalProfileIsBirth" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="globalProfileStatus" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="globalProfileTicketNumber" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="globalProfileUserCreation" ordinal="6" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="globalProfileDateCreation" ordinal="7" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="globalProfileUserApproval" ordinal="8" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="globalProfileDateApproval" ordinal="9" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="globalProfileObservation" ordinal="10" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="globalProfileScopeRulesWho" ordinal="11" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="globalProfileScopeRulesThat" ordinal="12" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="valid" ordinal="13" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="1"/>
+    </query>
+    <!-- UPDATE GlobalProfileReport -->
+    <query id="updateQuery_globalProfileReport" useConfig="default">
+        <sql>
+           UPDATE sch_centra_id.GLOBAL_PROFILES_REPORT_VW SET
+               global_profile_code=?,
+               global_profile_name=?,
+               global_profile_is_birth=?,
+               global_profile_status=?,
+               global_profile_ticket_number=?,
+               global_profile_user_creation=?,
+               global_profile_date_creation=?,
+               global_profile_user_approval=?,
+               global_profile_date_approval=?,
+               global_profile_observation=?,
+               global_profile_scope_rules_who=?,
+               global_profile_scope_rules_that=?
+            WHERE id=?
+        </sql>
+        <param name="globalProfileCode" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="globalProfileName" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="globalProfileIsBirth" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="globalProfileStatus" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="globalProfileTicketNumber" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="globalProfileUserCreation" ordinal="6" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="globalProfileDateCreation" ordinal="7" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="globalProfileUserApproval" ordinal="8" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="globalProfileDateApproval" ordinal="9" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="globalProfileObservation" ordinal="10" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="globalProfileScopeRulesWho" ordinal="11" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="globalProfileScopeRulesThat" ordinal="12" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="id" ordinal="13" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <!-- DYNAMIC FUNCTION  -->
+    <query id="dynamicQueryFunction_globalProfileReport" useConfig="default">
+        <sql>
+           SELECT :function(:field) as value FROM :table :innerjoinclause :whereclause
+         </sql>
+        <result element="result">
+            <element column="value" name="value" xsdType="xs:long"/>
+        </result>
+        <param name="function" sqlType="QUERY_STRING"/>
+        <param name="field" sqlType="QUERY_STRING"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DELETE  -->
+    <query id="dynamicDeleteQuery_globalProfileReport" useConfig="default">
+        <sql>UPDATE :table SET :set WHERE id=:id</sql>
+        <param name="id" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="set" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- OPERATIONS -->
+    <operation name="listAllOperation_globalProfileReport">
+        <call-query href="dynamicQuery_globalProfileReport">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="fromToOperation_globalProfileReport">
+        <call-query href="dynamicQuery_globalProfileReport">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="functionOperation_globalProfileReport">
+        <call-query href="dynamicQueryFunction_globalProfileReport">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="deleteOperation_globalProfileReport">
+        <call-query href="dynamicDeleteQuery_globalProfileReport">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </operation>
+    <operation name="create_globalProfileReport">
+        <call-query href="insertQuery_globalProfileReport">
+            <with-param name="globalProfileCode" query-param="globalProfileCode"/>
+            <with-param name="globalProfileName" query-param="globalProfileName"/>
+            <with-param name="globalProfileIsBirth" query-param="globalProfileIsBirth"/>
+            <with-param name="globalProfileStatus" query-param="globalProfileStatus"/>
+            <with-param name="globalProfileTicketNumber" query-param="globalProfileTicketNumber"/>
+            <with-param name="globalProfileUserCreation" query-param="globalProfileUserCreation"/>
+            <with-param name="globalProfileDateCreation" query-param="globalProfileDateCreation"/>
+            <with-param name="globalProfileUserApproval" query-param="globalProfileUserApproval"/>
+            <with-param name="globalProfileDateApproval" query-param="globalProfileDateApproval"/>
+            <with-param name="globalProfileObservation" query-param="globalProfileObservation"/>
+            <with-param name="globalProfileScopeRulesWho" query-param="globalProfileScopeRulesWho"/>
+            <with-param name="globalProfileScopeRulesThat" query-param="globalProfileScopeRulesThat"/>
+            <with-param name="valid" query-param="valid"/>
+        </call-query>
+    </operation>
+    <operation name="update_globalProfileReport">
+        <call-query href="updateQuery_globalProfileReport">
+            <with-param name="globalProfileCode" query-param="globalProfileCode"/>
+            <with-param name="globalProfileName" query-param="globalProfileName"/>
+            <with-param name="globalProfileIsBirth" query-param="globalProfileIsBirth"/>
+            <with-param name="globalProfileStatus" query-param="globalProfileStatus"/>
+            <with-param name="globalProfileTicketNumber" query-param="globalProfileTicketNumber"/>
+            <with-param name="globalProfileUserCreation" query-param="globalProfileUserCreation"/>
+            <with-param name="globalProfileDateCreation" query-param="globalProfileDateCreation"/>
+            <with-param name="globalProfileUserApproval" query-param="globalProfileUserApproval"/>
+            <with-param name="globalProfileDateApproval" query-param="globalProfileDateApproval"/>
+            <with-param name="globalProfileObservation" query-param="globalProfileObservation"/>
+            <with-param name="globalProfileScopeRulesWho" query-param="globalProfileScopeRulesWho"/>
+            <with-param name="globalProfileScopeRulesThat" query-param="globalProfileScopeRulesThat"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <!-- RESOURCES -->
+    <resource method="GET" path="GetAllGlobalProfileReport">
+        <call-query href="dynamicQuery_globalProfileReport">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFromToGlobalProfileReport">
+        <call-query href="dynamicQuery_globalProfileReport">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFunctionResultGlobalProfileReport">
+        <call-query href="dynamicQueryFunction_globalProfileReport">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="DeleteGlobalProfileReport">
+        <call-query href="dynamicDeleteQuery_globalProfileReport">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="CreateGlobalProfileReport">
+        <call-query href="insertQuery_globalProfileReport">
+            <with-param name="globalProfileCode" query-param="globalProfileCode"/>
+            <with-param name="globalProfileName" query-param="globalProfileName"/>
+            <with-param name="globalProfileIsBirth" query-param="globalProfileIsBirth"/>
+            <with-param name="globalProfileStatus" query-param="globalProfileStatus"/>
+            <with-param name="globalProfileTicketNumber" query-param="globalProfileTicketNumber"/>
+            <with-param name="globalProfileUserCreation" query-param="globalProfileUserCreation"/>
+            <with-param name="globalProfileDateCreation" query-param="globalProfileDateCreation"/>
+            <with-param name="globalProfileUserApproval" query-param="globalProfileUserApproval"/>
+            <with-param name="globalProfileDateApproval" query-param="globalProfileDateApproval"/>
+            <with-param name="globalProfileObservation" query-param="globalProfileObservation"/>
+            <with-param name="globalProfileScopeRulesWho" query-param="globalProfileScopeRulesWho"/>
+            <with-param name="globalProfileScopeRulesThat" query-param="globalProfileScopeRulesThat"/>
+            <with-param name="valid" query-param="valid"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="UpdateGlobalProfileReport">
+        <call-query href="updateQuery_globalProfileReport">
+            <with-param name="globalProfileCode" query-param="globalProfileCode"/>
+            <with-param name="globalProfileName" query-param="globalProfileName"/>
+            <with-param name="globalProfileIsBirth" query-param="globalProfileIsBirth"/>
+            <with-param name="globalProfileStatus" query-param="globalProfileStatus"/>
+            <with-param name="globalProfileTicketNumber" query-param="globalProfileTicketNumber"/>
+            <with-param name="globalProfileUserCreation" query-param="globalProfileUserCreation"/>
+            <with-param name="globalProfileDateCreation" query-param="globalProfileDateCreation"/>
+            <with-param name="globalProfileUserApproval" query-param="globalProfileUserApproval"/>
+            <with-param name="globalProfileDateApproval" query-param="globalProfileDateApproval"/>
+            <with-param name="globalProfileObservation" query-param="globalProfileObservation"/>
+            <with-param name="globalProfileScopeRulesWho" query-param="globalProfileScopeRulesWho"/>
+            <with-param name="globalProfileScopeRulesThat" query-param="globalProfileScopeRulesThat"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+</data>

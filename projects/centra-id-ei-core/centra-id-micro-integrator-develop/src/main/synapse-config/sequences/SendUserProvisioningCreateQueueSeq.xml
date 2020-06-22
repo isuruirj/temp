@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="SendUserProvisioningCreateQueueSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <payloadFactory media-type="xml">
+        <format>
+            <tem:crearUsuario xmlns:tem="http://tempuri.org/">
+                <tem:guid>$1</tem:guid>
+                <tem:uuid>$2</tem:uuid>
+                <tem:username>$3</tem:username>
+                <tem:password>$4</tem:password>
+                <tem:codigoTrabajador>$5</tem:codigoTrabajador>
+                <tem:apellidosEmpleado>$6</tem:apellidosEmpleado>
+                <tem:nombresEmpleado>$7</tem:nombresEmpleado>
+                <tem:identificacion>$8</tem:identificacion>
+                <tem:identificacionSupervisor>$9</tem:identificacionSupervisor>
+                <tem:nombreSupervisor>$10</tem:nombreSupervisor>
+                <tem:codigoCompania>$11</tem:codigoCompania>
+                <tem:nombreCompania>$12</tem:nombreCompania>
+                <tem:codigoAgrupacion>$13</tem:codigoAgrupacion>
+                <tem:nombreAgrupacion>$14</tem:nombreAgrupacion>
+                <tem:codigoDivision>$15</tem:codigoDivision>
+                <tem:nombreDivision>$16</tem:nombreDivision>
+                <tem:codigoArea>$17</tem:codigoArea>
+                <tem:nombreArea>$18</tem:nombreArea>
+                <tem:codigoDepartamento>$19</tem:codigoDepartamento>
+                <tem:nombreDepartamento>$20</tem:nombreDepartamento>
+                <tem:codigoCentroCosto>$21</tem:codigoCentroCosto>
+                <tem:nombreCentroCosto>$22</tem:nombreCentroCosto>
+                <tem:nombreLocalidad>$23</tem:nombreLocalidad>
+                <tem:nombreLocalidad>$24</tem:nombreLocalidad>
+                <tem:codigoNivelJerarquico>$25</tem:codigoNivelJerarquico>
+                <tem:nombreNivelJerarquico>$26</tem:nombreNivelJerarquico>
+                <tem:nombreCargo>$27</tem:nombreCargo>
+                <tem:numeroCuentaDeposito>$28</tem:numeroCuentaDeposito>
+                <tem:fechaIngresoEmpleado>$29</tem:fechaIngresoEmpleado>
+                <tem:fechaSalidaEmpleado>$30</tem:fechaSalidaEmpleado>
+                <tem:estadoEmpleado>$31</tem:estadoEmpleado>
+                <tem:codigoEmpleado>$32</tem:codigoEmpleado>
+                <tem:tipoUsuario>$33</tem:tipoUsuario>
+                <tem:subTipo>$34</tem:subTipo>
+                <tem:celular>$35</tem:celular>
+                <tem:especificos>X</tem:especificos>
+                <tem:aplicacion>X</tem:aplicacion>
+            </tem:crearUsuario>
+        </format>
+        <args>
+            <arg evaluator="xml" expression="//uuid" />
+            <arg evaluator="xml" expression="//guid" />
+            <arg evaluator="xml" expression="//username" />
+            <arg evaluator="xml" expression="get-property('password')" />
+            <arg evaluator="xml" expression="//workerCode" />
+            <arg evaluator="xml" expression="//employeeLastname" />
+            <arg evaluator="xml" expression="//employeeFirstname" />
+            <arg evaluator="xml" expression="//identification" />
+            <arg evaluator="xml" expression="//identificationSupervisor" />
+            <arg evaluator="xml" expression="//namesSupervisor" />
+            <arg evaluator="xml" expression="//companyCode" />
+            <arg evaluator="xml" expression="//companyName" />
+            <arg evaluator="xml" expression="//groupCode" />
+            <arg evaluator="xml" expression="//groupName" />
+            <arg evaluator="xml" expression="//divisionCode" />
+            <arg evaluator="xml" expression="//divisionName" />
+            <arg evaluator="xml" expression="//areaCode" />
+            <arg evaluator="xml" expression="//areaName" />
+            <arg evaluator="xml" expression="//departmentCode" />
+            <arg evaluator="xml" expression="//departmentName" />
+            <arg evaluator="xml" expression="//costCenterCode" />
+            <arg evaluator="xml" expression="//costCenterName" />
+            <arg evaluator="xml" expression="//locationCode" />
+            <arg evaluator="xml" expression="//locationName" />
+            <arg evaluator="xml" expression="//hierarchicalLevelCode" />
+            <arg evaluator="xml" expression="//hierarchicalLevelName" />
+            <arg evaluator="xml" expression="//positionName" />
+            <arg evaluator="xml" expression="//depositAccountNumber" />
+            <arg evaluator="xml" expression="//employeeStartDate" />
+            <arg evaluator="xml" expression="//employeeEndDate" />
+            <arg evaluator="xml" expression="//employeeStatus" />
+            <arg evaluator="xml" expression="//employeeCode" />
+            <arg evaluator="xml" expression="//userType" />
+            <arg evaluator="xml" expression="//userSubtype" />
+            <arg evaluator="xml" expression="//mobile" />
+        </args>
+    </payloadFactory>
+    <property name="service_ep" expression="fn:concat(get-property('uri.var.enterpriseIntegratorHost'),'/services' ,'/WSGeneric')" />
+    <header name="To" expression="get-property('service_ep')" />
+    <call>
+        <endpoint>
+            <default />
+        </endpoint>
+    </call>
+</sequence>

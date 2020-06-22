@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="UserSumSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse"/>
+    <log level="custom" category="DEBUG">
+        <property name="UserSumSeq" value="Inicio.." />
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+    <property name="Accept" scope="transport" type="STRING" value="application/json" />
+    <property action="remove" name="Content-Type" scope="transport" />
+    <property action="set" expression="$ctx:query.param.username" name="username" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.codigoEmpleado" name="codigoEmpleado" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.codigoTrabajador" name="codigoTrabajador" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.identificacion" name="identificacion" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.apellidosEmpleado" name="apellidosEmpleado" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.nombresEmpleado" name="nombresEmpleado" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.celular" name="celular" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.numeroCuentaDeposito" name="numeroCuentaDeposito" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.fechaIngresoEmpleado" name="fechaIngresoEmpleado" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.fechaSalidaEmpleado" name="fechaSalidaEmpleado" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.identificacionSupervisor" name="identificacionSupervisor" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.nombreSupervisor" name="nombreSupervisor" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.codigoCompania" name="codigoCompania" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.nombreCompania" name="nombreCompania" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.codigoDivision" name="codigoDivision" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.nombreDivision" name="nombreDivision" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.codigoArea" name="codigoArea" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.nombreArea" name="nombreArea" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.codigoDepartamento" name="codigoDepartamento" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.nombreDepartamento" name="nombreDepartamento" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.nombreCargo" name="nombreCargo" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.codigoCentroCosto" name="codigoCentroCosto" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.nombreCentroCosto" name="nombreCentroCosto" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.codigoAgrupacion" name="codigoAgrupacion" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.nombreAgrupacion" name="nombreAgrupacion" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.codigoNivelJerarquico" name="codigoNivelJerarquico" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.nombreNivelJerarquico" name="nombreNivelJerarquico" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.tipoUsuario" name="tipoUsuario" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.subTipo" name="subTipo" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.estadoEmpleado" name="estadoEmpleado" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.nombreLocalidad" name="nombreLocalidad" scope="default" type="STRING"/>
+    <property action="set" expression="$ctx:query.param.correoElectronico" name="correoElectronico" scope="default" type="STRING"/>
+
+    <script language="js"><![CDATA[
+            var log = mc.getServiceLog();
+            var where = " WHERE 1=1 ";
+
+            if(mc.getProperty("username")){ where = where + " AND userData.username=" + mc.getProperty("username"); }
+            if(mc.getProperty("codigoEmpleado")){ where = where + " AND userData.codigoEmpleado=" + mc.getProperty("codigoEmpleado"); }
+            if(mc.getProperty("codigoTrabajador")){ where = where + " AND userData.codigoTrabajador=" + mc.getProperty("codigoTrabajador"); }
+            if(mc.getProperty("identificacion")){ where = where + " AND userData.identificacion=" + mc.getProperty("identificacion"); }
+            if(mc.getProperty("apellidosEmpleado")){ where = where + " AND userData.apellidosEmpleado=" + mc.getProperty("apellidosEmpleado"); }
+            if(mc.getProperty("nombresEmpleado")){ where = where + " AND userData.nombresEmpleado=" + mc.getProperty("nombresEmpleado"); }
+            if(mc.getProperty("celular")){ where = where + " AND userData.celular=" + mc.getProperty("celular"); }
+            if(mc.getProperty("numeroCuentaDeposito")){ where = where + " AND userData.numeroCuentaDeposito=" + mc.getProperty("numeroCuentaDeposito"); }
+            if(mc.getProperty("fechaIngresoEmpleado")){ where = where + " AND userData.fechaIngresoEmpleado=" + mc.getProperty("fechaIngresoEmpleado"); }
+            if(mc.getProperty("fechaSalidaEmpleado")){ where = where + " AND userData.fechaSalidaEmpleado=" + mc.getProperty("fechaSalidaEmpleado"); }
+            if(mc.getProperty("identificacionSupervisor")){ where = where + " AND userData.identificacionSupervisor=" + mc.getProperty("identificacionSupervisor"); }
+            if(mc.getProperty("nombreSupervisor")){ where = where + " AND userData.nombreSupervisor=" + mc.getProperty("nombreSupervisor"); }
+            if(mc.getProperty("codigoCompania")){ where = where + " AND userData.codigoCompania=" + mc.getProperty("codigoCompania"); }
+            if(mc.getProperty("nombreCompania")){ where = where + " AND userData.nombreCompania=" + mc.getProperty("nombreCompania"); }
+            if(mc.getProperty("codigoDivision")){ where = where + " AND userData.codigoDivision=" + mc.getProperty("codigoDivision"); }
+            if(mc.getProperty("nombreDivision")){ where = where + " AND userData.nombreDivision=" + mc.getProperty("nombreDivision"); }
+            if(mc.getProperty("codigoArea")){ where = where + " AND userData.codigoArea=" + mc.getProperty("codigoArea"); }
+            if(mc.getProperty("nombreArea")){ where = where + " AND userData.nombreArea=" + mc.getProperty("nombreArea"); }
+            if(mc.getProperty("codigoDepartamento")){ where = where + " AND userData.codigoDepartamento=" + mc.getProperty("codigoDepartamento"); }
+            if(mc.getProperty("nombreDepartamento")){ where = where + " AND userData.nombreDepartamento=" + mc.getProperty("nombreDepartamento"); }
+            if(mc.getProperty("nombreCargo")){ where = where + " AND userData.nombreCargo=" + mc.getProperty("nombreCargo"); }
+            if(mc.getProperty("codigoCentroCosto")){ where = where + " AND userData.codigoCentroCosto=" + mc.getProperty("codigoCentroCosto"); }
+            if(mc.getProperty("nombreCentroCosto")){ where = where + " AND userData.nombreCentroCosto=" + mc.getProperty("nombreCentroCosto"); }
+            if(mc.getProperty("codigoAgrupacion")){ where = where + " AND userData.codigoAgrupacion=" + mc.getProperty("codigoAgrupacion"); }
+            if(mc.getProperty("nombreAgrupacion")){ where = where + " AND userData.nombreAgrupacion=" + mc.getProperty("nombreAgrupacion"); }
+            if(mc.getProperty("codigoNivelJerarquico")){ where = where + " AND userData.codigoNivelJerarquico=" + mc.getProperty("codigoNivelJerarquico"); }
+            if(mc.getProperty("nombreNivelJerarquico")){ where = where + " AND userData.nombreNivelJerarquico=" + mc.getProperty("nombreNivelJerarquico"); }
+            if(mc.getProperty("tipoUsuario")){ where = where + " AND userData.tipoUsuario=" + mc.getProperty("tipoUsuario"); }
+            if(mc.getProperty("subTipo")){ where = where + " AND userData.subTipo=" + mc.getProperty("subTipo"); }
+            if(mc.getProperty("estadoEmpleado")){ where = where + " AND userData.estadoEmpleado=" + mc.getProperty("estadoEmpleado"); }
+            if(mc.getProperty("nombreLocalidad")){ where = where + " AND userData.nombreLocalidad=" + mc.getProperty("nombreLocalidad"); }
+            if(mc.getProperty("correoElectronico")){ where = where + " AND userData.correoElectronico=" + mc.getProperty("correoElectronico"); }
+
+            mc.setProperty("uri.var.whereclause",where);
+            log.debug(where);
+        ]]>
+    </script>
+
+    <property value="dbo.USERS_DATA userData" name="uri.var.table" scope="default" type="STRING"/>
+    <property value="SUM" name="uri.var.function" scope="default" type="STRING"/>
+   
+    <call>
+        <endpoint name="UserDSS_Endpoint" template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/services/identity.user_data.ds.HTTPEndpoint/GetFunctionResultUser?function={uri.var.function}&amp;whereclause={uri.var.whereclause}&amp;field={uri.var.field}&amp;table={uri.var.table}" />
+    </call>
+
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING"/>
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq"/>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                        "count": $1
+                    }
+                </format>
+                <args>
+                    <arg evaluator="json" expression="$.result.value"/>
+                </args>
+            </payloadFactory>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200"/>
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="UserSumSeq" value="Fin.." />
+    </log>
+    <respond />
+</sequence>
+

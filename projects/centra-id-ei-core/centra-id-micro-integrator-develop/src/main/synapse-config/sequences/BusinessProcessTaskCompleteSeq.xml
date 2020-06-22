@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="BusinessProcessTaskCompleteSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="BusinessProcessTaskCompleteSeq" value="Inicio..." />
+        <property expression="$ctx:X-Forwarded-For" name="X-Forwarded-For" xmlns:cen="centra-id.com" />
+        <property expression="$ctx:UserName" name="UserName" xmlns:cen="centra-id.com" />
+    </log>
+    <!-- Salvar payload -->
+    <property expression="json-eval($)" name="json" scope="default" type="STRING" />
+    <!-- tranformar JSON to XML -->
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml" />
+    <property name="Accept" scope="transport" type="STRING" value="application/xml" />
+    <property expression="//taskId" name="uri.var.taskId" scope="default" type="STRING" xmlns:cen="centra-id.com" />
+    <property expression="//comments" name="uri.var.comments" scope="default" type="STRING" xmlns:cen="centra-id.com" />
+    <!-- Registrar comentario -->
+    <property name="ContentType" scope="axis2" type="STRING" value="application/json" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property expression="synapse:get-property('BPS_SERVER_USER')" name="BPS_SERVER_USER_DATO" scope="default" type="STRING" xmlns:cen="centra-id.com" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns2="http://org.apache.synapse/xsd" />
+    <property expression="synapse:get-property('BPS_SERVER_PASSWORD')" name="BPS_SERVER_PASSWORD_DATO" scope="default" type="STRING" xmlns:cen="centra-id.com" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns2="http://org.apache.synapse/xsd" />
+    <property expression="fn:concat('Basic ', base64Encode(fn:concat($ctx:BPS_SERVER_USER_DATO,':',$ctx:BPS_SERVER_PASSWORD_DATO)))" name="Authorization" scope="transport" type="STRING" xmlns:cen="centra-id.com" xmlns:ns="http://org.apache.synapse/xsd" />
+    <payloadFactory media-type="json">
+        <format>
+            {
+            "message" : "$1",
+            "saveProcessInstanceId" : true
+            }
+        </format>
+        <args>
+            <arg evaluator="xml" expression="get-property('uri.var.comments')" xmlns:cen="centra-id.com" />
+        </args>
+    </payloadFactory>
+    <call>
+        <endpoint template="HTTPEndpointPostTemplate" uri="{uri.var.bussinesProcessServiceHost}/bpmn/runtime/tasks/{uri.var.taskId}/comments" />
+    </call>
+    <filter regex="201" source="get-property('axis2', 'HTTP_SC')" xmlns:cen="centra-id.com">
+        <then>
+            <payloadFactory media-type="json">
+                <format>
+                    $1
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="get-property('json')" />
+                </args>
+            </payloadFactory>
+            <!-- tranformar JSON to XML -->
+            <property name="messageType" scope="axis2" type="STRING" value="application/xml" />
+            <property name="Accept" scope="transport" type="STRING" value="application/xml" />
+            <sequence key="GetReferenceDataSeq" />
+            <log level="full" category="INFO">
+                <property name="BusinessProcessTaskCompleteSeq.1" value="Inicio..." />
+            </log>
+            <xslt key="gov:/centra-id/xslt/bpsFilter.xsl">
+                <property name="action" value="complete" />
+                <property expression="$ctx:UserName" name="Username-Action" />
+                <property expression="$ctx:X-Forwarded-For" name="X-Forwarded-For-Action" />
+            </xslt>
+            <log level="full" category="INFO">
+                <property name="BusinessProcessTaskCompleteSeq.2" value="Inicio..." />
+            </log>
+            <property name="ContentType" scope="axis2" type="STRING" value="application/json" />
+            <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+            <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+            <property expression="synapse:get-property('BPS_SERVER_USER')" name="BPS_SERVER_USER_DATO" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns2="http://org.apache.synapse/xsd" />
+            <property expression="synapse:get-property('BPS_SERVER_PASSWORD')" name="BPS_SERVER_PASSWORD_DATO" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns2="http://org.apache.synapse/xsd" />
+            <property expression="fn:concat('Basic ', base64Encode(fn:concat($ctx:BPS_SERVER_USER_DATO,':',$ctx:BPS_SERVER_PASSWORD_DATO)))" name="Authorization" scope="transport" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" />
+            <call>
+                <endpoint template="HTTPEndpointPostTemplate" uri="{uri.var.bussinesProcessServiceHost}/bpmn/runtime/tasks/{uri.var.taskId}" />
+            </call>
+            <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                <then>
+                    <payloadFactory media-type="json">
+                        <format>
+                            {
+                                "taskId": $1
+                            }
+                        </format>
+                        <args>
+                            <arg evaluator="xml" expression="get-property('uri.var.taskId')" />
+                        </args>
+                    </payloadFactory>
+                    <property name="ContentType" scope="axis2" type="STRING" value="application/json" />
+                    <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+                </then>
+                <else>
+                    <property name="fault" scope="default" type="STRING" value="Error complete task " />
+                    <sequence key="FaultSeq" />
+                </else>
+            </filter>
+        </then>
+        <else>
+            <property name="fault" scope="default" type="STRING" value="Error create comments task " />
+            <sequence key="FaultSeq" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="BusinessProcessTaskCompleteSeq" value="Fin..." />
+        <property expression="$ctx:X-Forwarded-For" name="X-Forwarded-For" xmlns:cen="centra-id.com" />
+        <property expression="$ctx:UserName" name="UserName" xmlns:cen="centra-id.com" />
+    </log>
+</sequence>

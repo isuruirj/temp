@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="RecalculateTaskSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="RecalculateTaskSeq" value="Inicio.." />
+    </log>
+    <sequence key="GenerateUUID" />
+    <payloadFactory media-type="json">
+        <format>
+            {
+                "taskProvisioning": {
+                    "transactionalProfile": {
+                        "id": $1
+                    },
+                    "application" :{
+                        "id": $2
+                    },
+                    "operationProvisioning" :{
+                        "id": $3
+                    },
+                    "provisioningDate" : null,
+                    "provisioningStatus" : "PENDIENTE",
+                    "provisioningComments": "",
+                    "creationDate": "$4",
+                    "uuid":"$5",
+                    "uuidParent": null, 
+                    "ticketNumber": "",
+                    "ticketDate": null,
+                    "ticketContent": null,
+                    "ticketError": null,        
+                    "action": "$6",
+                    "type" : "$7",
+                    "status": "REGISTRADO"
+                    
+                }
+            }            
+        </format>
+        <args>
+            <arg evaluator="xml" expression="//id" />
+            <arg evaluator="xml" expression="//transactionalProfileApplicationId" />
+            <arg evaluator="xml" expression="get-property('uri.var.operationProvisioningId')" />
+            <arg evaluator="xml" expression="get-property('currentDate')" />
+            <arg evaluator="xml" expression="get-property('UUID')" />
+            <arg evaluator="xml" expression="get-property('typeAction')" />
+            <arg evaluator="xml" expression="//applicationAutomaticProvision" />
+        </args>
+    </payloadFactory>
+    <call>
+        <endpoint template="HTTPEndpointPostTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/provisioning/TaskProvisioning" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <property name="taskProvisiongId" expression="//id" />
+            <!-- Registrar historico -->
+            <call-template target="CreateTaskProvisioningHistory">
+                <with-param name="taskProvisiongId" value="{get-property('taskProvisiongId')}" />
+            </call-template>
+        </then>
+        <else>
+            <property name="fault" value="RecalculateTaskSeq: error when create TaskProvisioning" />
+            <sequence key="FaultSeq" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="RecalculateTaskSeq" value="Fin.." />
+    </log>
+</sequence>

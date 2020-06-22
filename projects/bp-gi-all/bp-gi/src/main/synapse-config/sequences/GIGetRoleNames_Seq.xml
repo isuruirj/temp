@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GIGetRoleNames_Seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log description="seq" level="custom">
+        <property name="Seq" value="---------- GIGetRoleNames_Seq ---------- "/>
+    </log>
+    <payloadFactory media-type="xml">
+        <format>
+            <ser:getRoleNames xmlns:ser="http://service.ws.um.carbon.wso2.org"/>
+        </format>
+        <args/>
+    </payloadFactory>
+    <header name="SOAPAction" scope="transport" value="urn:getRoleNames"/>
+    <property description="Authorization" expression="fn:concat('Basic ', base64Encode(fn:concat(get-property('IS_SERVER_USER'),':',get-property('IS_SERVER_PASSWORD'))))" name="Authorization" scope="transport" type="STRING" xmlns:ns="http://org.apache.synapse/xsd"/>
+    <property description="HTTP_METHOD:POST" name="HTTP_METHOD" scope="axis2" type="STRING" value="POST"/>
+    <property description="uri.var.host" expression="fn:concat(get-property('IDENTITY_SERVER_HOST'), '/services/RemoteUserStoreManagerService')" name="uri.var.host" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd"/>
+    <property description="messageType" name="messageType" scope="axis2" type="STRING" value="text/xml"/>
+    <property description="ContentType" name="ContentType" scope="axis2" type="STRING" value="text/xml"/>
+    <log description="Request Payload" level="custom">
+        <property expression="get-property('uri.var.host')" name="uri.var.host"/>
+        <property expression="get-property('transport','Authorization')" name="Authorization"/>
+        <property expression="$env" name="payload"/>
+    </log>
+    <call>
+        <endpoint key="GIRHDS_IS_EP"/>
+    </call>
+    <property description="existingFullRoles" expression="json-eval($.getRoleNamesResponse.return)" name="existingFullRoles" scope="default" type="STRING"/>
+    <log description="Dont know why JSON" level="custom">
+        <property expression="get-property('axis2','ContentType')" name="ContentType"/>
+    </log>
+</sequence>

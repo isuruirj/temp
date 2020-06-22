@@ -1,0 +1,383 @@
+{
+    "claims": [
+        {
+            "claim": "codigoTrabajador",
+            "display": "Codigo Trabajador",
+            "AD" : "codigoTrabajador",
+            "order": 1
+        },
+        {
+            "claim": "apellidosEmpleado",
+            "display": "Apellidos Empleado",
+            "AD" : "apellidosEmpleado",
+            "order": 2
+        },
+        {
+            "claim": "tipoIdentificacion",
+            "display": "Tipo Identificacion",
+            "order": 3,
+            "PPRD": "tipoIdentificacion",
+            "LOGICIEL": "tipoIdentificacion",            
+            "BANCS": "tipoIdentificacion"          
+        },
+        {
+            "claim": "identificacionSupervisor",
+            "display": "Identificacion Supervisor",
+            "AD": "identificacionSupervisor",            
+            "order": 4
+        },
+        {
+            "claim": "nombreSupervisor",
+            "display": "Nombre Supervisor",
+            "order": 5,
+            "AD": "nombreSupervisor"         
+        }
+    ]
+}
+---------------------------------------
+{
+    "claims": [
+        {
+            "claim": "codigoAgrupacion",
+            "display": "Codigo Agrupacion",
+            "AD": "codigoAgrupacion",
+            "order": 6
+        },
+        {
+            "claim": "nombreAgrupacion",
+            "display": "Nombre Agrupacion",
+            "AD": "nombreAgrupacion",
+            "order": 7
+        },
+        {
+            "claim": "codigoDivision",
+            "display": "Codigo Division",
+            "AD": "codigoDivision",
+            "order": 8
+        },
+        {
+            "claim": "nombreDivision",
+            "display": "Nombre Division",
+            "AD": "nombreDivision",
+            "order": 9
+        },
+        {
+            "claim": "codigoDepartamento",
+            "display": "Codigo Departamento",
+            "AD": "codigoDepartamento",
+            "order": 10
+        }
+    ]
+}
+---------------------------------------
+{
+    "claims": [
+        {
+            "claim": "nombreDepartamento",
+            "display": "Nombre Departamento",
+            "AD": "nombreDepartamento",
+            "order": 11
+        },
+        {
+            "claim": "codigoArea",
+            "display": "Codigo Area",
+            "AD": "codigoArea",
+            "order": 12
+        },
+        {
+            "claim": "nombreArea",
+            "display": "Nombre Area",
+            "AD": "nombreArea",
+            "order": 13
+        },
+        {
+            "claim": "nombreCentroCosto",
+            "display": "Nombre Centro Costo",
+            "order": 14,
+            "BANCS": "nombreCentroCosto"            
+
+        },
+        {
+            "claim": "nombreLocalidad",
+            "display": "Nombre Localidad",
+            "order": 15,
+            "BANCS": "nombreLocalidad"            
+        }
+    ]
+}
+---------------------------------------
+{
+    "claims": [
+        {
+            "claim": "codigoNivelJerarquico",
+            "display": "Codigo Nivel Jerarquico",
+            "order": 15,
+            "AD": "codigoNivelJerarquico"
+        },
+        {
+            "claim": "nombreNivelJerarquico",
+            "display": "Nombre Nivel Jerarquico",
+            "order": 16,
+            "AD": "nombreNivelJerarquico"
+        },
+        {
+            "claim": "numeroCuentaDeposito",
+            "display": "Numero Cuenta Deposito",
+            "order": 17,
+            "AD": "numeroCuentaDeposito"
+        },
+        {
+            "claim": "celular",
+            "display": "Celular",
+            "order": 18,
+            "AD": "celular"
+        },
+        {
+            "claim": "codigoEmpleado",
+            "display": "Codigo Empleado",
+            "order": 19,
+            "AD": "codigoEmpleado"
+        },
+        {
+            "claim": "tipoUsuario",
+            "display": "Tipo Usuario",
+            "order": 20,
+            "AD": "tipoUsuario"
+        }
+    ]
+}
+---------------------------------------
+{
+    "claims": [
+        {
+            "claim": "subTipo",
+            "display": "Subtipo Usuario",
+            "order": 21,
+            "AD": "subTipo"
+        },
+        {
+            "claim": "grupoTransaccion",
+            "display": "BC-Grupo Transaccion",
+            "order": 22,
+            "BANCS": "especificos.grupoTransaccion"
+
+        },
+        {
+            "claim": "nivelCapacidad",
+            "display": "BC-Nivel Capacidad",
+            "order": 23,
+            "BANCS": "especificos.nivelCapacidad"
+        },
+        {
+            "claim": "nivelCorreo",
+            "display": "BC-Nivel Correo",
+            "order": 24,
+            "BANCS": "especificos.nivelCorreo"
+        },
+        {
+            "claim": "userType",
+            "display": "BC-User Type",
+            "order": 25,
+            "BANCS": "especificos.userType"
+        }
+    ]
+}
+---------------------------------------
+{
+    "claims": [
+        {
+            "claim": "chngBranchAlwd",
+            "display": "BC-Chng Branch Alwd",
+            "order": 26,
+            "BANCS": "especificos.chngBranchAlwd"
+        },
+        {
+            "claim": "brchSup",
+            "display": "BC-Brch Sup",
+            "order": 27,
+            "BANCS": "especificos.brchSup"
+        },
+        {
+            "claim": "atmFlag",
+            "display": "BC-atm Flag",
+            "order": 28,
+            "BANCS": "especificos.atmFlag"
+        },
+        {
+            "claim": "accsignMod",
+            "display": "BC-Accsign Mod",
+            "order": 29,
+            "BANCS": "especificos.accsignMod"
+        },
+        {
+            "claim": "casualApprovallim",
+            "display": "BC-Casual Approvallim",
+            "order": 30,
+            "BANCS": "especificos.casualApprovallim"
+        }
+    ]
+}
+---------------------------------------
+{
+    "claims": [
+        {
+            "claim": "nivelSeguridad",
+            "display": "BC-Nivel Seguridad",
+            "order": 31,
+            "BANCS": "especificos.nivelSeguridad"
+        },
+        {
+            "claim": "estadoUsuario",
+            "display": "BC-Estado Usuario",
+            "order": 32,
+            "BANCS": "especificos.estadoUsuario"
+        },
+        {
+            "claim": "perfilUsuario",
+            "display": "PD-Perfil Usuario",
+            "order": 33,
+            "PPRD": "especificos.perfilUsuario"
+        },
+        {
+            "claim": "loginUsuario",
+            "display": "PD-login Usuario",
+            "order": 34,
+            "PPRD": "especificos.loginUsuario"
+        },
+        {
+            "claim": "usuarioInterno",
+            "display": "PD-Usuario Interno",
+            "order": 35,
+            "PPRD": "especificos.usuarioInterno"
+        }
+    ]
+}
+---------------------------------------
+{
+    "claims": [
+        {
+            "claim": "interno",
+            "display": "LG-Interno",
+            "order": 36,
+            "LOGICIEL": "especificos.interno"            
+        },
+        {
+            "claim": "enviarMail",
+            "display": "LG-Enviar Mail",
+            "order": 37,
+            "LOGICIEL": "especificos.enviarMail"            
+        },
+        {
+            "claim": "cambioPwdInicial",
+            "display": "LG-Cambio Pwd Inicial",
+            "order": 38,
+            "LOGICIEL": "especificos.cambioPwdInicial"            
+        },
+        {
+            "claim": "codigoTipoUsuario",
+            "display": "LG-Codigo Tipo Usuario",
+            "order": 39,
+            "LOGICIEL": "especificos.codigoTipoUsuario"            
+        },
+        {
+            "claim": "codigoRol",
+            "display": "LG-Codigo Rol",
+            "order": 40,
+            "LOGICIEL": "especificos.codigoRol"            
+        }
+    ]
+}
+---------------------------------------
+{
+    "claims": [
+        {
+            "claim": "codigoHorario",
+            "display": "LG-Codigo Horario",
+            "order": 41,
+            "LOGICIEL": "especificos.codigoHorario"            
+        },
+        {
+            "claim": "loginSupervisor",
+            "display": "LG-Login Supervisor",
+            "order": 42,
+            "LOGICIEL": "especificos.loginSupervisor"            
+        },
+        {
+            "claim": "codigoAgenciaDefault",
+            "display": "LGCodigo Agencia Default",
+            "order": 43,
+            "LOGICIEL": "especificos.codigoAgenciaDefault"            
+        },
+        {
+            "claim": "validarAtributosPerfil",
+            "display": "LG-Validar Atributos Perfil",
+            "order": 44,
+            "LOGICIEL": "especificos.validarAtributosPerfil"            
+        },
+        {
+            "claim": "codigoAtributo",
+            "display": "LG-Codigo Atributo",
+            "order": 45,
+            "LOGICIEL": "especificos.codigoAtributo"            
+        }
+    ]
+}
+---------------------------------------
+{
+    "claims": [
+        {
+            "claim": "aplicaciones",
+            "display": "LG-Aplicaciones",
+            "order": 45,
+            "LOGICIEL": "especificos.aplicaciones"            
+        },
+
+        {
+            "claim": "userDataId",
+            "display": "User Data ID",
+            "order": 47,
+            "AD": "userDataId"            
+
+        },
+        {
+            "claim": "globalProfileCode",
+            "display": "Codigo Perfil Global ",
+            "order": 48,
+            "AD": "globalProfileCode"            
+        },
+        {
+            "claim": "globalProfileName",
+            "display": "Nombre Perfil Global",
+            "order": 49,
+            "AD": "globalProfileName"            
+        },
+        {
+            "claim": "globalProfileId",
+            "display": "ID Perfil Global",
+            "order": 50,
+            "AD": "globalProfileId"            
+        }
+    ]
+}
+---------------------------------------
+{
+    "claims": [
+        {
+            "claim": "terminal",
+            "display": "Terminal",
+            "order": 51,
+            "PRIMARY" : "activeSomething",
+            "PPRD": "terminal",
+            "BANCS": "terminal"          
+        },
+        {
+            "claim": "tellerName",
+            "display": "Teller Name",
+            "order": 53,
+            "BANCS": "tellerName",
+            "PPRD": "tellerName",
+            "LOGICIEL": "tellerName"          
+        }
+
+    ]
+}

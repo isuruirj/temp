@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template name="CreateTaskProvisioningHistory" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="taskProvisiongId" />
+    <sequence>
+        <log level="custom">
+            <property name="CreateTaskProvisioningHistory" value="Inicio..." />
+            <property name="taskProvisiongId" expression="$func:taskProvisiongId" />
+        </log>
+        <property name="uri.var.taskProvisiongId" expression="$func:taskProvisiongId" />
+        <call>
+            <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/provisioning/TaskProvisioningSimple/{uri.var.taskProvisiongId}" />
+        </call>
+        <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+            <then>
+                <call-template target="GetCurrentDateTemplate" />
+                <payloadFactory media-type="json">
+                    <format>
+                        {
+                            "taskProvisioningHistory": {
+                                "taskProvisioningId":  $1,
+                                "creationDate": "$2",
+                                "status": "$3"
+                            }
+                        }                        
+                    </format>
+                    <args>
+                        <arg evaluator="xml" expression="get-property('uri.var.taskProvisiongId')" />
+                        <arg evaluator="xml" expression="get-property('currentDate')" />
+                        <arg evaluator="xml" expression="//provisioningStatus" />
+                    </args>
+                </payloadFactory>
+                <call>
+                    <endpoint template="HTTPEndpointPostTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/provisioning/TaskProvisioningHistory" />
+                </call>
+                <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                    <then></then>
+                    <else>
+                        <property name="fault" value="CreateTaskProvisioningHistory: error when create TaskProvisioningHistory" />
+                        <sequence key="FaultUserDataSeq" />
+                    </else>
+                </filter>
+            </then>
+            <else>
+                <property name="fault" value="CreateTaskProvisioningHistory: error when get TaskProvisioning" />
+                <sequence key="FaultUserDataSeq" />
+            </else>
+        </filter>
+        <log level="custom">
+            <property name="CreateTaskProvisioningHistory" value="Fin..." />
+        </log>
+    </sequence>
+</template>

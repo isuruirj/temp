@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ProvisioningSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningSeq" value="Inicio.." />
+        <property name="X-Forwarded-For" expression="$ctx:X-Forwarded-For" />
+        <property name="UserName" expression="$ctx:UserName" />
+        <property name="uri.var.operationProvisioningId" expression="$ctx:uri.var.operationProvisioningId" />
+    </log>
+    <!-- Consultar operacion -->
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/provisioning/OperationProvisioning/{uri.var.operationProvisioningId}" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <property name="operationProvisioning" expression="$body//*" scope="default" type="OM" />
+        </then>
+        <else>
+            <property name="fault" value="ProvisioningSeq: Error get OperationProvisioning" />
+            <sequence key="FaultSeq" />
+        </else>
+    </filter>
+    <!-- Crear Usuarios -->
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningSeq" value="Create..." />
+    </log>
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/provisioning/TaskProvisioningSimple?operationProvisioningId={uri.var.operationProvisioningId}&amp;action=C&amp;type=1" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <filter regex="true" source="boolean(//taskProvisioningSimpleList/taskProvisioningSimple)">
+                <then>
+                    <log level="custom" category="DEBUG">
+                        <property name="ProvisioningSeq" value="Create.1" />
+                    </log>
+                    <iterate expression="//taskProvisioningSimpleList/taskProvisioningSimple" id="taskProvisioningCreateId">
+                        <target>
+                            <sequence>
+                                <log level="custom" category="DEBUG">
+                                    <property name="ProvisioningSeq" value="Create.2." />
+                                </log>
+                                <enrich>
+                                    <source clone="false" type="body" />
+                                    <target action="replace" type="property" property="payloadCreate" />
+                                </enrich>
+                                <property name="X-Forwarded-For" expression="$ctx:X-Forwarded-For" />
+                                <property name="UserName" expression="$ctx:UserName" />
+                                <property name="dependency" value="false" type="BOOLEAN" />
+                                <sequence key="ProvisioningCreateUserSeq" />
+                                <enrich>
+                                    <source clone="false" type="property" property="payloadCreate" />
+                                    <target type="body" />
+                                </enrich>
+                            </sequence>
+                        </target>
+                    </iterate>
+                    <aggregate id="taskProvisioningCreateId">
+                        <completeCondition>
+                            <messageCount min="-1" max="-1" />
+                        </completeCondition>
+                        <onComplete expression="$body/*[1]">
+                            <log level="custom" category="DEBUG">
+                                <property name="agregado" value="ok create" />
+                            </log>
+                        </onComplete>
+                    </aggregate>
+                </then>
+                <else>
+                    <log level="custom" category="DEBUG">
+                        <property name="ProvisioningSeq" value="Create.4." />
+                    </log>
+                </else>
+            </filter>
+        </then>
+        <else>
+            <property name="fault" value="ProvisioningSeq: Error get TaskProvisioning Create" />
+            <sequence key="FaultSeq" />
+        </else>
+    </filter>
+    <!-- Actualizar Usuarios -->
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningSeq" value="Update.." />
+    </log>
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/provisioning/TaskProvisioningSimple?operationProvisioningId={uri.var.operationProvisioningId}&amp;action=U&amp;type=1" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <filter regex="true" source="boolean(//taskProvisioningSimpleList/taskProvisioningSimple)">
+                <then>
+                    <log level="custom" category="DEBUG">
+                        <property name="ProvisioningSeq" value="Update.1." />
+                    </log>
+                    <iterate expression="//taskProvisioningSimpleList/taskProvisioningSimple" id="taskProvisioningUpdateId">
+                        <target>
+                            <sequence>
+                                <log level="custom" category="DEBUG">
+                                    <property name="Provisioning" value="Update.2" />
+                                </log>
+                                <enrich>
+                                    <source clone="false" type="body" />
+                                    <target action="replace" type="property" property="payloadUpdate" />
+                                </enrich>
+                                <property name="X-Forwarded-For" expression="$ctx:X-Forwarded-For" />
+                                <property name="UserName" expression="$ctx:UserName" />
+                                <sequence key="ProvisioningUpdateUserSeq" />
+                                <enrich>
+                                    <source clone="false" type="property" property="payloadUpdate" />
+                                    <target type="body" />
+                                </enrich>
+                            </sequence>
+                        </target>
+                    </iterate>
+                    <aggregate id="taskProvisioningUpdateId">
+                        <completeCondition>
+                            <messageCount min="-1" max="-1" />
+                        </completeCondition>
+                        <onComplete expression="$body/*[1]">
+                            <log level="custom" category="DEBUG">
+                                <property name="agregado" value="ok update" />
+                            </log>
+                        </onComplete>
+                    </aggregate>
+                </then>
+                <else>
+                    <log level="custom" category="DEBUG">
+                        <property name="Provisioning" value="Update.3" />
+                    </log>
+                </else>
+            </filter>
+        </then>
+        <else>
+            <property name="fault" value="ProvisioningSeq: Error get TaskProvisioning Update" />
+            <sequence key="FaultSeq" />
+        </else>
+    </filter>
+    <!-- Elimina usuarioas -->
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningSeq" value="Delete.." />
+    </log>
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/provisioning/TaskProvisioningSimple?operationProvisioningId={uri.var.operationProvisioningId}&amp;action=D&amp;type=1" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <filter regex="true" source="boolean(//taskProvisioningSimpleList/taskProvisioningSimple)">
+                <then>
+                    <log level="custom" category="DEBUG">
+                        <property name="Provisioning" value="Delete.1" />
+                    </log>
+                    <iterate expression="//taskProvisioningSimpleList/taskProvisioningSimple" id="taskProvisioningDeleteId">
+                        <target>
+                            <sequence>
+                                <log level="custom" category="DEBUG">
+                                    <property name="ProvisioningSeq" value="Delete.1." />
+                                </log>
+                                <enrich>
+                                    <source clone="false" type="body" />
+                                    <target action="replace" type="property" property="payloadDelete" />
+                                </enrich>
+                                <property name="X-Forwarded-For" expression="$ctx:X-Forwarded-For" />
+                                <property name="UserName" expression="$ctx:UserName" />
+                                <sequence key="ProvisioningDeleteUserSeq" />
+                                <enrich>
+                                    <source clone="false" type="property" property="payloadDelete" />
+                                    <target type="body" />
+                                </enrich>
+                            </sequence>
+                        </target>
+                    </iterate>
+                    <aggregate id="taskProvisioningDeleteId">
+                        <completeCondition>
+                            <messageCount min="-1" max="-1" />
+                        </completeCondition>
+                        <onComplete expression="$body/*[1]">
+                            <log level="custom" category="DEBUG">
+                                <property name="agregado" value="ok create" />
+                            </log>
+                        </onComplete>
+                    </aggregate>
+                </then>
+                <else>
+                    <log level="custom" category="DEBUG">
+                        <property name="ProvisioningSeq" value="Delete.3." />
+                    </log>
+                </else>
+            </filter>
+        </then>
+        <else>
+            <property name="fault" value="ProvisioningSeq: Error get TaskProvisioning Delete" />
+            <sequence key="FaultSeq" />
+        </else>
+    </filter>
+    <!-- Requerimientos manuales por ticket -->
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningSeq" value="Manuales" />
+    </log>
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/provisioning/TaskProvisioning?operationProvisioning.id={uri.var.operationProvisioningId}&amp;type=0&amp;orderby=action" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <filter regex="true" source="boolean(//taskProvisioningList/taskProvisioning)">
+                <then>
+                    <!-- Generar xml para ticket manuales -->
+                    <property name="operationProvisioningId" expression="$ctx:uri.var.operationProvisioningId" />
+                    <sequence key="ProvisioningManualSeq" />
+                </then>
+            </filter>
+        </then>
+        <else>
+            <property name="fault" value="ProvisioningSeq: Error get TaskProvisioning Manuales" />
+            <sequence key="FaultSeq" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningSeq" value="Fin.." />
+        <property name="X-Forwarded-For" expression="$ctx:X-Forwarded-For" />
+        <property name="UserName" expression="$ctx:UserName" />
+    </log>
+</sequence>

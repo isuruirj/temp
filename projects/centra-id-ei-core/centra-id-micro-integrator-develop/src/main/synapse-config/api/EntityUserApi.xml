@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/api.centraid/identity/User" name="CentraIDidentityUserApi" version="1.0.0" version-type="context" xmlns="http://ws.apache.org/ns/synapse">
+    <resource faultSequence="FaultSeq" methods="GET">
+         <inSequence>
+             <sequence key="InBoundSeq" />
+             <sequence key="UserListSeq" />
+             <sequence key="OutboundSeq" />
+             <respond />
+         </inSequence>
+         <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/count">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="UserCountSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/max/{field}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="UserMaxSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/sum/{field}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="UserSumSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="POST" uri-template="/">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+             <sequence key="UserCreateSeq" />
+             <sequence key="OutboundSeq" />
+             <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="PUT" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="UserUpdateSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="DELETE" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="UserDeleteSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/{from}/{to}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="UserFromToSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/{username}">
+        <inSequence>
+            <sequence key="InBoundSeq" />
+            <sequence key="UserRetrieveSeq" />
+            <sequence key="OutboundSeq" />
+            <respond />
+       </inSequence>
+       <outSequence/>
+    </resource>
+</api>

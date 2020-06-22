@@ -1,0 +1,610 @@
+<data name="MassiveProcessDSS" serviceNamespace="centra-id.com" transports="https" >
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <query id="insert_massive_process_query" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>
+      INSERT INTO sch_centra_id.massive_process(json,state,result,observations,type_action,valid,username,codigo_trabajador,apellidos_empleado,nombres_empleado,identificacion,
+	      identificacion_supervisor,nombre_supervisor,codigo_compania,nombre_compania,codigo_agrupacion,nombre_agrupacion,codigo_division,nombre_division,codigo_departamento,
+	      nombre_departamento,codigo_area,nombre_area,codigo_sucursal,nombre_sucursal,codigo_centro_costo,nombre_centro_costo,nombre_localidad,nombre_cargo,codigo_nivel_jerarquico,
+	      nombre_nivel_jerarquico,numero_cuenta_deposito,estado_empleado,codigo_empleado,tipo_usuario,sub_tipo,fecha_registro,guid,type_event,
+	      modifica_datos,recalculo_perfil,fecha_datos,fecha_provisionamiento,uuid,fecha_ingreso_empleado,fecha_salida_empleado,celular) 
+	      VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,getdate(),?,?,?,?,convert(date,?,120),convert(date,?,120),NEWID(),
+	      ?,?,?)
+        </sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long" />
+        </result>
+        <param name="json" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <!-- [N]o procesado, [Y]Si procesado -->
+        <param name="state" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <!-- [P]endiente, [C]ompletado, [I]ncompleto -->
+        <param name="result" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="observations" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <!-- [C]reate, [U]pdate, [D]elete -->
+        <param name="typeAction" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="1" name="valid" ordinal="6" paramType="SCALAR" sqlType="INTEGER" type="IN" />
+        <param defaultValue="#{NULL}" name="username" ordinal="7" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="codigoTrabajador" ordinal="8" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="apellidosEmpleado" ordinal="9" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="nombresEmpleado" ordinal="10" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="identificacion" ordinal="11" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="identificacionSupervisor" ordinal="12" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="nombreSupervisor" ordinal="13" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="codigoCompania" ordinal="14" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="nombreCompania" ordinal="15" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="codigoAgrupacion" ordinal="16" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="nombreAgrupacion" ordinal="17" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="codigoDivision" ordinal="18" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="nombreDivision" ordinal="19" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="codigoDepartamento" ordinal="20" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="nombreDepartamento" ordinal="21" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="codigoArea" ordinal="22" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="nombreArea" ordinal="23" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="codigoSucursal" ordinal="24" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="nombreSucursal" ordinal="25" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="codigoCentroCosto" ordinal="26" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="nombreCentroCosto" ordinal="27" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="nombreLocalidad" ordinal="28" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="nombreCargo" ordinal="29" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="codigoNivelJerarquico" ordinal="30" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="nombreNivelJerarquico" ordinal="31" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="numeroCuentaDeposito" ordinal="32" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="estadoEmpleado" ordinal="33" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="codigoEmpleado" ordinal="34" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="tipoUsuario" ordinal="35" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="subTipo" ordinal="36" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="guid" ordinal="37" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <!-- [C]arga , [P]roblemas -->
+        <param name="typeEvent" ordinal="38" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="modificaDatos" ordinal="39" paramType="SCALAR" sqlType="INTEGER" type="IN" />
+        <param name="recalculoPerfil" ordinal="40" paramType="SCALAR" sqlType="INTEGER" type="IN" />
+        <param name="fechaDatos" ordinal="41" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="fechaProvisionamiento" ordinal="42" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="fechaIngresoEmpleado" ordinal="43" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="fechaSalidaEmpleado" ordinal="44" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param defaultValue="#{NULL}" name="celular" ordinal="45" paramType="SCALAR" sqlType="STRING" type="IN" />
+    </query>
+    <query id="select_with_date_range_massive_process_query" useConfig="default">
+        <sql>
+      SELECT id, json, state, result, observations, type_action, username, codigo_trabajador, apellidos_empleado, nombres_empleado, identificacion, 
+	      identificacion_supervisor, nombre_supervisor, codigo_compania, nombre_compania, codigo_agrupacion, nombre_agrupacion, codigo_division, nombre_division, 
+	      codigo_departamento, nombre_departamento, codigo_area, nombre_area, codigo_sucursal, nombre_sucursal, codigo_centro_costo, nombre_centro_costo, 
+	      nombre_localidad, nombre_cargo, codigo_nivel_jerarquico, nombre_nivel_jerarquico, numero_cuenta_deposito, fecha_ingreso_empleado, fecha_salida_empleado, 
+	      estado_empleado, codigo_empleado, tipo_usuario, sub_tipo,fecha_registro,guid,type_event,modifica_datos,recalculo_perfil,fecha_datos,fecha_provisionamiento,uuid
+      FROM sch_centra_id.massive_process WHERE valid=1 AND CAST(fecha_registro AS DATE) BETWEEN CONVERT(DATE, ?, 105) AND CONVERT(DATE, ?, 105) 
+        </sql>
+        <param name="fromDate" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="toDate" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <result element="MassiveProcesses" rowName="MassiveProcess">
+            <element column="id" name="id" xsdType="xs:long" />
+            <element column="json" name="json" xsdType="xs:string" />
+            <element column="state" name="state" xsdType="xs:string" />
+            <element column="result" name="result" xsdType="xs:string" />
+            <element column="observations" name="observations" xsdType="xs:string" />
+            <element column="type_action" name="typeAction" xsdType="xs:string" />
+            <element column="username" name="username" xsdType="xs:string" />
+            <element column="codigo_trabajador" name="codigoTrabajador" xsdType="xs:string" />
+            <element column="apellidos_empleado" name="apellidosEmpleado" xsdType="xs:string" />
+            <element column="nombres_empleado" name="nombresEmpleado" xsdType="xs:string" />
+            <element column="identificacion" name="identificacion" xsdType="xs:string" />
+            <element column="identificacion_supervisor" name="identificacionSupervisor" xsdType="xs:string" />
+            <element column="nombre_supervisor" name="nombreSupervisor" xsdType="xs:string" />
+            <element column="codigo_compania" name="codigoCompania" xsdType="xs:string" />
+            <element column="nombre_compania" name="nombreCompania" xsdType="xs:string" />
+            <element column="codigo_agrupacion" name="codigoAgrupacion" xsdType="xs:string" />
+            <element column="nombre_agrupacion" name="nombreAgrupacion" xsdType="xs:string" />
+            <element column="codigo_division" name="codigoDivision" xsdType="xs:string" />
+            <element column="nombre_division" name="nombreDivision" xsdType="xs:string" />
+            <element column="codigo_departamento" name="codigoDepartamento" xsdType="xs:string" />
+            <element column="nombre_departamento" name="nombreDepartamento" xsdType="xs:string" />
+            <element column="codigo_area" name="codigoArea" xsdType="xs:string" />
+            <element column="nombre_area" name="nombreArea" xsdType="xs:string" />
+            <element column="codigo_sucursal" name="codigoSucursal" xsdType="xs:string" />
+            <element column="nombre_sucursal" name="nombreSucursal" xsdType="xs:string" />
+            <element column="codigo_centro_costo" name="codigoCentroCosto" xsdType="xs:string" />
+            <element column="nombre_centro_costo" name="nombreCentroCosto" xsdType="xs:string" />
+            <element column="nombre_localidad" name="nombreLocalidad" xsdType="xs:string" />
+            <element column="nombre_cargo" name="nombreCargo" xsdType="xs:string" />
+            <element column="codigo_nivel_jerarquico" name="codigoNivelJerarquico" xsdType="xs:string" />
+            <element column="nombre_nivel_jerarquico" name="nombreNivelJerarquico" xsdType="xs:string" />
+            <element column="numero_cuenta_deposito" name="numeroCuentaDeposito" xsdType="xs:string" />
+            <element column="fecha_ingreso_empleado" name="fechaIngresoEmpleado" xsdType="xs:string" />
+            <element column="fecha_salida_empleado" name="fechaSalidaEmpleado" xsdType="xs:string" />
+            <element column="estado_empleado" name="estadoEmpleado" xsdType="xs:string" />
+            <element column="codigo_empleado" name="codigoEmpleado" xsdType="xs:string" />
+            <element column="tipo_usuario" name="tipoUsuario" xsdType="xs:string" />
+            <element column="sub_tipo" name="subTipo" xsdType="xs:string" />
+            <element column="fecha_registro" name="fechaRegistro" xsdType="xs:datetime" />
+            <element column="guid" name="guid" xsdType="xs:string" />
+            <element column="type_event" name="typeEvent" xsdType="xs:string" />
+            <element column="modifica_datos" name="modificaDatos" xsdType="xs:integer" />
+            <element column="recalculo_perfil" name="recalculoPerfil" xsdType="xs:integer" />
+            <element column="fecha_datos" name="fechaDatos" xsdType="xs:string" />
+            <element column="fecha_provisionamiento" name="fechaProvisionamiento" xsdType="xs:string" />
+            <element column="uuid" name="uuid" xsdType="xs:string" />
+        </result>
+    </query>
+    <query id="select_with_key_massive_process_query" useConfig="default">
+        <sql>
+        SELECT id, json, state, result, observations, type_action,  username, codigo_trabajador, apellidos_empleado, nombres_empleado, identificacion, 
+		        identificacion_supervisor, nombre_supervisor, codigo_compania, nombre_compania, codigo_agrupacion, nombre_agrupacion, codigo_division, nombre_division, 
+		        codigo_departamento, nombre_departamento, codigo_area, nombre_area, codigo_sucursal, nombre_sucursal, codigo_centro_costo, nombre_centro_costo, 
+		        nombre_localidad, nombre_cargo, codigo_nivel_jerarquico, nombre_nivel_jerarquico, numero_cuenta_deposito, fecha_ingreso_empleado, 
+		        fecha_salida_empleado, estado_empleado, codigo_empleado, tipo_usuario, sub_tipo , fecha_registro,guid,type_event,
+		        modifica_datos,recalculo_perfil,fecha_datos,fecha_provisionamiento,uuid
+		     FROM sch_centra_id.massive_process WHERE id=? AND valid=1</sql>
+        <param name="id" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN" />
+        <result element="MassiveProcesses" rowName="MassiveProcess">
+            <element column="id" name="id" xsdType="xs:long" />
+            <element column="json" name="json" xsdType="xs:string" />
+            <element column="state" name="state" xsdType="xs:string" />
+            <element column="result" name="result" xsdType="xs:string" />
+            <element column="observations" name="observations" xsdType="xs:string" />
+            <element column="type_action" name="type_action" xsdType="xs:string" />
+            <element column="username" name="username" xsdType="xs:string" />
+            <element column="codigo_trabajador" name="codigo_Trabajador" xsdType="xs:string" />
+            <element column="apellidos_empleado" name="apellidosEmpleado" xsdType="xs:string" />
+            <element column="nombres_empleado" name="nombresEmpleado" xsdType="xs:string" />
+            <element column="identificacion" name="identificacion" xsdType="xs:string" />
+            <element column="identificacion_supervisor" name="identificacionSupervisor" xsdType="xs:string" />
+            <element column="nombre_supervisor" name="nombreSupervisor" xsdType="xs:string" />
+            <element column="codigo_compania" name="codigoCompania" xsdType="xs:string" />
+            <element column="nombre_compania" name="nombreCompania" xsdType="xs:string" />
+            <element column="codigo_agrupacion" name="codigoAgrupacion" xsdType="xs:string" />
+            <element column="nombre_agrupacion" name="nombreAgrupacion" xsdType="xs:string" />
+            <element column="codigo_division" name="codigoDivision" xsdType="xs:string" />
+            <element column="nombre_division" name="nombreDivision" xsdType="xs:string" />
+            <element column="codigo_departamento" name="codigoDepartamento" xsdType="xs:string" />
+            <element column="nombre_departamento" name="nombreDepartamento" xsdType="xs:string" />
+            <element column="codigo_area" name="codigoArea" xsdType="xs:string" />
+            <element column="nombre_area" name="nombreArea" xsdType="xs:string" />
+            <element column="codigo_sucursal" name="codigoSucursal" xsdType="xs:string" />
+            <element column="nombre_sucursal" name="nombreSucursal" xsdType="xs:string" />
+            <element column="codigo_centro_costo" name="codigoCentroCosto" xsdType="xs:string" />
+            <element column="nombre_centro_costo" name="nombreCentroCosto" xsdType="xs:string" />
+            <element column="nombre_localidad" name="nombreLocalidad" xsdType="xs:string" />
+            <element column="nombre_cargo" name="nombreCargo" xsdType="xs:string" />
+            <element column="codigo_nivel_jerarquico" name="codigoNivelJerarquico" xsdType="xs:string" />
+            <element column="nombre_nivel_jerarquico" name="nombreNivelJerarquico" xsdType="xs:string" />
+            <element column="numero_cuenta_deposito" name="numeroCuentaDeposito" xsdType="xs:string" />
+            <element column="fecha_ingreso_empleado" name="fechaIngresoEmpleado" xsdType="xs:string" />
+            <element column="fecha_salida_empleado" name="fechaSalidaEmpleado" xsdType="xs:string" />
+            <element column="estado_empleado" name="estadoEmpleado" xsdType="xs:string" />
+            <element column="codigo_empleado" name="codigoEmpleado" xsdType="xs:string" />
+            <element column="tipo_usuario" name="tipoUsuario" xsdType="xs:string" />
+            <element column="sub_tipo" name="subTipo" xsdType="xs:string" />
+            <element column="fecha_registro" name="fechaRegistro" xsdType="xs:datetime" />
+            <element column="guid" name="guid" xsdType="xs:string" />
+            <element column="type_event" name="typeEvent" xsdType="xs:string" />
+            <element column="type_event" name="typeEvent" xsdType="xs:string" />
+            <element column="modifica_datos" name="modificaDatos" xsdType="xs:integer" />
+            <element column="recalculo_perfil" name="recalculoPerfil" xsdType="xs:string" />
+            <element column="fecha_datos" name="fechaDatos" xsdType="xs:string" />
+            <element column="fecha_provisionamiento" name="fechaProvisionamiento" xsdType="xs:string" />
+            <element column="uuid" name="uuid" xsdType="xs:string" />
+        </result>
+    </query>
+    <query id="select_with_guid_by_typeaction_massive_process_query" useConfig="default">
+        <sql>
+      SELECT id, json, state, result, observations, type_action, username, codigo_trabajador, apellidos_empleado, nombres_empleado, identificacion, 
+	      identificacion_supervisor, nombre_supervisor, codigo_compania, nombre_compania, codigo_agrupacion, nombre_agrupacion, codigo_division, nombre_division, 
+	      codigo_departamento, nombre_departamento, codigo_area, nombre_area, codigo_sucursal, nombre_sucursal, codigo_centro_costo, nombre_centro_costo, 
+	      nombre_localidad, nombre_cargo, codigo_nivel_jerarquico, nombre_nivel_jerarquico, numero_cuenta_deposito, fecha_ingreso_empleado, fecha_salida_empleado, 
+	      estado_empleado, codigo_empleado, tipo_usuario, sub_tipo,fecha_registro,guid,type_event,modifica_datos,recalculo_perfil,fecha_datos,fecha_provisionamiento,uuid,celular,
+          GLOBAL_PROFILE_ID,GLOBAL_PROFILE_CODE,GLOBAL_PROFILE_NAME
+      FROM sch_centra_id.massive_process WHERE valid=1 AND guid=? and type_action=? AND state='N' AND result='P' AND type_event='C'
+        </sql>
+        <param name="guid" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="typeAction" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <result element="MassiveProcesses" rowName="MassiveProcess">
+            <element column="id" name="id" xsdType="xs:long" />
+            <element column="json" name="json" xsdType="xs:string" />
+            <element column="state" name="state" xsdType="xs:string" />
+            <element column="result" name="result" xsdType="xs:string" />
+            <element column="observations" name="observations" xsdType="xs:string" />
+            <element column="type_action" name="typeAction" xsdType="xs:string" />
+            <element column="username" name="username" xsdType="xs:string" />
+            <element column="codigo_trabajador" name="codigoTrabajador" xsdType="xs:string" />
+            <element column="apellidos_empleado" name="apellidosEmpleado" xsdType="xs:string" />
+            <element column="nombres_empleado" name="nombresEmpleado" xsdType="xs:string" />
+            <element column="identificacion" name="identificacion" xsdType="xs:string" />
+            <element column="identificacion_supervisor" name="identificacionSupervisor" xsdType="xs:string" />
+            <element column="nombre_supervisor" name="nombreSupervisor" xsdType="xs:string" />
+            <element column="codigo_compania" name="codigoCompania" xsdType="xs:string" />
+            <element column="nombre_compania" name="nombreCompania" xsdType="xs:string" />
+            <element column="codigo_agrupacion" name="codigoAgrupacion" xsdType="xs:string" />
+            <element column="nombre_agrupacion" name="nombreAgrupacion" xsdType="xs:string" />
+            <element column="codigo_division" name="codigoDivision" xsdType="xs:string" />
+            <element column="nombre_division" name="nombreDivision" xsdType="xs:string" />
+            <element column="codigo_departamento" name="codigoDepartamento" xsdType="xs:string" />
+            <element column="nombre_departamento" name="nombreDepartamento" xsdType="xs:string" />
+            <element column="codigo_area" name="codigoArea" xsdType="xs:string" />
+            <element column="nombre_area" name="nombreArea" xsdType="xs:string" />
+            <element column="codigo_sucursal" name="codigoSucursal" xsdType="xs:string" />
+            <element column="nombre_sucursal" name="nombreSucursal" xsdType="xs:string" />
+            <element column="codigo_centro_costo" name="codigoCentroCosto" xsdType="xs:string" />
+            <element column="nombre_centro_costo" name="nombreCentroCosto" xsdType="xs:string" />
+            <element column="nombre_localidad" name="nombreLocalidad" xsdType="xs:string" />
+            <element column="nombre_cargo" name="nombreCargo" xsdType="xs:string" />
+            <element column="codigo_nivel_jerarquico" name="codigoNivelJerarquico" xsdType="xs:string" />
+            <element column="nombre_nivel_jerarquico" name="nombreNivelJerarquico" xsdType="xs:string" />
+            <element column="numero_cuenta_deposito" name="numeroCuentaDeposito" xsdType="xs:string" />
+            <element column="fecha_ingreso_empleado" name="fechaIngresoEmpleado" xsdType="xs:string" />
+            <element column="fecha_salida_empleado" name="fechaSalidaEmpleado" xsdType="xs:string" />
+            <element column="estado_empleado" name="estadoEmpleado" xsdType="xs:string" />
+            <element column="codigo_empleado" name="codigoEmpleado" xsdType="xs:string" />
+            <element column="tipo_usuario" name="tipoUsuario" xsdType="xs:string" />
+            <element column="sub_tipo" name="subTipo" xsdType="xs:string" />
+            <element column="fecha_registro" name="fechaRegistro" xsdType="xs:datetime" />
+            <element column="guid" name="guid" xsdType="xs:string" />
+            <element column="type_event" name="typeEvent" xsdType="xs:string" />
+            <element column="modifica_datos" name="modificaDatos" xsdType="xs:integer" />
+            <element column="recalculo_perfil" name="recalculoPerfil" xsdType="xs:integer" />
+            <element column="fecha_datos" name="fechaDatos" xsdType="xs:string" />
+            <element column="fecha_provisionamiento" name="fechaProvisionamiento" xsdType="xs:string" />
+            <element column="uuid" name="uuid" xsdType="xs:string" />
+            <element column="celular" name="celular" xsdType="xs:string" />
+            <element column="GLOBAL_PROFILE_ID" name="globalProfileId" xsdType="xs:string" />
+            <element column="GLOBAL_PROFILE_CODE" name="globalProfileCode" xsdType="xs:string" />
+            <element column="GLOBAL_PROFILE_NAME" name="globalProfileName" xsdType="xs:string" />
+        </result>
+    </query>
+    <query id="select_with_guid_massive_process_query" useConfig="default">
+        <sql>
+        SELECT id, json, state, result, observations, type_action, username, codigo_trabajador, apellidos_empleado, nombres_empleado, identificacion, 
+            identificacion_supervisor, nombre_supervisor, codigo_compania, nombre_compania, codigo_agrupacion, nombre_agrupacion, codigo_division, nombre_division, 
+            codigo_departamento, nombre_departamento, codigo_area, nombre_area, codigo_sucursal, nombre_sucursal, codigo_centro_costo, nombre_centro_costo, 
+            nombre_localidad, nombre_cargo, codigo_nivel_jerarquico, nombre_nivel_jerarquico, numero_cuenta_deposito, fecha_ingreso_empleado, fecha_salida_empleado, 
+            estado_empleado, codigo_empleado, tipo_usuario, sub_tipo,fecha_registro,guid,type_event,modifica_datos,recalculo_perfil,fecha_datos,fecha_provisionamiento,uuid,celular,
+           GLOBAL_PROFILE_ID,GLOBAL_PROFILE_CODE,GLOBAL_PROFILE_NAME            
+        FROM sch_centra_id.massive_process WHERE valid=1 AND guid=? AND type_event='C'
+        </sql>
+        <param name="guid" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <result element="MassiveProcesses" rowName="MassiveProcess">
+            <element column="id" name="id" xsdType="xs:long" />
+            <element column="json" name="json" xsdType="xs:string" />
+            <element column="state" name="state" xsdType="xs:string" />
+            <element column="result" name="result" xsdType="xs:string" />
+            <element column="observations" name="observations" xsdType="xs:string" />
+            <element column="type_action" name="typeAction" xsdType="xs:string" />
+            <element column="username" name="username" xsdType="xs:string" />
+            <element column="codigo_trabajador" name="codigoTrabajador" xsdType="xs:string" />
+            <element column="apellidos_empleado" name="apellidosEmpleado" xsdType="xs:string" />
+            <element column="nombres_empleado" name="nombresEmpleado" xsdType="xs:string" />
+            <element column="identificacion" name="identificacion" xsdType="xs:string" />
+            <element column="identificacion_supervisor" name="identificacionSupervisor" xsdType="xs:string" />
+            <element column="nombre_supervisor" name="nombreSupervisor" xsdType="xs:string" />
+            <element column="codigo_compania" name="codigoCompania" xsdType="xs:string" />
+            <element column="nombre_compania" name="nombreCompania" xsdType="xs:string" />
+            <element column="codigo_agrupacion" name="codigoAgrupacion" xsdType="xs:string" />
+            <element column="nombre_agrupacion" name="nombreAgrupacion" xsdType="xs:string" />
+            <element column="codigo_division" name="codigoDivision" xsdType="xs:string" />
+            <element column="nombre_division" name="nombreDivision" xsdType="xs:string" />
+            <element column="codigo_departamento" name="codigoDepartamento" xsdType="xs:string" />
+            <element column="nombre_departamento" name="nombreDepartamento" xsdType="xs:string" />
+            <element column="codigo_area" name="codigoArea" xsdType="xs:string" />
+            <element column="nombre_area" name="nombreArea" xsdType="xs:string" />
+            <element column="codigo_sucursal" name="codigoSucursal" xsdType="xs:string" />
+            <element column="nombre_sucursal" name="nombreSucursal" xsdType="xs:string" />
+            <element column="codigo_centro_costo" name="codigoCentroCosto" xsdType="xs:string" />
+            <element column="nombre_centro_costo" name="nombreCentroCosto" xsdType="xs:string" />
+            <element column="nombre_localidad" name="nombreLocalidad" xsdType="xs:string" />
+            <element column="nombre_cargo" name="nombreCargo" xsdType="xs:string" />
+            <element column="codigo_nivel_jerarquico" name="codigoNivelJerarquico" xsdType="xs:string" />
+            <element column="nombre_nivel_jerarquico" name="nombreNivelJerarquico" xsdType="xs:string" />
+            <element column="numero_cuenta_deposito" name="numeroCuentaDeposito" xsdType="xs:string" />
+            <element column="fecha_ingreso_empleado" name="fechaIngresoEmpleado" xsdType="xs:string" />
+            <element column="fecha_salida_empleado" name="fechaSalidaEmpleado" xsdType="xs:string" />
+            <element column="estado_empleado" name="estadoEmpleado" xsdType="xs:string" />
+            <element column="codigo_empleado" name="codigoEmpleado" xsdType="xs:string" />
+            <element column="tipo_usuario" name="tipoUsuario" xsdType="xs:string" />
+            <element column="sub_tipo" name="subTipo" xsdType="xs:string" />
+            <element column="fecha_registro" name="fechaRegistro" xsdType="xs:datetime" />
+            <element column="guid" name="guid" xsdType="xs:string" />
+            <element column="type_event" name="typeEvent" xsdType="xs:string" />
+            <element column="modifica_datos" name="modificaDatos" xsdType="xs:integer" />
+            <element column="recalculo_perfil" name="recalculoPerfil" xsdType="xs:integer" />
+            <element column="fecha_datos" name="fechaDatos" xsdType="xs:string" />
+            <element column="fecha_provisionamiento" name="fechaProvisionamiento" xsdType="xs:string" />
+            <element column="uuid" name="uuid" xsdType="xs:string" />
+            <element column="celular" name="celular" xsdType="xs:string" />
+            <element column="GLOBAL_PROFILE_ID" name="globalProfileId" xsdType="xs:string" />
+            <element column="GLOBAL_PROFILE_CODE" name="globalProfileCode" xsdType="xs:string" />
+            <element column="GLOBAL_PROFILE_NAME" name="globalProfileName" xsdType="xs:string" />
+        </result>
+    </query>
+    <query id="select_with_guid_by_error_massive_process_query" useConfig="default">
+        <sql>
+      SELECT id, json, state, result, observations, type_action, username, codigo_trabajador, apellidos_empleado, nombres_empleado, identificacion, 
+	      identificacion_supervisor, nombre_supervisor, codigo_compania, nombre_compania, codigo_agrupacion, nombre_agrupacion, codigo_division, nombre_division, 
+	      codigo_departamento, nombre_departamento, codigo_area, nombre_area, codigo_sucursal, nombre_sucursal, codigo_centro_costo, nombre_centro_costo, 
+	      nombre_localidad, nombre_cargo, codigo_nivel_jerarquico, nombre_nivel_jerarquico, numero_cuenta_deposito, fecha_ingreso_empleado, fecha_salida_empleado, 
+	      estado_empleado, codigo_empleado, tipo_usuario, sub_tipo,fecha_registro,guid,type_event,modifica_datos,recalculo_perfil,fecha_datos,fecha_provisionamiento,uuid,celular,
+          GLOBAL_PROFILE_DUPLICATE,GLOBAL_PROFILE_ERROR, GLOBAL_PROFILE_ID,GLOBAL_PROFILE_CODE,GLOBAL_PROFILE_NAME
+      FROM sch_centra_id.massive_process WHERE valid=1 AND guid=? AND type_event='P'
+        </sql>
+        <param name="guid" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <result element="MassiveProcesses" rowName="MassiveProcess">
+            <element column="id" name="id" xsdType="xs:long" />
+            <element column="json" name="json" xsdType="xs:string" />
+            <element column="state" name="state" xsdType="xs:string" />
+            <element column="result" name="result" xsdType="xs:string" />
+            <element column="observations" name="observations" xsdType="xs:string" />
+            <element column="type_action" name="typeAYction" xsdType="xs:string" />
+            <element column="username" name="username" xsdType="xs:string" />
+            <element column="codigo_trabajador" name="codigoTrabajador" xsdType="xs:string" />
+            <element column="apellidos_empleado" name="apellidosEmpleado" xsdType="xs:string" />
+            <element column="nombres_empleado" name="nombresEmpleado" xsdType="xs:string" />
+            <element column="identificacion" name="identificacion" xsdType="xs:string" />
+            <element column="identificacion_supervisor" name="identificacionSupervisor" xsdType="xs:string" />
+            <element column="nombre_supervisor" name="nombreSupervisor" xsdType="xs:string" />
+            <element column="codigo_compania" name="codigoCompania" xsdType="xs:string" />
+            <element column="nombre_compania" name="nombreCompania" xsdType="xs:string" />
+            <element column="codigo_agrupacion" name="codigoAgrupacion" xsdType="xs:string" />
+            <element column="nombre_agrupacion" name="nombreAgrupacion" xsdType="xs:string" />
+            <element column="codigo_division" name="codigoDivision" xsdType="xs:string" />
+            <element column="nombre_division" name="nombreDivision" xsdType="xs:string" />
+            <element column="codigo_departamento" name="codigoDepartamento" xsdType="xs:string" />
+            <element column="nombre_departamento" name="nombreDepartamento" xsdType="xs:string" />
+            <element column="codigo_area" name="codigoArea" xsdType="xs:string" />
+            <element column="nombre_area" name="nombreArea" xsdType="xs:string" />
+            <element column="codigo_sucursal" name="codigoSucursal" xsdType="xs:string" />
+            <element column="nombre_sucursal" name="nombreSucursal" xsdType="xs:string" />
+            <element column="codigo_centro_costo" name="codigoCentroCosto" xsdType="xs:string" />
+            <element column="nombre_centro_costo" name="nombreCentroCosto" xsdType="xs:string" />
+            <element column="nombre_localidad" name="nombreLocalidad" xsdType="xs:string" />
+            <element column="nombre_cargo" name="nombreCargo" xsdType="xs:string" />
+            <element column="codigo_nivel_jerarquico" name="codigoNivelJerarquico" xsdType="xs:string" />
+            <element column="nombre_nivel_jerarquico" name="nombreNivelJerarquico" xsdType="xs:string" />
+            <element column="numero_cuenta_deposito" name="numeroCuentaDeposito" xsdType="xs:string" />
+            <element column="fecha_ingreso_empleado" name="fechaIngresoEmpleado" xsdType="xs:string" />
+            <element column="fecha_salida_empleado" name="fechaSalidaEmpleado" xsdType="xs:string" />
+            <element column="estado_empleado" name="estadoEmpleado" xsdType="xs:string" />
+            <element column="codigo_empleado" name="codigoEmpleado" xsdType="xs:string" />
+            <element column="tipo_usuario" name="tipoUsuario" xsdType="xs:string" />
+            <element column="sub_tipo" name="subTipo" xsdType="xs:string" />
+            <element column="fecha_registro" name="fechaRegistro" xsdType="xs:datetime" />
+            <element column="guid" name="guid" xsdType="xs:string" />
+            <element column="type_event" name="typeEvent" xsdType="xs:string" />
+            <element column="modifica_datos" name="modificaDatos" xsdType="xs:integer" />
+            <element column="recalculo_perfil" name="recalculoPerfil" xsdType="xs:integer" />
+            <element column="fecha_datos" name="fechaDatos" xsdType="xs:string" />
+            <element column="fecha_provisionamiento" name="fechaProvisionamiento" xsdType="xs:string" />
+            <element column="uuid" name="uuid" xsdType="xs:string" />
+            <element column="celular" name="celular" xsdType="xs:string" />
+            <element column="GLOBAL_PROFILE_ID" name="globalProfileId" xsdType="xs:string" />
+            <element column="GLOBAL_PROFILE_CODE" name="globalProfileCode" xsdType="xs:string" />
+            <element column="GLOBAL_PROFILE_NAME" name="globalProfileName" xsdType="xs:string" />
+            <element column="GLOBAL_PROFILE_DUPLICATE" name="globalProfileDuplicate" xsdType="xs:string" />
+            <element column="GLOBAL_PROFILE_ERROR" name="globalProfileError" xsdType="xs:string" />
+        </result>
+    </query>
+    <query id="update_massive_process_username_query" useConfig="default">
+        <sql>
+          UPDATE sch_centra_id.massive_process 
+            SET USERNAME=?
+            WHERE ID=?
+        </sql>
+        <param name="username" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="id" ordinal="2" paramType="SCALAR" sqlType="INTEGER" type="IN" />
+    </query>
+    <query id="update_massive_process_global_profile_query" useConfig="default">
+        <sql>
+          UPDATE sch_centra_id.massive_process 
+            SET GLOBAL_PROFILE_ID=?,GLOBAL_PROFILE_CODE=?,GLOBAL_PROFILE_NAME=?
+            WHERE ID=?
+        </sql>
+        <param name="globalProfileId" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN" />
+        <param name="globalProfileCode" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="globalProfileName" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="id" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN" />
+    </query>
+    <query id="update_massive_process_global_error_query" useConfig="default">
+        <sql>
+          UPDATE sch_centra_id.massive_process 
+            SET TYPE_EVENT='P',OBSERVATIONS=?,GLOBAL_PROFILE_ERROR=?,GLOBAL_PROFILE_DUPLICATE=?
+            WHERE ID=?
+        </sql>
+        <param name="observations" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="globalProfileError" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="globalProfileDuplicate" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN" />
+        <param name="id" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN" />
+    </query>
+    <operation name="select_with_date_range_massive_process_operation">
+        <call-query href="select_with_date_range_massive_process_query">
+            <with-param name="fromDate" query-param="fromDate" />
+            <with-param name="toDate" query-param="toDate" />
+        </call-query>
+    </operation>
+    <operation name="select_with_guid_by_typeaction_massive_process_operation">
+        <call-query href="select_with_guid_by_typeaction_massive_process_query">
+            <with-param name="guid" query-param="guid" />
+            <with-param name="typeAction" query-param="typeAction" />
+        </call-query>
+    </operation>
+    <operation name="select_with_guid_by_error_massive_process_operation">
+        <call-query href="select_with_guid_by_error_massive_process_query">
+            <with-param name="guid" query-param="guid" />
+        </call-query>
+    </operation>
+    <operation name="select_with_guid_massive_process_operation">
+        <call-query href="select_with_guid_massive_process_query">
+            <with-param name="guid" query-param="guid" />
+        </call-query>
+    </operation>
+    <operation name="insert_massive_process_operation">
+        <call-query href="insert_massive_process_query">
+            <with-param name="nombreLocalidad" query-param="nombreLocalidad" />
+            <with-param name="codigoNivelJerarquico" query-param="codigoNivelJerarquico" />
+            <with-param name="fechaIngresoEmpleado" query-param="fechaIngresoEmpleado" />
+            <with-param name="nombreAgrupacion" query-param="nombreAgrupacion" />
+            <with-param name="codigoDepartamento" query-param="codigoDepartamento" />
+            <with-param name="nombreCargo" query-param="nombreCargo" />
+            <with-param name="nombreDepartamento" query-param="nombreDepartamento" />
+            <with-param name="codigoTrabajador" query-param="codigoTrabajador" />
+            <with-param name="nombreCentroCosto" query-param="nombreCentroCosto" />
+            <with-param name="codigoCentroCosto" query-param="codigoCentroCosto" />
+            <with-param name="result" query-param="result" />
+            <with-param name="valid" query-param="valid" />
+            <with-param name="nombreDivision" query-param="nombreDivision" />
+            <with-param name="estadoEmpleado" query-param="estadoEmpleado" />
+            <with-param name="observations" query-param="observations" />
+            <with-param name="numeroCuentaDeposito" query-param="numeroCuentaDeposito" />
+            <with-param name="json" query-param="json" />
+            <with-param name="state" query-param="state" />
+            <with-param name="codigoDivision" query-param="codigoDivision" />
+            <with-param name="tipoUsuario" query-param="tipoUsuario" />
+            <with-param name="nombresEmpleado" query-param="nombresEmpleado" />
+            <with-param name="nombreNivelJerarquico" query-param="nombreNivelJerarquico" />
+            <with-param name="codigoEmpleado" query-param="codigoEmpleado" />
+            <with-param name="nombreSucursal" query-param="nombreSucursal" />
+            <with-param name="subTipo" query-param="subTipo" />
+            <with-param name="codigoSucursal" query-param="codigoSucursal" />
+            <with-param name="typeAction" query-param="typeAction" />
+            <with-param name="apellidosEmpleado" query-param="apellidosEmpleado" />
+            <with-param name="codigoCompania" query-param="codigoCompania" />
+            <with-param name="codigoArea" query-param="codigoArea" />
+            <with-param name="identificacion" query-param="identificacion" />
+            <with-param name="nombreSupervisor" query-param="nombreSupervisor" />
+            <with-param name="identificacionSupervisor" query-param="identificacionSupervisor" />
+            <with-param name="nombreCompania" query-param="nombreCompania" />
+            <with-param name="nombreArea" query-param="nombreArea" />
+            <with-param name="codigoAgrupacion" query-param="codigoAgrupacion" />
+            <with-param name="fechaSalidaEmpleado" query-param="fechaSalidaEmpleado" />
+            <with-param name="username" query-param="username" />
+            <with-param name="guid" query-param="guid" />
+            <with-param name="typeEvent" query-param="typeEvent" />
+            <with-param name="modificaDatos" query-param="modificaDatos" />
+            <with-param name="recalculoPerfil" query-param="recalculoPerfil" />
+            <with-param name="fechaDatos" query-param="fechaDatos" />
+            <with-param name="fechaProvisionamiento" query-param="fechaProvisionamiento" />
+            <with-param name="celular" query-param="celular" />
+        </call-query>
+    </operation>
+    <operation name="select_with_key_massive_process_operation">
+        <call-query href="select_with_key_massive_process_query">
+            <with-param name="id" query-param="id" />
+        </call-query>
+    </operation>
+    <operation name="update_massive_process_username_operation">
+        <call-query href="update_massive_process_username_query">
+            <with-param name="username" query-param="username" />
+            <with-param name="id" query-param="id" />
+        </call-query>
+    </operation>
+    <operation name="update_massive_process_global_profile_operation">
+        <call-query href="update_massive_process_global_profile_query">
+            <with-param name="globalProfileId" query-param="globalProfileId" />
+            <with-param name="globalProfileCode" query-param="globalProfileCode" />
+            <with-param name="globalProfileName" query-param="globalProfileName" />
+            <with-param name="id" query-param="id" />
+        </call-query>
+    </operation>
+    <operation name="update_massive_process_global_error_operation">
+        <call-query href="update_massive_process_global_error_query">
+            <with-param name="observations" query-param="observations" />
+            <with-param name="globalProfileError" query-param="globalProfileError" />
+            <with-param name="globalProfileDuplicate" query-param="globalProfileDuplicate" />
+            <with-param name="id" query-param="id" />
+        </call-query>
+    </operation>
+    <resource method="GET" path="getByDateRangeMassiveProcess">
+        <call-query href="select_with_date_range_massive_process_query">
+            <with-param name="fromDate" query-param="fromDate" />
+            <with-param name="toDate" query-param="toDate" />
+        </call-query>
+    </resource>
+    <resource method="GET" path="getByGuidAndTypeActionMassiveProcess">
+        <call-query href="select_with_guid_by_typeaction_massive_process_query">
+            <with-param name="guid" query-param="guid" />
+            <with-param name="typeAction" query-param="typeAction" />
+        </call-query>
+    </resource>
+    <resource method="GET" path="getByGuidByErrorMassiveProcess">
+        <call-query href="select_with_guid_by_error_massive_process_query">
+            <with-param name="guid" query-param="guid" />
+        </call-query>
+    </resource>
+    <resource method="GET" path="getByGuidMassiveProcess">
+        <call-query href="select_with_guid_massive_process_query">
+            <with-param name="guid" query-param="guid" />
+        </call-query>
+    </resource>
+    <resource method="GET" path="getByIdMassiveProcess">
+        <call-query href="select_with_key_massive_process_query">
+            <with-param name="id" query-param="id" />
+        </call-query>
+    </resource>
+    <resource method="POST" path="createMassiveProcess">
+        <call-query href="insert_massive_process_query">
+            <with-param name="nombreLocalidad" query-param="nombreLocalidad" />
+            <with-param name="codigoNivelJerarquico" query-param="codigoNivelJerarquico" />
+            <with-param name="fechaIngresoEmpleado" query-param="fechaIngresoEmpleado" />
+            <with-param name="nombreAgrupacion" query-param="nombreAgrupacion" />
+            <with-param name="codigoDepartamento" query-param="codigoDepartamento" />
+            <with-param name="nombreCargo" query-param="nombreCargo" />
+            <with-param name="nombreDepartamento" query-param="nombreDepartamento" />
+            <with-param name="codigoTrabajador" query-param="codigoTrabajador" />
+            <with-param name="nombreCentroCosto" query-param="nombreCentroCosto" />
+            <with-param name="codigoCentroCosto" query-param="codigoCentroCosto" />
+            <with-param name="result" query-param="result" />
+            <with-param name="valid" query-param="valid" />
+            <with-param name="nombreDivision" query-param="nombreDivision" />
+            <with-param name="estadoEmpleado" query-param="estadoEmpleado" />
+            <with-param name="observations" query-param="observations" />
+            <with-param name="numeroCuentaDeposito" query-param="numeroCuentaDeposito" />
+            <with-param name="json" query-param="json" />
+            <with-param name="state" query-param="state" />
+            <with-param name="codigoDivision" query-param="codigoDivision" />
+            <with-param name="tipoUsuario" query-param="tipoUsuario" />
+            <with-param name="nombresEmpleado" query-param="nombresEmpleado" />
+            <with-param name="nombreNivelJerarquico" query-param="nombreNivelJerarquico" />
+            <with-param name="codigoEmpleado" query-param="codigoEmpleado" />
+            <with-param name="nombreSucursal" query-param="nombreSucursal" />
+            <with-param name="subTipo" query-param="subTipo" />
+            <with-param name="codigoSucursal" query-param="codigoSucursal" />
+            <with-param name="typeAction" query-param="typeAction" />
+            <with-param name="apellidosEmpleado" query-param="apellidosEmpleado" />
+            <with-param name="codigoCompania" query-param="codigoCompania" />
+            <with-param name="codigoArea" query-param="codigoArea" />
+            <with-param name="identificacion" query-param="identificacion" />
+            <with-param name="nombreSupervisor" query-param="nombreSupervisor" />
+            <with-param name="identificacionSupervisor" query-param="identificacionSupervisor" />
+            <with-param name="nombreCompania" query-param="nombreCompania" />
+            <with-param name="nombreArea" query-param="nombreArea" />
+            <with-param name="codigoAgrupacion" query-param="codigoAgrupacion" />
+            <with-param name="fechaSalidaEmpleado" query-param="fechaSalidaEmpleado" />
+            <with-param name="username" query-param="username" />
+            <with-param name="guid" query-param="guid" />
+            <with-param name="typeEvent" query-param="typeEvent" />
+            <with-param name="modificaDatos" query-param="modificaDatos" />
+            <with-param name="recalculoPerfil" query-param="recalculoPerfil" />
+            <with-param name="fechaDatos" query-param="fechaDatos" />
+            <with-param name="fechaProvisionamiento" query-param="fechaProvisionamiento" />
+            <with-param name="celular" query-param="celular" />
+        </call-query>
+    </resource>
+    <resource method="POST" path="updateUsername">
+        <call-query href="update_massive_process_username_query">
+            <with-param name="username" query-param="username" />
+            <with-param name="id" query-param="id" />
+        </call-query>
+    </resource>
+    <resource method="POST" path="updateGlobalProfile">
+        <call-query href="update_massive_process_global_profile_query">
+            <with-param name="globalProfileId" query-param="globalProfileId" />
+            <with-param name="globalProfileCode" query-param="globalProfileCode" />
+            <with-param name="globalProfileName" query-param="globalProfileName" />
+            <with-param name="id" query-param="id" />
+        </call-query>
+    </resource>
+    <resource method="POST" path="updateError">
+        <call-query href="update_massive_process_global_error_query">
+            <with-param name="observations" query-param="observations" />
+            <with-param name="globalProfileError" query-param="globalProfileError" />
+            <with-param name="globalProfileDuplicate" query-param="globalProfileDuplicate" />
+            <with-param name="id" query-param="id" />
+        </call-query>
+    </resource>
+</data>

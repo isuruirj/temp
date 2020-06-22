@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ProvisioningConfigureIdentificationTypeSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningConfigureIdentificationTypeSeq" value="Inicio.." />
+    </log>
+    <switch source="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/identificationType/text()">
+        <case regex="CEDULA">
+            <property name="idetificationType" value="0001" />
+        </case>
+        <case regex="PASAPORTE">
+            <property name="idetificationType" value="0002" />
+        </case>
+        <default>
+            <property name="idetificationType" value="0001" />
+        </default>
+    </switch>
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningConfigureIdentificationTypeSeq" value="Fin.." />
+    </log>
+</sequence>

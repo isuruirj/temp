@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ContainersAdSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse" xmlns:tem="http://tempuri.org/">
+    <log level="custom" category="DEBUG">
+        <property name="ContainersAdSeq" value="Inicio.." />
+    </log>
+    <property name="PATTERN" expression="$ctx:query.param.name" />
+    <filter regex="true" source="boolean($ctx:PATTERN)">
+        <then>
+            <property name="configureAD" expression="get-property('AD_CONFIGURE')" scope="default" type="OM" />
+            <property name="LDAP_URI" expression="$ctx:configureAD//tem:ldapUri" />
+            <property name="SEARCH_BASE" expression="$ctx:configureAD//tem:searchBaseContainer" />
+            <property name="SECURITY_PRINCIPAL" expression="$ctx:configureAD//tem:securityPrincipal" />
+            <property name="AES_PAYLOAD" expression="$ctx:configureAD//tem:securityCredential" />
+            <property name="AES_ACTION" scope="default" type="STRING" value="DECRYPT" />
+            <sequence key="EncryptDecryptSeq" />
+            <property name="SECURITY_CREDENTIALS" expression="$ctx:AES_RESULTS" />
+            <class name="com.centraid.mediator.ActiveDirectoryContainers" />
+            <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+            <payloadFactory media-type="json">
+                <format>$1</format>
+                <args>
+                    <arg evaluator="xml" expression="$ctx:JSON" />
+                </args>
+            </payloadFactory>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                        "result":  {
+                            "code" : -1,
+                            "message" : "Name does not exist"
+                        }
+                    }
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="get-property('AES_RESULTS')" />
+                </args>
+            </payloadFactory>
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="ContainersAdSeq" value="Fin.." />
+    </log>
+</sequence>

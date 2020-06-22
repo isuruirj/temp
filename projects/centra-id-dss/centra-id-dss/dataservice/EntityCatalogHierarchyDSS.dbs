@@ -1,0 +1,717 @@
+<data name="company.catalog-hierarchy.ds"
+    serviceNamespace="centra-id.com"
+    enableBatchRequests="false"
+    enableBoxcarring="false"
+    transports="https"
+    disableLegacyBoxcarringMode="true">
+
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <!-- DYNAMIC QUERY CATALOGHIERARCHY -->
+    <query id="dynamicQuery_catalogHierarchy" useConfig="default">
+        <sql>
+           SELECT
+               catalogHierarchy.id,
+               catalogHierarchy.catalog_type_id,
+               catalogHierarchy.catalog_company_type_id,
+               catalogHierarchy.parent_id,
+               catalogHierarchy.valid
+           FROM sch_centra_id.CATALOGS_HIERARCHIES catalogHierarchy :innerjoinclause :whereclause ORDER BY :orderby :fromto
+        </sql>
+        <result element="catalogHierarchyList" rowName="catalogHierarchy">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <call-query href="queryReferenceById__catalogHierarchy_catalogType">
+                <with-param column="catalog_type_id" name="id"/>
+            </call-query>
+            <call-query href="queryReferenceById__catalogHierarchy_catalogCompanyType">
+                <with-param column="catalog_company_type_id" name="id"/>
+            </call-query>
+            <call-query href="queryReferenceById__catalogHierarchy_parent">
+                <with-param column="parent_id" name="id"/>
+            </call-query>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="fromto" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DISTINCT QUERY CATALOGHIERARCHY CatalogType-->
+    <query id="dynamicDistinctQuery_catalogHierarchy_catalogType" useConfig="default">
+        <sql>
+           SELECT DISTINCT
+               catalogType.id,
+               catalogType.code,
+               catalogType.name,
+               catalogType.sort_type,
+               catalogType.editable,
+               catalogType.valid,
+               catalogType.description
+           FROM sch_centra_id.CATALOGS_HIERARCHIES catalogHierarchy :innerjoinclause :whereclause ORDER BY :orderby
+        </sql>
+        <result element="catalogTypeList" rowName="catalogType">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="sort_type" name="sortType" xsdType="xs:string"/>
+            <element column="editable" name="editable" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="description" name="description" xsdType="xs:string"/>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DISTINCT QUERY CATALOGHIERARCHY Catalog-->
+    <query id="dynamicDistinctQuery_catalogHierarchy_catalog" useConfig="default">
+        <sql>
+           SELECT DISTINCT
+               catalogCompanyType.id,
+               catalogCompanyType.code,
+               catalogCompanyType.name,
+               catalogCompanyType.predetermined,
+               catalogCompanyType.ordinal,
+               catalogCompanyType.value_text,
+               catalogCompanyType.value_number,
+               catalogCompanyType.value_date,
+               catalogCompanyType.value_boolean,
+               catalogCompanyType.catalog_type_id,
+               catalogCompanyType.valid
+           FROM sch_centra_id.CATALOGS_HIERARCHIES catalogHierarchy :innerjoinclause :whereclause ORDER BY :orderby
+        </sql>
+        <result element="catalogList" rowName="catalog">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="predetermined" name="predetermined" xsdType="xs:integer"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="value_text" name="valueText" xsdType="xs:string"/>
+            <element column="value_number" name="valueNumber" xsdType="xs:decimal"/>
+            <element column="value_date" name="valueDate" xsdType="xs:date"/>
+            <element column="value_boolean" name="valueBoolean" xsdType="xs:integer"/>
+            <call-query href="queryReferenceById__catalogCompanyType_catalog_catalogType">
+                <with-param column="catalog_type_id" name="id"/>
+            </call-query>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DISTINCT QUERY CATALOGHIERARCHY CatalogHierarchy-->
+    <query id="dynamicDistinctQuery_catalogHierarchy_catalogHierarchy" useConfig="default">
+        <sql>
+           SELECT DISTINCT
+               parent.id,
+               parent.catalog_type_id,
+               parent.catalog_company_type_id,
+               parent.parent_id,
+               parent.valid
+           FROM sch_centra_id.CATALOGS_HIERARCHIES catalogHierarchy :innerjoinclause :whereclause ORDER BY :orderby
+        </sql>
+        <result element="catalogHierarchyList" rowName="catalogHierarchy">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <call-query href="queryReferenceById__parent_catalogHierarchy_catalogType">
+                <with-param column="catalog_type_id" name="id"/>
+            </call-query>
+            <call-query href="queryReferenceById__parent_catalogHierarchy_catalogCompanyType">
+                <with-param column="catalog_company_type_id" name="id"/>
+            </call-query>
+            <call-query href="queryReferenceById__parent_catalogHierarchy_parent">
+                <with-param column="parent_id" name="id"/>
+            </call-query>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- INSERT CatalogHierarchy -->
+    <query id="insertQuery_catalogHierarchy" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>
+           INSERT INTO sch_centra_id.CATALOGS_HIERARCHIES(
+               catalog_type_id,
+               catalog_company_type_id,
+               parent_id,
+               valid
+        ) VALUES(?,?,?,?)
+        </sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="catalogTypeId" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="catalogCompanyTypeId" ordinal="2" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="parentId" ordinal="3" paramType="SCALAR" sqlType="BIGINT" type="IN" defaultValue="#{NULL}"/>
+        <param name="valid" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="1"/>
+    </query>
+    <!-- UPDATE CatalogHierarchy -->
+    <query id="updateQuery_catalogHierarchy" useConfig="default">
+        <sql>
+           UPDATE sch_centra_id.CATALOGS_HIERARCHIES SET
+               catalog_type_id=?,
+               catalog_company_type_id=?,
+               parent_id=?
+            WHERE id=?
+        </sql>
+        <param name="catalogTypeId" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="catalogCompanyTypeId" ordinal="2" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="parentId" ordinal="3" paramType="SCALAR" sqlType="BIGINT" type="IN" defaultValue="#{NULL}"/>
+        <param name="id" ordinal="4" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <!-- QUERY REFERENCE CatalogHierarchy CatalogType 0-->
+    <query id="queryReferenceById__catalogHierarchy_catalogType" useConfig="default">
+        <sql>
+           SELECT 
+               catalogType.id,
+               catalogType.code,
+               catalogType.name,
+               catalogType.sort_type,
+               catalogType.editable,
+               catalogType.valid,
+               catalogType.description
+           FROM sch_centra_id.CATALOGS_TYPES catalogType WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogType">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="sort_type" name="sortType" xsdType="xs:string"/>
+            <element column="editable" name="editable" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="description" name="description" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CatalogHierarchy Catalog 0-->
+    <query id="queryReferenceById__catalogHierarchy_catalogCompanyType" useConfig="default">
+        <sql>
+           SELECT 
+               catalogCompanyType.id,
+               catalogCompanyType.code,
+               catalogCompanyType.name,
+               catalogCompanyType.predetermined,
+               catalogCompanyType.ordinal,
+               catalogCompanyType.value_text,
+               catalogCompanyType.value_number,
+               catalogCompanyType.value_date,
+               catalogCompanyType.value_boolean,
+               catalogCompanyType.catalog_type_id,
+               catalogCompanyType.valid
+           FROM sch_centra_id.CATALOGS catalogCompanyType WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogCompanyType">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="predetermined" name="predetermined" xsdType="xs:integer"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="value_text" name="valueText" xsdType="xs:string"/>
+            <element column="value_number" name="valueNumber" xsdType="xs:decimal"/>
+            <element column="value_date" name="valueDate" xsdType="xs:date"/>
+            <element column="value_boolean" name="valueBoolean" xsdType="xs:integer"/>
+            <call-query href="queryReferenceById__catalogCompanyType_catalog_catalogType">
+                <with-param column="catalog_type_id" name="id"/>
+            </call-query>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CatalogHierarchy CatalogType 1-->
+    <query id="queryReferenceById__catalogCompanyType_catalog_catalogType" useConfig="default">
+        <sql>
+           SELECT 
+               catalogType.id,
+               catalogType.code,
+               catalogType.name,
+               catalogType.sort_type,
+               catalogType.editable,
+               catalogType.valid,
+               catalogType.description
+           FROM sch_centra_id.CATALOGS_TYPES catalogType WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogType">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="sort_type" name="sortType" xsdType="xs:string"/>
+            <element column="editable" name="editable" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="description" name="description" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CatalogHierarchy CatalogHierarchy 0-->
+    <query id="queryReferenceById__catalogHierarchy_parent" useConfig="default">
+        <sql>
+           SELECT 
+               parent.id,
+               parent.catalog_type_id,
+               parent.catalog_company_type_id,
+               parent.parent_id,
+               parent.valid
+           FROM sch_centra_id.CATALOGS_HIERARCHIES parent WHERE id=? AND valid=1
+        </sql>
+        <result element="parent">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <call-query href="queryReferenceById__parent_catalogHierarchy_catalogType">
+                <with-param column="catalog_type_id" name="id"/>
+            </call-query>
+            <call-query href="queryReferenceById__parent_catalogHierarchy_catalogCompanyType">
+                <with-param column="catalog_company_type_id" name="id"/>
+            </call-query>
+            <call-query href="queryReferenceById__parent_catalogHierarchy_parent">
+                <with-param column="parent_id" name="id"/>
+            </call-query>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CatalogHierarchy CatalogType 1-->
+    <query id="queryReferenceById__parent_catalogHierarchy_catalogType" useConfig="default">
+        <sql>
+           SELECT 
+               catalogType.id,
+               catalogType.code,
+               catalogType.name,
+               catalogType.sort_type,
+               catalogType.editable,
+               catalogType.valid,
+               catalogType.description
+           FROM sch_centra_id.CATALOGS_TYPES catalogType WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogType">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="sort_type" name="sortType" xsdType="xs:string"/>
+            <element column="editable" name="editable" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="description" name="description" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CatalogHierarchy Catalog 1-->
+    <query id="queryReferenceById__parent_catalogHierarchy_catalogCompanyType" useConfig="default">
+        <sql>
+           SELECT 
+               catalogCompanyType.id,
+               catalogCompanyType.code,
+               catalogCompanyType.name,
+               catalogCompanyType.predetermined,
+               catalogCompanyType.ordinal,
+               catalogCompanyType.value_text,
+               catalogCompanyType.value_number,
+               catalogCompanyType.value_date,
+               catalogCompanyType.value_boolean,
+               catalogCompanyType.catalog_type_id,
+               catalogCompanyType.valid
+           FROM sch_centra_id.CATALOGS catalogCompanyType WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogCompanyType">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="predetermined" name="predetermined" xsdType="xs:integer"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="value_text" name="valueText" xsdType="xs:string"/>
+            <element column="value_number" name="valueNumber" xsdType="xs:decimal"/>
+            <element column="value_date" name="valueDate" xsdType="xs:date"/>
+            <element column="value_boolean" name="valueBoolean" xsdType="xs:integer"/>
+            <call-query href="queryReferenceById__parent_catalogCompanyType_catalog_catalogType">
+                <with-param column="catalog_type_id" name="id"/>
+            </call-query>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CatalogHierarchy CatalogType 2-->
+    <query id="queryReferenceById__parent_catalogCompanyType_catalog_catalogType" useConfig="default">
+        <sql>
+           SELECT 
+               catalogType.id,
+               catalogType.code,
+               catalogType.name,
+               catalogType.sort_type,
+               catalogType.editable,
+               catalogType.valid,
+               catalogType.description
+           FROM sch_centra_id.CATALOGS_TYPES catalogType WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogType">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="sort_type" name="sortType" xsdType="xs:string"/>
+            <element column="editable" name="editable" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="description" name="description" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CatalogHierarchy CatalogHierarchy 1-->
+    <query id="queryReferenceById__parent_catalogHierarchy_parent" useConfig="default">
+        <sql>
+           SELECT 
+               parent.id,
+               parent.catalog_type_id,
+               parent.catalog_company_type_id,
+               parent.parent_id,
+               parent.valid
+           FROM sch_centra_id.CATALOGS_HIERARCHIES parent WHERE id=? AND valid=1
+        </sql>
+        <result element="parent">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <call-query href="queryReferenceById__parent_parent_catalogHierarchy_catalogType">
+                <with-param column="catalog_type_id" name="id"/>
+            </call-query>
+            <call-query href="queryReferenceById__parent_parent_catalogHierarchy_catalogCompanyType">
+                <with-param column="catalog_company_type_id" name="id"/>
+            </call-query>
+            <call-query href="queryReferenceById__parent_parent_catalogHierarchy_parent">
+                <with-param column="parent_id" name="id"/>
+            </call-query>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CatalogHierarchy CatalogType 2-->
+    <query id="queryReferenceById__parent_parent_catalogHierarchy_catalogType" useConfig="default">
+        <sql>
+           SELECT 
+               catalogType.id,
+               catalogType.code,
+               catalogType.name,
+               catalogType.sort_type,
+               catalogType.editable,
+               catalogType.valid,
+               catalogType.description
+           FROM sch_centra_id.CATALOGS_TYPES catalogType WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogType">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="sort_type" name="sortType" xsdType="xs:string"/>
+            <element column="editable" name="editable" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="description" name="description" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CatalogHierarchy Catalog 2-->
+    <query id="queryReferenceById__parent_parent_catalogHierarchy_catalogCompanyType" useConfig="default">
+        <sql>
+           SELECT 
+               catalogCompanyType.id,
+               catalogCompanyType.code,
+               catalogCompanyType.name,
+               catalogCompanyType.predetermined,
+               catalogCompanyType.ordinal,
+               catalogCompanyType.value_text,
+               catalogCompanyType.value_number,
+               catalogCompanyType.value_date,
+               catalogCompanyType.value_boolean,
+               catalogCompanyType.catalog_type_id,
+               catalogCompanyType.valid
+           FROM sch_centra_id.CATALOGS catalogCompanyType WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogCompanyType">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="predetermined" name="predetermined" xsdType="xs:integer"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="value_text" name="valueText" xsdType="xs:string"/>
+            <element column="value_number" name="valueNumber" xsdType="xs:decimal"/>
+            <element column="value_date" name="valueDate" xsdType="xs:date"/>
+            <element column="value_boolean" name="valueBoolean" xsdType="xs:integer"/>
+              <element name="catalogType">
+                <element column="catalog_type_id" name="id" xsdType="xs:integer"/>
+              </element>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CatalogHierarchy CatalogType 3-->
+    <query id="queryReferenceById__parent_parent_catalogCompanyType_catalog_catalogType" useConfig="default">
+        <sql>
+           SELECT 
+               catalogType.id,
+               catalogType.code,
+               catalogType.name,
+               catalogType.sort_type,
+               catalogType.editable,
+               catalogType.valid,
+               catalogType.description
+           FROM sch_centra_id.CATALOGS_TYPES catalogType WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogType">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="sort_type" name="sortType" xsdType="xs:string"/>
+            <element column="editable" name="editable" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="description" name="description" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CatalogHierarchy CatalogHierarchy 2-->
+    <query id="queryReferenceById__parent_parent_catalogHierarchy_parent" useConfig="default">
+        <sql>
+           SELECT 
+               parent.id,
+               parent.catalog_type_id,
+               parent.catalog_company_type_id,
+               parent.parent_id,
+               parent.valid
+           FROM sch_centra_id.CATALOGS_HIERARCHIES parent WHERE id=? AND valid=1
+        </sql>
+        <result element="parent">
+            <element column="id" name="id" xsdType="xs:integer"/>
+              <element name="catalogType">
+                <element column="catalog_type_id" name="id" xsdType="xs:integer"/>
+              </element>
+              <element name="catalogCompanyType">
+                <element column="catalog_company_type_id" name="id" xsdType="xs:integer"/>
+              </element>
+              <element name="parent">
+                <element column="parent_id" name="id" xsdType="xs:integer"/>
+              </element>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CatalogHierarchy CatalogType 3-->
+    <query id="queryReferenceById__parent_parent_parent_catalogHierarchy_catalogType" useConfig="default">
+        <sql>
+           SELECT 
+               catalogType.id,
+               catalogType.code,
+               catalogType.name,
+               catalogType.sort_type,
+               catalogType.editable,
+               catalogType.valid,
+               catalogType.description
+           FROM sch_centra_id.CATALOGS_TYPES catalogType WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogType">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="sort_type" name="sortType" xsdType="xs:string"/>
+            <element column="editable" name="editable" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="description" name="description" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CatalogHierarchy Catalog 3-->
+    <query id="queryReferenceById__parent_parent_parent_catalogHierarchy_catalogCompanyType" useConfig="default">
+        <sql>
+           SELECT 
+               catalogCompanyType.id,
+               catalogCompanyType.code,
+               catalogCompanyType.name,
+               catalogCompanyType.predetermined,
+               catalogCompanyType.ordinal,
+               catalogCompanyType.value_text,
+               catalogCompanyType.value_number,
+               catalogCompanyType.value_date,
+               catalogCompanyType.value_boolean,
+               catalogCompanyType.catalog_type_id,
+               catalogCompanyType.valid
+           FROM sch_centra_id.CATALOGS catalogCompanyType WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogCompanyType">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="predetermined" name="predetermined" xsdType="xs:integer"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="value_text" name="valueText" xsdType="xs:string"/>
+            <element column="value_number" name="valueNumber" xsdType="xs:decimal"/>
+            <element column="value_date" name="valueDate" xsdType="xs:date"/>
+            <element column="value_boolean" name="valueBoolean" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE CatalogHierarchy CatalogHierarchy 3-->
+    <query id="queryReferenceById__parent_parent_parent_catalogHierarchy_parent" useConfig="default">
+        <sql>
+           SELECT 
+               parent.id,
+               parent.catalog_type_id,
+               parent.catalog_company_type_id,
+               parent.parent_id,
+               parent.valid
+           FROM sch_centra_id.CATALOGS_HIERARCHIES parent WHERE id=? AND valid=1
+        </sql>
+        <result element="parent">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- DYNAMIC FUNCTION  -->
+    <query id="dynamicQueryFunction_catalogHierarchy" useConfig="default">
+        <sql>
+           SELECT :function(:field) as value FROM :table :innerjoinclause :whereclause
+         </sql>
+        <result element="result">
+            <element column="value" name="value" xsdType="xs:long"/>
+        </result>
+        <param name="function" sqlType="QUERY_STRING"/>
+        <param name="field" sqlType="QUERY_STRING"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DELETE  -->
+    <query id="dynamicDeleteQuery_catalogHierarchy" useConfig="default">
+        <sql>UPDATE :table SET :set WHERE id=:id</sql>
+        <param name="id" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="set" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- OPERATIONS -->
+    <operation name="listAllOperation_catalogHierarchy">
+        <call-query href="dynamicQuery_catalogHierarchy">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="fromToOperation_catalogHierarchy">
+        <call-query href="dynamicQuery_catalogHierarchy">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="functionOperation_catalogHierarchy">
+        <call-query href="dynamicQueryFunction_catalogHierarchy">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="deleteOperation_catalogHierarchy">
+        <call-query href="dynamicDeleteQuery_catalogHierarchy">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </operation>
+    <operation name="create_catalogHierarchy">
+        <call-query href="insertQuery_catalogHierarchy">
+            <with-param name="catalogTypeId" query-param="catalogTypeId"/>
+            <with-param name="catalogCompanyTypeId" query-param="catalogCompanyTypeId"/>
+            <with-param name="parentId" query-param="parentId"/>
+            <with-param name="valid" query-param="valid"/>
+        </call-query>
+    </operation>
+    <operation name="update_catalogHierarchy">
+        <call-query href="updateQuery_catalogHierarchy">
+            <with-param name="catalogTypeId" query-param="catalogTypeId"/>
+            <with-param name="catalogCompanyTypeId" query-param="catalogCompanyTypeId"/>
+            <with-param name="parentId" query-param="parentId"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <operation name="distinctOperation_catalogHierarchy_catalogType">
+        <call-query href="dynamicDistinctQuery_catalogHierarchy_catalogType">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="distinctOperation_catalogHierarchy_catalogCompanyType">
+        <call-query href="dynamicDistinctQuery_catalogHierarchy_catalog">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="distinctOperation_catalogHierarchy_parent">
+        <call-query href="dynamicDistinctQuery_catalogHierarchy_catalogHierarchy">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <!-- RESOURCES -->
+    <resource method="GET" path="GetAllCatalogHierarchy">
+        <call-query href="dynamicQuery_catalogHierarchy">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFromToCatalogHierarchy">
+        <call-query href="dynamicQuery_catalogHierarchy">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFunctionResultCatalogHierarchy">
+        <call-query href="dynamicQueryFunction_catalogHierarchy">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="DeleteCatalogHierarchy">
+        <call-query href="dynamicDeleteQuery_catalogHierarchy">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="CreateCatalogHierarchy">
+        <call-query href="insertQuery_catalogHierarchy">
+            <with-param name="catalogTypeId" query-param="catalogTypeId"/>
+            <with-param name="catalogCompanyTypeId" query-param="catalogCompanyTypeId"/>
+            <with-param name="parentId" query-param="parentId"/>
+            <with-param name="valid" query-param="valid"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="UpdateCatalogHierarchy">
+        <call-query href="updateQuery_catalogHierarchy">
+            <with-param name="catalogTypeId" query-param="catalogTypeId"/>
+            <with-param name="catalogCompanyTypeId" query-param="catalogCompanyTypeId"/>
+            <with-param name="parentId" query-param="parentId"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetDistinctCatalogHierarchyCatalogType">
+        <call-query href="dynamicDistinctQuery_catalogHierarchy_catalogType">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetDistinctCatalogHierarchyCatalogCompanyType">
+        <call-query href="dynamicDistinctQuery_catalogHierarchy_catalog">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetDistinctCatalogHierarchyParent">
+        <call-query href="dynamicDistinctQuery_catalogHierarchy_catalogHierarchy">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+</data>

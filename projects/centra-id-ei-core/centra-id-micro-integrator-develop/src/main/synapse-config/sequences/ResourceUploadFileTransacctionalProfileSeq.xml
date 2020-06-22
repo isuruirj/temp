@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ResourceUploadFileTransacctionalProfileSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="ResourceUploadFileTransacctionalProfileSeq" value="Inicio..." />
+        <property name="UserName" expression="$ctx:UserName" />
+    </log>
+    <!-- captura de datos -->
+    <property name="dateExecution" expression="//dateExecution" />
+    <property name="name" expression="//name" />
+    <property name="file" expression="//file" />
+    <!-- transforma excel a json -->
+    <property name="START_ROW" value="2" />
+    <property name="EXCEL" expression="$ctx:file" />
+    <class name="com.centraid.mediator.ExcelToJson" />
+    <payloadFactory media-type="json">
+        <format>$1</format>
+        <args>
+            <arg evaluator="xml" expression="$ctx:JSON" />
+        </args>
+    </payloadFactory>
+    <property name="validation" value="true" type="BOOLEAN" />
+    <!-- valida duplicados -->
+    <property name="validationDuplicatesMsg" value="No existen observaciones" />
+    <property name="validationDuplicates" expression="//rows/all[.= ../preceding-sibling::rows/all]" />
+    <filter regex="true" source="boolean($ctx:validationDuplicates)">
+        <then>
+            <property name="validation" value="false" type="BOOLEAN" />
+            <property name="validationDuplicatesMsg" value="Existen filas duplicadas" />
+        </then>
+    </filter>
+    <!-- valida campos vacios -->
+    <property name="validationEmptyMsg" value="No existen observaciones" />
+    <property name="validationEmpty" expression="//col0[not(normalize-space())] or //col1[not(normalize-space())] or //rows[not(col0)] or //rows[not(col1)] or //rows[not(col2)]" />
+    <filter regex="true" source="$ctx:validationEmpty">
+        <then>
+            <property name="validation" value="false" type="BOOLEAN" />
+            <property name="validationEmptyMsg" value="Existen filas en blanco" />
+        </then>
+    </filter>
+    <!-- validar acciones -->
+    <property name="validationActionMsg" value="No existen observaciones" />
+    <property name="validationAction" expression="//col2[text()!='C' and text()!='E']" />
+    <filter regex="true" source="boolean($ctx:validationAction)">
+        <then>
+            <property name="validation" value="false" type="BOOLEAN" />
+            <property name="validationActionMsg" value="Existen filas con acciones no conocidas" />
+        </then>
+    </filter>
+    <filter regex="true" source="$ctx:validation">
+        <then>
+            <!-- valida codigos de perfil global-->
+            <iterate expression="//rows[not(col0=preceding-sibling::rows/col0)]" id="globalProfileId">
+                <target>
+                    <sequence>
+                        <property name="uri.var.globalProfileCode" expression="//col0" />
+                        <call>
+                            <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/GlobalProfile/0/1?code={uri.var.globalProfileCode}" />
+                        </call>
+                        <filter regex="true" source="boolean(//globalProfileList/globalProfile/id)">
+                            <then>
+                                <payloadFactory media-type="xml">
+                                    <format>
+                                        <globalProfile />
+                                    </format>
+                                    <args />
+                                </payloadFactory>
+                            </then>
+                            <else>
+                                <payloadFactory media-type="xml">
+                                    <format>
+                                        <globalProfile>$1</globalProfile>
+                                    </format>
+                                    <args>
+                                        <arg evaluator="xml" expression="$ctx:uri.var.globalProfileCode" />
+                                    </args>
+                                </payloadFactory>
+                            </else>
+                        </filter>
+                    </sequence>
+                </target>
+            </iterate>
+            <property name="globalProfileResponse" scope="default">
+                <globalProfiles />
+            </property>
+            <aggregate id="globalProfileId">
+                <completeCondition>
+                    <messageCount min="-1" max="-1" />
+                </completeCondition>
+                <onComplete expression="$body/*" enclosingElementProperty="globalProfileResponse">
+                    <log level="custom" category="DEBUG">
+                        <property name="ResourceUploadFileTransacctionalProfileSeq" value="globalProfiles ok" />
+                    </log>
+                </onComplete>
+            </aggregate>
+            <property name="globalProfileNotFound" expression="string-join(//*:globalProfiles/*:globalProfile, ' ')" />
+            <script language="js">
+                <![CDATA[
+                    var textOriginal = mc.getProperty("globalProfileNotFound");
+                    var textFinal="";
+                    var arreglo = String(textOriginal).split(" ");
+                    for(i=0;i<arreglo.length;i++){
+                        if(String(arreglo[i].trim())) {
+                            textFinal += String(arreglo[i]).trim()+", ";
+                        }
+                    }
+                    textFinal=String(textFinal).substring(0, String(textFinal).length - 2);
+                    mc.setProperty("globalProfileNotFound",String(textFinal));
+                ]]>
+            </script>
+            <payloadFactory media-type="json">
+                <format>$1</format>
+                <args>
+                    <arg evaluator="xml" expression="$ctx:JSON" />
+                </args>
+            </payloadFactory>
+            <!-- valida codigos de perfil transaccional-->
+            <iterate expression="//rows[not(col1=preceding-sibling::rows/col1)]" id="transactionalProfileId">
+                <target>
+                    <sequence>
+                        <property name="uri.var.transactionalProfileCode" expression="//col1" />
+                        <call>
+                            <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/TransactionalProfileSimple/0/1?transactionalProfileCode={uri.var.transactionalProfileCode}" />
+                        </call>
+                        <filter regex="true" source="boolean(//transactionalProfileSimpleList/transactionalProfileSimple/id)">
+                            <then>
+                                <payloadFactory media-type="xml">
+                                    <format>
+                                        <transactionalProfile />
+                                    </format>
+                                    <args />
+                                </payloadFactory>
+                            </then>
+                            <else>
+                                <payloadFactory media-type="xml">
+                                    <format>
+                                        <transactionalProfile>$1</transactionalProfile>
+                                    </format>
+                                    <args>
+                                        <arg evaluator="xml" expression="$ctx:uri.var.transactionalProfileCode" />
+                                    </args>
+                                </payloadFactory>
+                            </else>
+                        </filter>
+                    </sequence>
+                </target>
+            </iterate>
+            <property name="transactionalProfileResponse" scope="default">
+                <transactionalProfiles />
+            </property>
+            <aggregate id="transactionalProfileId">
+                <completeCondition>
+                    <messageCount min="-1" max="-1" />
+                </completeCondition>
+                <onComplete expression="$body/*" enclosingElementProperty="transactionalProfileResponse">
+                    <log level="custom" category="DEBUG">
+                        <property name="ResourceUploadFileTransacctionalProfileSeq" value="transactionalProfile ok" />
+                    </log>
+                </onComplete>
+            </aggregate>
+            <property name="transactionalProfileNotFound" expression="string-join(//*:transactionalProfiles/*:transactionalProfile, ' ')" />
+            <script language="js">
+                <![CDATA[
+                    var textOriginal = mc.getProperty("transactionalProfileNotFound");
+                    var textFinal="";
+                    var arreglo = String(textOriginal).split(" ");
+                    for(i=0;i<arreglo.length;i++){
+                        if(String(arreglo[i].trim())) {
+                            textFinal += String(arreglo[i]).trim()+", ";
+                        }
+                    }
+                    textFinal=String(textFinal).substring(0, String(textFinal).length - 2);
+                    mc.setProperty("transactionalProfileNotFound",String(textFinal));
+                ]]>
+            </script>
+            <payloadFactory media-type="json">
+                <format>$1</format>
+                <args>
+                    <arg evaluator="xml" expression="$ctx:JSON" />
+                </args>
+            </payloadFactory>
+            <!--  validar perfiles transaccionales a quitar del perfil global -->
+            <filter regex="true" source="count(//rows[col2='E']) > 0">
+                <then>
+                    <iterate expression="//rows[col2='E']" id="globalTransactionalProfileDeleteId">
+                        <target>
+                            <sequence>
+                                <property name="uri.var.globalProfileCode" expression="//col0" />
+                                <property name="uri.var.transactionalProfileCode" expression="//col1" />
+                                <call>
+                                    <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/GlobalTransactionalProfile/0/1?globalProfile.code={uri.var.globalProfileCode}&amp;transactionalProfile.code={uri.var.transactionalProfileCode}" />
+                                </call>
+                                <filter regex="true" source="boolean(//globalTransactionalProfileList/globalTransactionalProfile/id)">
+                                    <then>
+                                        <payloadFactory media-type="xml">
+                                            <format>
+                                                <globalTransactionalProfile />
+                                            </format>
+                                            <args />
+                                        </payloadFactory>
+                                    </then>
+                                    <else>
+                                        <payloadFactory media-type="xml">
+                                            <format>
+                                                <globalTransactionalProfile>$1</globalTransactionalProfile>
+                                            </format>
+                                            <args>
+                                                <arg evaluator="xml" expression="$ctx:uri.var.transactionalProfileCode" />
+                                            </args>
+                                        </payloadFactory>
+                                    </else>
+                                </filter>
+                            </sequence>
+                        </target>
+                    </iterate>
+                    <property name="globalTransactionalProfileDeleteResponse" scope="default">
+                        <globalTransactionalProfiles />
+                    </property>
+                    <aggregate id="globalTransactionalProfileDeleteId">
+                        <completeCondition>
+                            <messageCount min="-1" max="-1" />
+                        </completeCondition>
+                        <onComplete expression="$body/*" enclosingElementProperty="globalTransactionalProfileDeleteResponse">
+                            <log level="custom" category="DEBUG">
+                                <property name="ResourceUploadFileTransacctionalProfileSeq" value="globalTransactionalProfileDeleteResponse ok" />
+                            </log>
+                        </onComplete>
+                    </aggregate>
+                    <property name="globalTransactionalProfileDeleteNotFound" expression="string-join(//*:globalTransactionalProfiles/*:globalTransactionalProfile, ' ')" />
+                    <script language="js">
+                        <![CDATA[
+                            var textOriginal = mc.getProperty("globalTransactionalProfileDeleteNotFound");
+                            var textFinal="";
+                            var arreglo = String(textOriginal).split(" ");
+                            for(i=0;i<arreglo.length;i++){
+                                if(String(arreglo[i].trim())) {
+                                    textFinal += String(arreglo[i]).trim()+", ";
+                                }
+                            }
+                            textFinal=String(textFinal).substring(0, String(textFinal).length - 2);
+                            mc.setProperty("globalTransactionalProfileDeleteNotFound",String(textFinal));
+                        ]]>
+                    </script>
+                </then>
+            </filter>
+            <payloadFactory media-type="json">
+                <format>$1</format>
+                <args>
+                    <arg evaluator="xml" expression="$ctx:JSON" />
+                </args>
+            </payloadFactory>
+            <!--  validar perfiles transaccionales a agregar del perfil global -->
+            <filter regex="true" source="count(//rows[col2='C']) > 0">
+                <then>
+                    <iterate expression="//rows[col2='C']" id="globalTransactionalProfileCreateId">
+                        <target>
+                            <sequence>
+                                <property name="uri.var.globalProfileCode" expression="//col0" />
+                                <property name="uri.var.transactionalProfileCode" expression="//col1" />
+                                <call>
+                                    <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/GlobalTransactionalProfile/0/1?globalProfile.code={uri.var.globalProfileCode}&amp;transactionalProfile.code={uri.var.transactionalProfileCode}" />
+                                </call>
+                                <filter regex="false" source="boolean(//globalTransactionalProfileList/globalTransactionalProfile/id)">
+                                    <then>
+                                        <payloadFactory media-type="xml">
+                                            <format>
+                                                <globalTransactionalProfile />
+                                            </format>
+                                            <args />
+                                        </payloadFactory>
+                                    </then>
+                                    <else>
+                                        <payloadFactory media-type="xml">
+                                            <format>
+                                                <globalTransactionalProfile>$1</globalTransactionalProfile>
+                                            </format>
+                                            <args>
+                                                <arg evaluator="xml" expression="$ctx:uri.var.transactionalProfileCode" />
+                                            </args>
+                                        </payloadFactory>
+                                    </else>
+                                </filter>
+                            </sequence>
+                        </target>
+                    </iterate>
+                    <property name="globalTransactionalProfileCreateResponse" scope="default">
+                        <globalTransactionalProfiles />
+                    </property>
+                    <aggregate id="globalTransactionalProfileCreateId">
+                        <completeCondition>
+                            <messageCount min="-1" max="-1" />
+                        </completeCondition>
+                        <onComplete expression="$body/*" enclosingElementProperty="globalTransactionalProfileCreateResponse">
+                            <log level="custom" category="DEBUG">
+                                <property name="ResourceUploadFileTransacctionalProfileSeq" value="globalTransactionalProfileCreateResponse ok" />
+                            </log>
+                        </onComplete>
+                    </aggregate>
+                    <property name="globalTransactionalProfileCreateFound" expression="string-join(//*:globalTransactionalProfiles/*:globalTransactionalProfile, ' ')" />
+                    <script language="js">
+                        <![CDATA[
+                                    var textOriginal = mc.getProperty("globalTransactionalProfileCreateFound");
+                                    var textFinal="";
+                                    var arreglo = String(textOriginal).split(" ");
+                                    for(i=0;i<arreglo.length;i++){
+                                        if(String(arreglo[i].trim())) {
+                                            textFinal += String(arreglo[i]).trim()+", ";
+                                        }
+                                    }
+                                    textFinal=String(textFinal).substring(0, String(textFinal).length - 2);
+                                    mc.setProperty("globalTransactionalProfileCreateFound",String(textFinal));
+                                ]]>
+                    </script>
+                </then>
+            </filter>
+        </then>
+    </filter>
+    <filter regex="true" source="boolean($ctx:globalProfileNotFound)">
+        <then>
+            <property name="validation" value="false" type="BOOLEAN" />
+        </then>
+        <else>
+            <property name="globalProfileNotFound" value="No existen observaciones" />
+        </else>
+    </filter>
+    <filter regex="true" source="boolean($ctx:transactionalProfileNotFound)">
+        <then>
+            <property name="validation" value="false" type="BOOLEAN" />
+        </then>
+        <else>
+            <property name="transactionalProfileNotFound" value="No existen observaciones" />
+        </else>
+    </filter>
+    <filter regex="true" source="boolean($ctx:globalTransactionalProfileCreateFound)">
+        <then>
+            <property name="validation" value="false" type="BOOLEAN" />
+        </then>
+        <else>
+            <property name="globalTransactionalProfileCreateFound" value="No existen observaciones" />
+        </else>
+    </filter>
+    <filter regex="true" source="boolean($ctx:globalTransactionalProfileDeleteNotFound)">
+        <then>
+            <property name="validation" value="false" type="BOOLEAN" />
+        </then>
+        <else>
+            <property name="globalTransactionalProfileDeleteNotFound" value="No existen observaciones" />
+        </else>
+    </filter>
+    <!-- analizar resultados-->
+    <call-template target="GetCurrentDateTemplate" />
+    <filter regex="true" source="$ctx:validation">
+        <then>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                        "recordFiles": {
+                            "name": "$1",
+                            "content": "$2",
+                            "userCreated": "$3",
+                            "dateCreated": "$4",
+                            "dateFinish": null,
+                            "datePlanned": null,
+                            "messages": null,
+                            "type": "CMPERTRA",
+                            "status": "REG"
+                        }
+                    }            
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="$ctx:name" />
+                    <arg evaluator="xml" expression="base64Encode($ctx:JSON)" />
+                    <arg evaluator="xml" expression="$ctx:UserName" />
+                    <arg evaluator="xml" expression="$ctx:currentDate" />
+                </args>
+            </payloadFactory>
+            <call>
+                <endpoint template="HTTPEndpointPostTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/common/RecordFiles" />
+            </call>
+            <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                <then>
+                    <property name="recordFileId" expression="//id" />
+                    <property name="datePlanned" expression="$ctx:dateExecution" />
+                    <property name="UserName" expression="$ctx:UserName" scope="transport" />
+                    <store messageStore="BulkTransactionalProfilesStore" />
+                    <payloadFactory media-type="json">
+                        <format>
+                            {
+                                "result":  {
+                                    "code" : 0,
+                                    "message" : "Operation performed successfully"
+                                }
+                            }                    
+                        </format>
+                        <args />
+                    </payloadFactory>
+                </then>
+                <else>
+                    <property name="fault" value="Error RecordFile create" />
+                    <sequence key="FaultSeq" />
+                </else>
+            </filter>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                        "recordFiles": {
+                            "name": "$1",
+                            "content": "$2",
+                            "userCreated": "$3",
+                            "dateCreated": "$4",
+                            "dateFinish": null,
+                            "datePlanned": null,
+                            "messages": "$5",
+                            "type": "CMPERTRA",
+                            "status": "ERR"
+                        }
+                    }            
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="$ctx:name" />
+                    <arg evaluator="xml" expression="base64Encode($ctx:JSON)" />
+                    <arg evaluator="xml" expression="$ctx:UserName" />
+                    <arg evaluator="xml" expression="$ctx:currentDate" />
+                    <arg evaluator="xml" expression="fn:concat('Duplicados: ',$ctx:validationDuplicatesMsg,'. En Blanco: ',$ctx:validationEmptyMsg,'. Acciones: ',$ctx:validationActionMsg)" />
+                </args>
+            </payloadFactory>
+            <call>
+                <endpoint template="HTTPEndpointPostTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/common/RecordFiles" />
+            </call>
+            <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                <then>
+                    <payloadFactory media-type="json">
+                        <format>
+                            {
+                                "result":  {
+                                    "code" : -1,
+                                    "duplicates" : "$1",
+                                    "empty" : "$2",
+                                    "actions" : "$3",
+                                    "globalProfileNotFound" : "$4",
+                                    "transactionalProfileNotFound" : "$5",
+                                    "globalTransactionalProfileCreateFound" : "$6",
+                                    "globalTransactionalProfileDeleteNotFound" : "$7",
+                                    "message" : "There are validation errors"
+                                }
+                            }                    
+                        </format>
+                        <args>
+                            <arg evaluator="xml" expression="$ctx:validationDuplicatesMsg" />
+                            <arg evaluator="xml" expression="$ctx:validationEmptyMsg" />
+                            <arg evaluator="xml" expression="$ctx:validationActionMsg" />
+                            <arg evaluator="xml" expression="$ctx:globalProfileNotFound" />
+                            <arg evaluator="xml" expression="$ctx:transactionalProfileNotFound" />
+                            <arg evaluator="xml" expression="$ctx:globalTransactionalProfileCreateFound" />
+                            <arg evaluator="xml" expression="$ctx:globalTransactionalProfileDeleteNotFound" />
+                        </args>
+                    </payloadFactory>
+                    <property name="messageType" value="application/json" scope="axis2" />
+                    <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+                </then>
+                <else>
+                    <property name="fault" value="Error RecordFile create" />
+                    <sequence key="FaultSeq" />
+                </else>
+            </filter>
+        </else>
+    </filter>
+    <property name="messageType" value="application/json" scope="axis2" />
+    <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+    <log level="custom" category="DEBUG">
+        <property name="ResourceUploadFileTransacctionalProfileSeq" value="Fin..." />
+    </log>
+</sequence>

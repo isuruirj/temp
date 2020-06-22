@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localEntry key="FIRST_NAME_ROTARY_USER" xmlns="http://ws.apache.org/ns/synapse"><![CDATA[${bp.rotary_user.first_name}]]></localEntry>

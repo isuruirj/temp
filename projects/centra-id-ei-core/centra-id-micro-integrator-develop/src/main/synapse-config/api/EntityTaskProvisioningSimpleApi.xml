@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/api.centraid/provisioning/TaskProvisioningSimple" name="CentraIDprovisioningTaskProvisioningSimpleApi" version="1.0.0" version-type="context" xmlns="http://ws.apache.org/ns/synapse">
+    <resource faultSequence="FaultSeq" methods="GET">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="TaskProvisioningSimpleListSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/count">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="TaskProvisioningSimpleCountSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/max/{field}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="TaskProvisioningSimpleMaxSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/sum/{field}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="TaskProvisioningSimpleSumSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="POST" uri-template="/">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="TaskProvisioningSimpleCreateSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="PUT" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="TaskProvisioningSimpleUpdateSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="DELETE" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="TaskProvisioningSimpleDeleteSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/{from}/{to}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="TaskProvisioningSimpleFromToSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="TaskProvisioningSimpleRetrieveSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+</api>

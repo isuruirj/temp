@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="UserdataReportDeleteSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse" xmlns:ci="centra-id.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:axis2ns65="http://ws.wso2.org/dataservice">
+    <log level="custom" category="DEBUG">
+        <property name="UserdataReportDeleteSeq" value="Inicio.."/>
+    </log>
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml"/>
+    <property name="Accept" scope="transport" type="STRING" value="application/xml"/>
+    <property name="uri.var.table" scope="default" type="STRING" value="sch_centra_id.USERDATA_REPORT_VW" />
+    <property name="uri.var.set" scope="default" type="STRING" value="valid=0" />
+    <payloadFactory media-type="xml">
+        <format>
+            <ci:_deletedeleteuserdataReport>
+            <ci:table>$1</ci:table>
+            <ci:set>$2</ci:set>
+            <ci:id>$3</ci:id>
+            </ci:_deletedeleteuserdataReport>
+        </format>
+        <args>
+           <arg evaluator="xml" expression="get-property('uri.var.table')" />
+           <arg evaluator="xml" expression="get-property('uri.var.set')" />
+           <arg evaluator="xml" expression="get-property('uri.var.id')" />
+        </args>
+     </payloadFactory>
+    <call>
+        <endpoint name="UserdataReportDSS_Endpoint" template="HTTPEndpointDeleteTemplate"
+              uri="{uri.var.dataServiceHost}/report.userdata-report.ds.HTTPEndpoint/DeleteUserdataReport" />
+    </call>
+    <property expression="//ci:Fault/ci:faultcode" name="faultCode" scope="default" type="STRING" />
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq"/>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>{ "userdataReport": { "id": $1 } }</format>
+                <args>
+                    <arg evaluator="xml" expression="get-property('uri.var.id')"/>
+                </args>
+            </payloadFactory>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200"/>
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="UserdataReportDeleteSeq" value="Fin.."/>
+    </log>
+</sequence>

@@ -1,0 +1,232 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "guid",
+    "processkey",
+    "identityType",
+    "identity",
+    "firstSurname",
+    "secondSurname",
+    "firstName",
+    "middleName",
+    "cellphoneNumber",
+    "personalEmail",
+    "company",
+    "division",
+    "area",
+    "department",
+    "position",
+    "costCenter",
+    "supervisionLine",
+    "admissionDate",
+    "userTypeCode",
+    "userSubtypeCode"
+  ],
+  "properties": {
+    "guid": {
+      "$id": "#/properties/guid",
+      "type": "string",
+      "title": "The Guid Schema",
+      "default": "",
+      "examples": [
+        "4563456534563456"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "processkey": {
+      "$id": "#/properties/processkey",
+      "type": "string",
+      "title": "The Processkey Schema",
+      "default": "",
+      "examples": [
+        "PROCREUSUINT"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "identityType": {
+      "$id": "#/properties/identityType",
+      "type": "string",
+      "title": "The Identitytype Schema",
+      "default": "",
+      "examples": [
+        "C"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "identity": {
+      "$id": "#/properties/identity",
+      "type": "string",
+      "title": "The Identity Schema",
+      "default": "",
+      "examples": [
+        "0702619321"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "firstSurname": {
+      "$id": "#/properties/firstSurname",
+      "type": "string",
+      "title": "The Firstsurname Schema",
+      "default": "",
+      "examples": [
+        "MOLINA"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "secondSurname": {
+      "$id": "#/properties/secondSurname",
+      "type": "string",
+      "title": "The Secondsurname Schema",
+      "default": "",
+      "examples": [
+        "NOBOA"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "firstName": {
+      "$id": "#/properties/firstName",
+      "type": "string",
+      "title": "The Firstname Schema",
+      "default": "",
+      "examples": [
+        "HENRY"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "middleName": {
+      "$id": "#/properties/middleName",
+      "type": "string",
+      "title": "The Middlename Schema",
+      "default": "",
+      "examples": [
+        "ABDON"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "cellphoneNumber": {
+      "$id": "#/properties/cellphoneNumber",
+      "type": "string",
+      "title": "The Cellphonenumber Schema",
+      "default": "",
+      "examples": [
+        "09834353453"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "personalEmail": {
+      "$id": "#/properties/personalEmail",
+      "type": "string",
+      "title": "The Personalemail Schema",
+      "default": "",
+      "examples": [
+        "henry.molina@atikasoft.com"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "company": {
+      "$id": "#/properties/company",
+      "type": "string",
+      "title": "The Company Schema",
+      "default": "",
+      "examples": [
+        "BCPI"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "division": {
+      "$id": "#/properties/division",
+      "type": "string",
+      "title": "The Division Schema",
+      "default": "",
+      "examples": [
+        "D1"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "area": {
+      "$id": "#/properties/area",
+      "type": "string",
+      "title": "The Area Schema",
+      "default": "",
+      "examples": [
+        "A1"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "department": {
+      "$id": "#/properties/department",
+      "type": "string",
+      "title": "The Department Schema",
+      "default": "",
+      "examples": [
+        "E1"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "position": {
+      "$id": "#/properties/position",
+      "type": "string",
+      "title": "The Position Schema",
+      "default": "",
+      "examples": [
+        "P1"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "costCenter": {
+      "$id": "#/properties/costCenter",
+      "type": "string",
+      "title": "The Costcenter Schema",
+      "default": "",
+      "examples": [
+        "C1"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "supervisionLine": {
+      "$id": "#/properties/supervisionLine",
+      "type": "string",
+      "title": "The Supervisionline Schema",
+      "default": "",
+      "examples": [
+        "124534543"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "admissionDate": {
+      "$id": "#/properties/admissionDate",
+      "type": "string",
+      "title": "The Admissiondate Schema",
+      "default": "",
+      "examples": [
+        "01-01-2019"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "userTypeCode": {
+      "$id": "#/properties/userTypeCode",
+      "type": "string",
+      "title": "The Usertypecode Schema",
+      "default": "",
+      "examples": [
+        "PER"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "userSubtypeCode": {
+      "$id": "#/properties/userSubtypeCode",
+      "type": "string",
+      "title": "The Usersubtypecode Schema",
+      "default": "",
+      "examples": [
+        "GEN"
+      ],
+      "pattern": "^(.*)$"
+    }
+  }
+}
+

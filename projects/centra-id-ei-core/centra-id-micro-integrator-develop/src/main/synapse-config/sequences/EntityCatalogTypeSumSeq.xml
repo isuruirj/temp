@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="CatalogTypeSumSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+        <property name="CatalogTypeSumSeq" value="Inicio.." />
+        <property name="uri.var.field" expression="get-property('uri.var.field')"/>
+    <log level="custom" category="DEBUG">
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+    <property name="Accept" scope="transport" type="STRING" value="application/json" />
+    <property action="remove" name="Content-Type" scope="transport" />
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.code" name="code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.name" name="name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.sortType" name="sortType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.editable" name="editable" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.description" name="description" scope="default" type="STRING" />
+    <script language="nashornJs"><![CDATA[
+        @add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE catalogType.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","catalogType","id");
+        where += addWhere("code","String","catalogType","code");
+        where += addWhere("name","String","catalogType","name");
+        where += addWhere("sortType","String","catalogType","sort_type");
+        where += addWhere("editable","Integer","catalogType","editable");
+        where += addWhere("valid","Integer","catalogType","valid");
+        where += addWhere("description","String","catalogType","description");
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+
+        // FIELD
+        var field = "catalogType."+mc.getProperty("uri.var.field");
+        mc.setProperty("uri.var.field",field);
+
+        log.debug(where);]]></script>
+
+    <property value="sch_centra_id.CATALOGS_TYPES catalogType" name="uri.var.table" scope="default" type="STRING"/>
+    <property value="SUM" name="uri.var.function" scope="default" type="STRING"/>
+
+    <call>
+        <endpoint name="CatalogTypeDSS_Endpoint" template="HTTPEndpointGetTemplate"
+              uri="{uri.var.dataServiceHost}/common.catalog-type.ds.HTTPEndpoint/GetFunctionResultCatalogType?function={uri.var.function}&amp;whereclause={uri.var.whereclause}&amp;field={uri.var.field}&amp;table={uri.var.table}&amp;innerjoinclause={uri.var.innerjoinclause}" />
+
+    </call>
+
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING"/>
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq"/>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                        "sum": $1
+                    }
+                </format>
+                <args>
+                    <arg evaluator="json" expression="$.result.value"/>
+                </args>
+            </payloadFactory>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200"/>
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="CatalogTypeSumSeq" value="Fin.." />
+    </log>
+    <respond />
+</sequence>

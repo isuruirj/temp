@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="UserDataSearchFromToSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="UserDataSearchFromToSeq" value="Inicio.." />
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml" />
+    <property name="Accept" scope="transport" type="STRING" value="application/xml" />
+    <property action="remove" name="Content-Type" scope="transport" />
+    <property expression="$ctx:query.param.orderby" name="uri.var.orderby" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.apellidosEmpleado" name="apellidosEmpleado" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.celular" name="celular" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.codigoAgrupacion" name="codigoAgrupacion" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.codigoArea" name="codigoArea" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.codigoCargo" name="codigoCargo" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.codigoCentroCosto" name="codigoCentroCosto" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.codigoCompania" name="codigoCompania" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.codigoDepartamento" name="codigoDepartamento" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.codigoDivision" name="codigoDivision" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.codigoEmpleado" name="codigoEmpleado" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.codigoNivelJerarquico" name="codigoNivelJerarquico" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.codigoPerfilGlobal" name="codigoPerfilGlobal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.codigoTrabajador" name="codigoTrabajador" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.correoElectronico" name="correoElectronico" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.estadoEmpleado" name="estadoEmpleado" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.fechaIngreso" name="fechaIngreso" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.fechaSalida" name="fechaSalida" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.idPerfilGlobal" name="idPerfilGlobal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.idUsuario" name="idUsuario" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.identificacion" name="identificacion" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.identificacionSupervisor" name="identificacionSupervisor" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.nombreArea" name="nombreArea" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.nombreCargo" name="nombreCargo" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.nombreCentroCosto" name="nombreCentroCosto" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.nombreCompania" name="nombreCompania" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.nombreDepartamento" name="nombreDepartamento" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.nombreDivision" name="nombreDivision" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.nombrePerfilGlobal" name="nombrePerfilGlobal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.nombreSupervisor" name="nombreSupervisor" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.nombrelocalidad" name="nombrelocalidad" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.nombresEmpleado" name="nombresEmpleado" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.numeroCuentaDeposito" name="numeroCuentaDeposito" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.subtipo" name="subtipo" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.tipousuario" name="tipousuario" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.username" name="username" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.nombresCompletos" name="nombresCompletos" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.correoElectronicoPersonal" name="correoElectronicoPersonal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.uuid" name="uuid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.guid" name="guid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.tipoIdentificacion" name="tipoIdentificacion" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.tipoRotativo" name="tipoRotativo" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.idSupervisor" name="idSupervisor" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.identificacionContraparte" name="identificacionContraparte" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.nombreContraparte" name="nombreContraparte" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.idContraparte" name="idContraparte" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.identificacionResponsable" name="identificacionResponsable" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.nombreResponsable" name="nombreResponsable" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.idResponsable" name="idResponsable" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.counterGenericRotary" name="counterGenericRotary" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.counterGenericMail" name="counterGenericMail" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING" />
+    <script language="nashornJs"><![CDATA[
+        @add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE userDataSearch.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","userDataSearch","id");
+        where += addWhere("apellidosEmpleado","String","userDataSearch","apellidos_empleado");
+        where += addWhere("celular","String","userDataSearch","celular");
+        where += addWhere("codigoAgrupacion","String","userDataSearch","codigo_agrupacion");
+        where += addWhere("codigoArea","String","userDataSearch","codigo_area");
+        where += addWhere("codigoCargo","String","userDataSearch","codigo_cargo");
+        where += addWhere("codigoCentroCosto","String","userDataSearch","codigo_centro_costo");
+        where += addWhere("codigoCompania","String","userDataSearch","codigo_compania");
+        where += addWhere("codigoDepartamento","String","userDataSearch","codigo_departamento");
+        where += addWhere("codigoDivision","String","userDataSearch","codigo_division");
+        where += addWhere("codigoEmpleado","String","userDataSearch","codigo_empleado");
+        where += addWhere("codigoNivelJerarquico","String","userDataSearch","codigo_nivel_jerarquico");
+        where += addWhere("codigoPerfilGlobal","String","userDataSearch","codigo_perfil_global");
+        where += addWhere("codigoTrabajador","String","userDataSearch","codigo_trabajador");
+        where += addWhere("correoElectronico","String","userDataSearch","correo_electronico");
+        where += addWhere("estadoEmpleado","String","userDataSearch","estado_empleado");
+        where += addWhere("fechaIngreso","Date","userDataSearch","fecha_ingreso");
+        where += addWhere("fechaSalida","Date","userDataSearch","fecha_salida");
+        where += addWhere("idPerfilGlobal","Integer","userDataSearch","id_perfil_global");
+        where += addWhere("idUsuario","Integer","userDataSearch","id_usuario");
+        where += addWhere("identificacion","String","userDataSearch","identificacion");
+        where += addWhere("identificacionSupervisor","String","userDataSearch","identificacion_supervisor");
+        where += addWhere("nombreArea","String","userDataSearch","nombre_area");
+        where += addWhere("nombreCargo","String","userDataSearch","nombre_cargo");
+        where += addWhere("nombreCentroCosto","String","userDataSearch","nombre_centro_costo");
+        where += addWhere("nombreCompania","String","userDataSearch","nombre_compania");
+        where += addWhere("nombreDepartamento","String","userDataSearch","nombre_departamento");
+        where += addWhere("nombreDivision","String","userDataSearch","nombre_division");
+        where += addWhere("nombrePerfilGlobal","String","userDataSearch","nombre_perfil_global");
+        where += addWhere("nombreSupervisor","String","userDataSearch","nombre_supervisor");
+        where += addWhere("nombrelocalidad","String","userDataSearch","nombrelocalidad");
+        where += addWhere("nombresEmpleado","String","userDataSearch","nombres_empleado");
+        where += addWhere("numeroCuentaDeposito","String","userDataSearch","numero_cuenta_deposito");
+        where += addWhere("subtipo","String","userDataSearch","subtipo");
+        where += addWhere("tipousuario","String","userDataSearch","tipousuario");
+        where += addWhere("username","String","userDataSearch","username");
+        where += addWhere("nombresCompletos","String","userDataSearch","nombres_completos");
+        where += addWhere("correoElectronicoPersonal","String","userDataSearch","correo_electronico_personal");
+        where += addWhere("uuid","String","userDataSearch","uuid");
+        where += addWhere("guid","String","userDataSearch","guid");
+        where += addWhere("tipoIdentificacion","String","userDataSearch","tipo_identificacion");
+        where += addWhere("tipoRotativo","String","userDataSearch","tipo_rotativo");
+        where += addWhere("idSupervisor","Integer","userDataSearch","id_supervisor");
+        where += addWhere("identificacionContraparte","String","userDataSearch","identificacion_contraparte");
+        where += addWhere("nombreContraparte","String","userDataSearch","nombre_contraparte");
+        where += addWhere("idContraparte","Integer","userDataSearch","id_contraparte");
+        where += addWhere("identificacionResponsable","String","userDataSearch","identificacion_responsable");
+        where += addWhere("nombreResponsable","String","userDataSearch","nombre_responsable");
+        where += addWhere("idResponsable","Integer","userDataSearch","id_responsable");
+        where += addWhere("counterGenericRotary","Integer","userDataSearch","counter_generic_rotary");
+        where += addWhere("counterGenericMail","Integer","userDataSearch","counter_generic_mail");
+        where += addWhere("valid","Integer","userDataSearch","valid");
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+
+        if(!mc.getProperty("uri.var.orderby")){
+            mc.setProperty("uri.var.orderby","userDataSearch.id");
+        } else {
+            mc.setProperty("uri.var.orderby","userDataSearch."+mc.getProperty("uri.var.orderby"));
+        }
+
+        // FROM TO
+        var fromto = "OFFSET "+mc.getProperty("uri.var.from")+" ROWS FETCH NEXT "+mc.getProperty("uri.var.to")+" ROWS ONLY";
+        mc.setProperty("uri.var.fromto",fromto);
+        log.debug(where);]]></script>
+    <call>
+        <endpoint name="UserDataSearchDSS_Endpoint" template="HTTPEndpointGetTemplate"
+              uri="{uri.var.dataServiceHost}/identity.user-data-search.ds.HTTPEndpoint/GetFromToUserDataSearch?whereclause={uri.var.whereclause}&amp;orderby={uri.var.orderby}&amp;fromto={uri.var.fromto}&amp;innerjoinclause={uri.var.innerjoinclause}" />
+
+    </call>
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING" />
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq" />
+        </then>
+        <else>
+            <xslt key="gov:/centra-id/xslt/dssFilter.xsl" />
+            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="UserDataSearchFromToSeq" value="Fin.." />
+    </log>
+</sequence>

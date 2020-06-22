@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template name="CalculateScopeRuleTemplate" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="username"/>
+    <sequence>
+        <log level="custom" category="DEBUG">
+            <property name="CalculateScopeRuleTemplatexxx" value="Inicio..."/>
+        </log>
+        <log level="custom" category="DEBUG">
+            <property name="CalculateScopeRuleTemplate" value="Fin..."/>
+        </log>
+    </sequence>
+</template>

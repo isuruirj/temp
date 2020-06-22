@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="FaultUserDataSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="FaultUserDataSeq" value="Inicio..." />
+        <property name="userdataId" expression="get-property('uri.var.userdataId')" />
+    </log>
+    <filter regex="true" source="boolean(get-property('uri.var.userdataId'))">
+        <then>
+            <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+            <property name="Accept" scope="transport" type="STRING" value="application/json" />
+            <log level="custom" separator="**2**"></log>
+            <call>
+                <endpoint template="HTTPEndpointDeleteTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/UserData/{uri.var.userdataId}" />
+            </call>
+        </then>
+    </filter>
+    <sequence key="FaultSeq" />
+</sequence>

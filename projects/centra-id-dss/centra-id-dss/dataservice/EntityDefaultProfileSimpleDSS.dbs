@@ -1,0 +1,213 @@
+<data name="application.default-profile-simple.ds"
+    serviceNamespace="centra-id.com"
+    enableBatchRequests="false"
+    enableBoxcarring="false"
+    transports="https"
+    disableLegacyBoxcarringMode="true">
+
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <!-- DYNAMIC QUERY DEFAULTPROFILESIMPLE -->
+    <query id="dynamicQuery_defaultProfileSimple" useConfig="default">
+        <sql>
+           SELECT
+               defaultProfileSimple.id,
+               defaultProfileSimple.code_company,
+               defaultProfileSimple.code_division,
+               defaultProfileSimple.code_area,
+               defaultProfileSimple.code_department,
+               defaultProfileSimple.code_position,
+               defaultProfileSimple.valid,
+               defaultProfileSimple.global_profile_id
+           FROM sch_centra_id.DEFAULT_PROFILES defaultProfileSimple :innerjoinclause :whereclause ORDER BY :orderby :fromto
+        </sql>
+        <result element="defaultProfileSimpleList" rowName="defaultProfileSimple">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code_company" name="codeCompany" xsdType="xs:string"/>
+            <element column="code_division" name="codeDivision" xsdType="xs:string"/>
+            <element column="code_area" name="codeArea" xsdType="xs:string"/>
+            <element column="code_department" name="codeDepartment" xsdType="xs:string"/>
+            <element column="code_position" name="codePosition" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="global_profile_id" name="globalProfileId" xsdType="xs:integer"/>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="fromto" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- INSERT DefaultProfileSimple -->
+    <query id="insertQuery_defaultProfileSimple" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>
+           INSERT INTO sch_centra_id.DEFAULT_PROFILES(
+               code_company,
+               code_division,
+               code_area,
+               code_department,
+               code_position,
+               valid,
+               global_profile_id
+        ) VALUES(?,?,?,?,?,?,?)
+        </sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="codeCompany" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="codeDivision" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="codeArea" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="codeDepartment" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="codePosition" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="valid" ordinal="6" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="1"/>
+        <param name="globalProfileId" ordinal="7" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+    </query>
+    <!-- UPDATE DefaultProfileSimple -->
+    <query id="updateQuery_defaultProfileSimple" useConfig="default">
+        <sql>
+           UPDATE sch_centra_id.DEFAULT_PROFILES SET
+               code_company=?,
+               code_division=?,
+               code_area=?,
+               code_department=?,
+               code_position=?,
+               global_profile_id=?
+            WHERE id=?
+        </sql>
+        <param name="codeCompany" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="codeDivision" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="codeArea" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="codeDepartment" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="codePosition" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="globalProfileId" ordinal="6" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+        <param name="id" ordinal="7" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <!-- DYNAMIC FUNCTION  -->
+    <query id="dynamicQueryFunction_defaultProfileSimple" useConfig="default">
+        <sql>
+           SELECT :function(:field) as value FROM :table :innerjoinclause :whereclause
+         </sql>
+        <result element="result">
+            <element column="value" name="value" xsdType="xs:long"/>
+        </result>
+        <param name="function" sqlType="QUERY_STRING"/>
+        <param name="field" sqlType="QUERY_STRING"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DELETE  -->
+    <query id="dynamicDeleteQuery_defaultProfileSimple" useConfig="default">
+        <sql>UPDATE :table SET :set WHERE id=:id</sql>
+        <param name="id" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="set" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- OPERATIONS -->
+    <operation name="listAllOperation_defaultProfileSimple">
+        <call-query href="dynamicQuery_defaultProfileSimple">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="fromToOperation_defaultProfileSimple">
+        <call-query href="dynamicQuery_defaultProfileSimple">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="functionOperation_defaultProfileSimple">
+        <call-query href="dynamicQueryFunction_defaultProfileSimple">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="deleteOperation_defaultProfileSimple">
+        <call-query href="dynamicDeleteQuery_defaultProfileSimple">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </operation>
+    <operation name="create_defaultProfileSimple">
+        <call-query href="insertQuery_defaultProfileSimple">
+            <with-param name="codeCompany" query-param="codeCompany"/>
+            <with-param name="codeDivision" query-param="codeDivision"/>
+            <with-param name="codeArea" query-param="codeArea"/>
+            <with-param name="codeDepartment" query-param="codeDepartment"/>
+            <with-param name="codePosition" query-param="codePosition"/>
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="globalProfileId" query-param="globalProfileId"/>
+        </call-query>
+    </operation>
+    <operation name="update_defaultProfileSimple">
+        <call-query href="updateQuery_defaultProfileSimple">
+            <with-param name="codeCompany" query-param="codeCompany"/>
+            <with-param name="codeDivision" query-param="codeDivision"/>
+            <with-param name="codeArea" query-param="codeArea"/>
+            <with-param name="codeDepartment" query-param="codeDepartment"/>
+            <with-param name="codePosition" query-param="codePosition"/>
+            <with-param name="globalProfileId" query-param="globalProfileId"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <!-- RESOURCES -->
+    <resource method="GET" path="GetAllDefaultProfileSimple">
+        <call-query href="dynamicQuery_defaultProfileSimple">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFromToDefaultProfileSimple">
+        <call-query href="dynamicQuery_defaultProfileSimple">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFunctionResultDefaultProfileSimple">
+        <call-query href="dynamicQueryFunction_defaultProfileSimple">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="DeleteDefaultProfileSimple">
+        <call-query href="dynamicDeleteQuery_defaultProfileSimple">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="CreateDefaultProfileSimple">
+        <call-query href="insertQuery_defaultProfileSimple">
+            <with-param name="codeCompany" query-param="codeCompany"/>
+            <with-param name="codeDivision" query-param="codeDivision"/>
+            <with-param name="codeArea" query-param="codeArea"/>
+            <with-param name="codeDepartment" query-param="codeDepartment"/>
+            <with-param name="codePosition" query-param="codePosition"/>
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="globalProfileId" query-param="globalProfileId"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="UpdateDefaultProfileSimple">
+        <call-query href="updateQuery_defaultProfileSimple">
+            <with-param name="codeCompany" query-param="codeCompany"/>
+            <with-param name="codeDivision" query-param="codeDivision"/>
+            <with-param name="codeArea" query-param="codeArea"/>
+            <with-param name="codeDepartment" query-param="codeDepartment"/>
+            <with-param name="codePosition" query-param="codePosition"/>
+            <with-param name="globalProfileId" query-param="globalProfileId"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+</data>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GISCIM_Mapping_RHDS_ModificarUsuario_Seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log description="seq" level="custom">
+        <property name="seq" value="-------------------- GISCIM_Mapping_RHDS_ModificarUsuario_Seq --------------------"/>
+    </log>
+    <payloadFactory description="RHDS Payload" media-type="json">
+        <format>{
+    "schemas": ["urn:ietf:params:scim:api:messages:2.0:PatchOp"],
+    "Operations": [{
+        "op": "replace",
+        "value": {
+            "emails": [
+                {"type": "other", "value": "$1"}
+            ],
+            "EnterpriseUser": {
+                "companyCode": "$2",
+                "endDate": "$3",
+                "created": "$4",
+                "organization": "$5",
+                "tellerNumber": "$6",
+                "description": "$7",
+                "position": "$8",
+                "fullname": "$9",
+                "termNo": "$10",
+                "noIdentificacion": "$11",
+                "rol": "$12",
+                "accountStatus": "$13",
+                "branch": "$14"
+            },
+            "name": {
+                "givenName": "$15",
+                "familyName": "$16"
+            }
+
+        }
+    }]
+}</format>
+        <args>
+            <arg evaluator="xml" expression="$body/*/tem:correoElectronico/text()" xmlns:ns="http://org.apache.synapse/xsd" xmlns:tem="http://tempuri.org/"/>
+            <arg evaluator="xml" expression="$body/*/tem:codigoCompania/text()" xmlns:ns="http://org.apache.synapse/xsd" xmlns:tem="http://tempuri.org/"/>
+            <arg evaluator="xml" expression="$body/*/tem:fechaSalidaEmpleado/text()" xmlns:ns="http://org.apache.synapse/xsd" xmlns:tem="http://tempuri.org/"/>
+            <arg evaluator="xml" expression="$body/*/tem:fechaIngresoEmpleado/text()" xmlns:ns="http://org.apache.synapse/xsd" xmlns:tem="http://tempuri.org/"/>
+            <arg evaluator="xml" expression="$body/*/tem:empresa/text()" xmlns:ns="http://org.apache.synapse/xsd" xmlns:tem="http://tempuri.org/"/>
+            <arg evaluator="xml" expression="$body/*/tem:tellerNumber/text()" xmlns:ns="http://org.apache.synapse/xsd" xmlns:tem="http://tempuri.org/"/>
+            <arg evaluator="xml" expression="$body/*/tem:observacion/text()" xmlns:ns="http://org.apache.synapse/xsd" xmlns:tem="http://tempuri.org/"/>
+            <arg evaluator="xml" expression="$body/*/tem:cargoCompleto/text()" xmlns:ns="http://org.apache.synapse/xsd" xmlns:tem="http://tempuri.org/"/>
+            <arg evaluator="xml" expression="fn:concat($body//*/tem:apellidosEmpleado/text(),' ', $body//*/tem:nombresEmpleado/text())" xmlns:tem="http://tempuri.org/"/>
+            <arg evaluator="xml" expression="$body/*/tem:especificos/tem:termNo/text()" xmlns:tem="http://tempuri.org/"/>
+            <arg value=""/>
+            <arg evaluator="xml" expression="$body/*/tem:especificos/tem:rol/text()" xmlns:tem="http://tempuri.org/"/>
+            <arg evaluator="xml" expression="$body/*/tem:estadoEmpleado/text()" xmlns:ns="http://org.apache.synapse/xsd" xmlns:tem="http://tempuri.org/"/>
+            <arg evaluator="xml" expression="$body/*/tem:especificos/tem:branch/text()" xmlns:ns="http://org.apache.synapse/xsd" xmlns:tem="http://tempuri.org/"/>
+            <arg evaluator="xml" expression="$body/*/tem:nombresEmpleado/text()" xmlns:tem="http://tempuri.org/"/>
+            <arg evaluator="xml" expression="$body/*/tem:apellidosEmpleado/text()" xmlns:tem="http://tempuri.org/"/>
+        </args>
+    </payloadFactory>
+</sequence>

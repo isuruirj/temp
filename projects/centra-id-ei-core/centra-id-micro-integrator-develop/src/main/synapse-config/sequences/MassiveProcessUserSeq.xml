@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="MassiveProcessUserSeq" onError="FaultMassiveProcessUsersSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse" xmlns:ns="http://org.apache.synapse/xsd" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:cen="centra-id.com">
+    <log level="custom" category="DEBUG">
+        <property name="MassiveProcessUserSeq" value="Inicio..." />
+    </log>
+    <property expression="json-eval($)" name="jsonEmployee" scope="default" type="STRING" />
+    <!-- obtiene datos del empleado -->
+    <filter regex="true" source="(//bodyIn/empleados/codigoTrabajador!='')">
+        <then>
+            <property expression="//bodyIn/empleados/codigoTrabajador" name="codigoTrabajador" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="codigoTrabajador" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/apellidosEmpleado!='')">
+        <then>
+            <property expression="//bodyIn/empleados/apellidosEmpleado" name="apellidosEmpleado" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="apellidosEmpleado" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/nombresEmpleado!='')">
+        <then>
+            <property expression="//bodyIn/empleados/nombresEmpleado" name="nombresEmpleado" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="nombresEmpleado" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/tipoIdentificacion!='')">
+        <then>
+            <property expression="//bodyIn/empleados/tipoIdentificacion" name="tipoIdentificacion" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="tipoIdentificacion" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/identificacion!='')">
+        <then>
+            <property expression="//bodyIn/empleados/identificacion" name="identificacion" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="identificacion" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/identificacionSupervisor!='')">
+        <then>
+            <property expression="//bodyIn/empleados/identificacionSupervisor" name="identificacionSupervisor" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="identificacionSupervisor" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/identificacionSupervisor!='')">
+        <then>
+            <property expression="//bodyIn/empleados/identificacionSupervisor" name="identificacionSupervisor" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="identificacionSupervisor" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/nombreSupervisor!='')">
+        <then>
+            <property expression="//bodyIn/empleados/nombreSupervisor" name="nombreSupervisor" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="nombreSupervisor" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/codigoCompania!='')">
+        <then>
+            <property expression="//bodyIn/empleados/codigoCompania" name="codigoCompania" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="codigoCompania" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/nombreCompania!='')">
+        <then>
+            <property expression="//bodyIn/empleados/nombreCompania" name="nombreCompania" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="nombreCompania" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/codigoAgrupacion!='')">
+        <then>
+            <property expression="//bodyIn/empleados/codigoAgrupacion" name="codigoAgrupacion" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="codigoAgrupacion" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/nombreAgrupacion!='')">
+        <then>
+            <property expression="//bodyIn/empleados/nombreAgrupacion" name="nombreAgrupacion" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="nombreAgrupacion" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/codigoDivision!='')">
+        <then>
+            <property expression="//bodyIn/empleados/codigoDivision" name="codigoDivision" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="codigoDivision" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <property expression="//bodyIn/empleados/nombreDivision" name="nombreDivision" scope="default" type="STRING" />
+    <filter regex="true" source="(//bodyIn/empleados/codigoDepartamento!='')">
+        <then>
+            <property expression="//bodyIn/empleados/codigoDepartamento" name="codigoDepartamento" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="codigoDepartamento" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <property expression="//bodyIn/empleados/nombreDepartamento" name="nombreDepartamento" scope="default" type="STRING" />
+    <filter regex="true" source="(//bodyIn/empleados/codigoArea!='')">
+        <then>
+            <property expression="//bodyIn/empleados/codigoArea" name="codigoArea" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="codigoArea" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <property expression="//bodyIn/empleados/nombreArea" name="nombreArea" scope="default" type="STRING" />
+    <filter regex="true" source="(//bodyIn/empleados/codigoCentroCosto!='')">
+        <then>
+            <property expression="//bodyIn/empleados/codigoCentroCosto" name="codigoCentroCosto" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="codigoCentroCosto" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/nombreCentroCosto!='')">
+        <then>
+            <property expression="//bodyIn/empleados/nombreCentroCosto" name="nombreCentroCosto" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="nombreCentroCosto" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/nombreLocalidad!='')">
+        <then>
+            <property expression="//bodyIn/empleados/nombreLocalidad" name="nombreLocalidad" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="nombreLocalidad" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/nombreCargo!='')">
+        <then>
+            <property expression="//bodyIn/empleados/nombreCargo" name="nombreCargo" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="nombreCargo" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/codigoNivelJerarquico!='')">
+        <then>
+            <property expression="//bodyIn/empleados/codigoNivelJerarquico" name="codigoNivelJerarquico" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="codigoNivelJerarquico" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/nombreNivelJerarquico!='')">
+        <then>
+            <property expression="//bodyIn/empleados/nombreNivelJerarquico" name="nombreNivelJerarquico" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="nombreNivelJerarquico" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/numeroCuentaDeposito!='')">
+        <then>
+            <property expression="//bodyIn/empleados/numeroCuentaDeposito" name="numeroCuentaDeposito" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="numeroCuentaDeposito" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/fechaIngresoEmpleado!='')">
+        <then>
+            <property expression="//bodyIn/empleados/fechaIngresoEmpleado" name="fechaIngresoEmpleado" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="fechaIngresoEmpleado" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/fechaSalidaEmpleado!='')">
+        <then>
+            <property expression="//bodyIn/empleados/fechaSalidaEmpleado" name="fechaSalidaEmpleado" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="fechaSalidaEmpleado" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/estadoEmpleado!='')">
+        <then>
+            <property expression="//bodyIn/empleados/estadoEmpleado" name="estadoEmpleado" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="estadoEmpleado" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/celular!='')">
+        <then>
+            <property expression="//bodyIn/empleados/celular" name="celular" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="celular" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/codigoEmpleado!='')">
+        <then>
+            <property expression="//bodyIn/empleados/codigoEmpleado" name="codigoEmpleado" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="codigoEmpleado" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/tipoUsuario!='')">
+        <then>
+            <property expression="//bodyIn/empleados/tipoUsuario" name="tipoUsuario" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="tipoUsuario" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <filter regex="true" source="(//bodyIn/empleados/subTipo!='')">
+        <then>
+            <property expression="//bodyIn/empleados/subTipo" name="subTipo" scope="default" type="STRING" />
+        </then>
+        <else>
+            <property value="" name="subTipo" scope="default" type="STRING" />
+        </else>
+    </filter>
+    <log level="custom" separator=" | ">
+        <property expression="get-property('codigoTrabajador')" name="codigoTrabajador" />
+        <property expression="get-property('apellidosEmpleado')" name="apellidosEmpleado" />
+        <property expression="get-property('nombresEmpleado')" name="nombresEmpleado" />
+        <property expression="get-property('tipoIdentificacion')" name="tipoIdentificacion" />        
+        <property expression="get-property('identificacion')" name="identificacion" />
+        <property expression="get-property('identificacionSupervisor')" name="identificacionSupervisor" />
+        <property expression="get-property('nombreSupervisor')" name="nombreSupervisor" />
+        <property expression="get-property('codigoCompania')" name="codigoCompania" />
+        <property expression="get-property('nombreCompania')" name="nombreCompania" />
+        <property expression="get-property('codigoAgrupacion')" name="codigoAgrupacion" />
+        <property expression="get-property('nombreAgrupacion')" name="nombreAgrupacion" />
+        <property expression="get-property('codigoDivision')" name="codigoDivision" />
+        <property expression="get-property('nombreDivision')" name="nombreDivision" />
+        <property expression="get-property('codigoDepartamento')" name="codigoDepartamento" />
+        <property expression="get-property('nombreDepartamento')" name="nombreDepartamento" />
+        <property expression="get-property('codigoArea')" name="codigoArea" />
+        <property expression="get-property('nombreArea')" name="nombreArea" />
+        <property expression="get-property('codigoCentroCosto')" name="codigoCentroCosto" />
+        <property expression="get-property('nombreCentroCosto')" name="nombreCentroCosto" />
+        <property expression="get-property('nombreLocalidad')" name="nombreLocalidad" />
+        <property expression="get-property('nombreCargo')" name="nombreCargo" />
+        <property expression="get-property('codigoNivelJerarquico')" name="codigoNivelJerarquico" />
+        <property expression="get-property('nombreNivelJerarquico')" name="nombreNivelJerarquico" />
+        <property expression="get-property('numeroCuentaDeposito')" name="numeroCuentaDeposito" />
+        <property expression="get-property('fechaIngresoEmpleado')" name="fechaIngresoEmpleado" />
+        <property expression="get-property('fechaSalidaEmpleado')" name="fechaSalidaEmpleado" />
+        <property expression="get-property('estadoEmpleado')" name="estadoEmpleado" />
+        <property expression="get-property('celular')" name="celular" />
+        <property expression="get-property('codigoEmpleado')" name="codigoEmpleado" />
+        <property expression="get-property('tipoUsuario')" name="tipoUsuario" />
+        <property expression="get-property('subTipo')" name="subTipo" />
+    </log>
+    <!-- Inicializar variables de validaciones -->
+    <property name="validateData" scope="default" type="BOOLEAN" value="true" />
+    <property name="validateDataMessage" scope="default" type="STRING" value="" />
+    <!-- Realiza la validacion de los datos del empleado -->
+    <sequence key="MassiveProcessUserValidateDataSeq" />
+    <filter regex="true" source="boolean(get-property('validateData'))">
+        <then>
+            <sequence key="MassiveProcessUserSelectSeq" />
+        </then>
+        <else>
+            <property expression="get-property('validateDataMessage')" name="observations" scope="default" type="STRING" />
+            <sequence key="FaultMassiveProcessUsersSeq" />
+        </else>
+    </filter>
+    <log level="custom" separator="| ">
+        <property name="MassiveProcessUserSeq" value="Fin..." />
+    </log>
+</sequence>

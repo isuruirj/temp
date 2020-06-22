@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="BusinessProcessCalculateUserAttentionSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="BusinessProcessCalculateUserAttentionSeq" value="Inicio.." />
+    </log>
+    <property name="byRole" expression="//byRole" />
+    <property name="bySupervisor" expression="//bySupervisor" />
+    <property name="type" expression="//type" />
+    <switch source="$ctx:type">
+        <case regex="ROLE">
+            <payloadFactory media-type="xml">
+                <format>
+                    <ser:getUserListOfRole xmlns:ser="http://service.ws.um.carbon.wso2.org">
+                        <ser:roleName>$1</ser:roleName>
+                    </ser:getUserListOfRole>
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="$ctx:byRole" />
+                </args>
+            </payloadFactory>
+            <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+            <property name="IS_SERVER_USER_DATO" expression="synapse:get-property('IS_SERVER_USER')" scope="default" />
+            <property name="IS_SERVER_PASSWORD_DATO" expression="synapse:get-property('IS_SERVER_PASSWORD')" scope="default" />
+            <property name="Authorization" expression="fn:concat('Basic ', base64Encode(fn:concat($ctx:IS_SERVER_USER_DATO,':',$ctx:IS_SERVER_PASSWORD_DATO)))" scope="transport" />
+            <property name="service_ep" expression="fn:concat(get-property('uri.var.identityServerHost'),'/services' ,'/RemoteUserStoreManagerService')" />
+            <header name="To" expression="get-property('service_ep')" />
+            <property name="Accept" scope="transport" value="application/xml" />
+            <call>
+                <endpoint>
+                    <default />
+                </endpoint>
+            </call>
+            <property name="fault" expression="//*:UserStoreException" />
+            <property name="fault2" expression="//faultstring" />
+            <filter regex="true" source="boolean(get-property('fault')) or boolean(get-property('fault2'))">
+                <then>
+                    <property name="fault" expression="fn:concat(get-property('fault'),':',get-property('fault2'))" />
+                    <sequence key="FaultSeq" />
+                </then>
+                <else>
+                    <property name="total" expression="count(//*:return)" type="INTEGER" />
+                    <filter regex="true" source="$ctx:total=0">
+                        <then>
+                            <payloadFactory media-type="xml">
+                                <format>
+                                    <result>
+                                        <code>-1</code>
+                                        <message>There is no user with role $1 to assign to the process</message>
+                                    </result>
+                                </format>
+                                <args>
+                                    <arg evaluator="xml" expression="$ctx:byRole" />
+                                </args>
+                            </payloadFactory>
+                        </then>
+                        <else>
+                            <script language="js">
+                                <![CDATA[   
+                                    var total = mc.getProperty('total')
+                                    var counter=Math.floor((Math.random() * total) + 1);    
+                                    mc.setProperty("counter", counter);
+                                    ]]>
+                            </script>
+                            <property name="expUsernameSelected" expression="fn:concat('//ns:return[',$ctx:counter,']')" />
+                            <property name="usernameSelected" expression="evaluate($ctx:expUsernameSelected)" xmlns:ns="http://service.ws.um.carbon.wso2.org" />
+                            <payloadFactory media-type="xml">
+                                <format>
+                                    <result>
+                                        <code>0</code>
+                                        <username>$1</username>
+                                        <message>Operation performed successfully</message>
+                                    </result>
+                                </format>
+                                <args>
+                                    <arg evaluator="xml" expression="$ctx:usernameSelected" />
+                                </args>
+                            </payloadFactory>
+                        </else>
+                    </filter>
+                </else>
+            </filter>
+        </case>
+        <case regex="SUPERVISOR">
+        </case>
+        <default>
+            <payloadFactory media-type="xml">
+                <format>
+                    <result>
+                        <code>-1</code>
+                        <message>Unknown type</message>
+                    </result>
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="$ctx:byRole" />
+                </args>
+            </payloadFactory>
+        </default>
+    </switch>
+    <property name="messageType" scope="axis2" value="application/json" />
+    <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+    <log level="custom" category="DEBUG">
+        <property name="BusinessProcessCalculateUserAttentionSeq" value="Fin.." />
+    </log>
+</sequence>

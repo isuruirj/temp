@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GIDecrypt_Seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log description="Log" level="custom">
+        <property name="seq" value="---------- GIDecrypt_Seq ----------"/>
+        <property expression="get-property('AES_PAYLOAD')" name="AES_PAYLOAD"/>
+        <property expression="get-property('CENTRAID_AES_KEY')" name="AES_KEY"/>
+        <property expression="get-property('CENTRAID_AES_IV')" name="AES_IV"/>
+        <property expression="get-property('AES_ACTION')" name="AES_ACTION"/>
+    </log>
+    <property description="Set the AES Key" expression="get-property('CENTRAID_AES_KEY')" name="AES_KEY" scope="default" type="STRING"/>
+    <property description="Set the AES IV" expression="get-property('CENTRAID_AES_IV')" name="AES_IV" scope="default" type="STRING"/>
+    <property description="Set the AES Action" expression="get-property('AES_ACTION')" name="AES_ACTION" scope="default" type="STRING"/>
+    <class description="Decrypting the User Password" name="org.wso2.pichincha.mediator.AESEncryptMediator"/>
+    <log description="Log">
+        <property expression="get-property('AES_RESULTS')" name="AES_RESULTS"/>
+        <property expression="get-property('ERROR_MESSAGE')" name="The Error After Class Mediator"/>
+    </log>
+</sequence>

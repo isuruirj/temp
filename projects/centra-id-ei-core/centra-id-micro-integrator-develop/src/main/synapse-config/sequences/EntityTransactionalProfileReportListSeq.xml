@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="TransactionalProfileReportListSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log category="DEBUG" level="custom">
+        <property name="TransactionalProfileReportListSeq" value="Inicio.."/>
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2"/>
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml"/>
+    <property name="Accept" scope="transport" type="STRING" value="application/xml"/>
+    <property action="remove" name="Content-Type" scope="transport"/>
+    <property expression="$ctx:query.param.orderby" name="uri.var.orderby" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.applicationCode" name="applicationCode" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.applicationName" name="applicationName" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.applicationAutomatic" name="applicationAutomatic" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.transactionalProfileCode" name="transactionalProfileCode" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.transactionalProfileName" name="transactionalProfileName" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.riskLevel" name="riskLevel" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.comments" name="comments" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.fieldName" name="fieldName" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.fieldValue" name="fieldValue" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING"/>
+    <script language="nashornJs"><![CDATA[@add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE transactionalProfileReport.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","transactionalProfileReport","id");
+        where += addWhere("applicationCode","String","transactionalProfileReport","application_code");
+        where += addWhere("applicationName","String","transactionalProfileReport","application_name");
+        where += addWhere("applicationAutomatic","Integer","transactionalProfileReport","application_automatic");
+        where += addWhere("transactionalProfileCode","String","transactionalProfileReport","transactional_profile_code");
+        where += addWhere("transactionalProfileName","String","transactionalProfileReport","transactional_profile_name");
+        where += addWhere("riskLevel","String","transactionalProfileReport","risk_level");
+        where += addWhere("comments","String","transactionalProfileReport","comments");
+        where += addWhere("fieldName","String","transactionalProfileReport","field_name");
+        where += addWhere("fieldValue","String","transactionalProfileReport","field_value");
+        where += addWhere("valid","Integer","transactionalProfileReport","valid");
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+        if(!mc.getProperty("uri.var.orderby")){
+            mc.setProperty("uri.var.orderby","transactionalProfileReport.id");
+        } else {
+            mc.setProperty("uri.var.orderby","transactionalProfileReport."+mc.getProperty("uri.var.orderby"));
+        }
+        log.debug(where);]]></script>
+    <call>
+        <endpoint name="TransactionalProfileReportDSS_Endpoint" template="HTTPEndpointGetTemplate" uri="{uri.var.dataServiceHost}/report.transactional-profile-report.ds.HTTPEndpoint/GetAllTransactionalProfileReport?whereclause={uri.var.whereclause}&amp;orderby={uri.var.orderby}&amp;innerjoinclause={uri.var.innerjoinclause}"/>
+    </call>
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING"/>
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq"/>
+        </then>
+        <else>
+            <xslt key="gov:/centra-id/xslt/dssFilter.xsl"/>
+            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200"/>
+        </else>
+    </filter>
+    <log category="DEBUG" level="custom">
+        <property name="TransactionalProfileReportSeq" value="Fin.."/>
+    </log>
+    <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+    <property name="Access-Control-Allow-Methods" scope="transport" type="STRING" value="GET,PUT,POST,DELETE,PATCH,OPTIONS"/>
+    <property name="Access-Control-Allow-Headers" scope="transport" type="STRING" value="Authorization,Access-Control-Allow-Origin,Content-Type"/>
+</sequence>

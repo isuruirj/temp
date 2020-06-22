@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="FaultUserDataDeleteSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse" xmlns:ci="centra-id.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:axis2ns65="http://ws.wso2.org/dataservice">
+    <log level="custom" separator="**1**">
+        <property name="FaultUserDataDeleteSeq" value="Inicio..." />
+        <property name="userdataId" expression="get-property('uri.var.userdataId')" />
+    </log>
+    <property name="uri.var.table" scope="default" type="STRING" value="sch_centra_id.USERDATA" />
+    <property name="uri.var.set" scope="default" type="STRING" value="valid=1" />
+    <property name="Content-Type" scope="transport" value="application/x-www-form-urlencoded" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/x-www-form-urlencoded" />
+    <call>
+        <endpoint template="HTTPEndpointDeleteTemplate" uri="{uri.var.dataServiceHost}/identity.user-data.ds.HTTPEndpoint/DeleteUserData?id={uri.var.userdataId}&amp;set={uri.var.set}&amp;table={uri.var.table}" />
+    </call>
+    <sequence key="FaultSeq" />
+</sequence>

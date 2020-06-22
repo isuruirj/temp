@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="RecalculateUpdateSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="RecalculateUpdateSeq" value="Inicio.." />
+        <property name="X-Forwarded-For" expression="$ctx:X-Forwarded-For" />
+        <property name="UserName" expression="$ctx:UserName" />
+    </log>
+    <!-- Recuperar perfil trasaccional actual-->
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/TransactionalProfileSimple?globalProfileId={uri.var.globalProfileId}" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <property name="transactionalProfileNow" expression="json-eval($)" scope="default" />
+        </then>
+        <else>
+            <property name="fault" scope="default" type="STRING" value="RecalculateUpdateSeq: error when get TransactionalProfileNow" />
+            <sequence key="FaultSeq" />
+        </else>
+    </filter>
+    <!-- Recuperar perfil trasaccional anterior-->
+    <filter regex="true" source="boolean($ctx:uri.var.globalProfilePreviusId)">
+        <then>
+            <call>
+                <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/TransactionalProfileSimple?globalProfileId={uri.var.globalProfilePreviusId}" />
+            </call>
+            <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                <then>
+                    <property name="transactionalProfilePrevius" expression="json-eval($)" scope="default" />
+                    <!-- realizar comparaciones de perfiles -->
+                    <script language="js">
+                        <![CDATA[
+                            var log = mc.getServiceLog();
+                            log.debug("Iniciando....");
+                            var now = JSON.parse(mc.getProperty("transactionalProfileNow"));
+                            log.debug("Iniciando.1...");
+                            var previus = JSON.parse(mc.getProperty("transactionalProfilePrevius"));
+                            if(previus!=null) {
+                                log.debug("Iniciando.2...");
+                                log.debug("Iniciando.3...");
+                                var currents = now.transactionalProfileSimpleList.transactionalProfileSimple;
+                                var pasts = previus.transactionalProfileSimpleList.transactionalProfileSimple;
+                                var transactionalProfileSimpleList = "{\"transactionalProfileSimpleList\": {\"transactionalProfileSimple\": [ ";
+                                log.debug("Iniciando.4...");
+                                var first=true;
+                                for (i = 0; i < pasts.length; ++i) {
+                                    var past = pasts[i];  
+                                    log.debug("Iniciando.5...");
+                                    for (j = 0; j < currents.length; ++j) {
+                                        var current = currents[j];  
+                                        var exist = false;
+                                        if(past.transactionalProfileApplicationId == current.transactionalProfileApplicationId){
+                                            // ACTUALIZACION
+                                            if(!first){
+                                                transactionalProfileSimpleList+= ",";
+                                            }
+                                            first=false;
+                                            transactionalProfileSimpleList+= "{ \"id\" : "+current.id+",";
+                                            transactionalProfileSimpleList+= "  \"transactionalProfileApplicationId\" : "+current.transactionalProfileApplicationId+",";
+                                            transactionalProfileSimpleList+= "  \"applicationAutomaticProvision\" : "+current.applicationAutomaticProvision+",";
+                                            transactionalProfileSimpleList+= "  \"typeAction\" : \"U\" }";
+                                            exist = true;
+                                            break;
+                                        }
+                                    }
+                                    if(!exist) {
+                                        // ELIMINACION
+                                        if(!first){
+                                            transactionalProfileSimpleList+= ",";
+                                        }
+                                        first=false;
+                                        transactionalProfileSimpleList+= "{ \"id\" : "+past.id+",";
+                                        transactionalProfileSimpleList+= "  \"transactionalProfileApplicationId\" : "+past.transactionalProfileApplicationId+",";
+                                        transactionalProfileSimpleList+= "  \"applicationAutomaticProvision\" : "+past.applicationAutomaticProvision+",";
+                                        transactionalProfileSimpleList+= "  \"typeAction\" : \"D\" }";
+                                    }    
+                                }
+                                log.debug("Iniciando.6...");
+                                for (i = 0; i < currents.length; ++i) {
+                                    var current = currents[i];  
+                                    var exist = false;
+                                    for (j = 0; j < pasts.length; ++j) {
+                                        var past = pasts[j];  
+                                        if(past.transactionalProfileApplicationId == current.transactionalProfileApplicationId){
+                                            exist = true;
+                                            break;
+                                        }
+                                    }
+                                    if(!exist) {
+                                        // CREACION
+                                        if(!first){
+                                            transactionalProfileSimpleList+= ",";
+                                        }
+                                        first=false;
+                                        transactionalProfileSimpleList+= "{ \"id\" : "+current.id+",";
+                                        transactionalProfileSimpleList+= "  \"transactionalProfileApplicationId\" : "+current.transactionalProfileApplicationId+",";
+                                        transactionalProfileSimpleList+= "  \"applicationAutomaticProvision\" : "+current.applicationAutomaticProvision+",";
+                                        transactionalProfileSimpleList+= "  \"typeAction\" : \"C\" }";
+                                    }    
+                                }
+                                transactionalProfileSimpleList += "]}}";
+                            } else {
+                                var transactionalProfileSimpleList = "{\"transactionalProfileSimpleList\": null }";
+                            }
+                            log.debug("transactionalProfileSimpleList:"+transactionalProfileSimpleList);
+                            mc.setPayloadJSON(JSON.parse(transactionalProfileSimpleList));
+                        ]]>
+                    </script>
+                </then>
+                <else>
+                    <property name="fault" scope="default" type="STRING" value="RecalculateUpdateSeq: error when get TransactionalProfilePrevius" />
+                    <sequence key="FaultSeq" />
+                </else>
+            </filter>
+        </then>
+    </filter>
+    <property name="findData" expression="boolean(//transactionalProfileSimpleList/transactionalProfileSimple)" />
+    <filter regex="true" source="$ctx:findData">
+        <then>
+            <iterate expression="//transactionalProfileSimple" id="transactionalProfileSimpleId">
+                <target>
+                    <sequence>
+                        <filter regex="true" source="boolean($ctx:uri.var.globalProfilePreviusId)">
+                            <then>
+                                <property name="typeAction" expression="//typeAction" />
+                            </then>
+                            <else>
+                                <property name="typeAction" value="U" />
+                            </else>
+                        </filter>
+                        <sequence key="RecalculateTaskSeq" />
+                    </sequence>
+                </target>
+            </iterate>
+            <aggregate id="transactionalProfileSimpleId">
+                <completeCondition>
+                    <messageCount max="-1" min="-1" />
+                </completeCondition>
+                <onComplete expression="$body/*[1]">
+                    <log level="custom" category="DEBUG">
+                        <property name="agregado" value="ok" />
+                    </log>
+                </onComplete>
+            </aggregate>
+            <!-- Especifica las dependencias entre aplicacion-->
+            <sequence key="RecalculateTaskDependencySeq" />
+            <!-- Enviar a colas de aprovisionamiento -->
+            <sequence key="ProvisioningSeq" />
+        </then>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="RecalculateUpdateSeq" value="Fin.." />
+        <property name="X-Forwarded-For" expression="$ctx:X-Forwarded-For" />
+        <property name="UserName" expression="$ctx:UserName" />
+    </log>
+</sequence>

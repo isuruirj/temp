@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.centra-id.micro-integrator</groupId>
+  <artifactId>centra-id-registry-resources_module</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>centra-id-registry-resources_module</name>
+  <description>centra-id-registry-resources_module</description>
+  <modules>
+    <module>artifacts/resource/jsonToXml.xsl</module>
+    <module>artifacts/resource/challengeQuestionsToXml.xsl</module>
+    <module>artifacts/resource/dssFilter.xsl</module>
+    <module>artifacts/resource/bpsInstanceFilter.xsl</module>
+    <module>artifacts/resource/bpsFilter.xsl</module>
+    <module>artifacts/resource/addLocalClaim.xsl</module>
+    <module>artifacts/resource/jsonFilter.xsl</module>
+    <module>artifacts/resource/replaceElement.xsl</module>
+    <module>artifacts/resource/logTransactional.xsl</module>
+    <module>artifacts/resource/mailTemplateDefaultProfileError.xsl</module>
+    <module>artifacts/resource/massiveProcessToJson.xsl</module>
+    <module>artifacts/resource/ProcesarEmpleadoRequestSchema.json</module>
+    <module>artifacts/resource/migration.xsl</module>
+    <module>artifacts/resource/pagination.xsl</module>
+    <module>artifacts/resource/dateToMiliSeconds.xsl</module>
+    <module>artifacts/resource/ticketManual.xsl</module>
+    <module>artifacts/resource/sendNotificacionMailToXml.xsl</module>
+    <module>artifacts/resource/sendNotificacionSmsToXml.xsl</module>
+    <module>artifacts/resource/businessProcessRequest.xml</module>
+    <module>artifacts/resource/catalogCreateJsonXML.xml</module>
+    <module>artifacts/resource/catalogs_transform.xml</module>
+    <module>artifacts/resource/catalogs.xml</module>
+    <module>artifacts/resource/mailTemplateDefaultProfileError.xml</module>
+    <module>artifacts/resource/massiveProcessToJson_xml</module>
+    <module>artifacts/resource/createInternUser.epr</module>
+    <module>artifacts/resource/createGenericUser.epr</module>
+    <module>artifacts/resource/createGenericRotaryUser.epr</module>
+    <module>artifacts/resource/createExternUser.epr</module>
+    <module>artifacts/resource/businessProcessSendNotification.epr</module>
+  </modules>
+</project>

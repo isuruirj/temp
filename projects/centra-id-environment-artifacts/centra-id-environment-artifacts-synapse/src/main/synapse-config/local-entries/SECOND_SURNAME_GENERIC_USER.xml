@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localEntry key="SECOND_SURNAME_GENERIC_USER" xmlns="http://ws.apache.org/ns/synapse"><![CDATA[${bp.generic_user.second_name}]]></localEntry>
