@@ -120,3 +120,7 @@ jdbc:sqlserver://10.50.24.47:10447;databaseName=WSO2_UM_DB;SendStringParametersA
 wso2ei-integrator-deployment-16-rxkvb:/home/wso2carbon/wso2ei-6.4.0/repository/deployment/server/carbonapps
 
 
+
+
+############ BP Bitbucket
+https://controlversiones.uio.bpichincha.com/scm/an10/centra-id-queue.git
