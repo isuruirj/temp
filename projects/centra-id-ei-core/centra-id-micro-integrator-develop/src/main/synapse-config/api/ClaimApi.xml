@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<api context="/centra-id/ei/claims" name="ClaimApi" xmlns="http://ws.apache.org/ns/synapse">
-    <resource faultSequence="FaultSeq" inSequence="CrearClaimSeq" methods="OPTIONS POST" uri-template="/create">
-        <outSequence/>
-    </resource>
-</api>

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><resources>
-    <item>
-        <file>businessProcessRequest.xml</file>
-        <path>/_system/governance/centra-id/xml</path>
-        <mediaType>application/xml</mediaType>
-    </item>
-</resources>

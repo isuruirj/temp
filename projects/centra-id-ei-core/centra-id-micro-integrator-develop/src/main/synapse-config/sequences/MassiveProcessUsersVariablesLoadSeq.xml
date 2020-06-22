@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<sequence name="MassiveProcessUsersVariablesLoadSeq" onError="FaultMassiveProcessUsersSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-    <property expression="synapse:get-property('DATA_SERVICE_HOST')" name="uri.var.dataServiceHost" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns2="http://org.apache.synapse/xsd"/>
-    <property expression="synapse:get-property('IDENTITY_SERVER_HOST')" name="uri.var.identityServerHost" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns2="http://org.apache.synapse/xsd"/>
-    <property expression="synapse:get-property('BUSSINES_PROCESS_SERVICE_HOST')" name="uri.var.bussinesProcessServiceHost" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns2="http://org.apache.synapse/xsd"/>
-    <property expression="synapse:get-property('ENTERPRISE_INTEGRATOR_HOST')" name="uri.var.enterpriseIntegratorHost" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns2="http://org.apache.synapse/xsd"/>
-    <property expression="synapse:get-property('ENDPOINT_CHALLENGE_QUESTION_TCS')" name="uri.var.endpointChallengeQuestionTcs" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns2="http://org.apache.synapse/xsd"/>
-    <property expression="synapse:get-property('ENDPOINT_NOTIFICACION_TCS')" name="uri.var.endpointNotificationTcs" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns2="http://org.apache.synapse/xsd"/>
-</sequence>
