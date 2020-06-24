@@ -1,6 +1,0 @@
-<Tier>
-    <IssueWarningQuota>400MB</IssueWarningQuota>
-    <ProhibitSendQuota>450MB</ProhibitSendQuota>
-    <ProhibitSendReceiveQuota>500MB</ProhibitSendReceiveQuota>
-    <UseDatabaseQuotaDefaults>$false</UseDatabaseQuotaDefaults>
-</Tier>

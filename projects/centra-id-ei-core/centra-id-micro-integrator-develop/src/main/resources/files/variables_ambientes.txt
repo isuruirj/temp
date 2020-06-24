@@ -1,7 +1,0 @@
-export CATALOGS_DSS_HOST=http://localhost:8282
-export DATA_SERVICE_HOST=http://localhost:8282
-export API_MANAGER_HOST=http://localhost:8280
-export IDENTITY_SERVER_HOST=https://localhost:9446
-export API_AUTHORIZATION_TOKEN=Bearer 97fee695-bc87-3abc-b9f2-c6163a459f6c
-
-

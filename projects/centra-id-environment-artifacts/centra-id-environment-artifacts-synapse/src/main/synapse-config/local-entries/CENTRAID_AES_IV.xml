@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<localEntry key="CENTRAID_AES_IV" xmlns="http://ws.apache.org/ns/synapse"><![CDATA[${bp.centraid.aes_iv}]]></localEntry>

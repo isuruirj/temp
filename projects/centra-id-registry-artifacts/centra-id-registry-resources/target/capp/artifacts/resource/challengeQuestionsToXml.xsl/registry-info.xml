@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><resources>
-    <item>
-        <file>challengeQuestionsToXml.xsl</file>
-        <path>/_system/governance/centra-id/xslt</path>
-        <mediaType>application/xsl+xml</mediaType>
-    </item>
-</resources>

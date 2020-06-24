@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<localEntry key="ENDPOINT_CHALLENGE_QUESTION_TCS" xmlns="http://ws.apache.org/ns/synapse"><![CDATA[${bp.datapower.challange_question.endpoint}]]></localEntry>

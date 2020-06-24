@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<sequence name="RecalculateReplySeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-    <log level="custom" category="DEBUG">
-        <property name="RecalculateReplySeq" value="Inicio.." />
-    </log>
-    <log level="custom" category="DEBUG">
-        <property name="RecalculateReplySeq" value="Fin.." />
-    </log>
-</sequence>

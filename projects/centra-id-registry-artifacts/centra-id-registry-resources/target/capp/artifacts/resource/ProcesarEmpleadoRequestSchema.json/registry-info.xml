@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><resources>
-    <item>
-        <file>ProcesarEmpleadoRequestSchema.json</file>
-        <path>/_system/governance/centra-id/schemas</path>
-        <mediaType>application/json</mediaType>
-    </item>
-</resources>

@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<localEntry key="APIM_GW_HOST" xmlns="http://ws.apache.org/ns/synapse"><![CDATA[${bp.apim.gw.host}]]></localEntry>
