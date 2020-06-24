@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ApplicationCountSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="ApplicationCountSeq" value="Inicio.." />
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+    <property name="Accept" scope="transport" type="STRING" value="application/json" />
+    <property action="remove" name="Content-Type" scope="transport" />
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.code" name="code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.name" name="name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.automaticProvision" name="automaticProvision" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.status" name="status" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.applicationGroup.id" name="applicationGroup.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.applicationGroup.code" name="applicationGroup.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.applicationGroup.name" name="applicationGroup.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.applicationGroup.endpointType" name="applicationGroup.endpointType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.applicationGroup.ordinal" name="applicationGroup.ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.applicationGroup.valid" name="applicationGroup.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.applicationGroup.numberRetries" name="applicationGroup.numberRetries" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.applicationGroup.timeBetweenRetries" name="applicationGroup.timeBetweenRetries" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.applicationGroup.errorsNotRequireTicket" name="applicationGroup.errorsNotRequireTicket" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.id" name="parent.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.code" name="parent.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.name" name="parent.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.automaticProvision" name="parent.automaticProvision" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.status" name="parent.status" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.valid" name="parent.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.applicationGroup.id" name="parent.applicationGroup.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.applicationGroup.code" name="parent.applicationGroup.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.applicationGroup.name" name="parent.applicationGroup.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.applicationGroup.endpointType" name="parent.applicationGroup.endpointType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.applicationGroup.ordinal" name="parent.applicationGroup.ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.applicationGroup.valid" name="parent.applicationGroup.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.applicationGroup.numberRetries" name="parent.applicationGroup.numberRetries" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.applicationGroup.timeBetweenRetries" name="parent.applicationGroup.timeBetweenRetries" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.applicationGroup.errorsNotRequireTicket" name="parent.applicationGroup.errorsNotRequireTicket" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.id" name="parent.parent.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.code" name="parent.parent.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.name" name="parent.parent.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.automaticProvision" name="parent.parent.automaticProvision" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.status" name="parent.parent.status" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.valid" name="parent.parent.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.applicationGroup.id" name="parent.parent.applicationGroup.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.applicationGroup.code" name="parent.parent.applicationGroup.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.applicationGroup.name" name="parent.parent.applicationGroup.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.applicationGroup.endpointType" name="parent.parent.applicationGroup.endpointType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.applicationGroup.ordinal" name="parent.parent.applicationGroup.ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.applicationGroup.valid" name="parent.parent.applicationGroup.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.applicationGroup.numberRetries" name="parent.parent.applicationGroup.numberRetries" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.applicationGroup.timeBetweenRetries" name="parent.parent.applicationGroup.timeBetweenRetries" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.applicationGroup.errorsNotRequireTicket" name="parent.parent.applicationGroup.errorsNotRequireTicket" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.id" name="parent.parent.parent.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.code" name="parent.parent.parent.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.name" name="parent.parent.parent.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.automaticProvision" name="parent.parent.parent.automaticProvision" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.status" name="parent.parent.parent.status" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.valid" name="parent.parent.parent.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.applicationGroup.id" name="parent.parent.parent.applicationGroup.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.applicationGroup.code" name="parent.parent.parent.applicationGroup.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.applicationGroup.name" name="parent.parent.parent.applicationGroup.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.applicationGroup.endpointType" name="parent.parent.parent.applicationGroup.endpointType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.applicationGroup.ordinal" name="parent.parent.parent.applicationGroup.ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.applicationGroup.valid" name="parent.parent.parent.applicationGroup.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.applicationGroup.numberRetries" name="parent.parent.parent.applicationGroup.numberRetries" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.applicationGroup.timeBetweenRetries" name="parent.parent.parent.applicationGroup.timeBetweenRetries" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.applicationGroup.errorsNotRequireTicket" name="parent.parent.parent.applicationGroup.errorsNotRequireTicket" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.parent.id" name="parent.parent.parent.parent.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.parent.code" name="parent.parent.parent.parent.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.parent.name" name="parent.parent.parent.parent.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.parent.automaticProvision" name="parent.parent.parent.parent.automaticProvision" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.parent.status" name="parent.parent.parent.parent.status" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.parent.valid" name="parent.parent.parent.parent.valid" scope="default" type="STRING" />
+    <script language="nashornJs"><![CDATA[
+        @add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE application.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","application","id");
+        where += addWhere("code","String","application","code");
+        where += addWhere("name","String","application","name");
+        where += addWhere("automaticProvision","Integer","application","automatic_provision");
+        where += addWhere("status","String","application","status");
+        where += addWhere("valid","Integer","application","valid");
+        where += addWhere("applicationGroup.id","Integer","applicationGroup","id");
+        where += addWhere("applicationGroup.code","String","applicationGroup","code");
+        where += addWhere("applicationGroup.name","String","applicationGroup","name");
+        where += addWhere("applicationGroup.endpointType","String","applicationGroup","endpoint_type");
+        where += addWhere("applicationGroup.ordinal","Integer","applicationGroup","ordinal");
+        where += addWhere("applicationGroup.valid","Integer","applicationGroup","valid");
+        where += addWhere("applicationGroup.numberRetries","Integer","applicationGroup","number_retries");
+        where += addWhere("applicationGroup.timeBetweenRetries","Integer","applicationGroup","time_between_retries");
+        where += addWhere("applicationGroup.errorsNotRequireTicket","String","applicationGroup","errors_not_require_ticket");
+        where += addWhere("parent.id","Integer","parent","id");
+        where += addWhere("parent.code","String","parent","code");
+        where += addWhere("parent.name","String","parent","name");
+        where += addWhere("parent.automaticProvision","Integer","parent","automatic_provision");
+        where += addWhere("parent.status","String","parent","status");
+        where += addWhere("parent.valid","Integer","parent","valid");
+        where += addWhere("parent.applicationGroup.id","Integer","parent_applicationGroup","id");
+        where += addWhere("parent.applicationGroup.code","String","parent_applicationGroup","code");
+        where += addWhere("parent.applicationGroup.name","String","parent_applicationGroup","name");
+        where += addWhere("parent.applicationGroup.endpointType","String","parent_applicationGroup","endpoint_type");
+        where += addWhere("parent.applicationGroup.ordinal","Integer","parent_applicationGroup","ordinal");
+        where += addWhere("parent.applicationGroup.valid","Integer","parent_applicationGroup","valid");
+        where += addWhere("parent.applicationGroup.numberRetries","Integer","parent_applicationGroup","number_retries");
+        where += addWhere("parent.applicationGroup.timeBetweenRetries","Integer","parent_applicationGroup","time_between_retries");
+        where += addWhere("parent.applicationGroup.errorsNotRequireTicket","String","parent_applicationGroup","errors_not_require_ticket");
+        where += addWhere("parent.parent.id","Integer","parent_parent","id");
+        where += addWhere("parent.parent.code","String","parent_parent","code");
+        where += addWhere("parent.parent.name","String","parent_parent","name");
+        where += addWhere("parent.parent.automaticProvision","Integer","parent_parent","automatic_provision");
+        where += addWhere("parent.parent.status","String","parent_parent","status");
+        where += addWhere("parent.parent.valid","Integer","parent_parent","valid");
+        where += addWhere("parent.parent.applicationGroup.id","Integer","parent_parent_applicationGroup","id");
+        where += addWhere("parent.parent.applicationGroup.code","String","parent_parent_applicationGroup","code");
+        where += addWhere("parent.parent.applicationGroup.name","String","parent_parent_applicationGroup","name");
+        where += addWhere("parent.parent.applicationGroup.endpointType","String","parent_parent_applicationGroup","endpoint_type");
+        where += addWhere("parent.parent.applicationGroup.ordinal","Integer","parent_parent_applicationGroup","ordinal");
+        where += addWhere("parent.parent.applicationGroup.valid","Integer","parent_parent_applicationGroup","valid");
+        where += addWhere("parent.parent.applicationGroup.numberRetries","Integer","parent_parent_applicationGroup","number_retries");
+        where += addWhere("parent.parent.applicationGroup.timeBetweenRetries","Integer","parent_parent_applicationGroup","time_between_retries");
+        where += addWhere("parent.parent.applicationGroup.errorsNotRequireTicket","String","parent_parent_applicationGroup","errors_not_require_ticket");
+        where += addWhere("parent.parent.parent.id","Integer","parent_parent_parent","id");
+        where += addWhere("parent.parent.parent.code","String","parent_parent_parent","code");
+        where += addWhere("parent.parent.parent.name","String","parent_parent_parent","name");
+        where += addWhere("parent.parent.parent.automaticProvision","Integer","parent_parent_parent","automatic_provision");
+        where += addWhere("parent.parent.parent.status","String","parent_parent_parent","status");
+        where += addWhere("parent.parent.parent.valid","Integer","parent_parent_parent","valid");
+        where += addWhere("parent.parent.parent.applicationGroup.id","Integer","parent_parent_parent_applicationGroup","id");
+        where += addWhere("parent.parent.parent.applicationGroup.code","String","parent_parent_parent_applicationGroup","code");
+        where += addWhere("parent.parent.parent.applicationGroup.name","String","parent_parent_parent_applicationGroup","name");
+        where += addWhere("parent.parent.parent.applicationGroup.endpointType","String","parent_parent_parent_applicationGroup","endpoint_type");
+        where += addWhere("parent.parent.parent.applicationGroup.ordinal","Integer","parent_parent_parent_applicationGroup","ordinal");
+        where += addWhere("parent.parent.parent.applicationGroup.valid","Integer","parent_parent_parent_applicationGroup","valid");
+        where += addWhere("parent.parent.parent.applicationGroup.numberRetries","Integer","parent_parent_parent_applicationGroup","number_retries");
+        where += addWhere("parent.parent.parent.applicationGroup.timeBetweenRetries","Integer","parent_parent_parent_applicationGroup","time_between_retries");
+        where += addWhere("parent.parent.parent.applicationGroup.errorsNotRequireTicket","String","parent_parent_parent_applicationGroup","errors_not_require_ticket");
+        where += addWhere("parent.parent.parent.parent.id","Integer","parent_parent_parent_parent","id");
+        where += addWhere("parent.parent.parent.parent.code","String","parent_parent_parent_parent","code");
+        where += addWhere("parent.parent.parent.parent.name","String","parent_parent_parent_parent","name");
+        where += addWhere("parent.parent.parent.parent.automaticProvision","Integer","parent_parent_parent_parent","automatic_provision");
+        where += addWhere("parent.parent.parent.parent.status","String","parent_parent_parent_parent","status");
+        where += addWhere("parent.parent.parent.parent.valid","Integer","parent_parent_parent_parent","valid");
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS_GROUP applicationGroup ON Application.application_group_id = applicationGroup.id";
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS parent ON Application.parent_id = parent.id";
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS_GROUP parent_applicationGroup ON parent.application_group_id = parent_applicationGroup.id";
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS parent_parent ON parent.parent_id = parent_parent.id";
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS_GROUP parent_parent_applicationGroup ON parent_parent.application_group_id = parent_parent_applicationGroup.id";
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS parent_parent_parent ON parent_parent.parent_id = parent_parent_parent.id";
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS_GROUP parent_parent_parent_applicationGroup ON parent_parent_parent.application_group_id = parent_parent_parent_applicationGroup.id";
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS parent_parent_parent_parent ON parent_parent_parent.parent_id = parent_parent_parent_parent.id";
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS_GROUP parent_parent_parent_parent_applicationGroup ON parent_parent_parent_parent.application_group_id = parent_parent_parent_parent_applicationGroup.id";
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS parent_parent_parent_parent_parent ON parent_parent_parent_parent.parent_id = parent_parent_parent_parent_parent.id";
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+        log.debug(where);]]></script>
+
+    <property value="sch_centra_id.APPLICATIONS application" name="uri.var.table" scope="default" type="STRING"/>
+    <property value="COUNT" name="uri.var.function" scope="default" type="STRING"/>
+    <property value="*" name="uri.var.field" scope="default" type="STRING"/>
+
+    <call>
+        <endpoint name="ApplicationDSS_Endpoint" template="HTTPEndpointGetTemplate"
+              uri="{uri.var.dataServiceHost}/application.application.ds.HTTPEndpoint/GetFunctionResultApplication?function={uri.var.function}&amp;whereclause={uri.var.whereclause}&amp;field={uri.var.field}&amp;table={uri.var.table}&amp;innerjoinclause={uri.var.innerjoinclause}" />
+
+    </call>
+
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING"/>
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq"/>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                        "count": $1
+                    }
+                </format>
+                <args>
+                    <arg evaluator="json" expression="$.result.value"/>
+                </args>
+            </payloadFactory>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200"/>
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="ApplicationCountSeq" value="Fin.." />
+    </log>
+    <respond />
+</sequence>

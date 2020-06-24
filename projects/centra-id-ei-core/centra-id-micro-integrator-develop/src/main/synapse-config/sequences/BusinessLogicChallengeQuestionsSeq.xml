@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="BusinessLogicChallengeQuestionsSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="BusinessLogicChallengeQuestionsSeq" value="Inicio..." />
+    </log>
+    <property name="Content-Encoding" action="remove" scope="transport" />
+    <property name="Accept-Encoding" action="remove" scope="transport" />
+    <property name="uri.var.username" expression="//username" />
+    <filter regex="true" source="//identificationType = 'C'">
+        <then>
+            <property name="identificationTypeService" value="0001" />
+        </then>
+        <else>
+            <property name="identificationTypeService" value="0003" />
+        </else>
+    </filter>
+    <property name="uri.var.identification" expression="//identification" />
+    <filter regex="true" source="boolean($ctx:uri.var.identification)">
+        <then>
+            <call>
+                <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/UserDataSimple?identification={uri.var.identification}&amp;username={uri.var.username}" />
+            </call>
+            <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                <then>
+                    <property name="username" expression="//username/text()" />
+                    <filter regex="true" source="boolean($ctx:username)">
+                        <then>
+                            <call-template target="GetCurrentDatePlainTemplate" />
+                            <xslt key="gov:/centra-id/xslt/challengeQuestionsToXml.xsl">
+                                <property name="dispositivo" value="01010101010101010101010101010101010101010" />
+                                <property name="guid" expression="get-property('guidCalled')" />
+                                <property name="dateTime" expression="get-property('currentDate')" />
+                                <property name="ip" expression="get-property('axis2','REMOTE_ADDR')" />
+                                <property name="username" value="USINTERT" />
+                                <property name="identification" expression="get-property('uri.var.identification')" />
+                                <property name="identificationType" expression="get-property('identificationTypeService')" />
+                            </xslt>
+                            <property name="service_ep" expression="get-property('ENDPOINT_CHALLENGE_QUESTION_TCS')" />
+                            <header name="To" expression="get-property('service_ep')" />
+                            <property name="Content-Encoding" action="remove" scope="transport" />
+                            <property name="Accept-Encoding" action="remove" scope="transport" />
+                            <property name="messageType" scope="axis2" type="STRING" value="text/xml" />
+                            <call>
+                                <endpoint>
+                                    <default />
+                                </endpoint>
+                            </call>
+                            <property name="preguntas" expression="//preguntas" scope="default" type="OM" />
+                            <log level="custom" category="DEBUG">
+                                <property name="BusinessLogicChallengeQuestionsSeq" value="Inicio.4.." />
+                                <property name="preguntas" expression="$ctx:preguntas" />
+                                <property name="preguntas1" expression="$ctx:preguntas//pregunta[1]/opciones/opcion[1]" />
+                            </log>
+                            <filter regex="true" source="boolean($ctx:preguntas)">
+                                <then>
+                                    <log level="custom" category="DEBUG">
+                                        <property name="BusinessLogicChallengeQuestionsSeq" value="Inicio.5.." />
+                                    </log>
+                                    <call-template target="GetCurrentDateTemplate" />
+                                    <log level="custom" category="DEBUG">
+                                        <property name="BusinessLogicChallengeQuestionsSeq" value="Inicio.6.." />
+                                    </log>
+                                    <payloadFactory media-type="json">
+                                        <format>
+                                            {
+                                                "challengeQuestion": {
+                                                    "username": "$1",
+                                                    "answer1": "$2",
+                                                    "answer2": "$3",
+                                                    "answer3": "$4",
+                                                    "answer4": "X",
+                                                    "code1": "$5",
+                                                    "code2": "$6",
+                                                    "code3": "$7",
+                                                    "code4": "X",
+                                                    "createdDate": "$8",
+                                                    "attentionDate": null,
+                                                    "status" : "REG"
+                                                }
+                                            }                                            
+                                        </format>
+                                        <args>
+                                            <arg evaluator="xml" expression="$ctx:username" />
+                                            <arg evaluator="xml" expression="$ctx:preguntas//pregunta[1]/opciones/opcion[1]" />
+                                            <arg evaluator="xml" expression="$ctx:preguntas//pregunta[2]/opciones/opcion[1]" />
+                                            <arg evaluator="xml" expression="$ctx:preguntas//pregunta[3]/opciones/opcion[1]" />
+                                            <arg evaluator="xml" expression="$ctx:preguntas//pregunta[1]/codigo" />
+                                            <arg evaluator="xml" expression="$ctx:preguntas//pregunta[2]/codigo" />
+                                            <arg evaluator="xml" expression="$ctx:preguntas//pregunta[3]/codigo" />
+                                            <arg evaluator="xml" expression="$ctx:currentDate" />
+                                        </args>
+                                    </payloadFactory>
+                                    <log level="custom" category="DEBUG">
+                                        <property name="BusinessLogicChallengeQuestionsSeq" value="Inicio.7.." />
+                                    </log>
+                                    <call>
+                                        <endpoint template="HTTPEndpointPostTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/ChallengeQuestion" />
+                                    </call>
+                                    <log level="custom" category="DEBUG">
+                                        <property name="BusinessLogicChallengeQuestionsSeq" value="Inicio.8.." />
+                                    </log>
+                                    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                                        <then>
+                                            <payloadFactory media-type="xml">
+                                                <format>
+                                                    <preguntas>
+                                                        <pregunta>
+                                                            <codigo>$1</codigo>
+                                                            <pregunta>$2</pregunta>
+                                                            <opciones>
+                                                                <opcion>$3</opcion>
+                                                                <opcion>$4</opcion>
+                                                                <opcion>$5</opcion>
+                                                            </opciones>
+                                                        </pregunta>
+                                                        <pregunta>
+                                                            <codigo>$6</codigo>
+                                                            <pregunta>$7</pregunta>
+                                                            <opciones>
+                                                                <opcion>$8</opcion>
+                                                                <opcion>$9</opcion>
+                                                                <opcion>$10</opcion>
+                                                            </opciones>
+                                                        </pregunta>
+                                                        <pregunta>
+                                                            <codigo>$11</codigo>
+                                                            <pregunta>$12</pregunta>
+                                                            <opciones>
+                                                                <opcion>$13</opcion>
+                                                                <opcion>$14</opcion>
+                                                                <opcion>$15</opcion>
+                                                            </opciones>
+                                                        </pregunta>
+                                                    </preguntas>
+                                                </format>
+                                                <args>
+                                                    <arg evaluator="xml" expression="$ctx:preguntas//pregunta[1]/codigo" />
+                                                    <arg evaluator="xml" expression="$ctx:preguntas//pregunta[1]/pregunta" />
+                                                    <arg evaluator="xml" expression="$ctx:preguntas//pregunta[1]/opciones/opcion[1]" />
+                                                    <arg evaluator="xml" expression="$ctx:preguntas//pregunta[1]/opciones/opcion[2]" />
+                                                    <arg evaluator="xml" expression="$ctx:preguntas//pregunta[1]/opciones/opcion[3]" />
+                                                    <arg evaluator="xml" expression="$ctx:preguntas//pregunta[2]/codigo" />
+                                                    <arg evaluator="xml" expression="$ctx:preguntas//pregunta[2]/pregunta" />
+                                                    <arg evaluator="xml" expression="$ctx:preguntas//pregunta[2]/opciones/opcion[1]" />
+                                                    <arg evaluator="xml" expression="$ctx:preguntas//pregunta[2]/opciones/opcion[2]" />
+                                                    <arg evaluator="xml" expression="$ctx:preguntas//pregunta[2]/opciones/opcion[3]" />
+                                                    <arg evaluator="xml" expression="$ctx:preguntas//pregunta[3]/codigo" />
+                                                    <arg evaluator="xml" expression="$ctx:preguntas//pregunta[3]/pregunta" />
+                                                    <arg evaluator="xml" expression="$ctx:preguntas//pregunta[3]/opciones/opcion[1]" />
+                                                    <arg evaluator="xml" expression="$ctx:preguntas//pregunta[3]/opciones/opcion[2]" />
+                                                    <arg evaluator="xml" expression="$ctx:preguntas//pregunta[3]/opciones/opcion[3]" />
+                                                </args>
+                                            </payloadFactory>
+                                        </then>
+                                        <else>
+                                            <payloadFactory media-type="json">
+                                                <format>
+                                                    {
+                                                        "result":  {
+                                                            "code" : -1,
+                                                            "message" : "Error create challengeQuestion"
+                                                        }
+                                                    }
+                                                </format>
+                                                <args />
+                                            </payloadFactory>
+                                        </else>
+                                    </filter>
+                                </then>
+                                <else>
+                                    <payloadFactory media-type="json">
+                                        <format>
+                                            {
+                                                "result":  {
+                                                    "code" : -1,
+                                                    "message" : "Questions don't exist"
+                                                }
+                                            }
+                                        </format>
+                                        <args />
+                                    </payloadFactory>
+                                </else>
+                            </filter>
+                        </then>
+                        <else>
+                            <payloadFactory media-type="json">
+                                <format>
+                                    {
+                                        "result":  {
+                                            "code" : -1,
+                                            "message" : "Identification does not exist"
+                                        }
+                                    }
+                                </format>
+                                <args />
+                            </payloadFactory>
+                        </else>
+                    </filter>
+                </then>
+                <else>
+                    <payloadFactory media-type="json">
+                        <format>
+                            {
+                                "result":  {
+                                    "code" : -1,
+                                    "message" : "Error get userdata "
+                                }
+                            }
+                        </format>
+                        <args />
+                    </payloadFactory>
+                </else>
+            </filter>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                        "result":  {
+                            "code" : -1,
+                            "message" : "Identification is mandatory"
+                        }
+                    }
+                </format>
+                <args />
+            </payloadFactory>
+        </else>
+    </filter>
+    <property name="messageType" value="application/json" scope="axis2" />
+    <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+    <log level="custom" category="DEBUG">
+        <property name="BusinessLogicChallengeQuestionsSeq" value="Fin..." />
+    </log>
+</sequence>

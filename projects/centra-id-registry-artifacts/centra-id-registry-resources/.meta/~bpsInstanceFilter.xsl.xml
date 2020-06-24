@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?><resource name="bpsInstanceFilter.xsl" isCollection="false" path="/_system/governance/centra-id/xslt/centra-id-registry-resources/bpsInstanceFilter.xsl" registryUrl="https://localhost:9443/registry" status="added">
+    <mediaType>application/xsl+xml</mediaType>
+</resource>

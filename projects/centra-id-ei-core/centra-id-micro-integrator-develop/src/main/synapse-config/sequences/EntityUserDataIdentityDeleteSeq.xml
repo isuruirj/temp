@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="EntityUserDataIdentityDeleteSeq" onError="FaultUserDataDeleteSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse" xmlns:ns="http://org.apache.axis2/xsd" xmlns:ax2764="http://common.mgt.user.carbon.wso2.org/xsd">
+    <log level="custom" category="INFO" separator="**1**">
+        <property name="EntityUserDataIdentityDeleteSeq" value="Inicio..." />
+        <property name="username" expression="get-property('uri.var.username')" />
+    </log>
+    <!-- Eliminar Usuario IS -->
+    <payloadFactory media-type="xml">
+        <format>
+            <xsd:deleteUser xmlns:xsd="http://org.apache.axis2/xsd" xmlns:xsd1="http://common.mgt.user.carbon.wso2.org/xsd">
+                <xsd:userName>$1</xsd:userName>
+            </xsd:deleteUser>
+        </format>
+        <args>
+            <arg evaluator="xml" expression="get-property('uri.var.username')" />
+        </args>
+    </payloadFactory>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="IS_SERVER_USER_DATO" expression="synapse:get-property('IS_SERVER_USER')" scope="default" />
+    <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="IS_SERVER_PASSWORD_DATO" expression="synapse:get-property('IS_SERVER_PASSWORD')" scope="default" />
+    <property xmlns:ns="http://org.apache.synapse/xsd" name="Authorization" expression="fn:concat('Basic ', base64Encode(fn:concat($ctx:IS_SERVER_USER_DATO,':',$ctx:IS_SERVER_PASSWORD_DATO)))" scope="transport" />
+    <property name="service_ep" expression="fn:concat(get-property('uri.var.identityServerHost'),'/services' ,'/UserAdmin')" />
+    <header name="To" expression="get-property('service_ep')" />
+    <property name="Accept" scope="transport" value="application/xml" />
+    <call>
+        <endpoint>
+            <default />
+        </endpoint>
+    </call>
+    <log level="custom" category="INFO" separator="**2**" />
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <property name="fault" expression="//ns:UserAdminUserAdminException" />
+            <property name="fault2" expression="//faultstring" />
+            <log level="custom" separator="**3**">
+                <property name="fault" expression="get-property('fault')" />
+                <property name="fault2" expression="get-property('fault2')" />
+            </log>
+            <filter regex="true" source="boolean(get-property('fault')) or boolean(get-property('fault2'))">
+                <then>
+                    <property name="fault" expression="fn:concat(get-property('fault'),':',get-property('fault2'))" />
+                    <sequence key="FaultUserDataDeleteSeq" />
+                </then>
+            </filter>
+        </then>
+        <else>
+            <sequence key="FaultUserDataDeleteSeq" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="EntityUserDataIdentityDeleteSeq" value="Fin..." />
+    </log>
+</sequence>

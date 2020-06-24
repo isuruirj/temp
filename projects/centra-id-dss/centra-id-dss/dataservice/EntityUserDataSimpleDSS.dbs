@@ -1,0 +1,683 @@
+<data name="identity.user-data-simple.ds"
+    serviceNamespace="centra-id.com"
+    enableBatchRequests="false"
+    enableBoxcarring="false"
+    transports="https"
+    disableLegacyBoxcarringMode="true">
+
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <!-- DYNAMIC QUERY USERDATASIMPLE -->
+    <query id="dynamicQuery_userDataSimple" useConfig="default">
+        <sql>
+           SELECT
+               userDataSimple.id,
+               userDataSimple.username,
+               userDataSimple.employee_first_surname,
+               userDataSimple.employee_second_surname,
+               userDataSimple.employee_first_name,
+               userDataSimple.employee_second_name,
+               userDataSimple.employee_complete_name,
+               userDataSimple.identification,
+               userDataSimple.company_id,
+               userDataSimple.catalog_division_id,
+               userDataSimple.catalog_area_id,
+               userDataSimple.catalog_department_id,
+               userDataSimple.catalog_position_id,
+               userDataSimple.grouping_code,
+               userDataSimple.subsidiary_code,
+               userDataSimple.subsidiary_name,
+               userDataSimple.cost_center_id,
+               userDataSimple.location_name,
+               userDataSimple.hierarchical_level,
+               userDataSimple.deposit_account_number,
+               userDataSimple.employee_income_date,
+               userDataSimple.employee_departure_date,
+               userDataSimple.employee_status,
+               userDataSimple.employee_code,
+               userDataSimple.registration_date,
+               userDataSimple.guid,
+               userDataSimple.type_event,
+               userDataSimple.data_date,
+               userDataSimple.uuid,
+               userDataSimple.provision_date,
+               userDataSimple.mobile,
+               userDataSimple.suspension_start_date,
+               userDataSimple.suspension_end_date,
+               userDataSimple.suspension_reason,
+               userDataSimple.suspension_type,
+               userDataSimple.validation_start_date,
+               userDataSimple.validation_end_date,
+               userDataSimple.ending_work_date,
+               userDataSimple.catalog_identification_type_id,
+               userDataSimple.global_profile_id,
+               userDataSimple.mail,
+               userDataSimple.effective_date,
+               userDataSimple.username_view,
+               userDataSimple.userdata_supervisor_id,
+               userDataSimple.userdata_responsible_user_id,
+               userDataSimple.userdata_bank_counterpart_id,
+               userDataSimple.worker_code,
+               userDataSimple.justification_elimination,
+               userDataSimple.justification_change_cost_center,
+               userDataSimple.justification_change_global_profile,
+               userDataSimple.filter,
+               userDataSimple.type_rotary,
+               userDataSimple.counter_generic_rotary,
+               userDataSimple.counter_generic_mail,
+               userDataSimple.valid
+           FROM sch_centra_id.USERDATA userDataSimple :innerjoinclause :whereclause ORDER BY :orderby :fromto
+        </sql>
+        <result element="userDataSimpleList" rowName="userDataSimple">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="username" name="username" xsdType="xs:string"/>
+            <element column="employee_first_surname" name="employeeFirstSurname" xsdType="xs:string"/>
+            <element column="employee_second_surname" name="employeeSecondSurname" xsdType="xs:string"/>
+            <element column="employee_first_name" name="employeeFirstName" xsdType="xs:string"/>
+            <element column="employee_second_name" name="employeeSecondName" xsdType="xs:string"/>
+            <element column="employee_complete_name" name="employeeCompleteName" xsdType="xs:string"/>
+            <element column="identification" name="identification" xsdType="xs:string"/>
+            <element column="company_id" name="companyId" xsdType="xs:integer"/>
+            <element column="catalog_division_id" name="catalogDivisionId" xsdType="xs:integer"/>
+            <element column="catalog_area_id" name="catalogAreaId" xsdType="xs:integer"/>
+            <element column="catalog_department_id" name="catalogDepartmentId" xsdType="xs:integer"/>
+            <element column="catalog_position_id" name="catalogPositionId" xsdType="xs:integer"/>
+            <element column="grouping_code" name="groupingCode" xsdType="xs:string"/>
+            <element column="subsidiary_code" name="subsidiaryCode" xsdType="xs:string"/>
+            <element column="subsidiary_name" name="subsidiaryName" xsdType="xs:string"/>
+            <element column="cost_center_id" name="costCenterId" xsdType="xs:integer"/>
+            <element column="location_name" name="locationName" xsdType="xs:string"/>
+            <element column="hierarchical_level" name="hierarchicalLevel" xsdType="xs:string"/>
+            <element column="deposit_account_number" name="depositAccountNumber" xsdType="xs:string"/>
+            <element column="employee_income_date" name="employeeIncomeDate" xsdType="xs:date"/>
+            <element column="employee_departure_date" name="employeeDepartureDate" xsdType="xs:date"/>
+            <element column="employee_status" name="employeeStatus" xsdType="xs:string"/>
+            <element column="employee_code" name="employeeCode" xsdType="xs:string"/>
+            <element column="registration_date" name="registrationDate" xsdType="xs:date"/>
+            <element column="guid" name="guid" xsdType="xs:string"/>
+            <element column="type_event" name="typeEvent" xsdType="xs:string"/>
+            <element column="data_date" name="dataDate" xsdType="xs:date"/>
+            <element column="uuid" name="uuid" xsdType="xs:string"/>
+            <element column="provision_date" name="provisionDate" xsdType="xs:date"/>
+            <element column="mobile" name="mobile" xsdType="xs:string"/>
+            <element column="suspension_start_date" name="suspensionStartDate" xsdType="xs:date"/>
+            <element column="suspension_end_date" name="suspensionEndDate" xsdType="xs:date"/>
+            <element column="suspension_reason" name="suspensionReason" xsdType="xs:string"/>
+            <element column="suspension_type" name="suspensionType" xsdType="xs:string"/>
+            <element column="validation_start_date" name="validationStartDate" xsdType="xs:date"/>
+            <element column="validation_end_date" name="validationEndDate" xsdType="xs:date"/>
+            <element column="ending_work_date" name="endingWorkDate" xsdType="xs:date"/>
+            <element column="catalog_identification_type_id" name="catalogIdentificationTypeId" xsdType="xs:integer"/>
+            <element column="global_profile_id" name="globalProfileId" xsdType="xs:integer"/>
+            <element column="mail" name="mail" xsdType="xs:string"/>
+            <element column="effective_date" name="effectiveDate" xsdType="xs:date"/>
+            <element column="username_view" name="usernameView" xsdType="xs:string"/>
+            <element column="userdata_supervisor_id" name="userdataSupervisorId" xsdType="xs:integer"/>
+            <element column="userdata_responsible_user_id" name="userdataResponsibleUserId" xsdType="xs:integer"/>
+            <element column="userdata_bank_counterpart_id" name="userdataBankCounterpartId" xsdType="xs:integer"/>
+            <element column="worker_code" name="workerCode" xsdType="xs:string"/>
+            <element column="justification_elimination" name="justificationElimination" xsdType="xs:string"/>
+            <element column="justification_change_cost_center" name="justificationChangeCostCenter" xsdType="xs:string"/>
+            <element column="justification_change_global_profile" name="justificationChangeGlobalProfile" xsdType="xs:string"/>
+            <element column="filter" name="filter" xsdType="xs:string"/>
+            <element column="type_rotary" name="typeRotary" xsdType="xs:string"/>
+            <element column="counter_generic_rotary" name="counterGenericRotary" xsdType="xs:integer"/>
+            <element column="counter_generic_mail" name="counterGenericMail" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="fromto" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- INSERT UserDataSimple -->
+    <query id="insertQuery_userDataSimple" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>
+           INSERT INTO sch_centra_id.USERDATA(
+               username,
+               employee_first_surname,
+               employee_second_surname,
+               employee_first_name,
+               employee_second_name,
+               employee_complete_name,
+               identification,
+               company_id,
+               catalog_division_id,
+               catalog_area_id,
+               catalog_department_id,
+               catalog_position_id,
+               grouping_code,
+               subsidiary_code,
+               subsidiary_name,
+               cost_center_id,
+               location_name,
+               hierarchical_level,
+               deposit_account_number,
+               employee_income_date,
+               employee_departure_date,
+               employee_status,
+               employee_code,
+               registration_date,
+               guid,
+               type_event,
+               data_date,
+               uuid,
+               provision_date,
+               mobile,
+               suspension_start_date,
+               suspension_end_date,
+               suspension_reason,
+               suspension_type,
+               validation_start_date,
+               validation_end_date,
+               ending_work_date,
+               catalog_identification_type_id,
+               global_profile_id,
+               mail,
+               effective_date,
+               username_view,
+               userdata_supervisor_id,
+               userdata_responsible_user_id,
+               userdata_bank_counterpart_id,
+               worker_code,
+               justification_elimination,
+               justification_change_cost_center,
+               justification_change_global_profile,
+               filter,
+               type_rotary,
+               counter_generic_rotary,
+               counter_generic_mail,
+               valid
+        ) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+        </sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="username" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="employeeFirstSurname" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="employeeSecondSurname" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="employeeFirstName" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="employeeSecondName" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="employeeCompleteName" ordinal="6" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="identification" ordinal="7" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="companyId" ordinal="8" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+        <param name="catalogDivisionId" ordinal="9" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="catalogAreaId" ordinal="10" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="catalogDepartmentId" ordinal="11" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="catalogPositionId" ordinal="12" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="groupingCode" ordinal="13" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="subsidiaryCode" ordinal="14" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="subsidiaryName" ordinal="15" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="costCenterId" ordinal="16" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="locationName" ordinal="17" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="hierarchicalLevel" ordinal="18" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="depositAccountNumber" ordinal="19" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="employeeIncomeDate" ordinal="20" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="employeeDepartureDate" ordinal="21" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="employeeStatus" ordinal="22" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="employeeCode" ordinal="23" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="registrationDate" ordinal="24" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+        <param name="guid" ordinal="25" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="typeEvent" ordinal="26" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="dataDate" ordinal="27" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+        <param name="uuid" ordinal="28" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="provisionDate" ordinal="29" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="mobile" ordinal="30" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="suspensionStartDate" ordinal="31" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="suspensionEndDate" ordinal="32" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="suspensionReason" ordinal="33" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="suspensionType" ordinal="34" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="validationStartDate" ordinal="35" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="validationEndDate" ordinal="36" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="endingWorkDate" ordinal="37" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="catalogIdentificationTypeId" ordinal="38" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="globalProfileId" ordinal="39" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="mail" ordinal="40" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="effectiveDate" ordinal="41" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="usernameView" ordinal="42" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="userdataSupervisorId" ordinal="43" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="userdataResponsibleUserId" ordinal="44" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="userdataBankCounterpartId" ordinal="45" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="workerCode" ordinal="46" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="justificationElimination" ordinal="47" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="justificationChangeCostCenter" ordinal="48" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="justificationChangeGlobalProfile" ordinal="49" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="filter" ordinal="50" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="typeRotary" ordinal="51" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="counterGenericRotary" ordinal="52" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="counterGenericMail" ordinal="53" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="valid" ordinal="54" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="1"/>
+    </query>
+    <!-- UPDATE UserDataSimple -->
+    <query id="updateQuery_userDataSimple" useConfig="default">
+        <sql>
+           UPDATE sch_centra_id.USERDATA SET
+               username=?,
+               employee_first_surname=?,
+               employee_second_surname=?,
+               employee_first_name=?,
+               employee_second_name=?,
+               employee_complete_name=?,
+               identification=?,
+               company_id=?,
+               catalog_division_id=?,
+               catalog_area_id=?,
+               catalog_department_id=?,
+               catalog_position_id=?,
+               grouping_code=?,
+               subsidiary_code=?,
+               subsidiary_name=?,
+               cost_center_id=?,
+               location_name=?,
+               hierarchical_level=?,
+               deposit_account_number=?,
+               employee_income_date=?,
+               employee_departure_date=?,
+               employee_status=?,
+               employee_code=?,
+               registration_date=?,
+               guid=?,
+               type_event=?,
+               data_date=?,
+               uuid=?,
+               provision_date=?,
+               mobile=?,
+               suspension_start_date=?,
+               suspension_end_date=?,
+               suspension_reason=?,
+               suspension_type=?,
+               validation_start_date=?,
+               validation_end_date=?,
+               ending_work_date=?,
+               catalog_identification_type_id=?,
+               global_profile_id=?,
+               mail=?,
+               effective_date=?,
+               username_view=?,
+               userdata_supervisor_id=?,
+               userdata_responsible_user_id=?,
+               userdata_bank_counterpart_id=?,
+               worker_code=?,
+               justification_elimination=?,
+               justification_change_cost_center=?,
+               justification_change_global_profile=?,
+               filter=?,
+               type_rotary=?,
+               counter_generic_rotary=?,
+               counter_generic_mail=?
+            WHERE id=?
+        </sql>
+        <param name="username" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="employeeFirstSurname" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="employeeSecondSurname" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="employeeFirstName" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="employeeSecondName" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="employeeCompleteName" ordinal="6" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="identification" ordinal="7" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="companyId" ordinal="8" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+        <param name="catalogDivisionId" ordinal="9" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="catalogAreaId" ordinal="10" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="catalogDepartmentId" ordinal="11" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="catalogPositionId" ordinal="12" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="groupingCode" ordinal="13" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="subsidiaryCode" ordinal="14" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="subsidiaryName" ordinal="15" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="costCenterId" ordinal="16" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="locationName" ordinal="17" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="hierarchicalLevel" ordinal="18" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="depositAccountNumber" ordinal="19" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="employeeIncomeDate" ordinal="20" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="employeeDepartureDate" ordinal="21" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="employeeStatus" ordinal="22" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="employeeCode" ordinal="23" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="registrationDate" ordinal="24" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+        <param name="guid" ordinal="25" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="typeEvent" ordinal="26" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="dataDate" ordinal="27" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+        <param name="uuid" ordinal="28" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="provisionDate" ordinal="29" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="mobile" ordinal="30" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="suspensionStartDate" ordinal="31" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="suspensionEndDate" ordinal="32" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="suspensionReason" ordinal="33" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="suspensionType" ordinal="34" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="validationStartDate" ordinal="35" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="validationEndDate" ordinal="36" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="endingWorkDate" ordinal="37" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="catalogIdentificationTypeId" ordinal="38" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="globalProfileId" ordinal="39" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="mail" ordinal="40" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="effectiveDate" ordinal="41" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="usernameView" ordinal="42" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="userdataSupervisorId" ordinal="43" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="userdataResponsibleUserId" ordinal="44" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="userdataBankCounterpartId" ordinal="45" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="workerCode" ordinal="46" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="justificationElimination" ordinal="47" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="justificationChangeCostCenter" ordinal="48" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="justificationChangeGlobalProfile" ordinal="49" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="filter" ordinal="50" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="typeRotary" ordinal="51" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="counterGenericRotary" ordinal="52" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="counterGenericMail" ordinal="53" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="id" ordinal="54" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <!-- DYNAMIC FUNCTION  -->
+    <query id="dynamicQueryFunction_userDataSimple" useConfig="default">
+        <sql>
+           SELECT :function(:field) as value FROM :table :innerjoinclause :whereclause
+         </sql>
+        <result element="result">
+            <element column="value" name="value" xsdType="xs:long"/>
+        </result>
+        <param name="function" sqlType="QUERY_STRING"/>
+        <param name="field" sqlType="QUERY_STRING"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DELETE  -->
+    <query id="dynamicDeleteQuery_userDataSimple" useConfig="default">
+        <sql>UPDATE :table SET :set WHERE id=:id</sql>
+        <param name="id" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="set" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- OPERATIONS -->
+    <operation name="listAllOperation_userDataSimple">
+        <call-query href="dynamicQuery_userDataSimple">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="fromToOperation_userDataSimple">
+        <call-query href="dynamicQuery_userDataSimple">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="functionOperation_userDataSimple">
+        <call-query href="dynamicQueryFunction_userDataSimple">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="deleteOperation_userDataSimple">
+        <call-query href="dynamicDeleteQuery_userDataSimple">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </operation>
+    <operation name="create_userDataSimple">
+        <call-query href="insertQuery_userDataSimple">
+            <with-param name="username" query-param="username"/>
+            <with-param name="employeeFirstSurname" query-param="employeeFirstSurname"/>
+            <with-param name="employeeSecondSurname" query-param="employeeSecondSurname"/>
+            <with-param name="employeeFirstName" query-param="employeeFirstName"/>
+            <with-param name="employeeSecondName" query-param="employeeSecondName"/>
+            <with-param name="employeeCompleteName" query-param="employeeCompleteName"/>
+            <with-param name="identification" query-param="identification"/>
+            <with-param name="companyId" query-param="companyId"/>
+            <with-param name="catalogDivisionId" query-param="catalogDivisionId"/>
+            <with-param name="catalogAreaId" query-param="catalogAreaId"/>
+            <with-param name="catalogDepartmentId" query-param="catalogDepartmentId"/>
+            <with-param name="catalogPositionId" query-param="catalogPositionId"/>
+            <with-param name="groupingCode" query-param="groupingCode"/>
+            <with-param name="subsidiaryCode" query-param="subsidiaryCode"/>
+            <with-param name="subsidiaryName" query-param="subsidiaryName"/>
+            <with-param name="costCenterId" query-param="costCenterId"/>
+            <with-param name="locationName" query-param="locationName"/>
+            <with-param name="hierarchicalLevel" query-param="hierarchicalLevel"/>
+            <with-param name="depositAccountNumber" query-param="depositAccountNumber"/>
+            <with-param name="employeeIncomeDate" query-param="employeeIncomeDate"/>
+            <with-param name="employeeDepartureDate" query-param="employeeDepartureDate"/>
+            <with-param name="employeeStatus" query-param="employeeStatus"/>
+            <with-param name="employeeCode" query-param="employeeCode"/>
+            <with-param name="registrationDate" query-param="registrationDate"/>
+            <with-param name="guid" query-param="guid"/>
+            <with-param name="typeEvent" query-param="typeEvent"/>
+            <with-param name="dataDate" query-param="dataDate"/>
+            <with-param name="uuid" query-param="uuid"/>
+            <with-param name="provisionDate" query-param="provisionDate"/>
+            <with-param name="mobile" query-param="mobile"/>
+            <with-param name="suspensionStartDate" query-param="suspensionStartDate"/>
+            <with-param name="suspensionEndDate" query-param="suspensionEndDate"/>
+            <with-param name="suspensionReason" query-param="suspensionReason"/>
+            <with-param name="suspensionType" query-param="suspensionType"/>
+            <with-param name="validationStartDate" query-param="validationStartDate"/>
+            <with-param name="validationEndDate" query-param="validationEndDate"/>
+            <with-param name="endingWorkDate" query-param="endingWorkDate"/>
+            <with-param name="catalogIdentificationTypeId" query-param="catalogIdentificationTypeId"/>
+            <with-param name="globalProfileId" query-param="globalProfileId"/>
+            <with-param name="mail" query-param="mail"/>
+            <with-param name="effectiveDate" query-param="effectiveDate"/>
+            <with-param name="usernameView" query-param="usernameView"/>
+            <with-param name="userdataSupervisorId" query-param="userdataSupervisorId"/>
+            <with-param name="userdataResponsibleUserId" query-param="userdataResponsibleUserId"/>
+            <with-param name="userdataBankCounterpartId" query-param="userdataBankCounterpartId"/>
+            <with-param name="workerCode" query-param="workerCode"/>
+            <with-param name="justificationElimination" query-param="justificationElimination"/>
+            <with-param name="justificationChangeCostCenter" query-param="justificationChangeCostCenter"/>
+            <with-param name="justificationChangeGlobalProfile" query-param="justificationChangeGlobalProfile"/>
+            <with-param name="filter" query-param="filter"/>
+            <with-param name="typeRotary" query-param="typeRotary"/>
+            <with-param name="counterGenericRotary" query-param="counterGenericRotary"/>
+            <with-param name="counterGenericMail" query-param="counterGenericMail"/>
+            <with-param name="valid" query-param="valid"/>
+        </call-query>
+    </operation>
+    <operation name="update_userDataSimple">
+        <call-query href="updateQuery_userDataSimple">
+            <with-param name="username" query-param="username"/>
+            <with-param name="employeeFirstSurname" query-param="employeeFirstSurname"/>
+            <with-param name="employeeSecondSurname" query-param="employeeSecondSurname"/>
+            <with-param name="employeeFirstName" query-param="employeeFirstName"/>
+            <with-param name="employeeSecondName" query-param="employeeSecondName"/>
+            <with-param name="employeeCompleteName" query-param="employeeCompleteName"/>
+            <with-param name="identification" query-param="identification"/>
+            <with-param name="companyId" query-param="companyId"/>
+            <with-param name="catalogDivisionId" query-param="catalogDivisionId"/>
+            <with-param name="catalogAreaId" query-param="catalogAreaId"/>
+            <with-param name="catalogDepartmentId" query-param="catalogDepartmentId"/>
+            <with-param name="catalogPositionId" query-param="catalogPositionId"/>
+            <with-param name="groupingCode" query-param="groupingCode"/>
+            <with-param name="subsidiaryCode" query-param="subsidiaryCode"/>
+            <with-param name="subsidiaryName" query-param="subsidiaryName"/>
+            <with-param name="costCenterId" query-param="costCenterId"/>
+            <with-param name="locationName" query-param="locationName"/>
+            <with-param name="hierarchicalLevel" query-param="hierarchicalLevel"/>
+            <with-param name="depositAccountNumber" query-param="depositAccountNumber"/>
+            <with-param name="employeeIncomeDate" query-param="employeeIncomeDate"/>
+            <with-param name="employeeDepartureDate" query-param="employeeDepartureDate"/>
+            <with-param name="employeeStatus" query-param="employeeStatus"/>
+            <with-param name="employeeCode" query-param="employeeCode"/>
+            <with-param name="registrationDate" query-param="registrationDate"/>
+            <with-param name="guid" query-param="guid"/>
+            <with-param name="typeEvent" query-param="typeEvent"/>
+            <with-param name="dataDate" query-param="dataDate"/>
+            <with-param name="uuid" query-param="uuid"/>
+            <with-param name="provisionDate" query-param="provisionDate"/>
+            <with-param name="mobile" query-param="mobile"/>
+            <with-param name="suspensionStartDate" query-param="suspensionStartDate"/>
+            <with-param name="suspensionEndDate" query-param="suspensionEndDate"/>
+            <with-param name="suspensionReason" query-param="suspensionReason"/>
+            <with-param name="suspensionType" query-param="suspensionType"/>
+            <with-param name="validationStartDate" query-param="validationStartDate"/>
+            <with-param name="validationEndDate" query-param="validationEndDate"/>
+            <with-param name="endingWorkDate" query-param="endingWorkDate"/>
+            <with-param name="catalogIdentificationTypeId" query-param="catalogIdentificationTypeId"/>
+            <with-param name="globalProfileId" query-param="globalProfileId"/>
+            <with-param name="mail" query-param="mail"/>
+            <with-param name="effectiveDate" query-param="effectiveDate"/>
+            <with-param name="usernameView" query-param="usernameView"/>
+            <with-param name="userdataSupervisorId" query-param="userdataSupervisorId"/>
+            <with-param name="userdataResponsibleUserId" query-param="userdataResponsibleUserId"/>
+            <with-param name="userdataBankCounterpartId" query-param="userdataBankCounterpartId"/>
+            <with-param name="workerCode" query-param="workerCode"/>
+            <with-param name="justificationElimination" query-param="justificationElimination"/>
+            <with-param name="justificationChangeCostCenter" query-param="justificationChangeCostCenter"/>
+            <with-param name="justificationChangeGlobalProfile" query-param="justificationChangeGlobalProfile"/>
+            <with-param name="filter" query-param="filter"/>
+            <with-param name="typeRotary" query-param="typeRotary"/>
+            <with-param name="counterGenericRotary" query-param="counterGenericRotary"/>
+            <with-param name="counterGenericMail" query-param="counterGenericMail"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <!-- RESOURCES -->
+    <resource method="GET" path="GetAllUserDataSimple">
+        <call-query href="dynamicQuery_userDataSimple">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFromToUserDataSimple">
+        <call-query href="dynamicQuery_userDataSimple">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFunctionResultUserDataSimple">
+        <call-query href="dynamicQueryFunction_userDataSimple">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="DeleteUserDataSimple">
+        <call-query href="dynamicDeleteQuery_userDataSimple">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="CreateUserDataSimple">
+        <call-query href="insertQuery_userDataSimple">
+            <with-param name="username" query-param="username"/>
+            <with-param name="employeeFirstSurname" query-param="employeeFirstSurname"/>
+            <with-param name="employeeSecondSurname" query-param="employeeSecondSurname"/>
+            <with-param name="employeeFirstName" query-param="employeeFirstName"/>
+            <with-param name="employeeSecondName" query-param="employeeSecondName"/>
+            <with-param name="employeeCompleteName" query-param="employeeCompleteName"/>
+            <with-param name="identification" query-param="identification"/>
+            <with-param name="companyId" query-param="companyId"/>
+            <with-param name="catalogDivisionId" query-param="catalogDivisionId"/>
+            <with-param name="catalogAreaId" query-param="catalogAreaId"/>
+            <with-param name="catalogDepartmentId" query-param="catalogDepartmentId"/>
+            <with-param name="catalogPositionId" query-param="catalogPositionId"/>
+            <with-param name="groupingCode" query-param="groupingCode"/>
+            <with-param name="subsidiaryCode" query-param="subsidiaryCode"/>
+            <with-param name="subsidiaryName" query-param="subsidiaryName"/>
+            <with-param name="costCenterId" query-param="costCenterId"/>
+            <with-param name="locationName" query-param="locationName"/>
+            <with-param name="hierarchicalLevel" query-param="hierarchicalLevel"/>
+            <with-param name="depositAccountNumber" query-param="depositAccountNumber"/>
+            <with-param name="employeeIncomeDate" query-param="employeeIncomeDate"/>
+            <with-param name="employeeDepartureDate" query-param="employeeDepartureDate"/>
+            <with-param name="employeeStatus" query-param="employeeStatus"/>
+            <with-param name="employeeCode" query-param="employeeCode"/>
+            <with-param name="registrationDate" query-param="registrationDate"/>
+            <with-param name="guid" query-param="guid"/>
+            <with-param name="typeEvent" query-param="typeEvent"/>
+            <with-param name="dataDate" query-param="dataDate"/>
+            <with-param name="uuid" query-param="uuid"/>
+            <with-param name="provisionDate" query-param="provisionDate"/>
+            <with-param name="mobile" query-param="mobile"/>
+            <with-param name="suspensionStartDate" query-param="suspensionStartDate"/>
+            <with-param name="suspensionEndDate" query-param="suspensionEndDate"/>
+            <with-param name="suspensionReason" query-param="suspensionReason"/>
+            <with-param name="suspensionType" query-param="suspensionType"/>
+            <with-param name="validationStartDate" query-param="validationStartDate"/>
+            <with-param name="validationEndDate" query-param="validationEndDate"/>
+            <with-param name="endingWorkDate" query-param="endingWorkDate"/>
+            <with-param name="catalogIdentificationTypeId" query-param="catalogIdentificationTypeId"/>
+            <with-param name="globalProfileId" query-param="globalProfileId"/>
+            <with-param name="mail" query-param="mail"/>
+            <with-param name="effectiveDate" query-param="effectiveDate"/>
+            <with-param name="usernameView" query-param="usernameView"/>
+            <with-param name="userdataSupervisorId" query-param="userdataSupervisorId"/>
+            <with-param name="userdataResponsibleUserId" query-param="userdataResponsibleUserId"/>
+            <with-param name="userdataBankCounterpartId" query-param="userdataBankCounterpartId"/>
+            <with-param name="workerCode" query-param="workerCode"/>
+            <with-param name="justificationElimination" query-param="justificationElimination"/>
+            <with-param name="justificationChangeCostCenter" query-param="justificationChangeCostCenter"/>
+            <with-param name="justificationChangeGlobalProfile" query-param="justificationChangeGlobalProfile"/>
+            <with-param name="filter" query-param="filter"/>
+            <with-param name="typeRotary" query-param="typeRotary"/>
+            <with-param name="counterGenericRotary" query-param="counterGenericRotary"/>
+            <with-param name="counterGenericMail" query-param="counterGenericMail"/>
+            <with-param name="valid" query-param="valid"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="UpdateUserDataSimple">
+        <call-query href="updateQuery_userDataSimple">
+            <with-param name="username" query-param="username"/>
+            <with-param name="employeeFirstSurname" query-param="employeeFirstSurname"/>
+            <with-param name="employeeSecondSurname" query-param="employeeSecondSurname"/>
+            <with-param name="employeeFirstName" query-param="employeeFirstName"/>
+            <with-param name="employeeSecondName" query-param="employeeSecondName"/>
+            <with-param name="employeeCompleteName" query-param="employeeCompleteName"/>
+            <with-param name="identification" query-param="identification"/>
+            <with-param name="companyId" query-param="companyId"/>
+            <with-param name="catalogDivisionId" query-param="catalogDivisionId"/>
+            <with-param name="catalogAreaId" query-param="catalogAreaId"/>
+            <with-param name="catalogDepartmentId" query-param="catalogDepartmentId"/>
+            <with-param name="catalogPositionId" query-param="catalogPositionId"/>
+            <with-param name="groupingCode" query-param="groupingCode"/>
+            <with-param name="subsidiaryCode" query-param="subsidiaryCode"/>
+            <with-param name="subsidiaryName" query-param="subsidiaryName"/>
+            <with-param name="costCenterId" query-param="costCenterId"/>
+            <with-param name="locationName" query-param="locationName"/>
+            <with-param name="hierarchicalLevel" query-param="hierarchicalLevel"/>
+            <with-param name="depositAccountNumber" query-param="depositAccountNumber"/>
+            <with-param name="employeeIncomeDate" query-param="employeeIncomeDate"/>
+            <with-param name="employeeDepartureDate" query-param="employeeDepartureDate"/>
+            <with-param name="employeeStatus" query-param="employeeStatus"/>
+            <with-param name="employeeCode" query-param="employeeCode"/>
+            <with-param name="registrationDate" query-param="registrationDate"/>
+            <with-param name="guid" query-param="guid"/>
+            <with-param name="typeEvent" query-param="typeEvent"/>
+            <with-param name="dataDate" query-param="dataDate"/>
+            <with-param name="uuid" query-param="uuid"/>
+            <with-param name="provisionDate" query-param="provisionDate"/>
+            <with-param name="mobile" query-param="mobile"/>
+            <with-param name="suspensionStartDate" query-param="suspensionStartDate"/>
+            <with-param name="suspensionEndDate" query-param="suspensionEndDate"/>
+            <with-param name="suspensionReason" query-param="suspensionReason"/>
+            <with-param name="suspensionType" query-param="suspensionType"/>
+            <with-param name="validationStartDate" query-param="validationStartDate"/>
+            <with-param name="validationEndDate" query-param="validationEndDate"/>
+            <with-param name="endingWorkDate" query-param="endingWorkDate"/>
+            <with-param name="catalogIdentificationTypeId" query-param="catalogIdentificationTypeId"/>
+            <with-param name="globalProfileId" query-param="globalProfileId"/>
+            <with-param name="mail" query-param="mail"/>
+            <with-param name="effectiveDate" query-param="effectiveDate"/>
+            <with-param name="usernameView" query-param="usernameView"/>
+            <with-param name="userdataSupervisorId" query-param="userdataSupervisorId"/>
+            <with-param name="userdataResponsibleUserId" query-param="userdataResponsibleUserId"/>
+            <with-param name="userdataBankCounterpartId" query-param="userdataBankCounterpartId"/>
+            <with-param name="workerCode" query-param="workerCode"/>
+            <with-param name="justificationElimination" query-param="justificationElimination"/>
+            <with-param name="justificationChangeCostCenter" query-param="justificationChangeCostCenter"/>
+            <with-param name="justificationChangeGlobalProfile" query-param="justificationChangeGlobalProfile"/>
+            <with-param name="filter" query-param="filter"/>
+            <with-param name="typeRotary" query-param="typeRotary"/>
+            <with-param name="counterGenericRotary" query-param="counterGenericRotary"/>
+            <with-param name="counterGenericMail" query-param="counterGenericMail"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+</data>

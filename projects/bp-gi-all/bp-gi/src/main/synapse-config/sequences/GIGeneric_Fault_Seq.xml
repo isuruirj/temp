@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GIGeneric_Fault_Seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log description="" level="custom">
+        <property name="seq" value="-------------------- GIGeneric_Fault_Seq --------------------"/>
+    </log>
+    <makefault>
+    	<code expression="$ctx:ERROR_CODE"/>
+    	<reason expression="$ctx:ERROR_MESSAGE"/>
+    </makefault>
+    <property name="HTTP_SC" scope="axis2" type="STRING" value="500"/>
+    <property name="messageType" scope="axis2" type="STRING" value="text/xml"/>
+    <respond/>
+</sequence>

@@ -1,0 +1,653 @@
+<data name="identity.user-data-search.ds"
+    serviceNamespace="centra-id.com"
+    enableBatchRequests="false"
+    enableBoxcarring="false"
+    transports="https"
+    disableLegacyBoxcarringMode="true">
+
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <!-- DYNAMIC QUERY USERDATASEARCH -->
+    <query id="dynamicQuery_userDataSearch" useConfig="default">
+        <sql>
+           SELECT
+               userDataSearch.id,
+               userDataSearch.apellidos_empleado,
+               userDataSearch.celular,
+               userDataSearch.codigo_agrupacion,
+               userDataSearch.codigo_area,
+               userDataSearch.codigo_cargo,
+               userDataSearch.codigo_centro_costo,
+               userDataSearch.codigo_compania,
+               userDataSearch.codigo_departamento,
+               userDataSearch.codigo_division,
+               userDataSearch.codigo_empleado,
+               userDataSearch.codigo_nivel_jerarquico,
+               userDataSearch.codigo_perfil_global,
+               userDataSearch.codigo_trabajador,
+               userDataSearch.correo_electronico,
+               userDataSearch.estado_empleado,
+               userDataSearch.fecha_ingreso,
+               userDataSearch.fecha_salida,
+               userDataSearch.id_perfil_global,
+               userDataSearch.id_usuario,
+               userDataSearch.identificacion,
+               userDataSearch.identificacion_supervisor,
+               userDataSearch.nombre_area,
+               userDataSearch.nombre_cargo,
+               userDataSearch.nombre_centro_costo,
+               userDataSearch.nombre_compania,
+               userDataSearch.nombre_departamento,
+               userDataSearch.nombre_division,
+               userDataSearch.nombre_perfil_global,
+               userDataSearch.nombre_supervisor,
+               userDataSearch.nombrelocalidad,
+               userDataSearch.nombres_empleado,
+               userDataSearch.numero_cuenta_deposito,
+               userDataSearch.subtipo,
+               userDataSearch.tipousuario,
+               userDataSearch.username,
+               userDataSearch.nombres_completos,
+               userDataSearch.correo_electronico_personal,
+               userDataSearch.uuid,
+               userDataSearch.guid,
+               userDataSearch.tipo_identificacion,
+               userDataSearch.tipo_rotativo,
+               userDataSearch.id_supervisor,
+               userDataSearch.identificacion_contraparte,
+               userDataSearch.nombre_contraparte,
+               userDataSearch.id_contraparte,
+               userDataSearch.identificacion_responsable,
+               userDataSearch.nombre_responsable,
+               userDataSearch.id_responsable,
+               userDataSearch.counter_generic_rotary,
+               userDataSearch.counter_generic_mail,
+               userDataSearch.valid
+           FROM sch_centra_id.USERDATA_VW userDataSearch :innerjoinclause :whereclause ORDER BY :orderby :fromto
+        </sql>
+        <result element="userDataSearchList" rowName="userDataSearch">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="apellidos_empleado" name="apellidosEmpleado" xsdType="xs:string"/>
+            <element column="celular" name="celular" xsdType="xs:string"/>
+            <element column="codigo_agrupacion" name="codigoAgrupacion" xsdType="xs:string"/>
+            <element column="codigo_area" name="codigoArea" xsdType="xs:string"/>
+            <element column="codigo_cargo" name="codigoCargo" xsdType="xs:string"/>
+            <element column="codigo_centro_costo" name="codigoCentroCosto" xsdType="xs:string"/>
+            <element column="codigo_compania" name="codigoCompania" xsdType="xs:string"/>
+            <element column="codigo_departamento" name="codigoDepartamento" xsdType="xs:string"/>
+            <element column="codigo_division" name="codigoDivision" xsdType="xs:string"/>
+            <element column="codigo_empleado" name="codigoEmpleado" xsdType="xs:string"/>
+            <element column="codigo_nivel_jerarquico" name="codigoNivelJerarquico" xsdType="xs:string"/>
+            <element column="codigo_perfil_global" name="codigoPerfilGlobal" xsdType="xs:string"/>
+            <element column="codigo_trabajador" name="codigoTrabajador" xsdType="xs:string"/>
+            <element column="correo_electronico" name="correoElectronico" xsdType="xs:string"/>
+            <element column="estado_empleado" name="estadoEmpleado" xsdType="xs:string"/>
+            <element column="fecha_ingreso" name="fechaIngreso" xsdType="xs:date"/>
+            <element column="fecha_salida" name="fechaSalida" xsdType="xs:date"/>
+            <element column="id_perfil_global" name="idPerfilGlobal" xsdType="xs:integer"/>
+            <element column="id_usuario" name="idUsuario" xsdType="xs:integer"/>
+            <element column="identificacion" name="identificacion" xsdType="xs:string"/>
+            <element column="identificacion_supervisor" name="identificacionSupervisor" xsdType="xs:string"/>
+            <element column="nombre_area" name="nombreArea" xsdType="xs:string"/>
+            <element column="nombre_cargo" name="nombreCargo" xsdType="xs:string"/>
+            <element column="nombre_centro_costo" name="nombreCentroCosto" xsdType="xs:string"/>
+            <element column="nombre_compania" name="nombreCompania" xsdType="xs:string"/>
+            <element column="nombre_departamento" name="nombreDepartamento" xsdType="xs:string"/>
+            <element column="nombre_division" name="nombreDivision" xsdType="xs:string"/>
+            <element column="nombre_perfil_global" name="nombrePerfilGlobal" xsdType="xs:string"/>
+            <element column="nombre_supervisor" name="nombreSupervisor" xsdType="xs:string"/>
+            <element column="nombrelocalidad" name="nombrelocalidad" xsdType="xs:string"/>
+            <element column="nombres_empleado" name="nombresEmpleado" xsdType="xs:string"/>
+            <element column="numero_cuenta_deposito" name="numeroCuentaDeposito" xsdType="xs:string"/>
+            <element column="subtipo" name="subtipo" xsdType="xs:string"/>
+            <element column="tipousuario" name="tipousuario" xsdType="xs:string"/>
+            <element column="username" name="username" xsdType="xs:string"/>
+            <element column="nombres_completos" name="nombresCompletos" xsdType="xs:string"/>
+            <element column="correo_electronico_personal" name="correoElectronicoPersonal" xsdType="xs:string"/>
+            <element column="uuid" name="uuid" xsdType="xs:string"/>
+            <element column="guid" name="guid" xsdType="xs:string"/>
+            <element column="tipo_identificacion" name="tipoIdentificacion" xsdType="xs:string"/>
+            <element column="tipo_rotativo" name="tipoRotativo" xsdType="xs:string"/>
+            <element column="id_supervisor" name="idSupervisor" xsdType="xs:integer"/>
+            <element column="identificacion_contraparte" name="identificacionContraparte" xsdType="xs:string"/>
+            <element column="nombre_contraparte" name="nombreContraparte" xsdType="xs:string"/>
+            <element column="id_contraparte" name="idContraparte" xsdType="xs:integer"/>
+            <element column="identificacion_responsable" name="identificacionResponsable" xsdType="xs:string"/>
+            <element column="nombre_responsable" name="nombreResponsable" xsdType="xs:string"/>
+            <element column="id_responsable" name="idResponsable" xsdType="xs:integer"/>
+            <element column="counter_generic_rotary" name="counterGenericRotary" xsdType="xs:integer"/>
+            <element column="counter_generic_mail" name="counterGenericMail" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="fromto" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- INSERT UserDataSearch -->
+    <query id="insertQuery_userDataSearch" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>
+           INSERT INTO sch_centra_id.USERDATA_VW(
+               apellidos_empleado,
+               celular,
+               codigo_agrupacion,
+               codigo_area,
+               codigo_cargo,
+               codigo_centro_costo,
+               codigo_compania,
+               codigo_departamento,
+               codigo_division,
+               codigo_empleado,
+               codigo_nivel_jerarquico,
+               codigo_perfil_global,
+               codigo_trabajador,
+               correo_electronico,
+               estado_empleado,
+               fecha_ingreso,
+               fecha_salida,
+               id_perfil_global,
+               id_usuario,
+               identificacion,
+               identificacion_supervisor,
+               nombre_area,
+               nombre_cargo,
+               nombre_centro_costo,
+               nombre_compania,
+               nombre_departamento,
+               nombre_division,
+               nombre_perfil_global,
+               nombre_supervisor,
+               nombrelocalidad,
+               nombres_empleado,
+               numero_cuenta_deposito,
+               subtipo,
+               tipousuario,
+               username,
+               nombres_completos,
+               correo_electronico_personal,
+               uuid,
+               guid,
+               tipo_identificacion,
+               tipo_rotativo,
+               id_supervisor,
+               identificacion_contraparte,
+               nombre_contraparte,
+               id_contraparte,
+               identificacion_responsable,
+               nombre_responsable,
+               id_responsable,
+               counter_generic_rotary,
+               counter_generic_mail,
+               valid
+        ) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+        </sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="apellidosEmpleado" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="celular" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="codigoAgrupacion" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="codigoArea" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="codigoCargo" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="codigoCentroCosto" ordinal="6" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="codigoCompania" ordinal="7" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="codigoDepartamento" ordinal="8" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="codigoDivision" ordinal="9" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="codigoEmpleado" ordinal="10" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="codigoNivelJerarquico" ordinal="11" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="codigoPerfilGlobal" ordinal="12" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="codigoTrabajador" ordinal="13" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="correoElectronico" ordinal="14" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="estadoEmpleado" ordinal="15" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="fechaIngreso" ordinal="16" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="fechaSalida" ordinal="17" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="idPerfilGlobal" ordinal="18" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="idUsuario" ordinal="19" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="identificacion" ordinal="20" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="identificacionSupervisor" ordinal="21" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombreArea" ordinal="22" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombreCargo" ordinal="23" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombreCentroCosto" ordinal="24" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombreCompania" ordinal="25" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombreDepartamento" ordinal="26" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombreDivision" ordinal="27" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombrePerfilGlobal" ordinal="28" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombreSupervisor" ordinal="29" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombrelocalidad" ordinal="30" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombresEmpleado" ordinal="31" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="numeroCuentaDeposito" ordinal="32" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="subtipo" ordinal="33" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="tipousuario" ordinal="34" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="username" ordinal="35" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombresCompletos" ordinal="36" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="correoElectronicoPersonal" ordinal="37" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="uuid" ordinal="38" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="guid" ordinal="39" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="tipoIdentificacion" ordinal="40" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="tipoRotativo" ordinal="41" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="idSupervisor" ordinal="42" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="identificacionContraparte" ordinal="43" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombreContraparte" ordinal="44" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="idContraparte" ordinal="45" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="identificacionResponsable" ordinal="46" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombreResponsable" ordinal="47" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="idResponsable" ordinal="48" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="counterGenericRotary" ordinal="49" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="counterGenericMail" ordinal="50" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="valid" ordinal="51" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="1"/>
+    </query>
+    <!-- UPDATE UserDataSearch -->
+    <query id="updateQuery_userDataSearch" useConfig="default">
+        <sql>
+           UPDATE sch_centra_id.USERDATA_VW SET
+               apellidos_empleado=?,
+               celular=?,
+               codigo_agrupacion=?,
+               codigo_area=?,
+               codigo_cargo=?,
+               codigo_centro_costo=?,
+               codigo_compania=?,
+               codigo_departamento=?,
+               codigo_division=?,
+               codigo_empleado=?,
+               codigo_nivel_jerarquico=?,
+               codigo_perfil_global=?,
+               codigo_trabajador=?,
+               correo_electronico=?,
+               estado_empleado=?,
+               fecha_ingreso=?,
+               fecha_salida=?,
+               id_perfil_global=?,
+               id_usuario=?,
+               identificacion=?,
+               identificacion_supervisor=?,
+               nombre_area=?,
+               nombre_cargo=?,
+               nombre_centro_costo=?,
+               nombre_compania=?,
+               nombre_departamento=?,
+               nombre_division=?,
+               nombre_perfil_global=?,
+               nombre_supervisor=?,
+               nombrelocalidad=?,
+               nombres_empleado=?,
+               numero_cuenta_deposito=?,
+               subtipo=?,
+               tipousuario=?,
+               username=?,
+               nombres_completos=?,
+               correo_electronico_personal=?,
+               uuid=?,
+               guid=?,
+               tipo_identificacion=?,
+               tipo_rotativo=?,
+               id_supervisor=?,
+               identificacion_contraparte=?,
+               nombre_contraparte=?,
+               id_contraparte=?,
+               identificacion_responsable=?,
+               nombre_responsable=?,
+               id_responsable=?,
+               counter_generic_rotary=?,
+               counter_generic_mail=?
+            WHERE id=?
+        </sql>
+        <param name="apellidosEmpleado" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="celular" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="codigoAgrupacion" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="codigoArea" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="codigoCargo" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="codigoCentroCosto" ordinal="6" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="codigoCompania" ordinal="7" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="codigoDepartamento" ordinal="8" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="codigoDivision" ordinal="9" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="codigoEmpleado" ordinal="10" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="codigoNivelJerarquico" ordinal="11" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="codigoPerfilGlobal" ordinal="12" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="codigoTrabajador" ordinal="13" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="correoElectronico" ordinal="14" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="estadoEmpleado" ordinal="15" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="fechaIngreso" ordinal="16" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="fechaSalida" ordinal="17" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="idPerfilGlobal" ordinal="18" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="idUsuario" ordinal="19" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="identificacion" ordinal="20" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="identificacionSupervisor" ordinal="21" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombreArea" ordinal="22" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombreCargo" ordinal="23" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombreCentroCosto" ordinal="24" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombreCompania" ordinal="25" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombreDepartamento" ordinal="26" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombreDivision" ordinal="27" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombrePerfilGlobal" ordinal="28" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombreSupervisor" ordinal="29" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombrelocalidad" ordinal="30" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombresEmpleado" ordinal="31" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="numeroCuentaDeposito" ordinal="32" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="subtipo" ordinal="33" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="tipousuario" ordinal="34" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="username" ordinal="35" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombresCompletos" ordinal="36" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="correoElectronicoPersonal" ordinal="37" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="uuid" ordinal="38" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="guid" ordinal="39" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="tipoIdentificacion" ordinal="40" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="tipoRotativo" ordinal="41" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="idSupervisor" ordinal="42" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="identificacionContraparte" ordinal="43" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombreContraparte" ordinal="44" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="idContraparte" ordinal="45" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="identificacionResponsable" ordinal="46" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="nombreResponsable" ordinal="47" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="idResponsable" ordinal="48" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="counterGenericRotary" ordinal="49" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="counterGenericMail" ordinal="50" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="id" ordinal="51" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <!-- DYNAMIC FUNCTION  -->
+    <query id="dynamicQueryFunction_userDataSearch" useConfig="default">
+        <sql>
+           SELECT :function(:field) as value FROM :table :innerjoinclause :whereclause
+         </sql>
+        <result element="result">
+            <element column="value" name="value" xsdType="xs:long"/>
+        </result>
+        <param name="function" sqlType="QUERY_STRING"/>
+        <param name="field" sqlType="QUERY_STRING"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DELETE  -->
+    <query id="dynamicDeleteQuery_userDataSearch" useConfig="default">
+        <sql>UPDATE :table SET :set WHERE id=:id</sql>
+        <param name="id" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="set" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- OPERATIONS -->
+    <operation name="listAllOperation_userDataSearch">
+        <call-query href="dynamicQuery_userDataSearch">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="fromToOperation_userDataSearch">
+        <call-query href="dynamicQuery_userDataSearch">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="functionOperation_userDataSearch">
+        <call-query href="dynamicQueryFunction_userDataSearch">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="deleteOperation_userDataSearch">
+        <call-query href="dynamicDeleteQuery_userDataSearch">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </operation>
+    <operation name="create_userDataSearch">
+        <call-query href="insertQuery_userDataSearch">
+            <with-param name="apellidosEmpleado" query-param="apellidosEmpleado"/>
+            <with-param name="celular" query-param="celular"/>
+            <with-param name="codigoAgrupacion" query-param="codigoAgrupacion"/>
+            <with-param name="codigoArea" query-param="codigoArea"/>
+            <with-param name="codigoCargo" query-param="codigoCargo"/>
+            <with-param name="codigoCentroCosto" query-param="codigoCentroCosto"/>
+            <with-param name="codigoCompania" query-param="codigoCompania"/>
+            <with-param name="codigoDepartamento" query-param="codigoDepartamento"/>
+            <with-param name="codigoDivision" query-param="codigoDivision"/>
+            <with-param name="codigoEmpleado" query-param="codigoEmpleado"/>
+            <with-param name="codigoNivelJerarquico" query-param="codigoNivelJerarquico"/>
+            <with-param name="codigoPerfilGlobal" query-param="codigoPerfilGlobal"/>
+            <with-param name="codigoTrabajador" query-param="codigoTrabajador"/>
+            <with-param name="correoElectronico" query-param="correoElectronico"/>
+            <with-param name="estadoEmpleado" query-param="estadoEmpleado"/>
+            <with-param name="fechaIngreso" query-param="fechaIngreso"/>
+            <with-param name="fechaSalida" query-param="fechaSalida"/>
+            <with-param name="idPerfilGlobal" query-param="idPerfilGlobal"/>
+            <with-param name="idUsuario" query-param="idUsuario"/>
+            <with-param name="identificacion" query-param="identificacion"/>
+            <with-param name="identificacionSupervisor" query-param="identificacionSupervisor"/>
+            <with-param name="nombreArea" query-param="nombreArea"/>
+            <with-param name="nombreCargo" query-param="nombreCargo"/>
+            <with-param name="nombreCentroCosto" query-param="nombreCentroCosto"/>
+            <with-param name="nombreCompania" query-param="nombreCompania"/>
+            <with-param name="nombreDepartamento" query-param="nombreDepartamento"/>
+            <with-param name="nombreDivision" query-param="nombreDivision"/>
+            <with-param name="nombrePerfilGlobal" query-param="nombrePerfilGlobal"/>
+            <with-param name="nombreSupervisor" query-param="nombreSupervisor"/>
+            <with-param name="nombrelocalidad" query-param="nombrelocalidad"/>
+            <with-param name="nombresEmpleado" query-param="nombresEmpleado"/>
+            <with-param name="numeroCuentaDeposito" query-param="numeroCuentaDeposito"/>
+            <with-param name="subtipo" query-param="subtipo"/>
+            <with-param name="tipousuario" query-param="tipousuario"/>
+            <with-param name="username" query-param="username"/>
+            <with-param name="nombresCompletos" query-param="nombresCompletos"/>
+            <with-param name="correoElectronicoPersonal" query-param="correoElectronicoPersonal"/>
+            <with-param name="uuid" query-param="uuid"/>
+            <with-param name="guid" query-param="guid"/>
+            <with-param name="tipoIdentificacion" query-param="tipoIdentificacion"/>
+            <with-param name="tipoRotativo" query-param="tipoRotativo"/>
+            <with-param name="idSupervisor" query-param="idSupervisor"/>
+            <with-param name="identificacionContraparte" query-param="identificacionContraparte"/>
+            <with-param name="nombreContraparte" query-param="nombreContraparte"/>
+            <with-param name="idContraparte" query-param="idContraparte"/>
+            <with-param name="identificacionResponsable" query-param="identificacionResponsable"/>
+            <with-param name="nombreResponsable" query-param="nombreResponsable"/>
+            <with-param name="idResponsable" query-param="idResponsable"/>
+            <with-param name="counterGenericRotary" query-param="counterGenericRotary"/>
+            <with-param name="counterGenericMail" query-param="counterGenericMail"/>
+            <with-param name="valid" query-param="valid"/>
+        </call-query>
+    </operation>
+    <operation name="update_userDataSearch">
+        <call-query href="updateQuery_userDataSearch">
+            <with-param name="apellidosEmpleado" query-param="apellidosEmpleado"/>
+            <with-param name="celular" query-param="celular"/>
+            <with-param name="codigoAgrupacion" query-param="codigoAgrupacion"/>
+            <with-param name="codigoArea" query-param="codigoArea"/>
+            <with-param name="codigoCargo" query-param="codigoCargo"/>
+            <with-param name="codigoCentroCosto" query-param="codigoCentroCosto"/>
+            <with-param name="codigoCompania" query-param="codigoCompania"/>
+            <with-param name="codigoDepartamento" query-param="codigoDepartamento"/>
+            <with-param name="codigoDivision" query-param="codigoDivision"/>
+            <with-param name="codigoEmpleado" query-param="codigoEmpleado"/>
+            <with-param name="codigoNivelJerarquico" query-param="codigoNivelJerarquico"/>
+            <with-param name="codigoPerfilGlobal" query-param="codigoPerfilGlobal"/>
+            <with-param name="codigoTrabajador" query-param="codigoTrabajador"/>
+            <with-param name="correoElectronico" query-param="correoElectronico"/>
+            <with-param name="estadoEmpleado" query-param="estadoEmpleado"/>
+            <with-param name="fechaIngreso" query-param="fechaIngreso"/>
+            <with-param name="fechaSalida" query-param="fechaSalida"/>
+            <with-param name="idPerfilGlobal" query-param="idPerfilGlobal"/>
+            <with-param name="idUsuario" query-param="idUsuario"/>
+            <with-param name="identificacion" query-param="identificacion"/>
+            <with-param name="identificacionSupervisor" query-param="identificacionSupervisor"/>
+            <with-param name="nombreArea" query-param="nombreArea"/>
+            <with-param name="nombreCargo" query-param="nombreCargo"/>
+            <with-param name="nombreCentroCosto" query-param="nombreCentroCosto"/>
+            <with-param name="nombreCompania" query-param="nombreCompania"/>
+            <with-param name="nombreDepartamento" query-param="nombreDepartamento"/>
+            <with-param name="nombreDivision" query-param="nombreDivision"/>
+            <with-param name="nombrePerfilGlobal" query-param="nombrePerfilGlobal"/>
+            <with-param name="nombreSupervisor" query-param="nombreSupervisor"/>
+            <with-param name="nombrelocalidad" query-param="nombrelocalidad"/>
+            <with-param name="nombresEmpleado" query-param="nombresEmpleado"/>
+            <with-param name="numeroCuentaDeposito" query-param="numeroCuentaDeposito"/>
+            <with-param name="subtipo" query-param="subtipo"/>
+            <with-param name="tipousuario" query-param="tipousuario"/>
+            <with-param name="username" query-param="username"/>
+            <with-param name="nombresCompletos" query-param="nombresCompletos"/>
+            <with-param name="correoElectronicoPersonal" query-param="correoElectronicoPersonal"/>
+            <with-param name="uuid" query-param="uuid"/>
+            <with-param name="guid" query-param="guid"/>
+            <with-param name="tipoIdentificacion" query-param="tipoIdentificacion"/>
+            <with-param name="tipoRotativo" query-param="tipoRotativo"/>
+            <with-param name="idSupervisor" query-param="idSupervisor"/>
+            <with-param name="identificacionContraparte" query-param="identificacionContraparte"/>
+            <with-param name="nombreContraparte" query-param="nombreContraparte"/>
+            <with-param name="idContraparte" query-param="idContraparte"/>
+            <with-param name="identificacionResponsable" query-param="identificacionResponsable"/>
+            <with-param name="nombreResponsable" query-param="nombreResponsable"/>
+            <with-param name="idResponsable" query-param="idResponsable"/>
+            <with-param name="counterGenericRotary" query-param="counterGenericRotary"/>
+            <with-param name="counterGenericMail" query-param="counterGenericMail"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <!-- RESOURCES -->
+    <resource method="GET" path="GetAllUserDataSearch">
+        <call-query href="dynamicQuery_userDataSearch">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFromToUserDataSearch">
+        <call-query href="dynamicQuery_userDataSearch">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFunctionResultUserDataSearch">
+        <call-query href="dynamicQueryFunction_userDataSearch">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="DeleteUserDataSearch">
+        <call-query href="dynamicDeleteQuery_userDataSearch">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="CreateUserDataSearch">
+        <call-query href="insertQuery_userDataSearch">
+            <with-param name="apellidosEmpleado" query-param="apellidosEmpleado"/>
+            <with-param name="celular" query-param="celular"/>
+            <with-param name="codigoAgrupacion" query-param="codigoAgrupacion"/>
+            <with-param name="codigoArea" query-param="codigoArea"/>
+            <with-param name="codigoCargo" query-param="codigoCargo"/>
+            <with-param name="codigoCentroCosto" query-param="codigoCentroCosto"/>
+            <with-param name="codigoCompania" query-param="codigoCompania"/>
+            <with-param name="codigoDepartamento" query-param="codigoDepartamento"/>
+            <with-param name="codigoDivision" query-param="codigoDivision"/>
+            <with-param name="codigoEmpleado" query-param="codigoEmpleado"/>
+            <with-param name="codigoNivelJerarquico" query-param="codigoNivelJerarquico"/>
+            <with-param name="codigoPerfilGlobal" query-param="codigoPerfilGlobal"/>
+            <with-param name="codigoTrabajador" query-param="codigoTrabajador"/>
+            <with-param name="correoElectronico" query-param="correoElectronico"/>
+            <with-param name="estadoEmpleado" query-param="estadoEmpleado"/>
+            <with-param name="fechaIngreso" query-param="fechaIngreso"/>
+            <with-param name="fechaSalida" query-param="fechaSalida"/>
+            <with-param name="idPerfilGlobal" query-param="idPerfilGlobal"/>
+            <with-param name="idUsuario" query-param="idUsuario"/>
+            <with-param name="identificacion" query-param="identificacion"/>
+            <with-param name="identificacionSupervisor" query-param="identificacionSupervisor"/>
+            <with-param name="nombreArea" query-param="nombreArea"/>
+            <with-param name="nombreCargo" query-param="nombreCargo"/>
+            <with-param name="nombreCentroCosto" query-param="nombreCentroCosto"/>
+            <with-param name="nombreCompania" query-param="nombreCompania"/>
+            <with-param name="nombreDepartamento" query-param="nombreDepartamento"/>
+            <with-param name="nombreDivision" query-param="nombreDivision"/>
+            <with-param name="nombrePerfilGlobal" query-param="nombrePerfilGlobal"/>
+            <with-param name="nombreSupervisor" query-param="nombreSupervisor"/>
+            <with-param name="nombrelocalidad" query-param="nombrelocalidad"/>
+            <with-param name="nombresEmpleado" query-param="nombresEmpleado"/>
+            <with-param name="numeroCuentaDeposito" query-param="numeroCuentaDeposito"/>
+            <with-param name="subtipo" query-param="subtipo"/>
+            <with-param name="tipousuario" query-param="tipousuario"/>
+            <with-param name="username" query-param="username"/>
+            <with-param name="nombresCompletos" query-param="nombresCompletos"/>
+            <with-param name="correoElectronicoPersonal" query-param="correoElectronicoPersonal"/>
+            <with-param name="uuid" query-param="uuid"/>
+            <with-param name="guid" query-param="guid"/>
+            <with-param name="tipoIdentificacion" query-param="tipoIdentificacion"/>
+            <with-param name="tipoRotativo" query-param="tipoRotativo"/>
+            <with-param name="idSupervisor" query-param="idSupervisor"/>
+            <with-param name="identificacionContraparte" query-param="identificacionContraparte"/>
+            <with-param name="nombreContraparte" query-param="nombreContraparte"/>
+            <with-param name="idContraparte" query-param="idContraparte"/>
+            <with-param name="identificacionResponsable" query-param="identificacionResponsable"/>
+            <with-param name="nombreResponsable" query-param="nombreResponsable"/>
+            <with-param name="idResponsable" query-param="idResponsable"/>
+            <with-param name="counterGenericRotary" query-param="counterGenericRotary"/>
+            <with-param name="counterGenericMail" query-param="counterGenericMail"/>
+            <with-param name="valid" query-param="valid"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="UpdateUserDataSearch">
+        <call-query href="updateQuery_userDataSearch">
+            <with-param name="apellidosEmpleado" query-param="apellidosEmpleado"/>
+            <with-param name="celular" query-param="celular"/>
+            <with-param name="codigoAgrupacion" query-param="codigoAgrupacion"/>
+            <with-param name="codigoArea" query-param="codigoArea"/>
+            <with-param name="codigoCargo" query-param="codigoCargo"/>
+            <with-param name="codigoCentroCosto" query-param="codigoCentroCosto"/>
+            <with-param name="codigoCompania" query-param="codigoCompania"/>
+            <with-param name="codigoDepartamento" query-param="codigoDepartamento"/>
+            <with-param name="codigoDivision" query-param="codigoDivision"/>
+            <with-param name="codigoEmpleado" query-param="codigoEmpleado"/>
+            <with-param name="codigoNivelJerarquico" query-param="codigoNivelJerarquico"/>
+            <with-param name="codigoPerfilGlobal" query-param="codigoPerfilGlobal"/>
+            <with-param name="codigoTrabajador" query-param="codigoTrabajador"/>
+            <with-param name="correoElectronico" query-param="correoElectronico"/>
+            <with-param name="estadoEmpleado" query-param="estadoEmpleado"/>
+            <with-param name="fechaIngreso" query-param="fechaIngreso"/>
+            <with-param name="fechaSalida" query-param="fechaSalida"/>
+            <with-param name="idPerfilGlobal" query-param="idPerfilGlobal"/>
+            <with-param name="idUsuario" query-param="idUsuario"/>
+            <with-param name="identificacion" query-param="identificacion"/>
+            <with-param name="identificacionSupervisor" query-param="identificacionSupervisor"/>
+            <with-param name="nombreArea" query-param="nombreArea"/>
+            <with-param name="nombreCargo" query-param="nombreCargo"/>
+            <with-param name="nombreCentroCosto" query-param="nombreCentroCosto"/>
+            <with-param name="nombreCompania" query-param="nombreCompania"/>
+            <with-param name="nombreDepartamento" query-param="nombreDepartamento"/>
+            <with-param name="nombreDivision" query-param="nombreDivision"/>
+            <with-param name="nombrePerfilGlobal" query-param="nombrePerfilGlobal"/>
+            <with-param name="nombreSupervisor" query-param="nombreSupervisor"/>
+            <with-param name="nombrelocalidad" query-param="nombrelocalidad"/>
+            <with-param name="nombresEmpleado" query-param="nombresEmpleado"/>
+            <with-param name="numeroCuentaDeposito" query-param="numeroCuentaDeposito"/>
+            <with-param name="subtipo" query-param="subtipo"/>
+            <with-param name="tipousuario" query-param="tipousuario"/>
+            <with-param name="username" query-param="username"/>
+            <with-param name="nombresCompletos" query-param="nombresCompletos"/>
+            <with-param name="correoElectronicoPersonal" query-param="correoElectronicoPersonal"/>
+            <with-param name="uuid" query-param="uuid"/>
+            <with-param name="guid" query-param="guid"/>
+            <with-param name="tipoIdentificacion" query-param="tipoIdentificacion"/>
+            <with-param name="tipoRotativo" query-param="tipoRotativo"/>
+            <with-param name="idSupervisor" query-param="idSupervisor"/>
+            <with-param name="identificacionContraparte" query-param="identificacionContraparte"/>
+            <with-param name="nombreContraparte" query-param="nombreContraparte"/>
+            <with-param name="idContraparte" query-param="idContraparte"/>
+            <with-param name="identificacionResponsable" query-param="identificacionResponsable"/>
+            <with-param name="nombreResponsable" query-param="nombreResponsable"/>
+            <with-param name="idResponsable" query-param="idResponsable"/>
+            <with-param name="counterGenericRotary" query-param="counterGenericRotary"/>
+            <with-param name="counterGenericMail" query-param="counterGenericMail"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+</data>

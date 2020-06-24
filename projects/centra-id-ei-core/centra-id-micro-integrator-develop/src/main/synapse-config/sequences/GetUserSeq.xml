@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GetUserSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="GetUserSeq" value="Inicio..." />
+        <property name="userIdCalled" expression="$ctx:userIdCalled" />
+    </log>
+    <filter regex="false" source="boolean($ctx:userIdCalled)">
+        <then>
+            <property name="Accept" scope="transport" value="application/json" />
+            <header name="Accept" value="application/json" scope="transport" />
+            <property name="uri.var.is" expression="get-property('IDENTITY_SERVER_HOST')" />
+            <call>
+                <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.is}/oauth2/userinfo?schema=openid" />
+            </call>
+            <property name="userIdCalled" expression="//sub" />
+        </then>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="GetUserSeq" value="Fin..." />
+        <property name="userIdCalled" expression="$ctx:userIdCalled" />
+    </log>
+</sequence>

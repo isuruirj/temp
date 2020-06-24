@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="MassiveProcessUserValidateDataSeq" onError="FaultMassiveProcessUsersSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="MassiveProcessUserValidateDataSeq" value="Inicio..." />
+    </log>
+    <!-- VALIDAR  OBLIGATORIOS -->
+    <filter regex="true" source="get-property('estadoEmpleado')='Activo'">
+        <then>
+            <filter regex="false" source="boolean(get-property('codigoTrabajador'))">
+                <then>
+                    <property name="validateData" scope="default" type="BOOLEAN" value="false" />
+                    <property expression="fn:concat(get-property('validateDataMessage'),'Codigo del trabajador no fue enviado.')" name="validateDataMessage" scope="default" type="STRING" />
+                </then>
+            </filter>
+            <filter regex="false" source="boolean(get-property('apellidosEmpleado'))">
+                <then>
+                    <property name="validateData" scope="default" type="BOOLEAN" value="false" />
+                    <property expression="fn:concat(get-property('validateDataMessage'),'Apellidos del empleado no fue enviado.')" name="validateDataMessage" scope="default" type="STRING" />
+                </then>
+            </filter>
+            <filter regex="false" source="boolean(get-property('nombresEmpleado'))">
+                <then>
+                    <property name="validateData" scope="default" type="BOOLEAN" value="false" />
+                    <property expression="fn:concat(get-property('validateDataMessage'),'Nombres del empleado no fue enviado.')" name="validateDataMessage" scope="default" type="STRING" />
+                </then>
+            </filter>
+            <filter regex="false" source="boolean(get-property('tipoIdentificacion'))">
+                <then>
+                    <property name="validateData" scope="default" type="BOOLEAN" value="false" />
+                    <property expression="fn:concat(get-property('validateDataMessage'),'Tipo Identificacion del empleado no fue enviado.')" name="validateDataMessage" scope="default" type="STRING" />
+                </then>
+            </filter>
+            <filter regex="false" source="boolean(get-property('identificacion'))">
+                <then>
+                    <property name="validateData" scope="default" type="BOOLEAN" value="false" />
+                    <property expression="fn:concat(get-property('validateDataMessage'),'Identificacion del empleado no fue enviado.')" name="validateDataMessage" scope="default" type="STRING" />
+                </then>
+            </filter>
+            <filter regex="false" source="boolean(get-property('codigoCompania'))">
+                <then>
+                    <property name="validateData" scope="default" type="BOOLEAN" value="false" />
+                    <property expression="fn:concat(get-property('validateDataMessage'),'Codigo de compania no fue enviado.')" name="validateDataMessage" scope="default" type="STRING" />
+                </then>
+            </filter>
+            <filter regex="false" source="boolean(get-property('codigoAgrupacion'))">
+                <then>
+                    <property name="validateData" scope="default" type="BOOLEAN" value="false" />
+                    <property expression="fn:concat(get-property('validateDataMessage'),'Codigo de agrupacion no fue enviado.')" name="validateDataMessage" scope="default" type="STRING" />
+                </then>
+            </filter>
+            <filter regex="false" source="boolean(get-property('codigoDivision'))">
+                <then>
+                    <property name="validateData" scope="default" type="BOOLEAN" value="false" />
+                    <property expression="fn:concat(get-property('validateDataMessage'),'Codigo de division no fue enviado.')" name="validateDataMessage" scope="default" type="STRING" />
+                </then>
+            </filter>
+            <filter regex="false" source="boolean(get-property('codigoDepartamento'))">
+                <then>
+                    <property name="validateData" scope="default" type="BOOLEAN" value="false" />
+                    <property expression="fn:concat(get-property('validateDataMessage'),'Codigo de departamento no fue enviado.')" name="validateDataMessage" scope="default" type="STRING" />
+                </then>
+            </filter>
+            <filter regex="false" source="boolean(get-property('codigoArea'))">
+                <then>
+                    <property name="validateData" scope="default" type="BOOLEAN" value="false" />
+                    <property expression="fn:concat(get-property('validateDataMessage'),'Codigo de area no fue enviado.')" name="validateDataMessage" scope="default" type="STRING" />
+                </then>
+            </filter>
+            <filter regex="false" source="boolean(get-property('codigoCentroCosto'))">
+                <then>
+                    <property name="validateData" scope="default" type="BOOLEAN" value="false" />
+                    <property expression="fn:concat(get-property('validateDataMessage'),'Codigo de centro de costo no fue enviado.')" name="validateDataMessage" scope="default" type="STRING" />
+                </then>
+            </filter>
+            <filter regex="false" source="boolean(get-property('nombreCargo'))">
+                <then>
+                    <property name="validateData" scope="default" type="BOOLEAN" value="false" />
+                    <property expression="fn:concat(get-property('validateDataMessage'),'Cargo no fue enviado.')" name="validateDataMessage" scope="default" type="STRING" />
+                </then>
+            </filter>
+            <filter regex="false" source="boolean(get-property('codigoNivelJerarquico'))">
+                <then>
+                    <property name="validateData" scope="default" type="BOOLEAN" value="false" />
+                    <property expression="fn:concat(get-property('validateDataMessage'),'Codigo de jerarquia no fue enviado.')" name="validateDataMessage" scope="default" type="STRING" />
+                </then>
+            </filter>
+            <filter regex="false" source="boolean(get-property('fechaIngresoEmpleado'))">
+                <then>
+                    <property name="validateData" scope="default" type="BOOLEAN" value="false" />
+                    <property expression="fn:concat(get-property('validateDataMessage'),'Fecha ingreso empleado no fue enviado.')" name="validateDataMessage" scope="default" type="STRING" />
+                </then>
+            </filter>
+            <filter regex="false" source="boolean(get-property('estadoEmpleado'))">
+                <then>
+                    <property name="validateData" scope="default" type="BOOLEAN" value="false" />
+                    <property expression="fn:concat(get-property('validateDataMessage'),'Estado de empleado no fue enviado.')" name="validateDataMessage" scope="default" type="STRING" />
+                </then>
+            </filter>
+            <filter regex="false" source="boolean(get-property('tipoUsuario'))">
+                <then>
+                    <property name="validateData" scope="default" type="BOOLEAN" value="false" />
+                    <property expression="fn:concat(get-property('validateDataMessage'),'Tipo de usuario no fue enviado.')" name="validateDataMessage" scope="default" type="STRING" />
+                </then>
+            </filter>
+            <filter regex="false" source="boolean(get-property('subTipo'))">
+                <then>
+                    <property name="validateData" scope="default" type="BOOLEAN" value="false" />
+                    <property expression="fn:concat(get-property('validateDataMessage'),'Subtipo de usuario no fue enviado.')" name="validateDataMessage" scope="default" type="STRING" />
+                </then>
+            </filter>
+        </then>
+    </filter>
+    <filter regex="false" source="boolean(get-property('codigoEmpleado'))">
+        <then>
+            <property name="validateData" scope="default" type="BOOLEAN" value="false" />
+            <property expression="fn:concat(get-property('validateDataMessage'),'Codigo de empleado no fue enviado.')" name="validateDataMessage" scope="default" type="STRING" />
+        </then>
+    </filter>
+    <!-- VALIDAR DATOS -->
+    <filter regex="true" source="boolean(get-property('validateData'))">
+        <then>
+            <filter regex="true" source="get-property('estadoEmpleado')='Activo'">
+                <then>
+                    <log level="custom" category="DEBUG">
+                        <property name="MassiveProcessUserValidateDataSeq" value="validando division.." />
+                    </log>
+                    <!-- CATALOGO DIVISION -->
+                    <payloadFactory media-type="xml">
+                        <format>
+                            <cen:_postcreatecatalognotexistcodeandname xmlns:cen="centra-id.com">
+                                <cen:code>$1</cen:code>
+                                <cen:name>$2</cen:name>
+                                <cen:typeCatalogCode>DIV</cen:typeCatalogCode>
+                                <cen:codeValidate>$3</cen:codeValidate>
+                                <cen:nameValidate>$4</cen:nameValidate>
+                            </cen:_postcreatecatalognotexistcodeandname>
+                        </format>
+                        <args>
+                            <arg evaluator="xml" expression="get-property('codigoDivision')" xmlns:cen="centra-id.com" />
+                            <arg evaluator="xml" expression="get-property('nombreDivision')" xmlns:cen="centra-id.com" />
+                            <arg evaluator="xml" expression="get-property('codigoDivision')" xmlns:cen="centra-id.com" />
+                            <arg evaluator="xml" expression="get-property('nombreDivision')" xmlns:cen="centra-id.com" />
+                        </args>
+                    </payloadFactory>
+                    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+                    <call>
+                        <endpoint name="CatalogsDSS_Endpoint" template="HTTPEndpointPostTemplate" uri="{uri.var.dataServiceHost}/CatalogsDSS.HTTPEndpoint/createCatalogNotExistCodeAndName" />
+                    </call>
+                    <log level="custom" category="DEBUG">
+                        <property name="MassiveProcessUserValidateDataSeq" value="validando area.." />
+                    </log>
+                    <!-- CATALOGO AREA -->
+                    <payloadFactory media-type="xml">
+                        <format>
+                            <cen:_postcreatecatalognotexistcodeandname xmlns:cen="centra-id.com">
+                                <cen:code>$1</cen:code>
+                                <cen:name>$2</cen:name>
+                                <cen:typeCatalogCode>ARE</cen:typeCatalogCode>
+                                <cen:codeValidate>$3</cen:codeValidate>
+                                <cen:nameValidate>$4</cen:nameValidate>
+                            </cen:_postcreatecatalognotexistcodeandname>
+                        </format>
+                        <args>
+                            <arg evaluator="xml" expression="get-property('codigoArea')" xmlns:cen="centra-id.com" />
+                            <arg evaluator="xml" expression="get-property('nombreArea')" xmlns:cen="centra-id.com" />
+                            <arg evaluator="xml" expression="get-property('codigoArea')" xmlns:cen="centra-id.com" />
+                            <arg evaluator="xml" expression="get-property('nombreArea')" xmlns:cen="centra-id.com" />
+                        </args>
+                    </payloadFactory>
+                    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+                    <call>
+                        <endpoint name="CatalogsDSS_Endpoint" template="HTTPEndpointPostTemplate" uri="{uri.var.dataServiceHost}/CatalogsDSS.HTTPEndpoint/createCatalogNotExistCodeAndName" />
+                    </call>
+                    <!-- CATALOGO DEPARTAMENTO -->
+                    <log level="custom" category="DEBUG">
+                        <property name="MassiveProcessUserValidateDataSeq" value="validando departamento.." />
+                    </log>
+                    <payloadFactory media-type="xml">
+                        <format>
+                            <cen:_postcreatecatalognotexistcodeandname xmlns:cen="centra-id.com">
+                                <cen:code>$1</cen:code>
+                                <cen:name>$2</cen:name>
+                                <cen:typeCatalogCode>DEP</cen:typeCatalogCode>
+                                <cen:codeValidate>$3</cen:codeValidate>
+                                <cen:nameValidate>$4</cen:nameValidate>
+                            </cen:_postcreatecatalognotexistcodeandname>
+                        </format>
+                        <args>
+                            <arg evaluator="xml" expression="get-property('codigoDepartamento')" xmlns:cen="centra-id.com" />
+                            <arg evaluator="xml" expression="get-property('nombreDepartamento')" xmlns:cen="centra-id.com" />
+                            <arg evaluator="xml" expression="get-property('codigoDepartamento')" xmlns:cen="centra-id.com" />
+                            <arg evaluator="xml" expression="get-property('nombreDepartamento')" xmlns:cen="centra-id.com" />
+                        </args>
+                    </payloadFactory>
+                    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+                    <call>
+                        <endpoint name="CatalogsDSS_Endpoint" template="HTTPEndpointPostTemplate" uri="{uri.var.dataServiceHost}/CatalogsDSS.HTTPEndpoint/createCatalogNotExistCodeAndName" />
+                    </call>
+                    <!-- CATALOGO CARGO -->
+                    <log level="custom" category="DEBUG">
+                        <property name="MassiveProcessUserValidateDataSeq" value="validando cargo.." />
+                    </log>
+                    <payloadFactory media-type="xml">
+                        <format>
+                            <cen:_postcreatecatalognotexistname xmlns:cen="centra-id.com">
+                                <cen:name>$1</cen:name>
+                                <cen:typeCatalogCode>CAR</cen:typeCatalogCode>
+                                <cen:nameValidate>$2</cen:nameValidate>
+                            </cen:_postcreatecatalognotexistname>
+                        </format>
+                        <args>
+                            <arg evaluator="xml" expression="get-property('nombreCargo')" xmlns:cen="centra-id.com" />
+                            <arg evaluator="xml" expression="get-property('nombreCargo')" xmlns:cen="centra-id.com" />
+                        </args>
+                    </payloadFactory>
+                    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+                    <call>
+                        <endpoint name="CatalogsDSS_Endpoint" template="HTTPEndpointPostTemplate" uri="{uri.var.dataServiceHost}/CatalogsDSS.HTTPEndpoint/createCatalogNotExistName" />
+                    </call>
+                    <!-- COMPANIA -->
+                    <log level="custom" category="DEBUG">
+                        <property name="MassiveProcessUserValidateDataSeq" value="validando compania.." />
+                    </log>
+                    <property expression="get-property('codigoCompania')" name="uri.var.code" scope="default" type="STRING" xmlns:cen="centra-id.com" />
+                    <sequence key="MassiveProcessUserValidateCompanySeq" />
+                    <!-- CENTRO DE COSTO -->
+                    <log level="custom" category="DEBUG">
+                        <property name="MassiveProcessUserValidateDataSeq" value="validando centro de costo.." />
+                    </log>
+                    <property expression="get-property('codigoCentroCosto')" name="uri.var.centerCostCode" scope="default" type="STRING" xmlns:cen="centra-id.com" />
+                    <property expression="get-property('codigoCompania')" name="uri.var.companyCode" scope="default" type="STRING" xmlns:cen="centra-id.com" />
+                    <sequence key="MassiveProcessUserValidateCostCenterSeq" />
+                    <!-- TIPO DE USUARIO - TIPO -->
+                    <log level="custom" category="DEBUG">
+                        <property name="MassiveProcessUserValidateDataSeq" value="validando tipo de usuario.." />
+                    </log>
+                    <property name="uri.var.type" scope="default" type="STRING" value="T" />
+                    <property expression="get-property('tipoUsuario')" name="uri.var.code" scope="default" type="STRING" xmlns:cen="centra-id.com" />
+                    <sequence key="MassiveProcessUserValidateUserTypeSeq" />
+                    <!-- TIPO DE USUARIO - SUBTIPO -->
+                    <log level="custom" category="DEBUG">
+                        <property name="MassiveProcessUserValidateDataSeq" value="validando tipo de usuario.." />
+                    </log>
+                    <property name="uri.var.type" scope="default" type="STRING" value="S" />
+                    <property expression="get-property('subTipo')" name="uri.var.code" scope="default" type="STRING" xmlns:cen="centra-id.com" />
+                    <sequence key="MassiveProcessUserValidateUserTypeSeq" />
+                </then>
+            </filter>
+        </then>
+    </filter>
+    <!-- Imprimir resultados -->
+    <log level="custom" separator="| ">
+        <property name="MassiveProcessUserValidateDataSeq" value="Fin..." />
+        <property expression="get-property('validateData')" name="validateData" />
+        <property expression="get-property('validateDataMessage')" name="validateDataMessage" />
+    </log>
+</sequence>

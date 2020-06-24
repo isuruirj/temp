@@ -1,0 +1,1093 @@
+<data name="application.template-profile-matrix-group.ds"
+    serviceNamespace="centra-id.com"
+    enableBatchRequests="false"
+    enableBoxcarring="false"
+    transports="https"
+    disableLegacyBoxcarringMode="true">
+
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <!-- DYNAMIC QUERY TEMPLATEPROFILEMATRIXGROUP -->
+    <query id="dynamicQuery_templateProfileMatrixGroup" useConfig="default">
+        <sql>
+           SELECT
+               templateProfileMatrixGroup.id,
+               templateProfileMatrixGroup.valid,
+               templateProfileMatrixGroup.template_profile_matrix_id
+           FROM sch_centra_id.TEMPLATE_PROFILES_MATRICES_GROUP templateProfileMatrixGroup :innerjoinclause :whereclause ORDER BY :orderby :fromto
+        </sql>
+        <result element="templateProfileMatrixGroupList" rowName="templateProfileMatrixGroup">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <call-query href="queryManyToOneById__templateProfileMatrixGroup_templateProfileMatrix">
+                <with-param column="template_profile_matrix_id" name="id"/>
+            </call-query>
+            <call-query href="queryOneToManyByMasterId__templateProfileMatrixGroup_templateProfileMatrixDetail">
+                <with-param column="id" name="masterId"/>
+            </call-query>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="fromto" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- INSERT TemplateProfileMatrixGroup -->
+    <query id="insertQuery_templateProfileMatrixGroup" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>
+           INSERT INTO sch_centra_id.TEMPLATE_PROFILES_MATRICES_GROUP(
+               valid,
+               template_profile_matrix_id
+        ) VALUES(?,?)
+        </sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="valid" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="1"/>
+        <param name="templateProfileMatrixId" ordinal="2" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <!-- UPDATE TemplateProfileMatrixGroup -->
+    <query id="updateQuery_templateProfileMatrixGroup" useConfig="default">
+        <sql>
+           UPDATE sch_centra_id.TEMPLATE_PROFILES_MATRICES_GROUP SET
+               template_profile_matrix_id=?
+            WHERE id=?
+        </sql>
+        <param name="templateProfileMatrixId" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="id" ordinal="2" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <!-- DYNAMIC FUNCTION  -->
+    <query id="dynamicQueryFunction_templateProfileMatrixGroup" useConfig="default">
+        <sql>
+           SELECT :function(:field) as value FROM :table :innerjoinclause :whereclause
+         </sql>
+        <result element="result">
+            <element column="value" name="value" xsdType="xs:long"/>
+        </result>
+        <param name="function" sqlType="QUERY_STRING"/>
+        <param name="field" sqlType="QUERY_STRING"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DELETE  -->
+    <query id="dynamicDeleteQuery_templateProfileMatrixGroup" useConfig="default">
+        <sql>UPDATE :table SET :set WHERE id=:id</sql>
+        <param name="id" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="set" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- QUERY ONE TO MANY TemplateProfileMatrixGroup TemplateProfileMatrixDetail 0-->
+    <query id="queryOneToManyByMasterId__templateProfileMatrixGroup_templateProfileMatrixDetail" useConfig="default">
+        <sql>
+           SELECT 
+               templateProfileMatrixDetailList.id,
+               templateProfileMatrixDetailList.template_profile_matrix_group_id,
+               templateProfileMatrixDetailList.matrix_detail_id,
+               templateProfileMatrixDetailList.value,
+               templateProfileMatrixDetailList.valid
+           FROM sch_centra_id.TEMPLATE_PROFILES_MATRICES_DETAIL templateProfileMatrixDetailList WHERE template_profile_matrix_group_id=? AND valid=1
+        </sql>
+        <result element="templateProfileMatrixDetailList" rowName="templateProfileMatrixDetail">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <call-query href="queryManyToOneById__templateProfileMatrixDetailList_templateProfileMatrixDetail_templateProfileMatrixGroup">
+                <with-param column="template_profile_matrix_group_id" name="id"/>
+            </call-query>
+            <call-query href="queryReferenceById__templateProfileMatrixDetailList_templateProfileMatrixDetail_matrixDetail">
+                <with-param column="matrix_detail_id" name="id"/>
+            </call-query>
+            <element column="value" name="value" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="masterId" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE TemplateProfileMatrixGroup MatrixDetail 1-->
+    <query id="queryReferenceById__templateProfileMatrixDetailList_templateProfileMatrixDetail_matrixDetail" useConfig="default">
+        <sql>
+           SELECT 
+               matrixDetail.id,
+               matrixDetail.code,
+               matrixDetail.name,
+               matrixDetail.valid,
+               matrixDetail.matrix_id
+           FROM sch_centra_id.MATRICES_DETAIL matrixDetail WHERE id=? AND valid=1
+        </sql>
+        <result element="matrixDetail">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <call-query href="queryReferenceById__templateProfileMatrixDetailList_matrixDetail_matrixDetail_matrix">
+                <with-param column="matrix_id" name="id"/>
+            </call-query>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE TemplateProfileMatrixGroup Matrix 2-->
+    <query id="queryReferenceById__templateProfileMatrixDetailList_matrixDetail_matrixDetail_matrix" useConfig="default">
+        <sql>
+           SELECT 
+               matrix.id,
+               matrix.code,
+               matrix.name,
+               matrix.quantity,
+               matrix.valid,
+               matrix.application_group_id
+           FROM sch_centra_id.MATRICES matrix WHERE id=? AND valid=1
+        </sql>
+        <result element="matrix">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="quantity" name="quantity" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE TemplateProfileMatrixGroup ApplicationGroup 3-->
+    <query id="queryManyToOneById__templateProfileMatrixDetailList_matrixDetail_matrix_matrix_applicationGroup" useConfig="default">
+        <sql>
+           SELECT 
+               applicationGroup.id,
+               applicationGroup.code,
+               applicationGroup.name,
+               applicationGroup.endpoint_type,
+               applicationGroup.ordinal,
+               applicationGroup.valid
+           FROM sch_centra_id.APPLICATIONS_GROUP applicationGroup WHERE id=? AND valid=1
+        </sql>
+        <result element="applicationGroup">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="endpoint_type" name="endpointType" xsdType="xs:string"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE TemplateProfileMatrixGroup TemplateProfileMatrixGroup 1-->
+    <query id="queryManyToOneById__templateProfileMatrixDetailList_templateProfileMatrixDetail_templateProfileMatrixGroup" useConfig="default">
+        <sql>
+           SELECT 
+               templateProfileMatrixGroup.id,
+               templateProfileMatrixGroup.valid,
+               templateProfileMatrixGroup.template_profile_matrix_id
+           FROM sch_centra_id.TEMPLATE_PROFILES_MATRICES_GROUP templateProfileMatrixGroup WHERE id=? AND valid=1
+        </sql>
+        <result element="templateProfileMatrixGroup">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+              <element name="templateProfileMatrix">
+                <element column="template_profile_matrix_id" name="id" xsdType="xs:integer"/>
+              </element>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY ONE TO MANY TemplateProfileMatrixGroup TemplateProfileMatrixDetail 2-->
+    <query id="queryOneToManyByMasterId__templateProfileMatrixDetailList_templateProfileMatrixGroup_templateProfileMatrixGroup_templateProfileMatrixDetail" useConfig="default">
+        <sql>
+           SELECT 
+               templateProfileMatrixDetailList.id,
+               templateProfileMatrixDetailList.template_profile_matrix_group_id,
+               templateProfileMatrixDetailList.matrix_detail_id,
+               templateProfileMatrixDetailList.value,
+               templateProfileMatrixDetailList.valid
+           FROM sch_centra_id.TEMPLATE_PROFILES_MATRICES_DETAIL templateProfileMatrixDetailList WHERE template_profile_matrix_group_id=? AND valid=1
+        </sql>
+        <result element="templateProfileMatrixDetailList" rowName="templateProfileMatrixDetail">
+            <element column="id" name="id" xsdType="xs:integer"/>
+              <element name="matrixDetail">
+                <element column="matrix_detail_id" name="id" xsdType="xs:integer"/>
+              </element>
+            <element column="value" name="value" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="masterId" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE TemplateProfileMatrixGroup MatrixDetail 3-->
+    <query id="queryReferenceById__templateProfileMatrixDetailList_templateProfileMatrixGroup_templateProfileMatrixDetailList_templateProfileMatrixDetail_matrixDetail" useConfig="default">
+        <sql>
+           SELECT 
+               matrixDetail.id,
+               matrixDetail.code,
+               matrixDetail.name,
+               matrixDetail.valid,
+               matrixDetail.matrix_id
+           FROM sch_centra_id.MATRICES_DETAIL matrixDetail WHERE id=? AND valid=1
+        </sql>
+        <result element="matrixDetail">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE TemplateProfileMatrixGroup TemplateProfileMatrixGroup 3-->
+    <query id="queryManyToOneById__templateProfileMatrixDetailList_templateProfileMatrixGroup_templateProfileMatrixDetailList_templateProfileMatrixDetail_templateProfileMatrixGroup" useConfig="default">
+        <sql>
+           SELECT 
+               templateProfileMatrixGroup.id,
+               templateProfileMatrixGroup.valid,
+               templateProfileMatrixGroup.template_profile_matrix_id
+           FROM sch_centra_id.TEMPLATE_PROFILES_MATRICES_GROUP templateProfileMatrixGroup WHERE id=? AND valid=1
+        </sql>
+        <result element="templateProfileMatrixGroup">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE TemplateProfileMatrixGroup TemplateProfileMatrix 2-->
+    <query id="queryManyToOneById__templateProfileMatrixDetailList_templateProfileMatrixGroup_templateProfileMatrixGroup_templateProfileMatrix" useConfig="default">
+        <sql>
+           SELECT 
+               templateProfileMatrix.id,
+               templateProfileMatrix.transactional_profile_id,
+               templateProfileMatrix.matrix_id,
+               templateProfileMatrix.valid
+           FROM sch_centra_id.TEMPLATE_PROFILES_MATRICES templateProfileMatrix WHERE id=? AND valid=1
+        </sql>
+        <result element="templateProfileMatrix">
+            <element column="id" name="id" xsdType="xs:integer"/>
+              <element name="matrix">
+                <element column="matrix_id" name="id" xsdType="xs:integer"/>
+              </element>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE TemplateProfileMatrixGroup Matrix 3-->
+    <query id="queryReferenceById__templateProfileMatrixDetailList_templateProfileMatrixGroup_templateProfileMatrix_templateProfileMatrix_matrix" useConfig="default">
+        <sql>
+           SELECT 
+               matrix.id,
+               matrix.code,
+               matrix.name,
+               matrix.quantity,
+               matrix.valid,
+               matrix.application_group_id
+           FROM sch_centra_id.MATRICES matrix WHERE id=? AND valid=1
+        </sql>
+        <result element="matrix">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="quantity" name="quantity" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY ONE TO MANY TemplateProfileMatrixGroup TemplateProfileMatrixGroup 3-->
+    <query id="queryOneToManyByMasterId__templateProfileMatrixDetailList_templateProfileMatrixGroup_templateProfileMatrix_templateProfileMatrix_templateProfileMatrixGroup" useConfig="default">
+        <sql>
+           SELECT 
+               templateProfileMatrixGroupList.id,
+               templateProfileMatrixGroupList.valid,
+               templateProfileMatrixGroupList.template_profile_matrix_id
+           FROM sch_centra_id.TEMPLATE_PROFILES_MATRICES_GROUP templateProfileMatrixGroupList WHERE template_profile_matrix_id=? AND valid=1
+        </sql>
+        <result element="templateProfileMatrixGroupList" rowName="templateProfileMatrixGroup">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="masterId" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE TemplateProfileMatrixGroup TransactionalProfile 3-->
+    <query id="queryManyToOneById__templateProfileMatrixDetailList_templateProfileMatrixGroup_templateProfileMatrix_templateProfileMatrix_transactionalProfile" useConfig="default">
+        <sql>
+           SELECT 
+               transactionalProfile.id,
+               transactionalProfile.code,
+               transactionalProfile.name,
+               transactionalProfile.comments,
+               transactionalProfile.date_created,
+               transactionalProfile.date_deleted,
+               transactionalProfile.user_created,
+               transactionalProfile.user_deleted,
+               transactionalProfile.valid,
+               transactionalProfile.catalog_risk_level_id,
+               transactionalProfile.application_id
+           FROM sch_centra_id.TRANSACTIONAL_PROFILES transactionalProfile WHERE id=? AND valid=1
+        </sql>
+        <result element="transactionalProfile">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="comments" name="comments" xsdType="xs:string"/>
+            <element column="date_created" name="dateCreated" xsdType="xs:dateTime"/>
+            <element column="date_deleted" name="dateDeleted" xsdType="xs:dateTime"/>
+            <element column="user_created" name="userCreated" xsdType="xs:string"/>
+            <element column="user_deleted" name="userDeleted" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE TemplateProfileMatrixGroup TemplateProfileMatrix 0-->
+    <query id="queryManyToOneById__templateProfileMatrixGroup_templateProfileMatrix" useConfig="default">
+        <sql>
+           SELECT 
+               templateProfileMatrix.id,
+               templateProfileMatrix.transactional_profile_id,
+               templateProfileMatrix.matrix_id,
+               templateProfileMatrix.valid
+           FROM sch_centra_id.TEMPLATE_PROFILES_MATRICES templateProfileMatrix WHERE id=? AND valid=1
+        </sql>
+        <result element="templateProfileMatrix">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <call-query href="queryManyToOneById__templateProfileMatrix_templateProfileMatrix_transactionalProfile">
+                <with-param column="transactional_profile_id" name="id"/>
+            </call-query>
+            <call-query href="queryReferenceById__templateProfileMatrix_templateProfileMatrix_matrix">
+                <with-param column="matrix_id" name="id"/>
+            </call-query>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <call-query href="queryOneToManyByMasterId__templateProfileMatrix_templateProfileMatrix_templateProfileMatrixGroup">
+                <with-param column="id" name="masterId"/>
+            </call-query>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE TemplateProfileMatrixGroup Matrix 1-->
+    <query id="queryReferenceById__templateProfileMatrix_templateProfileMatrix_matrix" useConfig="default">
+        <sql>
+           SELECT 
+               matrix.id,
+               matrix.code,
+               matrix.name,
+               matrix.quantity,
+               matrix.valid,
+               matrix.application_group_id
+           FROM sch_centra_id.MATRICES matrix WHERE id=? AND valid=1
+        </sql>
+        <result element="matrix">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="quantity" name="quantity" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+              <element name="applicationGroup">
+                <element column="application_group_id" name="id" xsdType="xs:integer"/>
+              </element>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE TemplateProfileMatrixGroup ApplicationGroup 2-->
+    <query id="queryManyToOneById__templateProfileMatrix_matrix_matrix_applicationGroup" useConfig="default">
+        <sql>
+           SELECT 
+               applicationGroup.id,
+               applicationGroup.code,
+               applicationGroup.name,
+               applicationGroup.endpoint_type,
+               applicationGroup.ordinal,
+               applicationGroup.valid
+           FROM sch_centra_id.APPLICATIONS_GROUP applicationGroup WHERE id=? AND valid=1
+        </sql>
+        <result element="applicationGroup">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="endpoint_type" name="endpointType" xsdType="xs:string"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY ONE TO MANY TemplateProfileMatrixGroup Matrix 3-->
+    <query id="queryOneToManyByMasterId__templateProfileMatrix_matrix_applicationGroup_applicationGroup_matrix" useConfig="default">
+        <sql>
+           SELECT 
+               matrixList.id,
+               matrixList.code,
+               matrixList.name,
+               matrixList.quantity,
+               matrixList.valid,
+               matrixList.application_group_id
+           FROM sch_centra_id.MATRICES matrixList WHERE application_group_id=? AND valid=1
+        </sql>
+        <result element="matrixList" rowName="matrix">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="quantity" name="quantity" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="masterId" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY ONE TO MANY TemplateProfileMatrixGroup Field 3-->
+    <query id="queryOneToManyByMasterId__templateProfileMatrix_matrix_applicationGroup_applicationGroup_field" useConfig="default">
+        <sql>
+           SELECT 
+               fieldList.id,
+               fieldList.code,
+               fieldList.name,
+               fieldList.predetermined,
+               fieldList.type,
+               fieldList.length,
+               fieldList.required,
+               fieldList.valid,
+               fieldList.application_group_id
+           FROM sch_centra_id.FIELDS fieldList WHERE application_group_id=? AND valid=1
+        </sql>
+        <result element="fieldList" rowName="field">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="predetermined" name="predetermined" xsdType="xs:string"/>
+            <element column="type" name="type" xsdType="xs:string"/>
+            <element column="length" name="length" xsdType="xs:integer"/>
+            <element column="required" name="required" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="masterId" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY ONE TO MANY TemplateProfileMatrixGroup TemplateProfileMatrixGroup 1-->
+    <query id="queryOneToManyByMasterId__templateProfileMatrix_templateProfileMatrix_templateProfileMatrixGroup" useConfig="default">
+        <sql>
+           SELECT 
+               templateProfileMatrixGroupList.id,
+               templateProfileMatrixGroupList.valid,
+               templateProfileMatrixGroupList.template_profile_matrix_id
+           FROM sch_centra_id.TEMPLATE_PROFILES_MATRICES_GROUP templateProfileMatrixGroupList WHERE template_profile_matrix_id=? AND valid=1
+        </sql>
+        <result element="templateProfileMatrixGroupList" rowName="templateProfileMatrixGroup">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+              <element name="templateProfileMatrix">
+                <element column="template_profile_matrix_id" name="id" xsdType="xs:integer"/>
+              </element>
+        </result>
+        <param name="masterId" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY ONE TO MANY TemplateProfileMatrixGroup TemplateProfileMatrixDetail 2-->
+    <query id="queryOneToManyByMasterId__templateProfileMatrix_templateProfileMatrixGroupList_templateProfileMatrixGroup_templateProfileMatrixDetail" useConfig="default">
+        <sql>
+           SELECT 
+               templateProfileMatrixDetailList.id,
+               templateProfileMatrixDetailList.template_profile_matrix_group_id,
+               templateProfileMatrixDetailList.matrix_detail_id,
+               templateProfileMatrixDetailList.value,
+               templateProfileMatrixDetailList.valid
+           FROM sch_centra_id.TEMPLATE_PROFILES_MATRICES_DETAIL templateProfileMatrixDetailList WHERE template_profile_matrix_group_id=? AND valid=1
+        </sql>
+        <result element="templateProfileMatrixDetailList" rowName="templateProfileMatrixDetail">
+            <element column="id" name="id" xsdType="xs:integer"/>
+              <element name="matrixDetail">
+                <element column="matrix_detail_id" name="id" xsdType="xs:integer"/>
+              </element>
+            <element column="value" name="value" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="masterId" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE TemplateProfileMatrixGroup MatrixDetail 3-->
+    <query id="queryReferenceById__templateProfileMatrix_templateProfileMatrixGroupList_templateProfileMatrixDetailList_templateProfileMatrixDetail_matrixDetail" useConfig="default">
+        <sql>
+           SELECT 
+               matrixDetail.id,
+               matrixDetail.code,
+               matrixDetail.name,
+               matrixDetail.valid,
+               matrixDetail.matrix_id
+           FROM sch_centra_id.MATRICES_DETAIL matrixDetail WHERE id=? AND valid=1
+        </sql>
+        <result element="matrixDetail">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE TemplateProfileMatrixGroup TemplateProfileMatrixGroup 3-->
+    <query id="queryManyToOneById__templateProfileMatrix_templateProfileMatrixGroupList_templateProfileMatrixDetailList_templateProfileMatrixDetail_templateProfileMatrixGroup" useConfig="default">
+        <sql>
+           SELECT 
+               templateProfileMatrixGroup.id,
+               templateProfileMatrixGroup.valid,
+               templateProfileMatrixGroup.template_profile_matrix_id
+           FROM sch_centra_id.TEMPLATE_PROFILES_MATRICES_GROUP templateProfileMatrixGroup WHERE id=? AND valid=1
+        </sql>
+        <result element="templateProfileMatrixGroup">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE TemplateProfileMatrixGroup TemplateProfileMatrix 2-->
+    <query id="queryManyToOneById__templateProfileMatrix_templateProfileMatrixGroupList_templateProfileMatrixGroup_templateProfileMatrix" useConfig="default">
+        <sql>
+           SELECT 
+               templateProfileMatrix.id,
+               templateProfileMatrix.transactional_profile_id,
+               templateProfileMatrix.matrix_id,
+               templateProfileMatrix.valid
+           FROM sch_centra_id.TEMPLATE_PROFILES_MATRICES templateProfileMatrix WHERE id=? AND valid=1
+        </sql>
+        <result element="templateProfileMatrix">
+            <element column="id" name="id" xsdType="xs:integer"/>
+              <element name="matrix">
+                <element column="matrix_id" name="id" xsdType="xs:integer"/>
+              </element>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE TemplateProfileMatrixGroup Matrix 3-->
+    <query id="queryReferenceById__templateProfileMatrix_templateProfileMatrixGroupList_templateProfileMatrix_templateProfileMatrix_matrix" useConfig="default">
+        <sql>
+           SELECT 
+               matrix.id,
+               matrix.code,
+               matrix.name,
+               matrix.quantity,
+               matrix.valid,
+               matrix.application_group_id
+           FROM sch_centra_id.MATRICES matrix WHERE id=? AND valid=1
+        </sql>
+        <result element="matrix">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="quantity" name="quantity" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY ONE TO MANY TemplateProfileMatrixGroup TemplateProfileMatrixGroup 3-->
+    <query id="queryOneToManyByMasterId__templateProfileMatrix_templateProfileMatrixGroupList_templateProfileMatrix_templateProfileMatrix_templateProfileMatrixGroup" useConfig="default">
+        <sql>
+           SELECT 
+               templateProfileMatrixGroupList.id,
+               templateProfileMatrixGroupList.valid,
+               templateProfileMatrixGroupList.template_profile_matrix_id
+           FROM sch_centra_id.TEMPLATE_PROFILES_MATRICES_GROUP templateProfileMatrixGroupList WHERE template_profile_matrix_id=? AND valid=1
+        </sql>
+        <result element="templateProfileMatrixGroupList" rowName="templateProfileMatrixGroup">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="masterId" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE TemplateProfileMatrixGroup TransactionalProfile 3-->
+    <query id="queryManyToOneById__templateProfileMatrix_templateProfileMatrixGroupList_templateProfileMatrix_templateProfileMatrix_transactionalProfile" useConfig="default">
+        <sql>
+           SELECT 
+               transactionalProfile.id,
+               transactionalProfile.code,
+               transactionalProfile.name,
+               transactionalProfile.comments,
+               transactionalProfile.date_created,
+               transactionalProfile.date_deleted,
+               transactionalProfile.user_created,
+               transactionalProfile.user_deleted,
+               transactionalProfile.valid,
+               transactionalProfile.catalog_risk_level_id,
+               transactionalProfile.application_id
+           FROM sch_centra_id.TRANSACTIONAL_PROFILES transactionalProfile WHERE id=? AND valid=1
+        </sql>
+        <result element="transactionalProfile">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="comments" name="comments" xsdType="xs:string"/>
+            <element column="date_created" name="dateCreated" xsdType="xs:dateTime"/>
+            <element column="date_deleted" name="dateDeleted" xsdType="xs:dateTime"/>
+            <element column="user_created" name="userCreated" xsdType="xs:string"/>
+            <element column="user_deleted" name="userDeleted" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE TemplateProfileMatrixGroup TransactionalProfile 1-->
+    <query id="queryManyToOneById__templateProfileMatrix_templateProfileMatrix_transactionalProfile" useConfig="default">
+        <sql>
+           SELECT 
+               transactionalProfile.id,
+               transactionalProfile.code,
+               transactionalProfile.name,
+               transactionalProfile.comments,
+               transactionalProfile.date_created,
+               transactionalProfile.date_deleted,
+               transactionalProfile.user_created,
+               transactionalProfile.user_deleted,
+               transactionalProfile.valid,
+               transactionalProfile.catalog_risk_level_id,
+               transactionalProfile.application_id
+           FROM sch_centra_id.TRANSACTIONAL_PROFILES transactionalProfile WHERE id=? AND valid=1
+        </sql>
+        <result element="transactionalProfile">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="comments" name="comments" xsdType="xs:string"/>
+            <element column="date_created" name="dateCreated" xsdType="xs:dateTime"/>
+            <element column="date_deleted" name="dateDeleted" xsdType="xs:dateTime"/>
+            <element column="user_created" name="userCreated" xsdType="xs:string"/>
+            <element column="user_deleted" name="userDeleted" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <call-query href="queryReferenceById__templateProfileMatrix_transactionalProfile_transactionalProfile_catalogRiskLevel">
+                <with-param column="catalog_risk_level_id" name="id"/>
+            </call-query>
+            <call-query href="queryReferenceById__templateProfileMatrix_transactionalProfile_transactionalProfile_application">
+                <with-param column="application_id" name="id"/>
+            </call-query>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE TemplateProfileMatrixGroup Catalog 2-->
+    <query id="queryReferenceById__templateProfileMatrix_transactionalProfile_transactionalProfile_catalogRiskLevel" useConfig="default">
+        <sql>
+           SELECT 
+               catalogRiskLevel.id,
+               catalogRiskLevel.code,
+               catalogRiskLevel.name,
+               catalogRiskLevel.predetermined,
+               catalogRiskLevel.ordinal,
+               catalogRiskLevel.value_text,
+               catalogRiskLevel.value_number,
+               catalogRiskLevel.value_date,
+               catalogRiskLevel.value_boolean,
+               catalogRiskLevel.catalog_type_id,
+               catalogRiskLevel.valid
+           FROM sch_centra_id.CATALOGS catalogRiskLevel WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogRiskLevel">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="predetermined" name="predetermined" xsdType="xs:integer"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="value_text" name="valueText" xsdType="xs:string"/>
+            <element column="value_number" name="valueNumber" xsdType="xs:decimal"/>
+            <element column="value_date" name="valueDate" xsdType="xs:date"/>
+            <element column="value_boolean" name="valueBoolean" xsdType="xs:integer"/>
+              <element name="catalogType">
+                <element column="catalog_type_id" name="id" xsdType="xs:integer"/>
+              </element>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE TemplateProfileMatrixGroup CatalogType 3-->
+    <query id="queryReferenceById__templateProfileMatrix_transactionalProfile_catalogRiskLevel_catalog_catalogType" useConfig="default">
+        <sql>
+           SELECT 
+               catalogType.id,
+               catalogType.code,
+               catalogType.name,
+               catalogType.sort_type,
+               catalogType.editable,
+               catalogType.valid,
+               catalogType.description
+           FROM sch_centra_id.CATALOGS_TYPES catalogType WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogType">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="sort_type" name="sortType" xsdType="xs:string"/>
+            <element column="editable" name="editable" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="description" name="description" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE TemplateProfileMatrixGroup Application 2-->
+    <query id="queryReferenceById__templateProfileMatrix_transactionalProfile_transactionalProfile_application" useConfig="default">
+        <sql>
+           SELECT 
+               application.id,
+               application.code,
+               application.name,
+               application.automatic_provision,
+               application.valid,
+               application.status,
+               application.application_group_id
+           FROM sch_centra_id.APPLICATIONS application WHERE id=? AND valid=1
+        </sql>
+        <result element="application">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="automatic_provision" name="automaticProvision" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="status" name="status" xsdType="xs:string"/>
+              <element name="applicationGroup">
+                <element column="application_group_id" name="id" xsdType="xs:integer"/>
+              </element>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE TemplateProfileMatrixGroup ApplicationGroup 3-->
+    <query id="queryReferenceById__templateProfileMatrix_transactionalProfile_application_application_applicationGroup" useConfig="default">
+        <sql>
+           SELECT 
+               applicationGroup.id,
+               applicationGroup.code,
+               applicationGroup.name,
+               applicationGroup.endpoint_type,
+               applicationGroup.ordinal,
+               applicationGroup.valid
+           FROM sch_centra_id.APPLICATIONS_GROUP applicationGroup WHERE id=? AND valid=1
+        </sql>
+        <result element="applicationGroup">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="endpoint_type" name="endpointType" xsdType="xs:string"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY ONE TO MANY TemplateProfileMatrixGroup GlobalTransactionalProfile 2-->
+    <query id="queryOneToManyByMasterId__templateProfileMatrix_transactionalProfile_transactionalProfile_globalTransactionalProfile" useConfig="default">
+        <sql>
+           SELECT 
+               globalTransactionalProfileList.id,
+               globalTransactionalProfileList.date_created,
+               globalTransactionalProfileList.date_deleted,
+               globalTransactionalProfileList.user_created,
+               globalTransactionalProfileList.user_deleted,
+               globalTransactionalProfileList.valid,
+               globalTransactionalProfileList.global_profile_id,
+               globalTransactionalProfileList.transactional_profile_id
+           FROM sch_centra_id.GLOBAL_TRANSACTIONAL_PROFILES globalTransactionalProfileList WHERE transactional_profile_id=? AND valid=1
+        </sql>
+        <result element="globalTransactionalProfileList" rowName="globalTransactionalProfile">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="date_created" name="dateCreated" xsdType="xs:dateTime"/>
+            <element column="date_deleted" name="dateDeleted" xsdType="xs:dateTime"/>
+            <element column="user_created" name="userCreated" xsdType="xs:string"/>
+            <element column="user_deleted" name="userDeleted" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+              <element name="globalProfile">
+                <element column="global_profile_id" name="id" xsdType="xs:integer"/>
+              </element>
+        </result>
+        <param name="masterId" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE TemplateProfileMatrixGroup GlobalProfile 3-->
+    <query id="queryReferenceById__templateProfileMatrix_transactionalProfile_globalTransactionalProfileList_globalTransactionalProfile_globalProfile" useConfig="default">
+        <sql>
+           SELECT 
+               globalProfile.id,
+               globalProfile.code,
+               globalProfile.name,
+               globalProfile.is_birth,
+               globalProfile.employee_code_owner,
+               globalProfile.catalog_position_owner_id,
+               globalProfile.valid,
+               globalProfile.associated_ticket_number,
+               globalProfile.status,
+               globalProfile.created_date,
+               globalProfile.approval_date,
+               globalProfile.employee_code_approval,
+               globalProfile.observation,
+               globalProfile.scope_rules_who,
+               globalProfile.scope_rules_that
+           FROM sch_centra_id.GLOBAL_PROFILES globalProfile WHERE id=? AND valid=1
+        </sql>
+        <result element="globalProfile">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="is_birth" name="isBirth" xsdType="xs:integer"/>
+            <element column="employee_code_owner" name="employeeCodeOwner" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="associated_ticket_number" name="associatedTicketNumber" xsdType="xs:string"/>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <element column="created_date" name="createdDate" xsdType="xs:dateTime"/>
+            <element column="approval_date" name="approvalDate" xsdType="xs:dateTime"/>
+            <element column="employee_code_approval" name="employeeCodeApproval" xsdType="xs:string"/>
+            <element column="observation" name="observation" xsdType="xs:string"/>
+            <element column="scope_rules_who" name="scopeRulesWho" xsdType="xs:string"/>
+            <element column="scope_rules_that" name="scopeRulesThat" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE TemplateProfileMatrixGroup TransactionalProfile 3-->
+    <query id="queryManyToOneById__templateProfileMatrix_transactionalProfile_globalTransactionalProfileList_globalTransactionalProfile_transactionalProfile" useConfig="default">
+        <sql>
+           SELECT 
+               transactionalProfile.id,
+               transactionalProfile.code,
+               transactionalProfile.name,
+               transactionalProfile.comments,
+               transactionalProfile.date_created,
+               transactionalProfile.date_deleted,
+               transactionalProfile.user_created,
+               transactionalProfile.user_deleted,
+               transactionalProfile.valid,
+               transactionalProfile.catalog_risk_level_id,
+               transactionalProfile.application_id
+           FROM sch_centra_id.TRANSACTIONAL_PROFILES transactionalProfile WHERE id=? AND valid=1
+        </sql>
+        <result element="transactionalProfile">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="comments" name="comments" xsdType="xs:string"/>
+            <element column="date_created" name="dateCreated" xsdType="xs:dateTime"/>
+            <element column="date_deleted" name="dateDeleted" xsdType="xs:dateTime"/>
+            <element column="user_created" name="userCreated" xsdType="xs:string"/>
+            <element column="user_deleted" name="userDeleted" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY ONE TO MANY TemplateProfileMatrixGroup TemplateProfile 2-->
+    <query id="queryOneToManyByMasterId__templateProfileMatrix_transactionalProfile_transactionalProfile_templateProfile" useConfig="default">
+        <sql>
+           SELECT 
+               templateProfileList.id,
+               templateProfileList.transactional_profile_id,
+               templateProfileList.field_id,
+               templateProfileList.field_value,
+               templateProfileList.valid
+           FROM sch_centra_id.TEMPLATE_PROFILES templateProfileList WHERE transactional_profile_id=? AND valid=1
+        </sql>
+        <result element="templateProfileList" rowName="templateProfile">
+            <element column="id" name="id" xsdType="xs:integer"/>
+              <element name="field">
+                <element column="field_id" name="id" xsdType="xs:integer"/>
+              </element>
+            <element column="field_value" name="fieldValue" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="masterId" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE TemplateProfileMatrixGroup Field 3-->
+    <query id="queryReferenceById__templateProfileMatrix_transactionalProfile_templateProfileList_templateProfile_field" useConfig="default">
+        <sql>
+           SELECT 
+               field.id,
+               field.code,
+               field.name,
+               field.predetermined,
+               field.type,
+               field.length,
+               field.required,
+               field.valid,
+               field.application_group_id
+           FROM sch_centra_id.FIELDS field WHERE id=? AND valid=1
+        </sql>
+        <result element="field">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="predetermined" name="predetermined" xsdType="xs:string"/>
+            <element column="type" name="type" xsdType="xs:string"/>
+            <element column="length" name="length" xsdType="xs:integer"/>
+            <element column="required" name="required" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE TemplateProfileMatrixGroup TransactionalProfile 3-->
+    <query id="queryManyToOneById__templateProfileMatrix_transactionalProfile_templateProfileList_templateProfile_transactionalProfile" useConfig="default">
+        <sql>
+           SELECT 
+               transactionalProfile.id,
+               transactionalProfile.code,
+               transactionalProfile.name,
+               transactionalProfile.comments,
+               transactionalProfile.date_created,
+               transactionalProfile.date_deleted,
+               transactionalProfile.user_created,
+               transactionalProfile.user_deleted,
+               transactionalProfile.valid,
+               transactionalProfile.catalog_risk_level_id,
+               transactionalProfile.application_id
+           FROM sch_centra_id.TRANSACTIONAL_PROFILES transactionalProfile WHERE id=? AND valid=1
+        </sql>
+        <result element="transactionalProfile">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="comments" name="comments" xsdType="xs:string"/>
+            <element column="date_created" name="dateCreated" xsdType="xs:dateTime"/>
+            <element column="date_deleted" name="dateDeleted" xsdType="xs:dateTime"/>
+            <element column="user_created" name="userCreated" xsdType="xs:string"/>
+            <element column="user_deleted" name="userDeleted" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY ONE TO MANY TemplateProfileMatrixGroup TemplateProfileMatrix 2-->
+    <query id="queryOneToManyByMasterId__templateProfileMatrix_transactionalProfile_transactionalProfile_templateProfileMatrix" useConfig="default">
+        <sql>
+           SELECT 
+               templateProfileMatrixList.id,
+               templateProfileMatrixList.transactional_profile_id,
+               templateProfileMatrixList.matrix_id,
+               templateProfileMatrixList.valid
+           FROM sch_centra_id.TEMPLATE_PROFILES_MATRICES templateProfileMatrixList WHERE transactional_profile_id=? AND valid=1
+        </sql>
+        <result element="templateProfileMatrixList" rowName="templateProfileMatrix">
+            <element column="id" name="id" xsdType="xs:integer"/>
+              <element name="matrix">
+                <element column="matrix_id" name="id" xsdType="xs:integer"/>
+              </element>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="masterId" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE TemplateProfileMatrixGroup Matrix 3-->
+    <query id="queryReferenceById__templateProfileMatrix_transactionalProfile_templateProfileMatrixList_templateProfileMatrix_matrix" useConfig="default">
+        <sql>
+           SELECT 
+               matrix.id,
+               matrix.code,
+               matrix.name,
+               matrix.quantity,
+               matrix.valid,
+               matrix.application_group_id
+           FROM sch_centra_id.MATRICES matrix WHERE id=? AND valid=1
+        </sql>
+        <result element="matrix">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="quantity" name="quantity" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY ONE TO MANY TemplateProfileMatrixGroup TemplateProfileMatrixGroup 3-->
+    <query id="queryOneToManyByMasterId__templateProfileMatrix_transactionalProfile_templateProfileMatrixList_templateProfileMatrix_templateProfileMatrixGroup" useConfig="default">
+        <sql>
+           SELECT 
+               templateProfileMatrixGroupList.id,
+               templateProfileMatrixGroupList.valid,
+               templateProfileMatrixGroupList.template_profile_matrix_id
+           FROM sch_centra_id.TEMPLATE_PROFILES_MATRICES_GROUP templateProfileMatrixGroupList WHERE template_profile_matrix_id=? AND valid=1
+        </sql>
+        <result element="templateProfileMatrixGroupList" rowName="templateProfileMatrixGroup">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="masterId" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE TemplateProfileMatrixGroup TransactionalProfile 3-->
+    <query id="queryManyToOneById__templateProfileMatrix_transactionalProfile_templateProfileMatrixList_templateProfileMatrix_transactionalProfile" useConfig="default">
+        <sql>
+           SELECT 
+               transactionalProfile.id,
+               transactionalProfile.code,
+               transactionalProfile.name,
+               transactionalProfile.comments,
+               transactionalProfile.date_created,
+               transactionalProfile.date_deleted,
+               transactionalProfile.user_created,
+               transactionalProfile.user_deleted,
+               transactionalProfile.valid,
+               transactionalProfile.catalog_risk_level_id,
+               transactionalProfile.application_id
+           FROM sch_centra_id.TRANSACTIONAL_PROFILES transactionalProfile WHERE id=? AND valid=1
+        </sql>
+        <result element="transactionalProfile">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="comments" name="comments" xsdType="xs:string"/>
+            <element column="date_created" name="dateCreated" xsdType="xs:dateTime"/>
+            <element column="date_deleted" name="dateDeleted" xsdType="xs:dateTime"/>
+            <element column="user_created" name="userCreated" xsdType="xs:string"/>
+            <element column="user_deleted" name="userDeleted" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- OPERATIONS -->
+    <operation name="listAllOperation_templateProfileMatrixGroup">
+        <call-query href="dynamicQuery_templateProfileMatrixGroup">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="fromToOperation_templateProfileMatrixGroup">
+        <call-query href="dynamicQuery_templateProfileMatrixGroup">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="functionOperation_templateProfileMatrixGroup">
+        <call-query href="dynamicQueryFunction_templateProfileMatrixGroup">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="deleteOperation_templateProfileMatrixGroup">
+        <call-query href="dynamicDeleteQuery_templateProfileMatrixGroup">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </operation>
+    <operation name="create_templateProfileMatrixGroup">
+        <call-query href="insertQuery_templateProfileMatrixGroup">
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="templateProfileMatrixId" query-param="templateProfileMatrixId"/>
+        </call-query>
+    </operation>
+    <operation name="update_templateProfileMatrixGroup">
+        <call-query href="updateQuery_templateProfileMatrixGroup">
+            <with-param name="templateProfileMatrixId" query-param="templateProfileMatrixId"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <!-- RESOURCES -->
+    <resource method="GET" path="GetAllTemplateProfileMatrixGroup">
+        <call-query href="dynamicQuery_templateProfileMatrixGroup">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFromToTemplateProfileMatrixGroup">
+        <call-query href="dynamicQuery_templateProfileMatrixGroup">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFunctionResultTemplateProfileMatrixGroup">
+        <call-query href="dynamicQueryFunction_templateProfileMatrixGroup">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="DeleteTemplateProfileMatrixGroup">
+        <call-query href="dynamicDeleteQuery_templateProfileMatrixGroup">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="CreateTemplateProfileMatrixGroup">
+        <call-query href="insertQuery_templateProfileMatrixGroup">
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="templateProfileMatrixId" query-param="templateProfileMatrixId"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="UpdateTemplateProfileMatrixGroup">
+        <call-query href="updateQuery_templateProfileMatrixGroup">
+            <with-param name="templateProfileMatrixId" query-param="templateProfileMatrixId"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+</data>

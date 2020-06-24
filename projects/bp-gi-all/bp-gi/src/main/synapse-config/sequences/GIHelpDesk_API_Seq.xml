@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GIHelpDesk_API_Seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log description="seq" level="custom">
+        <property name="seq" value="-------------------- GIHelpDesk_API_Seq --------------------"/>
+    </log>
+    <property description="Authorization" expression="fn:concat('Basic ', base64Encode(fn:concat(get-property('HP_USER'),':',get-property('HP_PASSWORD'))))" name="Authorization" scope="transport" type="STRING" xmlns:ns="http://org.apache.synapse/xsd"/>
+    <property description="messageType" name="messageType" scope="axis2" type="STRING" value="text/xml"/>
+    <property description="ContentType" name="ContentType" scope="axis2" type="STRING" value="text/xml"/>
+    <call>
+        <endpoint key="GIIncidentes_EP"/>
+    </call>
+    <log description="Incident Response" level="full"/>
+</sequence>

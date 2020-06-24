@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="MigrationMassiveProcessUsersSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="MigrationMassiveProcessUsersSeq" value="Inicio..." />
+        <property name="file" expression="$ctx:file" />
+    </log>
+    <sequence key="MassiveProcessUsersVariablesLoadSeq" />
+    <!-- Iterar datos de cada emleado -->
+    <property name="fullName" expression="fn:concat('gov:/centra-id/xml/',$ctx:file)" />
+    <property expression="get-property('registry',$ctx:fullName)" name="xmlFile" scope="default" type="OM" />
+    <enrich>
+        <source clone="false" property="xmlFile" type="property" />
+        <target type="body" />
+    </enrich>
+    <property expression="count(//empleados)" name="count" scope="default" type="STRING" />
+    <filter regex="true" source="$ctx:count=0">
+        <then>
+            <payloadFactory media-type="xml">
+                <format>
+                    <resultado>
+                    No hay datos
+                </resultado>
+                </format>
+                <args />
+            </payloadFactory>
+        </then>
+        <else>
+            <foreach expression="//empleados">
+                <sequence>
+                    <store messageStore="MigrationStore" />
+                </sequence>
+            </foreach>
+            <payloadFactory media-type="xml">
+                <format>
+                    <resultado>
+                        Enviado a procesar...
+                    </resultado>
+                </format>
+                <args />
+            </payloadFactory>
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="MigrationMassiveProcessUsersSeq" value="Fin...." />
+    </log>
+</sequence>

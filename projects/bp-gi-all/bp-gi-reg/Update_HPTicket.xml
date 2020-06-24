@@ -1,0 +1,9 @@
+<p:Update_HPTicket xmlns:p="http://ws.wso2.org/dataservice">
+	<p:Guid>$1</p:Guid>
+	<p:Estado>$2</p:Estado>
+	<p:HPTicketNumero>$3</p:HPTicketNumero>
+	<p:HPTicketContenido>$4</p:HPTicketContenido>
+	<p:HPTicketFechaRespuesta>$5</p:HPTicketFechaRespuesta>
+	<p:HPTicketEstado>$6</p:HPTicketEstado>
+	<p:HPTicketLogs>$7</p:HPTicketLogs>
+</p:Update_HPTicket>

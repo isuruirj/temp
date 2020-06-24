@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GIUpdateRoleListOfUser_Seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log description="seq" level="custom">
+        <property name="Seq" value="---------- GIUpdateRoleListOfUser_Seq ---------- "/>
+    </log>
+    <header name="SOAPAction" scope="transport" value="urn:updateRoleListOfUser"/>
+    <property description="Authorization" expression="fn:concat('Basic ', base64Encode(fn:concat(get-property('IS_SCIM_USER'),':',get-property('IS_SCIM_USER_PASSWORD'))))" name="Authorization" scope="transport" type="STRING" xmlns:ns="http://org.apache.synapse/xsd"/>
+    <property description="HTTP_METHOD:POST" name="HTTP_METHOD" scope="axis2" type="STRING" value="POST"/>
+    <property description="uri.var.host" expression="fn:concat(get-property('IDENTITY_SERVER_HOST'), '/services/RemoteUserStoreManagerService')" name="uri.var.host" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd"/>
+    <property description="messageType" name="messageType" scope="axis2" type="STRING" value="text/xml"/>
+    <property description="ContentType" name="ContentType" scope="axis2" type="STRING" value="text/xml"/>
+    <log description="Request Payload" level="custom">
+        <property expression="get-property('uri.var.host')" name="uri.var.host"/>
+        <property expression="get-property('transport','Authorization')" name="Authorization"/>
+        <property expression="$env" name="payload"/>
+    </log>
+    <call>
+        <endpoint key="GIRHDS_IS_EP"/>
+    </call>
+</sequence>

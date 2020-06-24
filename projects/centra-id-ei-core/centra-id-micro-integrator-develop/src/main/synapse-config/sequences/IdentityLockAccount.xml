@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="IdentityLockAccount" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse" xmlns:ns="http://org.apache.axis2/xsd" xmlns:ax2764="http://common.mgt.user.carbon.wso2.org/xsd">
+    <log level="custom" category="DEBUG">
+        <property name="IdentityLockAccount" value="Inicio..." />
+        <property name="userId" expression="get-property('uri.var.userId')" />
+    </log>
+    <log level="custom" category="DEBUG">
+        <property name="EntityUserDataIdentityUpdateSeq" value="Fin..." />
+    </log>
+</sequence>

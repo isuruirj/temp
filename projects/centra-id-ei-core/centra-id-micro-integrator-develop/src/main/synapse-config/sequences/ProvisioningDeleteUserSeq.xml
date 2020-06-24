@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ProvisioningDeleteUserSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningDeleteUserSeq" value="Inicio.." />
+    </log>
+    <property name="taskProvisioningCreate" expression="$body//*" scope="default" type="OM" />
+    <property name="uri.var.username" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/username" />
+    <!-- Consultar Application -->
+    <sequence key="ProvisioningConfigureApplicationSeq" />
+    <!-- Consultar Teller No -->
+    <sequence key="ProvisioningConfigureTellerNumberSeq" />
+    <payloadFactory media-type="xml">
+        <format>
+            <tem:eliminarUsuario xmlns:tem="http://tempuri.org/">
+                <tem:guid>$1</tem:guid>
+                <tem:uuid>$2</tem:uuid>
+                <tem:aplicacion>$3</tem:aplicacion>
+                <tem:tellerName>$4</tem:tellerName>
+                <tem:tellerNumber>$5</tem:tellerNumber>
+                <tem:ipcliente>$6</tem:ipcliente>
+                <tem:usuarioAplicacion>$7</tem:usuarioAplicacion>
+                <tem:especificos>
+                    <!--Only for AD-->
+                    <tem:mailbox>1</tem:mailbox>
+                </tem:especificos>
+            </tem:eliminarUsuario>
+        </format>
+        <args>
+            <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/guid/text()" />
+            <arg evaluator="xml" expression="$ctx:taskProvisioningDelete//uuid/text()" />
+            <arg evaluator="xml" expression="$ctx:application//applicationList/application/applicationGroup/code/text()" />
+            <arg evaluator="xml" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/username/text()" />
+            <arg evaluator="xml" expression="$ctx:restUserStoreScim//tellerNumber/text()" />
+            <!-- Ip client + Username -->
+            <arg evaluator="xml" expression="$ctx:X-Forwarded-For" />
+            <arg evaluator="xml" expression="$ctx:UserName" />
+        </args>
+    </payloadFactory>
+    <property name="target.endpoint" value="ProvisioningEP" />
+    <header name="Action" value="http://tempuri.org/eliminarUsuario" />
+    <property name="SOAPAction" scope="transport" value="http://tempuri.org/eliminarUsuario" />
+    <store messageStore="ProvisioningStore" />
+    <!-- actualizar xml -->
+    <property name="input" expression="$body/*[1]" scope="default" />
+    <property name="uuid" expression="$ctx:taskProvisioningDelete//uuid/text()" />
+    <call-template target="UpdateDataInputTemplate">
+        <with-param name="type" value="Q" />
+        <with-param name="input" value="{get-property('input')}" />
+        <with-param name="uuid" value="{get-property('uuid')}" />
+    </call-template>
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningDeleteUserSeq" value="Fin.." />
+    </log>
+</sequence>

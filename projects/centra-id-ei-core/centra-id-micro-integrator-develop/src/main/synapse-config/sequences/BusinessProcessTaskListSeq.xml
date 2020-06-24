@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="BusinessProcessTaskListSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="BusinessProcessTaskListSeq" value="Inicio..." />
+        <property name="emailAddress" expression="$ctx:query.param.emailAddress" />
+    </log>
+    <!-- Recuperar duracion de tramites en dias-->
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <filter regex="true" source="boolean($ctx:query.param.emailAddress)">
+        <then>
+            <!-- filtrar por mail -->
+            <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="BPS_SERVER_USER_DATO" expression="synapse:get-property('BPS_SERVER_USER')" scope="default" />
+            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="BPS_SERVER_PASSWORD_DATO" expression="synapse:get-property('BPS_SERVER_PASSWORD')" scope="default" />
+            <property xmlns:ns="http://org.apache.synapse/xsd" name="Authorization" expression="fn:concat('Basic ', base64Encode(fn:concat($ctx:BPS_SERVER_USER_DATO,':',$ctx:BPS_SERVER_PASSWORD_DATO)))" scope="transport" />
+            <property name="uri.var.url" expression="fn:concat(get-property('uri.var.bussinesProcessServiceHost'),'/bpmn/runtime/tasks?includeProcessVariables=true&amp;size=10000')" />
+            <call>
+                <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.url}" />
+            </call>
+            <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                <then>
+                    <xslt key="gov:/centra-id/xslt/jsonToXml.xsl" />
+                    <property name="messageType" scope="axis2" value="application/xml" />
+                    <property name="findData" expression="fn:concat('//data[variables[name=','&quot;','emailAddress','&quot;',' and value=','&quot;',$ctx:query.param.emailAddress,'&quot;',']]')" />
+                    <filter regex="true" source="boolean(evaluate($ctx:findData))">
+                        <then>
+                            <payloadFactory media-type="json">
+                                <format>
+                                    {
+                                        "data" : { 
+                                            "taskId":1
+                                        }
+                                       
+                                    }
+                                </format>
+                                <args />
+                            </payloadFactory>
+                        </then>
+                        <else>
+                            <payloadFactory media-type="json">
+                                <format>
+                                    {
+                                        "data" : null
+                                    }
+                                </format>
+                                <args />
+                            </payloadFactory>
+                        </else>
+                    </filter>
+                </then>
+                <else>
+                    <property name="fault" value="error when consulting tasks " />
+                    <sequence key="FaultSeq" />
+                </else>
+            </filter>
+        </then>
+        <else>
+            <call>
+                <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/common/GlobalParameter?code=DURTRA" />
+            </call>
+            <property name="duration" expression="//globalParameter/valueNumber" scope="default" type="STRING" />
+            <!-- Consultas tareas -->
+            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="BPS_SERVER_USER_DATO" expression="synapse:get-property('BPS_SERVER_USER')" scope="default" />
+            <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="BPS_SERVER_PASSWORD_DATO" expression="synapse:get-property('BPS_SERVER_PASSWORD')" scope="default" />
+            <property xmlns:ns="http://org.apache.synapse/xsd" name="Authorization" expression="fn:concat('Basic ', base64Encode(fn:concat($ctx:BPS_SERVER_USER_DATO,':',$ctx:BPS_SERVER_PASSWORD_DATO)))" scope="transport" />
+            <property name="uri.var.url" expression="fn:concat(get-property('uri.var.bussinesProcessServiceHost'),'/bpmn/runtime/tasks','?sort=createTime&amp;size=1000')" />
+            <!-- Agregar filtros -->
+            <property expression="$ctx:query.param.assignee" name="assignee" scope="default" type="STRING" />
+            <filter regex="true" source="boolean(get-property('assignee'))">
+                <then>
+                    <property name="uri.var.url" expression="fn:concat(get-property('uri.var.url'),'&amp;assignee=', $ctx:UserName)" />
+                </then>
+            </filter>
+            <property expression="$ctx:query.param.identification" name="identification" scope="default" type="STRING" />
+            <filter regex="true" source="boolean(get-property('identification'))">
+                <then>
+                    <property name="uri.var.url" expression="fn:concat(get-property('uri.var.url'),'&amp;processInstanceBusinessKey=',get-property('identification'))" />
+                </then>
+            </filter>
+            <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+            <call>
+                <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.url}" />
+            </call>
+            <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                <then>
+                    <property name="jsonResultStart" expression="json-eval($.start)" scope="default" type="INTEGER" />
+                    <property name="jsonResultTotal" expression="json-eval($.total)" scope="default" type="INTEGER" />
+                    <property name="jsonResultOrder" expression="json-eval($.order)" scope="default" type="STRING" />
+                    <property name="jsonResultSort" expression="json-eval($.sort)" scope="default" type="STRING" />
+                    <property name="jsonResultSize" expression="json-eval($.size)" scope="default" type="INTEGER" />
+                    <filter regex="^[1-9][0-9]*$" source="get-property('jsonResultTotal')">
+                        <then>
+                            <iterate expression="//data" sequential="true" id="tasksId">
+                                <target>
+                                    <sequence>
+                                        <property name="uri.var.id" expression="//processInstanceId" scope="default" />
+                                        <property name="taskId" expression="//id" scope="default" />
+                                        <property name="taskNumber" expression="//id" scope="default" />
+                                        <property name="taskCreationDate" expression="//createTime" scope="default" />
+                                        <property name="taskName" expression="//processDefinitionId" scope="default" />
+                                        <property name="taskDefinition" expression="//taskDefinitionKey" scope="default" />
+                                        <property name="taskPriority" expression="//priority" scope="default" />
+                                        <property name="taskStatus" expression="//name" scope="default" />
+                                        <script language="nashornJs">
+                                            <![CDATA[
+                                            var duration = mc.getProperty("duration") * 24 * 60 * 60 * 1000;
+                                            var creationDate = mc.getProperty("taskCreationDate");
+                                            var endDate =  parseInt(creationDate) +  parseInt(duration);
+                                            mc.setProperty("taskEndDate",endDate);
+                                            ]]>
+                                        </script>
+                                        <filter regex="true" source="(//owner!='')">
+                                            <then>
+                                                <property name="taskOwner" expression="//owner" scope="default" />
+                                            </then>
+                                            <else>
+                                                <property name="taskOwner" value="" scope="default" />
+                                            </else>
+                                        </filter>
+                                        <filter regex="true" source="(//formKey!='')">
+                                            <then>
+                                                <property name="taskForm" expression="//formKey" scope="default" />
+                                            </then>
+                                            <else>
+                                                <property name="taskForm" value="" scope="default" />
+                                            </else>
+                                        </filter>
+                                        <property xmlns:ns="http://org.apache.synapse/xsd" name="Authorization" expression="fn:concat('Basic ', base64Encode(fn:concat($ctx:BPS_SERVER_USER_DATO,':',$ctx:BPS_SERVER_PASSWORD_DATO)))" scope="transport" />
+                                        <call>
+                                            <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.bussinesProcessServiceHost}/bpmn/runtime/process-instances/{uri.var.id}" />
+                                        </call>
+                                        <property name="typeUser" expression="//variables[name='userTypeName']/value/text()" scope="default" />
+                                        <property name="subtypeUser" expression="//variables[name='userSubtypeName']/value/text()" scope="default" />
+                                        <property name="company" expression="//variables[name='companyName']/value/text()" scope="default" />
+                                        <property name="names" expression="//variables[name='names']/value/text()" scope="default" />
+                                        <property name="costCenter" expression="//variables[name='costCenterName']/value/text()" scope="default" />
+                                        <property name="type" expression="//variables[name='type']/value/text()" scope="default" />
+                                        <payloadFactory media-type="json">
+                                            <format>
+                                                {
+                                                    "taskId":$1,
+                                                    "taskNumber":"$2",
+                                                    "taskCreationDate":$3,
+                                                    "taskEndDate": $4,
+                                                    "taskName":"$5",
+                                                    "taskDefinition":"$6",
+                                                    "taskOwner":"",
+                                                    "taskPriority":$8,
+                                                    "taskForm":"$9",
+                                                    "typeUser":"$10",
+                                                    "subtypeUser":"$11",
+                                                    "company":"$12",
+                                                    "names":"$13",
+                                                    "taskStatus":"$14",
+                                                    "costCenter" : "$15",
+                                                    "instanceId":"$16"
+                                                }
+                                            </format>
+                                            <args>
+                                                <arg evaluator="xml" expression="get-property('taskId')" />
+                                                <arg evaluator="xml" expression="get-property('taskNumber')" />
+                                                <arg evaluator="xml" expression="get-property('taskCreationDate')" />
+                                                <arg evaluator="xml" expression="get-property('taskEndDate')" />
+                                                <arg evaluator="xml" expression="get-property('type')" />
+                                                <arg evaluator="xml" expression="get-property('taskDefinition')" />
+                                                <arg evaluator="xml" expression="get-property('taskOwner')" />
+                                                <arg evaluator="xml" expression="get-property('taskPriority')" />
+                                                <arg evaluator="xml" expression="get-property('taskForm')" />
+                                                <arg evaluator="xml" expression="get-property('typeUser')" />
+                                                <arg evaluator="xml" expression="get-property('subtypeUser')" />
+                                                <arg evaluator="xml" expression="get-property('company')" />
+                                                <arg evaluator="xml" expression="get-property('names')" />
+                                                <arg evaluator="xml" expression="get-property('taskStatus')" />
+                                                <arg evaluator="xml" expression="get-property('costCenter')" />
+                                                <arg evaluator="xml" expression="get-property('uri.var.id')" />
+                                            </args>
+                                        </payloadFactory>
+                                    </sequence>
+                                </target>
+                            </iterate>
+                            <property name="data" scope="default">
+                                <data />
+                            </property>
+                            <aggregate id="tasksId">
+                                <completeCondition>
+                                    <messageCount min="-1" max="-1" />
+                                </completeCondition>
+                                <onComplete expression="$body/*[1]" enclosingElementProperty="data">
+                                    <log level="full" category="INFO">
+                                        <property name="agregado" value="ok" />
+                                    </log>
+                                </onComplete>
+                            </aggregate>
+                        </then>
+                        <else>
+                            <payloadFactory media-type="json">
+                                <format>
+                                    {
+                                        "data" : null
+                                    }
+                        </format>
+                                <args />
+                            </payloadFactory>
+                        </else>
+                    </filter>
+                    <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+                    <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+                </then>
+                <else>
+                    <property name="fault" value="error when consulting tasks " />
+                    <sequence key="FaultSeq" />
+                </else>
+            </filter>
+        </else>
+    </filter>
+    <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+    <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+    <log level="custom" category="DEBUG">
+        <property name="BusinessProcessTaskListSeq" value="Fin..." />
+    </log>
+</sequence>

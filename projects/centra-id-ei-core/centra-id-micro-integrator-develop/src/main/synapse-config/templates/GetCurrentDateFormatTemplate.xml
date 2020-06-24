@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template name="GetCurrentDateFormatTemplate" xmlns="http://ws.apache.org/ns/synapse">
+    <sequence>
+        <property name="dayOfWeek" expression="get-property('SYSTEM_DATE', 'u')" scope="default" />
+        <property name="dayOfMonth" expression="get-property('SYSTEM_DATE', 'dd')" scope="default" />
+        <property name="month" expression="get-property('SYSTEM_DATE', 'MM')" scope="default" />
+        <property name="year" expression="get-property('SYSTEM_DATE', 'yyyy')" scope="default" />
+        <property name="time" expression="get-property('SYSTEM_DATE', 'HH:mm:ss')" scope="default" />
+        <switch source="$ctx:dayOfWeek">
+            <case regex="1">
+                <property name="dayOfWeekName" value="lunes" />
+            </case>
+            <case regex="2">
+                <property name="dayOfWeekName" value="martes" />
+            </case>
+            <case regex="3">
+                <property name="dayOfWeekName" value="miércoles" />
+            </case>
+            <case regex="4">
+                <property name="dayOfWeekName" value="jueves" />
+            </case>
+            <case regex="5">
+                <property name="dayOfWeekName" value="viernes" />
+            </case>
+            <case regex="6">
+                <property name="dayOfWeekName" value="sábado" />
+            </case>
+            <case regex="7">
+                <property name="dayOfWeekName" value="domingo" />
+            </case>
+            <default>
+                <property name="dayOfWeekName" value="*******" />
+            </default>
+        </switch>
+        <switch source="$ctx:month">
+            <case regex="01">
+                <property name="monthName" value="enero" />
+            </case>
+            <case regex="02">
+                <property name="monthName" value="febrero" />
+            </case>
+            <case regex="03">
+                <property name="monthName" value="marzo" />
+            </case>
+            <case regex="04">
+                <property name="monthName" value="abril" />
+            </case>
+            <case regex="05">
+                <property name="monthName" value="mayo" />
+            </case>
+            <case regex="06">
+                <property name="monthName" value="junio" />
+            </case>
+            <case regex="07">
+                <property name="monthName" value="julio" />
+            </case>
+            <case regex="08">
+                <property name="monthName" value="agosto" />
+            </case>
+            <case regex="09">
+                <property name="monthName" value="septiembre" />
+            </case>
+            <case regex="10">
+                <property name="monthName" value="octubre" />
+            </case>
+            <case regex="11">
+                <property name="monthName" value="noviembre" />
+            </case>
+            <case regex="12">
+                <property name="monthName" value="diciembre" />
+            </case>
+            <default>
+                <property name="monthName" expression="fn:concat('*** ',$ctx:month,' ***')" />
+            </default>
+        </switch>
+        <property name="currentDate" expression="fn:concat($ctx:dayOfWeekName,', ',$ctx:dayOfMonth,' de ',$ctx:monthName,' de ',$ctx:year,' ',$ctx:time)" />
+    </sequence>
+</template>

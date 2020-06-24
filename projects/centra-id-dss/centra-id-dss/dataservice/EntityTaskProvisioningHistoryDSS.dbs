@@ -1,0 +1,203 @@
+<data name="provisioning.task-provisioning-history.ds"
+    serviceNamespace="centra-id.com"
+    enableBatchRequests="false"
+    enableBoxcarring="false"
+    transports="https"
+    disableLegacyBoxcarringMode="true">
+
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <!-- DYNAMIC QUERY TASKPROVISIONINGHISTORY -->
+    <query id="dynamicQuery_taskProvisioningHistory" useConfig="default">
+        <sql>
+           SELECT
+               taskProvisioningHistory.id,
+               taskProvisioningHistory.task_provisioning_id,
+               taskProvisioningHistory.status,
+               taskProvisioningHistory.creation_date,
+               taskProvisioningHistory.valid,
+               taskProvisioningHistory.retry_number,
+               taskProvisioningHistory.retry_date
+           FROM sch_centra_id.TAKS_PROVISIONING_HISTORY taskProvisioningHistory :innerjoinclause :whereclause ORDER BY :orderby :fromto
+        </sql>
+        <result element="taskProvisioningHistoryList" rowName="taskProvisioningHistory">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="task_provisioning_id" name="taskProvisioningId" xsdType="xs:integer"/>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <element column="creation_date" name="creationDate" xsdType="xs:date"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="retry_number" name="retryNumber" xsdType="xs:integer"/>
+            <element column="retry_date" name="retryDate" xsdType="xs:date"/>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="fromto" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- INSERT TaskProvisioningHistory -->
+    <query id="insertQuery_taskProvisioningHistory" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>
+           INSERT INTO sch_centra_id.TAKS_PROVISIONING_HISTORY(
+               task_provisioning_id,
+               status,
+               creation_date,
+               valid,
+               retry_number,
+               retry_date
+        ) VALUES(?,?,?,?,?,?)
+        </sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="taskProvisioningId" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+        <param name="status" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="A"/>
+        <param name="creationDate" ordinal="3" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="valid" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="1"/>
+        <param name="retryNumber" ordinal="5" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="retryDate" ordinal="6" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+    </query>
+    <!-- UPDATE TaskProvisioningHistory -->
+    <query id="updateQuery_taskProvisioningHistory" useConfig="default">
+        <sql>
+           UPDATE sch_centra_id.TAKS_PROVISIONING_HISTORY SET
+               task_provisioning_id=?,
+               status=?,
+               creation_date=?,
+               retry_number=?,
+               retry_date=?
+            WHERE id=?
+        </sql>
+        <param name="taskProvisioningId" ordinal="1" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+        <param name="status" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="A"/>
+        <param name="creationDate" ordinal="3" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="retryNumber" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="retryDate" ordinal="5" paramType="SCALAR" sqlType="TIMESTAMP" type="IN" defaultValue="#{NULL}"/>
+        <param name="id" ordinal="6" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <!-- DYNAMIC FUNCTION  -->
+    <query id="dynamicQueryFunction_taskProvisioningHistory" useConfig="default">
+        <sql>
+           SELECT :function(:field) as value FROM :table :innerjoinclause :whereclause
+         </sql>
+        <result element="result">
+            <element column="value" name="value" xsdType="xs:long"/>
+        </result>
+        <param name="function" sqlType="QUERY_STRING"/>
+        <param name="field" sqlType="QUERY_STRING"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DELETE  -->
+    <query id="dynamicDeleteQuery_taskProvisioningHistory" useConfig="default">
+        <sql>UPDATE :table SET :set WHERE id=:id</sql>
+        <param name="id" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="set" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- OPERATIONS -->
+    <operation name="listAllOperation_taskProvisioningHistory">
+        <call-query href="dynamicQuery_taskProvisioningHistory">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="fromToOperation_taskProvisioningHistory">
+        <call-query href="dynamicQuery_taskProvisioningHistory">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="functionOperation_taskProvisioningHistory">
+        <call-query href="dynamicQueryFunction_taskProvisioningHistory">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="deleteOperation_taskProvisioningHistory">
+        <call-query href="dynamicDeleteQuery_taskProvisioningHistory">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </operation>
+    <operation name="create_taskProvisioningHistory">
+        <call-query href="insertQuery_taskProvisioningHistory">
+            <with-param name="taskProvisioningId" query-param="taskProvisioningId"/>
+            <with-param name="status" query-param="status"/>
+            <with-param name="creationDate" query-param="creationDate"/>
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="retryNumber" query-param="retryNumber"/>
+            <with-param name="retryDate" query-param="retryDate"/>
+        </call-query>
+    </operation>
+    <operation name="update_taskProvisioningHistory">
+        <call-query href="updateQuery_taskProvisioningHistory">
+            <with-param name="taskProvisioningId" query-param="taskProvisioningId"/>
+            <with-param name="status" query-param="status"/>
+            <with-param name="creationDate" query-param="creationDate"/>
+            <with-param name="retryNumber" query-param="retryNumber"/>
+            <with-param name="retryDate" query-param="retryDate"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <!-- RESOURCES -->
+    <resource method="GET" path="GetAllTaskProvisioningHistory">
+        <call-query href="dynamicQuery_taskProvisioningHistory">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFromToTaskProvisioningHistory">
+        <call-query href="dynamicQuery_taskProvisioningHistory">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFunctionResultTaskProvisioningHistory">
+        <call-query href="dynamicQueryFunction_taskProvisioningHistory">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="DeleteTaskProvisioningHistory">
+        <call-query href="dynamicDeleteQuery_taskProvisioningHistory">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="CreateTaskProvisioningHistory">
+        <call-query href="insertQuery_taskProvisioningHistory">
+            <with-param name="taskProvisioningId" query-param="taskProvisioningId"/>
+            <with-param name="status" query-param="status"/>
+            <with-param name="creationDate" query-param="creationDate"/>
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="retryNumber" query-param="retryNumber"/>
+            <with-param name="retryDate" query-param="retryDate"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="UpdateTaskProvisioningHistory">
+        <call-query href="updateQuery_taskProvisioningHistory">
+            <with-param name="taskProvisioningId" query-param="taskProvisioningId"/>
+            <with-param name="status" query-param="status"/>
+            <with-param name="creationDate" query-param="creationDate"/>
+            <with-param name="retryNumber" query-param="retryNumber"/>
+            <with-param name="retryDate" query-param="retryDate"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+</data>

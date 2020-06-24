@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="CalculateScopeRuleWhoSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="CalculateScopeRuleWhoSeq" value="Inicio..." />
+        <property name="UserName" expression="$ctx:UserName" />
+    </log>
+    <!--sequence key="GetUserSeq" /-->
+    <property name="uri.var.username" expression="$ctx:UserName" />
+    <filter regex="true" source="boolean($ctx:uri.var.username)">
+        <then>
+            <call>
+                <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/UserDataSimple/0/1?username={uri.var.username}&amp;employeeStatus=ACTIVO" />
+            </call>
+            <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                <then>
+                    <property name="userdata" expression="$body//*" scope="default" type="OM" />
+                    <property name="uri.var.globalProfileId" expression="$ctx:userdata//globalProfileId" />
+                    <filter regex="true" source="boolean($ctx:uri.var.globalProfileId)">
+                        <then>
+                            <call>
+                                <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/GlobalProfile/{uri.var.globalProfileId}" />
+                            </call>
+                            <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                                <then>
+                                    <property name="globalProfile" expression="$body//*" scope="default" type="OM" />
+                                </then>
+                                <else>
+                                    <property name="whereRule" value=" AND userData.username='XXXXX'" />
+                                </else>
+                            </filter>
+                        </then>
+                    </filter>
+                </then>
+                <else>
+                    <property name="whereRule" value=" AND userData.username='XXXXX'" />
+                </else>
+            </filter>
+            <filter regex="true" source="boolean($ctx:userdata//id/text()) and boolean($ctx:globalProfile//id/text())">
+                <then>
+                    <!-- Buscar la regla quien -->
+                    <property name="rule" expression="$ctx:globalProfile//scopeRulesWho/text()" />
+                    <filter regex="true" source="boolean($ctx:rule)">
+                        <then>
+                            <script language="js">
+                                <![CDATA[
+                                        var log = mc.getServiceLog();       
+                                        var where = " AND  (";
+                                        var rule = eval(mc.getProperty("rule"));
+                                        var jsonObject = JSON.parse(rule);
+                                        for (i = 0; i < jsonObject.length; ++i) {
+                                            var obj = jsonObject[i];
+                                            log.debug('obj:'+obj.type);
+                                            if(obj.type=='Operador'){
+                                                where += " " + obj.data + " ";
+                                            } else if(obj.type=='Compania'){
+                                                where += " company.code='"+obj.code+"'";
+                                            } else if(obj.type=='Division'){
+                                                where += " catalogDivision.code='"+obj.code+"'";
+                                            } else if(obj.type=='Area'){
+                                                where += " catalogArea.code='"+obj.code+"'";
+                                            } else if(obj.type=='Departamento'){
+                                                where += " catalogDepartment.code='"+obj.code+"'";
+                                            } else if(obj.type=='Cargo'){
+                                                where += " catalogPosition.code='"+obj.code+"'";
+                                            } else if(obj.type=='Tipo Usuario'){
+                                                where += " typeUser.code='"+obj.code+"'";
+                                            } else if(obj.type=='Subtipo Usuario'){
+                                                where += " subtypeUser.code='"+obj.code+"'";
+                                            } else if(obj.type=='Usuario'){
+                                                where += " userData.username='"+obj.data+"'";
+                                            } 
+                                        }
+                                        where += ")";
+                                        mc.setProperty('whereRule',eval(where).toString());
+                                        log.debug('where:'+mc.getProperty('whereRule'));
+                                    ]]>
+                            </script>
+                        </then>
+                        <else>
+                            <!-- incluir condicion para que no retorne ningun usuario ya que no existe regla -->
+                            <property name="whereRule" value=" AND userData.username='XXXXX'" />
+                        </else>
+                    </filter>
+                </then>
+                <else>
+                    <property name="whereRule" value=" AND userData.username='XXXXX'" />
+                </else>
+            </filter>
+        </then>
+        <else>
+            <property name="whereRule" value=" AND userData.username='XXXXX'" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="CalculateScopeRuleTemplate" value="Fin..." />
+    </log>
+</sequence>

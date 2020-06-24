@@ -1,0 +1,112 @@
+<data name="ApplicationsDSS" serviceNamespace="centra-id.com" transports="https">
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <query id="select_all_applications_query" useConfig="default">
+        <sql>SELECT id, code, name, automatic_provisioning, automatic_profiles, created FROM sch_centra_id.applications WHERE valid=1</sql>
+        <result element="Applications" rowName="Application">
+            <element column="id" name="id" xsdType="xs:long"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="automatic_provisioning" name="automaticProvisioning" xsdType="xs:integer"/>
+            <element column="automatic_profiles" name="automaticProfiles" xsdType="xs:integer"/>
+            <element column="created" name="created" xsdType="xs:dateTime"/>
+        </result>
+    </query>
+    <query id="update_applications_query" useConfig="default">
+        <sql>UPDATE sch_centra_id.applications SET code=?,name=?,automatic_provisioning=?,automatic_profiles=? WHERE id=? AND valid=1</sql>
+        <param name="code" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="name" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="automaticProvisioning" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+        <param name="automaticProfiles" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+        <param name="id" ordinal="5" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <query id="delete_applications_query" useConfig="default">
+        <sql>UPDATE sch_centra_id.applications SET valid=0 WHERE id=?</sql>
+        <param name="id" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <query id="select_with_key_applications_query" useConfig="default">
+        <sql>SELECT id, code, name, automatic_provisioning, automatic_profiles, created FROM sch_centra_id.applications WHERE id=? AND valid=1</sql>
+        <param name="id" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <result element="Applications" rowName="Application">
+            <element column="id" name="id" xsdType="xs:long"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="automatic_provisioning" name="automaticProvisioning" xsdType="xs:integer"/>
+            <element column="automatic_profiles" name="automaticProfiles" xsdType="xs:integer"/>
+            <element column="created" name="created" xsdType="xs:dateTime"/>
+        </result>
+    </query>
+    <query id="insert_applications_query" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>INSERT INTO sch_centra_id.applications(code,name,automatic_provisioning,automatic_profiles,created,valid) VALUES(?,?,?,?,getdate(),?)</sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="code" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="name" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="automaticProvisioning" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+        <param name="automaticProfiles" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+        <param defaultValue="1" name="valid" ordinal="5" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+    </query>
+    <operation name="update_applications_operation">
+        <call-query href="update_applications_query">
+            <with-param name="code" query-param="code"/>
+            <with-param name="automaticProvisioning" query-param="automaticProvisioning"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="id" query-param="id"/>
+            <with-param name="automaticProfiles" query-param="automaticProfiles"/>
+        </call-query>
+    </operation>
+    <operation name="delete_applications_operation">
+        <call-query href="delete_applications_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <operation name="select_all_applications_operation">
+        <call-query href="select_all_applications_query"/>
+    </operation>
+    <operation name="select_with_key_applications_operation">
+        <call-query href="select_with_key_applications_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <operation name="insert_applications_operation">
+        <call-query href="insert_applications_query">
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="code" query-param="code"/>
+            <with-param name="automaticProvisioning" query-param="automaticProvisioning"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="automaticProfiles" query-param="automaticProfiles"/>
+        </call-query>
+    </operation>
+    <resource method="GET" path="getAllApplications">
+        <call-query href="select_all_applications_query"/>
+    </resource>
+    <resource method="GET" path="getByIdApplication">
+        <call-query href="select_with_key_applications_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="createApplication">
+        <call-query href="insert_applications_query">
+            <with-param name="code" query-param="code"/>
+            <with-param name="automaticProvisioning" query-param="automaticProvisioning"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="automaticProfiles" query-param="automaticProfiles"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="updateApplication">
+        <call-query href="update_applications_query">
+            <with-param name="code" query-param="code"/>
+            <with-param name="automaticProvisioning" query-param="automaticProvisioning"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="id" query-param="id"/>
+            <with-param name="automaticProfiles" query-param="automaticProfiles"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="deleteApplication">
+        <call-query href="delete_applications_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+</data>

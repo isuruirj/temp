@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GISCIM_CrearUsuario_Seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <switch source="get-property('aplicacion')">
+        <case regex=".*ad.*">
+            <sequence key="GISCIM_Mapping_AD_CrearUsuario_Seq"/>
+        </case>
+        <case regex=".*bancs.*">
+            <sequence key="GISCIM_Mapping_BANCS_Seq"/>
+        </case>
+        <case regex=".*logiciel.*">
+            <sequence key="GISCIM_Mapping_LOGICIEL_Seq"/>
+        </case>
+        <case regex=".*pprd.*">
+            <sequence key="GISCIM_Mapping_PPRD_Seq"/>
+        </case>
+        <case regex=".*rhds.*">
+            <sequence key="GISCIM_Mapping_RHDS_CrearUsuario_Seq"/>
+        </case>
+        <default/>
+    </switch>
+    <log description="SCIM Payload" level="custom">
+        <property name="seq" value="-------------------- GISCIM_CrearUsuario_Seq --------------------"/>
+        <property expression="json-eval($.)" name="SCIMPayload"/>
+    </log>
+    <property description="HTTP_METHOD:POST" name="HTTP_METHOD" scope="axis2" type="STRING" value="POST"/>
+    <sequence key="GISCIM_Seq"/>
+    <filter regex="0" source="get-property('cgi-error-codigo')">
+        <then>
+            <switch source="get-property('aplicacion')">
+                <case regex=".*ad.*">
+                    <sequence key="GISCIM_AD_Assign_Role_Seq"/>
+                </case>
+                <case regex=".*rhds.*">
+                    <sequence key="GISCIM_RHDS_Assign_Role_Seq"/>
+                </case>
+                <default>
+                    <log description="Log" level="custom">
+                        <property name="msg" value="Role addition is not necessary."/>
+                    </log>
+                </default>
+            </switch>
+        </then>
+        <else>
+            <log description="Log" level="custom">
+                <property name="msg" value="Error in provisioning. Role update will not be processed for AD &amp; RHDS"/>
+            </log>
+        </else>
+    </filter>
+</sequence>

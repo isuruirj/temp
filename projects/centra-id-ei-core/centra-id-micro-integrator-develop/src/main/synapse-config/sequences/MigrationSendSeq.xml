@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="MigrationSendSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="MigrationSendSeq" value="Inicio..." />
+    </log>
+    <property name="Content-Encoding" action="remove" scope="transport" />
+    <property name="Accept-Encoding" action="remove" scope="transport" />
+    <property name="file" expression="//file"></property>
+    <store messageStore="MigrationSendStore" />
+    <log level="custom" category="DEBUG">
+        <property name="MigrationSendSeq" value="Fin..." />
+    </log>
+</sequence>

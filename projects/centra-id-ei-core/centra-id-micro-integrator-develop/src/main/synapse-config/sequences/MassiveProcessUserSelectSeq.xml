@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="MassiveProcessUserSelectSeq" onError="FaultMassiveProcessUsersSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse" xmlns:cen="centra-id.com">
+    <log level="custom" category="DEBUG">
+        <property name="MassiveProcessUserSelectSeq" value="Inicio..." />
+    </log>
+    <!-- Recuperar los datos del empleado registrados en el IS -->
+    <property expression="get-property('codigoEmpleado')" name="uri.var.codeEmployee" scope="default" type="STRING" />
+    <property action="remove" name="Content-Type" scope="transport" />
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.dataServiceHost}/UsersDSS.HTTPEndpoint/getUserByCodeEmployee?code={uri.var.codeEmployee}" />
+    </call>
+    <!-- Verificar si el empleado existe-->
+    <property expression="//cen:User/cen:codigoEmpleado" name="codeEmployee" scope="default" type="STRING" />
+    <filter regex="true" source="boolean(get-property('codeEmployee'))">
+        <then>
+            <!-- Empleado SI Existe-->
+            <!-- Obtener username -->
+            <property name="username" scope="default" type="STRING" expression="//cen:User/cen:username" />
+            <property name="modifyData" scope="default" type="STRING" value="0" />
+            <property name="profileRecalculation" scope="default" type="STRING" value="0" />
+            <!-- Verifica si el empleado fue eliminado -->
+            <script language="js">
+                <![CDATA[
+                function isEmpty(str) {
+                    return (!str || /^\s*$/.test(str));
+                }
+              function stringToDate(_date,_format,_delimiter) {
+                    var formatLowerCase=_format.toLowerCase();
+                    var formatItems=formatLowerCase.split(_delimiter);
+                    var dateItems=_date.split(_delimiter);
+                    var monthIndex=formatItems.indexOf("mm");
+                    var dayIndex=formatItems.indexOf("dd");
+                    var yearIndex=formatItems.indexOf("yyyy");
+                    var month=parseInt(dateItems[monthIndex]);
+                    month-=1;
+                    var formatedDate = new Date(dateItems[yearIndex],month,dateItems[dayIndex]);
+                    return formatedDate;
+                }
+
+                var log = mc.getServiceLog();   
+                if(!isEmpty(mc.getProperty('fechaSalidaEmpleado'))){
+                    log.debug('SI tiene fecha salida: '+mc.getProperty('fechaSalidaEmpleado'));
+                    var departureDate =  stringToDate(mc.getProperty('fechaSalidaEmpleado'),'yyyy-mm-dd','-');
+                    log.debug('departureDate: '+departureDate);
+                    var today = new Date();
+                    log.debug('today: '+today);
+                    if(departureDate < today) {
+                        log.debug('SALIDA OK..');
+                        mc.setProperty("hasDepartureDate",true);
+                    } else {
+                        log.debug('SALIDA FAIL...');
+                        mc.setProperty("hasDepartureDate",false);
+                    }
+                } else {
+                    log.debug('NO tiene fecha salida');
+                    mc.setProperty("hasDepartureDate",false);
+                }
+                ]]>
+            </script>
+            <filter regex="true" source="boolean(get-property('hasDepartureDate'))">
+                <then>
+                    <!-- El empleado ha sido eliminado, se procede a registrar su eliminacion -->
+                    <property name="typeEvent" scope="default" type="STRING" value="C" />
+                    <property name="typeAction" scope="default" type="STRING" value="D" />
+                    <sequence key="MassiveProcessUserRegisterSeq" />
+                </then>
+                <else>
+                    <!-- El empleado no ha sido eliminado, se verifica si los datos del empleado fueron cambiados-->
+                    <property expression="$body//*" name="userData" scope="default" type="OM" />
+                    <sequence key="MassiveProcessUserCompareSeq" />
+                    <!-- Valida si los datos del empleado fueron modificados -->
+                    <filter regex="true" source="get-property('modifyData')='1'">
+                        <then>
+                            <!-- Los datos del empleado fueron modificado, se procede a registrar su actualizacion -->
+                            <property name="typeEvent" scope="default" type="STRING" value="C" />
+                            <property name="typeAction" scope="default" type="STRING" value="U" />
+                            <sequence key="MassiveProcessUserRegisterSeq" />
+                        </then>
+                    </filter>
+                </else>
+            </filter>
+        </then>
+        <else>
+            <!-- Empleado NO Existe-->
+            <!-- Verifica si existe fecha de salida-->
+            <filter regex="false" source="boolean(get-property('fechaSalidaEmpleado'))">
+                <then>
+                    <!-- Empleado no tiene fecha de salida, es decir es nuevo, se proceder a crear-->
+                    <property name="typeEvent" scope="default" type="STRING" value="C" />
+                    <property name="typeAction" scope="default" type="STRING" value="C" />
+                    <property name="modifyData" scope="default" type="STRING" value="0" />
+                    <property name="profileRecalculation" scope="default" type="STRING" value="0" />
+                    <sequence key="MassiveProcessUserRegisterSeq" />
+                </then>
+            </filter>
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="MassiveProcessUserSelectSeq" value="Fin..." />
+    </log>
+</sequence>

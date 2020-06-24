@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="BusinessLogicTaskProvisioningmManualSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="BusinessLogicTaskProvisioningmManualSeq" value="Inicio..." />
+    </log>
+    <property name="Content-Encoding" action="remove" scope="transport" />
+    <property name="Accept-Encoding" action="remove" scope="transport" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+    <property name="ticketNumber" expression="//ticketNumber" />
+    <property name="ticketDate" expression="//ticketDate" />
+    <property name="ticketContent" expression="//ticketContent" />
+    <property name="ticketError" expression="//ticketError" />
+    <call-template target="GetCurrentDateTemplate" />
+    <filter regex="true" source="boolean(//uuids/uuid)">
+        <then>
+            <iterate expression="//uuids/uuid">
+                <target>
+                    <sequence>
+                        <property name="uri.var.uuid" expression="//uuid" />
+                        <call>
+                            <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/provisioning/TaskProvisioning?uuid={uri.var.uuid}" />
+                        </call>
+                        <log level="custom" category="DEBUG">
+                            <property name="BusinessLogicTaskProvisioningmManualSeq" value="Inicio.2.." />
+                        </log>
+                        <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                            <then>
+                                <property name="uri.var.taskProvisioningId" expression="//taskProvisioningList/taskProvisioning/id" />
+                                <filter regex="true" source="boolean(get-property('uri.var.taskProvisioningId'))">
+                                    <then>
+                                        <property name="uuidParent" expression="//taskProvisioningList/taskProvisioning/uuidParent/text()" />
+                                        <filter regex="true" source="boolean(get-property('uuidParent'))">
+                                            <then>
+                                                <payloadFactory media-type="json">
+                                                    <format>
+                                                        {
+                                                            "taskProvisioning": {
+                                                                "id" :$1,
+                                                                "transactionalProfile": {
+                                                                    "id": $2
+                                                                },
+                                                                "application" :{
+                                                                    "id": $3
+                                                                },
+                                                                "operationProvisioning" :{
+                                                                    "id": $4
+                                                                },
+                                                                "provisioningDate" : "$5",
+                                                                "provisioningStatus" : "APROVISIONADO",
+                                                                "provisioningComments": "$6",
+                                                                "creationDate": "$7",
+                                                                "uuid":"$8",
+                                                                "uuidParent": "$9",
+                                                                "action": "$10",        
+                                                                "status": "APROVISIONADO",
+                                                                "ticketNumber": "$11",
+                                                                "ticketDate": "$12",
+                                                                "ticketContent": "$13",
+                                                                "ticketError": "$14",        
+                                                                "retryLastDate": null,        
+                                                                "retryNumber": null,
+                                                                "type" : "$15"        
+                                                            }
+                                                        }                    
+                                                    </format>
+                                                    <args>
+                                                        <arg evaluator="xml" expression="get-property('uri.var.taskProvisioningId')" />
+                                                        <arg evaluator="xml" expression="//taskProvisioningList/taskProvisioning/transactionalProfile/id/text()" />
+                                                        <arg evaluator="xml" expression="//taskProvisioningList/taskProvisioning/application/id/text()" />
+                                                        <arg evaluator="xml" expression="//taskProvisioningList/taskProvisioning/operationProvisioning/id/text()" />
+                                                        <arg evaluator="xml" expression="get-property('currentDate')" />
+                                                        <arg evaluator="xml" value="APROVISIONAMIENTO MANUAL" />
+                                                        <arg evaluator="xml" expression="//taskProvisioningList/taskProvisioning/creationDate/text()" />
+                                                        <arg evaluator="xml" expression="//taskProvisioningList/taskProvisioning/uuid/text()" />
+                                                        <arg evaluator="xml" expression="//taskProvisioningList/taskProvisioning/uuidParent/text()" />
+                                                        <arg evaluator="xml" expression="//taskProvisioningList/taskProvisioning/action/text()" />
+                                                        <arg evaluator="xml" expression="get-property('ticketNumber')" />
+                                                        <arg evaluator="xml" expression="get-property('ticketDate')" />
+                                                        <arg evaluator="xml" expression="base64Decode(get-property('ticketContent'))" />
+                                                        <arg evaluator="xml" expression="get-property('ticketError')" />
+                                                        <arg evaluator="xml" expression="//taskProvisioningList/taskProvisioning/type/text()" />
+                                                    </args>
+                                                </payloadFactory>
+                                            </then>
+                                            <else>
+                                                <payloadFactory media-type="json">
+                                                    <format>
+                                                        {
+                                                            "taskProvisioning": {
+                                                                "id" :$1,
+                                                                "transactionalProfile": {
+                                                                    "id": $2
+                                                                },
+                                                                "application" :{
+                                                                    "id": $3
+                                                                },
+                                                                "operationProvisioning" :{
+                                                                    "id": $4
+                                                                },
+                                                                "provisioningDate" : "$5",
+                                                                "provisioningStatus" : "APROVISIONADO",
+                                                                "provisioningComments": "$6",
+                                                                "creationDate": "$7",
+                                                                "uuid":"$8",
+                                                                "uuidParent": null,
+                                                                "action": "$9",        
+                                                                "status": "APROVISIONADO",
+                                                                "ticketNumber": "$10",
+                                                                "ticketDate": "$11",
+                                                                "ticketContent": "$12",
+                                                                "ticketError": "$13",        
+                                                                "retryLastDate": null,        
+                                                                "retryNumber": null,
+                                                                "type" : "$14"            
+                                                            }
+                                                        }                    
+                                                    </format>
+                                                    <args>
+                                                        <arg evaluator="xml" expression="get-property('uri.var.taskProvisioningId')" />
+                                                        <arg evaluator="xml" expression="//taskProvisioningList/taskProvisioning/transactionalProfile/id/text()" />
+                                                        <arg evaluator="xml" expression="//taskProvisioningList/taskProvisioning/application/id/text()" />
+                                                        <arg evaluator="xml" expression="//taskProvisioningList/taskProvisioning/operationProvisioning/id/text()" />
+                                                        <arg evaluator="xml" expression="get-property('currentDate')" />
+                                                        <arg evaluator="xml" value="APROVISIONAMIENTO MANUAL" />
+                                                        <arg evaluator="xml" expression="//taskProvisioningList/taskProvisioning/creationDate/text()" />
+                                                        <arg evaluator="xml" expression="//taskProvisioningList/taskProvisioning/uuid/text()" />
+                                                        <arg evaluator="xml" expression="//taskProvisioningList/taskProvisioning/action/text()" />
+                                                        <arg evaluator="xml" expression="get-property('ticketNumber')" />
+                                                        <arg evaluator="xml" expression="get-property('ticketDate')" />
+                                                        <arg evaluator="xml" expression="base64Decode(get-property('ticketContent'))" />
+                                                        <arg evaluator="xml" expression="get-property('ticketError')" />
+                                                        <arg evaluator="xml" expression="//taskProvisioningList/taskProvisioning/type/text()" />
+                                                    </args>
+                                                </payloadFactory>
+                                            </else>
+                                        </filter>
+                                        <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+                                        <log level="custom" category="DEBUG">
+                                            <property name="BusinessLogicTaskProvisioningmManualSeq" value="Inicio.4.." />
+                                        </log>
+                                        <call>
+                                            <endpoint template="HTTPEndpointPutTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/provisioning/TaskProvisioning/{uri.var.taskProvisioningId}" />
+                                        </call>
+                                        <log level="custom" category="DEBUG">
+                                            <property name="BusinessLogicTaskProvisioningmManualSeq" value="Inicio.5.." />
+                                            <property name="http_sc" expression="get-property('axis2', 'HTTP_SC')" />
+                                        </log>
+                                        <filter regex="202" source="get-property('axis2', 'HTTP_SC')">
+                                            <then>
+                                                <log level="custom" category="DEBUG">
+                                                    <property name="BusinessLogicTaskProvisioningmManualSeq" value="Inicio.6." />
+                                                </log>
+                                                <payloadFactory media-type="json">
+                                                    <format>
+                                                        {
+                                                            "taskProvisioningHistory": {
+                                                                "taskProvisioningId":  $1,
+                                                                "creationDate": "$2",
+                                                                "status": "APROVISIONADO",
+                                                                "retryNumber": null,
+                                                                "retryDate": null                                                                        
+                                                            }
+                                                        }
+                                                    </format>
+                                                    <args>
+                                                        <arg evaluator="xml" expression="//taskProvisioning/id" />
+                                                        <arg evaluator="xml" expression="get-property('requestDate')" />
+                                                    </args>
+                                                </payloadFactory>
+                                                <call>
+                                                    <endpoint template="HTTPEndpointPostTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/provisioning/TaskProvisioningHistory" />
+                                                </call>
+                                                <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+                                                <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+                                                <payloadFactory media-type="json">
+                                                    <format>
+                                                        {
+                                                            "result": "true",
+                                                            "message" : "ok"
+                                                        }
+                                                    </format>
+                                                    <args />
+                                                </payloadFactory>
+                                            </then>
+                                            <else>
+                                                <property name="fault" value="Error TaskProvisioning update" />
+                                                <sequence key="FaultSeq" />
+                                            </else>
+                                        </filter>
+                                    </then>
+                                    <else>
+                                        <payloadFactory media-type="json">
+                                            <format>
+                                                {
+                                                    "result": "false",
+                                                    "message" : "There is no task with the uuid sent"
+                                                }
+                                            </format>
+                                            <args />
+                                        </payloadFactory>
+                                        <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+                                    </else>
+                                </filter>
+                            </then>
+                            <else>
+                                <property name="fault" value="Error when consulting TaskProvisioning by uuid " />
+                                <sequence key="FaultSeq" />
+                            </else>
+                        </filter>
+                    </sequence>
+                </target>
+            </iterate>
+        </then>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="BusinessLogicTaskProvisioningErrorSeq" value="Fin..." />
+    </log>
+</sequence>

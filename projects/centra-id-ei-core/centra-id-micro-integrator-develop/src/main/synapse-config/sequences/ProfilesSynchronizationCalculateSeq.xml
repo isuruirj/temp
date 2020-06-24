@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ProfilesSynchronizationCalculateSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom">
+        <property name="ProfilesSynchronizationCalculateSeq" value="Inicio.." />
+    </log>
+    <!-- recupera las ejecuciones pendientes -->
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/ProfilesSynchronizationExecution?status=REG&amp;orderby=date_planned" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <property name="findData" expression="//profilesSynchronizationExecution[1]" />
+            <log level="custom">
+                <property name="ProfilesSynchronizationCalculateSeq" value="Inicio..1" />
+            </log>
+            <filter regex="true" source="boolean($ctx:findData)">
+                <then>
+                    <log level="custom">
+                        <property name="ProfilesSynchronizationCalculateSeq" value="Inicio..1.1" />
+                    </log>
+                    <property name="profilesSynchronizationExecution" expression="//profilesSynchronizationExecution[1]" scope="default" type="OM" />
+                    <property name="profilesSynchronizationExecutionId" expression="$ctx:profilesSynchronizationExecution//id" />
+                    <property name="plannedDate" expression="$ctx:profilesSynchronizationExecution//datePlanned" />
+                    <property name="now" expression="get-property('SYSTEM_TIME')" scope="default" />
+                    <xslt key="gov:/centra-id/xslt/dateToMiliSeconds.xsl">
+                        <property name="date_time" expression="$ctx:profilesSynchronizationExecution//datePlanned" />
+                    </xslt>
+                    <property name="plannedDate" expression="//dateMiliSeconds" />
+                    <filter regex="true" source="$ctx:plannedDate &lt;=  $ctx:now">
+                        <then>
+                            <property name="uri.var.where" expression="fn:concat('status=REG&amp;transactionalProfileId=',$ctx:profilesSynchronizationExecution//transactionalProfileId)" />
+                            <filter regex="true" source="boolean($ctx:profilesSynchronizationExecution//globalProfileId/text())">
+                                <then>
+                                    <property name="uri.var.where" expression="fn:concat($ctx:uri.var.where,'&amp;globalProfileId=',$ctx:profilesSynchronizationExecution//globalProfileId)" />
+                                </then>
+                            </filter>
+                            <call>
+                                <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/ProfilesSynchronization?{uri.var.where}&amp;orderby=id" />
+                            </call>
+                            <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                                <then>
+                                    <filter regex="true" source="boolean(//profilesSynchronizationList/profilesSynchronization)">
+                                        <then>
+                                            <foreach expression="//profilesSynchronization">
+                                                <sequence>
+                                                    <property name="profilesSynchronizationExecutionId" expression="$ctx:profilesSynchronizationExecutionId" />
+                                                    <store messageStore="ProfilesSynchronizationCalculateStore" />
+                                                </sequence>
+                                            </foreach>
+                                            <!-- Actualizar ejecucion como sincronizado -->
+                                            <call-template target="GetCurrentDateTemplate" />
+                                            <filter regex="true" source="boolean($ctx:profilesSynchronizationExecution//globalProfileId/text())">
+                                                <then>
+                                                    <payloadFactory media-type="json">
+                                                        <format>
+                                                            {
+                                                                "profilesSynchronizationExecution": {
+                                                                    "id" : $1,
+                                                                    "userCreated":  "$2",
+                                                                    "dateCreated": "$3",
+                                                                    "datePlanned": "$4",
+                                                                    "dateSynchronizationInit" : "$5",
+                                                                    "dateSynchronizationEnd" : null,
+                                                                    "type": "$6",
+                                                                    "status": "SYN",
+                                                                    "transactionalProfileId": $7,
+                                                                    "globalProfileId" : $8
+                                                                }
+                                                            }            
+                                                       </format>
+                                                        <args>
+                                                            <arg evaluator="xml" expression="$ctx:profilesSynchronizationExecution//id" />
+                                                            <arg evaluator="xml" expression="$ctx:profilesSynchronizationExecution//userCreated" />
+                                                            <arg evaluator="xml" expression="$ctx:profilesSynchronizationExecution//dateCreated" />
+                                                            <arg evaluator="xml" expression="$ctx:profilesSynchronizationExecution//datePlanned" />
+                                                            <arg evaluator="xml" expression="$ctx:currentDate" />
+                                                            <arg evaluator="xml" expression="$ctx:profilesSynchronizationExecution//type" />
+                                                            <arg evaluator="xml" expression="$ctx:profilesSynchronizationExecution//transactionalProfileId" />
+                                                            <arg evaluator="xml" expression="$ctx:profilesSynchronizationExecution//globalProfileId" />
+                                                        </args>
+                                                    </payloadFactory>
+                                                </then>
+                                                <else>
+                                                    <payloadFactory media-type="json">
+                                                        <format>
+                                                            {
+                                                                "profilesSynchronizationExecution": {
+                                                                    "id" : $1,
+                                                                    "userCreated":  "$2",
+                                                                    "dateCreated": "$3",
+                                                                    "datePlanned": "$4",
+                                                                    "dateSynchronizationInit" : "$5",
+                                                                    "dateSynchronizationEnd" : null,
+                                                                    "type": "$6",
+                                                                    "status": "SYN",
+                                                                    "transactionalProfileId": $7,
+                                                                    "globalProfileId" : null
+                                                                }
+                                                            }            
+                                                        </format>
+                                                        <args>
+                                                            <arg evaluator="xml" expression="$ctx:profilesSynchronizationExecution//id" />
+                                                            <arg evaluator="xml" expression="$ctx:profilesSynchronizationExecution//userCreated" />
+                                                            <arg evaluator="xml" expression="$ctx:profilesSynchronizationExecution//dateCreated" />
+                                                            <arg evaluator="xml" expression="$ctx:profilesSynchronizationExecution//datePlanned" />
+                                                            <arg evaluator="xml" expression="$ctx:currentDate" />
+                                                            <arg evaluator="xml" expression="$ctx:profilesSynchronizationExecution//type" />
+                                                            <arg evaluator="xml" expression="$ctx:profilesSynchronizationExecution//transactionalProfileId" />
+                                                        </args>
+                                                    </payloadFactory>
+                                                </else>
+                                            </filter>
+                                            <property name="uri.var.id" expression="$ctx:profilesSynchronizationExecutionId" />
+                                            <call>
+                                                <endpoint template="HTTPEndpointPutTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/ProfilesSynchronizationExecution/{uri.var.id}" />
+                                            </call>
+                                            <filter regex="202" source="get-property('axis2', 'HTTP_SC')">
+                                                <then></then>
+                                                <else>
+                                                    <property name="fault" value="Error update ProfilesSynchronizationExecution" />
+                                                    <sequence key="FaultSeq" />
+                                                </else>
+                                            </filter>
+                                        </then>
+                                        <else>
+                                            <payloadFactory media-type="json">
+                                                <format>
+                                                    {
+                                                        "result":  {
+                                                            "code" : -1,
+                                                            "message" : "There are no changes to synchronize"
+                                                        }
+                                                    }
+                                                </format>
+                                                <args />
+                                            </payloadFactory>
+                                        </else>
+                                    </filter>
+                                </then>
+                                <else>
+                                    <property name="fault" value="Error get ProfilesSynchronization" />
+                                    <sequence key="FaultSeq" />
+                                </else>
+                            </filter>
+                        </then>
+                        <else>
+                            <payloadFactory media-type="json">
+                                <format>
+                                    {
+                                        "result":  {
+                                            "code" : -1,
+                                            "message" : "Execution is not planned."
+                                        }
+                                    }
+                                </format>
+                                <args />
+                            </payloadFactory>
+                        </else>
+                    </filter>
+                </then>
+                <else>
+                    <payloadFactory media-type="json">
+                        <format>
+                         {
+                             "result":  {
+                                "code" : -1,
+                                "message" : "There are no executions !"
+                              }
+                        }
+                     </format>
+                        <args />
+                    </payloadFactory>
+                </else>
+            </filter>
+        </then>
+        <else>
+            <property name="fault" value="Error get ProfilesSynchronizationExecution" />
+            <sequence key="FaultSeq" />
+        </else>
+    </filter>
+    <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+    <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+    <log level="custom" category="DEBUG">
+        <property name="ProfilesSynchronizationCalculateSeq" value="Fin.." />
+    </log>
+</sequence>

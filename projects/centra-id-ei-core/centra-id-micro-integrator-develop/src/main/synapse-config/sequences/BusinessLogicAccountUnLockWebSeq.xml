@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="BusinessLogicAccountUnLockWebSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse" xmlns:ns="http://org.apache.synapse/xsd">
+    <log level="custom" category="DEBUG">
+        <property name="BusinessLogicAccountUnLockWebSeq" value="Inicio..." />
+        <property name="uri.var.username" expression="//username" />
+    </log>
+    <property name="uri.var.username" expression="//username" />
+    <property name="accountUnLockWeb" expression="json-eval($.AccountUnLockWeb)" />
+    <property action="remove" name="Content-Type" scope="transport" />
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/ChallengeQuestion/0/1?username={uri.var.username}&amp;status=REG" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <log level="custom" category="DEBUG">
+                <property name="BusinessLogicAccountUnLockWebSeq" value="Inicio.2.." />
+            </log>
+            <property name="challengeQuestion" expression="json-eval($)" scope="default" />
+            <property name="challengeQuestionXML" expression="$body//*" scope="default" type="OM" />
+            <xslt key="gov:/centra-id/xslt/jsonToXml.xsl" />
+            <log level="custom" category="DEBUG">
+                <property name="BusinessLogicAccountUnLockWebSeq" value="Inicio.3.." />
+                <property name="challengeQuestionId" expression="//id/text()" />
+            </log>
+            <filter regex="true" source="boolean(//id/text())">
+                <then>
+                    <!-- Recuperar datos del usuario -->
+                    <call>
+                        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/UserDataSimple/0/1?username={uri.var.username}" />
+                    </call>
+                    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                        <then>
+                            <property name="userdata" expression="$body//*" scope="default" type="OM" />
+                        </then>
+                        <else>
+                            <property name="fault" value="Error get userdata" />
+                            <sequence key="FaultSeq" />
+                        </else>
+                    </filter>
+                    <!-- Verificar respuestas correctas -->
+                    <script language="js">
+                        <![CDATA[
+                                var log = mc.getServiceLog();
+                                log.debug("Iniciando....");
+                                var validation1=false;
+                                var validation2=false;
+                                var validation3=false;
+                                var challengeQuestion = JSON.parse(mc.getProperty("challengeQuestion"));
+                                var accountUnLockWeb = JSON.parse(mc.getProperty("accountUnLockWeb"));
+                                var questions = accountUnLockWeb.questions;
+                                log.debug("Iniciando.1.1..");
+                                for (i = 0; i < questions.length; ++i) {
+                                    var question = questions[i];
+                                    log.debug("Iniciando.2.:"+question.code);
+                                    log.debug("Iniciando.3.:"+question.optionSelected);
+
+                                    var challenge = challengeQuestion.challengeQuestionList.challengeQuestion[0];
+
+
+                                    log.debug("Iniciando.4.:"+challenge.code1+ ":"+challenge.answer1);
+                                    log.debug("Iniciando.5.:"+challenge.code2+ ":"+challenge.answer2);
+                                    log.debug("Iniciando.6.:"+challenge.code3+ ":"+challenge.answer3);
+
+                                    if(challenge.code1.trim() == question.code.trim()) {
+                                        log.debug("Iniciando.7");
+                                        validation1 = (question.optionSelected.trim() == challenge.answer1.trim());
+                                    } else  if(challenge.code2.trim() == question.code.trim()) {
+                                        log.debug("Iniciando.8: "+ question.optionSelected + " : "+challenge.answer2);
+                                        validation2 = (question.optionSelected.trim() == challenge.answer2.trim());
+                                        log.debug("Iniciando.8.1: "+ validation2);
+                                    } else  if(challenge.code3.trim() == question.code.trim()) {                
+                                        log.debug("Iniciando.9");
+                                        validation3= (question.optionSelected.trim() == challenge.answer3.trim());                    
+                                    }
+
+                                }
+                                log.debug("validation1: "+validation1);
+                                log.debug("validation2: "+validation2);
+                                log.debug("validation3: "+validation3);
+                                mc.setProperty("validation",validation1 && validation2 && validation3);
+                            ]]>
+                    </script>
+                    <log level="custom" category="DEBUG">
+                        <property name="BusinessLogicAccountUnLockWebSeq" value="Inicio.4.." />
+                        <property name="validation" expression="$ctx:validation" />
+                    </log>
+                    <filter regex="true" source="$ctx:validation">
+                        <then>
+                            <log level="custom" category="DEBUG">
+                                <property name="BusinessLogicAccountUnLockWebSeq" value="Inicio.3.1." />
+                            </log>
+                            <filter regex="true" source="boolean($ctx:userdata//id/text())">
+                                <then>
+                                    <log level="custom" category="DEBUG">
+                                        <property name="BusinessLogicAccountUnLockWebSeq" value="Inicio.3.2." />
+                                    </log>
+                                    <!-- Desbloquear Usuario -->
+                                    <payloadFactory media-type="xml">
+                                        <format>
+                                            <ser:setUserClaimValues xmlns:ser="http://service.ws.um.carbon.wso2.org" xmlns:xsd="http://common.mgt.user.carbon.wso2.org/xsd">
+                                                <ser:userName>$1</ser:userName>
+                                                <ser:claims>
+                                                    <xsd:claimURI>http://wso2.org/claims/identity/accountLocked</xsd:claimURI>
+                                                    <xsd:value>false</xsd:value>
+                                                </ser:claims>
+                                                <ser:profileName>default</ser:profileName>
+                                            </ser:setUserClaimValues>
+                                        </format>
+                                        <args>
+                                            <arg evaluator="xml" expression="$ctx:uri.var.username" />
+                                        </args>
+                                    </payloadFactory>
+                                    <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="IS_SERVER_USER_DATO" expression="synapse:get-property('IS_SERVER_USER')" scope="default" />
+                                    <property xmlns:ns2="http://org.apache.synapse/xsd" xmlns:ns="http://org.apache.synapse/xsd" name="IS_SERVER_PASSWORD_DATO" expression="synapse:get-property('IS_SERVER_PASSWORD')" scope="default" />
+                                    <property xmlns:ns="http://org.apache.synapse/xsd" name="Authorization" expression="fn:concat('Basic ', base64Encode(fn:concat($ctx:IS_SERVER_USER_DATO,':',$ctx:IS_SERVER_PASSWORD_DATO)))" scope="transport" />
+                                    <property name="service_ep" expression="fn:concat(get-property('uri.var.identityServerHost'),'/services' ,'/RemoteUserStoreManagerService')" />
+                                    <header name="To" expression="get-property('service_ep')" />
+                                    <property name="Accept" scope="transport" value="application/xml" />
+                                    <call>
+                                        <endpoint>
+                                            <default />
+                                        </endpoint>
+                                    </call>
+                                    <log level="custom" category="INFO" separator="**2**"></log>
+                                    <property name="fault" expression="//ns:UserStoreException" />
+                                    <property name="fault2" expression="//faultstring" />
+                                    <log level="custom" separator="**3**">
+                                        <property name="fault" expression="get-property('fault')" />
+                                        <property name="fault2" expression="get-property('fault2')" />
+                                    </log>
+                                    <call-template target="GetCurrentDateFormatTemplate" />
+                                    <property name="toAddress" expression="$ctx:userdata//mail" />
+                                    <property name="identification" expression="$ctx:userdata//identification" />
+                                    <property name="guid" expression="fn:substring-after(get-property('MessageID'), 'urn:uuid:')" />
+                                    <log level="custom" category="DEBUG">
+                                        <property name="userdata" expression="$ctx:userdata" />
+                                        <property name="toAddress" expression="$ctx:toAddress" />
+                                    </log>
+                                    <filter regex="true" source="boolean(get-property('fault')) or boolean(get-property('fault2'))">
+                                        <then>
+                                            <!-- Registrar operacion como fallida -->
+                                            <call-template target="GetCurrentDateTemplate" />
+                                            <property name="uri.var.challengeQuestionId" expression="$ctx:challengeQuestionXML//id" />
+                                            <payloadFactory media-type="json">
+                                                <format>
+                                                        {
+                                                            "challengeQuestion": {
+                                                                "id": $1,
+                                                                "username": "$2",
+                                                                "answer1": "$3",
+                                                                "answer2": "$4",
+                                                                "answer3": "$5",
+                                                                "answer4": "$6",
+                                                                "createdDate": "$7",
+                                                                "attentionDate": "$8",
+                                                                "code1": "$9",
+                                                                "code2": "$10",
+                                                                "code3": "$11",
+                                                                "code4": "$12",
+                                                                "status" : "ERR"
+                                                            }
+                                                        }                                    
+                                                    </format>
+                                                <args>
+                                                    <arg evaluator="xml" expression="$ctx:uri.var.challengeQuestionId" />
+                                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//username" />
+                                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//answer1" />
+                                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//answer2" />
+                                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//answer3" />
+                                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//answer4" />
+                                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//createdDate" />
+                                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//code1" />
+                                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//code2" />
+                                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//code3" />
+                                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//code4" />
+                                                    <arg evaluator="xml" expression="$ctx:currentDate" />
+                                                </args>
+                                            </payloadFactory>
+                                            <call>
+                                                <endpoint template="HTTPEndpointPutTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/ChallengeQuestion/{uri.var.challengeQuestionId}" />
+                                            </call>
+                                            <!-- Enviar mail  Error-->
+                                            <payloadFactory media-type="json">
+                                                <format>
+                                                        [
+                                                            {
+                                                                "campo":"Generado",
+                                                                "valor":"$1"
+                                                            
+                                                            },
+                                                            {
+                                                                "campo":"nombreOrdenante",
+                                                                "valor":"$2"
+                                                            
+                                                            }
+                                                        ]                      
+                                                    </format>
+                                                <args>
+                                                    <arg evaluator="xml" expression="$ctx:currentDate" />
+                                                    <arg evaluator="xml" expression="$ctx:userdata//employeeCompleteName" />
+                                                </args>
+                                            </payloadFactory>
+                                            <property name="message" expression="json-eval($)" />
+                                            <call-template target="SendMailSeqTemplate">
+                                                <with-param name="templateType" value="Plantilla_Email_DesbloqueoUsuario_Error" />
+                                                <with-param name="toAddress" value="{get-property('toAddress')}" />
+                                                <with-param name="identification" value="{get-property('identification')}" />
+                                                <with-param name="message" value="{get-property('message')}" />
+                                                <with-param name="attachedName" value="X" />
+                                                <with-param name="attachedBase64" value="X" />
+                                                <with-param name="uuid" value="{get-property('guid')}" />
+                                                <with-param name="guid" value="{get-property('guid')}" />
+                                            </call-template>
+                                            <payloadFactory media-type="json">
+                                                <format>
+                                                        {
+                                                            "result":  {
+                                                                "code" : -1,
+                                                                "message" : "Failed operation !"
+                                                            }
+                                                        }
+                                                    </format>
+                                                <args />
+                                            </payloadFactory>
+                                        </then>
+                                        <else>
+                                            <call-template target="GetCurrentDateTemplate" />
+                                            <property name="uri.var.challengeQuestionId" expression="$ctx:challengeQuestionXML//id" />
+                                            <payloadFactory media-type="json">
+                                                <format>
+                                                        {
+                                                            "challengeQuestion": {
+                                                                "id": $1,
+                                                                "username": "$2",
+                                                                "answer1": "$3",
+                                                                "answer2": "$4",
+                                                                "answer3": "$5",
+                                                                "answer4": "$6",
+                                                                "createdDate": "$7",
+                                                                "attentionDate": "$8",
+                                                                "code1": "$9",
+                                                                "code2": "$10",
+                                                                "code3": "$11",
+                                                                "code4": "$12",                                                                
+                                                                "status" : "ATE"
+                                                            }
+                                                        }                                    
+                                                    </format>
+                                                <args>
+                                                    <arg evaluator="xml" expression="$ctx:uri.var.challengeQuestionId" />
+                                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//username" />
+                                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//answer1" />
+                                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//answer2" />
+                                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//answer3" />
+                                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//answer4" />
+                                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//createdDate" />
+                                                    <arg evaluator="xml" expression="$ctx:currentDate" />
+                                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//code1" />
+                                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//code2" />
+                                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//code3" />
+                                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//code4" />
+                                                </args>
+                                            </payloadFactory>
+                                            <call>
+                                                <endpoint template="HTTPEndpointPutTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/ChallengeQuestion/{uri.var.challengeQuestionId}" />
+                                            </call>
+                                            <!-- Enviar mail  OK-->
+                                            <payloadFactory media-type="json">
+                                                <format>
+                                                        [
+                                                            {
+                                                                "campo":"Generado",
+                                                                "valor":"$1"
+                                                            
+                                                            },
+                                                            {
+                                                                "campo":"nombreOrdenante",
+                                                                "valor":"$2"
+                                                            
+                                                            }
+                                                        ]                      
+                                                    </format>
+                                                <args>
+                                                    <arg evaluator="xml" expression="$ctx:currentDate" />
+                                                    <arg evaluator="xml" expression="$ctx:userdata//employeeCompleteName" />
+                                                </args>
+                                            </payloadFactory>
+                                            <property name="message" expression="json-eval($)" />
+                                            <call-template target="SendMailSeqTemplate">
+                                                <with-param name="templateType" value="Plantilla_Email_DesbloqueoUsuario_Exito" />
+                                                <with-param name="toAddress" value="{get-property('toAddress')}" />
+                                                <with-param name="identification" value="{get-property('identification')}" />
+                                                <with-param name="message" value="{get-property('message')}" />
+                                                <with-param name="attachedName" value="X" />
+                                                <with-param name="attachedBase64" value="X" />
+                                                <with-param name="uuid" value="{get-property('guid')}" />
+                                                <with-param name="guid" value="{get-property('guid')}" />
+                                            </call-template>
+                                            <payloadFactory media-type="json">
+                                                <format>
+                                                        {
+                                                            "result":  {
+                                                                "code" : 0,
+                                                                "message" : "Operation performed successfully"
+                                                            }
+                                                        }
+                                                    </format>
+                                                <args />
+                                            </payloadFactory>
+                                        </else>
+                                    </filter>
+                                </then>
+                                <else>
+                                    <!-- Registrar operacion como fallida -->
+                                    <call-template target="GetCurrentDateTemplate" />
+                                    <property name="uri.var.challengeQuestionId" expression="$ctx:challengeQuestionXML//id" />
+                                    <payloadFactory media-type="json">
+                                        <format>
+                                            {
+                                                "challengeQuestion": {
+                                                    "id": $1,
+                                                    "username": "$2",
+                                                    "answer1": "$3",
+                                                    "answer2": "$4",
+                                                    "answer3": "$5",
+                                                    "answer4": "$6",
+                                                    "createdDate": "$7",
+                                                    "attentionDate": "$8",
+                                                    "code1": "$9",
+                                                    "code2": "$10",
+                                                    "code3": "$11",
+                                                    "code4": "$12",
+                                                    "status" : "ERR"
+                                                }
+                                            }                                    
+                                        </format>
+                                        <args>
+                                            <arg evaluator="xml" expression="$ctx:uri.var.challengeQuestionId" />
+                                            <arg evaluator="xml" expression="$ctx:challengeQuestionXML//username" />
+                                            <arg evaluator="xml" expression="$ctx:challengeQuestionXML//answer1" />
+                                            <arg evaluator="xml" expression="$ctx:challengeQuestionXML//answer2" />
+                                            <arg evaluator="xml" expression="$ctx:challengeQuestionXML//answer3" />
+                                            <arg evaluator="xml" expression="$ctx:challengeQuestionXML//answer4" />
+                                            <arg evaluator="xml" expression="$ctx:challengeQuestionXML//createdDate" />
+                                            <arg evaluator="xml" expression="$ctx:currentDate" />
+                                            <arg evaluator="xml" expression="$ctx:challengeQuestionXML//code1" />
+                                            <arg evaluator="xml" expression="$ctx:challengeQuestionXML//code2" />
+                                            <arg evaluator="xml" expression="$ctx:challengeQuestionXML//code3" />
+                                            <arg evaluator="xml" expression="$ctx:challengeQuestionXML//code4" />
+                                        </args>
+                                    </payloadFactory>
+                                    <call>
+                                        <endpoint template="HTTPEndpointPutTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/ChallengeQuestion/{uri.var.challengeQuestionId}" />
+                                    </call>
+                                    <payloadFactory media-type="json">
+                                        <format>
+                                                {
+                                                    "result":  {
+                                                        "code" : -1,
+                                                        "message" : "Username does not exist"
+                                                    }
+                                                }
+                                            </format>
+                                        <args />
+                                    </payloadFactory>
+                                </else>
+                            </filter>
+                        </then>
+                        <else>
+                            <log level="custom" category="DEBUG">
+                                <property name="BusinessLogicAccountUnLockWebSeq" value="Inicio.40." />
+                            </log>
+                            <!-- Registrar operacion como fallida -->
+                            <call-template target="GetCurrentDateTemplate" />
+                            <property name="uri.var.challengeQuestionId" expression="$ctx:challengeQuestionXML//id" />
+                            <payloadFactory media-type="json">
+                                <format>
+                                    {
+                                        "challengeQuestion": {
+                                            "id": $1,
+                                            "username": "$2",
+                                            "answer1": "$3",
+                                            "answer2": "$4",
+                                            "answer3": "$5",
+                                            "answer4": "$6",
+                                            "createdDate": "$7",
+                                            "attentionDate": "$8",
+                                            "code1": "$9",
+                                            "code2": "$10",
+                                            "code3": "$11",
+                                            "code4": "$12",
+                                            "status" : "ERR"
+                                        }
+                                    }                                    
+                                </format>
+                                <args>
+                                    <arg evaluator="xml" expression="$ctx:uri.var.challengeQuestionId" />
+                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//username" />
+                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//answer1" />
+                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//answer2" />
+                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//answer3" />
+                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//answer4" />
+                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//createdDate" />
+                                    <arg evaluator="xml" expression="$ctx:currentDate" />
+                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//code1" />
+                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//code2" />
+                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//code3" />
+                                    <arg evaluator="xml" expression="$ctx:challengeQuestionXML//code4" />
+                                </args>
+                            </payloadFactory>
+                            <call>
+                                <endpoint template="HTTPEndpointPutTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/ChallengeQuestion/{uri.var.challengeQuestionId}" />
+                            </call>
+                            <log level="custom" category="DEBUG">
+                                <property name="BusinessLogicAccountUnLockWebSeq" value="Inicio.42." />
+                                <property name="http" expression="get-property('axis2', 'HTTP_SC')" />
+                            </log>
+                            <!-- Enviar mail  Error-->
+                            <payloadFactory media-type="json">
+                                <format>
+                                        [
+                                        {
+                                                "campo":"Generado",
+                                                "valor":"$1"
+                                        },
+                                        {
+                                                "campo":"nombreOrdenante",
+                                                "valor":"$2"
+                                            }
+                                        ]                      
+                                    </format>
+                                <args>
+                                    <arg evaluator="xml" expression="$ctx:currentDate" />
+                                    <arg evaluator="xml" expression="$ctx:userdata//employeeCompleteName" />
+                                </args>
+                            </payloadFactory>
+                            <property name="message" expression="json-eval($)" />
+                            <call-template target="SendMailSeqTemplate">
+                                <with-param name="templateType" value="Plantilla_Email_DesbloqueoUsuario_Error" />
+                                <with-param name="toAddress" value="{get-property('toAddress')}" />
+                                <with-param name="identification" value="{get-property('identification')}" />
+                                <with-param name="message" value="{get-property('message')}" />
+                                <with-param name="attachedName" value="X" />
+                                <with-param name="attachedBase64" value="X" />
+                                <with-param name="uuid" value="{get-property('guid')}" />
+                                <with-param name="guid" value="{get-property('guid')}" />
+                            </call-template>
+                            <payloadFactory media-type="json">
+                                <format>
+                                    {
+                                        "result":  {
+                                            "code" : -1,
+                                            "message" : "Failed operation"
+                                        }
+                                    }
+                            </format>
+                                <args />
+                            </payloadFactory>
+                        </else>
+                    </filter>
+                </then>
+                <else>
+                    <log level="custom" category="DEBUG">
+                        <property name="BusinessLogicAccountUnLockWebSeq" value="Inicio.4.." />
+                    </log>
+                    <payloadFactory media-type="json">
+                        <format>
+                                {
+                                    "result":  {
+                                        "code" : -1,
+                                        "message" : "Unauthorized user"
+                                    }
+                                }
+                            </format>
+                        <args />
+                    </payloadFactory>
+                </else>
+            </filter>
+        </then>
+        <else>
+            <log level="custom" category="DEBUG">
+                <property name="BusinessLogicAccountUnLockWebSeq" value="Inicio.4.." />
+            </log>
+            <payloadFactory media-type="json">
+                <format>
+                        {
+                            "result":  {
+                                "code" : 1-,
+                                "message" : "Error get challenge question"
+                            }
+                        }
+                    </format>
+                <args />
+            </payloadFactory>
+        </else>
+    </filter>
+    <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+    <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+</sequence>

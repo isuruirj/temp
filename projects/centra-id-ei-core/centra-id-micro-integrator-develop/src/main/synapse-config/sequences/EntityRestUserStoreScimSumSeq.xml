@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="RestUserStoreScimSumSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+        <property name="RestUserStoreScimSumSeq" value="Inicio.." />
+        <property name="uri.var.field" expression="get-property('uri.var.field')"/>
+    <log level="custom" category="DEBUG">
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+    <property name="Accept" scope="transport" type="STRING" value="application/json" />
+    <property action="remove" name="Content-Type" scope="transport" />
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.username" name="username" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.scim" name="scim" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.domain" name="domain" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.tellerNumber" name="tellerNumber" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.tellerName" name="tellerName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING" />
+    <script language="nashornJs"><![CDATA[
+        @add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE restUserStoreScim.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","restUserStoreScim","id");
+        where += addWhere("username","String","restUserStoreScim","username");
+        where += addWhere("scim","String","restUserStoreScim","scim");
+        where += addWhere("domain","String","restUserStoreScim","domain");
+        where += addWhere("tellerNumber","String","restUserStoreScim","teller_number");
+        where += addWhere("tellerName","String","restUserStoreScim","teller_name");
+        where += addWhere("valid","Integer","restUserStoreScim","valid");
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+
+        // FIELD
+        var field = "restUserStoreScim."+mc.getProperty("uri.var.field");
+        mc.setProperty("uri.var.field",field);
+
+        log.debug(where);]]></script>
+
+    <property value="sch_centra_id.REST_USER_STORE_SCIM restUserStoreScim" name="uri.var.table" scope="default" type="STRING"/>
+    <property value="SUM" name="uri.var.function" scope="default" type="STRING"/>
+
+    <call>
+        <endpoint name="RestUserStoreScimDSS_Endpoint" template="HTTPEndpointGetTemplate"
+              uri="{uri.var.dataServiceHost}/provisioning.rest-user-store-scim.ds.HTTPEndpoint/GetFunctionResultRestUserStoreScim?function={uri.var.function}&amp;whereclause={uri.var.whereclause}&amp;field={uri.var.field}&amp;table={uri.var.table}&amp;innerjoinclause={uri.var.innerjoinclause}" />
+
+    </call>
+
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING"/>
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq"/>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                        "sum": $1
+                    }
+                </format>
+                <args>
+                    <arg evaluator="json" expression="$.result.value"/>
+                </args>
+            </payloadFactory>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200"/>
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="RestUserStoreScimSumSeq" value="Fin.." />
+    </log>
+    <respond />
+</sequence>

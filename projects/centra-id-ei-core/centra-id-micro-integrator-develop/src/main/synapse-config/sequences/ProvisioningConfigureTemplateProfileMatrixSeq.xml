@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ProvisioningConfigureTemplateProfileMatrixSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningConfigureTemplateProfileMatrixSeq" value="Inicio.." />
+    </log>
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/TemplateProfileMatrixSimple?transactionalProfileId={uri.var.transactionalProfileId}&amp;orderby=grouper" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <filter regex="true" source="boolean(//templateProfileMatrixSimple/id/text())">
+                <then>
+                    <property name="expirationDate" expression="get-property('LOGICIEL_EXPIRATION_DATE')" />
+                    <script language="js">
+                        <![CDATA[
+                                    //  PERFIL-APPLICATION-DEFAULT       
+                                    var first = true;
+                                    var perfilAplicacionDefault = String("["); 
+                                    var previus = "";
+                                    var payload = mc.getPayloadJSON();
+                                    var results = payload.templateProfileMatrixSimpleList.templateProfileMatrixSimple;
+                                    var contador = 0;
+                                    for (i = 0; i < results.length; ++i) {
+                                        var templateProfileMatrixSimple = results[i];
+                                        if(templateProfileMatrixSimple.fieldDetailCode != null) {
+                                            if(previus!=templateProfileMatrixSimple.grouper){
+                                                perfilAplicacionDefault += "{";
+                                                perfilAplicacionDefault += "\\\"";
+                                                perfilAplicacionDefault += templateProfileMatrixSimple.fieldDetailCode;
+                                                perfilAplicacionDefault += "\\\"";
+                                                perfilAplicacionDefault += ":";
+                                                perfilAplicacionDefault += "\\\"";
+                                                perfilAplicacionDefault += String(templateProfileMatrixSimple.fieldDetailValue).split(',')[0];
+                                                perfilAplicacionDefault += "\\\"";
+                                                perfilAplicacionDefault += ",";
+                                            } else {
+                                                perfilAplicacionDefault += "\\\"";
+                                                perfilAplicacionDefault += templateProfileMatrixSimple.fieldDetailCode;
+                                                perfilAplicacionDefault += "\\\"";
+                                                perfilAplicacionDefault += ":";
+                                                perfilAplicacionDefault += "\\\"";
+                                                perfilAplicacionDefault += String(templateProfileMatrixSimple.fieldDetailValue).split(',')[0];
+                                                perfilAplicacionDefault += "\\\"},";
+                                            }
+                                            previus = templateProfileMatrixSimple.grouper;
+                                            contador = contador + 1;
+                                        }
+                                    }
+                                    perfilAplicacionDefault=String(perfilAplicacionDefault).substring(0, String(perfilAplicacionDefault).length - 1);
+                                    perfilAplicacionDefault += "]";
+                                    mc.setProperty("perfilAplicacionDefault",perfilAplicacionDefault.toString());
+                                    
+
+
+                                    //  PERFIL-APPLICATION-TEMPORAL    
+                                    var expirationDate = mc.getProperty("expirationDate");   
+                                    var perfilAplicacionTemporal = "["; 
+                                    payload = mc.getPayloadJSON();
+                                    var exist = false;
+                                    results = payload.templateProfileMatrixSimpleList.templateProfileMatrixSimple;
+                                    for (i = 0; i < results.length; i=i+2) {
+                                        var templateProfileMatrixSimple = results[i];
+                                        var templateProfileMatrixSimple2 = results[i+1];
+                                        var application;
+                                        var profile;
+                                        if(templateProfileMatrixSimple.fieldDetailCode="codigoAplicacion"){
+                                            application=templateProfileMatrixSimple;
+                                            profile=templateProfileMatrixSimple2;
+                                        } else {
+                                            application=templateProfileMatrixSimple2;
+                                            profile=templateProfileMatrixSimple;
+                                        }
+                                        if(String(profile.fieldDetailValue).split(',').length>1){
+                                            var elements=String(profile.fieldDetailValue).split(',');
+                                            for(j=1;j<elements.length;j++){
+                                                 var element=elements[j];
+                                                 perfilAplicacionTemporal+="{";
+                                                 perfilAplicacionTemporal+="\\\"codigoAplicacion\\\":\\\""+application.fieldDetailValue+"\\\",";
+                                                 perfilAplicacionTemporal+="\\\"codigoPerfilPermanente\\\":\\\""+profile.fieldDetailValue.split(",")[0]+"\\\",";
+                                                 perfilAplicacionTemporal+="\\\"codigoPerfilTemporal\\\":\\\""+element+"\\\",";
+                                                 perfilAplicacionTemporal+="\\\"fechaFinVigencia\\\":\\\""+expirationDate+"\\\"";
+                                                 perfilAplicacionTemporal+="},";
+                                                 exist=true;
+                                            }
+                                        }
+                                    }
+                                    perfilAplicacionTemporal=String(perfilAplicacionTemporal).substring(0, String(perfilAplicacionTemporal).length - 1);
+                                    perfilAplicacionTemporal += "]";
+                                    if(exist){
+                                        mc.setProperty("perfilAplicacionTemporal",perfilAplicacionTemporal.toString());
+                                    } else {
+                                        mc.setProperty("perfilAplicacionTemporal","");
+                                    }
+                                    
+                                ]]>
+                    </script>
+                    <log level="custom" category="DEBUG">
+                        <property name="ProvisioningCreateUserSeq" value="Inicio.4" />
+                        <property name="perfilAplicacionDefault" expression="$ctx:perfilAplicacionDefault" />
+                        <property name="perfilAplicacionTemporal" expression="$ctx:perfilAplicacionTemporal" />
+                    </log>
+                </then>
+            </filter>
+        </then>
+        <else>
+            <property name="fault" value="ProvisioningCreateUserSeq: Error get TemplateProfileMatrixSimple" />
+            <sequence key="FaulSeq" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningConfigureTemplateProfileMatrixSeq" value="Fin.." />
+    </log>
+</sequence>

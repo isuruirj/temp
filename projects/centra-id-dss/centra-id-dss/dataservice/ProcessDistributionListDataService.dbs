@@ -1,0 +1,71 @@
+<data description="multiple services per each table" disableLegacyBoxcarringMode="false" enableBatchRequests="false" enableBoxcarring="false" name="process_distribution_list_DataService" serviceNamespace="centra-id.com" serviceStatus="active" transports="https">
+   <config id="default">
+      <property name="carbon_datasource_name">CENTRA_ID</property>
+   </config>
+   <query id="select_with_key_process_distribution_list_query" useConfig="default">
+      <sql>SELECT id, distribution_list_id, process_id, valid FROM sch_centra_id.process_distribution_list WHERE id=?</sql>
+      <param name="id" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+      <result element="process_distribution_listCollection" rowName="process_distribution_list">
+         <element column="id" name="id" xsdType="xs:long"/>
+         <element column="distribution_list_id" name="distribution_list_id" xsdType="xs:long"/>
+         <element column="process_id" name="process_id" xsdType="xs:long"/>
+         <element column="valid" name="valid" xsdType="xs:integer"/>
+      </result>
+   </query>
+   <query id="update_process_distribution_list_query" useConfig="default">
+      <sql>UPDATE sch_centra_id.process_distribution_list SET distribution_list_id=?,process_id=?,valid=? WHERE id=?</sql>
+      <param name="distribution_list_id" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+      <param name="process_id" ordinal="2" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+      <param name="valid" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <param name="id" ordinal="4" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+   </query>
+   <query id="insert_process_distribution_list_query" useConfig="default">
+      <sql>INSERT INTO sch_centra_id.process_distribution_list(id,distribution_list_id,process_id,valid) VALUES(?,?,?,?)</sql>
+      <param name="id" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+      <param name="distribution_list_id" ordinal="2" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+      <param name="process_id" ordinal="3" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+      <param name="valid" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+   </query>
+   <query id="delete_process_distribution_list_query" useConfig="default">
+      <sql>DELETE FROM sch_centra_id.process_distribution_list WHERE id=?</sql>
+      <param name="id" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+   </query>
+   <query id="select_all_process_distribution_list_query" useConfig="default">
+      <sql>SELECT id, distribution_list_id, process_id, valid FROM sch_centra_id.process_distribution_list</sql>
+      <result element="process_distribution_listCollection" rowName="process_distribution_list">
+         <element column="id" name="id" xsdType="xs:long"/>
+         <element column="distribution_list_id" name="distribution_list_id" xsdType="xs:long"/>
+         <element column="process_id" name="process_id" xsdType="xs:long"/>
+         <element column="valid" name="valid" xsdType="xs:integer"/>
+      </result>
+   </query>
+   <operation name="delete_process_distribution_list_operation">
+      <call-query href="delete_process_distribution_list_query">
+         <with-param name="id" query-param="id"/>
+      </call-query>
+   </operation>
+   <operation name="select_all_process_distribution_list_operation">
+      <call-query href="select_all_process_distribution_list_query"/>
+   </operation>
+   <operation name="insert_process_distribution_list_operation">
+      <call-query href="insert_process_distribution_list_query">
+         <with-param name="valid" query-param="valid"/>
+         <with-param name="process_id" query-param="process_id"/>
+         <with-param name="distribution_list_id" query-param="distribution_list_id"/>
+         <with-param name="id" query-param="id"/>
+      </call-query>
+   </operation>
+   <operation name="select_with_key_process_distribution_list_operation">
+      <call-query href="select_with_key_process_distribution_list_query">
+         <with-param name="id" query-param="id"/>
+      </call-query>
+   </operation>
+   <operation name="update_process_distribution_list_operation">
+      <call-query href="update_process_distribution_list_query">
+         <with-param name="valid" query-param="valid"/>
+         <with-param name="process_id" query-param="process_id"/>
+         <with-param name="distribution_list_id" query-param="distribution_list_id"/>
+         <with-param name="id" query-param="id"/>
+      </call-query>
+   </operation>
+</data>

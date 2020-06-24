@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="MigrationSendStoreSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="MigrationSendStoreSeq" value="Inicio..." />
+    </log>
+    <store messageStore="MigrationStore" />
+    <log level="custom" category="DEBUG">
+        <property name="MigrationSendStoreSeq" value="Fin..." />
+    </log>
+</sequence>

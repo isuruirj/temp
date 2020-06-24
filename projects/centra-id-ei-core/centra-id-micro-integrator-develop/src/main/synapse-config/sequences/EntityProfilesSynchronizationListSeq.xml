@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ProfilesSynchronizationListSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="ProfilesSynchronizationListSeq" value="Inicio.." />
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml" />
+    <property name="Accept" scope="transport" type="STRING" value="application/xml" />
+    <property action="remove" name="Content-Type" scope="transport" />
+    <property expression="$ctx:query.param.orderby" name="uri.var.orderby" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.userCreated" name="userCreated" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.dateCreated" name="dateCreated" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.dateSynchronization" name="dateSynchronization" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.type" name="type" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.status" name="status" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfileId" name="transactionalProfileId" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.globalProfileId" name="globalProfileId" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.profileSynchronizationExecutionId" name="profileSynchronizationExecutionId" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING" />
+    <script language="nashornJs"><![CDATA[
+        @add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE profilesSynchronization.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","profilesSynchronization","id");
+        where += addWhere("userCreated","String","profilesSynchronization","user_created");
+        where += addWhere("dateCreated","DateTime","profilesSynchronization","date_created");
+        where += addWhere("dateSynchronization","DateTime","profilesSynchronization","date_synchronization");
+        where += addWhere("type","String","profilesSynchronization","type");
+        where += addWhere("status","String","profilesSynchronization","status");
+        where += addWhere("transactionalProfileId","Integer","profilesSynchronization","transactional_profile_id");
+        where += addWhere("globalProfileId","Integer","profilesSynchronization","global_profile_id");
+        where += addWhere("profileSynchronizationExecutionId","Integer","profilesSynchronization","profile_synchronization_execution_id");
+        where += addWhere("valid","Integer","profilesSynchronization","valid");
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+        if(!mc.getProperty("uri.var.orderby")){
+            mc.setProperty("uri.var.orderby","profilesSynchronization.id");
+        } else {
+            mc.setProperty("uri.var.orderby","profilesSynchronization."+mc.getProperty("uri.var.orderby"));
+        }
+        log.debug(where);]]></script>
+    <call>
+        <endpoint name="ProfilesSynchronizationDSS_Endpoint" template="HTTPEndpointGetTemplate"
+              uri="{uri.var.dataServiceHost}/application.profiles-synchronization.ds.HTTPEndpoint/GetAllProfilesSynchronization?whereclause={uri.var.whereclause}&amp;orderby={uri.var.orderby}&amp;innerjoinclause={uri.var.innerjoinclause}" />
+
+    </call>
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING" />
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq" />
+        </then>
+        <else>
+            <xslt key="gov:/centra-id/xslt/dssFilter.xsl" />
+            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="ProfilesSynchronizationSeq" value="Fin.." />
+    </log>
+    <property name="messageType" value="application/json" scope="axis2" type="STRING"/>
+    <property name="Access-Control-Allow-Methods" value="GET,PUT,POST,DELETE,PATCH,OPTIONS" scope="transport" type="STRING"/>
+    <property name="Access-Control-Allow-Headers" value="Authorization,Access-Control-Allow-Origin,Content-Type" scope="transport" type="STRING"/>
+</sequence>

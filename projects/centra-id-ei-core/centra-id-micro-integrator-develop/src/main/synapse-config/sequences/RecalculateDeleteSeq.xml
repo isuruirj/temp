@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="RecalculateDeleteSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="RecalculateDeleteSeq" value="Inicio.."/>
+    </log>
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/TransactionalProfileSimple?globalProfileId={uri.var.globalProfileId}"/>
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <iterate expression="//transactionalProfileSimple" id="transactionalProfileSimpleId">
+                <target>
+                    <sequence>
+                        <sequence key="RecalculateTaskSeq"/>
+                    </sequence>
+                </target>
+            </iterate>
+            <aggregate id="transactionalProfileSimpleId">
+                <completeCondition>
+                    <messageCount max="-1" min="-1"/>
+                </completeCondition>
+                <onComplete expression="$body/*[1]">
+                    <log level="custom" category="DEBUG">
+                        <property name="agregado" value="ok"/>
+                    </log>
+                </onComplete>
+            </aggregate>
+            <!-- Enviar a colas de aprovisionamiento -->
+            <sequence key="ProvisioningSeq"/>
+        </then>
+        <else>
+            <property name="fault" scope="default" type="STRING" value="RecalculateSeq: error when get TransactionalProfile"/>
+            <sequence key="FaultUserDataSeq"/>
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="RecalculateDeleteSeq" value="Fin.."/>
+    </log>
+</sequence>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="LogSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="LogSeq" value="Inicio..."/>
+    </log>
+    <property name="responseDate" expression='get-property("SYSTEM_DATE","yyyy-MM-dd&apos;T&apos;HH:mm:ss.SSSXXX")' scope="default" />
+    <sequence key="LogTransactionalSeq" />
+    <sequence key="LogPerformanceSeq" />
+    <log level="custom" category="DEBUG">
+        <property name="LogSeq" value="Inicio..."/>
+    </log>
+</sequence>

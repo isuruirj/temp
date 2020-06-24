@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template name="GetCurrentDatePlainTemplate" xmlns="http://ws.apache.org/ns/synapse">
+    <sequence>
+        <property name="currentDate" expression="get-property('SYSTEM_DATE','yyyyMMddHHmmssSSSS')" scope="default" />
+    </sequence>
+</template>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="HistoryScopeRulesCreateSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse" xmlns:ci="centra-id.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:axis2ns65="http://ws.wso2.org/dataservice">
+    <log level="custom" category="DEBUG">
+        <property name="HistoryScopeRulesCreateSeq" value="Inicio.."/>
+    </log>
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml"/>
+    <property name="Accept" scope="transport" type="STRING" value="application/xml"/>
+    <xslt key="gov:/centra-id/xslt/jsonFilter.xsl">
+        <property value="insert" name="operationName"/>
+        <property value="historyScopeRules" name="entityName"/>
+        <property value="history_scope_rules" name="entityNamePlural"/>
+    </xslt>
+    <call>
+        <endpoint name="HistoryScopeRulesDSS_Endpoint" template="HTTPEndpointPostTemplate"
+              uri="{uri.var.dataServiceHost}/application.history-scope-rules.ds.HTTPEndpoint/CreateHistoryScopeRules" />
+    </call>
+    <property expression="//ci:Entry/ci:id" name="result" scope="default" type="STRING"/>
+    <filter regex="true" source="boolean(get-property('result'))">
+        <then>
+            <payloadFactory media-type="json">
+                <format>{ "historyScopeRules": { "id": $1 } }</format>
+                <args>
+                    <arg evaluator="xml" expression="//ci:Entry/ci:id"/>
+                </args>
+            </payloadFactory>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200"/>
+        </then>
+        <else>
+            <sequence key="FaultSeq"/> 
+        </else>
+    </filter>
+    <log level="custom"  category="DEBUG">
+        <property name="HistoryScopeRulesCreateSeq" value="Fin.."/>
+    </log>
+</sequence>

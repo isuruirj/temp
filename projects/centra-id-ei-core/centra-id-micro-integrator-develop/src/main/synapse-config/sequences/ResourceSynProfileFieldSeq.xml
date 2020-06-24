@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ResourceSynProfileFieldSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="ResourceSynProfileFieldSeq" value="Inicio..." />
+        <property name="uri.var.applicationGroupId" expression="get-property('uri.var.applicationGroupId')" />
+    </log>
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/ApplicationGroup/{uri.var.applicationGroupId}" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <property name="applicationGroup" expression="$body//*" scope="default" type="OM" />
+            <filter regex="true" source="$ctx:applicationGroup//applicationGroupList/applicationGroup/endpointType = 'AD'">
+                <then>
+                    <!-- Transactional profile AD -->
+                    <payloadFactory media-type="xml">
+                        <format>
+                            <ci:insert_transactional_profiles_ad_operacion xmlns:ci="centra-id.com">
+                                <ci:transactionalProfileId>$1</ci:transactionalProfileId>
+                            </ci:insert_transactional_profiles_ad_operacion>
+                        </format>
+                        <args>
+                            <arg evaluator="xml" expression="get-property('uri.var.transactionalProfileId')" />
+                        </args>
+                    </payloadFactory>
+                    <call>
+                        <endpoint template="HTTPEndpointPostTemplate" uri="{uri.var.dataServiceHost}/TransactionalProfilesDSS.HTTPEndpoint/InsertTransactionalProfileAd" />
+                    </call>
+                </then>
+                <else>
+                    <!-- Transactional profile -->
+                    <call>
+                        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/FieldSimple?applicationGroupId={uri.var.applicationGroupId}" />
+                    </call>
+                    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                        <then>
+                            <filter regex="true" source="boolean(//fieldSimpleList/fieldSimple)">
+                                <then>
+                                    <!-- CREAT TEMPLATE PROFILE -->
+                                    <iterate expression="//fieldSimple" id="fieldSimpleListId">
+                                        <target>
+                                            <sequence>
+                                                <property name="uri.var.fieldId" expression="//id" scope="default" type="STRING" />
+                                                <log level="custom" category="DEBUG">
+                                                    <property name="ResourceSynProfileSeq" value="Inicio.3." />
+                                                    <property name="uri.var.transactionalProfileId" expression="get-property('uri.var.transactionalProfileId')" scope="default" type="STRING" />
+                                                    <property name="uri.var.applicationGroupId" expression="get-property('uri.var.applicationGroupId')" scope="default" type="STRING" />
+                                                    <property name="uri.var.fieldId" expression="get-property('uri.var.fieldId')" scope="default" type="STRING" />
+                                                </log>
+                                                <call>
+                                                    <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/TemplateProfileSimple?transactionalProfileId={uri.var.transactionalProfileId}&amp;fieldId={uri.var.fieldId}" />
+                                                </call>
+                                                <property name="uri.var.templateProfileId" expression="(//templateProfileSimple/id)[1]" scope="default" type="STRING" />
+                                                <log level="custom" category="DEBUG">
+                                                    <property name="ResourceSynProfileSeq" value="Inicio.4." />
+                                                    <property name="uri.var.transactionalProfileId" expression="get-property('uri.var.transactionalProfileId')" scope="default" type="STRING" />
+                                                    <property name="uri.var.applicationGroupId" expression="get-property('uri.var.applicationGroupId')" scope="default" type="STRING" />
+                                                    <property name="uri.var.fieldId" expression="get-property('uri.var.fieldId')" scope="default" type="STRING" />
+                                                    <property name="uri.var.templateProfileId" expression="get-property('uri.var.templateProfileId')" scope="default" type="STRING" />
+                                                </log>
+                                                <filter regex="false" source="boolean(get-property('uri.var.templateProfileId'))">
+                                                    <then>
+                                                        <payloadFactory media-type="json">
+                                                            <format>
+                                                                {
+                                                                    "templateProfile": {
+                                                                        "fieldValue": "",
+                                                                        "field": {
+                                                                            "id": $1
+                                                                        },
+                                                                        "transactionalProfile": {
+                                                                            "id": $2
+                                                                        }
+                                                                    }
+                                                                }
+                                                            </format>
+                                                            <args>
+                                                                <arg evaluator="xml" expression="get-property('uri.var.fieldId')" />
+                                                                <arg evaluator="xml" expression="get-property('uri.var.transactionalProfileId')" />
+                                                            </args>
+                                                        </payloadFactory>
+                                                        <call>
+                                                            <endpoint template="HTTPEndpointPostTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/TemplateProfile" />
+                                                        </call>
+                                                    </then>
+                                                </filter>
+                                            </sequence>
+                                        </target>
+                                    </iterate>
+                                    <aggregate id="fieldSimpleListId">
+                                        <completeCondition>
+                                            <messageCount min="-1" max="-1" />
+                                        </completeCondition>
+                                        <onComplete expression="$body/*[1]">
+                                            <log level="custom" category="DEBUG">
+                                                <property name="agregado" value="ok" />
+                                            </log>
+                                        </onComplete>
+                                    </aggregate>
+                                </then>
+                            </filter>
+                        </then>
+                        <else>
+                            <property name="fault" value="error when consulting fields by id " />
+                            <sequence key="FaultSeq" />
+                        </else>
+                    </filter>
+                </else>
+            </filter>
+        </then>
+        <else>
+            <property name="fault" value="error when consulting applicationGroup" />
+            <sequence key="FaultSeq" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="ResourceSynProfileFieldSeq" value="Fin..." />
+    </log>
+</sequence>

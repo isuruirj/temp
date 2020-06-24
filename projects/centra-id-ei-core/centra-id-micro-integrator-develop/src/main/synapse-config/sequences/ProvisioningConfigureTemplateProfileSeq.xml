@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ProvisioningConfigureTemplateProfileSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningConfigureTemplateProfileSeq" value="Inicio.." />
+    </log>
+    <property name="uri.var.transactionalProfileId" expression="$ctx:taskProvisioningCreate//transactionalProfileId" />
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningCreateUserSeq" value="Inicio..3" />
+        <property name="transactionalProfileId" expression="$ctx:uri.var.transactionalProfileId" />
+        <property name="transactionalProfile" expression="$ctx:taskProvisioningCreate" />
+    </log>
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/application/TemplateProfileSimple?transactionalProfileId={uri.var.transactionalProfileId}" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <property name="templateProfileSimple" expression="$body//*" scope="default" type="OM" />
+        </then>
+        <else>
+            <property name="fault" value="ProvisioningCreateUserSeq: Error get TemplateProfileSimple" />
+            <sequence key="FaultSeq" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningConfigureTemplateProfileSeq" value="Fin.." />
+    </log>
+</sequence>

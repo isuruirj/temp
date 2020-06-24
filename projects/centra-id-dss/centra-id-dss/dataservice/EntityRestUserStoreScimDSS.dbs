@@ -1,0 +1,200 @@
+<data name="provisioning.rest-user-store-scim.ds"
+    serviceNamespace="centra-id.com"
+    enableBatchRequests="false"
+    enableBoxcarring="false"
+    transports="https"
+    disableLegacyBoxcarringMode="true">
+
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <!-- DYNAMIC QUERY RESTUSERSTORESCIM -->
+    <query id="dynamicQuery_restUserStoreScim" useConfig="default">
+        <sql>
+           SELECT
+               restUserStoreScim.id,
+               restUserStoreScim.username,
+               restUserStoreScim.scim,
+               restUserStoreScim.domain,
+               restUserStoreScim.teller_number,
+               restUserStoreScim.teller_name,
+               restUserStoreScim.valid
+           FROM sch_centra_id.REST_USER_STORE_SCIM restUserStoreScim :innerjoinclause :whereclause ORDER BY :orderby :fromto
+        </sql>
+        <result element="restUserStoreScimList" rowName="restUserStoreScim">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="username" name="username" xsdType="xs:string"/>
+            <element column="scim" name="scim" xsdType="xs:string"/>
+            <element column="domain" name="domain" xsdType="xs:string"/>
+            <element column="teller_number" name="tellerNumber" xsdType="xs:string"/>
+            <element column="teller_name" name="tellerName" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="fromto" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- INSERT RestUserStoreScim -->
+    <query id="insertQuery_restUserStoreScim" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>
+           INSERT INTO sch_centra_id.REST_USER_STORE_SCIM(
+               username,
+               scim,
+               domain,
+               teller_number,
+               teller_name,
+               valid
+        ) VALUES(?,?,?,?,?,?)
+        </sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="username" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="scim" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="domain" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="tellerNumber" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="tellerName" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="valid" ordinal="6" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="1"/>
+    </query>
+    <!-- UPDATE RestUserStoreScim -->
+    <query id="updateQuery_restUserStoreScim" useConfig="default">
+        <sql>
+           UPDATE sch_centra_id.REST_USER_STORE_SCIM SET
+               username=?,
+               scim=?,
+               domain=?,
+               teller_number=?,
+               teller_name=?
+            WHERE id=?
+        </sql>
+        <param name="username" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="scim" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="domain" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="tellerNumber" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="tellerName" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="#{NULL}"/>
+        <param name="id" ordinal="6" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <!-- DYNAMIC FUNCTION  -->
+    <query id="dynamicQueryFunction_restUserStoreScim" useConfig="default">
+        <sql>
+           SELECT :function(:field) as value FROM :table :innerjoinclause :whereclause
+         </sql>
+        <result element="result">
+            <element column="value" name="value" xsdType="xs:long"/>
+        </result>
+        <param name="function" sqlType="QUERY_STRING"/>
+        <param name="field" sqlType="QUERY_STRING"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DELETE  -->
+    <query id="dynamicDeleteQuery_restUserStoreScim" useConfig="default">
+        <sql>UPDATE sch_centra_id.REST_USER_STORE_SCIM SET valid=0 WHERE username=:username and domain=:domain</sql>
+        <param name="username" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="domain" paramType="SCALAR" sqlType="STRING" type="IN"/>
+    </query>
+    <!-- OPERATIONS -->
+    <operation name="listAllOperation_restUserStoreScim">
+        <call-query href="dynamicQuery_restUserStoreScim">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="fromToOperation_restUserStoreScim">
+        <call-query href="dynamicQuery_restUserStoreScim">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="functionOperation_restUserStoreScim">
+        <call-query href="dynamicQueryFunction_restUserStoreScim">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="deleteOperation_restUserStoreScim">
+        <call-query href="dynamicDeleteQuery_restUserStoreScim">
+            <with-param name="username" query-param="username"/>
+            <with-param name="domain" query-param="domain"/>
+        </call-query>
+    </operation>
+    <operation name="create_restUserStoreScim">
+        <call-query href="insertQuery_restUserStoreScim">
+            <with-param name="username" query-param="username"/>
+            <with-param name="scim" query-param="scim"/>
+            <with-param name="domain" query-param="domain"/>
+            <with-param name="tellerNumber" query-param="tellerNumber"/>
+            <with-param name="tellerName" query-param="tellerName"/>
+            <with-param name="valid" query-param="valid"/>
+        </call-query>
+    </operation>
+    <operation name="update_restUserStoreScim">
+        <call-query href="updateQuery_restUserStoreScim">
+            <with-param name="username" query-param="username"/>
+            <with-param name="scim" query-param="scim"/>
+            <with-param name="domain" query-param="domain"/>
+            <with-param name="tellerNumber" query-param="tellerNumber"/>
+            <with-param name="tellerName" query-param="tellerName"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <!-- RESOURCES -->
+    <resource method="GET" path="GetAllRestUserStoreScim">
+        <call-query href="dynamicQuery_restUserStoreScim">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFromToRestUserStoreScim">
+        <call-query href="dynamicQuery_restUserStoreScim">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFunctionResultRestUserStoreScim">
+        <call-query href="dynamicQueryFunction_restUserStoreScim">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="DeleteRestUserStoreScim">
+        <call-query href="dynamicDeleteQuery_restUserStoreScim">
+            <with-param name="username" query-param="username"/>
+            <with-param name="domain" query-param="domain"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="CreateRestUserStoreScim">
+        <call-query href="insertQuery_restUserStoreScim">
+            <with-param name="username" query-param="username"/>
+            <with-param name="scim" query-param="scim"/>
+            <with-param name="domain" query-param="domain"/>
+            <with-param name="tellerNumber" query-param="tellerNumber"/>
+            <with-param name="tellerName" query-param="tellerName"/>
+            <with-param name="valid" query-param="valid"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="UpdateRestUserStoreScim">
+        <call-query href="updateQuery_restUserStoreScim">
+            <with-param name="username" query-param="username"/>
+            <with-param name="scim" query-param="scim"/>
+            <with-param name="domain" query-param="domain"/>
+            <with-param name="tellerNumber" query-param="tellerNumber"/>
+            <with-param name="tellerName" query-param="tellerName"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+</data>

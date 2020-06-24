@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="LogExceptionSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="INFO">
+        <property name="LogExceptionSeq" value="Inicio.." />
+        <property name="LogExceptionSeq" expression="get-property('exception')" />
+    </log>
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml" />
+    <property name="Accept" scope="transport" type="STRING" value="application/xml" />
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property expression="$body//*" name="errorPayload" scope="default" type="STRING" />
+    <call-template target="GetCurrentDateTemplate" />
+    <payloadFactory media-type="xml">
+        <format>
+            <cen:_postcreatelogexception xmlns:cen="centra-id.com">
+                <cen:guid>$1</cen:guid>
+                <cen:createdDate>$2</cen:createdDate>
+                <cen:appCalled>$3</cen:appCalled>
+                <cen:actionCalled>$4</cen:actionCalled>
+                <cen:jsonInput>$5</cen:jsonInput>
+                <cen:exception>$6</cen:exception>
+            </cen:_postcreatelogexception>
+        </format>
+        <args>
+            <arg evaluator="xml" expression="$ctx:guidCalled" />
+            <arg evaluator="xml" expression="$ctx:currentDate" />
+            <arg evaluator="xml" expression="$ctx:appCalled" />
+            <arg evaluator="xml" expression="$ctx:actionCalled" />
+            <arg evaluator="xml" expression="base64Encode(get-property('requestJson'))" />
+            <arg evaluator="xml" expression="$ctx:exception" />
+        </args>
+    </payloadFactory>
+    <call>
+        <endpoint template="HTTPEndpointPostTemplate" uri="{uri.var.dataServiceHost}/LogExceptionsDSS.HTTPEndpoint/createLogException" />
+    </call>
+    <log level="custom" category="INFO">
+        <property name="LogExceptionSeq" value="Fin.." />
+    </log>
+</sequence>

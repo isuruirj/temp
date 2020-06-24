@@ -1,0 +1,473 @@
+<data name="TransactionalProfilesDSS" serviceNamespace="centra-id.com" transports="https">
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+
+    <query id="select_groups_ad_available_count_query" useConfig="default">
+        <sql>
+           SELECT
+               COUNT(cat.id) AS value
+            FROM SCH_CENTRA_ID.CATALOGS cat 
+            JOIN SCH_CENTRA_ID.CATALOGS_TYPES type on cat.catalog_type_id=type.ID
+            JOIN SCH_CENTRA_ID.TEMPLATE_PROFILES_AD ad on ad.GROUP_AD NOT LIKE '%'+cat.code+'%'  and ad.TRANSACTIONAL_PROFILE_ID=?
+            WHERE cat.NAME LIKE ? and type.code='GROUPAD'  
+            AND cat.VALID=1
+        </sql>
+        <result element="result">
+            <element column="value" name="value" xsdType="xs:long"/>
+        </result>
+        <param name="transactionalProfileId" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="name" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+    </query>
+    <query id="select_groups_ad_available_query" useConfig="default">
+        <sql>
+           SELECT
+               cat.id,
+               cat.code,
+               cat.name,
+               cat.valid
+            FROM SCH_CENTRA_ID.CATALOGS cat 
+            JOIN SCH_CENTRA_ID.CATALOGS_TYPES type on cat.catalog_type_id=type.ID
+            JOIN SCH_CENTRA_ID.TEMPLATE_PROFILES_AD ad on ad.GROUP_AD NOT LIKE '%'+cat.code+'%'  and ad.TRANSACTIONAL_PROFILE_ID=?
+            WHERE cat.NAME LIKE ? and type.code='GROUPAD'  
+            AND cat.VALID=1
+            ORDER BY cat.NAME
+            OFFSET ? ROWS FETCH NEXT ? ROWS ONLY
+        </sql>
+        <result element="groupsList" rowName="groups">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="transactionalProfileId" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="name" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="from" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+        <param name="to" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+    </query>
+
+
+
+    <query id="select_transactional_profiles_available_count_query" useConfig="default">
+        <sql>
+           SELECT COUNT(ID) as value FROM SCH_CENTRA_ID.TRANSACTIONAL_PROFILES transactionalProfile
+           WHERE
+                ( transactionalProfile.CODE LIKE ?  OR  transactionalProfile.NAME LIKE ?)  
+            AND transactionalProfile.ID NOT IN
+                (
+                    SELECT
+                        TRANSACTIONAL_PROFILE_ID
+                    FROM
+                        SCH_CENTRA_ID.GLOBAL_TRANSACTIONAL_PROFILES
+                    WHERE VALID=1
+                    AND GLOBAL_PROFILE_ID=? )
+            AND transactionalProfile.VALID=1
+        </sql>
+        <result element="result">
+            <element column="value" name="value" xsdType="xs:long"/>
+        </result>
+        <param name="code" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="name" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="globalProfileId" ordinal="3" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <query id="select_transactional_profiles_available_query" useConfig="default">
+        <sql>
+            SELECT
+               transactionalProfile.id,
+               transactionalProfile.code,
+               transactionalProfile.name,
+               transactionalProfile.comments,
+               transactionalProfile.date_created,
+               transactionalProfile.date_deleted,
+               transactionalProfile.user_created,
+               transactionalProfile.user_deleted,
+               transactionalProfile.valid,
+               transactionalProfile.configured,
+               transactionalProfile.catalog_risk_level_id,
+               transactionalProfile.application_id
+            FROM
+                SCH_CENTRA_ID.TRANSACTIONAL_PROFILES transactionalProfile
+            WHERE
+                ( transactionalProfile.CODE LIKE ?  OR  transactionalProfile.NAME LIKE ?)  
+            AND transactionalProfile.ID NOT IN
+                (
+                    SELECT
+                        TRANSACTIONAL_PROFILE_ID
+                    FROM
+                        SCH_CENTRA_ID.GLOBAL_TRANSACTIONAL_PROFILES
+                    WHERE VALID=1
+                    AND GLOBAL_PROFILE_ID=? )
+            AND transactionalProfile.VALID=1
+            ORDER BY transactionalProfile.NAME
+            OFFSET ? ROWS FETCH NEXT ? ROWS ONLY
+        </sql>
+        <result element="transactionalProfileList" rowName="transactionalProfile">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="comments" name="comments" xsdType="xs:string"/>
+            <element column="date_created" name="dateCreated" xsdType="xs:dateTime"/>
+            <element column="date_deleted" name="dateDeleted" xsdType="xs:dateTime"/>
+            <element column="user_created" name="userCreated" xsdType="xs:string"/>
+            <element column="user_deleted" name="userDeleted" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="configured" name="configured" xsdType="xs:integer"/>
+            <call-query href="queryReferenceById__transactionalProfile_catalogRiskLevel">
+                <with-param column="catalog_risk_level_id" name="id"/>
+            </call-query>
+            <call-query href="queryReferenceById__transactionalProfile_application">
+                <with-param column="application_id" name="id"/>
+            </call-query>
+        </result>
+        <param name="code" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="name" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="globalProfileId" ordinal="3" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="from" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+        <param name="to" ordinal="5" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+
+    </query>
+
+    <query id="select_with_key_transactional_profiles_query" useConfig="default">
+        <sql>SELECT id, application_profile_id, code, name, description, comments, catalog_risk_level_id, created
+           FROM sch_centra_id.transactional_profiles WHERE id=? AND valid=1</sql>
+        <param name="id" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <result element="TransactionalProfiles" rowName="TransactionalProfile">
+            <element column="id" name="id" xsdType="xs:long"/>
+            <element column="application_profile_id" name="applicationProfileId" xsdType="xs:long"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="description" name="description" xsdType="xs:string"/>
+            <element column="comments" name="comments" xsdType="xs:string"/>
+            <element column="catalog_risk_level_id" name="catalogRiskLevelId" xsdType="xs:long"/>
+            <element column="created" name="created" xsdType="xs:dateTime"/>
+        </result>
+    </query>
+    <query id="update_transactional_profiles_query" useConfig="default">
+        <sql>UPDATE sch_centra_id.transactional_profiles SET application_profile_id=?,code=?,name=?,description=?,comments=?,catalog_risk_level_id=?
+            WHERE id=? AND valid=1</sql>
+        <param name="applicationProfileId" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="code" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="name" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="description" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="comments" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="catalogRiskLevelId" ordinal="6" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="id" ordinal="7" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+
+    <query id="insert_transactional_profiles_ad_query" useConfig="default">
+        <sql>
+            INSERT INTO SCH_CENTRA_ID.TEMPLATE_PROFILES_AD
+                (
+                    TRANSACTIONAL_PROFILE_ID,
+                    FIELD_ACTIVATE_MAIL_ID,
+                    FIELD_MAILBOX_TYPE_ID,
+                    FIELD_SHOULD_CHANGE_PASSWORD_FIRST_TIME_ID,
+                    FIELD_SHOULD_NOT_CHANGE_PASSWORD_ID,
+                    FIELD_PASSWORD_NOT_EXPIRE_ID,
+                    FIELD_ACCOUNT_CONTAINER_ID,
+                    FIELD_GROUP_AD_ID,
+                    FIELD_EXCHANGE_ADVANCED_OWA_ID,
+                    FIELD_EXCHANGE_ADVANCED_ACTIVE_SYNC_ID,
+                    FIELD_SIP_ID,
+                    FIELD_TERMINAL_SERVICES_PROFILE_ID,
+                    FIELD_CONNECT_FOLLOWING_DRIVE_ID,
+                    FIELD_TERMINAL_SERVICES_HOME_DIRECTORY_ID,
+                    FIELD_ALLOW_LOGON_TO_TERMINAL_SERVER_ID,
+                    GROUP_AD,
+                    VALID
+                )
+                VALUES
+                (    ? ,
+                    (SELECT id FROM SCH_CENTRA_ID.FIELDS WHERE CODE='activateMail'),
+                    (SELECT id FROM SCH_CENTRA_ID.FIELDS WHERE CODE='mailboxType'),
+                    (SELECT id FROM SCH_CENTRA_ID.FIELDS WHERE CODE='changePasswordNextLogon'),
+                    (SELECT id FROM SCH_CENTRA_ID.FIELDS WHERE CODE='userCannotChangePassword'),
+                    (SELECT id FROM SCH_CENTRA_ID.FIELDS WHERE CODE='passwordNeverExpires'),
+                    (SELECT id FROM SCH_CENTRA_ID.FIELDS WHERE CODE='accountContainer'),
+                    (SELECT id FROM SCH_CENTRA_ID.FIELDS WHERE CODE='groupAd'),
+                    (SELECT id FROM SCH_CENTRA_ID.FIELDS WHERE CODE='exchangeAdvanceOwa'),
+                    (SELECT id FROM SCH_CENTRA_ID.FIELDS WHERE CODE='exchangeAdvanceActiveSync'),
+                    (SELECT id FROM SCH_CENTRA_ID.FIELDS WHERE CODE='sip'),
+                    (SELECT id FROM SCH_CENTRA_ID.FIELDS WHERE CODE='terminalServicesProfile'),
+                    (SELECT id FROM SCH_CENTRA_ID.FIELDS WHERE CODE='connectFollowingDrive'),
+                    (SELECT id FROM SCH_CENTRA_ID.FIELDS WHERE CODE='terminalServicesHomeDirectory'),
+                    (SELECT id FROM SCH_CENTRA_ID.FIELDS WHERE CODE='allowLogonTerminalServer'),
+                    '',1
+                )
+        </sql>
+        <param name="transactionalProfileId" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+
+
+
+    <query id="select_all_transactional_profiles_query" useConfig="default">
+        <sql>SELECT id, application_profile_id, code, name, description, comments, catalog_risk_level_id, created 
+            FROM sch_centra_id.transactional_profiles WHERE valid=1</sql>
+        <result element="TransactionalProfiles" rowName="TransactionalProfile">
+            <element column="id" name="id" xsdType="xs:long"/>
+            <element column="application_profile_id" name="applicationProfileId" xsdType="xs:long"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="description" name="description" xsdType="xs:string"/>
+            <element column="comments" name="comments" xsdType="xs:string"/>
+            <element column="catalog_risk_level_id" name="catalogRiskLevelId" xsdType="xs:long"/>
+            <element column="created" name="created" xsdType="xs:dateTime"/>
+        </result>
+    </query>
+    <query id="delete_transactional_profiles_query" useConfig="default">
+        <sql>UPDATE sch_centra_id.transactional_profiles SET valid=0 WHERE id=?</sql>
+        <param name="id" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <query id="insert_transactional_profiles_query" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>INSERT INTO sch_centra_id.transactional_profiles(application_profile_id,code,name,description,comments,catalog_risk_level_id,created,valid)
+            VALUES(?,?,?,?,?,?,getdate(),?)</sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="applicationProfileId" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="code" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="name" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="description" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="comments" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="catalogRiskLevelId" ordinal="6" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param defaultValue="1" name="valid" ordinal="7" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+    </query>
+    <!-- QUERY REFERENCE TransactionalProfile Catalog 0-->
+    <query id="queryReferenceById__transactionalProfile_catalogRiskLevel" useConfig="default">
+        <sql>
+           SELECT 
+               catalogRiskLevel.id,
+               catalogRiskLevel.code,
+               catalogRiskLevel.name,
+               catalogRiskLevel.predetermined,
+               catalogRiskLevel.ordinal,
+               catalogRiskLevel.value_text,
+               catalogRiskLevel.value_number,
+               catalogRiskLevel.value_date,
+               catalogRiskLevel.value_boolean,
+               catalogRiskLevel.catalog_type_id,
+               catalogRiskLevel.valid
+           FROM sch_centra_id.CATALOGS catalogRiskLevel WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogRiskLevel">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="predetermined" name="predetermined" xsdType="xs:integer"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="value_text" name="valueText" xsdType="xs:string"/>
+            <element column="value_number" name="valueNumber" xsdType="xs:decimal"/>
+            <element column="value_date" name="valueDate" xsdType="xs:date"/>
+            <element column="value_boolean" name="valueBoolean" xsdType="xs:integer"/>
+            <element column="catalog_type_id" name="catalogTypeId" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE TransactionalProfile Application 0-->
+    <query id="queryReferenceById__transactionalProfile_application" useConfig="default">
+        <sql>
+           SELECT 
+               application.id,
+               application.code,
+               application.name,
+               application.automatic_provision,
+               application.valid,
+               application.status,
+               application.application_group_id
+           FROM sch_centra_id.APPLICATIONS application WHERE id=? AND valid=1
+        </sql>
+        <result element="application">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="automatic_provision" name="automaticProvision" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <call-query href="queryReferenceById__application_application_applicationGroup">
+                <with-param column="application_group_id" name="id"/>
+            </call-query>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE TransactionalProfile ApplicationGroup 1-->
+    <query id="queryReferenceById__application_application_applicationGroup" useConfig="default">
+        <sql>
+           SELECT 
+               applicationGroup.id,
+               applicationGroup.code,
+               applicationGroup.name,
+               applicationGroup.endpoint_type,
+               applicationGroup.ordinal,
+               applicationGroup.valid,
+               applicationGroup.number_retries,
+               applicationGroup.time_between_retries,
+               applicationGroup.errors_not_require_ticket
+           FROM sch_centra_id.APPLICATIONS_GROUP applicationGroup WHERE id=? AND valid=1
+        </sql>
+        <result element="applicationGroup">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="endpoint_type" name="endpointType" xsdType="xs:string"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="number_retries" name="numberRetries" xsdType="xs:integer"/>
+            <element column="time_between_retries" name="timeBetweenRetries" xsdType="xs:integer"/>
+            <element column="errors_not_require_ticket" name="errorsNotRequireTicket" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+
+
+    <operation name="select_all_transactional_profiles_operation">
+        <call-query href="select_all_transactional_profiles_query"/>
+    </operation>
+    <operation name="select_with_key_transactional_profiles_operation">
+        <call-query href="select_with_key_transactional_profiles_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+
+    <operation name="select_with_key_transactional_profiles_available_count_operation">
+        <call-query href="select_transactional_profiles_available_count_query">
+            <with-param name="globalProfileId" query-param="globalProfileId"/>
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+        </call-query>
+    </operation>
+
+    <operation name="select_with_key_transactional_profiles_available_operation">
+        <call-query href="select_transactional_profiles_available_query">
+            <with-param name="globalProfileId" query-param="globalProfileId"/>
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="from" query-param="from"/>
+            <with-param name="to" query-param="to"/>
+        </call-query>
+    </operation>
+
+    <operation name="select_with_key_groups_ad_available_count_operation">
+        <call-query href="select_groups_ad_available_count_query">
+            <with-param name="transactionalProfileId" query-param="transactionalProfileId"/>
+            <with-param name="name" query-param="name"/>
+        </call-query>
+    </operation>
+
+    <operation name="select_with_key_groups_ad_available_operation">
+        <call-query href="select_groups_ad_available_query">
+            <with-param name="transactionalProfileId" query-param="transactionalProfileId"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="from" query-param="from"/>
+            <with-param name="to" query-param="to"/>
+        </call-query>
+    </operation>
+
+    <operation name="update_transactional_profiles_operation">
+        <call-query href="update_transactional_profiles_query">
+            <with-param name="code" query-param="code"/>
+            <with-param name="comments" query-param="comments"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="description" query-param="description"/>
+            <with-param name="id" query-param="id"/>
+            <with-param name="catalogRiskLevelId" query-param="catalogRiskLevelId"/>
+            <with-param name="applicationProfileId" query-param="applicationProfileId"/>
+        </call-query>
+    </operation>
+    <operation name="delete_transactional_profiles_operation">
+        <call-query href="delete_transactional_profiles_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <operation name="insert_transactional_profiles_operation">
+        <call-query href="insert_transactional_profiles_query">
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="code" query-param="code"/>
+            <with-param name="comments" query-param="comments"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="description" query-param="description"/>
+            <with-param name="catalogRiskLevelId" query-param="catalogRiskLevelId"/>
+            <with-param name="applicationProfileId" query-param="applicationProfileId"/>
+        </call-query>
+    </operation>
+    <operation name="insert_transactional_profiles_ad_operacion">
+        <call-query href="insert_transactional_profiles_ad_query">
+            <with-param name="transactionalProfileId" query-param="transactionalProfileId"/>
+        </call-query>
+    </operation>
+
+    <resource method="GET" path="getAllTransactionalProfiles">
+        <call-query href="select_all_transactional_profiles_query"/>
+    </resource>
+    <resource method="GET" path="getTransactionalProfileAvailableCount">
+        <call-query href="select_transactional_profiles_available_count_query">
+            <with-param name="globalProfileId" query-param="globalProfileId"/>
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="getTransactionalProfileAvailable">
+        <call-query href="select_transactional_profiles_available_query">
+            <with-param name="globalProfileId" query-param="globalProfileId"/>
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="from" query-param="from"/>
+            <with-param name="to" query-param="to"/>
+        </call-query>
+    </resource>
+
+
+    <resource method="GET" path="getGroupsAdAvailableCount">
+        <call-query href="select_groups_ad_available_count_query">
+            <with-param name="transactionalProfileId" query-param="transactionalProfileId"/>
+            <with-param name="name" query-param="name"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="getGroupsAdAvailable">
+        <call-query href="select_groups_ad_available_query">
+            <with-param name="transactionalProfileId" query-param="transactionalProfileId"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="from" query-param="from"/>
+            <with-param name="to" query-param="to"/>
+        </call-query>
+    </resource>
+
+    <resource method="GET" path="getByIdTransactionalProfile">
+        <call-query href="select_with_key_transactional_profiles_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="createTransactionalProfile">
+        <call-query href="insert_transactional_profiles_query">
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="code" query-param="code"/>
+            <with-param name="comments" query-param="comments"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="description" query-param="description"/>
+            <with-param name="catalogRiskLevelId" query-param="catalogRiskLevelId"/>
+            <with-param name="applicationProfileId" query-param="applicationProfileId"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="updateTransactionalProfile">
+        <call-query href="update_transactional_profiles_query">
+            <with-param name="code" query-param="code"/>
+            <with-param name="comments" query-param="comments"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="description" query-param="description"/>
+            <with-param name="id" query-param="id"/>
+            <with-param name="catalogRiskLevelId" query-param="catalogRiskLevelId"/>
+            <with-param name="applicationProfileId" query-param="applicationProfileId"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="deleteTransactionalProfile">
+        <call-query href="delete_transactional_profiles_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="InsertTransactionalProfileAd">
+        <call-query href="insert_transactional_profiles_ad_query">
+            <with-param name="transactionalProfileId" query-param="transactionalProfileId"/>
+        </call-query>
+    </resource>
+
+</data>

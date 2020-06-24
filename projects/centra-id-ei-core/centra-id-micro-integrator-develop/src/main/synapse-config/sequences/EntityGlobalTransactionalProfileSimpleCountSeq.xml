@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GlobalTransactionalProfileSimpleCountSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log category="DEBUG" level="custom">
+        <property name="GlobalTransactionalProfileSimpleCountSeq" value="Inicio.."/>
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2"/>
+    <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+    <property name="Accept" scope="transport" type="STRING" value="application/json"/>
+    <property action="remove" name="Content-Type" scope="transport"/>
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.dateCreated" name="dateCreated" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.dateDeleted" name="dateDeleted" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.userCreated" name="userCreated" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.userDeleted" name="userDeleted" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.transactionalProfileId" name="transactionalProfileId" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.globalProfileId" name="globalProfileId" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING"/>
+    <script language="nashornJs"><![CDATA[@add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE globalTransactionalProfileSimple.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","globalTransactionalProfileSimple","id");
+        where += addWhere("dateCreated","DateTime","globalTransactionalProfileSimple","date_created");
+        where += addWhere("dateDeleted","DateTime","globalTransactionalProfileSimple","date_deleted");
+        where += addWhere("userCreated","String","globalTransactionalProfileSimple","user_created");
+        where += addWhere("userDeleted","String","globalTransactionalProfileSimple","user_deleted");
+        where += addWhere("transactionalProfileId","Integer","globalTransactionalProfileSimple","transactional_profile_id");
+        where += addWhere("globalProfileId","Integer","globalTransactionalProfileSimple","global_profile_id");
+        where += addWhere("valid","Integer","globalTransactionalProfileSimple","valid");
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+        log.debug(where);]]></script>
+    <property name="uri.var.table" scope="default" type="STRING" value="sch_centra_id.GLOBAL_TRANSACTIONAL_PROFILES globalTransactionalProfileSimple"/>
+    <property name="uri.var.function" scope="default" type="STRING" value="COUNT"/>
+    <property name="uri.var.field" scope="default" type="STRING" value="*"/>
+    <call>
+        <endpoint name="GlobalTransactionalProfileSimpleDSS_Endpoint" template="HTTPEndpointGetTemplate" uri="{uri.var.dataServiceHost}/application.global-transactional-profile-simple.ds.HTTPEndpoint/GetFunctionResultGlobalTransactionalProfileSimple?function={uri.var.function}&amp;whereclause={uri.var.whereclause}&amp;field={uri.var.field}&amp;table={uri.var.table}&amp;innerjoinclause={uri.var.innerjoinclause}"/>
+    </call>
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING"/>
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq"/>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                        "count": $1
+                    }
+                </format>
+                <args>
+                    <arg evaluator="json" expression="$.result.value"/>
+                </args>
+            </payloadFactory>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200"/>
+        </else>
+    </filter>
+    <log category="DEBUG" level="custom">
+        <property name="GlobalTransactionalProfileSimpleCountSeq" value="Fin.."/>
+    </log>
+    <respond/>
+</sequence>

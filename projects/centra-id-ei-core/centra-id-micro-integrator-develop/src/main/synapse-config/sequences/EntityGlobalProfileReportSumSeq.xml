@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GlobalProfileReportSumSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property name="GlobalProfileReportSumSeq" scope="default" type="STRING" value="Inicio.."/>
+    <property expression="get-property('uri.var.field')" name="uri.var.field" scope="default" type="STRING"/>
+    <log category="DEBUG" level="custom"/>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2"/>
+    <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+    <property name="Accept" scope="transport" type="STRING" value="application/json"/>
+    <property action="remove" name="Content-Type" scope="transport"/>
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.globalProfileCode" name="globalProfileCode" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.globalProfileName" name="globalProfileName" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.globalProfileIsBirth" name="globalProfileIsBirth" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.globalProfileStatus" name="globalProfileStatus" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.globalProfileTicketNumber" name="globalProfileTicketNumber" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.globalProfileUserCreation" name="globalProfileUserCreation" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.globalProfileDateCreation" name="globalProfileDateCreation" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.globalProfileUserApproval" name="globalProfileUserApproval" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.globalProfileDateApproval" name="globalProfileDateApproval" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.globalProfileObservation" name="globalProfileObservation" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.globalProfileScopeRulesWho" name="globalProfileScopeRulesWho" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.globalProfileScopeRulesThat" name="globalProfileScopeRulesThat" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING"/>
+    <script language="nashornJs"><![CDATA[@add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE globalProfileReport.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","globalProfileReport","id");
+        where += addWhere("globalProfileCode","String","globalProfileReport","global_profile_code");
+        where += addWhere("globalProfileName","String","globalProfileReport","global_profile_name");
+        where += addWhere("globalProfileIsBirth","Integer","globalProfileReport","global_profile_is_birth");
+        where += addWhere("globalProfileStatus","String","globalProfileReport","global_profile_status");
+        where += addWhere("globalProfileTicketNumber","String","globalProfileReport","global_profile_ticket_number");
+        where += addWhere("globalProfileUserCreation","String","globalProfileReport","global_profile_user_creation");
+        where += addWhere("globalProfileDateCreation","Date","globalProfileReport","global_profile_date_creation");
+        where += addWhere("globalProfileUserApproval","String","globalProfileReport","global_profile_user_approval");
+        where += addWhere("globalProfileDateApproval","Date","globalProfileReport","global_profile_date_approval");
+        where += addWhere("globalProfileObservation","String","globalProfileReport","global_profile_observation");
+        where += addWhere("globalProfileScopeRulesWho","String","globalProfileReport","global_profile_scope_rules_who");
+        where += addWhere("globalProfileScopeRulesThat","String","globalProfileReport","global_profile_scope_rules_that");
+        where += addWhere("valid","Integer","globalProfileReport","valid");
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+
+        // FIELD
+        var field = "globalProfileReport."+mc.getProperty("uri.var.field");
+        mc.setProperty("uri.var.field",field);
+
+        log.debug(where);]]></script>
+    <property name="uri.var.table" scope="default" type="STRING" value="sch_centra_id.GLOBAL_PROFILES_REPORT_VW globalProfileReport"/>
+    <property name="uri.var.function" scope="default" type="STRING" value="SUM"/>
+    <call>
+        <endpoint name="GlobalProfileReportDSS_Endpoint" template="HTTPEndpointGetTemplate" uri="{uri.var.dataServiceHost}/report.global-profile-report.ds.HTTPEndpoint/GetFunctionResultGlobalProfileReport?function={uri.var.function}&amp;whereclause={uri.var.whereclause}&amp;field={uri.var.field}&amp;table={uri.var.table}&amp;innerjoinclause={uri.var.innerjoinclause}"/>
+    </call>
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING"/>
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq"/>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                        "sum": $1
+                    }
+                </format>
+                <args>
+                    <arg evaluator="json" expression="$.result.value"/>
+                </args>
+            </payloadFactory>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200"/>
+        </else>
+    </filter>
+    <log category="DEBUG" level="custom">
+        <property name="GlobalProfileReportSumSeq" value="Fin.."/>
+    </log>
+    <respond/>
+</sequence>

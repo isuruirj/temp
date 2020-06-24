@@ -1,0 +1,15 @@
+<p:Insert_GIdentidad xmlns:p="http://ws.wso2.org/dataservice">
+    <p:Guid>$1</p:Guid>
+    <p:FechaIngreso>$2</p:FechaIngreso>
+    <p:IdMensaje>$3</p:IdMensaje>
+    <p:Estado>$4</p:Estado>
+    <p:UserStore>$5</p:UserStore>
+    <p:MensajePeticion>$6</p:MensajePeticion>
+    <p:MensajeRespuesta>$7</p:MensajeRespuesta>
+    <p:Prioridad>10</p:Prioridad>
+    <p:Reintento>0</p:Reintento>
+    <p:SoapAction>$8</p:SoapAction>
+    <p:StatusCodResp>$9</p:StatusCodResp>
+    <p:MensajePeticionValores><![CDATA[$10]]></p:MensajePeticionValores>
+    <p:MensajeRespuestaValores><![CDATA[$11]]></p:MensajeRespuestaValores>
+</p:Insert_GIdentidad>

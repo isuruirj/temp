@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/api.centraid/application/FieldSimple" name="CentraIDapplicationFieldSimpleApi" version="1.0.0" version-type="context" xmlns="http://ws.apache.org/ns/synapse">
+    <resource faultSequence="FaultSeq" methods="GET">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="FieldSimpleListSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/count">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="FieldSimpleCountSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/max/{field}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="FieldSimpleMaxSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/sum/{field}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="FieldSimpleSumSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="POST" uri-template="/">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="FieldSimpleCreateSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="PUT" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="FieldSimpleUpdateSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="DELETE" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="FieldSimpleDeleteSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/{from}/{to}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="FieldSimpleFromToSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="FieldSimpleRetrieveSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+</api>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="MassiveProcessUsersTransactionalSeq" onError="FaultMassiveProcessUsersSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse" xmlns:cen="centra-id.com">
+    <log level="custom" separator=" | " category="DEBUG">
+        <property name="MassiveProcessUsersTransactionalSeq" value="Inicio..." />
+    </log>
+    <property name="uri.var.guid" expression="get-property('guid')" />
+    <property name="currentDate" expression='get-property("SYSTEM_DATE","yyyy-MM-dd&apos;T&apos;HH:mm:ss.SSSXXX")' scope="default" />
+    <header action="remove" name="Content-Type" scope="transport" />
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.dataServiceHost}/MassiveProcessDSS.HTTPEndpoint/getByGuidMassiveProcess?guid={uri.var.guid}" />
+    </call>
+    <property name="findData" expression="//cen:MassiveProcesses/cen:MassiveProcess" xmlns:cen="centra-id.com" />
+    <filter regex="true" source="boolean(get-property('findData'))">
+        <then>
+            <iterate  attachPath="//cen:MassiveProcesses" expression="//cen:MassiveProcesses/cen:MassiveProcess" preservePayload="true" sequential="true" xmlns:cen="centra-id.com">
+                <target>
+                    <sequence>
+                        <sequence key="MassiveProcessUsersTransactionalCreateSeq" />
+                    </sequence>
+                </target>
+            </iterate>
+        </then>
+    </filter>
+    <log level="custom" separator="| ">
+        <property name="MassiveProcessUsersTransactionalSeq" value="Fin..." />
+    </log>
+</sequence>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GITareas_Retry_Seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log description="seq" level="custom">
+        <property name="seq" value="-------------------- GITareas_Retry_Seq --------------------"/>
+        <property expression="get-property('ESTADO')" name="ESTADO"/>
+        <property expression="get-property('REINTENTO')" name="REINTENTO"/>
+    </log>
+    <property description="uri.var.resourcepath" name="uri.var.resourcepath" scope="default" type="STRING" value="TaskProvisioningRetry"/>
+    <payloadFactory description="Tareas Payload Retry" media-type="json">
+        <format>
+							{
+							"TaskProvisioningRetry": {
+							"uuid": "$1",
+							"retryDate": "$2",
+							"retryNumber": "$3"
+							}
+							}</format>
+        <args>
+            <arg evaluator="xml" expression="get-property('uuid')"/>
+            <arg evaluator="xml" expression="get-property(&quot;SYSTEM_DATE&quot;, &quot;yyyy-MM-dd'T'HH:mm:ss.SSSXXX&quot;)"/>
+            <arg evaluator="xml" expression="get-property('REINTENTO')"/>
+        </args>
+    </payloadFactory>
+    <sequence key="GITareas_Seq"/>
+</sequence>

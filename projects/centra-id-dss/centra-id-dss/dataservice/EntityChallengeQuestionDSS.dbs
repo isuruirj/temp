@@ -1,0 +1,273 @@
+<data name="identity.challenge-question.ds"
+    serviceNamespace="centra-id.com"
+    enableBatchRequests="false"
+    enableBoxcarring="false"
+    transports="https"
+    disableLegacyBoxcarringMode="true">
+
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <!-- DYNAMIC QUERY CHALLENGEQUESTION -->
+    <query id="dynamicQuery_challengeQuestion" useConfig="default">
+        <sql>
+           SELECT
+               challengeQuestion.id,
+               challengeQuestion.username,
+               challengeQuestion.answer1,
+               challengeQuestion.answer2,
+               challengeQuestion.answer3,
+               challengeQuestion.answer4,
+               challengeQuestion.created_date,
+               challengeQuestion.attention_date,
+               challengeQuestion.status,
+               challengeQuestion.code1,
+               challengeQuestion.code2,
+               challengeQuestion.code3,
+               challengeQuestion.code4,
+               challengeQuestion.valid
+           FROM sch_centra_id.CHALLENGE_QUESTIONS challengeQuestion :innerjoinclause :whereclause ORDER BY :orderby :fromto
+        </sql>
+        <result element="challengeQuestionList" rowName="challengeQuestion">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="username" name="username" xsdType="xs:string"/>
+            <element column="answer1" name="answer1" xsdType="xs:string"/>
+            <element column="answer2" name="answer2" xsdType="xs:string"/>
+            <element column="answer3" name="answer3" xsdType="xs:string"/>
+            <element column="answer4" name="answer4" xsdType="xs:string"/>
+            <element column="created_date" name="createdDate" xsdType="xs:date"/>
+            <element column="attention_date" name="attentionDate" xsdType="xs:date"/>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <element column="code1" name="code1" xsdType="xs:string"/>
+            <element column="code2" name="code2" xsdType="xs:string"/>
+            <element column="code3" name="code3" xsdType="xs:string"/>
+            <element column="code4" name="code4" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="fromto" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- INSERT ChallengeQuestion -->
+    <query id="insertQuery_challengeQuestion" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>
+           INSERT INTO sch_centra_id.CHALLENGE_QUESTIONS(
+               username,
+               answer1,
+               answer2,
+               answer3,
+               answer4,
+               created_date,
+               attention_date,
+               status,
+               code1,
+               code2,
+               code3,
+               code4,
+               valid
+        ) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)
+        </sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="username" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="answer1" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="answer2" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="answer3" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="answer4" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="createdDate" ordinal="6" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+        <param name="attentionDate" ordinal="7" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+        <param name="status" ordinal="8" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="A"/>
+        <param name="code1" ordinal="9" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="code2" ordinal="10" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="code3" ordinal="11" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="code4" ordinal="12" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="valid" ordinal="13" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="1"/>
+    </query>
+    <!-- UPDATE ChallengeQuestion -->
+    <query id="updateQuery_challengeQuestion" useConfig="default">
+        <sql>
+           UPDATE sch_centra_id.CHALLENGE_QUESTIONS SET
+               username=?,
+               answer1=?,
+               answer2=?,
+               answer3=?,
+               answer4=?,
+               created_date=?,
+               attention_date=?,
+               status=?,
+               code1=?,
+               code2=?,
+               code3=?,
+               code4=?
+            WHERE id=?
+        </sql>
+        <param name="username" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="answer1" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="answer2" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="answer3" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="answer4" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="createdDate" ordinal="6" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+        <param name="attentionDate" ordinal="7" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+        <param name="status" ordinal="8" paramType="SCALAR" sqlType="STRING" type="IN" defaultValue="A"/>
+        <param name="code1" ordinal="9" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="code2" ordinal="10" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="code3" ordinal="11" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="code4" ordinal="12" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="id" ordinal="13" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <!-- DYNAMIC FUNCTION  -->
+    <query id="dynamicQueryFunction_challengeQuestion" useConfig="default">
+        <sql>
+           SELECT :function(:field) as value FROM :table :innerjoinclause :whereclause
+         </sql>
+        <result element="result">
+            <element column="value" name="value" xsdType="xs:long"/>
+        </result>
+        <param name="function" sqlType="QUERY_STRING"/>
+        <param name="field" sqlType="QUERY_STRING"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DELETE  -->
+    <query id="dynamicDeleteQuery_challengeQuestion" useConfig="default">
+        <sql>UPDATE :table SET :set WHERE id=:id</sql>
+        <param name="id" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="set" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- OPERATIONS -->
+    <operation name="listAllOperation_challengeQuestion">
+        <call-query href="dynamicQuery_challengeQuestion">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="fromToOperation_challengeQuestion">
+        <call-query href="dynamicQuery_challengeQuestion">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="functionOperation_challengeQuestion">
+        <call-query href="dynamicQueryFunction_challengeQuestion">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="deleteOperation_challengeQuestion">
+        <call-query href="dynamicDeleteQuery_challengeQuestion">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </operation>
+    <operation name="create_challengeQuestion">
+        <call-query href="insertQuery_challengeQuestion">
+            <with-param name="username" query-param="username"/>
+            <with-param name="answer1" query-param="answer1"/>
+            <with-param name="answer2" query-param="answer2"/>
+            <with-param name="answer3" query-param="answer3"/>
+            <with-param name="answer4" query-param="answer4"/>
+            <with-param name="createdDate" query-param="createdDate"/>
+            <with-param name="attentionDate" query-param="attentionDate"/>
+            <with-param name="status" query-param="status"/>
+            <with-param name="code1" query-param="code1"/>
+            <with-param name="code2" query-param="code2"/>
+            <with-param name="code3" query-param="code3"/>
+            <with-param name="code4" query-param="code4"/>
+            <with-param name="valid" query-param="valid"/>
+        </call-query>
+    </operation>
+    <operation name="update_challengeQuestion">
+        <call-query href="updateQuery_challengeQuestion">
+            <with-param name="username" query-param="username"/>
+            <with-param name="answer1" query-param="answer1"/>
+            <with-param name="answer2" query-param="answer2"/>
+            <with-param name="answer3" query-param="answer3"/>
+            <with-param name="answer4" query-param="answer4"/>
+            <with-param name="createdDate" query-param="createdDate"/>
+            <with-param name="attentionDate" query-param="attentionDate"/>
+            <with-param name="status" query-param="status"/>
+            <with-param name="code1" query-param="code1"/>
+            <with-param name="code2" query-param="code2"/>
+            <with-param name="code3" query-param="code3"/>
+            <with-param name="code4" query-param="code4"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <!-- RESOURCES -->
+    <resource method="GET" path="GetAllChallengeQuestion">
+        <call-query href="dynamicQuery_challengeQuestion">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFromToChallengeQuestion">
+        <call-query href="dynamicQuery_challengeQuestion">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFunctionResultChallengeQuestion">
+        <call-query href="dynamicQueryFunction_challengeQuestion">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="DeleteChallengeQuestion">
+        <call-query href="dynamicDeleteQuery_challengeQuestion">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="CreateChallengeQuestion">
+        <call-query href="insertQuery_challengeQuestion">
+            <with-param name="username" query-param="username"/>
+            <with-param name="answer1" query-param="answer1"/>
+            <with-param name="answer2" query-param="answer2"/>
+            <with-param name="answer3" query-param="answer3"/>
+            <with-param name="answer4" query-param="answer4"/>
+            <with-param name="createdDate" query-param="createdDate"/>
+            <with-param name="attentionDate" query-param="attentionDate"/>
+            <with-param name="status" query-param="status"/>
+            <with-param name="code1" query-param="code1"/>
+            <with-param name="code2" query-param="code2"/>
+            <with-param name="code3" query-param="code3"/>
+            <with-param name="code4" query-param="code4"/>
+            <with-param name="valid" query-param="valid"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="UpdateChallengeQuestion">
+        <call-query href="updateQuery_challengeQuestion">
+            <with-param name="username" query-param="username"/>
+            <with-param name="answer1" query-param="answer1"/>
+            <with-param name="answer2" query-param="answer2"/>
+            <with-param name="answer3" query-param="answer3"/>
+            <with-param name="answer4" query-param="answer4"/>
+            <with-param name="createdDate" query-param="createdDate"/>
+            <with-param name="attentionDate" query-param="attentionDate"/>
+            <with-param name="status" query-param="status"/>
+            <with-param name="code1" query-param="code1"/>
+            <with-param name="code2" query-param="code2"/>
+            <with-param name="code3" query-param="code3"/>
+            <with-param name="code4" query-param="code4"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+</data>

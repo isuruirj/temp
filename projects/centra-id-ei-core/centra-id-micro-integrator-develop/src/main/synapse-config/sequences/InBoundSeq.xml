@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="InBoundSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property action="remove" name="Content-Encoding" scope="transport"/>
+    <property action="remove" name="Accept-Encoding" scope="transport"/>
+    <property expression="json-eval($)" name="requestJson" scope="default" type="STRING"/>
+    <property name="appCalled" scope="default" type="STRING" value="CENTRA-ID"/>
+    
+    <property expression="get-property(&quot;SYSTEM_DATE&quot;,&quot;yyyy-MM-dd'T'HH:mm:ss.SSSXXX&quot;)" name="requestDate" scope="default" type="STRING"/>
+    <property expression="$trp:Operation-Type" name="Operation-Type" scope="default" type="STRING"/>
+    <property expression="get-property('transport','X-Forwarded-For')" name="X-Forwarded-For" scope="default" type="STRING"/>
+    <property expression="get-property('transport','UserName')" name="UserName" scope="default" type="STRING"/>
+    <log level="custom" category="DEBUG">
+        <property name="InBoundSeq" value="Inicio..."/>
+        <property expression="$ctx:UserName" name="UserName"/>
+    </log>
+    <filter regex="false" source="boolean($ctx:actionCalled)">
+        <then>
+            <property expression="fn:concat(get-property('axis2', 'HTTP_METHOD'),':',get-property('To'))" name="actionCalled" scope="default" type="STRING"/>            
+        </then>
+    </filter>
+    <filter regex="true" source="boolean(get-property('Operation-Type'))">
+        <then>
+            <property name="operarationTypeAccess" scope="default" type="STRING" value="G"/>
+            <property action="remove" name="Operation-Type" scope="default"/>
+        </then>
+        <else>
+            <property name="operarationTypeAccess" scope="default" type="STRING" value="T"/>
+        </else>
+    </filter>
+    <property expression="//guid" name="guidCalled" scope="default" type="STRING"/>
+    <filter regex="false" source="boolean(get-property('guidCalled'))">
+        <then>
+            <property expression="fn:substring-after(get-property('MessageID'), 'urn:uuid:')" name="guidCalled" scope="default" type="STRING"/>
+        </then>
+        <else/>
+    </filter>
+    <!-- Cargar variables de ambiente -->
+    <sequence key="MassiveProcessUsersVariablesLoadSeq"/>
+</sequence>

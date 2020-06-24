@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="TemplateProfileSimpleListSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="TemplateProfileSimpleListSeq" value="Inicio.." />
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml" />
+    <property name="Accept" scope="transport" type="STRING" value="application/xml" />
+    <property action="remove" name="Content-Type" scope="transport" />
+    <property expression="$ctx:query.param.orderby" name="uri.var.orderby" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.fieldCode" name="fieldCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.fieldName" name="fieldName" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.fieldValue" name="fieldValue" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfileId" name="transactionalProfileId" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.applicationCode" name="applicationCode" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.fieldId" name="fieldId" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING" />
+    <script language="nashornJs"><![CDATA[
+        @add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE templateProfileSimple.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","templateProfileSimple","id");
+        where += addWhere("fieldCode","String","templateProfileSimple","field_code");
+        where += addWhere("fieldName","String","templateProfileSimple","field_name");
+        where += addWhere("fieldValue","String","templateProfileSimple","field_value");
+        where += addWhere("transactionalProfileId","Integer","templateProfileSimple","transactional_profile_id");
+        where += addWhere("applicationCode","String","templateProfileSimple","application_code");
+        where += addWhere("fieldId","Integer","templateProfileSimple","field_id");
+        where += addWhere("valid","Integer","templateProfileSimple","valid");
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+        if(!mc.getProperty("uri.var.orderby")){
+            mc.setProperty("uri.var.orderby","templateProfileSimple.id");
+        } else {
+            mc.setProperty("uri.var.orderby","templateProfileSimple."+mc.getProperty("uri.var.orderby"));
+        }
+        log.debug(where);]]></script>
+    <call>
+        <endpoint name="TemplateProfileSimpleDSS_Endpoint" template="HTTPEndpointGetTemplate"
+              uri="{uri.var.dataServiceHost}/application.template-profile-simple.ds.HTTPEndpoint/GetAllTemplateProfileSimple?whereclause={uri.var.whereclause}&amp;orderby={uri.var.orderby}&amp;innerjoinclause={uri.var.innerjoinclause}" />
+
+    </call>
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING" />
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq" />
+        </then>
+        <else>
+            <xslt key="gov:/centra-id/xslt/dssFilter.xsl" />
+            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="TemplateProfileSimpleSeq" value="Fin.." />
+    </log>
+    <property name="messageType" value="application/json" scope="axis2" type="STRING"/>
+    <property name="Access-Control-Allow-Methods" value="GET,PUT,POST,DELETE,PATCH,OPTIONS" scope="transport" type="STRING"/>
+    <property name="Access-Control-Allow-Headers" value="Authorization,Access-Control-Allow-Origin,Content-Type" scope="transport" type="STRING"/>
+</sequence>

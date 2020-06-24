@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GroupsAdAvailableSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse" xmlns:tem="http://tempuri.org/">
+    <log level="custom" category="INFO">
+        <property name="GroupsAdAvailableSeq" value="Inicio.." />
+    </log>
+    <property name="PATTERN" expression="$ctx:query.param.name" />
+    <log level="custom" category="INFO">
+        <property name="GroupsAdAvailableSeq" value="Inicio.1." />
+        <property name="JSON" expression="$ctx:PATTERN" />
+    </log>
+    <filter regex="true" source="boolean($ctx:PATTERN)">
+        <then>
+            <log level="custom" category="INFO">
+                <property name="GroupsAdAvailableSeq" value="Inicio.2." />
+                <property name="JSON" expression="$ctx:PATTERN" />
+            </log>
+            <property name="configureAD" expression="get-property('AD_CONFIGURE')" scope="default" type="OM" />
+            <property name="LDAP_URI" expression="$ctx:configureAD//tem:ldapUri" />
+            <property name="SEARCH_BASE" expression="$ctx:configureAD//tem:searchBaseGroup" />
+            <property name="SECURITY_PRINCIPAL" expression="$ctx:configureAD//tem:securityPrincipal" />
+            <property name="AES_PAYLOAD" expression="$ctx:configureAD//tem:securityCredential" />
+            <property name="AES_ACTION" scope="default" type="STRING" value="DECRYPT" />
+            <sequence key="EncryptDecryptSeq" />
+            <property name="SECURITY_CREDENTIALS" expression="$ctx:AES_RESULTS" />
+            <log level="custom" category="INFO">
+                <property name="GroupsAdAvailableSeq" value="Inicio.3." />
+                <property name="JSON" expression="$ctx:JSON" />
+            </log>
+            <class name="com.centraid.mediator.ActiveDirectoryGroups" />
+            <log level="custom" category="INFO">
+                <property name="GroupsAdAvailableSeq" value="Inicio.4." />
+                <property name="JSON" expression="$ctx:JSON" />
+                <property name="ERROR_MESSAGE" expression="$ctx:ERROR_MESSAGE" />
+            </log>
+            <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+            <payloadFactory media-type="json">
+                <format>$1</format>
+                <args>
+                    <arg evaluator="xml" expression="$ctx:JSON" />
+                </args>
+            </payloadFactory>
+            <log level="full" category="INFO">
+                <property name="GroupsAdAvailableSeq" value="Inicio.2." />
+            </log>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                        "result":  {
+                            "code" : -1,
+                            "message" : "Name does not exist"
+                        }
+                    }
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="get-property('AES_RESULTS')" />
+                </args>
+            </payloadFactory>
+        </else>
+    </filter>
+    <log level="custom" category="INFO">
+        <property name="GroupsAdAvailableSeq" value="Fin.." />
+    </log>
+</sequence>

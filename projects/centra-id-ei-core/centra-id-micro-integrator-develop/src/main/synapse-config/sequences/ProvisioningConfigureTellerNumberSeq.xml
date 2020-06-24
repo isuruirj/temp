@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ProvisioningConfigureTellerNumberSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningConfigureTellerNumberSeq" value="Inicio.." />
+    </log>
+    <property name="uri.var.username" expression="$ctx:operationProvisioning//operationProvisioningList/operationProvisioning/transactionalIdentity/username" />
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningCreateUserSeq" value="Inicio..1" />
+        <property name="username" expression="$ctx:uri.var.username" />
+    </log>
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/provisioning/RestUserStoreScim/0/1?tellerName={uri.var.username}&amp;domain=BANCS" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <property name="restUserStoreScim" expression="$body//*" scope="default" type="OM" />
+        </then>
+        <else>
+            <property name="fault" value="ProvisioningCreateUserSeq: Error get RestUserStoreScim" />
+            <sequence key="FaultSeq" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="ProvisioningConfigureTellerNumberSeq" value="Fin.." />
+    </log>
+</sequence>

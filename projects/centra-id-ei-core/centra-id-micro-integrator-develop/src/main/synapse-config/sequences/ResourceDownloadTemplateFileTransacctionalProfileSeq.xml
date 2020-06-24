@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ResourceDownloadTemplateFileTransacctionalProfileSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="ResourceDownloadTemplateFileTransacctionalProfileSeq" value="Inicio..." />
+    </log>
+    <property name="fileName" expression="get-property('FILE_NAME_BULK_UPLOAD_TRANSACTIONAL_PROFILES')" />
+    <property name="fileNameExcel" expression="fn:concat('gov:/centra-id/excel/',$ctx:fileName)" />
+    <property name="fileExcel" expression="get-property('registry',$ctx:fileNameExcel)" />
+    <payloadFactory media-type="json">
+        <format>
+            { 
+                "DownloadTemplateFileTransacctionalProfile" : {
+                    "name" : "$1",
+                    "file": "$2"
+                }
+            }
+        </format>
+        <args>
+            <arg evaluator="xml" expression="$ctx:fileName" />
+            <arg evaluator="xml" expression="$ctx:fileExcel" />
+        </args>
+    </payloadFactory>
+    <property name="Content-Disposition" expression="fn:concat('attachment;filename=',$ctx:fileName)" scope="transport" />
+    <property name="Content-Type" value="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" scope="axis2" />
+    <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+    <log level="custom" category="DEBUG">
+        <property name="ResourceDownloadTemplateFileTransacctionalProfileSeq" value="Fin..." />
+    </log>
+</sequence>

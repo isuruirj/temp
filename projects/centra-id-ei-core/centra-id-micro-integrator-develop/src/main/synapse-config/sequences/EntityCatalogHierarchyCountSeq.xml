@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="CatalogHierarchyCountSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="CatalogHierarchyCountSeq" value="Inicio.." />
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+    <property name="Accept" scope="transport" type="STRING" value="application/json" />
+    <property action="remove" name="Content-Type" scope="transport" />
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogType.id" name="catalogType.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogType.code" name="catalogType.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogType.name" name="catalogType.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogType.sortType" name="catalogType.sortType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogType.editable" name="catalogType.editable" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogType.valid" name="catalogType.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogType.description" name="catalogType.description" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogCompanyType.id" name="catalogCompanyType.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogCompanyType.code" name="catalogCompanyType.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogCompanyType.name" name="catalogCompanyType.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogCompanyType.predetermined" name="catalogCompanyType.predetermined" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogCompanyType.ordinal" name="catalogCompanyType.ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogCompanyType.valueText" name="catalogCompanyType.valueText" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogCompanyType.valueNumber" name="catalogCompanyType.valueNumber" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogCompanyType.valueDate" name="catalogCompanyType.valueDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogCompanyType.valueBoolean" name="catalogCompanyType.valueBoolean" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogCompanyType.catalogType.id" name="catalogCompanyType.catalogType.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogCompanyType.catalogType.code" name="catalogCompanyType.catalogType.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogCompanyType.catalogType.name" name="catalogCompanyType.catalogType.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogCompanyType.catalogType.sortType" name="catalogCompanyType.catalogType.sortType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogCompanyType.catalogType.editable" name="catalogCompanyType.catalogType.editable" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogCompanyType.catalogType.valid" name="catalogCompanyType.catalogType.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogCompanyType.catalogType.description" name="catalogCompanyType.catalogType.description" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogCompanyType.valid" name="catalogCompanyType.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.id" name="parent.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogType.id" name="parent.catalogType.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogType.code" name="parent.catalogType.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogType.name" name="parent.catalogType.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogType.sortType" name="parent.catalogType.sortType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogType.editable" name="parent.catalogType.editable" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogType.valid" name="parent.catalogType.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogType.description" name="parent.catalogType.description" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogCompanyType.id" name="parent.catalogCompanyType.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogCompanyType.code" name="parent.catalogCompanyType.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogCompanyType.name" name="parent.catalogCompanyType.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogCompanyType.predetermined" name="parent.catalogCompanyType.predetermined" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogCompanyType.ordinal" name="parent.catalogCompanyType.ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogCompanyType.valueText" name="parent.catalogCompanyType.valueText" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogCompanyType.valueNumber" name="parent.catalogCompanyType.valueNumber" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogCompanyType.valueDate" name="parent.catalogCompanyType.valueDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogCompanyType.valueBoolean" name="parent.catalogCompanyType.valueBoolean" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogCompanyType.catalogType.id" name="parent.catalogCompanyType.catalogType.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogCompanyType.catalogType.code" name="parent.catalogCompanyType.catalogType.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogCompanyType.catalogType.name" name="parent.catalogCompanyType.catalogType.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogCompanyType.catalogType.sortType" name="parent.catalogCompanyType.catalogType.sortType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogCompanyType.catalogType.editable" name="parent.catalogCompanyType.catalogType.editable" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogCompanyType.catalogType.valid" name="parent.catalogCompanyType.catalogType.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogCompanyType.catalogType.description" name="parent.catalogCompanyType.catalogType.description" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.catalogCompanyType.valid" name="parent.catalogCompanyType.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.id" name="parent.parent.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogType.id" name="parent.parent.catalogType.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogType.code" name="parent.parent.catalogType.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogType.name" name="parent.parent.catalogType.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogType.sortType" name="parent.parent.catalogType.sortType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogType.editable" name="parent.parent.catalogType.editable" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogType.valid" name="parent.parent.catalogType.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogType.description" name="parent.parent.catalogType.description" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogCompanyType.id" name="parent.parent.catalogCompanyType.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogCompanyType.code" name="parent.parent.catalogCompanyType.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogCompanyType.name" name="parent.parent.catalogCompanyType.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogCompanyType.predetermined" name="parent.parent.catalogCompanyType.predetermined" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogCompanyType.ordinal" name="parent.parent.catalogCompanyType.ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogCompanyType.valueText" name="parent.parent.catalogCompanyType.valueText" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogCompanyType.valueNumber" name="parent.parent.catalogCompanyType.valueNumber" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogCompanyType.valueDate" name="parent.parent.catalogCompanyType.valueDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogCompanyType.valueBoolean" name="parent.parent.catalogCompanyType.valueBoolean" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogCompanyType.catalogType.id" name="parent.parent.catalogCompanyType.catalogType.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogCompanyType.catalogType.code" name="parent.parent.catalogCompanyType.catalogType.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogCompanyType.catalogType.name" name="parent.parent.catalogCompanyType.catalogType.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogCompanyType.catalogType.sortType" name="parent.parent.catalogCompanyType.catalogType.sortType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogCompanyType.catalogType.editable" name="parent.parent.catalogCompanyType.catalogType.editable" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogCompanyType.catalogType.valid" name="parent.parent.catalogCompanyType.catalogType.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogCompanyType.catalogType.description" name="parent.parent.catalogCompanyType.catalogType.description" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.catalogCompanyType.valid" name="parent.parent.catalogCompanyType.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.id" name="parent.parent.parent.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.catalogType.id" name="parent.parent.parent.catalogType.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.catalogType.code" name="parent.parent.parent.catalogType.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.catalogType.name" name="parent.parent.parent.catalogType.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.catalogType.sortType" name="parent.parent.parent.catalogType.sortType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.catalogType.editable" name="parent.parent.parent.catalogType.editable" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.catalogType.valid" name="parent.parent.parent.catalogType.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.catalogType.description" name="parent.parent.parent.catalogType.description" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.catalogCompanyType.id" name="parent.parent.parent.catalogCompanyType.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.catalogCompanyType.code" name="parent.parent.parent.catalogCompanyType.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.catalogCompanyType.name" name="parent.parent.parent.catalogCompanyType.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.catalogCompanyType.predetermined" name="parent.parent.parent.catalogCompanyType.predetermined" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.catalogCompanyType.ordinal" name="parent.parent.parent.catalogCompanyType.ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.catalogCompanyType.valueText" name="parent.parent.parent.catalogCompanyType.valueText" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.catalogCompanyType.valueNumber" name="parent.parent.parent.catalogCompanyType.valueNumber" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.catalogCompanyType.valueDate" name="parent.parent.parent.catalogCompanyType.valueDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.catalogCompanyType.valueBoolean" name="parent.parent.parent.catalogCompanyType.valueBoolean" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.catalogCompanyType.valid" name="parent.parent.parent.catalogCompanyType.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.parent.id" name="parent.parent.parent.parent.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.parent.valid" name="parent.parent.parent.parent.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.parent.valid" name="parent.parent.parent.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.parent.valid" name="parent.parent.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.parent.valid" name="parent.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING" />
+    <script language="nashornJs"><![CDATA[
+        @add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE catalogHierarchy.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","catalogHierarchy","id");
+        where += addWhere("catalogType.id","Integer","catalogType","id");
+        where += addWhere("catalogType.code","String","catalogType","code");
+        where += addWhere("catalogType.name","String","catalogType","name");
+        where += addWhere("catalogType.sortType","String","catalogType","sort_type");
+        where += addWhere("catalogType.editable","Integer","catalogType","editable");
+        where += addWhere("catalogType.valid","Integer","catalogType","valid");
+        where += addWhere("catalogType.description","String","catalogType","description");
+        where += addWhere("catalogCompanyType.id","Integer","catalogCompanyType","id");
+        where += addWhere("catalogCompanyType.code","String","catalogCompanyType","code");
+        where += addWhere("catalogCompanyType.name","String","catalogCompanyType","name");
+        where += addWhere("catalogCompanyType.predetermined","Integer","catalogCompanyType","predetermined");
+        where += addWhere("catalogCompanyType.ordinal","Integer","catalogCompanyType","ordinal");
+        where += addWhere("catalogCompanyType.valueText","String","catalogCompanyType","value_text");
+        where += addWhere("catalogCompanyType.valueNumber","Numeric","catalogCompanyType","value_number");
+        where += addWhere("catalogCompanyType.valueDate","Date","catalogCompanyType","value_date");
+        where += addWhere("catalogCompanyType.valueBoolean","Integer","catalogCompanyType","value_boolean");
+        where += addWhere("catalogCompanyType.catalogType.id","Integer","catalogCompanyType_catalogType","id");
+        where += addWhere("catalogCompanyType.catalogType.code","String","catalogCompanyType_catalogType","code");
+        where += addWhere("catalogCompanyType.catalogType.name","String","catalogCompanyType_catalogType","name");
+        where += addWhere("catalogCompanyType.catalogType.sortType","String","catalogCompanyType_catalogType","sort_type");
+        where += addWhere("catalogCompanyType.catalogType.editable","Integer","catalogCompanyType_catalogType","editable");
+        where += addWhere("catalogCompanyType.catalogType.valid","Integer","catalogCompanyType_catalogType","valid");
+        where += addWhere("catalogCompanyType.catalogType.description","String","catalogCompanyType_catalogType","description");
+        where += addWhere("catalogCompanyType.valid","Integer","catalogCompanyType","valid");
+        where += addWhere("parent.id","Integer","parent","id");
+        where += addWhere("parent.catalogType.id","Integer","parent_catalogType","id");
+        where += addWhere("parent.catalogType.code","String","parent_catalogType","code");
+        where += addWhere("parent.catalogType.name","String","parent_catalogType","name");
+        where += addWhere("parent.catalogType.sortType","String","parent_catalogType","sort_type");
+        where += addWhere("parent.catalogType.editable","Integer","parent_catalogType","editable");
+        where += addWhere("parent.catalogType.valid","Integer","parent_catalogType","valid");
+        where += addWhere("parent.catalogType.description","String","parent_catalogType","description");
+        where += addWhere("parent.catalogCompanyType.id","Integer","parent_catalogCompanyType","id");
+        where += addWhere("parent.catalogCompanyType.code","String","parent_catalogCompanyType","code");
+        where += addWhere("parent.catalogCompanyType.name","String","parent_catalogCompanyType","name");
+        where += addWhere("parent.catalogCompanyType.predetermined","Integer","parent_catalogCompanyType","predetermined");
+        where += addWhere("parent.catalogCompanyType.ordinal","Integer","parent_catalogCompanyType","ordinal");
+        where += addWhere("parent.catalogCompanyType.valueText","String","parent_catalogCompanyType","value_text");
+        where += addWhere("parent.catalogCompanyType.valueNumber","Numeric","parent_catalogCompanyType","value_number");
+        where += addWhere("parent.catalogCompanyType.valueDate","Date","parent_catalogCompanyType","value_date");
+        where += addWhere("parent.catalogCompanyType.valueBoolean","Integer","parent_catalogCompanyType","value_boolean");
+        where += addWhere("parent.catalogCompanyType.catalogType.id","Integer","parent_catalogCompanyType_catalogType","id");
+        where += addWhere("parent.catalogCompanyType.catalogType.code","String","parent_catalogCompanyType_catalogType","code");
+        where += addWhere("parent.catalogCompanyType.catalogType.name","String","parent_catalogCompanyType_catalogType","name");
+        where += addWhere("parent.catalogCompanyType.catalogType.sortType","String","parent_catalogCompanyType_catalogType","sort_type");
+        where += addWhere("parent.catalogCompanyType.catalogType.editable","Integer","parent_catalogCompanyType_catalogType","editable");
+        where += addWhere("parent.catalogCompanyType.catalogType.valid","Integer","parent_catalogCompanyType_catalogType","valid");
+        where += addWhere("parent.catalogCompanyType.catalogType.description","String","parent_catalogCompanyType_catalogType","description");
+        where += addWhere("parent.catalogCompanyType.valid","Integer","parent_catalogCompanyType","valid");
+        where += addWhere("parent.parent.id","Integer","parent_parent","id");
+        where += addWhere("parent.parent.catalogType.id","Integer","parent_parent_catalogType","id");
+        where += addWhere("parent.parent.catalogType.code","String","parent_parent_catalogType","code");
+        where += addWhere("parent.parent.catalogType.name","String","parent_parent_catalogType","name");
+        where += addWhere("parent.parent.catalogType.sortType","String","parent_parent_catalogType","sort_type");
+        where += addWhere("parent.parent.catalogType.editable","Integer","parent_parent_catalogType","editable");
+        where += addWhere("parent.parent.catalogType.valid","Integer","parent_parent_catalogType","valid");
+        where += addWhere("parent.parent.catalogType.description","String","parent_parent_catalogType","description");
+        where += addWhere("parent.parent.catalogCompanyType.id","Integer","parent_parent_catalogCompanyType","id");
+        where += addWhere("parent.parent.catalogCompanyType.code","String","parent_parent_catalogCompanyType","code");
+        where += addWhere("parent.parent.catalogCompanyType.name","String","parent_parent_catalogCompanyType","name");
+        where += addWhere("parent.parent.catalogCompanyType.predetermined","Integer","parent_parent_catalogCompanyType","predetermined");
+        where += addWhere("parent.parent.catalogCompanyType.ordinal","Integer","parent_parent_catalogCompanyType","ordinal");
+        where += addWhere("parent.parent.catalogCompanyType.valueText","String","parent_parent_catalogCompanyType","value_text");
+        where += addWhere("parent.parent.catalogCompanyType.valueNumber","Numeric","parent_parent_catalogCompanyType","value_number");
+        where += addWhere("parent.parent.catalogCompanyType.valueDate","Date","parent_parent_catalogCompanyType","value_date");
+        where += addWhere("parent.parent.catalogCompanyType.valueBoolean","Integer","parent_parent_catalogCompanyType","value_boolean");
+        where += addWhere("parent.parent.catalogCompanyType.catalogType.id","Integer","parent_parent_catalogCompanyType_catalogType","id");
+        where += addWhere("parent.parent.catalogCompanyType.catalogType.code","String","parent_parent_catalogCompanyType_catalogType","code");
+        where += addWhere("parent.parent.catalogCompanyType.catalogType.name","String","parent_parent_catalogCompanyType_catalogType","name");
+        where += addWhere("parent.parent.catalogCompanyType.catalogType.sortType","String","parent_parent_catalogCompanyType_catalogType","sort_type");
+        where += addWhere("parent.parent.catalogCompanyType.catalogType.editable","Integer","parent_parent_catalogCompanyType_catalogType","editable");
+        where += addWhere("parent.parent.catalogCompanyType.catalogType.valid","Integer","parent_parent_catalogCompanyType_catalogType","valid");
+        where += addWhere("parent.parent.catalogCompanyType.catalogType.description","String","parent_parent_catalogCompanyType_catalogType","description");
+        where += addWhere("parent.parent.catalogCompanyType.valid","Integer","parent_parent_catalogCompanyType","valid");
+        where += addWhere("parent.parent.parent.id","Integer","parent_parent_parent","id");
+        where += addWhere("parent.parent.parent.catalogType.id","Integer","parent_parent_parent_catalogType","id");
+        where += addWhere("parent.parent.parent.catalogType.code","String","parent_parent_parent_catalogType","code");
+        where += addWhere("parent.parent.parent.catalogType.name","String","parent_parent_parent_catalogType","name");
+        where += addWhere("parent.parent.parent.catalogType.sortType","String","parent_parent_parent_catalogType","sort_type");
+        where += addWhere("parent.parent.parent.catalogType.editable","Integer","parent_parent_parent_catalogType","editable");
+        where += addWhere("parent.parent.parent.catalogType.valid","Integer","parent_parent_parent_catalogType","valid");
+        where += addWhere("parent.parent.parent.catalogType.description","String","parent_parent_parent_catalogType","description");
+        where += addWhere("parent.parent.parent.catalogCompanyType.id","Integer","parent_parent_parent_catalogCompanyType","id");
+        where += addWhere("parent.parent.parent.catalogCompanyType.code","String","parent_parent_parent_catalogCompanyType","code");
+        where += addWhere("parent.parent.parent.catalogCompanyType.name","String","parent_parent_parent_catalogCompanyType","name");
+        where += addWhere("parent.parent.parent.catalogCompanyType.predetermined","Integer","parent_parent_parent_catalogCompanyType","predetermined");
+        where += addWhere("parent.parent.parent.catalogCompanyType.ordinal","Integer","parent_parent_parent_catalogCompanyType","ordinal");
+        where += addWhere("parent.parent.parent.catalogCompanyType.valueText","String","parent_parent_parent_catalogCompanyType","value_text");
+        where += addWhere("parent.parent.parent.catalogCompanyType.valueNumber","Numeric","parent_parent_parent_catalogCompanyType","value_number");
+        where += addWhere("parent.parent.parent.catalogCompanyType.valueDate","Date","parent_parent_parent_catalogCompanyType","value_date");
+        where += addWhere("parent.parent.parent.catalogCompanyType.valueBoolean","Integer","parent_parent_parent_catalogCompanyType","value_boolean");
+        where += addWhere("parent.parent.parent.catalogCompanyType.valid","Integer","parent_parent_parent_catalogCompanyType","valid");
+        where += addWhere("parent.parent.parent.parent.id","Integer","parent_parent_parent_parent","id");
+        where += addWhere("parent.parent.parent.parent.valid","Integer","parent_parent_parent_parent","valid");
+        where += addWhere("parent.parent.parent.valid","Integer","parent_parent_parent","valid");
+        where += addWhere("parent.parent.valid","Integer","parent_parent","valid");
+        where += addWhere("parent.valid","Integer","parent","valid");
+        where += addWhere("valid","Integer","catalogHierarchy","valid");
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS_TYPES catalogType ON CatalogHierarchy.catalog_type_id = catalogType.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS catalogCompanyType ON CatalogHierarchy.catalog_company_type_id = catalogCompanyType.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS_TYPES catalogCompanyType_catalogType ON catalogCompanyType.catalog_type_id = catalogCompanyType_catalogType.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS_HIERARCHIES parent ON CatalogHierarchy.parent_id = parent.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS_TYPES parent_catalogType ON parent.catalog_type_id = parent_catalogType.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS parent_catalogCompanyType ON parent.catalog_company_type_id = parent_catalogCompanyType.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS_TYPES parent_catalogCompanyType_catalogType ON parent_catalogCompanyType.catalog_type_id = parent_catalogCompanyType_catalogType.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS_HIERARCHIES parent_parent ON parent.parent_id = parent_parent.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS_TYPES parent_parent_catalogType ON parent_parent.catalog_type_id = parent_parent_catalogType.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS parent_parent_catalogCompanyType ON parent_parent.catalog_company_type_id = parent_parent_catalogCompanyType.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS_TYPES parent_parent_catalogCompanyType_catalogType ON parent_parent_catalogCompanyType.catalog_type_id = parent_parent_catalogCompanyType_catalogType.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS_HIERARCHIES parent_parent_parent ON parent_parent.parent_id = parent_parent_parent.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS_TYPES parent_parent_parent_catalogType ON parent_parent_parent.catalog_type_id = parent_parent_parent_catalogType.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS parent_parent_parent_catalogCompanyType ON parent_parent_parent.catalog_company_type_id = parent_parent_parent_catalogCompanyType.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS_TYPES parent_parent_parent_catalogCompanyType_catalogType ON parent_parent_parent_catalogCompanyType.catalog_type_id = parent_parent_parent_catalogCompanyType_catalogType.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS_HIERARCHIES parent_parent_parent_parent ON parent_parent_parent.parent_id = parent_parent_parent_parent.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS_TYPES parent_parent_parent_parent_catalogType ON parent_parent_parent_parent.catalog_type_id = parent_parent_parent_parent_catalogType.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS parent_parent_parent_parent_catalogCompanyType ON parent_parent_parent_parent.catalog_company_type_id = parent_parent_parent_parent_catalogCompanyType.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS_HIERARCHIES parent_parent_parent_parent_parent ON parent_parent_parent_parent.parent_id = parent_parent_parent_parent_parent.id";
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+        log.debug(where);]]></script>
+
+    <property value="sch_centra_id.CATALOGS_HIERARCHIES catalogHierarchy" name="uri.var.table" scope="default" type="STRING"/>
+    <property value="COUNT" name="uri.var.function" scope="default" type="STRING"/>
+    <property value="*" name="uri.var.field" scope="default" type="STRING"/>
+
+    <call>
+        <endpoint name="CatalogHierarchyDSS_Endpoint" template="HTTPEndpointGetTemplate"
+              uri="{uri.var.dataServiceHost}/company.catalog-hierarchy.ds.HTTPEndpoint/GetFunctionResultCatalogHierarchy?function={uri.var.function}&amp;whereclause={uri.var.whereclause}&amp;field={uri.var.field}&amp;table={uri.var.table}&amp;innerjoinclause={uri.var.innerjoinclause}" />
+
+    </call>
+
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING"/>
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq"/>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                        "count": $1
+                    }
+                </format>
+                <args>
+                    <arg evaluator="json" expression="$.result.value"/>
+                </args>
+            </payloadFactory>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200"/>
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="CatalogHierarchyCountSeq" value="Fin.." />
+    </log>
+    <respond />
+</sequence>

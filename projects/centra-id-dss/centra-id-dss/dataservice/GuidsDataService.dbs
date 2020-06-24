@@ -1,0 +1,45 @@
+<data enableBatchRequests="true" enableBoxcarring="true" name="GuidsDSS" serviceNamespace="centra-id.com" transports="https" disableLegacyBoxcarringMode="true">
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <query id="insert_guids_query" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>INSERT INTO sch_centra_id.guids(guid,created,event) VALUES(?,getdate(),?)</sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="guid" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="event" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+    </query>
+    <query id="select_with_guid_guids_query" useConfig="default">
+        <sql>SELECT id, guid, created, event FROM sch_centra_id.guids WHERE guid=?</sql>
+        <param name="guid" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <result element="Guids" rowName="Guid">
+            <element column="id" name="id" xsdType="xs:long"/>
+            <element column="guid" name="guid" xsdType="xs:string"/>
+            <element column="created" name="created" xsdType="xs:dateTime"/>
+            <element column="event" name="event" xsdType="xs:string"/>
+        </result>
+    </query>
+    <operation name="insert_guids_operation">
+        <call-query href="insert_guids_query">
+            <with-param name="guid" query-param="guid"/>
+            <with-param name="event" query-param="event"/>
+        </call-query>
+    </operation>
+    <operation name="select_with_key_guids_operation">
+        <call-query href="select_with_guid_guids_query">
+            <with-param name="guid" query-param="guid"/>
+        </call-query>
+    </operation>
+    <resource method="GET" path="getByGuid">
+        <call-query href="select_with_guid_guids_query">
+            <with-param name="guid" query-param="guid"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="createGuid">
+        <call-query href="insert_guids_query">
+            <with-param name="guid" query-param="guid"/>
+            <with-param name="event" query-param="event"/>
+        </call-query>
+    </resource>
+</data>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GIMailbox_Seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log description="seq" level="custom">
+        <property name="seq" value="---------- GIMailbox_Seq ----------"/>
+        <property expression="get-property('SOAP_ACTION_REQUEST')" name="SOAP_ACTION_REQUEST"/>
+        <property expression="get-property('mailbox')" name="mailbox"/>
+        <property expression="get-property('tier')" name="tier"/>
+        <property expression="get-property('axis2', 'HTTP_SC')" name="HTTP_SC"/>
+        <property expression="get-property('cgi-error-codigo')" name="cgi-error-codigo"/>
+        <property expression="get-property('cgi-error-mensaje')" name="cgi-error-mensaje"/>
+    </log>
+    <filter regex=".*ad.*" source="get-property('aplicacion')">
+        <then>
+            <filter regex="0" source="get-property('cgi-error-codigo')">
+                <then>
+                    <filter regex="1" source="get-property('mailbox')">
+                        <then>
+                            <switch source="get-property('SOAP_ACTION_REQUEST')">
+                                <case regex=".*crearUsuario.*">
+                                    <log description="create" level="custom">
+                                        <property expression="fn:concat('Enabling mailbox for: ',get-property('username'))" name="msg"/>
+                                    </log>
+                                    <property description="tierConfig" expression="get-property('registry', fn:concat('gov:/pichincha/',$ctx:tier,'.xml'))" name="tierConfig" scope="default" type="OM"/>
+                                    <payloadFactory description="Crear Mailbox" media-type="json">
+                                        <format>{
+							"identity":"$1",
+							"IssueWarningQuota" : "$2",
+							"ProhibitSendQuota" : "$3",
+							"ProhibitSendReceiveQuota" : "$4",
+							"UseDatabaseQuotaDefaults" : "$5"
+		         		}
+				</format>
+                                        <args>
+                                            <arg evaluator="xml" expression="get-property('username')"/>
+                                            <arg evaluator="xml" expression="$ctx:tierConfig/IssueWarningQuota/text()"/>
+                                            <arg evaluator="xml" expression="$ctx:tierConfig/ProhibitSendQuota/text()"/>
+                                            <arg evaluator="xml" expression="$ctx:tierConfig/ProhibitSendReceiveQuota/text()"/>
+                                            <arg value="$false"/>
+                                        </args>
+                                    </payloadFactory>
+                                    <property description="uri.var.resourcepath" name="uri.var.resourcepath" scope="default" type="STRING" value="enable"/>
+                                    <sequence key="GIMailbox_API_Seq"/>
+                                </case>
+                                <case regex=".*eliminarUsuario.*">
+                                    <log description="delete" level="custom">
+                                        <property expression="fn:concat('Disabling mailbox for: ',get-property('username'))" name="msg"/>
+                                    </log>
+                                    <payloadFactory description="Eliminar Mailbox" media-type="json">
+                                        <format>{
+							"identity":"$1"
+		         		}
+				</format>
+                                        <args>
+                                            <arg evaluator="xml" expression="get-property('username')"/>
+                                        </args>
+                                    </payloadFactory>
+                                    <property description="uri.var.resourcepath" name="uri.var.resourcepath" scope="default" type="STRING" value="disable"/>
+                                    <sequence key="GIMailbox_API_Seq"/>
+                                </case>
+                                <case regex=".*modificarUsuario.*">
+                                    <log description="update" level="custom">
+                                        <property expression="fn:concat('Generating ticket to change tier for: ',get-property('username'))" name="msg"/>
+                                    </log>
+                                    <payloadFactory description="Description" media-type="xml">
+                                        <format>
+                                            <Description><![CDATA[
+                        Accion: "$1"
+						]]></Description>
+                                        </format>
+                                        <args>
+                                            <arg evaluator="xml" expression="fn:concat('Cambir tier para:',$ctx:tier, ' del usuario:',$ctx:username)"/>
+                                        </args>
+                                    </payloadFactory>
+                                    <property description="description" expression="$body//*" name="description" scope="default" type="STRING"/>
+                                    <payloadFactory description="Incident Request Payload" media-type="xml">
+                                        <format>
+                                            <ns:CreateIM_IncidentRequest ignoreEmptyElements="true" updateconstraint="-1" xmlns:ns="http://schemas.hp.com/SM/7">
+                                                <ns:model>
+                                                    <ns:keys>
+                                                        <ns:IncidentID type="String"/>
+                                                    </ns:keys>
+                                                    <ns:instance>
+                                                        <ns:Category type="String">$1</ns:Category>
+                                                        <ns:Urgency type="String">$2</ns:Urgency>
+                                                        <ns:AssignmentGroup type="String">$3</ns:AssignmentGroup>
+                                                        <ns:Description type="Array">
+                                                            <ns:Description type="String"><![CDATA[$4]]></ns:Description>
+                                                        </ns:Description>
+                                                        <ns:Contact type="String">$5</ns:Contact>
+                                                        <ns:Title type="String">$6</ns:Title>
+                                                        <ns:Status type="String">$7</ns:Status>
+                                                        <ns:Phase type="String">$8</ns:Phase>
+                                                        <ns:Area type="String">$9</ns:Area>
+                                                        <ns:SLAAgreementID type="Decimal">$10</ns:SLAAgreementID>
+                                                        <ns:Subarea type="String">$11</ns:Subarea>
+                                                        <ns:Impact type="String">$12</ns:Impact>
+                                                        <ns:Service type="String">$13</ns:Service>
+                                                        <ns:Filial type="String">$14</ns:Filial>
+                                                        <ns:Ambiente type="String">$15</ns:Ambiente>
+                                                    </ns:instance>
+                                                </ns:model>
+                                            </ns:CreateIM_IncidentRequest>
+                                        </format>
+                                        <args>
+                                            <arg value="Incident"/>
+                                            <arg value="3"/>
+                                            <arg value="TEC_N2_ADMINISTRACION CLAVES"/>
+                                            <arg evaluator="xml" expression="get-property('description')"/>
+                                            <arg value="fbalarez"/>
+                                            <arg value="Cambiar Tier"/>
+                                            <arg value="Categorize"/>
+                                            <arg value="Categorization"/>
+                                            <arg value="Infraestructura"/>
+                                            <arg value="177"/>
+                                            <arg value="Incidente Equipo Facilidades"/>
+                                            <arg value="3"/>
+                                            <arg value="Servicios Operaciones IT"/>
+                                            <arg value="BANCO PICHINCHA"/>
+                                            <arg value="PRODUCCIÓN"/>
+                                        </args>
+                                    </payloadFactory>
+                                    <log description="Incident Payload" level="full"/>
+                                    <sequence key="GIHelpDesk_CreateTicket_Seq"/>
+                                </case>
+                                <default/>
+                            </switch>
+                        </then>
+                        <else>
+                            <log description="No Mailbox" level="custom">
+                                <property name="msg" value="The user does not have Mailbox."/>
+                            </log>
+                        </else>
+                    </filter>
+                </then>
+                <else>
+                    <log description="Error in AD" level="custom">
+                        <property name="msg" value="Error in AD."/>
+                    </log>
+                </else>
+            </filter>
+        </then>
+        <else>
+            <log description="Non AD" level="custom">
+                <property name="msg" value="The user is not targetted for AD."/>
+            </log>
+        </else>
+    </filter>
+</sequence>

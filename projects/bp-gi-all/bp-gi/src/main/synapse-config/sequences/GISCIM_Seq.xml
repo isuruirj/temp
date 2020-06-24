@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GISCIM_Seq" onError="GIFault_Seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <filter regex="true" source="boolean($ctx:ipclient)">
+        <then>
+            <property description="cgi-ipclient" expression="get-property('ipclient')" name="cgi-ipclient" scope="transport" type="STRING"/>
+        </then>
+        <else>
+            <property description="cgi-ipclient" expression="get-property('axis2','REMOTE_ADDR')" name="cgi-ipclient" scope="transport" type="STRING" xmlns:tem="http://tempuri.org/"/>
+        </else>
+    </filter>
+    <filter regex="true" source="boolean($ctx:usuarioAplicacion)">
+        <then>
+            <property description="cgi-usuarioAplicacion" expression="get-property('usuarioAplicacion')" name="cgi-usuarioAplicacion" scope="transport" type="STRING"/>
+        </then>
+        <else>
+            <property description="cgi-usuarioAplicacion" expression="get-property('WS_USER')" name="cgi-usuarioAplicacion" scope="transport" type="STRING" xmlns:tem="http://tempuri.org/"/>
+        </else>
+    </filter>
+    <property description="cgi-guid" expression="get-property('GUID')" name="cgi-guid" scope="transport" type="STRING"/>
+    <property description="cgi-uuid" expression="get-property('uuid')" name="cgi-uuid" scope="transport" type="STRING"/>
+    <property description="Authorization" expression="fn:concat('Basic ', base64Encode(fn:concat(get-property('IS_SCIM_USER'),':',get-property('IS_SCIM_USER_PASSWORD'))))" name="Authorization" scope="transport" type="STRING" xmlns:ns="http://org.apache.synapse/xsd"/>
+    <property description="Accept" name="Accept" scope="transport" type="STRING" value="application/json"/>
+    <property description="uri.var.context" name="uri.var.context" scope="default" type="STRING" value="/scim2/Users/"/>
+    <property description="uri.var.host" expression="fn:concat(get-property('IDENTITY_SERVER_HOST'), get-property('uri.var.context'), get-property('uri.var.resourcepath'))" name="uri.var.host" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd"/>
+    <log description="seq" level="custom">
+        <property name="seq" value="-------------------- GISCIM_Seq --------------------"/>
+        <property expression="get-property('transport','cgi-guid')" name="cgi-guid"/>
+        <property expression="get-property('transport','cgi-uuid')" name="cgi-uuid"/>
+        <property expression="get-property('transport','cgi-ipclient')" name="cgi-ipclient"/>
+        <property expression="get-property('transport','cgi-usuarioAplicacion')" name="cgi-usuarioAplicacion"/>
+        <property expression="get-property('uri.var.host')" name="URL"/>
+    </log>
+    <call>
+        <endpoint key="GISCIM_EP"/>
+    </call>
+    <filter regex=".*bancs.*|.*logiciel.*|.*pprd.*" source="get-property('aplicacion')">
+        <then>
+            <property description="Header:cgi-error-codigo" expression="$trp:cgi-error-codigo" name="cgi-error-codigo" scope="default" type="STRING"/>
+            <property description="Header:cgi-error-mensaje" expression="$trp:cgi-error-mensaje" name="cgi-error-mensaje" scope="default" type="STRING"/>
+        </then>
+        <else>
+            <filter regex=".*20.*" source="get-property('axis2', 'HTTP_SC')">
+                <then>
+                    <property description="Header:cgi-error-codigo" name="cgi-error-codigo" scope="default" type="STRING" value="0"/>
+                    <property description="Header:cgi-error-mensaje" name="cgi-error-mensaje" scope="default" type="STRING" value="No Error"/>
+                </then>
+                <else>
+                    <property description="Header:cgi-error-codigo" name="cgi-error-codigo" scope="default" type="STRING" value="1"/>
+                    <property description="Header:cgi-error-mensaje" name="cgi-error-mensaje" scope="default" type="STRING" value=""/>
+                </else>
+            </filter>
+        </else>
+    </filter>
+    <filter regex="0" source="get-property('cgi-error-codigo')">
+        <then>
+            <property description="scimResponse" expression="json-eval($.)" name="scimResponse" scope="default" type="STRING"/>
+        </then>
+        <else>
+            <filter regex="true" source="boolean(get-property('cgi-error-mensaje'))">
+                <then>
+                    <property description="scimResponse" expression="get-property('cgi-error-mensaje')" name="scimResponse" scope="default" type="STRING"/>
+                </then>
+                <else>
+                    <property description="scimResponse" expression="json-eval($.detail)" name="scimResponse" scope="default" type="STRING"/>
+                </else>
+            </filter>
+        </else>
+    </filter>
+    <log description="Response" level="custom">
+        <property expression="get-property('axis2', 'HTTP_SC')" name="HTTP_SC"/>
+        <property expression="get-property('cgi-error-codigo')" name="cgi-error-codigo"/>
+        <property expression="get-property('cgi-error-mensaje')" name="cgi-error-mensaje"/>
+        <property expression="get-property('scimResponse')" name="scimResponse"/>
+    </log>
+</sequence>

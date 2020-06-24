@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/api.centraid/bussinesprocess" name="BussinesProcessApi" version="1.0.0" version-type="context" xmlns="http://ws.apache.org/ns/synapse">
+    <resource faultSequence="FaultSeq" methods="POST" uri-template="/StartInstance">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="BussinesProcessStartInstanceSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/Instances/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="BusinessProcessInstanceIdSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/Tasks/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="BusinessProcessTaskIdSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/Tasks">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="BusinessProcessTaskListSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="POST" uri-template="/Tasks">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="BusinessProcessTaskQuerySeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/HistoryInstance/{instanceId}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="BusinessProcessHistoryInstanceSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="POST" uri-template="/TaskComplete">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="BusinessProcessTaskCompleteSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="POST" uri-template="/SendNotification">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="BusinessProcessSendNotificationSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="POST" uri-template="/CalculateUserAttention">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="BusinessProcessCalculateUserAttentionSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+</api>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GenerateQRCodeSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log category="INFO" level="custom">
+        <property expression="get-property('QR_CODE_ACCOUNT')" name="QR_CODE_ACCOUNT" />
+        <property expression="get-property('QR_CODE_ISSUER')" name="QR_CODE_ISSUER" />
+        <property expression="get-property('QR_CODE_SECRET')" name="QR_CODE_SECRET" />
+    </log>
+    <property action="set" name="QR_CODE_ISSUER" expression="get-property('QR_CODE_ISSUER')" />
+    <class description="Generate QR Code Image Base 64" name="com.centraid.mediator.GenerateQRCode" />
+    <log category="INFO" level="custom">
+        <property expression="get-property('QR_CODE_RESULT')" name="QR_CODE_RESULT" />
+    </log>
+</sequence>

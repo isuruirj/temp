@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="BusinessLogicDeleteUserSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="BusinessLogicDeleteUserSeq" value="Inicio.." />
+    </log>
+    <property name="Content-Encoding" action="remove" scope="transport" />
+    <property name="Accept-Encoding" scope="transport" action="remove" />
+    <property expression="//userDataId" name="uri.var.userDataId" scope="default" type="STRING" />
+    <property expression="//justification" name="justification" scope="default" type="STRING" />
+    <property value="ELIMINADO" name="employeeStatus" scope="default" type="STRING" />
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/UserDataSimple/{uri.var.userDataId}" />
+    </call>
+    <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+        <then>
+            <enrich>
+                <source clone="true" property="justification" type="property" />
+                <target xpath="//justificationElimination" />
+            </enrich>
+            
+            <property expression="json-eval($.userDataSimpleList)" name="payload" scope="default" type="STRING" />
+            <payloadFactory media-type="json">
+                <format>$1</format>
+                <args>
+                    <arg evaluator="xml" expression="$ctx:payload" />
+                </args>
+            </payloadFactory>
+            <call>
+                <endpoint template="HTTPEndpointPutTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/UserDataSimple/{uri.var.userDataId}" />
+            </call>
+            <filter regex="202" source="get-property('axis2', 'HTTP_SC')">
+                <then>
+                    <call>
+                        <endpoint template="HTTPEndpointDeleteTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/identity/UserData/{uri.var.userDataId}" />
+                    </call>
+                    <filter regex="202" source="get-property('axis2', 'HTTP_SC')">
+                        <then>
+                            <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+                            <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+                            <payloadFactory media-type="json">
+                                <format>
+                                    {
+                                        "result":  {
+                                            "code" : 0,
+                                            "message" : "Operation performed successfully"
+                                        }
+                                    }
+                                </format>
+                                <args />
+                            </payloadFactory>
+                        </then>
+                        <else>
+                            <property name="fault" scope="default" type="STRING" value="Error delete user" />
+                            <sequence key="FaultSeq" />
+                        </else>
+                    </filter>
+                </then>
+                <else>
+                    <property name="fault" scope="default" type="STRING" value="Error update user" />
+                    <sequence key="FaultSeq" />
+                </else>
+            </filter>
+        </then>
+        <else>
+            <property name="fault" scope="default" type="STRING" value="Error get user" />
+            <sequence key="FaultSeq" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="BusinessLogicDeleteUserSeq" value="Fin.." />
+    </log>
+</sequence>

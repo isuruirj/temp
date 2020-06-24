@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="TemplateProfileFromToSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="TemplateProfileFromToSeq" value="Inicio.." />
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml" />
+    <property name="Accept" scope="transport" type="STRING" value="application/xml" />
+    <property action="remove" name="Content-Type" scope="transport" />
+    <property expression="$ctx:query.param.orderby" name="uri.var.orderby" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.id" name="transactionalProfile.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.code" name="transactionalProfile.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.name" name="transactionalProfile.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.comments" name="transactionalProfile.comments" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.dateCreated" name="transactionalProfile.dateCreated" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.dateDeleted" name="transactionalProfile.dateDeleted" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.userCreated" name="transactionalProfile.userCreated" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.userDeleted" name="transactionalProfile.userDeleted" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.valid" name="transactionalProfile.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.catalogRiskLevel.id" name="transactionalProfile.catalogRiskLevel.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.catalogRiskLevel.code" name="transactionalProfile.catalogRiskLevel.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.catalogRiskLevel.name" name="transactionalProfile.catalogRiskLevel.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.catalogRiskLevel.predetermined" name="transactionalProfile.catalogRiskLevel.predetermined" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.catalogRiskLevel.ordinal" name="transactionalProfile.catalogRiskLevel.ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.catalogRiskLevel.valueText" name="transactionalProfile.catalogRiskLevel.valueText" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.catalogRiskLevel.valueNumber" name="transactionalProfile.catalogRiskLevel.valueNumber" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.catalogRiskLevel.valueDate" name="transactionalProfile.catalogRiskLevel.valueDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.catalogRiskLevel.valueBoolean" name="transactionalProfile.catalogRiskLevel.valueBoolean" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.catalogRiskLevel.catalogType.id" name="transactionalProfile.catalogRiskLevel.catalogType.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.catalogRiskLevel.catalogType.code" name="transactionalProfile.catalogRiskLevel.catalogType.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.catalogRiskLevel.catalogType.name" name="transactionalProfile.catalogRiskLevel.catalogType.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.catalogRiskLevel.catalogType.sortType" name="transactionalProfile.catalogRiskLevel.catalogType.sortType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.catalogRiskLevel.catalogType.editable" name="transactionalProfile.catalogRiskLevel.catalogType.editable" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.catalogRiskLevel.catalogType.valid" name="transactionalProfile.catalogRiskLevel.catalogType.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.catalogRiskLevel.catalogType.description" name="transactionalProfile.catalogRiskLevel.catalogType.description" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.catalogRiskLevel.valid" name="transactionalProfile.catalogRiskLevel.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.application.id" name="transactionalProfile.application.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.application.code" name="transactionalProfile.application.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.application.name" name="transactionalProfile.application.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.application.automaticProvision" name="transactionalProfile.application.automaticProvision" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.application.valid" name="transactionalProfile.application.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.application.status" name="transactionalProfile.application.status" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.application.applicationGroup.id" name="transactionalProfile.application.applicationGroup.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.application.applicationGroup.code" name="transactionalProfile.application.applicationGroup.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.application.applicationGroup.name" name="transactionalProfile.application.applicationGroup.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.application.applicationGroup.endpointType" name="transactionalProfile.application.applicationGroup.endpointType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.application.applicationGroup.ordinal" name="transactionalProfile.application.applicationGroup.ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.transactionalProfile.application.applicationGroup.valid" name="transactionalProfile.application.applicationGroup.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.field.id" name="field.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.field.code" name="field.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.field.name" name="field.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.field.predetermined" name="field.predetermined" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.field.type" name="field.type" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.field.length" name="field.length" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.field.required" name="field.required" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.field.valid" name="field.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.field.applicationGroup.id" name="field.applicationGroup.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.field.applicationGroup.code" name="field.applicationGroup.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.field.applicationGroup.name" name="field.applicationGroup.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.field.applicationGroup.endpointType" name="field.applicationGroup.endpointType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.field.applicationGroup.ordinal" name="field.applicationGroup.ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.field.applicationGroup.valid" name="field.applicationGroup.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.fieldValue" name="fieldValue" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.ordinal" name="ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING" />
+    <script language="nashornJs"><![CDATA[
+        @add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE templateProfile.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","templateProfile","id");
+        where += addWhere("transactionalProfile.id","Integer","transactionalProfile","id");
+        where += addWhere("transactionalProfile.code","String","transactionalProfile","code");
+        where += addWhere("transactionalProfile.name","String","transactionalProfile","name");
+        where += addWhere("transactionalProfile.comments","String","transactionalProfile","comments");
+        where += addWhere("transactionalProfile.dateCreated","DateTime","transactionalProfile","date_created");
+        where += addWhere("transactionalProfile.dateDeleted","DateTime","transactionalProfile","date_deleted");
+        where += addWhere("transactionalProfile.userCreated","String","transactionalProfile","user_created");
+        where += addWhere("transactionalProfile.userDeleted","String","transactionalProfile","user_deleted");
+        where += addWhere("transactionalProfile.valid","Integer","transactionalProfile","valid");
+        where += addWhere("transactionalProfile.catalogRiskLevel.id","Integer","transactionalProfile_catalogRiskLevel","id");
+        where += addWhere("transactionalProfile.catalogRiskLevel.code","String","transactionalProfile_catalogRiskLevel","code");
+        where += addWhere("transactionalProfile.catalogRiskLevel.name","String","transactionalProfile_catalogRiskLevel","name");
+        where += addWhere("transactionalProfile.catalogRiskLevel.predetermined","Integer","transactionalProfile_catalogRiskLevel","predetermined");
+        where += addWhere("transactionalProfile.catalogRiskLevel.ordinal","Integer","transactionalProfile_catalogRiskLevel","ordinal");
+        where += addWhere("transactionalProfile.catalogRiskLevel.valueText","String","transactionalProfile_catalogRiskLevel","value_text");
+        where += addWhere("transactionalProfile.catalogRiskLevel.valueNumber","Numeric","transactionalProfile_catalogRiskLevel","value_number");
+        where += addWhere("transactionalProfile.catalogRiskLevel.valueDate","Date","transactionalProfile_catalogRiskLevel","value_date");
+        where += addWhere("transactionalProfile.catalogRiskLevel.valueBoolean","Integer","transactionalProfile_catalogRiskLevel","value_boolean");
+        where += addWhere("transactionalProfile.catalogRiskLevel.catalogType.id","Integer","transactionalProfile_catalogRiskLevel_catalogType","id");
+        where += addWhere("transactionalProfile.catalogRiskLevel.catalogType.code","String","transactionalProfile_catalogRiskLevel_catalogType","code");
+        where += addWhere("transactionalProfile.catalogRiskLevel.catalogType.name","String","transactionalProfile_catalogRiskLevel_catalogType","name");
+        where += addWhere("transactionalProfile.catalogRiskLevel.catalogType.sortType","String","transactionalProfile_catalogRiskLevel_catalogType","sort_type");
+        where += addWhere("transactionalProfile.catalogRiskLevel.catalogType.editable","Integer","transactionalProfile_catalogRiskLevel_catalogType","editable");
+        where += addWhere("transactionalProfile.catalogRiskLevel.catalogType.valid","Integer","transactionalProfile_catalogRiskLevel_catalogType","valid");
+        where += addWhere("transactionalProfile.catalogRiskLevel.catalogType.description","String","transactionalProfile_catalogRiskLevel_catalogType","description");
+        where += addWhere("transactionalProfile.catalogRiskLevel.valid","Integer","transactionalProfile_catalogRiskLevel","valid");
+        where += addWhere("transactionalProfile.application.id","Integer","transactionalProfile_application","id");
+        where += addWhere("transactionalProfile.application.code","String","transactionalProfile_application","code");
+        where += addWhere("transactionalProfile.application.name","String","transactionalProfile_application","name");
+        where += addWhere("transactionalProfile.application.automaticProvision","Integer","transactionalProfile_application","automatic_provision");
+        where += addWhere("transactionalProfile.application.valid","Integer","transactionalProfile_application","valid");
+        where += addWhere("transactionalProfile.application.status","String","transactionalProfile_application","status");
+        where += addWhere("transactionalProfile.application.applicationGroup.id","Integer","transactionalProfile_application_applicationGroup","id");
+        where += addWhere("transactionalProfile.application.applicationGroup.code","String","transactionalProfile_application_applicationGroup","code");
+        where += addWhere("transactionalProfile.application.applicationGroup.name","String","transactionalProfile_application_applicationGroup","name");
+        where += addWhere("transactionalProfile.application.applicationGroup.endpointType","String","transactionalProfile_application_applicationGroup","endpoint_type");
+        where += addWhere("transactionalProfile.application.applicationGroup.ordinal","Integer","transactionalProfile_application_applicationGroup","ordinal");
+        where += addWhere("transactionalProfile.application.applicationGroup.valid","Integer","transactionalProfile_application_applicationGroup","valid");
+        where += addWhere("field.id","Integer","field","id");
+        where += addWhere("field.code","String","field","code");
+        where += addWhere("field.name","String","field","name");
+        where += addWhere("field.predetermined","String","field","predetermined");
+        where += addWhere("field.type","String","field","type");
+        where += addWhere("field.length","Integer","field","length");
+        where += addWhere("field.required","Integer","field","required");
+        where += addWhere("field.valid","Integer","field","valid");
+        where += addWhere("field.applicationGroup.id","Integer","field_applicationGroup","id");
+        where += addWhere("field.applicationGroup.code","String","field_applicationGroup","code");
+        where += addWhere("field.applicationGroup.name","String","field_applicationGroup","name");
+        where += addWhere("field.applicationGroup.endpointType","String","field_applicationGroup","endpoint_type");
+        where += addWhere("field.applicationGroup.ordinal","Integer","field_applicationGroup","ordinal");
+        where += addWhere("field.applicationGroup.valid","Integer","field_applicationGroup","valid");
+        where += addWhere("fieldValue","String","templateProfile","field_value");
+        where += addWhere("ordinal","Integer","templateProfile","ordinal");
+        where += addWhere("valid","Integer","templateProfile","valid");
+        innerJoin += " LEFT JOIN sch_centra_id.TRANSACTIONAL_PROFILES transactionalProfile ON TemplateProfile.transactional_profile_id = transactionalProfile.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS transactionalProfile_catalogRiskLevel ON transactionalProfile.catalog_risk_level_id = transactionalProfile_catalogRiskLevel.id";
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS_TYPES transactionalProfile_catalogRiskLevel_catalogType ON transactionalProfile_catalogRiskLevel.catalog_type_id = transactionalProfile_catalogRiskLevel_catalogType.id";
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS transactionalProfile_application ON transactionalProfile.application_id = transactionalProfile_application.id";
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS_GROUP transactionalProfile_application_applicationGroup ON transactionalProfile_application.application_group_id = transactionalProfile_application_applicationGroup.id";
+        innerJoin += " LEFT JOIN sch_centra_id.FIELDS field ON TemplateProfile.field_id = field.id";
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS_GROUP field_applicationGroup ON field.application_group_id = field_applicationGroup.id";
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+
+        if(!mc.getProperty("uri.var.orderby")){
+            mc.setProperty("uri.var.orderby","templateProfile.id");
+        } else {
+            mc.setProperty("uri.var.orderby","templateProfile."+mc.getProperty("uri.var.orderby"));
+        }
+
+        // FROM TO
+        var fromto = "OFFSET "+mc.getProperty("uri.var.from")+" ROWS FETCH NEXT "+mc.getProperty("uri.var.to")+" ROWS ONLY";
+        mc.setProperty("uri.var.fromto",fromto);
+        log.debug(where);]]></script>
+    <call>
+        <endpoint name="TemplateProfileDSS_Endpoint" template="HTTPEndpointGetTemplate"
+              uri="{uri.var.dataServiceHost}/application.template-profile.ds.HTTPEndpoint/GetFromToTemplateProfile?whereclause={uri.var.whereclause}&amp;orderby={uri.var.orderby}&amp;fromto={uri.var.fromto}&amp;innerjoinclause={uri.var.innerjoinclause}" />
+
+    </call>
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING" />
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq" />
+        </then>
+        <else>
+            <xslt key="gov:/centra-id/xslt/dssFilter.xsl" />
+            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="TemplateProfileFromToSeq" value="Fin.." />
+    </log>
+</sequence>

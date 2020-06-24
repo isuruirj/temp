@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="TemplateProfileMatrixDetailUpdateSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse" xmlns:ci="centra-id.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:axis2ns65="http://ws.wso2.org/dataservice">
+    <log level="custom" category="DEBUG">
+        <property name="TemplateProfileMatrixDetailUpdateSeq" value="Inicio.."/>
+    </log>
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml"/>
+    <property name="Accept" scope="transport" type="STRING" value="application/xml"/>
+    <xslt key="gov:/centra-id/xslt/jsonFilter.xsl">
+        <property value="update" name="operationName"/>
+        <property value="templateProfileMatrixDetail" name="entityName"/>
+        <property value="templatesProfilesMatricesDetail" name="entityNamePlural"/>
+        <property expression="get-property('uri.var.id')" name="id" />
+    </xslt>
+    <call>
+        <endpoint name="TemplateProfileMatrixDetailDSS_Endpoint" template="HTTPEndpointPutTemplate"
+              uri="{uri.var.dataServiceHost}/application.template-profile-matrix-detail.ds.HTTPEndpoint/UpdateTemplateProfileMatrixDetail" />
+    </call>
+    <property expression="//axis2ns65:DataServiceFault/axis2ns65:ds_code" name="faultCode" scope="default" type="STRING"/> 
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq"/>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>{ "templateProfileMatrixDetail": { "id": $1 } }</format>
+                <args>
+                    <arg evaluator="xml" expression="get-property('uri.var.id')"/>
+                </args>
+            </payloadFactory>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200"/>
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="TemplateProfileMatrixDetailUpdateSeq" value="Fin.."/>
+    </log>
+</sequence>

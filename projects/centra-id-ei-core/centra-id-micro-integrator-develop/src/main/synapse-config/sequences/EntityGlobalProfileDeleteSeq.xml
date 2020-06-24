@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GlobalProfileDeleteSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse" xmlns:ci="centra-id.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:axis2ns65="http://ws.wso2.org/dataservice">
+    <log level="custom" category="DEBUG">
+        <property name="GlobalProfileDeleteSeq" value="Inicio.." />
+    </log>
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml" />
+    <property name="Accept" scope="transport" type="STRING" value="application/xml" />
+    <property name="uri.var.table" scope="default" type="STRING" value="sch_centra_id.GLOBAL_PROFILES" />
+    <property name="uri.var.set" scope="default" type="STRING" value="valid=0" />
+    <property name="Content-Type" scope="transport" value="application/x-www-form-urlencoded" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/x-www-form-urlencoded" />
+    <call>
+        <endpoint template="HTTPEndpointDeleteTemplate" uri="{uri.var.dataServiceHost}/application.global-profile.ds.HTTPEndpoint/DeleteGlobalProfile?id={uri.var.id}&amp;set={uri.var.set}&amp;table={uri.var.table}" />
+    </call>
+    <property expression="//ci:Fault/ci:faultcode" name="faultCode" scope="default" type="STRING" />
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq" />
+        </then>
+        <else>
+            <property name="messageType" scope="axis2" type="STRING" value="application/xml" />
+            <property name="Accept" scope="transport" type="STRING" value="application/xml" />
+            <payloadFactory media-type="xml">
+                <format>
+                    <ci:update_all_query_operation xmlns:ci="centra-id.com">
+                        <ci:table>SCH_CENTRA_ID.GLOBAL_PROFILES</ci:table>
+                        <ci:set>STATUS='ELIMINADO'</ci:set>
+                        <ci:where>ID=$1</ci:where>
+                    </ci:update_all_query_operation>
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="$ctx:uri.var.id" />
+                </args>
+            </payloadFactory>
+            <call>
+                <endpoint template="HTTPEndpointPutTemplate" uri="{uri.var.dataServiceHost}/UsersDSS.HTTPEndpoint/updateAll" />
+            </call>
+            <payloadFactory media-type="json">
+                <format>{ "globalProfile": { "id": $1 } }</format>
+                <args>
+                    <arg evaluator="xml" expression="get-property('uri.var.id')" />
+                </args>
+            </payloadFactory>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="GlobalProfileDeleteSeq" value="Fin.." />
+    </log>
+</sequence>

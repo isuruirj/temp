@@ -1,0 +1,126 @@
+<data name="ApplicationsProfilesDSS" serviceNamespace="centra-id.com" transports="https">
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <query id="select_all_applications_profiles_query" useConfig="default">
+        <sql>SELECT id, application_id, code, name, created FROM sch_centra_id.applications_profiles WHERE valid=1</sql>
+        <result element="ApplicationsProfiles" rowName="ApplicationProfile">
+            <element column="id" name="id" xsdType="xs:long"/>
+            <element column="application_id" name="applicationId" xsdType="xs:long"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="created" name="created" xsdType="xs:dateTime"/>
+        </result>
+    </query>
+    <query id="select_with_key_applications_profiles_query" useConfig="default">
+        <sql>SELECT id, application_id, code, name, created FROM sch_centra_id.applications_profiles WHERE id=? AND valid=1</sql>
+        <param name="id" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <result element="ApplicationsProfiles" rowName="ApplicationProfile">
+            <element column="id" name="id" xsdType="xs:long"/>
+            <element column="application_id" name="applicationId" xsdType="xs:long"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="created" name="created" xsdType="xs:dateTime"/>
+        </result>
+    </query>
+    <query id="select_with_application_applications_profiles_query" useConfig="default">
+        <sql>SELECT id, application_id, code, name, created FROM sch_centra_id.applications_profiles WHERE application_id=? AND valid=1</sql>
+        <param name="applicationId" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <result element="ApplicationsProfiles" rowName="ApplicationProfile">
+            <element column="id" name="id" xsdType="xs:long"/>
+            <element column="application_id" name="applicationId" xsdType="xs:long"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="created" name="created" xsdType="xs:dateTime"/>
+        </result>
+    </query>
+    <query id="insert_applications_profiles_query" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>INSERT INTO sch_centra_id.applications_profiles(application_id,code,name,created,valid) VALUES(?,?,?,getdate(),?)</sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="applicationId" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="code" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="name" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param defaultValue="1" name="valid" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+    </query>
+    <query id="update_applications_profiles_query" useConfig="default">
+        <sql>UPDATE sch_centra_id.applications_profiles SET application_id=?,code=?,name=? WHERE id=? AND valid=1</sql>
+        <param name="applicationId" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="code" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="name" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="id" ordinal="4" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <query id="delete_applications_profiles_query" useConfig="default">
+        <sql>UPDATE sch_centra_id.applications_profiles SET valid=0 WHERE id=? </sql>
+        <param name="id" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <operation name="select_with_key_applications_profiles_operation">
+        <call-query href="select_with_key_applications_profiles_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <operation name="select_with_application_applications_profiles_operation">
+        <call-query href="select_with_application_applications_profiles_query">
+            <with-param name="applicationId" query-param="applicationId"/>
+        </call-query>
+    </operation>
+    <operation name="delete_applications_profiles_operation">
+        <call-query href="delete_applications_profiles_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <operation name="select_all_applications_profiles_operation">
+        <call-query href="select_all_applications_profiles_query"/>
+    </operation>
+    <operation name="insert_applications_profiles_operation">
+        <call-query href="insert_applications_profiles_query">
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="applicationId" query-param="applicationId"/>
+        </call-query>
+    </operation>
+    <operation name="update_applications_profiles_operation">
+        <call-query href="update_applications_profiles_query">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="id" query-param="id"/>
+            <with-param name="applicationId" query-param="applicationId"/>
+        </call-query>
+    </operation>
+    <resource method="GET" path="getAllApplicationsProfiles">
+        <call-query href="select_all_applications_profiles_query"/>
+    </resource>
+    <resource method="GET" path="getByIdApplicationProfile">
+        <call-query href="select_with_key_applications_profiles_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="getByApplicationApplicationProfile">
+        <call-query href="select_with_application_applications_profiles_query">
+            <with-param name="applicationId" query-param="applicationId"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="createApplicationProfile">
+        <call-query href="insert_applications_profiles_query">
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="applicationId" query-param="applicationId"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="updateApplicationProfile">
+        <call-query href="update_applications_profiles_query">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="id" query-param="id"/>
+            <with-param name="applicationId" query-param="applicationId"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="deleteApplicationProfile">
+        <call-query href="delete_applications_profiles_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+</data>

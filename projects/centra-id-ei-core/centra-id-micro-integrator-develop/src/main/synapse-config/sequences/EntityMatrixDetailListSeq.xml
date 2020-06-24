@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="MatrixDetailListSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="MatrixDetailListSeq" value="Inicio.." />
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml" />
+    <property name="Accept" scope="transport" type="STRING" value="application/xml" />
+    <property action="remove" name="Content-Type" scope="transport" />
+    <property expression="$ctx:query.param.orderby" name="uri.var.orderby" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.code" name="code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.name" name="name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.ordinal" name="ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.matrix.id" name="matrix.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.matrix.code" name="matrix.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.matrix.name" name="matrix.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.matrix.quantity" name="matrix.quantity" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.matrix.valid" name="matrix.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.matrix.applicationGroup.id" name="matrix.applicationGroup.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.matrix.applicationGroup.code" name="matrix.applicationGroup.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.matrix.applicationGroup.name" name="matrix.applicationGroup.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.matrix.applicationGroup.endpointType" name="matrix.applicationGroup.endpointType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.matrix.applicationGroup.ordinal" name="matrix.applicationGroup.ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.matrix.applicationGroup.valid" name="matrix.applicationGroup.valid" scope="default" type="STRING" />
+    <script language="nashornJs"><![CDATA[
+        @add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE matrixDetail.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","matrixDetail","id");
+        where += addWhere("code","String","matrixDetail","code");
+        where += addWhere("name","String","matrixDetail","name");
+        where += addWhere("valid","Integer","matrixDetail","valid");
+        where += addWhere("ordinal","Integer","matrixDetail","ordinal");
+        where += addWhere("matrix.id","Integer","matrix","id");
+        where += addWhere("matrix.code","String","matrix","code");
+        where += addWhere("matrix.name","String","matrix","name");
+        where += addWhere("matrix.quantity","Integer","matrix","quantity");
+        where += addWhere("matrix.valid","Integer","matrix","valid");
+        where += addWhere("matrix.applicationGroup.id","Integer","matrix_applicationGroup","id");
+        where += addWhere("matrix.applicationGroup.code","String","matrix_applicationGroup","code");
+        where += addWhere("matrix.applicationGroup.name","String","matrix_applicationGroup","name");
+        where += addWhere("matrix.applicationGroup.endpointType","String","matrix_applicationGroup","endpoint_type");
+        where += addWhere("matrix.applicationGroup.ordinal","Integer","matrix_applicationGroup","ordinal");
+        where += addWhere("matrix.applicationGroup.valid","Integer","matrix_applicationGroup","valid");
+        innerJoin += " LEFT JOIN sch_centra_id.MATRICES matrix ON MatrixDetail.matrix_id = matrix.id";
+        innerJoin += " LEFT JOIN sch_centra_id.APPLICATIONS_GROUP matrix_applicationGroup ON matrix.application_group_id = matrix_applicationGroup.id";
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+        if(!mc.getProperty("uri.var.orderby")){
+            mc.setProperty("uri.var.orderby","matrixDetail.id");
+        } else {
+            mc.setProperty("uri.var.orderby","matrixDetail."+mc.getProperty("uri.var.orderby"));
+        }
+        log.debug(where);]]></script>
+    <call>
+        <endpoint name="MatrixDetailDSS_Endpoint" template="HTTPEndpointGetTemplate"
+              uri="{uri.var.dataServiceHost}/application.matrix-detail.ds.HTTPEndpoint/GetAllMatrixDetail?whereclause={uri.var.whereclause}&amp;orderby={uri.var.orderby}&amp;innerjoinclause={uri.var.innerjoinclause}" />
+
+    </call>
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING" />
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq" />
+        </then>
+        <else>
+            <xslt key="gov:/centra-id/xslt/dssFilter.xsl" />
+            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="MatrixDetailSeq" value="Fin.." />
+    </log>
+    <property name="messageType" value="application/json" scope="axis2" type="STRING"/>
+    <property name="Access-Control-Allow-Methods" value="GET,PUT,POST,DELETE,PATCH,OPTIONS" scope="transport" type="STRING"/>
+    <property name="Access-Control-Allow-Headers" value="Authorization,Access-Control-Allow-Origin,Content-Type" scope="transport" type="STRING"/>
+</sequence>

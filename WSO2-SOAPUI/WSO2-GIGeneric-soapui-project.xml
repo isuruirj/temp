@@ -433,7 +433,7 @@
    <soapenv:Header/>
    <soapenv:Body>
       <tem:crearUsuario>
-         <tem:uuid>guid-BANCS119</tem:uuid>
+         <tem:uuid>guid-BANCS1120</tem:uuid>
          <tem:aplicacion>BANCS</tem:aplicacion>
          <tem:correoElectronico>test@bp.com</tem:correoElectronico>
          <tem:tellerName>BANCS119</tem:tellerName>
@@ -467,8 +467,7 @@
    <soapenv:Header/>
    <soapenv:Body>
       <tem:crearUsuario>
-         <tem:guid>23A2C461-4F4F-61E6-3A99-2111</tem:guid>
-         <tem:uuid>23A2C461-4F4F-61E6-3A99-212125551</tem:uuid>
+         <tem:uuid>23A2C461-4F4F-61E6-3A99-10596610</tem:uuid>
          <tem:aplicacion>ADSSL</tem:aplicacion>
          <tem:correoElectronico>test@bp.com</tem:correoElectronico>
          <tem:tellerName>ad_user_6</tem:tellerName>

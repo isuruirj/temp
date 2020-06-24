@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="IdentitySeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="IdentitySeq" value="Inicio..." />
+        <property name="userdataId" expression="get-property('userdataId')" />
+        <property name="type" expression="get-property('uri.var.type')" />
+    </log>
+    <property name="uri.var.userdataId" expression="get-property('userdataId')" />
+    <switch source="get-property('uri.var.type')">
+        <case regex="C">
+            <sequence key="EntityUserDataIdentityCreateSeq" />
+        </case>
+        <case regex="U">
+            <sequence key="EntityUserDataIdentityUpdateSeq" />
+        </case>
+        <case regex="D">
+            <sequence key="EntityUserDataIdentityDeleteSeq" />
+        </case>
+    </switch>
+    <log level="custom" category="DEBUG">
+        <property name="IdentitySeq" value="Fin..." />
+        <property name="date" expression="get-property('SYSTEM_DATE', 'yyyy-MM-dd HH:mm:ss:SSS')" />
+    </log>
+</sequence>

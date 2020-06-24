@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="jsonToXml.xsl" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>jsonToXml.xsl</file>
+            <path>/_system/governance/centra-id/xslt</path>
+            <mediaType>application/xsl+xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="challengeQuestionsToXml.xsl" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>challengeQuestionsToXml.xsl</file>
+            <path>/_system/governance/centra-id/xslt</path>
+            <mediaType>application/xsl+xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="dssFilter.xsl" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>dssFilter.xsl</file>
+            <path>/_system/governance/centra-id/xslt</path>
+            <mediaType>application/xsl+xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="bpsInstanceFilter.xsl" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>bpsInstanceFilter.xsl</file>
+            <path>/_system/governance/centra-id/xslt</path>
+            <mediaType>application/xsl+xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="bpsFilter.xsl" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>bpsFilter.xsl</file>
+            <path>/_system/governance/centra-id/xslt</path>
+            <mediaType>application/xsl+xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="addLocalClaim.xsl" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>addLocalClaim.xsl</file>
+            <path>/_system/governance/centra-id/xslt</path>
+            <mediaType>application/xsl+xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="jsonFilter.xsl" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>jsonFilter.xsl</file>
+            <path>/_system/governance/centra-id/xslt</path>
+            <mediaType>application/xsl+xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="replaceElement.xsl" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>replaceElement.xsl</file>
+            <path>/_system/governance/centra-id/xslt</path>
+            <mediaType>application/xsl+xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="logTransactional.xsl" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>logTransactional.xsl</file>
+            <path>/_system/governance/centra-id/xslt</path>
+            <mediaType>application/xsl+xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="mailTemplateDefaultProfileError.xsl" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>mailTemplateDefaultProfileError.xsl</file>
+            <path>/_system/governance/centra-id/xslt/template-mail</path>
+            <mediaType>application/xsl+xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="massiveProcessToJson.xsl" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>massiveProcessToJson.xsl</file>
+            <path>/_system/governance/centra-id/xslt</path>
+            <mediaType>application/xsl+xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="ProcesarEmpleadoRequestSchema.json" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>ProcesarEmpleadoRequestSchema.json</file>
+            <path>/_system/governance/centra-id/schemas</path>
+            <mediaType>application/json</mediaType>
+        </item>
+    </artifact>
+    <artifact name="migration.xsl" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>migration.xsl</file>
+            <path>/_system/governance/centra-id/xslt</path>
+            <mediaType>application/xsl+xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="pagination.xsl" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>pagination.xsl</file>
+            <path>/_system/governance/centra-id/xslt</path>
+            <mediaType>application/xsl+xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="dateToMiliSeconds.xsl" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>dateToMiliSeconds.xsl</file>
+            <path>/_system/governance/centra-id/xslt</path>
+            <mediaType>application/xsl+xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="ticketManual.xsl" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>ticketManual.xsl</file>
+            <path>/_system/governance/centra-id/xslt</path>
+            <mediaType>application/xsl+xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="sendNotificacionMailToXml.xsl" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>sendNotificacionMailToXml.xsl</file>
+            <path>/_system/governance/centra-id/xslt</path>
+            <mediaType>application/xsl+xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="sendNotificacionSmsToXml.xsl" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>sendNotificacionSmsToXml.xsl</file>
+            <path>/_system/governance/centra-id/xslt</path>
+            <mediaType>application/xsl+xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="businessProcessRequest.xml" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>businessProcessRequest.xml</file>
+            <path>/_system/governance/centra-id/xml</path>
+            <mediaType>application/xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="catalogCreateJsonXML.xml" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>catalogCreateJsonXML.xml</file>
+            <path>/_system/governance/centra-id/xml</path>
+            <mediaType>application/xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="catalogs_transform.xml" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>catalogs_transform.xml</file>
+            <path>/_system/governance/centra-id/xml</path>
+            <mediaType>application/xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="catalogs.xml" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>catalogs.xml</file>
+            <path>/_system/governance/centra-id/xml</path>
+            <mediaType>application/xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="mailTemplateDefaultProfileError.xml" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>mailTemplateDefaultProfileError.xml</file>
+            <path>/_system/governance/centra-id/xml</path>
+            <mediaType>application/xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="massiveProcessToJson_xml" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>massiveProcessToJson.xml</file>
+            <path>/_system/governance/centra-id/xml</path>
+            <mediaType>application/xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="createInternUser.epr" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="BusinessProcessServer">
+        <item>
+            <file>createInternUser.epr</file>
+            <path>/_system/governance/centra-id/endpoint_reference</path>
+            <mediaType/>
+        </item>
+    </artifact>
+    <artifact name="createGenericUser.epr" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="BusinessProcessServer">
+        <item>
+            <file>createGenericUser.epr</file>
+            <path>/_system/governance/centra-id/endpoint_reference</path>
+            <mediaType/>
+        </item>
+    </artifact>
+    <artifact name="createGenericRotaryUser.epr" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="BusinessProcessServer">
+        <item>
+            <file>createGenericRotaryUser.epr</file>
+            <path>/_system/governance/centra-id/endpoint_reference</path>
+            <mediaType/>
+        </item>
+    </artifact>
+    <artifact name="createExternUser.epr" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="BusinessProcessServer">
+        <item>
+            <file>createExternUser.epr</file>
+            <path>/_system/governance/centra-id/endpoint_reference</path>
+            <mediaType/>
+        </item>
+    </artifact>
+    <artifact name="businessProcessSendNotification.epr" groupId="com.centra-id.micro-integrator.resource" version="1.0.0" type="registry/resource" serverRole="BusinessProcessServer">
+        <item>
+            <file>businessProcessSendNotification.epr</file>
+            <path>/_system/governance/centra-id/endpoint_reference</path>
+            <mediaType/>
+        </item>
+    </artifact>
+</artifacts>

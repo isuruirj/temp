@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="SendNotificationSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="SendNotificationSeq" value="Inicio.." />
+    </log>
+    <!--
+    <property name="ContentType" value="text/xml" scope="axis2" />
+    <property name="messageType" value="text/xml" scope="axis2" />
+    -->
+    <property name="service_ep" expression="get-property('ENDPOINT_NOTIFICACION_TCS')" />
+    <header name="To" expression="get-property('service_ep')" />
+    <call>
+        <endpoint>
+            <default format="soap11" />
+        </endpoint>
+    </call>
+    <log level="custom" category="DEBUG">
+        <property name="SendNotificationSeq" value="Fin.." />
+    </log>
+</sequence>

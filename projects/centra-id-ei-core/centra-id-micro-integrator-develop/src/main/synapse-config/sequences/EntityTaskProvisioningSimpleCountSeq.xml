@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="TaskProvisioningSimpleCountSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log category="DEBUG" level="custom">
+        <property name="TaskProvisioningSimpleCountSeq" value="Inicio.."/>
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2"/>
+    <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+    <property name="Accept" scope="transport" type="STRING" value="application/json"/>
+    <property action="remove" name="Content-Type" scope="transport"/>
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.provisioningDate" name="provisioningDate" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.provisioningStatus" name="provisioningStatus" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.provisioningComments" name="provisioningComments" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.status" name="status" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.creationDate" name="creationDate" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.uuid" name="uuid" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.uuidParent" name="uuidParent" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.ticketNumber" name="ticketNumber" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.ticketDate" name="ticketDate" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.ticketContent" name="ticketContent" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.ticketError" name="ticketError" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.action" name="action" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.retryNumber" name="retryNumber" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.type" name="type" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.retryLastDate" name="retryLastDate" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.transactionalProfileId" name="transactionalProfileId" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.applicationId" name="applicationId" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.operationProvisioningId" name="operationProvisioningId" scope="default" type="STRING"/>
+    <script language="nashornJs"><![CDATA[@add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE taskProvisioningSimple.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","taskProvisioningSimple","id");
+        where += addWhere("provisioningDate","Date","taskProvisioningSimple","provisioning_date");
+        where += addWhere("provisioningStatus","String","taskProvisioningSimple","provisioning_status");
+        where += addWhere("provisioningComments","String","taskProvisioningSimple","provisioning_comments");
+        where += addWhere("status","String","taskProvisioningSimple","status");
+        where += addWhere("creationDate","Date","taskProvisioningSimple","creation_date");
+        where += addWhere("uuid","String","taskProvisioningSimple","uuid");
+        where += addWhere("uuidParent","String","taskProvisioningSimple","uuid_parent");
+        where += addWhere("ticketNumber","String","taskProvisioningSimple","ticket_number");
+        where += addWhere("ticketDate","Date","taskProvisioningSimple","ticket_date");
+        where += addWhere("ticketContent","String","taskProvisioningSimple","ticket_content");
+        where += addWhere("ticketError","String","taskProvisioningSimple","ticket_error");
+        where += addWhere("action","String","taskProvisioningSimple","action");
+        where += addWhere("retryNumber","Integer","taskProvisioningSimple","retry_number");
+        where += addWhere("type","String","taskProvisioningSimple","type");
+        where += addWhere("retryLastDate","Date","taskProvisioningSimple","retry_last_date");
+        where += addWhere("valid","Integer","taskProvisioningSimple","valid");
+        where += addWhere("transactionalProfileId","Integer","taskProvisioningSimple","transactional_profile_id");
+        where += addWhere("applicationId","Integer","taskProvisioningSimple","application_id");
+        where += addWhere("operationProvisioningId","Integer","taskProvisioningSimple","operation_provisioning_id");
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+        log.debug(where);]]></script>
+    <property name="uri.var.table" scope="default" type="STRING" value="sch_centra_id.TAKS_PROVISIONING taskProvisioningSimple"/>
+    <property name="uri.var.function" scope="default" type="STRING" value="COUNT"/>
+    <property name="uri.var.field" scope="default" type="STRING" value="*"/>
+    <call>
+        <endpoint name="TaskProvisioningSimpleDSS_Endpoint" template="HTTPEndpointGetTemplate" uri="{uri.var.dataServiceHost}/provisioning.task-provisioning-simple.ds.HTTPEndpoint/GetFunctionResultTaskProvisioningSimple?function={uri.var.function}&amp;whereclause={uri.var.whereclause}&amp;field={uri.var.field}&amp;table={uri.var.table}&amp;innerjoinclause={uri.var.innerjoinclause}"/>
+    </call>
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING"/>
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq"/>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                        "count": $1
+                    }
+                </format>
+                <args>
+                    <arg evaluator="json" expression="$.result.value"/>
+                </args>
+            </payloadFactory>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200"/>
+        </else>
+    </filter>
+    <log category="DEBUG" level="custom">
+        <property name="TaskProvisioningSimpleCountSeq" value="Fin.."/>
+    </log>
+    <respond/>
+</sequence>

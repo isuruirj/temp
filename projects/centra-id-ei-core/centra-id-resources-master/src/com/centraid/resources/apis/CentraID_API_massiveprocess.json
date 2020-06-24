@@ -1,0 +1,54 @@
+{
+    "swagger": "2.0",
+    "paths": {
+        "/Employees": {
+            "post": {
+                "parameters": [
+                    {
+                        "name": "Payload",
+                        "description": "Request Body",
+                        "required": false,
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "payload": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "x-auth-type": "Application & Application User",
+                "x-throttling-tier": "Unlimited",
+                "x-scope": "pkg_massiveprocess_create"
+            }
+        }
+    },
+    "info": {
+        "title": "CentraID_API_massiveprocess",
+        "version": "v1"
+    },
+    "host": "api.centraid.com",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/api.centraid/massiveprocess",
+    "x-wso2-security": {
+        "apim": {
+            "x-wso2-scopes": [
+                {
+                    "name": "Packaje Massive Process Create",
+                    "description": "Acceso para crear entidades de paquetel massiveprocess",
+                    "key": "pkg_massiveprocess_create",
+                    "roles": "administration_user, operation_user"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="MassiveProcessUserValidateCostCenterSeq" onError="FaultMassiveProcessUsersSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse" xmlns:cen="centra-id.com">
+    <log level="custom" category="DEBUG">
+        <property name="MassiveProcessUserValidateCostCenterSeq" value="Inicio..." />
+        <property expression="get-property('uri.var.centerCostCode')" name="uri.var.centerCostCode" />
+        <property expression="get-property('uri.var.companyCode')" name="uri.var.companyCode" />
+    </log>
+    <header action="remove" name="Content-Type" scope="transport" />
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <call>
+        <endpoint name="CostsCentersDSS_Endpoint" template="HTTPEndpointGetTemplate" uri="{uri.var.dataServiceHost}/CostsCentersDSS.HTTPEndpoint/getByCompanyCodeAndCodeCostCenter?centerCostCode={uri.var.centerCostCode}&amp;companyCode={uri.var.companyCode}" />
+    </call>
+    <property expression="//cen:CostCenter/cen:code" name="code" scope="default" type="STRING" />
+    <filter regex="false" source="boolean(get-property('code'))">
+        <then>
+            <property name="validateData" scope="default" type="BOOLEAN" value="false" />
+            <property expression="fn:concat(get-property('validateDataMessage'),'El codigo del centro de costo (',get-property('uri.var.centerCostCode'),') no existe. ')" name="validateDataMessage" scope="default" type="STRING" />
+        </then>
+        <else />
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="MassiveProcessUserValidateCostCenterSeq" value="Fin.." />
+    </log>
+</sequence>

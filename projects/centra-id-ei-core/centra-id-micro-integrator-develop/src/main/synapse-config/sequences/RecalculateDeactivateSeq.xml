@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="RecalculateDeactivateSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="RecalculateDeactivateSeq" value="Inicio.." />
+    </log>
+    <script language="js">
+        <![CDATA[java.lang.Thread.sleep(60000);]]>
+    </script>
+    <store messageStore="ProvisioningStore" />
+    <log level="custom" category="DEBUG">
+        <property name="RecalculateDeactivateSeq" value="Fin.." />
+    </log>
+</sequence>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="BusinessLogicDeleteRestUserStoreScimSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="BusinessLogicDeleteRestUserStoreScimSeq" value="Inicio.." />
+    </log>
+    <property expression="$ctx:query.param.domain" name="uri.var.domain" />
+    <property expression="$ctx:query.param.username" name="uri.var.username" />
+    <filter regex="true" source="boolean($ctx:uri.var.domain) and boolean($ctx:uri.var.username)">
+        <then>
+            <call>
+                <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/provisioning/RestUserStoreScim?domain={uri.var.domain}&amp;username={uri.var.username}" />
+            </call>
+            <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                <then>
+                    <property name="uri.var.id" expression="//id" />
+                    <filter regex="true" source="boolean($ctx:uri.var.id)">
+                        <then>
+                            <call>
+                                <endpoint template="HTTPEndpointDeleteTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/provisioning/RestUserStoreScim/{uri.var.id}" />
+                            </call>
+                            <filter regex="202" source="get-property('axis2', 'HTTP_SC')">
+                                <then>
+                                    <payloadFactory media-type="json">
+                                        <format>
+                                        {
+                                            "result": "true", 
+                                            "message": "Removal successful" 
+                                        }
+                                    </format>
+                                        <args />
+                                    </payloadFactory>
+                                </then>
+                                <else>
+                                    <property name="fault" value="BusinessLogicDeleteRestUserStoreScimSeq: Error Delete RestUserStoreScim" />
+                                    <sequence key="FaultSeq" />
+                                </else>
+                            </filter>
+                        </then>
+                        <else>
+                            <payloadFactory media-type="json">
+                                <format>
+                                    {
+                                        "result": "false" ,
+                                        "message": "Error: There is no record with the data sent" 
+                                    }
+                                </format>
+                                <args />
+                            </payloadFactory>
+                        </else>
+                    </filter>
+                </then>
+                <else>
+                    <property name="fault" value="BusinessLogicDeleteRestUserStoreScimSeq: Error Get RestUserStoreScim" />
+                    <sequence key="FaultSeq" />
+                </else>
+            </filter>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                      "result": "false" ,
+                      "message": "Error: 'domain' and 'username' parameters are required" 
+                    }
+                </format>
+                <args />
+            </payloadFactory>
+        </else>
+    </filter>
+    <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+    <log level="custom" category="DEBUG">
+        <property name="BusinessLogicDeleteRestUserStoreScimSeq" value="Fin.." />
+    </log>
+</sequence>

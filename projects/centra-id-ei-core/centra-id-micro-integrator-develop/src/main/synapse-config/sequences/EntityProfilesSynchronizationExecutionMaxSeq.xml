@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ProfilesSynchronizationExecutionMaxSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log category="DEBUG" level="custom">
+        <property name="ProfilesSynchronizationExecutionMaxSeq" value="Inicio.."/>
+        <property expression="get-property('uri.var.field')" name="uri.var.field"/>
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2"/>
+    <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+    <property name="Accept" scope="transport" type="STRING" value="application/json"/>
+    <property action="remove" name="Content-Type" scope="transport"/>
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.userCreated" name="userCreated" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.dateCreated" name="dateCreated" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.datePlanned" name="datePlanned" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.dateSynchronizationInit" name="dateSynchronizationInit" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.dateSynchronizationEnd" name="dateSynchronizationEnd" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.type" name="type" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.status" name="status" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.transactionalProfileId" name="transactionalProfileId" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.globalProfileId" name="globalProfileId" scope="default" type="STRING"/>
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING"/>
+    <script language="nashornJs"><![CDATA[@add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE profilesSynchronizationExecution.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","profilesSynchronizationExecution","id");
+        where += addWhere("userCreated","String","profilesSynchronizationExecution","user_created");
+        where += addWhere("dateCreated","DateTime","profilesSynchronizationExecution","date_created");
+        where += addWhere("datePlanned","DateTime","profilesSynchronizationExecution","date_planned");
+        where += addWhere("dateSynchronizationInit","DateTime","profilesSynchronizationExecution","date_synchronization_init");
+        where += addWhere("dateSynchronizationEnd","DateTime","profilesSynchronizationExecution","date_synchronization_end");
+        where += addWhere("type","String","profilesSynchronizationExecution","type");
+        where += addWhere("status","String","profilesSynchronizationExecution","status");
+        where += addWhere("transactionalProfileId","Integer","profilesSynchronizationExecution","transactional_profile_id");
+        where += addWhere("globalProfileId","Integer","profilesSynchronizationExecution","global_profile_id");
+        where += addWhere("valid","Integer","profilesSynchronizationExecution","valid");
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+
+        // FIELD
+        var field = "profilesSynchronizationExecution."+mc.getProperty("uri.var.field");
+        mc.setProperty("uri.var.field",field);
+
+        log.debug(where);]]></script>
+    <property name="uri.var.table" scope="default" type="STRING" value="sch_centra_id.PROFILES_SYNCHRONIZATION_EXECUTIONS profilesSynchronizationExecution"/>
+    <property name="uri.var.function" scope="default" type="STRING" value="MAX"/>
+    <call>
+        <endpoint name="ProfilesSynchronizationExecutionDSS_Endpoint" template="HTTPEndpointGetTemplate" uri="{uri.var.dataServiceHost}/application.profiles-synchronization-execution.ds.HTTPEndpoint/GetFunctionResultProfilesSynchronizationExecution?function={uri.var.function}&amp;whereclause={uri.var.whereclause}&amp;field={uri.var.field}&amp;table={uri.var.table}&amp;innerjoinclause={uri.var.innerjoinclause}"/>
+    </call>
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING"/>
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq"/>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                        "max": $1
+                    }
+                </format>
+                <args>
+                    <arg evaluator="json" expression="$.result.value"/>
+                </args>
+            </payloadFactory>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200"/>
+        </else>
+    </filter>
+    <log category="DEBUG" level="custom">
+        <property name="ProfilesSynchronizationExecutionMaxSeq" value="Fin.."/>
+    </log>
+    <respond/>
+</sequence>

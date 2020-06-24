@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="CatalogListSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="CatalogListSeq" value="Inicio.." />
+        <property name="X-Forwarded-For" expression="$ctx:X-Forwarded-For" />
+        <property name="UserName" expression="$ctx:UserName" />
+    </log>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2" />
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml" />
+    <property name="Accept" scope="transport" type="STRING" value="application/xml" />
+    <property action="remove" name="Content-Type" scope="transport" />
+    <property expression="$ctx:query.param.orderby" name="uri.var.orderby" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.id" name="id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.code" name="code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.name" name="name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.predetermined" name="predetermined" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.ordinal" name="ordinal" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.valueText" name="valueText" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.valueNumber" name="valueNumber" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.valueDate" name="valueDate" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.valueBoolean" name="valueBoolean" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogType.id" name="catalogType.id" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogType.code" name="catalogType.code" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogType.name" name="catalogType.name" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogType.sortType" name="catalogType.sortType" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogType.editable" name="catalogType.editable" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogType.valid" name="catalogType.valid" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.catalogType.description" name="catalogType.description" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.filter" name="filter" scope="default" type="STRING" />
+    <property expression="$ctx:query.param.valid" name="valid" scope="default" type="STRING" />
+    <script language="nashornJs">
+        <![CDATA[
+        @add.where.js.function
+        function operatorType(value) {
+            if(value.indexOf("*")!=-1 ) {
+                return " LIKE ";
+            } else {
+                return " = ";
+            }
+        }
+        var log = mc.getServiceLog();
+        var where = " WHERE catalog.valid=1 ";
+        var innerJoin = "";
+        where += addWhere("id","Integer","catalog","id");
+        where += addWhere("code","String","catalog","code");
+        where += addWhere("name","String","catalog","name");
+        where += addWhere("predetermined","Integer","catalog","predetermined");
+        where += addWhere("ordinal","Integer","catalog","ordinal");
+        where += addWhere("valueText","String","catalog","value_text");
+        where += addWhere("valueNumber","Numeric","catalog","value_number");
+        where += addWhere("valueDate","Date","catalog","value_date");
+        where += addWhere("valueBoolean","Integer","catalog","value_boolean");
+        where += addWhere("catalogType.id","Integer","catalogType","id");
+        where += addWhere("catalogType.code","String","catalogType","code");
+        where += addWhere("catalogType.name","String","catalogType","name");
+        where += addWhere("catalogType.sortType","String","catalogType","sort_type");
+        where += addWhere("catalogType.editable","Integer","catalogType","editable");
+        where += addWhere("catalogType.valid","Integer","catalogType","valid");
+        where += addWhere("catalogType.description","String","catalogType","description");
+        where += addWhere("filter","String","catalog","filter");
+        where += addWhere("valid","Integer","catalog","valid");
+        innerJoin += " LEFT JOIN sch_centra_id.CATALOGS_TYPES catalogType ON Catalog.catalog_type_id = catalogType.id";
+        mc.setProperty("uri.var.whereclause",where);
+        mc.setProperty("uri.var.innerjoinclause",innerJoin);
+        if(!mc.getProperty("uri.var.orderby")){
+            mc.setProperty("uri.var.orderby","catalog.id");
+        } else {
+            mc.setProperty("uri.var.orderby","catalog."+mc.getProperty("uri.var.orderby"));
+        }
+        log.debug(where);]]>
+    </script>
+    <call>
+        <endpoint name="CatalogDSS_Endpoint" template="HTTPEndpointGetTemplate" uri="{uri.var.dataServiceHost}/common.catalog.ds.HTTPEndpoint/GetAllCatalog?whereclause={uri.var.whereclause}&amp;orderby={uri.var.orderby}&amp;innerjoinclause={uri.var.innerjoinclause}" />
+    </call>
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING" />
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq" />
+        </then>
+        <else>
+            <xslt key="gov:/centra-id/xslt/dssFilter.xsl" />
+            <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="CatalogSeq" value="Fin.." />
+        <property name="X-Forwarded-For" expression="$ctx:X-Forwarded-For" />
+        <property name="UserName" expression="$ctx:UserName" />
+    </log>
+    <property name="messageType" value="application/json" scope="axis2" type="STRING" />
+    <property name="Access-Control-Allow-Methods" value="GET,PUT,POST,DELETE,PATCH,OPTIONS" scope="transport" type="STRING" />
+    <property name="Access-Control-Allow-Headers" value="Authorization,Access-Control-Allow-Origin,Content-Type" scope="transport" type="STRING" />
+</sequence>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="TransactionalProfileAvailableSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="TransactionalProfileAvailableSeq" value="Inicio..." />
+        <property name="code" expression="$ctx:uri.var.code" />
+        <property name="name" expression="$ctx:uri.var.name" />
+        <property name="globalProfileId" expression="$ctx:uri.var.globalProfileId" />
+        <property name="from" expression="$ctx:uri.var.from" />
+        <property name="to" expression="$ctx:uri.var.to" />
+    </log>
+    <property name="uri.var.code" expression="fn:concat('%',get-property('uri.var.code'),'%')" />
+    <property name="uri.var.name" expression="fn:concat('%',get-property('uri.var.name'),'%')" />
+    <call>
+        <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.dataServiceHost}/TransactionalProfilesDSS.HTTPEndpoint/getTransactionalProfileAvailable?code={uri.var.code}&amp;name={uri.var.name}&amp;globalProfileId={uri.var.globalProfileId}&amp;from={uri.var.from}&amp;to={uri.var.to}" />
+    </call>
+    <property expression="json-eval($.Fault.faultcode)" name="faultCode" scope="default" type="STRING" />
+    <filter regex="true" source="boolean(get-property('faultCode'))">
+        <then>
+            <sequence key="FaultSeq" />
+        </then>
+        <else>
+            <!--xslt key="gov:/centra-id/xslt/dssFilter.xsl" /-->
+            <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+        </else>
+    </filter>
+    <log level="custom" category="DEBUG">
+        <property name="TransactionalProfileAvailableSeq" value="Fin..." />
+    </log>
+</sequence>

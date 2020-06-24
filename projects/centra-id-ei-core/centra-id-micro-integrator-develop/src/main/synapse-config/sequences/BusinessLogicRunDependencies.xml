@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="BusinessLogicRunDependencies" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom" category="DEBUG">
+        <property name="BusinessLogicRunDependencies" value="Inicio..." />
+    </log>
+    <property name="uri.var.uuid" expression="//uuid" />
+    <property name="X-Forwarded-For" expression="//X-Forwarded-For" />
+    <property name="UserName" expression="//UserName" />
+    <log level="custom" category="DEBUG">
+        <property name="uuid" expression="get-property('uri.var.uuid')" />
+    </log>
+    <filter regex="true" source="boolean($ctx:uri.var.uuid)">
+        <then>
+            <call>
+                <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/provisioning/TaskProvisioningSimple?uuidParent={uri.var.uuid}" />
+            </call>
+            <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                <then>
+                    <property name="taskProvisioningList" expression="$body//*" scope="default" type="OM" />
+                    <property name="find" expression="$ctx:taskProvisioningList//taskProvisioningSimpleList/taskProvisioningSimple[action[text()='C']]" />
+                    <filter regex="true" source="boolean($ctx:find)">
+                        <then>
+                            <iterate expression="$ctx:taskProvisioningList//taskProvisioningSimpleList/taskProvisioningSimple[action[text()='C']]" id="taskProvisioningCreateListId">
+                                <target>
+                                    <sequence>
+                                        <enrich>
+                                            <source clone="false" type="body" />
+                                            <target action="replace" type="property" property="payload" />
+                                        </enrich>
+                                        <property name="taskProvisioning" expression="$body//*" scope="default" type="OM" />
+                                        <filter regex="false" source="boolean($ctx:operationProvisioning)">
+                                            <then>
+                                                <property name="uri.var.operationProvisioningId" expression="$ctx:taskProvisioning//operationProvisioningId" />
+                                                <call>
+                                                    <endpoint template="HTTPEndpointGetTemplate" uri="{uri.var.enterpriseIntegratorHost}/api.centraid/provisioning/OperationProvisioning/{uri.var.operationProvisioningId}" />
+                                                </call>
+                                                <filter regex="200" source="get-property('axis2', 'HTTP_SC')">
+                                                    <then>
+                                                        <property name="operationProvisioning" expression="$body//*" scope="default" type="OM" />
+                                                    </then>
+                                                </filter>
+                                            </then>
+                                        </filter>
+                                        <log level="custom" category="DEBUG">
+                                            <property name="BusinessLogicRunDependencies" value="Inicio.2." />
+                                            <property name="uuid" expression="$ctx:taskProvisioning//uuid/text()" />
+                                            <property name="uuidParent" expression="$ctx:taskProvisioning//uuidParent/text()" />
+                                        </log>
+                                        <enrich>
+                                            <source clone="false" property="payload" type="property" />
+                                            <target type="body" />
+                                        </enrich>
+                                        <property name="dependency" value="true" type="BOOLEAN" />
+                                        <sequence key="ProvisioningCreateUserSeq" />
+                                    </sequence>
+                                </target>
+                            </iterate>
+                            <property name="BusinessLogicRunDependencies" value="Inicio.3." />
+                            <aggregate id="taskProvisioningCreateListId">
+                                <completeCondition>
+                                    <messageCount min="-1" max="-1" />
+                                </completeCondition>
+                                <onComplete expression="$body/*[1]">
+                                    <log level="custom" category="DEBUG">
+                                        <property name="agregado" value="ok create" />
+                                    </log>
+                                </onComplete>
+                            </aggregate>
+                        </then>
+                    </filter>
+                    <payloadFactory media-type="json">
+                        <format>
+                            {
+                               "result": "true",
+                               "message" : "ok"
+                            }
+                        </format>
+                        <args></args>
+                    </payloadFactory>
+                </then>
+                <else>
+                    <payloadFactory media-type="json">
+                        <format>
+                            {
+                                "result": "false",
+                                "message" : "Error when consulting TaskProvisioning by uuid"
+                            }
+                        </format>
+                        <args />
+                    </payloadFactory>
+                </else>
+            </filter>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>
+                            {
+                                "result": "false",
+                                "message" : "Error not exist by uuid"
+                            }
+                </format>
+                <args />
+            </payloadFactory>
+            <log level="custom" category="DEBUG">
+                <property name="BusinessLogicRunDependencies" value="Error..no se ejecuto dependencias, no existe uuid" />
+            </log>
+        </else>
+    </filter>
+    <property name="messageType" scope="axis2" type="STRING" value="application/json" />
+    <property name="HTTP_SC" scope="axis2" type="STRING" value="200" />
+    <log level="custom" category="DEBUG">
+        <property name="BusinessLogicRunDependencies" value="Fin...." />
+    </log>
+</sequence>

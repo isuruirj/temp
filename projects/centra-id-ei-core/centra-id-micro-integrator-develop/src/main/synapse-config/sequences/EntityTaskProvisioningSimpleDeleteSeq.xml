@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="TaskProvisioningSimpleDeleteSeq" onError="FaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log category="DEBUG" level="custom">
+        <property name="TaskProvisioningSimpleDeleteSeq" value="Inicio.."/>
+    </log>
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml"/>
+    <property name="Accept" scope="transport" type="STRING" value="application/xml"/>
+    <property name="uri.var.table" scope="default" type="STRING" value="sch_centra_id.TAKS_PROVISIONING"/>
+    <property name="uri.var.set" scope="default" type="STRING" value="valid=0"/>
+    <payloadFactory media-type="xml">
+        <format>
+            <ci:_deletedeletetaskProvisioningSimple xmlns:ci="centra-id.com">
+                <ci:table>$1</ci:table>
+                <ci:set>$2</ci:set>
+                <ci:id>$3</ci:id>
+            </ci:_deletedeletetaskProvisioningSimple>
+        </format>
+        <args>
+            <arg evaluator="xml" expression="get-property('uri.var.table')" xmlns:axis2ns65="http://ws.wso2.org/dataservice" xmlns:ci="centra-id.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            <arg evaluator="xml" expression="get-property('uri.var.set')" xmlns:axis2ns65="http://ws.wso2.org/dataservice" xmlns:ci="centra-id.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            <arg evaluator="xml" expression="get-property('uri.var.id')" xmlns:axis2ns65="http://ws.wso2.org/dataservice" xmlns:ci="centra-id.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+        </args>
+    </payloadFactory>
+    <call>
+        <endpoint name="TaskProvisioningSimpleDSS_Endpoint" template="HTTPEndpointDeleteTemplate" uri="{uri.var.dataServiceHost}/provisioning.task-provisioning-simple.ds.HTTPEndpoint/DeleteTaskProvisioningSimple"/>
+    </call>
+    <property expression="//ci:Fault/ci:faultcode" name="faultCode" scope="default" type="STRING" xmlns:axis2ns65="http://ws.wso2.org/dataservice" xmlns:ci="centra-id.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    <filter regex="true" source="boolean(get-property('faultCode'))" xmlns:axis2ns65="http://ws.wso2.org/dataservice" xmlns:ci="centra-id.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <then>
+            <sequence key="FaultSeq"/>
+        </then>
+        <else>
+            <payloadFactory media-type="json">
+                <format>{ "taskProvisioningSimple": { "id": $1 } }</format>
+                <args>
+                    <arg evaluator="xml" expression="get-property('uri.var.id')"/>
+                </args>
+            </payloadFactory>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200"/>
+        </else>
+    </filter>
+    <log category="DEBUG" level="custom">
+        <property name="TaskProvisioningSimpleDeleteSeq" value="Fin.."/>
+    </log>
+</sequence>

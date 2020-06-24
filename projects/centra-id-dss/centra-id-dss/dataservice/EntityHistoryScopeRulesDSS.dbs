@@ -1,0 +1,383 @@
+<data name="application.history-scope-rules.ds"
+    serviceNamespace="centra-id.com"
+    enableBatchRequests="false"
+    enableBoxcarring="false"
+    transports="https"
+    disableLegacyBoxcarringMode="true">
+
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <!-- DYNAMIC QUERY HISTORYSCOPERULES -->
+    <query id="dynamicQuery_historyScopeRules" useConfig="default">
+        <sql>
+           SELECT
+               historyScopeRules.id,
+               historyScopeRules.scope_rules_who,
+               historyScopeRules.scope_rules_that,
+               historyScopeRules.date_created,
+               historyScopeRules.date_deleted,
+               historyScopeRules.user_created,
+               historyScopeRules.user_deleted,
+               historyScopeRules.valid,
+               historyScopeRules.global_profile_id
+           FROM sch_centra_id.HISTORY_SCOPE_RULES historyScopeRules :innerjoinclause :whereclause ORDER BY :orderby :fromto
+        </sql>
+        <result element="historyScopeRulesList" rowName="historyScopeRules">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="scope_rules_who" name="scopeRulesWho" xsdType="xs:string"/>
+            <element column="scope_rules_that" name="scopeRulesThat" xsdType="xs:string"/>
+            <element column="date_created" name="dateCreated" xsdType="xs:dateTime"/>
+            <element column="date_deleted" name="dateDeleted" xsdType="xs:dateTime"/>
+            <element column="user_created" name="userCreated" xsdType="xs:string"/>
+            <element column="user_deleted" name="userDeleted" xsdType="xs:string"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <call-query href="queryReferenceById__historyScopeRules_globalProfile">
+                <with-param column="global_profile_id" name="id"/>
+            </call-query>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="fromto" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DISTINCT QUERY HISTORYSCOPERULES GlobalProfile-->
+    <query id="dynamicDistinctQuery_historyScopeRules_globalProfile" useConfig="default">
+        <sql>
+           SELECT DISTINCT
+               globalProfile.id,
+               globalProfile.code,
+               globalProfile.name,
+               globalProfile.is_birth,
+               globalProfile.employee_code_owner,
+               globalProfile.catalog_position_owner_id,
+               globalProfile.valid,
+               globalProfile.associated_ticket_number,
+               globalProfile.status,
+               globalProfile.created_date,
+               globalProfile.approval_date,
+               globalProfile.employee_code_approval,
+               globalProfile.observation,
+               globalProfile.scope_rules_who,
+               globalProfile.scope_rules_that
+           FROM sch_centra_id.HISTORY_SCOPE_RULES historyScopeRules :innerjoinclause :whereclause ORDER BY :orderby
+        </sql>
+        <result element="globalProfileList" rowName="globalProfile">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="is_birth" name="isBirth" xsdType="xs:integer"/>
+            <element column="employee_code_owner" name="employeeCodeOwner" xsdType="xs:string"/>
+            <call-query href="queryReferenceById__globalProfile_globalProfile_catalogPositionOwner">
+                <with-param column="catalog_position_owner_id" name="id"/>
+            </call-query>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="associated_ticket_number" name="associatedTicketNumber" xsdType="xs:string"/>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <element column="created_date" name="createdDate" xsdType="xs:dateTime"/>
+            <element column="approval_date" name="approvalDate" xsdType="xs:dateTime"/>
+            <element column="employee_code_approval" name="employeeCodeApproval" xsdType="xs:string"/>
+            <element column="observation" name="observation" xsdType="xs:string"/>
+            <element column="scope_rules_who" name="scopeRulesWho" xsdType="xs:string"/>
+            <element column="scope_rules_that" name="scopeRulesThat" xsdType="xs:string"/>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- INSERT HistoryScopeRules -->
+    <query id="insertQuery_historyScopeRules" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>
+           INSERT INTO sch_centra_id.HISTORY_SCOPE_RULES(
+               scope_rules_who,
+               scope_rules_that,
+               date_created,
+               date_deleted,
+               user_created,
+               user_deleted,
+               valid,
+               global_profile_id
+        ) VALUES(?,?,?,?,?,?,?,?)
+        </sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="scopeRulesWho" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="scopeRulesThat" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="dateCreated" ordinal="3" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+        <param name="dateDeleted" ordinal="4" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+        <param name="userCreated" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="userDeleted" ordinal="6" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="valid" ordinal="7" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="1"/>
+        <param name="globalProfileId" ordinal="8" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <!-- UPDATE HistoryScopeRules -->
+    <query id="updateQuery_historyScopeRules" useConfig="default">
+        <sql>
+           UPDATE sch_centra_id.HISTORY_SCOPE_RULES SET
+               scope_rules_who=?,
+               scope_rules_that=?,
+               date_created=?,
+               date_deleted=?,
+               user_created=?,
+               user_deleted=?,
+               global_profile_id=?
+            WHERE id=?
+        </sql>
+        <param name="scopeRulesWho" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="scopeRulesThat" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="dateCreated" ordinal="3" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+        <param name="dateDeleted" ordinal="4" paramType="SCALAR" sqlType="TIMESTAMP" type="IN"/>
+        <param name="userCreated" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="userDeleted" ordinal="6" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="globalProfileId" ordinal="7" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="id" ordinal="8" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <!-- QUERY REFERENCE HistoryScopeRules GlobalProfile 0-->
+    <query id="queryReferenceById__historyScopeRules_globalProfile" useConfig="default">
+        <sql>
+           SELECT 
+               globalProfile.id,
+               globalProfile.code,
+               globalProfile.name,
+               globalProfile.is_birth,
+               globalProfile.employee_code_owner,
+               globalProfile.catalog_position_owner_id,
+               globalProfile.valid,
+               globalProfile.associated_ticket_number,
+               globalProfile.status,
+               globalProfile.created_date,
+               globalProfile.approval_date,
+               globalProfile.employee_code_approval,
+               globalProfile.observation,
+               globalProfile.scope_rules_who,
+               globalProfile.scope_rules_that
+           FROM sch_centra_id.GLOBAL_PROFILES globalProfile WHERE id=? AND valid=1
+        </sql>
+        <result element="globalProfile">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="is_birth" name="isBirth" xsdType="xs:integer"/>
+            <element column="employee_code_owner" name="employeeCodeOwner" xsdType="xs:string"/>
+            <call-query href="queryReferenceById__globalProfile_globalProfile_catalogPositionOwner">
+                <with-param column="catalog_position_owner_id" name="id"/>
+            </call-query>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="associated_ticket_number" name="associatedTicketNumber" xsdType="xs:string"/>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <element column="created_date" name="createdDate" xsdType="xs:dateTime"/>
+            <element column="approval_date" name="approvalDate" xsdType="xs:dateTime"/>
+            <element column="employee_code_approval" name="employeeCodeApproval" xsdType="xs:string"/>
+            <element column="observation" name="observation" xsdType="xs:string"/>
+            <element column="scope_rules_who" name="scopeRulesWho" xsdType="xs:string"/>
+            <element column="scope_rules_that" name="scopeRulesThat" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE HistoryScopeRules Catalog 1-->
+    <query id="queryReferenceById__globalProfile_globalProfile_catalogPositionOwner" useConfig="default">
+        <sql>
+           SELECT 
+               catalogPositionOwner.id,
+               catalogPositionOwner.code,
+               catalogPositionOwner.name,
+               catalogPositionOwner.predetermined,
+               catalogPositionOwner.ordinal,
+               catalogPositionOwner.value_text,
+               catalogPositionOwner.value_number,
+               catalogPositionOwner.value_date,
+               catalogPositionOwner.value_boolean,
+               catalogPositionOwner.catalog_type_id,
+               catalogPositionOwner.valid
+           FROM sch_centra_id.CATALOGS catalogPositionOwner WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogPositionOwner">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="predetermined" name="predetermined" xsdType="xs:integer"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="value_text" name="valueText" xsdType="xs:string"/>
+            <element column="value_number" name="valueNumber" xsdType="xs:decimal"/>
+            <element column="value_date" name="valueDate" xsdType="xs:date"/>
+            <element column="value_boolean" name="valueBoolean" xsdType="xs:integer"/>
+            <call-query href="queryReferenceById__globalProfile_catalogPositionOwner_catalog_catalogType">
+                <with-param column="catalog_type_id" name="id"/>
+            </call-query>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY REFERENCE HistoryScopeRules CatalogType 2-->
+    <query id="queryReferenceById__globalProfile_catalogPositionOwner_catalog_catalogType" useConfig="default">
+        <sql>
+           SELECT 
+               catalogType.id,
+               catalogType.code,
+               catalogType.name,
+               catalogType.sort_type,
+               catalogType.editable,
+               catalogType.valid,
+               catalogType.description
+           FROM sch_centra_id.CATALOGS_TYPES catalogType WHERE id=? AND valid=1
+        </sql>
+        <result element="catalogType">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="sort_type" name="sortType" xsdType="xs:string"/>
+            <element column="editable" name="editable" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="description" name="description" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- DYNAMIC FUNCTION  -->
+    <query id="dynamicQueryFunction_historyScopeRules" useConfig="default">
+        <sql>
+           SELECT :function(:field) as value FROM :table :innerjoinclause :whereclause
+         </sql>
+        <result element="result">
+            <element column="value" name="value" xsdType="xs:long"/>
+        </result>
+        <param name="function" sqlType="QUERY_STRING"/>
+        <param name="field" sqlType="QUERY_STRING"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DELETE  -->
+    <query id="dynamicDeleteQuery_historyScopeRules" useConfig="default">
+        <sql>UPDATE :table SET :set WHERE id=:id</sql>
+        <param name="id" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="set" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- OPERATIONS -->
+    <operation name="listAllOperation_historyScopeRules">
+        <call-query href="dynamicQuery_historyScopeRules">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="fromToOperation_historyScopeRules">
+        <call-query href="dynamicQuery_historyScopeRules">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="functionOperation_historyScopeRules">
+        <call-query href="dynamicQueryFunction_historyScopeRules">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="deleteOperation_historyScopeRules">
+        <call-query href="dynamicDeleteQuery_historyScopeRules">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </operation>
+    <operation name="create_historyScopeRules">
+        <call-query href="insertQuery_historyScopeRules">
+            <with-param name="scopeRulesWho" query-param="scopeRulesWho"/>
+            <with-param name="scopeRulesThat" query-param="scopeRulesThat"/>
+            <with-param name="dateCreated" query-param="dateCreated"/>
+            <with-param name="dateDeleted" query-param="dateDeleted"/>
+            <with-param name="userCreated" query-param="userCreated"/>
+            <with-param name="userDeleted" query-param="userDeleted"/>
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="globalProfileId" query-param="globalProfileId"/>
+        </call-query>
+    </operation>
+    <operation name="update_historyScopeRules">
+        <call-query href="updateQuery_historyScopeRules">
+            <with-param name="scopeRulesWho" query-param="scopeRulesWho"/>
+            <with-param name="scopeRulesThat" query-param="scopeRulesThat"/>
+            <with-param name="dateCreated" query-param="dateCreated"/>
+            <with-param name="dateDeleted" query-param="dateDeleted"/>
+            <with-param name="userCreated" query-param="userCreated"/>
+            <with-param name="userDeleted" query-param="userDeleted"/>
+            <with-param name="globalProfileId" query-param="globalProfileId"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <operation name="distinctOperation_historyScopeRules_globalProfile">
+        <call-query href="dynamicDistinctQuery_historyScopeRules_globalProfile">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <!-- RESOURCES -->
+    <resource method="GET" path="GetAllHistoryScopeRules">
+        <call-query href="dynamicQuery_historyScopeRules">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFromToHistoryScopeRules">
+        <call-query href="dynamicQuery_historyScopeRules">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFunctionResultHistoryScopeRules">
+        <call-query href="dynamicQueryFunction_historyScopeRules">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="DeleteHistoryScopeRules">
+        <call-query href="dynamicDeleteQuery_historyScopeRules">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="CreateHistoryScopeRules">
+        <call-query href="insertQuery_historyScopeRules">
+            <with-param name="scopeRulesWho" query-param="scopeRulesWho"/>
+            <with-param name="scopeRulesThat" query-param="scopeRulesThat"/>
+            <with-param name="dateCreated" query-param="dateCreated"/>
+            <with-param name="dateDeleted" query-param="dateDeleted"/>
+            <with-param name="userCreated" query-param="userCreated"/>
+            <with-param name="userDeleted" query-param="userDeleted"/>
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="globalProfileId" query-param="globalProfileId"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="UpdateHistoryScopeRules">
+        <call-query href="updateQuery_historyScopeRules">
+            <with-param name="scopeRulesWho" query-param="scopeRulesWho"/>
+            <with-param name="scopeRulesThat" query-param="scopeRulesThat"/>
+            <with-param name="dateCreated" query-param="dateCreated"/>
+            <with-param name="dateDeleted" query-param="dateDeleted"/>
+            <with-param name="userCreated" query-param="userCreated"/>
+            <with-param name="userDeleted" query-param="userDeleted"/>
+            <with-param name="globalProfileId" query-param="globalProfileId"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetDistinctHistoryScopeRulesGlobalProfile">
+        <call-query href="dynamicDistinctQuery_historyScopeRules_globalProfile">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+</data>

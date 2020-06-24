@@ -1,0 +1,547 @@
+<data name="application.application-group.ds"
+    serviceNamespace="centra-id.com"
+    enableBatchRequests="false"
+    enableBoxcarring="false"
+    transports="https"
+    disableLegacyBoxcarringMode="true">
+
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <!-- DYNAMIC QUERY APPLICATIONGROUP -->
+    <query id="dynamicQuery_applicationGroup" useConfig="default">
+        <sql>
+           SELECT
+               applicationGroup.id,
+               applicationGroup.code,
+               applicationGroup.name,
+               applicationGroup.endpoint_type,
+               applicationGroup.ordinal,
+               applicationGroup.valid,
+               applicationGroup.number_retries,
+               applicationGroup.time_between_retries,
+               applicationGroup.errors_not_require_ticket
+           FROM sch_centra_id.APPLICATIONS_GROUP applicationGroup :innerjoinclause :whereclause ORDER BY :orderby :fromto
+        </sql>
+        <result element="applicationGroupList" rowName="applicationGroup">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="endpoint_type" name="endpointType" xsdType="xs:string"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="number_retries" name="numberRetries" xsdType="xs:integer"/>
+            <element column="time_between_retries" name="timeBetweenRetries" xsdType="xs:integer"/>
+            <element column="errors_not_require_ticket" name="errorsNotRequireTicket" xsdType="xs:string"/>
+            <call-query href="queryOneToManyByMasterId__applicationGroup_matrix">
+                <with-param column="id" name="masterId"/>
+            </call-query>
+            <call-query href="queryOneToManyByMasterId__applicationGroup_field">
+                <with-param column="id" name="masterId"/>
+            </call-query>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="fromto" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- INSERT ApplicationGroup -->
+    <query id="insertQuery_applicationGroup" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>
+           INSERT INTO sch_centra_id.APPLICATIONS_GROUP(
+               code,
+               name,
+               endpoint_type,
+               ordinal,
+               valid,
+               number_retries,
+               time_between_retries,
+               errors_not_require_ticket
+        ) VALUES(?,?,?,?,?,?,?,?)
+        </sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="code" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="name" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="endpointType" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="ordinal" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="valid" ordinal="5" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="1"/>
+        <param name="numberRetries" ordinal="6" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="timeBetweenRetries" ordinal="7" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="errorsNotRequireTicket" ordinal="8" paramType="SCALAR" sqlType="STRING" type="IN"/>
+    </query>
+    <!-- UPDATE ApplicationGroup -->
+    <query id="updateQuery_applicationGroup" useConfig="default">
+        <sql>
+           UPDATE sch_centra_id.APPLICATIONS_GROUP SET
+               code=?,
+               name=?,
+               endpoint_type=?,
+               ordinal=?,
+               number_retries=?,
+               time_between_retries=?,
+               errors_not_require_ticket=?
+            WHERE id=?
+        </sql>
+        <param name="code" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="name" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="endpointType" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="ordinal" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="numberRetries" ordinal="5" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="timeBetweenRetries" ordinal="6" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="#{NULL}"/>
+        <param name="errorsNotRequireTicket" ordinal="7" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="id" ordinal="8" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <!-- DYNAMIC FUNCTION  -->
+    <query id="dynamicQueryFunction_applicationGroup" useConfig="default">
+        <sql>
+           SELECT :function(:field) as value FROM :table :innerjoinclause :whereclause
+         </sql>
+        <result element="result">
+            <element column="value" name="value" xsdType="xs:long"/>
+        </result>
+        <param name="function" sqlType="QUERY_STRING"/>
+        <param name="field" sqlType="QUERY_STRING"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DELETE  -->
+    <query id="dynamicDeleteQuery_applicationGroup" useConfig="default">
+        <sql>UPDATE :table SET :set WHERE id=:id</sql>
+        <param name="id" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="set" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- QUERY ONE TO MANY ApplicationGroup Matrix 0-->
+    <query id="queryOneToManyByMasterId__applicationGroup_matrix" useConfig="default">
+        <sql>
+           SELECT 
+               matrixList.id,
+               matrixList.code,
+               matrixList.name,
+               matrixList.quantity,
+               matrixList.valid,
+               matrixList.application_group_id
+           FROM sch_centra_id.MATRICES matrixList WHERE application_group_id=? AND valid=1
+        </sql>
+        <result element="matrixList" rowName="matrix">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="quantity" name="quantity" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <call-query href="queryManyToOneById__matrixList_matrix_applicationGroup">
+                <with-param column="application_group_id" name="id"/>
+            </call-query>
+        </result>
+        <param name="masterId" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE ApplicationGroup ApplicationGroup 1-->
+    <query id="queryManyToOneById__matrixList_matrix_applicationGroup" useConfig="default">
+        <sql>
+           SELECT 
+               applicationGroup.id,
+               applicationGroup.code,
+               applicationGroup.name,
+               applicationGroup.endpoint_type,
+               applicationGroup.ordinal,
+               applicationGroup.valid,
+               applicationGroup.number_retries,
+               applicationGroup.time_between_retries,
+               applicationGroup.errors_not_require_ticket
+           FROM sch_centra_id.APPLICATIONS_GROUP applicationGroup WHERE id=? AND valid=1
+        </sql>
+        <result element="applicationGroup">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="endpoint_type" name="endpointType" xsdType="xs:string"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="number_retries" name="numberRetries" xsdType="xs:integer"/>
+            <element column="time_between_retries" name="timeBetweenRetries" xsdType="xs:integer"/>
+            <element column="errors_not_require_ticket" name="errorsNotRequireTicket" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY ONE TO MANY ApplicationGroup Matrix 2-->
+    <query id="queryOneToManyByMasterId__matrixList_applicationGroup_applicationGroup_matrix" useConfig="default">
+        <sql>
+           SELECT 
+               matrixList.id,
+               matrixList.code,
+               matrixList.name,
+               matrixList.quantity,
+               matrixList.valid,
+               matrixList.application_group_id
+           FROM sch_centra_id.MATRICES matrixList WHERE application_group_id=? AND valid=1
+        </sql>
+        <result element="matrixList" rowName="matrix">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="quantity" name="quantity" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="masterId" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE ApplicationGroup ApplicationGroup 3-->
+    <query id="queryManyToOneById__matrixList_applicationGroup_matrixList_matrix_applicationGroup" useConfig="default">
+        <sql>
+           SELECT 
+               applicationGroup.id,
+               applicationGroup.code,
+               applicationGroup.name,
+               applicationGroup.endpoint_type,
+               applicationGroup.ordinal,
+               applicationGroup.valid,
+               applicationGroup.number_retries,
+               applicationGroup.time_between_retries,
+               applicationGroup.errors_not_require_ticket
+           FROM sch_centra_id.APPLICATIONS_GROUP applicationGroup WHERE id=? AND valid=1
+        </sql>
+        <result element="applicationGroup">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="endpoint_type" name="endpointType" xsdType="xs:string"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="number_retries" name="numberRetries" xsdType="xs:integer"/>
+            <element column="time_between_retries" name="timeBetweenRetries" xsdType="xs:integer"/>
+            <element column="errors_not_require_ticket" name="errorsNotRequireTicket" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY ONE TO MANY ApplicationGroup Field 2-->
+    <query id="queryOneToManyByMasterId__matrixList_applicationGroup_applicationGroup_field" useConfig="default">
+        <sql>
+           SELECT 
+               fieldList.id,
+               fieldList.code,
+               fieldList.name,
+               fieldList.predetermined,
+               fieldList.type,
+               fieldList.length,
+               fieldList.required,
+               fieldList.valid,
+               fieldList.application_group_id
+           FROM sch_centra_id.FIELDS fieldList WHERE application_group_id=? AND valid=1
+        </sql>
+        <result element="fieldList" rowName="field">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="predetermined" name="predetermined" xsdType="xs:string"/>
+            <element column="type" name="type" xsdType="xs:string"/>
+            <element column="length" name="length" xsdType="xs:integer"/>
+            <element column="required" name="required" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="masterId" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE ApplicationGroup ApplicationGroup 3-->
+    <query id="queryManyToOneById__matrixList_applicationGroup_fieldList_field_applicationGroup" useConfig="default">
+        <sql>
+           SELECT 
+               applicationGroup.id,
+               applicationGroup.code,
+               applicationGroup.name,
+               applicationGroup.endpoint_type,
+               applicationGroup.ordinal,
+               applicationGroup.valid,
+               applicationGroup.number_retries,
+               applicationGroup.time_between_retries,
+               applicationGroup.errors_not_require_ticket
+           FROM sch_centra_id.APPLICATIONS_GROUP applicationGroup WHERE id=? AND valid=1
+        </sql>
+        <result element="applicationGroup">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="endpoint_type" name="endpointType" xsdType="xs:string"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="number_retries" name="numberRetries" xsdType="xs:integer"/>
+            <element column="time_between_retries" name="timeBetweenRetries" xsdType="xs:integer"/>
+            <element column="errors_not_require_ticket" name="errorsNotRequireTicket" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY ONE TO MANY ApplicationGroup Field 0-->
+    <query id="queryOneToManyByMasterId__applicationGroup_field" useConfig="default">
+        <sql>
+           SELECT 
+               fieldList.id,
+               fieldList.code,
+               fieldList.name,
+               fieldList.predetermined,
+               fieldList.type,
+               fieldList.length,
+               fieldList.required,
+               fieldList.valid,
+               fieldList.application_group_id
+           FROM sch_centra_id.FIELDS fieldList WHERE application_group_id=? AND valid=1
+        </sql>
+        <result element="fieldList" rowName="field">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="predetermined" name="predetermined" xsdType="xs:string"/>
+            <element column="type" name="type" xsdType="xs:string"/>
+            <element column="length" name="length" xsdType="xs:integer"/>
+            <element column="required" name="required" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <call-query href="queryManyToOneById__fieldList_field_applicationGroup">
+                <with-param column="application_group_id" name="id"/>
+            </call-query>
+        </result>
+        <param name="masterId" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE ApplicationGroup ApplicationGroup 1-->
+    <query id="queryManyToOneById__fieldList_field_applicationGroup" useConfig="default">
+        <sql>
+           SELECT 
+               applicationGroup.id,
+               applicationGroup.code,
+               applicationGroup.name,
+               applicationGroup.endpoint_type,
+               applicationGroup.ordinal,
+               applicationGroup.valid,
+               applicationGroup.number_retries,
+               applicationGroup.time_between_retries,
+               applicationGroup.errors_not_require_ticket
+           FROM sch_centra_id.APPLICATIONS_GROUP applicationGroup WHERE id=? AND valid=1
+        </sql>
+        <result element="applicationGroup">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="endpoint_type" name="endpointType" xsdType="xs:string"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="number_retries" name="numberRetries" xsdType="xs:integer"/>
+            <element column="time_between_retries" name="timeBetweenRetries" xsdType="xs:integer"/>
+            <element column="errors_not_require_ticket" name="errorsNotRequireTicket" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY ONE TO MANY ApplicationGroup Matrix 2-->
+    <query id="queryOneToManyByMasterId__fieldList_applicationGroup_applicationGroup_matrix" useConfig="default">
+        <sql>
+           SELECT 
+               matrixList.id,
+               matrixList.code,
+               matrixList.name,
+               matrixList.quantity,
+               matrixList.valid,
+               matrixList.application_group_id
+           FROM sch_centra_id.MATRICES matrixList WHERE application_group_id=? AND valid=1
+        </sql>
+        <result element="matrixList" rowName="matrix">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="quantity" name="quantity" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="masterId" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE ApplicationGroup ApplicationGroup 3-->
+    <query id="queryManyToOneById__fieldList_applicationGroup_matrixList_matrix_applicationGroup" useConfig="default">
+        <sql>
+           SELECT 
+               applicationGroup.id,
+               applicationGroup.code,
+               applicationGroup.name,
+               applicationGroup.endpoint_type,
+               applicationGroup.ordinal,
+               applicationGroup.valid,
+               applicationGroup.number_retries,
+               applicationGroup.time_between_retries,
+               applicationGroup.errors_not_require_ticket
+           FROM sch_centra_id.APPLICATIONS_GROUP applicationGroup WHERE id=? AND valid=1
+        </sql>
+        <result element="applicationGroup">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="endpoint_type" name="endpointType" xsdType="xs:string"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="number_retries" name="numberRetries" xsdType="xs:integer"/>
+            <element column="time_between_retries" name="timeBetweenRetries" xsdType="xs:integer"/>
+            <element column="errors_not_require_ticket" name="errorsNotRequireTicket" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY ONE TO MANY ApplicationGroup Field 2-->
+    <query id="queryOneToManyByMasterId__fieldList_applicationGroup_applicationGroup_field" useConfig="default">
+        <sql>
+           SELECT 
+               fieldList.id,
+               fieldList.code,
+               fieldList.name,
+               fieldList.predetermined,
+               fieldList.type,
+               fieldList.length,
+               fieldList.required,
+               fieldList.valid,
+               fieldList.application_group_id
+           FROM sch_centra_id.FIELDS fieldList WHERE application_group_id=? AND valid=1
+        </sql>
+        <result element="fieldList" rowName="field">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="predetermined" name="predetermined" xsdType="xs:string"/>
+            <element column="type" name="type" xsdType="xs:string"/>
+            <element column="length" name="length" xsdType="xs:integer"/>
+            <element column="required" name="required" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+        </result>
+        <param name="masterId" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- QUERY MANY TO ONE ApplicationGroup ApplicationGroup 3-->
+    <query id="queryManyToOneById__fieldList_applicationGroup_fieldList_field_applicationGroup" useConfig="default">
+        <sql>
+           SELECT 
+               applicationGroup.id,
+               applicationGroup.code,
+               applicationGroup.name,
+               applicationGroup.endpoint_type,
+               applicationGroup.ordinal,
+               applicationGroup.valid,
+               applicationGroup.number_retries,
+               applicationGroup.time_between_retries,
+               applicationGroup.errors_not_require_ticket
+           FROM sch_centra_id.APPLICATIONS_GROUP applicationGroup WHERE id=? AND valid=1
+        </sql>
+        <result element="applicationGroup">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="endpoint_type" name="endpointType" xsdType="xs:string"/>
+            <element column="ordinal" name="ordinal" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="number_retries" name="numberRetries" xsdType="xs:integer"/>
+            <element column="time_between_retries" name="timeBetweenRetries" xsdType="xs:integer"/>
+            <element column="errors_not_require_ticket" name="errorsNotRequireTicket" xsdType="xs:string"/>
+        </result>
+        <param name="id" ordinal="1" sqlType="BIGINT"/>
+    </query>
+    <!-- OPERATIONS -->
+    <operation name="listAllOperation_applicationGroup">
+        <call-query href="dynamicQuery_applicationGroup">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="fromToOperation_applicationGroup">
+        <call-query href="dynamicQuery_applicationGroup">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="functionOperation_applicationGroup">
+        <call-query href="dynamicQueryFunction_applicationGroup">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="deleteOperation_applicationGroup">
+        <call-query href="dynamicDeleteQuery_applicationGroup">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </operation>
+    <operation name="create_applicationGroup">
+        <call-query href="insertQuery_applicationGroup">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="endpointType" query-param="endpointType"/>
+            <with-param name="ordinal" query-param="ordinal"/>
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="numberRetries" query-param="numberRetries"/>
+            <with-param name="timeBetweenRetries" query-param="timeBetweenRetries"/>
+            <with-param name="errorsNotRequireTicket" query-param="errorsNotRequireTicket"/>
+        </call-query>
+    </operation>
+    <operation name="update_applicationGroup">
+        <call-query href="updateQuery_applicationGroup">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="endpointType" query-param="endpointType"/>
+            <with-param name="ordinal" query-param="ordinal"/>
+            <with-param name="numberRetries" query-param="numberRetries"/>
+            <with-param name="timeBetweenRetries" query-param="timeBetweenRetries"/>
+            <with-param name="errorsNotRequireTicket" query-param="errorsNotRequireTicket"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <!-- RESOURCES -->
+    <resource method="GET" path="GetAllApplicationGroup">
+        <call-query href="dynamicQuery_applicationGroup">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFromToApplicationGroup">
+        <call-query href="dynamicQuery_applicationGroup">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFunctionResultApplicationGroup">
+        <call-query href="dynamicQueryFunction_applicationGroup">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="DeleteApplicationGroup">
+        <call-query href="dynamicDeleteQuery_applicationGroup">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="CreateApplicationGroup">
+        <call-query href="insertQuery_applicationGroup">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="endpointType" query-param="endpointType"/>
+            <with-param name="ordinal" query-param="ordinal"/>
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="numberRetries" query-param="numberRetries"/>
+            <with-param name="timeBetweenRetries" query-param="timeBetweenRetries"/>
+            <with-param name="errorsNotRequireTicket" query-param="errorsNotRequireTicket"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="UpdateApplicationGroup">
+        <call-query href="updateQuery_applicationGroup">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="endpointType" query-param="endpointType"/>
+            <with-param name="ordinal" query-param="ordinal"/>
+            <with-param name="numberRetries" query-param="numberRetries"/>
+            <with-param name="timeBetweenRetries" query-param="timeBetweenRetries"/>
+            <with-param name="errorsNotRequireTicket" query-param="errorsNotRequireTicket"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+</data>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/api.centraid/report/TransactionalProfileReport" name="CentraIDreportTransactionalProfileReportApi" version="1.0.0" version-type="context" xmlns="http://ws.apache.org/ns/synapse">
+    <resource faultSequence="FaultSeq" methods="GET">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="TransactionalProfileReportListSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/count">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="TransactionalProfileReportCountSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/max/{field}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="TransactionalProfileReportMaxSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/sum/{field}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="TransactionalProfileReportSumSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="POST" uri-template="/">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="TransactionalProfileReportCreateSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="PUT" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="TransactionalProfileReportUpdateSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="DELETE" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="TransactionalProfileReportDeleteSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/{from}/{to}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="TransactionalProfileReportFromToSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+    <resource faultSequence="FaultSeq" methods="GET" uri-template="/{id}">
+        <inSequence>
+            <sequence key="InBoundSeq"/>
+            <sequence key="TransactionalProfileReportRetrieveSeq"/>
+            <sequence key="OutboundSeq"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+    </resource>
+</api>

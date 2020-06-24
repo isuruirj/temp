@@ -1,0 +1,193 @@
+<data name="application.matrix-simple.ds"
+    serviceNamespace="centra-id.com"
+    enableBatchRequests="false"
+    enableBoxcarring="false"
+    transports="https"
+    disableLegacyBoxcarringMode="true">
+
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <!-- DYNAMIC QUERY MATRIXSIMPLE -->
+    <query id="dynamicQuery_matrixSimple" useConfig="default">
+        <sql>
+           SELECT
+               matrixSimple.id,
+               matrixSimple.code,
+               matrixSimple.name,
+               matrixSimple.quantity,
+               matrixSimple.valid,
+               matrixSimple.application_group_id
+           FROM sch_centra_id.MATRICES matrixSimple :innerjoinclause :whereclause ORDER BY :orderby :fromto
+        </sql>
+        <result element="matrixSimpleList" rowName="matrixSimple">
+            <element column="id" name="id" xsdType="xs:integer"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="quantity" name="quantity" xsdType="xs:integer"/>
+            <element column="valid" name="valid" xsdType="xs:integer"/>
+            <element column="application_group_id" name="applicationGroupId" xsdType="xs:integer"/>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param defaultValue="id" name="orderby" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="fromto" sqlType="QUERY_STRING"/>
+        <param defaultValue="" name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- INSERT MatrixSimple -->
+    <query id="insertQuery_matrixSimple" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>
+           INSERT INTO sch_centra_id.MATRICES(
+               code,
+               name,
+               quantity,
+               valid,
+               application_group_id
+        ) VALUES(?,?,?,?,?)
+        </sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="code" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="name" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="quantity" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+        <param name="valid" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN" defaultValue="1"/>
+        <param name="applicationGroupId" ordinal="5" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+    </query>
+    <!-- UPDATE MatrixSimple -->
+    <query id="updateQuery_matrixSimple" useConfig="default">
+        <sql>
+           UPDATE sch_centra_id.MATRICES SET
+               code=?,
+               name=?,
+               quantity=?,
+               application_group_id=?
+            WHERE id=?
+        </sql>
+        <param name="code" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="name" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="quantity" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+        <param name="applicationGroupId" ordinal="4" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+        <param name="id" ordinal="5" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <!-- DYNAMIC FUNCTION  -->
+    <query id="dynamicQueryFunction_matrixSimple" useConfig="default">
+        <sql>
+           SELECT :function(:field) as value FROM :table :innerjoinclause :whereclause
+         </sql>
+        <result element="result">
+            <element column="value" name="value" xsdType="xs:long"/>
+        </result>
+        <param name="function" sqlType="QUERY_STRING"/>
+        <param name="field" sqlType="QUERY_STRING"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+        <param name="innerjoinclause" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- DYNAMIC DELETE  -->
+    <query id="dynamicDeleteQuery_matrixSimple" useConfig="default">
+        <sql>UPDATE :table SET :set WHERE id=:id</sql>
+        <param name="id" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="table" sqlType="QUERY_STRING"/>
+        <param name="set" sqlType="QUERY_STRING"/>
+    </query>
+    <!-- OPERATIONS -->
+    <operation name="listAllOperation_matrixSimple">
+        <call-query href="dynamicQuery_matrixSimple">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="fromToOperation_matrixSimple">
+        <call-query href="dynamicQuery_matrixSimple">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="functionOperation_matrixSimple">
+        <call-query href="dynamicQueryFunction_matrixSimple">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </operation>
+    <operation name="deleteOperation_matrixSimple">
+        <call-query href="dynamicDeleteQuery_matrixSimple">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </operation>
+    <operation name="create_matrixSimple">
+        <call-query href="insertQuery_matrixSimple">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="quantity" query-param="quantity"/>
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="applicationGroupId" query-param="applicationGroupId"/>
+        </call-query>
+    </operation>
+    <operation name="update_matrixSimple">
+        <call-query href="updateQuery_matrixSimple">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="quantity" query-param="quantity"/>
+            <with-param name="applicationGroupId" query-param="applicationGroupId"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <!-- RESOURCES -->
+    <resource method="GET" path="GetAllMatrixSimple">
+        <call-query href="dynamicQuery_matrixSimple">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFromToMatrixSimple">
+        <call-query href="dynamicQuery_matrixSimple">
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="orderby" query-param="orderby"/>
+            <with-param name="fromto" query-param="fromto"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetFunctionResultMatrixSimple">
+        <call-query href="dynamicQueryFunction_matrixSimple">
+            <with-param name="function" query-param="function"/>
+            <with-param name="field" query-param="field"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="whereclause" query-param="whereclause"/>
+            <with-param name="innerjoinclause" query-param="innerjoinclause"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="DeleteMatrixSimple">
+        <call-query href="dynamicDeleteQuery_matrixSimple">
+            <with-param name="id" query-param="id"/>
+            <with-param name="table" query-param="table"/>
+            <with-param name="set" query-param="set"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="CreateMatrixSimple">
+        <call-query href="insertQuery_matrixSimple">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="quantity" query-param="quantity"/>
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="applicationGroupId" query-param="applicationGroupId"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="UpdateMatrixSimple">
+        <call-query href="updateQuery_matrixSimple">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="quantity" query-param="quantity"/>
+            <with-param name="applicationGroupId" query-param="applicationGroupId"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+</data>

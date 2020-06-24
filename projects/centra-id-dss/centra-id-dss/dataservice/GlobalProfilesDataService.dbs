@@ -1,0 +1,322 @@
+<data name="GlobalProfilesDSS" serviceNamespace="centra-id.com" transports="https">
+    <config id="default">
+        <property name="carbon_datasource_name">CENTRA_ID</property>
+    </config>
+    <query id="select_global_profiles_by_scope_rule_query" useConfig="default">
+        <sql>
+            SELECT ID,CODE ,NAME,SUBSTRING(FILTER,1,1000) FILTER
+                FROM SCH_CENTRA_ID.GLOBAL_PROFILES 
+                WHERE VALID=1 :whereclause 
+                ORDER BY NAME
+        </sql>
+        <result element="globalProfileList" rowName="globalProfile">
+            <element column="id" name="id" xsdType="xs:long"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="filter" name="filter" xsdType="xs:string"/>
+        </result>
+        <param name="whereclause" sqlType="QUERY_STRING"/>
+    </query>
+    <query id="update_global_profiles_query" useConfig="default">
+        <sql>
+                UPDATE sch_centra_id.global_profiles 
+                SET code=?,name=?,is_birth=?,employee_code_owner=?,catalog_position_owner_id=?, associated_ticket_number=?  WHERE id=? AND valid=1
+        </sql>
+        <param name="code" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="name" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="isBirth" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+        <param name="employeeCodeOwner" ordinal="7" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="catalogPositionOwnerId" ordinal="8" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="associatedTicketNumber" ordinal="9" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="id" ordinal="10" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <query id="select_all_global_profiles_query" useConfig="default">
+        <sql>SELECT id, code, name, is_birth,employee_code_owner,
+                  catalog_position_owner_id,associated_ticket_number,status,created_date,approval_date,employee_code_approval
+             FROM sch_centra_id.global_profiles WHERE valid=1 AND status IN ('REG','ACT','INA') ORDER BY status DESC</sql>
+        <result element="GlobalProfiles" rowName="GlobalProfile">
+            <element column="id" name="id" xsdType="xs:long"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="is_birth" name="isBirth" xsdType="xs:integer"/>
+            <element column="employee_code_owner" name="employeeCodeOwner" xsdType="xs:string"/>
+            <element column="catalog_position_owner_id" name="catalogPositionOwnerId" xsdType="xs:long"/>
+            <element column="associated_ticket_number" name="associatedTicketNumber" xsdType="xs:string"/>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <element column="created_date" name="createdDate" xsdType="xs:dateTime"/>
+            <element column="approval_date" name="approvalDate" xsdType="xs:dateTime"/>
+            <element column="employee_code_approval" name="employeeCodeApproval" xsdType="xs:string"/>
+        </result>
+    </query>
+    <query id="insert_global_profiles_query" returnGeneratedKeys="true" useConfig="default" keyColumns="1">
+        <sql>INSERT INTO sch_centra_id.global_profiles(code,name,is_birth,employee_code_owner,
+                  catalog_position_owner_id,associated_ticket_number,status,valid,created_date) VALUES(?,?,?,?,?,?,?,?,getdate())</sql>
+        <result element="GeneratedKeys" rowName="Entry" useColumnNumbers="true">
+            <element column="1" name="id" xsdType="xs:long"/>
+        </result>
+        <param name="code" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="name" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="isBirth" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+        <param name="employeeCodeOwner" ordinal="7" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="catalogPositionOwnerId" ordinal="8" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <param name="associatedTicketNumber" ordinal="9" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param defaultValue="REG" name="status" ordinal="10" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param defaultValue="1" name="valid" ordinal="11" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+    </query>
+    <query id="select_with_key_global_profiles_query" useConfig="default">
+        <sql>SELECT id, code, name, is_birth,employee_code_owner,
+                  catalog_position_owner_id,associated_ticket_number,status,created_date,approval_date,employee_code_approval
+          FROM sch_centra_id.global_profiles WHERE id=? AND valid=1</sql>
+        <param name="id" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+        <result element="GlobalProfiles" rowName="GlobalProfile">
+            <element column="id" name="id" xsdType="xs:long"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="is_birth" name="isBirth" xsdType="xs:integer"/>
+            <element column="employee_code_owner" name="employeeCodeOwner" xsdType="xs:string"/>
+            <element column="catalog_position_owner_id" name="catalogPositionOwnerId" xsdType="xs:long"/>
+            <element column="associated_ticket_number" name="associatedTicketNumber" xsdType="xs:string"/>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <element column="created_date" name="createdDate" xsdType="xs:dateTime"/>
+            <element column="approval_date" name="approvalDate" xsdType="xs:dateTime"/>
+            <element column="employee_code_approval" name="employeeCodeApproval" xsdType="xs:string"/>
+        </result>
+    </query>
+    <query id="select_with_rules_scope_by_company_and_division_and_position_global_profiles_query" useConfig="default">
+        <sql>SELECT id, code, name, is_birth,employee_code_owner,
+                  catalog_position_owner_id,associated_ticket_number,status,created_date,approval_date,employee_code_approval
+          FROM sch_centra_id.global_profiles WHERE valid=1</sql>
+        <param name="companyCode" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="divisionCode" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="positionCode" ordinal="3" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <result element="GlobalProfiles" rowName="GlobalProfile">
+            <element column="id" name="id" xsdType="xs:long"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="is_birth" name="isBirth" xsdType="xs:integer"/>
+            <element column="employee_code_owner" name="employeeCodeOwner" xsdType="xs:string"/>
+            <element column="catalog_position_owner_id" name="catalogPositionOwnerId" xsdType="xs:long"/>
+            <element column="associated_ticket_number" name="associatedTicketNumber" xsdType="xs:string"/>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <element column="created_date" name="createdDate" xsdType="xs:dateTime"/>
+            <element column="approval_date" name="approvalDate" xsdType="xs:dateTime"/>
+            <element column="employee_code_approval" name="employeeCodeApproval" xsdType="xs:string"/>
+        </result>
+    </query>
+    <query id="select_with_rules_scope_by_typeuser_and_subtypeuser_global_profiles_query" useConfig="default">
+        <sql>SELECT id, code, name, is_birth,employee_code_owner,
+                  catalog_position_owner_id,associated_ticket_number,status,created_date,approval_date,employee_code_approval
+          FROM sch_centra_id.global_profiles WHERE valid=1</sql>
+        <param name="typeUserCode" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="subtypeUserCode" ordinal="2" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <result element="GlobalProfiles" rowName="GlobalProfile">
+            <element column="id" name="id" xsdType="xs:long"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="is_birth" name="isBirth" xsdType="xs:integer"/>
+            <element column="employee_code_owner" name="employeeCodeOwner" xsdType="xs:string"/>
+            <element column="catalog_position_owner_id" name="catalogPositionOwnerId" xsdType="xs:long"/>
+            <element column="associated_ticket_number" name="associatedTicketNumber" xsdType="xs:string"/>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <element column="created_date" name="createdDate" xsdType="xs:dateTime"/>
+            <element column="approval_date" name="approvalDate" xsdType="xs:dateTime"/>
+            <element column="employee_code_approval" name="employeeCodeApproval" xsdType="xs:string"/>
+        </result>
+    </query>
+    <query id="select_with_is_birth_global_profiles_query" useConfig="default">
+        <sql>SELECT id, code, name, is_birth,employee_code_owner,
+                  catalog_position_owner_id,associated_ticket_number,status,created_date,approval_date,employee_code_approval
+            FROM sch_centra_id.global_profiles WHERE valid=1 AND is_birth=1</sql>
+        <result element="GlobalProfiles" rowName="GlobalProfile">
+            <element column="id" name="id" xsdType="x,s:long"/>
+            <element column="code" name="code" xsdType="xs:string"/>
+            <element column="name" name="name" xsdType="xs:string"/>
+            <element column="is_birth" name="isBirth" xsdType="xs:integer"/>
+            <element column="employee_code_owner" name="employeeCodeOwner" xsdType="xs:string"/>
+            <element column="catalog_position_owner_id" name="catalogPositionOwnerId" xsdType="xs:long"/>
+            <element column="associated_ticket_number" name="associatedTicketNumber" xsdType="xs:string"/>
+            <element column="status" name="status" xsdType="xs:string"/>
+            <element column="created_date" name="createdDate" xsdType="xs:dateTime"/>
+            <element column="approval_date" name="approvalDate" xsdType="xs:dateTime"/>
+            <element column="employee_code_approval" name="employeeCodeApproval" xsdType="xs:string"/>
+        </result>
+    </query>
+    <query id="delete_global_profiles_query" useConfig="default">
+        <sql>UPDATE sch_centra_id.global_profiles SET valid=0,statud='ELI' WHERE id=?</sql>
+        <param name="id" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <query id="approve_global_profiles_query" useConfig="default">
+        <sql>UPDATE sch_centra_id.global_profiles SET status='APR',approval_date=getdate(),employee_code_approval=? WHERE id=?</sql>
+        <param name="employeeCodeApproval" ordinal="1" paramType="SCALAR" sqlType="STRING" type="IN"/>
+        <param name="id" ordinal="2" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <query id="activate_global_profiles_query" useConfig="default">
+        <sql>UPDATE sch_centra_id.global_profiles SET status='ACT' WHERE id=?</sql>
+        <param name="id" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <query id="inactivate_global_profiles_query" useConfig="default">
+        <sql>UPDATE sch_centra_id.global_profiles SET status='INA' WHERE id=?</sql>
+        <param name="id" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <query id="refuse_global_profiles_query" useConfig="default">
+        <sql>UPDATE sch_centra_id.global_profiles SET status='REC' WHERE id=?</sql>
+        <param name="id" ordinal="1" paramType="SCALAR" sqlType="BIGINT" type="IN"/>
+    </query>
+    <operation name="insert_global_profiles_operation">
+        <call-query href="insert_global_profiles_query">
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="employeeCodeOwner" query-param="employeeCodeOwner"/>
+            <with-param name="catalogPositionOwnerId" query-param="catalogPositionOwnerId"/>
+            <with-param name="associatedTicketNumber" query-param="associatedTicketNumber"/>
+            <with-param name="status" query-param="status"/>
+            <with-param name="isBirth" query-param="isBirth"/>
+            <with-param name="valid" query-param="valid"/>
+        </call-query>
+    </operation>
+    <operation name="delete_global_profiles_operation">
+        <call-query href="delete_global_profiles_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <operation name="approve_global_profiles_operation">
+        <call-query href="approve_global_profiles_query">
+            <with-param name="id" query-param="id"/>
+            <with-param name="employeeCodeApproval" query-param="employeeCodeApproval"/>
+        </call-query>
+    </operation>
+    <operation name="activate_global_profiles_operation">
+        <call-query href="activate_global_profiles_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <operation name="inactivate_global_profiles_operation">
+        <call-query href="inactivate_global_profiles_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <operation name="refuse_global_profiles_operacion">
+        <call-query href="refuse_global_profiles_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <operation name="select_with_key_global_profiles_operation">
+        <call-query href="select_with_key_global_profiles_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <operation name="select_with_rules_scope_by_company_and_division_and_position_global_profiles_operation">
+        <call-query href="select_with_rules_scope_by_company_and_division_and_position_global_profiles_query">
+            <with-param name="companyCode" query-param="companyCode"/>
+            <with-param name="divisionCode" query-param="divisionCode"/>
+            <with-param name="positionCode" query-param="positionCode"/>
+        </call-query>
+    </operation>
+    <operation name="select_with_rules_scope_by_typeuser_and_subtypeuser_global_profiles_operation">
+        <call-query href="select_with_rules_scope_by_typeuser_and_subtypeuser_global_profiles_query">
+            <with-param name="typeUserCode" query-param="typeUserCode"/>
+            <with-param name="subtypeUserCode" query-param="subtypeUserCode"/>
+        </call-query>
+    </operation>
+    <operation name="update_global_profiles_operation">
+        <call-query href="update_global_profiles_query">
+            <with-param name="isBirth" query-param="isBirth"/>
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="id" query-param="id"/>
+            <with-param name="employeeCodeOwner" query-param="employeeCodeOwner"/>
+            <with-param name="catalogPositionOwnerId" query-param="catalogPositionOwnerId"/>
+            <with-param name="associatedTicketNumber" query-param="associatedTicketNumber"/>
+        </call-query>
+    </operation>
+    <operation name="select_all_global_profiles_operation">
+        <call-query href="select_all_global_profiles_query"/>
+    </operation>
+    <operation name="select_with_is_birth_global_profiles_operation">
+        <call-query href="select_with_is_birth_global_profiles_query"/>
+    </operation>
+    <operation name="select_global_profiles_by_scope_rule_operation">
+        <call-query href="select_global_profiles_by_scope_rule_query">
+            <with-param name="whereclause" query-param="whereclause"/>
+        </call-query>
+    </operation>
+    <resource method="GET" path="getAllGlobalProfiles">
+        <call-query href="select_all_global_profiles_query"/>
+    </resource>
+    <resource method="GET" path="getIsBirthGlobalProfiles">
+        <call-query href="select_with_is_birth_global_profiles_query"/>
+    </resource>
+    <resource method="GET" path="getByIdGlobalProfile">
+        <call-query href="select_with_key_global_profiles_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="getByRulesScopeCompanyAndDivisionAndPositionGlobalProfile">
+        <call-query href="select_with_rules_scope_by_company_and_division_and_position_global_profiles_query">
+            <with-param name="companyCode" query-param="companyCode"/>
+            <with-param name="divisionCode" query-param="divisionCode"/>
+            <with-param name="positionCode" query-param="positionCode"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="getByRulesScopeTypeUserAndSubtypeUserGlobalProfile">
+        <call-query href="select_with_rules_scope_by_typeuser_and_subtypeuser_global_profiles_query">
+            <with-param name="typeUserCode" query-param="typeUserCode"/>
+            <with-param name="subtypeUserCode" query-param="subtypeUserCode"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="createGlobalProfile">
+        <call-query href="insert_global_profiles_query">
+            <with-param name="isBirth" query-param="isBirth"/>
+            <with-param name="valid" query-param="valid"/>
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="employeeCodeOwner" query-param="employeeCodeOwner"/>
+            <with-param name="catalogPositionOwnerId" query-param="catalogPositionOwnerId"/>
+            <with-param name="associatedTicketNumber" query-param="associatedTicketNumber"/>
+            <with-param name="status" query-param="status"/>
+        </call-query>
+    </resource>
+    <resource method="PUT" path="updateGlobalProfile">
+        <call-query href="update_global_profiles_query">
+            <with-param name="isBirth" query-param="isBirth"/>
+            <with-param name="code" query-param="code"/>
+            <with-param name="name" query-param="name"/>
+            <with-param name="id" query-param="id"/>
+            <with-param name="employeeCodeOwner" query-param="employeeCodeOwner"/>
+            <with-param name="catalogPositionOwnerId" query-param="catalogPositionOwnerId"/>
+            <with-param name="associatedTicketNumber" query-param="associatedTicketNumber"/>
+        </call-query>
+    </resource>
+    <resource method="DELETE" path="deleteGlobalProfile">
+        <call-query href="delete_global_profiles_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="approveGlobalProfile">
+        <call-query href="approve_global_profiles_query">
+            <with-param name="id" query-param="id"/>
+            <with-param name="employeeCodeApproval" query-param="employeeCodeApproval"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="activateGlobalProfile">
+        <call-query href="activate_global_profiles_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="inactivateGlobalProfile">
+        <call-query href="inactivate_global_profiles_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+    <resource method="POST" path="refuseGlobalProfile">
+        <call-query href="refuse_global_profiles_query">
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </resource>
+    <resource method="GET" path="GetGlobalProfilesByScopeRule">
+        <call-query href="select_global_profiles_by_scope_rule_query">
+            <with-param name="whereclause" query-param="whereclause"/>
+        </call-query>
+    </resource>
+
+</data>
