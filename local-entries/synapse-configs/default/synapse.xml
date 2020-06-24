@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://ws.apache.org/ns/synapse">
-   <taskManager provider="org.wso2.carbon.mediation.ntask.NTaskTaskManager"/>
-   <endpoint name="Ws_Identidades_Demo_RT">
-      <address uri="http://10.0.64.140/WSGestionIdentidad/WebServices/Bancs/WebServiceBancsRT.asmx"/>
-   </endpoint>
-   <!-- You can add any flat sequences, endpoints, etc.. to this synapse.xml file if you do
-    *not* want to keep the artifacts in several files --></definitions>
