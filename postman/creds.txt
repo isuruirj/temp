@@ -127,8 +127,12 @@ git clone https://controlversiones.uio.bpichincha.com/scm/an10/centra-id-queue.g
 git checkout feature/PRY_GESTION_IDENTIDAD
 git pull origin feature/PRY_GESTION_IDENTIDAD
 
+########### BB BP
 usrwso2
 usrwso2!*
 
+########## OC Test
+usuario:usrtlibr
+password:Us4Tal0s
 User: usrtwasp
 Pass: us3r70p3n2o21
