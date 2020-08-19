@@ -1,0 +1,40 @@
+ {
+                "schemas": [
+                    "urn:ietf:params:scim:schemas:core:2.0:User",
+                    "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"
+                ],
+                "emails": [
+                    {
+                        "type": "other",
+                        "value": "jdelarho@pichinchatest.com"
+                    }
+                ],
+                "name": {
+                    "givenName": "JOSE  MARIA",
+                    "familyName": "DE LA RHOSA ARIAS"
+                },
+                "EnterpriseUser": {
+                    "manager": {
+                        "displayName": "DE LA RHOSA ARIAS JOSE  MARIA"
+                    },
+                    "position": "ANALISTA BIENES",
+                    "Employeeid": "1",
+                    "organization": "BCPI",
+                    "pager": "Avaya_1_Med",
+                    "msDS-User-Account-Control-Computed": "0x0010",
+                    "userAccountControl": "0x0200",
+                    "physicalDeliveryOfficeName": "ADMINISTRATIVA",
+                    "postOfficeBox": "ADMINISTRACION BIENES Y SERVICIOS",
+                    "city": "QUITO",
+                    "departament": "0001",
+                    "telephoneNumber": "0998502363",
+                    "userPrincipalName": "jdelarho@pichinchatest.com",
+                    "comment": "0100648187",
+                    "fullname": "DE LA RHOSA ARIAS JOSE  MARIA",
+                    "containerInfo": "OU=AdministrativoFinancieroA/OU=TCS/OU=Externos/OU=BPUsuarios",
+                    "proxyAddresses": []
+                },
+                "userName": "ad/jdelarho",
+                "password": "e3cnTdl@f"
+            }
+
