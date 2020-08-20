@@ -1,48 +1,21 @@
- {
-        "emails": [
-                 {"type": "other", "value": "pajaro@pichinchatest.com"}
-        ],
-        "schemas": [
-                "urn:ietf:params:scim:schemas:core:2.0:User",
-                "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"
-        ],
-        "EnterpriseUser" : {
-        "tellerName": "pajaro",
-        "fullname": "AJARO  PPPP ",
-        "position": "ANALISTA BIENES",
-        "organization": "0010",
-        "noIdentificacion": "8765433R4",
-        "tipoIdentificacion": "0002",
-        "costCenter": "",
-        "claveAcceso": "iM/hHOu10cxQnZ/BM8B+Dg==",
-        "terminal": "10.128.3.169",
-        "observacion": "AUTO PROVISIONADO - CREADO DESDE GI",
-        "mail": "pajaro@pichinchatest.com",
-        "celular": "",
-        "interno": "1",
-        "enviarMail": "S",
-        "cambioPwdInicial": "S",
-        "codigoTipoUsuario": "003",
-        "codigoRol": "109027",
-        "codigoHorario": "HN",
-        "loginSupervisor": "avargas",
-        "codigoAgenciaDefault": "0001",
-        "validarAtributosPerfil": "S",
-        "codigoAtributo": "16",
-        "codigoEstado": "",
-        "perfilAplicacionDefault": "[{\"codigoAplicacion\":\"LWF\",\"codigoPerfil\":\"CMC\"},{\"codigoAplicacion\":\"LPT\",\"codigoPerfil\":\"CMC\"}]",
-        "perfilesAplicacionTemporal": "[{\"codigoAplicacion\":\"LWF\",\"codigoPerfilPermanente\":\"CMC\",\"codigoPerfilTemporal\":\"REAGE\",\"fechaFinVigencia\":\"12-12-2060\"},{\"codigoAplicacion\":\"LWF\",\"codigoPerfilPermanente\":\"CMC\",\"codigoPerfilTemporal\":\"RECC1\",\"fechaFinVigencia\":\"12-12-2060\"},{\"codigoAplicacion\":\"LWF\",\"codigoPerfilPermanente\":\"CMC\",\"codigoPerfilTemporal\":\"CONS\",\"fechaFinVigencia\":\"12-12-2060\"}]",
-        "agenciasPermanentesUsuario": "",
-        "agenciasTemporalesUsuario": "",
-        "atributoPerfilAplicacionDefault": "",
-        "atributoPerfilesAplicacionTemporal": "",
-        "atributoUsuario": "[ {    \"codigoAtributo\": 15,    \"valorAtributo\": \"\" }, {    \"codigoAtributo\": 16,    \"valorAtributo\": \"pajaro@pichinchatest.com\" }]"
-
-        },
-        "name": {
-                "givenName": "PPPP "
-        },
-        "userName": "logiciel/pajaro",
-        "password" : "default"
-}
+TID: [-1234] [] [2020-08-20 15:38:11,521] DEBUG {com.pichincha.wso2.iam.user.store.rest.RestUserStore} -  ########## Method:doCheckExistingUser ,Current Domain: LOGICIEL, User Name: pajaro
+TID: [-1234] [] [2020-08-20 15:38:11,521] DEBUG {com.pichincha.wso2.iam.user.store.rest.RestUserStore} -  ########## Host: http://wsseguridad0062-seguridad.apps.test.bpichincha.com/api/v1/Usuario ,Resource URL: /doCheckExistingUser
+TID: [-1234] [] [2020-08-20 15:38:11,521] DEBUG {com.pichincha.wso2.iam.user.store.rest.RestUserStore} -  ########## Request {"bodyIn":{"usuario":{"tellerName":"pajaro","especificos":{"estado":"EUS01","interno":"0"}}},"headerIn":{"dispositivo":"01010101010101010101010101010101","empresa":"0010","canal":"02","medio":"020002","aplicacion":"00573","agencia":"0006","usuario":"USINTERT","unicidad":"3DF7F1FD-3046-4D62-9321-14565B2638DC","guid":"3DF7F1FD-3046-4D62-9321-14565B2638DC","fechaHora":"202008200338110521","filler":"WSO2 Identity Server","idioma":"es-EC","ip":"10.192.168.45"}}
+TID: [-1234] [] [2020-08-20 15:38:11,521]  INFO {com.pichincha.wso2.iam.user.store.rest.service.ClientRestCall} -  ########## Full URL:http://wsseguridad0062-seguridad.apps.test.bpichincha.com/api/v1/Usuario/doCheckExistingUser
+TID: [-1234] [] [2020-08-20 15:38:11,555] ERROR {com.pichincha.wso2.iam.user.store.rest.service.ClientRestCall} -  ClientRestException [Response={"headerOut":{"dispositivo":"01010101010101010101010101010101","empresa":"0010","canal":"02","medio":"020002","aplicacion":"00573","agencia":"0006","tipoTransaccion":"","geolocalizacion":"","usuario":"USINTERT","ip":"10.192.168.45","requestIp":"::ffff:10.129.0.1","fechaHora":"202008200338110521","sesion":"","unicidad":"3DF7F1FD-3046-4D62-9321-14565B2638DC","guid":"3DF7F1FD-3046-4D62-9321-14565B2638DC","filler":"WSO2 Identity Server","idioma":"es-EC","idCliente":"","tipoIdCliente":"","bancs":null},"bodyOut":{"usuario":{"tellerName":"pajaro","tellerNumber":"","nombreUsuario":"","cargo":"","empresa":"","identificacion":"","tipoIdentificacion":"","centroDeCostos":"","claveAcceso":"","mail":"","celular":"","terminal":"","observacion":"","especificos":{"interno":"0","estado":"EUS01"}}},"error":{"codigo":"4034","mensaje":"El login pajaro no se encuentra registrado en la aplicación.","mensajeNegocio":null,"tipo":"ERROR","componente":"Consultar","backend":"00674","recurso":"WSSeguridad0062/Consultar"}}, message=El login pajaro no se encuentra registrado en la aplicación., Status Code=-1]
+TID: [-1234] [] [2020-08-20 15:38:11,555] ERROR {com.pichincha.wso2.iam.user.store.rest.service.ClientRestCall} -  ClientRestException [Response={"headerOut":{"dispositivo":"01010101010101010101010101010101","empresa":"0010","canal":"02","medio":"020002","aplicacion":"00573","agencia":"0006","tipoTransaccion":"","geolocalizacion":"","usuario":"USINTERT","ip":"10.192.168.45","requestIp":"::ffff:10.129.0.1","fechaHora":"202008200338110521","sesion":"","unicidad":"3DF7F1FD-3046-4D62-9321-14565B2638DC","guid":"3DF7F1FD-3046-4D62-9321-14565B2638DC","filler":"WSO2 Identity Server","idioma":"es-EC","idCliente":"","tipoIdCliente":"","bancs":null},"bodyOut":{"usuario":{"tellerName":"pajaro","tellerNumber":"","nombreUsuario":"","cargo":"","empresa":"","identificacion":"","tipoIdentificacion":"","centroDeCostos":"","claveAcceso":"","mail":"","celular":"","terminal":"","observacion":"","especificos":{"interno":"0","estado":"EUS01"}}},"error":{"codigo":"4034","mensaje":"El login pajaro no se encuentra registrado en la aplicación.","mensajeNegocio":null,"tipo":"ERROR","componente":"Consultar","backend":"00674","recurso":"WSSeguridad0062/Consultar"}}, message=El login pajaro no se encuentra registrado en la aplicación., Status Code=-1]
+TID: [-1234] [] [2020-08-20 15:38:11,555] ERROR {com.pichincha.wso2.iam.user.store.rest.RestUserStore} -  [OperationUUID: 3DF7F1FD-3046-4D62-9321-14565B2638DC] - Error: El login pajaro no se encuentra registrado en la aplicación.
+ClientRestException [Response={"headerOut":{"dispositivo":"01010101010101010101010101010101","empresa":"0010","canal":"02","medio":"020002","aplicacion":"00573","agencia":"0006","tipoTransaccion":"","geolocalizacion":"","usuario":"USINTERT","ip":"10.192.168.45","requestIp":"::ffff:10.129.0.1","fechaHora":"202008200338110521","sesion":"","unicidad":"3DF7F1FD-3046-4D62-9321-14565B2638DC","guid":"3DF7F1FD-3046-4D62-9321-14565B2638DC","filler":"WSO2 Identity Server","idioma":"es-EC","idCliente":"","tipoIdCliente":"","bancs":null},"bodyOut":{"usuario":{"tellerName":"pajaro","tellerNumber":"","nombreUsuario":"","cargo":"","empresa":"","identificacion":"","tipoIdentificacion":"","centroDeCostos":"","claveAcceso":"","mail":"","celular":"","terminal":"","observacion":"","especificos":{"interno":"0","estado":"EUS01"}}},"error":{"codigo":"4034","mensaje":"El login pajaro no se encuentra registrado en la aplicación.","mensajeNegocio":null,"tipo":"ERROR","componente":"Consultar","backend":"00674","recurso":"WSSeguridad0062/Consultar"}}, message=El login pajaro no se encuentra registrado en la aplicación., Status Code=-1]
+        at com.pichincha.wso2.iam.user.store.rest.service.ClientRestCall.validateTheResponse(ClientRestCall.java:149)
+        at com.pichincha.wso2.iam.user.store.rest.service.ClientRestCall.getResponseAsCustomResponse(ClientRestCall.java:196)
+        at com.pichincha.wso2.iam.user.store.rest.service.ClientRestCall.call(ClientRestCall.java:74)
+        at com.pichincha.wso2.iam.user.store.rest.RestUserStore.doCheckExistingUser(RestUserStore.java:868)
+        at org.wso2.carbon.user.core.common.AbstractUserStoreManager.isExistingUser(AbstractUserStoreManager.java:4132)
+        at org.wso2.carbon.user.core.common.AbstractUserStoreManager.isExistingUser(AbstractUserStoreManager.java:4122)
+        at sun.reflect.GeneratedMethodAccessor408.invoke(Unknown Source)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.lang.reflect.Method.invoke(Method.java:498)
+        at org.wso2.carbon.user.core.common.AbstractUserStoreManager$2.run(AbstractUserStoreManager.java:178)
+        at java.security.AccessController.doPrivileged(Native Method)
+        at org.wso2.carbon.user.core.common.AbstractUserStoreManager.callSecure(AbstractUserStoreManager.java:175)
 
