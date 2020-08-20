@@ -1,40 +1,48 @@
  {
-                "schemas": [
-                    "urn:ietf:params:scim:schemas:core:2.0:User",
-                    "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"
-                ],
-                "emails": [
-                    {
-                        "type": "other",
-                        "value": "jdelarho@pichinchatest.com"
-                    }
-                ],
-                "name": {
-                    "givenName": "JOSE  MARIA",
-                    "familyName": "DE LA RHOSA ARIAS"
-                },
-                "EnterpriseUser": {
-                    "manager": {
-                        "displayName": "DE LA RHOSA ARIAS JOSE  MARIA"
-                    },
-                    "position": "ANALISTA BIENES",
-                    "Employeeid": "1",
-                    "organization": "BCPI",
-                    "pager": "Avaya_1_Med",
-                    "msDS-User-Account-Control-Computed": "0x0010",
-                    "userAccountControl": "0x0200",
-                    "physicalDeliveryOfficeName": "ADMINISTRATIVA",
-                    "postOfficeBox": "ADMINISTRACION BIENES Y SERVICIOS",
-                    "city": "QUITO",
-                    "departament": "0001",
-                    "telephoneNumber": "0998502363",
-                    "userPrincipalName": "jdelarho@pichinchatest.com",
-                    "comment": "0100648187",
-                    "fullname": "DE LA RHOSA ARIAS JOSE  MARIA",
-                    "containerInfo": "OU=AdministrativoFinancieroA/OU=TCS/OU=Externos/OU=BPUsuarios",
-                    "proxyAddresses": []
-                },
-                "userName": "ad/jdelarho",
-                "password": "e3cnTdl@f"
-            }
+        "emails": [
+                 {"type": "other", "value": "pajaro@pichinchatest.com"}
+        ],
+        "schemas": [
+                "urn:ietf:params:scim:schemas:core:2.0:User",
+                "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"
+        ],
+        "EnterpriseUser" : {
+        "tellerName": "pajaro",
+        "fullname": "AJARO  PPPP ",
+        "position": "ANALISTA BIENES",
+        "organization": "0010",
+        "noIdentificacion": "8765433R4",
+        "tipoIdentificacion": "0002",
+        "costCenter": "",
+        "claveAcceso": "iM/hHOu10cxQnZ/BM8B+Dg==",
+        "terminal": "10.128.3.169",
+        "observacion": "AUTO PROVISIONADO - CREADO DESDE GI",
+        "mail": "pajaro@pichinchatest.com",
+        "celular": "",
+        "interno": "1",
+        "enviarMail": "S",
+        "cambioPwdInicial": "S",
+        "codigoTipoUsuario": "003",
+        "codigoRol": "109027",
+        "codigoHorario": "HN",
+        "loginSupervisor": "avargas",
+        "codigoAgenciaDefault": "0001",
+        "validarAtributosPerfil": "S",
+        "codigoAtributo": "16",
+        "codigoEstado": "",
+        "perfilAplicacionDefault": "[{\"codigoAplicacion\":\"LWF\",\"codigoPerfil\":\"CMC\"},{\"codigoAplicacion\":\"LPT\",\"codigoPerfil\":\"CMC\"}]",
+        "perfilesAplicacionTemporal": "[{\"codigoAplicacion\":\"LWF\",\"codigoPerfilPermanente\":\"CMC\",\"codigoPerfilTemporal\":\"REAGE\",\"fechaFinVigencia\":\"12-12-2060\"},{\"codigoAplicacion\":\"LWF\",\"codigoPerfilPermanente\":\"CMC\",\"codigoPerfilTemporal\":\"RECC1\",\"fechaFinVigencia\":\"12-12-2060\"},{\"codigoAplicacion\":\"LWF\",\"codigoPerfilPermanente\":\"CMC\",\"codigoPerfilTemporal\":\"CONS\",\"fechaFinVigencia\":\"12-12-2060\"}]",
+        "agenciasPermanentesUsuario": "",
+        "agenciasTemporalesUsuario": "",
+        "atributoPerfilAplicacionDefault": "",
+        "atributoPerfilesAplicacionTemporal": "",
+        "atributoUsuario": "[ {    \"codigoAtributo\": 15,    \"valorAtributo\": \"\" }, {    \"codigoAtributo\": 16,    \"valorAtributo\": \"pajaro@pichinchatest.com\" }]"
+
+        },
+        "name": {
+                "givenName": "PPPP "
+        },
+        "userName": "logiciel/pajaro",
+        "password" : "default"
+}
 
